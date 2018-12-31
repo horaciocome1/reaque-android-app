@@ -25,7 +25,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import io.github.horaciocome1.reeque.R
-import io.github.horaciocome1.reeque.data.user.User
+import io.github.horaciocome1.reeque.data.users.User
 import jp.wasabeef.picasso.transformations.BlurTransformation
 
 class UsersAdapter(private val context: Context, private val list: List<User>)

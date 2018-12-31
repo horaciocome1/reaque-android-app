@@ -16,8 +16,8 @@
 package io.github.horaciocome1.reeque.ui.topics
 
 import androidx.lifecycle.ViewModel
-import io.github.horaciocome1.reeque.data.topic.Topic
-import io.github.horaciocome1.reeque.data.topic.TopicRepository
+import io.github.horaciocome1.reeque.data.topics.Topic
+import io.github.horaciocome1.reeque.data.topics.TopicRepository
 
 class TopicsViewModel(private val topicRepository: TopicRepository): ViewModel() {
 

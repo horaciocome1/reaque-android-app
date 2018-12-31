@@ -26,9 +26,9 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.github.horaciocome1.reeque.R
-import io.github.horaciocome1.reeque.data.topic.Topic
 import io.github.horaciocome1.reeque.ui.MainActivity
 import io.github.horaciocome1.reeque.utilities.InjectorUtils
+import kotlinx.android.synthetic.main.fragment_topics.*
 
 lateinit var fragmentManager: FragmentManager
 
@@ -46,7 +46,7 @@ class TopicsFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as MainActivity).supportActionBar?.show()
-        if (view is RecyclerView) initList(view)
+        initList(fragment_topics_recyclerview)
     }
 
     private fun initList(recyclerView: RecyclerView) {

@@ -13,7 +13,7 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reeque.data.post
+package io.github.horaciocome1.reeque.data.posts
 
 data class Post(var title: String) {
 

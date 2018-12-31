@@ -13,18 +13,19 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reeque.ui.topics
+package io.github.horaciocome1.reeque.data.users
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import io.github.horaciocome1.reeque.data.topics.TopicRepository
+data class User(var name: String) {
 
-class TopicsViewModelFactory(private val topicRepository: TopicRepository)
-    : ViewModelProvider.NewInstanceFactory() {
-
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return TopicsViewModel(topicRepository) as T
-    }
+    var key = ""
+    var description = ""
+    var cover = 0
+    var profilePic = 0
+    var totalFollowers = ""
+    var totalPosts = ""
+    var latestPost = ""
+    var categories = ""
+    var town = ""
+    var since = ""
 
 }

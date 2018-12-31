@@ -22,7 +22,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white">
+        android:background="?android:colorBackground">
 
         <TextView
             android:layout_width="wrap_content"
@@ -34,34 +34,20 @@
             android:fontFamily="@font/roboto_medium"/>
 
         <com.google.android.material.tabs.TabLayout
+            android:id="@+id/fragment_favorites_tablayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabTextAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
             app:tabIndicatorFullWidth="false"
-            app:tabSelectedTextColor="@color/primary_text">
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/fragment_favorites_topics_tabitem"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Topicos"
-                android:icon="@drawable/outline_short_text_24"/>
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/fragment_favorites_posts_tabitem"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Publicacoes"
-                android:icon="@drawable/outline_list_24_black"/>
-
-        </com.google.android.material.tabs.TabLayout>
+            app:tabSelectedTextColor="@color/primary_text"
+            android:background="?android:colorBackground"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fragment_favorites_recyclerview"
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/fragment_favorites_viewpager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="128dp"/>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

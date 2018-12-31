@@ -13,12 +13,12 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reeque.data.user
+package io.github.horaciocome1.reeque.data.users
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.github.horaciocome1.reeque.R
-import io.github.horaciocome1.reeque.data.topic.Topic
+import io.github.horaciocome1.reeque.data.topics.Topic
 
 class UserDAO {
 

@@ -13,19 +13,15 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reeque.data.user
+package io.github.horaciocome1.reeque.ui.favorites
 
-data class User(var name: String) {
+import androidx.lifecycle.ViewModel
+import io.github.horaciocome1.reeque.data.favorites.FavoriteRepository
 
-    var key = ""
-    var description = ""
-    var cover = 0
-    var profilePic = 0
-    var totalFollowers = ""
-    var totalPosts = ""
-    var latestPost = ""
-    var categories = ""
-    var town = ""
-    var since = ""
+class FavoritesViewModel(private val favoriteRepository: FavoriteRepository) : ViewModel() {
+
+    fun getPosts() = favoriteRepository.getPosts()
+
+    fun getTopics() = favoriteRepository.getTopics()
 
 }

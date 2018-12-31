@@ -25,9 +25,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.horaciocome1.reeque.R
-import io.github.horaciocome1.reeque.data.topic.Topic
+import io.github.horaciocome1.reeque.data.topics.Topic
 import io.github.horaciocome1.reeque.ui.MainActivity
-import io.github.horaciocome1.reeque.ui.users.UsersFragment
 import io.github.horaciocome1.reeque.ui.users.loadUsers
 import io.github.horaciocome1.reeque.utilities.InjectorUtils
 import kotlinx.android.synthetic.main.fragment_posts.*

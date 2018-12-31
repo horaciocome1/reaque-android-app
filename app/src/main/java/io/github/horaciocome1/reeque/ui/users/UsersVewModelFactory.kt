@@ -17,7 +17,7 @@ package io.github.horaciocome1.reeque.ui.users
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import io.github.horaciocome1.reeque.data.user.UserRepository
+import io.github.horaciocome1.reeque.data.users.UserRepository
 
 class UsersVewModelFactory(private val userRepository: UserRepository)
     : ViewModelProvider.NewInstanceFactory() {

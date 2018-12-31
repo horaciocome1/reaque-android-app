@@ -20,40 +20,54 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/fragment_posts_toolbar"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="?attr/actionBarSize"
-        app:navigationIcon="@drawable/outline_arrow_back_24"/>
+        android:background="?android:colorBackground">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="?actionBarSize">
-
-        <TextView
-            android:id="@+id/fragment_posts_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Casamento"
-            android:maxLines="2"
-            android:ellipsize="end"
-            android:fontFamily="@font/roboto_light"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-            android:layout_marginLeft="?attr/actionBarSize"
-            android:layout_marginStart="?attr/actionBarSize"
-            android:layout_marginBottom="16dp"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/fragment_posts_recyclerview"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="vertical"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/fragment_posts_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Casamento"
+                android:textAlignment="center"
+                style="@style/TextAppearance.MaterialComponents.Headline5"
+                android:layout_gravity="top|center_horizontal"
+                android:padding="12dp"
+                android:maxLines="1"
+                android:fontFamily="@font/roboto_light"
+                android:layout_marginLeft="?attr/actionBarSize"
+                android:layout_marginStart="?attr/actionBarSize"
+                android:layout_marginRight="?attr/actionBarSize"
+                android:layout_marginEnd="?attr/actionBarSize"/>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/fragment_posts_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?attr/actionBarSize"
+                android:background="@android:color/transparent"
+                app:navigationIcon="@drawable/outline_arrow_back_24"/>
+
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragment_posts_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/fragment_posts_authors_button"

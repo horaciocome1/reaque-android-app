@@ -13,18 +13,19 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reeque.ui.topics
+package io.github.horaciocome1.reeque.data.topics
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import io.github.horaciocome1.reeque.data.topics.TopicRepository
+class TopicRepository private constructor(private val topicDAO: TopicDAO) {
 
-class TopicsViewModelFactory(private val topicRepository: TopicRepository)
-    : ViewModelProvider.NewInstanceFactory() {
+    fun addTopic(topic: Topic) = topicDAO.addTopic(topic)
 
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return TopicsViewModel(topicRepository) as T
+    fun getTopics() = topicDAO.getTopics()
+
+    companion object {
+        @Volatile private var instance: TopicRepository? = null
+        fun getInstance(topicDAO: TopicDAO) = instance ?: synchronized(this) {
+            instance ?: TopicRepository(topicDAO).also { instance = it }
+        }
     }
 
 }

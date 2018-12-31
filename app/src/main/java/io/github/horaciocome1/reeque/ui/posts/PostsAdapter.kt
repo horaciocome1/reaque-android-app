@@ -19,15 +19,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import de.hdodenhof.circleimageview.CircleImageView
-import io.github.horaciocome1.reeque.R
-import io.github.horaciocome1.reeque.data.post.Post
+import io.github.horaciocome1.reeque.data.posts.Post
 import io.github.horaciocome1.reeque.databinding.ItemPostBinding
 import jp.wasabeef.picasso.transformations.BlurTransformation
 

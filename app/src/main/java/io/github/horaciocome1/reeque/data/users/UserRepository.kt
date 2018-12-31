@@ -13,22 +13,24 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reeque.data.post
+package io.github.horaciocome1.reeque.data.users
 
-class PostRepository private constructor(private val postDAO: PostDAO) {
+import io.github.horaciocome1.reeque.data.topics.Topic
 
-    fun addPost(post: Post) = postDAO.addPost(post)
+class UserRepository private constructor(private val userDAO: UserDAO) {
 
-    fun getPosts() = postDAO.getPosts()
+    fun addUser(user: User) = userDAO.addUser(user)
 
-    fun setPost(post: Post) = postDAO.setPost(post)
+    fun getUsers(topic: Topic) = userDAO.getUsers(topic)
 
-    fun getPost(key: String) = postDAO.getPost(key)
+    fun setUser(user: User) = userDAO.setUser(user)
+
+    fun getUser(key: String) = userDAO.getUser(key)
 
     companion object {
-        @Volatile private var instance: PostRepository? = null
-        fun getInstance(postDAO: PostDAO) = instance ?: synchronized(this) {
-            instance ?: PostRepository(postDAO).also { instance = it }
+        @Volatile private var instance: UserRepository? = null
+        fun getInstance(userDAO: UserDAO) = instance ?: synchronized(this) {
+            instance ?: UserRepository(userDAO).also { instance = it }
         }
     }
 

@@ -25,7 +25,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.squareup.picasso.Picasso
 import io.github.horaciocome1.reeque.R
-import io.github.horaciocome1.reeque.data.post.Post
+import io.github.horaciocome1.reeque.data.posts.Post
 import io.github.horaciocome1.reeque.databinding.FragmentReadBinding
 import io.github.horaciocome1.reeque.ui.MainActivity
 import io.github.horaciocome1.reeque.utilities.InjectorUtils

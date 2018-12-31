@@ -21,7 +21,7 @@
 
         <variable
             name="post"
-            type="io.github.horaciocome1.reeque.data.post.Post" />
+            type="io.github.horaciocome1.reeque.data.posts.Post" />
 
     </data>
 

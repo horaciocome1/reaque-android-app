@@ -16,9 +16,9 @@
 package io.github.horaciocome1.reeque.ui.users
 
 import androidx.lifecycle.ViewModel
-import io.github.horaciocome1.reeque.data.topic.Topic
-import io.github.horaciocome1.reeque.data.user.User
-import io.github.horaciocome1.reeque.data.user.UserRepository
+import io.github.horaciocome1.reeque.data.topics.Topic
+import io.github.horaciocome1.reeque.data.users.User
+import io.github.horaciocome1.reeque.data.users.UserRepository
 
 class UsersViewModel(private val userRepository: UserRepository) : ViewModel() {
 

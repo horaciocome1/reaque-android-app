@@ -25,7 +25,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.squareup.picasso.Picasso
 import io.github.horaciocome1.reeque.R
-import io.github.horaciocome1.reeque.data.user.User
+import io.github.horaciocome1.reeque.data.users.User
 import io.github.horaciocome1.reeque.databinding.FragmentProfileBinding
 import io.github.horaciocome1.reeque.ui.MainActivity
 import io.github.horaciocome1.reeque.utilities.InjectorUtils
@@ -55,9 +55,9 @@ class UserFragment: Fragment() {
         val viewModel = ViewModelProviders.of(this, factory).get(UsersViewModel::class.java)
         viewModel.getUser(user.key).observe(this, Observer {
             binding.user = it
-            Picasso.with(binding.root.context).load(it.profilePic).transform(BlurTransformation(binding.root.context, 2,14))
-                .into(binding.fragmentProfileProfilePicImageview)
-            Picasso.with(binding.root.context).load(it.cover).into(binding.fragmentProfileCoverImageview)
+            Picasso.with(binding.root.context).load(it.cover).transform(BlurTransformation(binding.root.context, 2,14))
+                .into(binding.fragmentProfileCoverImageview)
+            Picasso.with(binding.root.context).load(it.profilePic).into(binding.fragmentProfileProfilePicImageview)
         })
     }
 

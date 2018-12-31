@@ -19,7 +19,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -27,7 +26,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import io.github.horaciocome1.reeque.R
-import io.github.horaciocome1.reeque.data.topic.Topic
+import io.github.horaciocome1.reeque.data.topics.Topic
 import io.github.horaciocome1.reeque.ui.MainActivity
 import io.github.horaciocome1.reeque.utilities.InjectorUtils
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addSimpleTouchListener

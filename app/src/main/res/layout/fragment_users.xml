@@ -29,6 +29,17 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_gravity="top|center"
+        app:srcCompat="@drawable/outline_drag_handle_24" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragment_users_recyclerview"
         android:layout_width="match_parent"

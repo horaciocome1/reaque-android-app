@@ -16,8 +16,8 @@
 package io.github.horaciocome1.reeque.ui.posts
 
 import androidx.lifecycle.ViewModel
-import io.github.horaciocome1.reeque.data.post.Post
-import io.github.horaciocome1.reeque.data.post.PostRepository
+import io.github.horaciocome1.reeque.data.posts.Post
+import io.github.horaciocome1.reeque.data.posts.PostRepository
 
 class PostsViewModel(private val postRepository: PostRepository) : ViewModel() {
 

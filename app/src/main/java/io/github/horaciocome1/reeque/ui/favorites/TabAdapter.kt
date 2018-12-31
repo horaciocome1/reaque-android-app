@@ -13,21 +13,23 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reeque.data.topic
+package io.github.horaciocome1.reeque.ui.favorites
 
-data class Topic(var title: String) {
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
 
-    var key = ""
-    var totalPosts = 0
-    var post1Rating = 0f
-    var post1Title = ""
-    var post1ProfilePic = 0
-    var post2Rating = 0f
-    var post2Title = ""
-    var post2ProfilePic = 0
-    var post3Rating = 0f
-    var post3Title = ""
-    var post3ProfilePic = 0
-    var totalReaders = 0
+class TabAdapter(fragmentManager: FragmentManager?): FragmentStatePagerAdapter(fragmentManager) {
 
+    private val fragments = arrayListOf(
+        fragmentManager?.getFavoriteFragmentOfTopics(),
+        fragmentManager?.getFavoriteFragmentOfPosts()
+    )
+
+    private val titles = arrayListOf(topics, posts)
+
+    override fun getItem(position: Int) = fragments[position]
+
+    override fun getCount() = fragments.size
+
+    override fun getPageTitle(position: Int) = titles[position]
 }

@@ -13,7 +13,7 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reeque.data.topic
+package io.github.horaciocome1.reeque.data.topics
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

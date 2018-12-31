@@ -22,7 +22,7 @@
 
         <variable
             name="user"
-            type="io.github.horaciocome1.reeque.data.user.User" />
+            type="io.github.horaciocome1.reeque.data.users.User" />
 
     </data>
 

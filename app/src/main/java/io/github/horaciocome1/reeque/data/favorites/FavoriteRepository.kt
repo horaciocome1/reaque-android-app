@@ -13,18 +13,20 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reeque.ui.topics
+package io.github.horaciocome1.reeque.data.favorites
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import io.github.horaciocome1.reeque.data.topics.TopicRepository
+class FavoriteRepository private constructor(private val favoriteDAO: FavoriteDAO) {
 
-class TopicsViewModelFactory(private val topicRepository: TopicRepository)
-    : ViewModelProvider.NewInstanceFactory() {
+    fun getPosts() = favoriteDAO.getPosts()
 
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return TopicsViewModel(topicRepository) as T
+    fun getTopics() = favoriteDAO.getTopics()
+
+    companion object {
+        @Volatile private var instance: FavoriteRepository? = null
+        fun getInstance(favoriteDAO: FavoriteDAO) = instance
+            ?: synchronized(this) {
+                instance ?: FavoriteRepository(favoriteDAO).also { instance = it }
+            }
     }
 
 }

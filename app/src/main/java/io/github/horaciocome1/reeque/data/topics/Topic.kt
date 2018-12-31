@@ -13,19 +13,21 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reeque.data.topic
+package io.github.horaciocome1.reeque.data.topics
 
-class TopicRepository private constructor(private val topicDAO: TopicDAO) {
+data class Topic(var title: String) {
 
-    fun addTopic(topic: Topic) = topicDAO.addTopic(topic)
-
-    fun getTopics() = topicDAO.getTopics()
-
-    companion object {
-        @Volatile private var instance: TopicRepository? = null
-        fun getInstance(topicDAO: TopicDAO) = instance ?: synchronized(this) {
-            instance ?: TopicRepository(topicDAO).also { instance = it }
-        }
-    }
+    var key = ""
+    var totalPosts = 0
+    var post1Rating = 0f
+    var post1Title = ""
+    var post1ProfilePic = 0
+    var post2Rating = 0f
+    var post2Title = ""
+    var post2ProfilePic = 0
+    var post3Rating = 0f
+    var post3Title = ""
+    var post3ProfilePic = 0
+    var totalReaders = 0
 
 }

@@ -15,15 +15,17 @@
 
 package io.github.horaciocome1.reeque.data
 
-import io.github.horaciocome1.reeque.data.post.PostDAO
-import io.github.horaciocome1.reeque.data.topic.TopicDAO
-import io.github.horaciocome1.reeque.data.user.UserDAO
+import io.github.horaciocome1.reeque.data.favorites.FavoriteDAO
+import io.github.horaciocome1.reeque.data.posts.PostDAO
+import io.github.horaciocome1.reeque.data.topics.TopicDAO
+import io.github.horaciocome1.reeque.data.users.UserDAO
 
 class Database private constructor() {
 
     var topicDAO = TopicDAO()
     var userDAO = UserDAO()
     var postDAO = PostDAO()
+    var favoriteDAO = FavoriteDAO()
 
     companion object {
         @Volatile private var instance: Database? = null

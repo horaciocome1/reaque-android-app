@@ -16,9 +16,12 @@
 package io.github.horaciocome1.reeque.utilities
 
 import io.github.horaciocome1.reeque.data.Database
-import io.github.horaciocome1.reeque.data.post.PostRepository
-import io.github.horaciocome1.reeque.data.topic.TopicRepository
-import io.github.horaciocome1.reeque.data.user.UserRepository
+import io.github.horaciocome1.reeque.data.favorites.FavoriteRepository
+import io.github.horaciocome1.reeque.data.posts.PostRepository
+import io.github.horaciocome1.reeque.data.topics.TopicRepository
+import io.github.horaciocome1.reeque.data.users.UserRepository
+import io.github.horaciocome1.reeque.ui.favorites.FavoritesViewModel
+import io.github.horaciocome1.reeque.ui.favorites.FavoritesViewModelFactory
 import io.github.horaciocome1.reeque.ui.posts.PostsViewModelFactory
 import io.github.horaciocome1.reeque.ui.topics.TopicsViewModelFactory
 import io.github.horaciocome1.reeque.ui.users.UsersVewModelFactory
@@ -38,6 +41,11 @@ object InjectorUtils {
     fun providePostsViewModelFactory(): PostsViewModelFactory {
         val repository = PostRepository.getInstance(Database.getInstance().postDAO)
         return PostsViewModelFactory(repository)
+    }
+
+    fun provideFavoritesViewModelFactory(): FavoritesViewModelFactory {
+        val repository = FavoriteRepository.getInstance(Database.getInstance().favoriteDAO)
+        return FavoritesViewModelFactory(repository)
     }
 
 }

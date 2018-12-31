@@ -24,7 +24,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import io.github.horaciocome1.reeque.R
-import io.github.horaciocome1.reeque.ui.topics.loadFavorites
+import io.github.horaciocome1.reeque.ui.favorites.loadFavorites
 import io.github.horaciocome1.reeque.ui.topics.loadTopics
 import io.github.horaciocome1.reeque.ui.users.UsersViewModel
 import io.github.horaciocome1.reeque.ui.users.loadProfile
