@@ -13,7 +13,7 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reeque.ui.users
+package io.github.horaciocome1.reeque.ui.posts
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -21,17 +21,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import io.github.horaciocome1.reeque.data.users.User
-import io.github.horaciocome1.reeque.databinding.ItemUserBinding
-import jp.wasabeef.picasso.transformations.BlurTransformation
+import io.github.horaciocome1.reeque.data.posts.Post
+import io.github.horaciocome1.reeque.databinding.ItemUserPostBinding
 
-class UsersAdapter(private val context: Context, private val list: List<User>)
-    : RecyclerView.Adapter<UsersAdapter.ViewHolder>() {
+class UserPostsAdapter(private val context: Context,
+                       private val list: List<Post>)
+    : RecyclerView.Adapter<UserPostsAdapter.ViewHolder>() {
 
-    lateinit var binding: ItemUserBinding
+    lateinit var binding: ItemUserPostBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        binding = ItemUserBinding.inflate(LayoutInflater.from(context), parent, false)
+        binding = ItemUserPostBinding.inflate(LayoutInflater.from(context), parent, false)
         return ViewHolder(binding.root)
     }
 
@@ -39,13 +39,11 @@ class UsersAdapter(private val context: Context, private val list: List<User>)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         list[position].run {
-            binding.user = this
-            Picasso.with(context).load(pic)
-                .transform(BlurTransformation(context, 7, 14)).into(binding.itemUserCoverImageview)
-            Picasso.with(context).load(pic).into(binding.itemUserProfilePicImageview)
+            binding.post = this
+            Picasso.with(context).load(cover).into(binding.itemUserPostCoverImageview)
         }
     }
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
+    class ViewHolder(view: View): RecyclerView.ViewHolder(view)
 
 }

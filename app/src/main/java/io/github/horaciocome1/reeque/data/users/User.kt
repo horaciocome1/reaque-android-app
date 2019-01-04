@@ -19,13 +19,13 @@ data class User(var name: String) {
 
     var key = ""
     var description = ""
-    var cover = 0
-    var profilePic = 0
+    var pic = 0
     var totalFollowers = ""
     var totalPosts = ""
     var latestPost = ""
-    var categories = ""
+    var topics = ""
     var town = ""
     var since = ""
+    var email = ""
 
 }

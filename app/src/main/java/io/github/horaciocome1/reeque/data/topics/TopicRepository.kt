@@ -15,11 +15,15 @@
 
 package io.github.horaciocome1.reeque.data.topics
 
+import io.github.horaciocome1.reeque.data.users.User
+
 class TopicRepository private constructor(private val topicDAO: TopicDAO) {
 
     fun addTopic(topic: Topic) = topicDAO.addTopic(topic)
 
     fun getTopics() = topicDAO.getTopics()
+
+    fun getTopics(user: User) = topicDAO.getTopics(user)
 
     companion object {
         @Volatile private var instance: TopicRepository? = null

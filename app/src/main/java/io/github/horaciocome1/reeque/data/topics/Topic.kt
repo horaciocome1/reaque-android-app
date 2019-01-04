@@ -15,19 +15,13 @@
 
 package io.github.horaciocome1.reeque.data.topics
 
+import io.github.horaciocome1.reeque.data.posts.Post
+
 data class Topic(var title: String) {
 
     var key = ""
     var totalPosts = 0
-    var post1Rating = 0f
-    var post1Title = ""
-    var post1ProfilePic = 0
-    var post2Rating = 0f
-    var post2Title = ""
-    var post2ProfilePic = 0
-    var post3Rating = 0f
-    var post3Title = ""
-    var post3ProfilePic = 0
     var totalReaders = 0
+    var posts = mutableListOf<Post>()
 
 }

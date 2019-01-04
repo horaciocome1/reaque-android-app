@@ -23,9 +23,7 @@ class UserRepository private constructor(private val userDAO: UserDAO) {
 
     fun getUsers(topic: Topic) = userDAO.getUsers(topic)
 
-    fun setUser(user: User) = userDAO.setUser(user)
-
-    fun getUser(key: String) = userDAO.getUser(key)
+    fun getUsers(key: String) = userDAO.getUsers(key)
 
     companion object {
         @Volatile private var instance: UserRepository? = null

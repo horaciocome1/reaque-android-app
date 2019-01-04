@@ -55,7 +55,10 @@ class UsersFragment : BottomSheetDialogFragment() {
         viewModel.getUsers(topic).observe(this, Observer { fragment_users_recyclerview.apply {
             layoutManager = StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
             adapter = UsersAdapter(view.context, it)
-            setOnClick { _, position -> fragmentManager?.loadProfile(it[position]) }
+            setOnClick { _, position ->
+                fragmentManager?.loadProfile(it[position])
+                dismiss()
+            }
             addSimpleTouchListener()
         } })
     }

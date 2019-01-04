@@ -25,7 +25,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.squareup.picasso.Picasso
 import io.github.horaciocome1.reeque.R
-import io.github.horaciocome1.reeque.data.users.User
 import io.github.horaciocome1.reeque.databinding.FragmentProfileBinding
 import io.github.horaciocome1.reeque.ui.fragmentManager
 import io.github.horaciocome1.reeque.ui.posts.loadUserPosts
@@ -34,16 +33,12 @@ import io.github.horaciocome1.reeque.utilities.InjectorUtils
 import jp.wasabeef.picasso.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.fragment_profile.*
 
-lateinit var user: User
-
-fun FragmentManager.loadProfile(user: User) {
-    this.beginTransaction().replace(R.id.activity_main_container, ProfileFragment())
-        .addToBackStack("ProfileFragment").commit()
+fun FragmentManager.loadMyProfile() {
+    this.beginTransaction().replace(R.id.activity_main_container, MyProfileFragment()).commit()
     fragmentManager = this
-    io.github.horaciocome1.reeque.ui.users.user = user
 }
 
-class ProfileFragment: Fragment() {
+class MyProfileFragment: Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
 
@@ -54,24 +49,21 @@ class ProfileFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.fragmentProfileActionButton.text = "Seguir"
-        binding.fragmentProfileActionButton.setOnClickListener { binding.fragmentProfileActionButton.text = "Seguindo" }
+        binding.fragmentProfileActionButton.text = "Alterar"
 
         val factory = InjectorUtils.provideUsersViewModelFactory()
         val viewModel = ViewModelProviders.of(this, factory)[UsersViewModel::class.java]
-        viewModel.getUsers(user.key).observe(this, Observer { user ->
+        viewModel.getUsers("").observe(this, Observer { user ->
             binding.user = user
             Picasso.with(context).load(user.pic).transform(BlurTransformation(context, 2,14))
                 .into(binding.fragmentProfileCoverImageview)
             Picasso.with(context).load(user.pic).into(binding.fragmentProfileProfilePicImageview)
-            fragment_profile_more_button.setOnClickListener {
-                fragmentManager?.loadUserPosts(io.github.horaciocome1.reeque.ui.users.user)
-            }
+            fragment_profile_more_button.setOnClickListener { fragmentManager?.loadUserPosts(user) }
             fragment_profile_profile_pic_imageview.setOnClickListener {
-                fragmentManager?.viewPic(user.pic)
+                fragmentManager?.viewPic(io.github.horaciocome1.reeque.ui.users.user.pic)
             }
             fragment_profile_cover_imageview.setOnClickListener {
-                fragmentManager?.viewPic(user.pic)
+                fragmentManager?.viewPic(io.github.horaciocome1.reeque.ui.users.user.pic)
             }
         })
     }

@@ -15,15 +15,18 @@
 
 package io.github.horaciocome1.reeque.data.posts
 
+import io.github.horaciocome1.reeque.data.topics.Topic
+import io.github.horaciocome1.reeque.data.users.User
+
 class PostRepository private constructor(private val postDAO: PostDAO) {
 
     fun addPost(post: Post) = postDAO.addPost(post)
 
-    fun getPosts() = postDAO.getPosts()
+    fun getPosts(topic: Topic) = postDAO.getPosts(topic)
 
-    fun setPost(post: Post) = postDAO.setPost(post)
+    fun getPosts(key: String) = postDAO.getPosts(key)
 
-    fun getPost(key: String) = postDAO.getPost(key)
+    fun getPosts(topic: Topic, user: User) = postDAO.getPosts(topic, user)
 
     companion object {
         @Volatile private var instance: PostRepository? = null

@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="8dp"
-            android:elevation="0dp">
+            app:elevation="0dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -94,6 +94,7 @@
                     android:layout_marginBottom="24dp"
                     android:fontFamily="@font/roboto_medium"
                     android:text="@{post.date}"
+                    android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
                     app:layout_constraintBottom_toBottomOf="@+id/item_post_cover_imageview"
                     app:layout_constraintEnd_toStartOf="@+id/constrainlayout"

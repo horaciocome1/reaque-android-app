@@ -27,10 +27,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.github.horaciocome1.reeque.R
 import io.github.horaciocome1.reeque.ui.MainActivity
+import io.github.horaciocome1.reeque.ui.fragmentManager
 import io.github.horaciocome1.reeque.utilities.InjectorUtils
 import kotlinx.android.synthetic.main.fragment_topics.*
-
-lateinit var fragmentManager: FragmentManager
 
 fun FragmentManager.loadTopics() {
     this.beginTransaction().replace(R.id.activity_main_container, TopicsFragment()).commit()

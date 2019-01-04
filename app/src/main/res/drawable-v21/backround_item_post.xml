@@ -18,6 +18,12 @@
 
     <solid android:color="?android:colorBackground" />
 
-    <corners android:bottomLeftRadius="8dp" android:topLeftRadius="8dp" />
+    <stroke
+        android:color="@color/divider"
+        android:width="0.1dp" />
+
+    <corners
+        android:bottomLeftRadius="8dp"
+        android:topLeftRadius="8dp" />
 
 </shape>

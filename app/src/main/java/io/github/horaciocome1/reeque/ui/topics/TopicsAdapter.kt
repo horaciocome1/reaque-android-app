@@ -24,7 +24,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import io.github.horaciocome1.reeque.data.topics.Topic
 import io.github.horaciocome1.reeque.databinding.ItemTopicBinding
+import io.github.horaciocome1.reeque.ui.posts.loadPost
 import io.github.horaciocome1.reeque.ui.posts.loadPosts
+import io.github.horaciocome1.reeque.ui.users.loadProfile
 
 class TopicsAdapter(private val context: Context,
                     private val list: List<Topic>,
@@ -43,10 +45,22 @@ class TopicsAdapter(private val context: Context,
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         list[position].run {
             binding.topic = this
-            Picasso.with(context).load(post1ProfilePic).into(binding.itemTopicPost1ProfilePicImageview)
-            Picasso.with(context).load(post2ProfilePic).into(binding.itemTopicPost2ProfilePicImageview)
-            Picasso.with(context).load(post3ProfilePic).into(binding.itemTopicPost3ProfilePicImageview)
+            Picasso.with(context).load(posts[0].user.pic).into(binding.itemTopicPost1ProfilePicImageview)
+            Picasso.with(context).load(posts[1].user.pic).into(binding.itemTopicPost2ProfilePicImageview)
+            Picasso.with(context).load(posts[2].user.pic).into(binding.itemTopicPost3ProfilePicImageview)
             binding.itemTopicMoreButton.setOnClickListener { fragmentManager?.loadPosts(this) }
+            binding.itemTopicPost1TitleTextview.setOnClickListener { fragmentManager?.loadPost(posts[0]) }
+            binding.itemTopicPost2TitleTextview.setOnClickListener { fragmentManager?.loadPost(posts[1]) }
+            binding.itemTopicPost3TitleTextview.setOnClickListener { fragmentManager?.loadPost(posts[2]) }
+            binding.itemTopicPost1ProfilePicImageview.setOnClickListener {
+                fragmentManager?.loadProfile(posts[0].user)
+            }
+            binding.itemTopicPost2ProfilePicImageview.setOnClickListener {
+                fragmentManager?.loadProfile(posts[1].user)
+            }
+            binding.itemTopicPost3ProfilePicImageview.setOnClickListener {
+                fragmentManager?.loadProfile(posts[2].user)
+            }
         }
     }
 

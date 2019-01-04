@@ -16,12 +16,9 @@
 
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <solid android:color="@android:color/white" />
-
-    <stroke
-        android:color="@color/divider"
-        android:width="0.1dp" />
-
-    <corners android:radius="8dp" />
+    <gradient
+        android:endColor="#42ffffff"
+        android:startColor="?android:colorBackground"
+        android:angle="90" />
 
 </shape>

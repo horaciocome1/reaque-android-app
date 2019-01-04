@@ -23,11 +23,12 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import io.github.horaciocome1.reeque.R
+import com.squareup.picasso.Picasso
+import io.github.horaciocome1.reeque.databinding.FragmentDrawerBinding
 import io.github.horaciocome1.reeque.ui.favorites.loadFavorites
 import io.github.horaciocome1.reeque.ui.topics.loadTopics
 import io.github.horaciocome1.reeque.ui.users.UsersViewModel
-import io.github.horaciocome1.reeque.ui.users.loadProfile
+import io.github.horaciocome1.reeque.ui.users.loadMyProfile
 import io.github.horaciocome1.reeque.utilities.InjectorUtils
 import kotlinx.android.synthetic.main.fragment_drawer.*
 
@@ -41,8 +42,11 @@ fun FragmentManager.loadDrawer(): Boolean {
 
 class DrawerFragment: BottomSheetDialogFragment() {
 
+    lateinit var binding: FragmentDrawerBinding
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_drawer, container, false)
+        binding = FragmentDrawerBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,8 +58,10 @@ class DrawerFragment: BottomSheetDialogFragment() {
 
         val factory = InjectorUtils.provideUsersViewModelFactory()
         val viewModel = ViewModelProviders.of(this, factory).get(UsersViewModel::class.java)
-        viewModel.getUser("").observe(this, Observer {
-                user -> fragment_drawer_profile_pic_imageview.setOnClickListener { dismiss(); fragmentManager?.loadProfile(user) }
+        viewModel.getUsers("").observe(this, Observer { user ->
+            binding.user = user
+            Picasso.with(context).load(user.pic).into(binding.fragmentDrawerProfilePicImageview)
+            fragment_drawer_profile_pic_imageview.setOnClickListener { dismiss(); fragmentManager?.loadMyProfile() }
         })
     }
 

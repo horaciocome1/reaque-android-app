@@ -18,15 +18,17 @@ package io.github.horaciocome1.reeque.ui.posts
 import androidx.lifecycle.ViewModel
 import io.github.horaciocome1.reeque.data.posts.Post
 import io.github.horaciocome1.reeque.data.posts.PostRepository
+import io.github.horaciocome1.reeque.data.topics.Topic
+import io.github.horaciocome1.reeque.data.users.User
 
 class PostsViewModel(private val postRepository: PostRepository) : ViewModel() {
 
     fun addPost(post: Post) = postRepository.addPost(post)
 
-    fun getPosts() = postRepository.getPosts()
+    fun getPosts(topic: Topic) = postRepository.getPosts(topic)
 
-    fun setPost(post: Post) = postRepository.setPost(post)
+    fun getPosts(topic: Topic, user: User) = postRepository.getPosts(topic, user)
 
-    fun getPost(key: String) = postRepository.getPost(key)
+    fun getPosts(key: String) = postRepository.getPosts(key)
 
 }

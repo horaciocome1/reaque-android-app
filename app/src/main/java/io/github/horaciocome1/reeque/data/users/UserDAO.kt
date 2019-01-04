@@ -33,6 +33,10 @@ class UserDAO {
         users().forEach { userList.add(it) }
         users().forEach { userList.add(it) }
         users().forEach { userList.add(it) }
+        users().forEach { userList.add(it) }
+        users().forEach { userList.add(it) }
+        users().forEach { userList.add(it) }
+        users().forEach { userList.add(it) }
         user.value = users()[0]
 
 
@@ -47,14 +51,12 @@ class UserDAO {
 
     fun getUsers(topic: Topic) = users as LiveData<List<User>>
 
-    fun setUser(user: User) { this.user.value = user }
-
-    fun getUser(key: String) = user as LiveData<User>
+    fun getUsers(key: String) = user as LiveData<User>
 
     private fun users() = arrayListOf(
         User("Antonia Marta de Sema Ricardo").apply {
-            profilePic = R.drawable.profile2
-            categories = "Amor, Cidadania, Cultura, Casamento, Lugares"
+            pic = R.drawable.profile2
+            topics = "Amor, Cidadania, Cultura, Casamento, Lugares"
             town = "Ilha de Mocambique"
 
             description = "17 year old student passionate for cars and urban culture. Thats what i write about.\\nHope you like it.\\n\\nhugs!"
@@ -63,21 +65,21 @@ class UserDAO {
             town = "Mocimboa da Praia"
             since = "Setembro de 2018"
             latestPost = "Não acredite em algo simplesmente porque ouviu. Não acredite em algo simplesmente porque todos falam a respeito. Não acredite em algo simplesmente porque está escrito em seus livros religiosos. Não acredite em algo só porque seus professores e mestres dizem que é verdade. Não acredite em tradições só porque foram passadas de geração em geração. Mas depois de muita análise e observação, se você vê que algo concorda com a razão, e que conduz ao bem e beneficio de todos, aceite-o e viva-o."
-            cover = R.drawable.profile3
+            email = "aricardo968@zmail.com"
         },
         User("Ana Ju").apply {
-            profilePic = R.drawable.profile3
-            categories = "Cultura, Casamento"
+            pic = R.drawable.profile3
+            topics = "Cultura, Casamento"
             town = "Maputo"
         },
         User("Cedro de Carlos").apply {
-            profilePic = R.drawable.profile3
-            categories = "Amor"
+            pic = R.drawable.profile2
+            topics = "Amor"
             town = "Cidade do Cabo"
         },
         User("Julia Ju").apply {
-            profilePic = R.drawable.profile2
-            categories = "Cidadania, Cultura, Casamento, Lugares"
+            pic = R.drawable.profile3
+            topics = "Cidadania, Cultura, Casamento, Lugares"
             town = "Chimoio"
         }
     )

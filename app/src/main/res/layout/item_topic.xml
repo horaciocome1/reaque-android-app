@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/background_card"
-        android:layout_margin="8dp"
+        android:layout_margin="4dp"
         android:padding="16dp">
 
         <TextView
@@ -51,7 +51,7 @@
             android:id="@+id/item_topic_post2_rating_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{Float.toString(topic.post2Rating)}"
+            android:text="@{Float.toString(topic.posts[1].rating)}"
             android:fontFamily="@font/roboto_light"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
             app:layout_constraintBottom_toBottomOf="@+id/item_topic_post2_title_textview"
@@ -76,7 +76,7 @@
             android:foreground="?attr/selectableItemBackground"
             android:maxLines="3"
             android:padding="12dp"
-            android:text="@{topic.post2Title}"
+            android:text="@{topic.posts[1].title}"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             app:layout_constraintEnd_toStartOf="@+id/item_topic_post1_profile_pic_imageview"
             app:layout_constraintHorizontal_bias="0.0"
@@ -157,7 +157,7 @@
             android:id="@+id/item_topic_post1_rating_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{Float.toString(topic.post1Rating)}"
+            android:text="@{Float.toString(topic.posts[0].rating)}"
             android:fontFamily="@font/roboto_light"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
             app:layout_constraintBottom_toBottomOf="@+id/item_topic_post1_title_textview"
@@ -182,7 +182,7 @@
             android:foreground="?attr/selectableItemBackground"
             android:maxLines="3"
             android:padding="12dp"
-            android:text="@{topic.post1Title}"
+            android:text="@{topic.posts[0].title}"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             app:layout_constraintEnd_toStartOf="@+id/item_topic_post1_profile_pic_imageview"
             app:layout_constraintHorizontal_bias="0.0"
@@ -207,7 +207,7 @@
             android:id="@+id/item_topic_post3_rating_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{Float.toString(topic.post3Rating)}"
+            android:text="@{Float.toString(topic.posts[2].rating)}"
             android:fontFamily="@font/roboto_light"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
             app:layout_constraintBottom_toBottomOf="@+id/item_topic_post3_title_textview"
@@ -232,7 +232,7 @@
             android:foreground="?attr/selectableItemBackground"
             android:maxLines="3"
             android:padding="12dp"
-            android:text="@{topic.post3Title}"
+            android:text="@{topic.posts[2].title}"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             app:layout_constraintEnd_toStartOf="@+id/item_topic_post1_profile_pic_imageview"
             app:layout_constraintHorizontal_bias="0.0"
@@ -264,7 +264,7 @@
             app:layout_constraintTop_toBottomOf="@+id/item_topic_post3_profile_pic_imageview"
             android:clickable="true"
             android:focusable="true"
-            app:cornerRadius="8dp"/>
+            app:cornerRadius="4dp"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/item_topic_less_button"
@@ -277,7 +277,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/item_topic_more_button"
             app:layout_constraintStart_toEndOf="@+id/item_topic_more_button"
             app:layout_constraintTop_toTopOf="@+id/item_topic_more_button"
-            app:cornerRadius="8dp"/>
+            app:cornerRadius="4dp"/>
 
         <TextView
             android:id="@+id/item_topic_total_readers_textview"

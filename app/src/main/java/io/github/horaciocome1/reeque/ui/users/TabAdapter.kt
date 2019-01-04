@@ -13,26 +13,26 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reeque.ui.favorites
+package io.github.horaciocome1.reeque.ui.users
 
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 
-const val topics = "Tópicos"
-const val posts = "Publicações"
-
 class TabAdapter(fragmentManager: FragmentManager?): FragmentStatePagerAdapter(fragmentManager) {
 
-    private val fragments = arrayListOf(
-        fragmentManager?.getTopicsListFragment(),
-        fragmentManager?.getPostsListFragment()
-    )
-
-    private val titles = arrayListOf(topics, posts)
+    private val fragments = ArrayList<Fragment?>()
+    private val titles = ArrayList<String>()
 
     override fun getItem(position: Int) = fragments[position]
 
     override fun getCount() = fragments.size
 
     override fun getPageTitle(position: Int) = titles[position]
+
+    fun addFragment(title: String, fragment: Fragment?) {
+        titles += title
+        fragments += fragment
+    }
+
 }

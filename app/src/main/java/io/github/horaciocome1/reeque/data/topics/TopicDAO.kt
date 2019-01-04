@@ -17,14 +17,22 @@ package io.github.horaciocome1.reeque.data.topics
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.firestore.FirebaseFirestore
 import io.github.horaciocome1.reeque.R
+import io.github.horaciocome1.reeque.data.posts.Post
+import io.github.horaciocome1.reeque.data.users.User
 
 class TopicDAO {
 
     private val topicList = mutableListOf<Topic>()
     private val topics = MutableLiveData<List<Topic>>()
 
+    private val db = FirebaseFirestore.getInstance()
+
     init {
+        topics().forEach { topicList += it }
+        topics().forEach { topicList += it }
+        topics().forEach { topicList += it }
         topics().forEach { topicList += it }
         topics().forEach { topicList += it }
         topics().forEach { topicList += it }
@@ -39,56 +47,66 @@ class TopicDAO {
         topics.value = topicList
     }
 
-    fun getTopics() = topics as LiveData<List<Topic>>
+    //    fun getTopics() = topics as LiveData<List<Topic>>
+    fun getTopics() {
+        if (topicList.isEmpty()) {
+
+        }
+    }
+
+    fun getTopics(user: User) = topics as LiveData<List<Topic>>
 
     private fun topics() = arrayListOf(
         Topic("Casamento").apply {
             totalPosts = 132
             totalReaders = 724
 
-            post1Rating = 4.1f
-            post1Title = "Sem Querer Foi Acontecer de Novo?"
-            post1ProfilePic = R.drawable.profile3
-
-            post2Rating = 4.0f
-            post2Title = "Casados de Fresco"
-            post2ProfilePic = R.drawable.profile2
-
-            post3Rating = 3.7f
-            post3Title = "Vida a Dois ++"
-            post3ProfilePic = R.drawable.profile3
+            posts.add(Post("Sem Querer Foi Acontecer de Novo?").apply {
+                rating = 4.1f
+                user = User("").apply { pic = R.drawable.profile3 }
+            })
+            posts.add(Post("Casados de Fresco").apply {
+                rating = 4.0f
+                user = User("").apply { pic = R.drawable.profile2 }
+            })
+            posts.add(Post("Vida a Dois ++").apply {
+                rating = 3.7f
+                user = User("").apply { pic = R.drawable.profile3 }
+            })
         },
         Topic("Cultura").apply {
             totalPosts = 9
             totalReaders = 3428
 
-            post1Rating = 4.8f
-            post1Title = "Ndau"
-            post1ProfilePic = R.drawable.profile2
-
-            post2Rating = 4.5f
-            post2Title = "Carringana Wa Carringana"
-            post2ProfilePic = R.drawable.profile3
-
-            post3Rating = 4.0f
-            post3Title = "Ximitso Hi Kwatsi"
-            post3ProfilePic = R.drawable.profile3
+            posts.add(Post("Ndau").apply {
+                rating = 4.8f
+                user = User("").apply { pic = R.drawable.profile2 }
+            })
+            posts.add(Post("Carringana Wa Carringana").apply {
+                rating = 4.6f
+                user = User("").apply { pic = R.drawable.profile3 }
+            })
+            posts.add(Post("Ximitso Hi Kwatsi").apply {
+                rating = 3.9f
+                user = User("").apply { pic = R.drawable.profile2 }
+            })
         },
         Topic("Lugares").apply {
             totalPosts = 132
             totalReaders = 724
 
-            post1Rating = 4.1f
-            post1Title = "Monte Binga"
-            post1ProfilePic = R.drawable.profile2
-
-            post2Rating = 4.0f
-            post2Title = "Baia dos Cocos"
-            post2ProfilePic = R.drawable.profile2
-
-            post3Rating = 3.7f
-            post3Title = "Lago Niassa"
-            post3ProfilePic = R.drawable.profile3
+            posts.add(Post("O Monte Mais Alto - O Mais Solitario").apply {
+                rating = 4.1f
+                user = User("").apply { pic = R.drawable.profile3 }
+            })
+            posts.add(Post("Nascer Do Sol Como Mais Nenhum").apply {
+                rating = 4.0f
+                user = User("").apply { pic = R.drawable.profile2 }
+            })
+            posts.add(Post("O Canto Molhado Mais A Norte").apply {
+                rating = 3.7f
+                user = User("").apply { pic = R.drawable.profile3 }
+            })
         }
     )
 

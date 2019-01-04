@@ -13,7 +13,7 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reeque.ui.favorites
+package io.github.horaciocome1.reeque.ui.posts
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -23,30 +23,25 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import io.github.horaciocome1.reeque.R
+import io.github.horaciocome1.reeque.data.topics.Topic
+import io.github.horaciocome1.reeque.data.users.User
 import io.github.horaciocome1.reeque.ui.fragmentManager
+import io.github.horaciocome1.reeque.ui.users.user
 import io.github.horaciocome1.reeque.utilities.InjectorUtils
+import io.github.horaciocome1.simplerecyclerviewtouchlistener.addSimpleTouchListener
+import io.github.horaciocome1.simplerecyclerviewtouchlistener.setOnClick
 
-const val topics = "Tópicos"
-const val posts = "Publicações"
-
-var type = ""
-
-fun FragmentManager.getFavoriteFragmentOfTopics(): Fragment {
-    type = topics
+fun FragmentManager.getListOfPosts(topic: Topic, user: User): Fragment {
     fragmentManager = this
-    return ListFragment()
+    io.github.horaciocome1.reeque.ui.users.user = user
+    io.github.horaciocome1.reeque.ui.posts.topic = topic
+    return PostsListFragment()
 }
 
-fun FragmentManager.getFavoriteFragmentOfPosts(): Fragment {
-    type = posts
-    fragmentManager = this
-    return ListFragment()
-}
-
-class ListFragment: Fragment() {
+class PostsListFragment: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_list, container, false)
@@ -54,29 +49,15 @@ class ListFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (view is RecyclerView) {
-            val factory = InjectorUtils.provideFavoritesViewModelFactory()
-            val viewModel = ViewModelProviders.of(this, factory)[FavoritesViewModel::class.java]
-            if (type == posts) posts(view, viewModel) else if (type == topics) topics(view, viewModel)
-        }
-    }
-
-    private fun posts(recyclerView: RecyclerView, viewModel: FavoritesViewModel) {
-        viewModel.getPosts().observe(this, Observer {
-            recyclerView.apply {
-                layoutManager = LinearLayoutManager(recyclerView.context)
-                adapter = FavoritesAdapter(recyclerView.context, it)
+        val factory = InjectorUtils.providePostsViewModelFactory()
+        val viewModel = ViewModelProviders.of(this, factory)[PostsViewModel::class.java]
+        viewModel.getPosts(io.github.horaciocome1.reeque.ui.users.topic, user).observe(this, Observer {
+            if (view is RecyclerView) view.apply {
+                layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+                adapter = UserPostsAdapter(context, it)
+                setOnClick { _, position -> fragmentManager?.loadPost(it[position]) }
+                addSimpleTouchListener()
             }
         })
     }
-
-    private fun topics(recyclerView: RecyclerView, viewModel: FavoritesViewModel) {
-        viewModel.getTopics().observe(this, Observer {
-            recyclerView.apply {
-                layoutManager = LinearLayoutManager(recyclerView.context)
-                adapter = FavoritesAdapter(recyclerView.context, it)
-            }
-        })
-    }
-
 }

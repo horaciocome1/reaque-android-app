@@ -26,8 +26,6 @@ class UsersViewModel(private val userRepository: UserRepository) : ViewModel() {
 
     fun getUsers(topic: Topic) = userRepository.getUsers(topic)
 
-    fun setUser(user: User) = userRepository.setUser(user)
-
-    fun getUser(key: String) = userRepository.getUser(key)
+    fun getUsers(key: String) = userRepository.getUsers(key)
 
 }

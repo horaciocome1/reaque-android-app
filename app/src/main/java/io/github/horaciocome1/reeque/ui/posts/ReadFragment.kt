@@ -28,6 +28,7 @@ import io.github.horaciocome1.reeque.R
 import io.github.horaciocome1.reeque.data.posts.Post
 import io.github.horaciocome1.reeque.databinding.FragmentReadBinding
 import io.github.horaciocome1.reeque.ui.MainActivity
+import io.github.horaciocome1.reeque.ui.fragmentManager
 import io.github.horaciocome1.reeque.utilities.InjectorUtils
 
 var post = Post("")
@@ -36,27 +37,34 @@ const val nameReadFragment = "ReadFragment"
 fun FragmentManager.loadPost(post: Post) {
     this.beginTransaction().replace(R.id.activity_main_container, ReadFragment()).addToBackStack(nameReadFragment).commit()
     io.github.horaciocome1.reeque.ui.posts.post = post
+    fragmentManager = this
 }
 
 
 class ReadFragment: Fragment() {
 
+    lateinit var binding: FragmentReadBinding
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding = FragmentReadBinding.inflate(inflater, container, false)
-        val factory = InjectorUtils.providePostsViewModelFactory()
-        val viewModel = ViewModelProviders.of(this, factory).get(PostsViewModel::class.java)
-        viewModel.getPost(post.key).observe(this, Observer {
-            binding.post = it
-            Picasso.with(binding.root.context).load(it.cover).into(binding.fragmentReadCover)
-            Picasso.with(binding.root.context).load(it.profilePic).into(binding.fragmentReadProfilePic)
-        })
+        binding = FragmentReadBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as MainActivity).supportActionBar?.hide()
+        val factory = InjectorUtils.providePostsViewModelFactory()
+        val viewModel = ViewModelProviders.of(this, factory).get(PostsViewModel::class.java)
+        viewModel.getPosts(post.key).observe(this, Observer { post ->
+            binding.post = post
+            Picasso.with(context).load(post.cover).into(binding.fragmentReadCover)
+            Picasso.with(context).load(post.user.pic).into(binding.fragmentReadProfilePic)
+            binding.fragmentReadCover.setOnClickListener {
+                fragmentManager?.viewPic(post.cover) }
+            binding.fragmentReadProfilePic.setOnClickListener {
+                fragmentManager?.viewPic(post.user.pic)
+            }
+        })
     }
-
 
 }

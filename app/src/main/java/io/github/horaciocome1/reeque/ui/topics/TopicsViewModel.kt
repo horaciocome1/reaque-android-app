@@ -18,11 +18,14 @@ package io.github.horaciocome1.reeque.ui.topics
 import androidx.lifecycle.ViewModel
 import io.github.horaciocome1.reeque.data.topics.Topic
 import io.github.horaciocome1.reeque.data.topics.TopicRepository
+import io.github.horaciocome1.reeque.data.users.User
 
 class TopicsViewModel(private val topicRepository: TopicRepository): ViewModel() {
 
     fun addTopic(topic: Topic) = topicRepository.addTopic(topic)
 
     fun getTopics() = topicRepository.getTopics()
+
+    fun getTopics(user: User) = topicRepository.getTopics(user)
 
 }

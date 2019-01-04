@@ -13,77 +13,87 @@
   ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~    See the License for the specific language governing permissions and limitations under the License.
   -->
+<layout>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="1dp"
-    style="@style/AppTheme.CompleteClickableEffect">
+    <data>
 
-    <ImageView
-        android:id="@+id/item_user_cover_imageview"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/profile2"
-        android:tint="#99ffffff"
-        android:foreground="@drawable/background_item_user"/>
+        <variable
+            name="user"
+            type="io.github.horaciocome1.reeque.data.users.User" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/item_user_profile_pic_imageview"
-        android:layout_width="140dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:src="@drawable/profile2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    </data>
 
-    <TextView
-        android:id="@+id/item_user_name_textview"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Andre Balmeu"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-        app:layout_constraintEnd_toEndOf="@+id/item_user_profile_pic_imageview"
-        app:layout_constraintStart_toStartOf="@+id/item_user_profile_pic_imageview"
-        app:layout_constraintTop_toBottomOf="@+id/item_user_profile_pic_imageview" />
+        android:layout_margin="1dp"
+        style="@style/AppTheme.CompleteClickableEffect">
 
-    <TextView
-        android:id="@+id/item_user_categories_textview"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Casamento, Culture"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="@+id/item_user_profile_pic_imageview"
-        app:layout_constraintStart_toStartOf="@+id/item_user_profile_pic_imageview"
-        app:layout_constraintTop_toBottomOf="@+id/item_user_name_textview" />
+        <ImageView
+            android:id="@+id/item_user_cover_imageview"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/profile2"
+            android:tint="#99ffffff"
+            android:foreground="@drawable/background_item_user"/>
 
-    <TextView
-        android:id="@+id/item_user_town_textview"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="Maputo"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/item_user_profile_pic_imageview"
-        app:layout_constraintStart_toStartOf="@+id/item_user_profile_pic_imageview"
-        app:layout_constraintTop_toBottomOf="@+id/item_user_categories_textview" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/item_user_profile_pic_imageview"
+            android:layout_width="140dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/item_user_name_textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@{user.name}"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            app:layout_constraintEnd_toEndOf="@+id/item_user_profile_pic_imageview"
+            app:layout_constraintStart_toStartOf="@+id/item_user_profile_pic_imageview"
+            app:layout_constraintTop_toBottomOf="@+id/item_user_profile_pic_imageview" />
+
+        <TextView
+            android:id="@+id/item_user_topics_textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@{user.topics}"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="@+id/item_user_profile_pic_imageview"
+            app:layout_constraintStart_toStartOf="@+id/item_user_profile_pic_imageview"
+            app:layout_constraintTop_toBottomOf="@+id/item_user_name_textview" />
+
+        <TextView
+            android:id="@+id/item_user_town_textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@{user.town}"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/item_user_profile_pic_imageview"
+            app:layout_constraintStart_toStartOf="@+id/item_user_profile_pic_imageview"
+            app:layout_constraintTop_toBottomOf="@+id/item_user_topics_textview" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -13,6 +13,7 @@
   ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~    See the License for the specific language governing permissions and limitations under the License.
   -->
+
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,29 +21,32 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="wrap_content"
         android:background="?android:colorBackground"
         app:elevation="0dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/fragment_user_posts_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_close_black_24dp"/>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/fragment_user_posts_tablayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tópicos"
-            style="@style/TextAppearance.MaterialComponents.Headline5"
-            android:layout_gravity="top|center_horizontal"
-            android:padding="12dp"
-            android:fontFamily="@font/roboto_medium"/>
+            app:tabTextAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            app:tabIndicatorFullWidth="false"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/primary_text"
+            android:background="?android:colorBackground"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fragment_topics_recyclerview"
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/fragment_user_posts_viewpager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="4dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:paddingStart="4dp"
-        android:paddingRight="4dp"
-        android:paddingEnd="4dp"/>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

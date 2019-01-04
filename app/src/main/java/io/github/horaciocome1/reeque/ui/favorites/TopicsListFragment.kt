@@ -13,7 +13,7 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reeque.ui.posts
+package io.github.horaciocome1.reeque.ui.favorites
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -24,44 +24,35 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import io.github.horaciocome1.reeque.R
-import io.github.horaciocome1.reeque.data.topics.Topic
-import io.github.horaciocome1.reeque.ui.MainActivity
 import io.github.horaciocome1.reeque.ui.fragmentManager
-import io.github.horaciocome1.reeque.ui.users.loadUsers
 import io.github.horaciocome1.reeque.utilities.InjectorUtils
-import kotlinx.android.synthetic.main.fragment_posts.*
 
-var topic = Topic("")
-const val namePostsFragment = "PostsFragment"
-
-fun FragmentManager.loadPosts(topic: Topic) {
-    beginTransaction().replace(R.id.activity_main_container, PostsFragment()).addToBackStack(namePostsFragment).commit()
-    io.github.horaciocome1.reeque.ui.posts.topic = topic
+fun FragmentManager.getTopicsListFragment(): Fragment {
     fragmentManager = this
+    return TopicsListFragment()
 }
 
-class PostsFragment: Fragment() {
+
+class TopicsListFragment: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_posts, container, false)
+        return inflater.inflate(R.layout.fragment_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as MainActivity).supportActionBar?.hide()
-        initialize(view)
-    }
-
-    private fun initialize(view: View) {
-        fragment_posts_title.text = topic.title
-        val factory = InjectorUtils.providePostsViewModelFactory()
-        val viewModel = ViewModelProviders.of(this, factory).get(PostsViewModel::class.java)
-        viewModel.getPosts(topic).observe(this, Observer { fragment_posts_recyclerview.apply {
-            layoutManager = LinearLayoutManager(view.context)
-            adapter = PostsAdapter(view.context, it, fragmentManager)
-        } })
-        fragment_posts_authors_button.setOnClickListener { fragmentManager?.loadUsers(topic) }
+        if (view is RecyclerView) {
+            val factory = InjectorUtils.provideFavoritesViewModelFactory()
+            val viewModel = ViewModelProviders.of(this, factory)[FavoritesViewModel::class.java]
+            viewModel.getTopics().observe(this, Observer {
+                view.apply {
+                    layoutManager = LinearLayoutManager(context)
+                    adapter = FavoritesAdapter(context, it)
+                }
+            })
+        }
     }
 
 }
