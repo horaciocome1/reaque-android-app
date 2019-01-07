@@ -50,16 +50,16 @@ class PostsFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as MainActivity).supportActionBar?.hide()
-        initialize(view)
     }
 
-    private fun initialize(view: View) {
+    override fun onResume() {
+        super.onResume()
         fragment_posts_title.text = topic.title
         val factory = InjectorUtils.providePostsViewModelFactory()
         val viewModel = ViewModelProviders.of(this, factory).get(PostsViewModel::class.java)
         viewModel.getPosts(topic).observe(this, Observer { fragment_posts_recyclerview.apply {
-            layoutManager = LinearLayoutManager(view.context)
-            adapter = PostsAdapter(view.context, it, fragmentManager)
+            layoutManager = LinearLayoutManager(context)
+            adapter = PostsAdapter(context, it, fragmentManager)
         } })
         fragment_posts_authors_button.setOnClickListener { fragmentManager?.loadUsers(topic) }
     }

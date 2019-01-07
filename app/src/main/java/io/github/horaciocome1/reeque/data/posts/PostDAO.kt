@@ -47,7 +47,7 @@ class PostDAO {
 
     fun getPosts(topic: Topic): LiveData<List<Post>> {
         if (postList.isEmpty() or !this.topic.id.equals(topic.id, true)) {
-            reference.whereEqualTo(this.topic.id, true).addSnapshotListener {
+            reference.whereEqualTo(topic.id, true).addSnapshotListener {
                 snapshot, exception -> when {
                     exception != null -> onListenFailed(tag, exception)
                     snapshot != null -> {
@@ -64,7 +64,6 @@ class PostDAO {
         return posts
     }
 
-    //    fun getPosts(topic: Topic, user: User) = posts as LiveData<List<Post>>
     fun getPosts(topic: Topic, user: User): LiveData<List<Post>> {
         if (userPostList.isEmpty() or !this.user.id.equals(user.id, false)) {
             reference.whereEqualTo("writer_id", user.id).addSnapshotListener {

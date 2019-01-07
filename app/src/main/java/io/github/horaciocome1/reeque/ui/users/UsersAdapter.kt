@@ -20,12 +20,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import io.github.horaciocome1.reeque.data.users.User
 import io.github.horaciocome1.reeque.databinding.ItemUserBinding
-import jp.wasabeef.picasso.transformations.BlurTransformation
+import jp.wasabeef.glide.transformations.BlurTransformation
 
-class UsersAdapter(private val context: Context, private val list: List<User>)
+class UsersAdapter(private val context: Context,
+                   private val list: List<User>)
     : RecyclerView.Adapter<UsersAdapter.ViewHolder>() {
 
     lateinit var binding: ItemUserBinding
@@ -40,9 +42,10 @@ class UsersAdapter(private val context: Context, private val list: List<User>)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         list[position].run {
             binding.user = this
-            Picasso.with(context).load(pic2)
-                .transform(BlurTransformation(context, 7, 14)).into(binding.itemUserCoverImageview)
-            Picasso.with(context).load(pic2).into(binding.itemUserProfilePicImageview)
+            Glide.with(context).load(pic2)
+                .apply(RequestOptions.bitmapTransform(BlurTransformation(14, 7)))
+                .into(binding.itemUserCoverImageview)
+            Glide.with(context).load(pic2).into(binding.itemUserProfilePicImageview)
         }
     }
 

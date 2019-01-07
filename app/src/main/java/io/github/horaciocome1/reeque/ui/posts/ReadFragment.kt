@@ -23,7 +23,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
 import io.github.horaciocome1.reeque.R
 import io.github.horaciocome1.reeque.data.posts.Post
 import io.github.horaciocome1.reeque.databinding.FragmentReadBinding
@@ -57,8 +57,8 @@ class ReadFragment: Fragment() {
         val viewModel = ViewModelProviders.of(this, factory).get(PostsViewModel::class.java)
         viewModel.getPosts(post).observe(this, Observer { post ->
             binding.post = post
-            Picasso.with(context).load(post.cover2).into(binding.fragmentReadCover)
-            Picasso.with(context).load(post.user.pic2).into(binding.fragmentReadProfilePic)
+            Glide.with(this).load(post.cover2).into(binding.fragmentReadCover)
+            Glide.with(this).load(post.user.pic2).into(binding.fragmentReadProfilePic)
             binding.fragmentReadCover.setOnClickListener { fragmentManager?.viewPic(post.cover2) }
             binding.fragmentReadProfilePic.setOnClickListener { fragmentManager?.viewPic(post.user.pic2) }
         })

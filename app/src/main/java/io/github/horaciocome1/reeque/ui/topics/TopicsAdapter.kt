@@ -21,7 +21,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
 import io.github.horaciocome1.reeque.data.topics.Topic
 import io.github.horaciocome1.reeque.databinding.ItemTopicBinding
 import io.github.horaciocome1.reeque.ui.posts.loadPost
@@ -45,9 +45,9 @@ class TopicsAdapter(private val context: Context,
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         list[position].run {
             binding.topic = this
-            Picasso.with(context).load(posts[0].user.pic2).into(binding.itemTopicPost1ProfilePicImageview)
-            Picasso.with(context).load(posts[1].user.pic2).into(binding.itemTopicPost2ProfilePicImageview)
-            Picasso.with(context).load(posts[2].user.pic2).into(binding.itemTopicPost3ProfilePicImageview)
+            Glide.with(context).load(posts[0].user.pic2).into(binding.itemTopicPost1ProfilePicImageview)
+            Glide.with(context).load(posts[1].user.pic2).into(binding.itemTopicPost2ProfilePicImageview)
+            Glide.with(context).load(posts[2].user.pic2).into(binding.itemTopicPost3ProfilePicImageview)
             binding.itemTopicMoreButton.setOnClickListener { fragmentManager?.loadPosts(this) }
             binding.itemTopicPost1TitleTextview.setOnClickListener { fragmentManager?.loadPost(posts[0]) }
             binding.itemTopicPost2TitleTextview.setOnClickListener { fragmentManager?.loadPost(posts[1]) }

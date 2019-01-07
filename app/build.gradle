@@ -28,7 +28,6 @@ android {
 
 dependencies {
     def lifecycle_version = "2.0.0"
-    def nav_version = "1.0.0-alpha09"
 
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -41,13 +40,12 @@ dependencies {
     // ui utility libraries
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.github.horaciocome1:simple-recyclerview-touch-listener:0.1.7'
-    implementation 'de.hdodenhof:circleimageview:2.2.0'
-    implementation 'jp.wasabeef:picasso-transformations:2.2.1'
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
+    implementation 'jp.wasabeef:glide-transformations:4.0.1'
 
     // firebase libraries
     implementation 'com.google.firebase:firebase-core:16.0.6'
     implementation 'com.google.firebase:firebase-firestore:17.1.5'
-//    implementation 'com.github.rosariopfernandes.fireXtensions:firestore:0.3.4'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
@@ -55,4 +53,3 @@ dependencies {
 }
 
 apply plugin: 'com.google.gms.google-services'
-apply plugin: "androidx.navigation.safeargs"

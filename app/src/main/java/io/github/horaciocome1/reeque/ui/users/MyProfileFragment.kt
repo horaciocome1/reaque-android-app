@@ -23,7 +23,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import io.github.horaciocome1.reeque.R
 import io.github.horaciocome1.reeque.data.users.User
 import io.github.horaciocome1.reeque.databinding.FragmentProfileBinding
@@ -31,7 +32,7 @@ import io.github.horaciocome1.reeque.ui.fragmentManager
 import io.github.horaciocome1.reeque.ui.posts.loadUserPosts
 import io.github.horaciocome1.reeque.ui.posts.viewPic
 import io.github.horaciocome1.reeque.utilities.InjectorUtils
-import jp.wasabeef.picasso.transformations.BlurTransformation
+import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 fun FragmentManager.loadMyProfile() {
@@ -56,15 +57,16 @@ class MyProfileFragment: Fragment() {
         val viewModel = ViewModelProviders.of(this, factory)[UsersViewModel::class.java]
         viewModel.getUsers(User((""))).observe(this, Observer { user ->
             binding.user = user
-            Picasso.with(context).load(user.pic).transform(BlurTransformation(context, 2,14))
+            Glide.with(this).load(user.pic2)
+                .apply(RequestOptions.bitmapTransform(BlurTransformation(14,2)))
                 .into(binding.fragmentProfileCoverImageview)
-            Picasso.with(context).load(user.pic).into(binding.fragmentProfileProfilePicImageview)
+            Glide.with(this).load(user.pic2).into(binding.fragmentProfileProfilePicImageview)
             fragment_profile_more_button.setOnClickListener { fragmentManager?.loadUserPosts(user) }
             fragment_profile_profile_pic_imageview.setOnClickListener {
-//                fragmentManager?.viewPic(io.github.horaciocome1.reeque.ui.users.user.pic)
+                fragmentManager?.viewPic(io.github.horaciocome1.reeque.ui.users.user.pic2)
             }
             fragment_profile_cover_imageview.setOnClickListener {
-//                fragmentManager?.viewPic(io.github.horaciocome1.reeque.ui.users.user.pic)
+                fragmentManager?.viewPic(io.github.horaciocome1.reeque.ui.users.user.pic2)
             }
         })
     }

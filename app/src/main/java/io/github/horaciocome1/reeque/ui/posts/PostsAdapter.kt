@@ -21,10 +21,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import io.github.horaciocome1.reeque.data.posts.Post
 import io.github.horaciocome1.reeque.databinding.ItemPostBinding
-import jp.wasabeef.picasso.transformations.BlurTransformation
+import jp.wasabeef.glide.transformations.BlurTransformation
 
 class PostsAdapter(private val context: Context,
                    private val list: List<Post>,
@@ -43,8 +44,9 @@ class PostsAdapter(private val context: Context,
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         list[position].run {
             binding.post = this
-            Picasso.with(context).load(user.pic2).into(binding.itemPostProfileImageview)
-            Picasso.with(context).load(cover2).transform(BlurTransformation(context, 2, 7))
+            Glide.with(context).load(user.pic2).into(binding.itemPostProfileImageview)
+            Glide.with(context).load(cover2)
+                .apply(RequestOptions.bitmapTransform(BlurTransformation(7,2)))
                 .into(binding.itemPostCoverImageview)
             binding.itemPostReadMoreButton.setOnClickListener { fragmentManager?.loadPost(this) }
         }

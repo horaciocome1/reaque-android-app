@@ -21,7 +21,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
 import io.github.horaciocome1.reeque.R
 import kotlinx.android.synthetic.main.fragment_image_viewer.*
 
@@ -41,7 +41,7 @@ class ViewerFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Picasso.with(context).load(pic).into(fragment_viewer_imageview)
+        Glide.with(this).load(pic).into(fragment_viewer_imageview)
     }
 
 }
