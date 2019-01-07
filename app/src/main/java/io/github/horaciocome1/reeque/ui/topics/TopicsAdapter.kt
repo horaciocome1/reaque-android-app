@@ -45,9 +45,9 @@ class TopicsAdapter(private val context: Context,
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         list[position].run {
             binding.topic = this
-            Picasso.with(context).load(posts[0].user.pic).into(binding.itemTopicPost1ProfilePicImageview)
-            Picasso.with(context).load(posts[1].user.pic).into(binding.itemTopicPost2ProfilePicImageview)
-            Picasso.with(context).load(posts[2].user.pic).into(binding.itemTopicPost3ProfilePicImageview)
+            Picasso.with(context).load(posts[0].user.pic2).into(binding.itemTopicPost1ProfilePicImageview)
+            Picasso.with(context).load(posts[1].user.pic2).into(binding.itemTopicPost2ProfilePicImageview)
+            Picasso.with(context).load(posts[2].user.pic2).into(binding.itemTopicPost3ProfilePicImageview)
             binding.itemTopicMoreButton.setOnClickListener { fragmentManager?.loadPosts(this) }
             binding.itemTopicPost1TitleTextview.setOnClickListener { fragmentManager?.loadPost(posts[0]) }
             binding.itemTopicPost2TitleTextview.setOnClickListener { fragmentManager?.loadPost(posts[1]) }

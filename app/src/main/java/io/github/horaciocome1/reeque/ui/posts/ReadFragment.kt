@@ -55,15 +55,12 @@ class ReadFragment: Fragment() {
         (activity as MainActivity).supportActionBar?.hide()
         val factory = InjectorUtils.providePostsViewModelFactory()
         val viewModel = ViewModelProviders.of(this, factory).get(PostsViewModel::class.java)
-        viewModel.getPosts(post.key).observe(this, Observer { post ->
+        viewModel.getPosts(post).observe(this, Observer { post ->
             binding.post = post
-            Picasso.with(context).load(post.cover).into(binding.fragmentReadCover)
-            Picasso.with(context).load(post.user.pic).into(binding.fragmentReadProfilePic)
-            binding.fragmentReadCover.setOnClickListener {
-                fragmentManager?.viewPic(post.cover) }
-            binding.fragmentReadProfilePic.setOnClickListener {
-                fragmentManager?.viewPic(post.user.pic)
-            }
+            Picasso.with(context).load(post.cover2).into(binding.fragmentReadCover)
+            Picasso.with(context).load(post.user.pic2).into(binding.fragmentReadProfilePic)
+            binding.fragmentReadCover.setOnClickListener { fragmentManager?.viewPic(post.cover2) }
+            binding.fragmentReadProfilePic.setOnClickListener { fragmentManager?.viewPic(post.user.pic2) }
         })
     }
 

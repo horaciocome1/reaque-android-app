@@ -34,7 +34,7 @@ import io.github.horaciocome1.reeque.utilities.InjectorUtils
 import jp.wasabeef.picasso.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.fragment_profile.*
 
-lateinit var user: User
+var user = User("")
 
 fun FragmentManager.loadProfile(user: User) {
     this.beginTransaction().replace(R.id.activity_main_container, ProfileFragment())
@@ -59,20 +59,16 @@ class ProfileFragment: Fragment() {
 
         val factory = InjectorUtils.provideUsersViewModelFactory()
         val viewModel = ViewModelProviders.of(this, factory)[UsersViewModel::class.java]
-        viewModel.getUsers(user.key).observe(this, Observer { user ->
+        viewModel.getUsers(user).observe(this, Observer { user ->
             binding.user = user
-            Picasso.with(context).load(user.pic).transform(BlurTransformation(context, 2,14))
+            Picasso.with(context).load(user.pic2).transform(BlurTransformation(context, 2,14))
                 .into(binding.fragmentProfileCoverImageview)
-            Picasso.with(context).load(user.pic).into(binding.fragmentProfileProfilePicImageview)
+            Picasso.with(context).load(user.pic2).into(binding.fragmentProfileProfilePicImageview)
             fragment_profile_more_button.setOnClickListener {
-                fragmentManager?.loadUserPosts(io.github.horaciocome1.reeque.ui.users.user)
+                fragmentManager?.loadUserPosts(user)
             }
-            fragment_profile_profile_pic_imageview.setOnClickListener {
-                fragmentManager?.viewPic(user.pic)
-            }
-            fragment_profile_cover_imageview.setOnClickListener {
-                fragmentManager?.viewPic(user.pic)
-            }
+            fragment_profile_profile_pic_imageview.setOnClickListener { fragmentManager?.viewPic(user.pic2) }
+            fragment_profile_cover_imageview.setOnClickListener { fragmentManager?.viewPic(user.pic2) }
         })
     }
 

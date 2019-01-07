@@ -31,20 +31,26 @@
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/ic_close_black_24dp"/>
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/fragment_user_posts_tablayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabTextAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-            app:tabIndicatorFullWidth="false"
-            app:tabMode="scrollable"
-            app:tabSelectedTextColor="@color/primary_text"
-            android:background="?android:colorBackground"/>
+        <!--<com.google.android.material.tabs.TabLayout-->
+            <!--android:id="@+id/fragment_user_posts_tablayout"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:tabTextAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"-->
+            <!--app:tabIndicatorFullWidth="false"-->
+            <!--app:tabMode="scrollable"-->
+            <!--app:tabSelectedTextColor="@color/primary_text"-->
+            <!--android:background="?android:colorBackground"/>-->
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/fragment_user_posts_viewpager"
+    <!--<androidx.viewpager.widget.ViewPager-->
+        <!--android:id="@+id/fragment_user_posts_viewpager"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"/>-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragment_user_posts_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>

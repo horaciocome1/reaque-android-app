@@ -17,13 +17,14 @@ package io.github.horaciocome1.reeque.data.posts
 
 import io.github.horaciocome1.reeque.data.users.User
 
-data class Post(var title: String) {
+data class Post(var id: String) {
 
-    var key = ""
+    var title = ""
     var rating = 0f
     var date = ""
     var user = User("")
     var cover = 0
+    var cover2 = ""
     var message = ""
     var topic = ""
 

@@ -15,11 +15,12 @@
 
 package io.github.horaciocome1.reeque.data.users
 
-data class User(var name: String) {
+data class User(var id: String) {
 
-    var key = ""
+    var name = ""
     var description = ""
     var pic = 0
+    var pic2 = ""
     var totalFollowers = ""
     var totalPosts = ""
     var latestPost = ""
@@ -27,5 +28,6 @@ data class User(var name: String) {
     var town = ""
     var since = ""
     var email = ""
+    var topicsId = mutableListOf<String>()
 
 }

@@ -40,9 +40,9 @@ class UsersAdapter(private val context: Context, private val list: List<User>)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         list[position].run {
             binding.user = this
-            Picasso.with(context).load(pic)
+            Picasso.with(context).load(pic2)
                 .transform(BlurTransformation(context, 7, 14)).into(binding.itemUserCoverImageview)
-            Picasso.with(context).load(pic).into(binding.itemUserProfilePicImageview)
+            Picasso.with(context).load(pic2).into(binding.itemUserProfilePicImageview)
         }
     }
 

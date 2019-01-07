@@ -43,8 +43,8 @@ class PostsAdapter(private val context: Context,
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         list[position].run {
             binding.post = this
-            Picasso.with(context).load(user.pic).into(binding.itemPostProfileImageview)
-            Picasso.with(context).load(cover).transform(BlurTransformation(context, 2, 7))
+            Picasso.with(context).load(user.pic2).into(binding.itemPostProfileImageview)
+            Picasso.with(context).load(cover2).transform(BlurTransformation(context, 2, 7))
                 .into(binding.itemPostCoverImageview)
             binding.itemPostReadMoreButton.setOnClickListener { fragmentManager?.loadPost(this) }
         }

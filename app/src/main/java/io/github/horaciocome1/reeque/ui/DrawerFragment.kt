@@ -24,6 +24,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.squareup.picasso.Picasso
+import io.github.horaciocome1.reeque.data.users.User
 import io.github.horaciocome1.reeque.databinding.FragmentDrawerBinding
 import io.github.horaciocome1.reeque.ui.favorites.loadFavorites
 import io.github.horaciocome1.reeque.ui.topics.loadTopics
@@ -58,7 +59,7 @@ class DrawerFragment: BottomSheetDialogFragment() {
 
         val factory = InjectorUtils.provideUsersViewModelFactory()
         val viewModel = ViewModelProviders.of(this, factory).get(UsersViewModel::class.java)
-        viewModel.getUsers("").observe(this, Observer { user ->
+        viewModel.getUsers(User("")).observe(this, Observer { user ->
             binding.user = user
             Picasso.with(context).load(user.pic).into(binding.fragmentDrawerProfilePicImageview)
             fragment_drawer_profile_pic_imageview.setOnClickListener { dismiss(); fragmentManager?.loadMyProfile() }

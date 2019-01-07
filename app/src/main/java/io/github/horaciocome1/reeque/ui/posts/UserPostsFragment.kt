@@ -23,13 +23,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.google.android.material.tabs.TabLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.horaciocome1.reeque.R
+import io.github.horaciocome1.reeque.data.topics.Topic
 import io.github.horaciocome1.reeque.data.users.User
 import io.github.horaciocome1.reeque.ui.MainActivity
 import io.github.horaciocome1.reeque.ui.fragmentManager
-import io.github.horaciocome1.reeque.ui.topics.TopicsViewModel
-import io.github.horaciocome1.reeque.ui.users.TabAdapter
 import io.github.horaciocome1.reeque.ui.users.user
 import io.github.horaciocome1.reeque.utilities.InjectorUtils
 import kotlinx.android.synthetic.main.fragment_user_posts.*
@@ -50,20 +49,18 @@ class UserPostsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as MainActivity).supportActionBar?.hide()
-        var tabAdapter: TabAdapter
-        val factory = InjectorUtils.provideTopicsViewModelFactory()
-        val viewModel = ViewModelProviders.of(this, factory)[TopicsViewModel::class.java]
-        viewModel.getTopics().observe(this, Observer {
-            tabAdapter = TabAdapter(fragmentManager)
-            it.forEach { topic ->
-                tabAdapter.addFragment(topic.title, fragmentManager?.getListOfPosts(topic, user)
-            ) }
+    }
 
-            if (tabAdapter.count <= 3) fragment_user_posts_tablayout.tabMode = TabLayout.MODE_FIXED
-            else fragment_user_posts_tablayout.tabMode = TabLayout.MODE_SCROLLABLE
+    override fun onResume() {
+        super.onResume()
+        val factory = InjectorUtils.providePostsViewModelFactory()
+        val viewModel = ViewModelProviders.of(this, factory)[PostsViewModel::class.java]
 
-            fragment_user_posts_viewpager.adapter = tabAdapter
-            fragment_user_posts_tablayout.setupWithViewPager(fragment_user_posts_viewpager)
+        viewModel.getPosts(Topic(""), user).observe(this, Observer {
+            fragment_user_posts_recyclerview.apply {
+                layoutManager = LinearLayoutManager(context)
+                adapter = PostsAdapter(context, it, fragmentManager)
+            }
         })
     }
 

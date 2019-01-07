@@ -13,19 +13,10 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reeque.ui.users
+package io.github.horaciocome1.reeque.utilities
 
-import androidx.lifecycle.ViewModel
-import io.github.horaciocome1.reeque.data.topics.Topic
-import io.github.horaciocome1.reeque.data.users.User
-import io.github.horaciocome1.reeque.data.users.UserRepository
+import android.util.Log
 
-class UsersViewModel(private val userRepository: UserRepository) : ViewModel() {
+fun onListenFailed(tag: String, exception: Exception) = Log.w(tag, "Listen failed.", exception)
 
-    fun addUser(user: User) = userRepository.addUser(user)
-
-    fun getUsers(topic: Topic) = userRepository.getUsers(topic)
-
-    fun getUsers(user: User) = userRepository.getUsers(user)
-
-}
+fun onSnapshotNull(tag: String) = Log.w(tag, "Snapshot is null.")

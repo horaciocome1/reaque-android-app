@@ -29,6 +29,6 @@ class PostsViewModel(private val postRepository: PostRepository) : ViewModel() {
 
     fun getPosts(topic: Topic, user: User) = postRepository.getPosts(topic, user)
 
-    fun getPosts(key: String) = postRepository.getPosts(key)
+    fun getPosts(post: Post) = postRepository.getPosts(post)
 
 }

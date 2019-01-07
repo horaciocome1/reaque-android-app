@@ -17,9 +17,9 @@ package io.github.horaciocome1.reeque.data.topics
 
 import io.github.horaciocome1.reeque.data.posts.Post
 
-data class Topic(var title: String) {
+data class Topic(var id: String) {
 
-    var key = ""
+    var title = ""
     var totalPosts = 0
     var totalReaders = 0
     var posts = mutableListOf<Post>()

@@ -15,6 +15,7 @@
 
 package io.github.horaciocome1.reeque.data.users
 
+import io.github.horaciocome1.reeque.data.posts.Post
 import io.github.horaciocome1.reeque.data.topics.Topic
 
 class UserRepository private constructor(private val userDAO: UserDAO) {
@@ -23,7 +24,7 @@ class UserRepository private constructor(private val userDAO: UserDAO) {
 
     fun getUsers(topic: Topic) = userDAO.getUsers(topic)
 
-    fun getUsers(key: String) = userDAO.getUsers(key)
+    fun getUsers(user: User) = userDAO.getUsers(user)
 
     companion object {
         @Volatile private var instance: UserRepository? = null

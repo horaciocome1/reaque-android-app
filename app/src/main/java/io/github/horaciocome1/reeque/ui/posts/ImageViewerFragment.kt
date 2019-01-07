@@ -23,11 +23,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.squareup.picasso.Picasso
 import io.github.horaciocome1.reeque.R
-import kotlinx.android.synthetic.main.fragment_viewer.*
+import kotlinx.android.synthetic.main.fragment_image_viewer.*
 
-var pic = 0 // String link
+var pic = "" // String link
 
-fun FragmentManager.viewPic(pic: Int) {
+fun FragmentManager.viewPic(pic: String) {
     beginTransaction().replace(R.id.activity_main_container, ViewerFragment())
         .addToBackStack("ViewerFragment").commit()
     io.github.horaciocome1.reeque.ui.posts.pic = pic
@@ -36,12 +36,12 @@ fun FragmentManager.viewPic(pic: Int) {
 class ViewerFragment: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_viewer, container, false)
+        return inflater.inflate(R.layout.fragment_image_viewer, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (pic != 0) Picasso.with(context).load(pic).into(fragment_viewer_imageview)
+        Picasso.with(context).load(pic).into(fragment_viewer_imageview)
     }
 
 }

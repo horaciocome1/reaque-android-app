@@ -25,6 +25,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.squareup.picasso.Picasso
 import io.github.horaciocome1.reeque.R
+import io.github.horaciocome1.reeque.data.users.User
 import io.github.horaciocome1.reeque.databinding.FragmentProfileBinding
 import io.github.horaciocome1.reeque.ui.fragmentManager
 import io.github.horaciocome1.reeque.ui.posts.loadUserPosts
@@ -53,17 +54,17 @@ class MyProfileFragment: Fragment() {
 
         val factory = InjectorUtils.provideUsersViewModelFactory()
         val viewModel = ViewModelProviders.of(this, factory)[UsersViewModel::class.java]
-        viewModel.getUsers("").observe(this, Observer { user ->
+        viewModel.getUsers(User((""))).observe(this, Observer { user ->
             binding.user = user
             Picasso.with(context).load(user.pic).transform(BlurTransformation(context, 2,14))
                 .into(binding.fragmentProfileCoverImageview)
             Picasso.with(context).load(user.pic).into(binding.fragmentProfileProfilePicImageview)
             fragment_profile_more_button.setOnClickListener { fragmentManager?.loadUserPosts(user) }
             fragment_profile_profile_pic_imageview.setOnClickListener {
-                fragmentManager?.viewPic(io.github.horaciocome1.reeque.ui.users.user.pic)
+//                fragmentManager?.viewPic(io.github.horaciocome1.reeque.ui.users.user.pic)
             }
             fragment_profile_cover_imageview.setOnClickListener {
-                fragmentManager?.viewPic(io.github.horaciocome1.reeque.ui.users.user.pic)
+//                fragmentManager?.viewPic(io.github.horaciocome1.reeque.ui.users.user.pic)
             }
         })
     }

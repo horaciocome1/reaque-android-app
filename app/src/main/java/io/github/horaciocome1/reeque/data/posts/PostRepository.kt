@@ -24,7 +24,7 @@ class PostRepository private constructor(private val postDAO: PostDAO) {
 
     fun getPosts(topic: Topic) = postDAO.getPosts(topic)
 
-    fun getPosts(key: String) = postDAO.getPosts(key)
+    fun getPosts(post: Post) = postDAO.getPosts(post)
 
     fun getPosts(topic: Topic, user: User) = postDAO.getPosts(topic, user)
 
