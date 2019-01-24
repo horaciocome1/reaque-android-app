@@ -38,12 +38,19 @@
             android:id="@+id/fragment_favorites_tablayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabTextAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            app:tabTextAppearance="@style/AppTheme.Text.TabItem"
             app:tabIndicatorFullWidth="false"
             app:tabSelectedTextColor="@color/primary_text"
             android:background="?android:colorBackground"/>
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <ImageButton
+        android:id="@+id/fragment_favorites_notifications_button"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
+        android:layout_width="?attr/actionBarSize"
+        android:layout_height="?attr/actionBarSize"
+        app:srcCompat="@drawable/outline_notifications_none_black_24" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/fragment_favorites_viewpager"

@@ -20,7 +20,7 @@
 
     <stroke
         android:color="@color/divider"
-        android:width="0.1dp" />
+        android:width="0.01dp" />
 
     <corners
         android:bottomLeftRadius="8dp"

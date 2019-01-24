@@ -19,19 +19,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/fragment_topics_appbarlayout"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="wrap_content"
         android:background="?android:colorBackground"
         app:elevation="0dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tópicos"
-            style="@style/TextAppearance.MaterialComponents.Headline5"
-            android:layout_gravity="top|center_horizontal"
-            android:padding="12dp"
-            android:fontFamily="@font/roboto_medium"/>
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/TextAppearance.MaterialComponents.Headline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|center_horizontal"
+                android:fontFamily="@font/roboto_medium"
+                android:padding="12dp"
+                android:text="Tópicos" />
+
+            <ImageButton
+                android:id="@+id/fragment_topics_notifications_button"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="?attr/actionBarSize"
+                app:srcCompat="@drawable/outline_notifications_none_black_24" />
+
+            <ImageButton
+                android:id="@+id/fragment_topics_add_button"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_gravity="top|end"
+                app:srcCompat="@drawable/outline_add_box_black_24" />
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -39,10 +61,18 @@
         android:id="@+id/fragment_topics_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="4dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:paddingLeft="4dp"
         android:paddingStart="4dp"
         android:paddingRight="4dp"
         android:paddingEnd="4dp"/>
+
+    <ProgressBar
+        android:id="@+id/fragment_topics_progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|top"
+        android:layout_marginTop="32dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

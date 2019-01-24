@@ -52,6 +52,50 @@
     },
     {
       "client_info": {
+        "mobilesdk_app_id": "1:839533874506:android:282dab5331ca358d",
+        "android_client_info": {
+          "package_name": "io.github.horaciocome1.reaque"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "839533874506-1ui1vaevdemndu7t81js5h5kj2pocig9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.github.horaciocome1.reaque",
+            "certificate_hash": "72a7ddf89d8fe5dfbcaeab01db60df676b2ed26c"
+          }
+        },
+        {
+          "client_id": "839533874506-n52sih6pe0g7pt3sjta12q424foq4gqd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBR-JlLvM-HburIhN2f6OETFUFYnNBIHqQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "839533874506-n52sih6pe0g7pt3sjta12q424foq4gqd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:839533874506:android:bba16cbcee780b42",
         "android_client_info": {
           "package_name": "io.github.horaciocome1.reeque"

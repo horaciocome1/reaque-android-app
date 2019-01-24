@@ -1,0 +1,39 @@
+/*
+ *    Copyright 2018 Horácio Flávio Comé Júnior
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and limitations under the License.
+ */
+
+package io.github.horaciocome1.reaque.data
+
+import io.github.horaciocome1.reaque.data.comments.CommentsWebService
+import io.github.horaciocome1.reaque.data.favorites.FavoriteWebService
+import io.github.horaciocome1.reaque.data.posts.PostWebService
+import io.github.horaciocome1.reaque.data.topics.TopicWebService
+import io.github.horaciocome1.reaque.data.users.UserWebService
+
+class Database private constructor() {
+
+    var topicWebService = TopicWebService()
+    var userWebService = UserWebService()
+    var postWebService = PostWebService()
+    var favoriteWebService = FavoriteWebService()
+    var commentsWebService = CommentsWebService()
+
+    companion object {
+        @Volatile private var instance: Database? = null
+        fun getInstance() = instance ?: synchronized(this) {
+            instance ?: Database().also { instance = it }
+        }
+    }
+
+}
