@@ -20,13 +20,13 @@
     <item
         android:id="@+id/main_menu_search"
         android:title="Search"
-        android:icon="@drawable/ic_search_white_24dp"
+        android:icon="@drawable/round_search_black_24"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/main_menu_overflow"
         android:title="More"
-        android:icon="@drawable/ic_more_vert_white_24dp"
+        android:icon="@drawable/outline_more_vert_black_24"
         app:showAsAction="always" />
 
 </menu>

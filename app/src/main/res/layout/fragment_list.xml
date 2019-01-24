@@ -13,9 +13,33 @@
   ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~    See the License for the specific language governing permissions and limitations under the License.
   -->
-
-<androidx.recyclerview.widget.RecyclerView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:scrollbars="vertical"/>
+    android:layout_height="wrap_content">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragment_list_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical" />
+
+    <ProgressBar
+        android:id="@+id/fragment_list_progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="32dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/fragment_list_tap_to_update_button"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="32dp"
+        android:text="Actualizar"
+        android:textSize="12sp"
+        android:visibility="gone"
+        app:cornerRadius="12dp" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

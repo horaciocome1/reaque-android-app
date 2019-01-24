@@ -14,38 +14,33 @@
   ~    See the License for the specific language governing permissions and limitations under the License.
   -->
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/fragment_posts_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="?attr/actionBarSize"
-        app:navigationIcon="@drawable/ic_close_black_24dp">
-
-    </androidx.appcompat.widget.Toolbar>
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="14dp"
-        android:layout_height="14dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_gravity="top|center"
-        app:srcCompat="@drawable/outline_drag_handle_24" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragment_users_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="vertical"
-        android:layout_marginTop="?attr/actionBarSize"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:scrollbars="vertical" />
+
+    <ProgressBar
+        android:id="@+id/fragment_users_progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|top"
+        android:layout_marginTop="32dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/fragment_users_tap_to_update_button"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="32dp"
+        android:text="Actualizar"
+        android:textSize="12sp"
+        android:visibility="gone"
+        app:cornerRadius="12dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

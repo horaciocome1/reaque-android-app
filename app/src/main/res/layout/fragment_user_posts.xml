@@ -25,26 +25,17 @@
         android:background="?android:colorBackground"
         app:elevation="0dp">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/fragment_user_posts_toolbar"
-            android:layout_width="match_parent"
+        <ImageButton
+            android:id="@+id/fragment_user_posts_back_button"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
             android:layout_height="?attr/actionBarSize"
-            app:navigationIcon="@drawable/ic_close_black_24dp"/>
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/fragment_user_posts_tablayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabTextAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-            app:tabIndicatorFullWidth="false"
-            app:tabMode="scrollable"
-            app:tabSelectedTextColor="@color/primary_text"
-            android:background="?android:colorBackground"/>
+            android:layout_width="?attr/actionBarSize"
+            app:srcCompat="@drawable/outline_arrow_back_black_24" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/fragment_user_posts_viewpager"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragment_user_posts_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>

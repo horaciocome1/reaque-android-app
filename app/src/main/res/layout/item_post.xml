@@ -21,7 +21,7 @@
 
         <variable
             name="post"
-            type="io.github.horaciocome1.reeque.data.posts.Post" />
+            type="io.github.horaciocome1.reaque.data.posts.Post" />
 
     </data>
 
@@ -76,6 +76,7 @@
                     android:fontFamily="@font/roboto_medium"
                     android:text="@{Float.toString(post.rating)}"
                     android:textAlignment="center"
+                    android:textColor="@color/primary_text"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
                     app:layout_constraintBottom_toTopOf="@+id/item_post_profile_imageview"
                     app:layout_constraintEnd_toStartOf="@+id/constrainlayout"
@@ -136,11 +137,11 @@
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/item_post_read_more_button"
-                        style="@style/Widget.MaterialComponents.Button.TextButton"
-                        android:layout_width="wrap_content"
+                        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                        android:layout_width="42dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
-                        android:text="Ler mais"
+                        app:icon="@drawable/outline_more_horiz_black_24"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/item_post_message_textview"
                         app:layout_constraintStart_toStartOf="@+id/item_post_message_textview" />
@@ -159,6 +160,7 @@
                         app:layout_constraintBottom_toTopOf="@+id/item_post_read_more_button"
                         app:layout_constraintEnd_toEndOf="@+id/item_post_message_textview"
                         app:layout_constraintStart_toStartOf="@+id/item_post_message_textview" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>

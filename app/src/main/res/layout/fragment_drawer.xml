@@ -19,7 +19,7 @@
 
         <variable
             name="user"
-            type="io.github.horaciocome1.reeque.data.users.User" />
+            type="io.github.horaciocome1.reaque.data.users.User" />
 
     </data>
 
@@ -54,7 +54,6 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/profile2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 style="@style/AppTheme.CompleteClickableEffect"/>

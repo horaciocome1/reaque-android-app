@@ -14,71 +14,33 @@
   ~    See the License for the specific language governing permissions and limitations under the License.
   -->
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?android:colorBackground"
-        app:elevation="0dp">
-
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/fragment_posts_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Casamento"
-                android:textAlignment="center"
-                style="@style/TextAppearance.MaterialComponents.Headline5"
-                android:layout_gravity="top|center_horizontal"
-                android:padding="12dp"
-                android:maxLines="1"
-                android:fontFamily="@font/roboto_light"
-                android:layout_marginLeft="?attr/actionBarSize"
-                android:layout_marginStart="?attr/actionBarSize"
-                android:layout_marginRight="?attr/actionBarSize"
-                android:layout_marginEnd="?attr/actionBarSize"/>
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/fragment_posts_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="?attr/actionBarSize"
-                android:background="@android:color/transparent"
-                app:navigationIcon="@drawable/outline_arrow_back_24"/>
-
-
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragment_posts_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:scrollbars="vertical" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/fragment_posts_authors_button"
+    <ProgressBar
+        android:id="@+id/fragment_posts_progressbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ver autores"
+        android:layout_gravity="center|top"
+        android:layout_marginTop="32dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/fragment_posts_tap_to_update_button"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:layout_marginBottom="32dp"
         android:textSize="12sp"
+        android:text="Actualizar"
         android:layout_gravity="bottom|center"
-        android:layout_margin="16dp"
-        app:cornerRadius="32dp"
-        style="@style/Widget.MaterialComponents.Button" />
+        android:visibility="gone"
+        app:cornerRadius="12dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

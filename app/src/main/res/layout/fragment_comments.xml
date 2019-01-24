@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~    Copyright 2018 Horácio Flávio Comé Júnior
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and limitations under the License.
+  -->
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backround_comments_gradient">
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragment_comments_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="61dp" />
+
+    <ProgressBar
+        android:id="@+id/fragment_comments_progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|top"
+        android:layout_marginTop="32dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/fragment_comments_tap_to_update_button"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="61dp"
+        android:text="Actualizar"
+        android:textSize="12sp"
+        android:visibility="gone"
+        app:cornerRadius="12dp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+
+        <EditText
+            android:id="@+id/fragment_comments_edittext"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/backround_rounded_view_white"
+            android:hint="Seu comentario  . . ."
+            android:inputType="textMultiLine"
+            android:maxLines="7"
+            android:minHeight="45dp"
+            android:paddingStart="24dp"
+            android:paddingLeft="24dp"
+            android:paddingEnd="24dp"
+            android:paddingRight="24dp"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_comments_send_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/fragment_comments_send_button"
+            style="@style/AppTheme.CompleteClickableEffect"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/backround_rounded_view_white"
+            android:text="Enviar"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_comments_edittext"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fragment_comments_edittext"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/outline_send_24" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
