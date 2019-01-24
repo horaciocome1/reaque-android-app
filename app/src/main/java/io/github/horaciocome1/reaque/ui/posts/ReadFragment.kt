@@ -25,9 +25,9 @@ import androidx.lifecycle.Observer
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.databinding.FragmentReadBinding
-import io.github.horaciocome1.reaque.ui.fragmentManager
+import io.github.horaciocome1.reaque.ui.imageviewer.viewPic
+import io.github.horaciocome1.reaque.ui.menu.fragmentManager
 import io.github.horaciocome1.reaque.ui.menu.loadReadMenu
-import io.github.horaciocome1.reaque.ui.viewPic
 import io.github.horaciocome1.reaque.utilities.getGlide
 import kotlinx.android.synthetic.main.fragment_read.*
 

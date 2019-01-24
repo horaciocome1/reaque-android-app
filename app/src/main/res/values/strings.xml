@@ -15,4 +15,11 @@
 
 <resources>
     <string name="app_name">reaque</string>
+
+    <!-- 01 URL -->
+    <string name="terms_and_conditions_url">https://github.com/horaciocome1/reaque/blob/master/TERMS_AND_CONDITIONS.md</string>
+    <string name="privacy_policy_url">https://github.com/horaciocome1/reaque/blob/master/PRIVACY_POLICY.md</string>
+    <string name="licence_url">https://github.com/horaciocome1/reaque/blob/master/LICENSE</string>
+    <string name="read_me_url">https://github.com/horaciocome1/reaque/blob/master/README.md</string>
+    <string name="project_url">https://github.com/horaciocome1/reaque</string>
 </resources>

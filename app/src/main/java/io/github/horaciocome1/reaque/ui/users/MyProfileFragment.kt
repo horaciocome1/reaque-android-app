@@ -26,9 +26,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.databinding.FragmentProfileBinding
-import io.github.horaciocome1.reaque.ui.fragmentManager
+import io.github.horaciocome1.reaque.ui.imageviewer.viewPic
+import io.github.horaciocome1.reaque.ui.menu.fragmentManager
 import io.github.horaciocome1.reaque.ui.posts.loadUserPosts
-import io.github.horaciocome1.reaque.ui.viewPic
 import io.github.horaciocome1.reaque.utilities.getProfileCoverTransformation
 import kotlinx.android.synthetic.main.fragment_profile.*
 

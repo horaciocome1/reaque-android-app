@@ -23,7 +23,6 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.topics.Topic
-import io.github.horaciocome1.reaque.ui.fragmentManager
 import kotlinx.android.synthetic.main.fragment_topic_menu.*
 
 lateinit var topic: Topic

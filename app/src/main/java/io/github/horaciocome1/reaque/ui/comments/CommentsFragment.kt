@@ -26,7 +26,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.comments.Comment
 import io.github.horaciocome1.reaque.data.topics.Topic
-import io.github.horaciocome1.reaque.ui.fragmentManager
+import io.github.horaciocome1.reaque.ui.menu.fragmentManager
 import kotlinx.android.synthetic.main.fragment_comments.*
 
 lateinit var topic: Topic

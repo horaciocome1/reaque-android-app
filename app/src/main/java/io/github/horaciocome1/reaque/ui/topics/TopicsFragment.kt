@@ -27,7 +27,7 @@ import com.google.android.material.bottomappbar.BottomAppBar
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.ui.MainActivity
-import io.github.horaciocome1.reaque.ui.fragmentManager
+import io.github.horaciocome1.reaque.ui.menu.fragmentManager
 import kotlinx.android.synthetic.main.fragment_topics.*
 
 fun FragmentManager.loadTopics() {

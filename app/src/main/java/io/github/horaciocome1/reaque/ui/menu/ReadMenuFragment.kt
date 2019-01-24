@@ -23,7 +23,6 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.posts.Post
-import io.github.horaciocome1.reaque.ui.fragmentManager
 
 fun FragmentManager.loadReadMenu(post: Post) {
     val fragment = ReadMenuFragment()

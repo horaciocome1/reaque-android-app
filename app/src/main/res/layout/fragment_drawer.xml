@@ -308,7 +308,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/divider5">
 
                 <TextView
-                    android:id="@+id/textView13"
+                    android:id="@+id/fragment_drawer_terms_and_conditions"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="4dp"
@@ -332,7 +332,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/divider5"/>
 
                 <TextView
-                    android:id="@+id/textView14"
+                    android:id="@+id/fragment_drawer_privacy_police"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="4dp"

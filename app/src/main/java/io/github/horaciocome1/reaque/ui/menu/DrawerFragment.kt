@@ -13,8 +13,10 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.ui
+package io.github.horaciocome1.reaque.ui.menu
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +24,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.databinding.FragmentDrawerBinding
 import io.github.horaciocome1.reaque.ui.favorites.loadFavorites
 import io.github.horaciocome1.reaque.ui.topics.loadTopics
@@ -65,6 +68,8 @@ class DrawerFragment: BottomSheetDialogFragment() {
         fragment_drawer_about_constraintLayout.setOnClickListener {
             dismiss()
         }
+        fragment_drawer_terms_and_conditions.setOnClickListener { onUrlOnClickListener(it) }
+        fragment_drawer_privacy_police.setOnClickListener { onUrlOnClickListener(it) }
     }
 
     override fun onStart() {
@@ -80,6 +85,19 @@ class DrawerFragment: BottomSheetDialogFragment() {
                 }
             }
         })
+    }
+
+    private fun onUrlOnClickListener(view: View) {
+        val url = resources.getString(
+            when (view) {
+                fragment_drawer_terms_and_conditions -> R.string.terms_and_conditions_url
+                fragment_drawer_privacy_police -> R.string.privacy_policy_url
+                else -> R.string.read_me_url
+            }
+        )
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent)
+        dismiss()
     }
 
 }

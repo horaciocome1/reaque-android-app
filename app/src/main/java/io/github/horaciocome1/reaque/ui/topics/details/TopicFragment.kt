@@ -23,7 +23,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.topics.Topic
-import io.github.horaciocome1.reaque.ui.fragmentManager
+import io.github.horaciocome1.reaque.ui.menu.fragmentManager
 import kotlinx.android.synthetic.main.fragment_topic.*
 
 lateinit var topic: Topic

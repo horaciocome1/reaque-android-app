@@ -13,7 +13,7 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.ui
+package io.github.horaciocome1.reaque.ui.imageviewer
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -31,7 +31,7 @@ fun FragmentManager.viewPic(pic: String) {
     val fragment = ViewerFragment()
     beginTransaction().replace(R.id.activity_main_container, fragment)
         .addToBackStack(fragment.tag).commit()
-    io.github.horaciocome1.reaque.ui.link = pic
+    link = pic
 }
 
 class ViewerFragment: Fragment() {

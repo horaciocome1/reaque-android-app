@@ -25,6 +25,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import io.github.horaciocome1.reaque.R
+import io.github.horaciocome1.reaque.ui.menu.loadDrawer
 import io.github.horaciocome1.reaque.ui.menu.loadMainMenu
 import io.github.horaciocome1.reaque.ui.signin.getSignInActivityIntent
 import io.github.horaciocome1.reaque.ui.topics.loadTopics

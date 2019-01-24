@@ -24,17 +24,18 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomappbar.BottomAppBar
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.ui.MainActivity
+import io.github.horaciocome1.reaque.ui.menu.fragmentManager
 import kotlinx.android.synthetic.main.fragment_favorites.*
 
 fun FragmentManager.loadFavorites() {
     beginTransaction().replace(R.id.activity_main_container, FavoritesFragment()).commit()
-    io.github.horaciocome1.reaque.ui.fragmentManager = this
+    fragmentManager = this
 }
 
 class FavoritesFragment : Fragment() {
 
-    lateinit var bottomAppBarShadow: View
-    lateinit var bottomAppBar: BottomAppBar
+    private lateinit var bottomAppBarShadow: View
+    private lateinit var bottomAppBar: BottomAppBar
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         bottomAppBarShadow = (activity as MainActivity).findViewById(R.id.activity_main_bottomappbar_shadow)

@@ -26,7 +26,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.ui.favorites.getFavoritesViewModel
-import io.github.horaciocome1.reaque.ui.fragmentManager
+import io.github.horaciocome1.reaque.ui.menu.fragmentManager
 import io.github.horaciocome1.reaque.ui.topics.details.loadTopic
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addSimpleTouchListener
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.setOnClick
