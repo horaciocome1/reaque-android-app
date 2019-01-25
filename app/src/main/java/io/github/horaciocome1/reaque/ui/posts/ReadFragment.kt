@@ -25,9 +25,9 @@ import androidx.lifecycle.Observer
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.databinding.FragmentReadBinding
+import io.github.horaciocome1.reaque.ui.MainActivity
 import io.github.horaciocome1.reaque.ui.imageviewer.viewPic
 import io.github.horaciocome1.reaque.ui.menu.fragmentManager
-import io.github.horaciocome1.reaque.ui.menu.loadReadMenu
 import io.github.horaciocome1.reaque.utilities.getGlide
 import kotlinx.android.synthetic.main.fragment_read.*
 
@@ -50,35 +50,33 @@ class ReadFragment: Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        fragment_read_more_button.setOnClickListener { fragmentManager?.loadReadMenu(post) }
-        fragment_read_back_button.setOnClickListener { activity?.onBackPressed() }
-    }
-
     override fun onStart() {
         super.onStart()
-        getPostsViewModel().getPosts(post).observe(this, Observer { posts ->
-            when {
-                posts.isEmpty() -> {
-                    fragment_read_appbar.visibility = View.GONE
-                    fragment_read_message_scrollview.visibility = View.GONE
-                    fragment_read_details_scrollview.visibility = View.GONE
+        arguments?.let {
+            val postId = ReadFragmentArgs.fromBundle(it).postId
+            getPostsViewModel().getPosts(Post(postId)).observe(this, Observer { posts ->
+                when {
+                    posts.isEmpty() -> {
+//                        fragment_read_appbar.visibility = View.GONE
+                        fragment_read_message_scrollview.visibility = View.GONE
+                        fragment_read_details_scrollview.visibility = View.GONE
+                    }
+                    else -> {
+                        post = posts[0]
+//                        fragment_read_appbar.visibility = View.VISIBLE
+                        fragment_read_message_scrollview.visibility = View.VISIBLE
+                        fragment_read_details_scrollview.visibility = View.VISIBLE
+                        fragment_read_progressbar.visibility = View.GONE
+                        (activity as MainActivity).supportActionBar?.title = post.title
+                        binding.post = post
+                        getGlide().load(post.cover).into(fragment_read_cover)
+                        getGlide().load(post.user.pic).into(fragment_read_profile_pic)
+                        fragment_read_cover.setOnClickListener { fragmentManager?.viewPic(post.cover) }
+                        fragment_read_profile_pic.setOnClickListener { fragmentManager?.viewPic(post.user.pic) }
+                    }
                 }
-                else -> {
-                    fragment_read_appbar.visibility = View.VISIBLE
-                    fragment_read_message_scrollview.visibility = View.VISIBLE
-                    fragment_read_details_scrollview.visibility = View.VISIBLE
-                    fragment_read_progressbar.visibility = View.GONE
-                    post = posts[0]
-                    binding.post = post
-                    getGlide().load(post.cover).into(fragment_read_cover)
-                    getGlide().load(post.user.pic).into(fragment_read_profile_pic)
-                    fragment_read_cover.setOnClickListener { fragmentManager?.viewPic(post.cover) }
-                    fragment_read_profile_pic.setOnClickListener { fragmentManager?.viewPic(post.user.pic) }
-                }
-            }
-        })
+            })
+        }
     }
 
 }

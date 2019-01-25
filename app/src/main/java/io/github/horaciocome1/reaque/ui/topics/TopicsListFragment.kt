@@ -27,9 +27,7 @@ import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.ui.favorites.getFavoritesViewModel
 import io.github.horaciocome1.reaque.ui.menu.fragmentManager
-import io.github.horaciocome1.reaque.ui.topics.details.loadTopic
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addSimpleTouchListener
-import io.github.horaciocome1.simplerecyclerviewtouchlistener.setOnClick
 import kotlinx.android.synthetic.main.fragment_topics_list.*
 
 fun FragmentManager.getTopicsListFragment(): TopicsListFragment {
@@ -73,7 +71,7 @@ class TopicsListFragment: Fragment() {
     private fun configList(list: List<Topic>) = fragment_topics_list_recyclerview.apply {
         layoutManager = LinearLayoutManager(context)
         adapter = FavoriteTopicAdapter(context, list)
-        setOnClick { _, position -> fragmentManager?.loadTopic(list[position]) }
+//        setOnClick { _, position -> fragmentManager?.loadTopic(list[position]) }
         addSimpleTouchListener()
     }
 

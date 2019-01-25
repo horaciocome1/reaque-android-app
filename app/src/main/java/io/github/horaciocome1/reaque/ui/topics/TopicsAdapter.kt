@@ -20,13 +20,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
+import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.databinding.ItemTopicBinding
-import io.github.horaciocome1.reaque.ui.posts.loadPost
-import io.github.horaciocome1.reaque.ui.topics.details.loadTopic
-import io.github.horaciocome1.reaque.ui.users.loadProfile
 
 class TopicsAdapter(private val context: Context,
                     private val list: List<Topic>,
@@ -45,23 +45,66 @@ class TopicsAdapter(private val context: Context,
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         list[position].run {
             binding.topic = this
+
             Glide.with(context).load(posts[0].user.pic).into(binding.itemTopicPost1ProfilePicImageview)
             Glide.with(context).load(posts[1].user.pic).into(binding.itemTopicPost2ProfilePicImageview)
             Glide.with(context).load(posts[2].user.pic).into(binding.itemTopicPost3ProfilePicImageview)
-            binding.itemTopicMoreButton.setOnClickListener { fragmentManager?.loadTopic(this) }
-            binding.itemTopicPost1TitleTextview.setOnClickListener { fragmentManager?.loadPost(posts[0]) }
-            binding.itemTopicPost2TitleTextview.setOnClickListener { fragmentManager?.loadPost(posts[1]) }
-            binding.itemTopicPost3TitleTextview.setOnClickListener { fragmentManager?.loadPost(posts[2]) }
+
+            binding.itemTopicPost1TitleTextview.setOnClickListener {
+                //                fragmentManager?.loadPost(posts[0])
+                read(it, posts[0])
+            }
+            binding.itemTopicPost2TitleTextview.setOnClickListener {
+                //                fragmentManager?.loadPost(posts[1])
+                read(it, posts[1])
+            }
+            binding.itemTopicPost3TitleTextview.setOnClickListener {
+                //                fragmentManager?.loadPost(posts[2])
+                read(it, posts[2])
+            }
+
+
             binding.itemTopicPost1ProfilePicImageview.setOnClickListener {
-                fragmentManager?.loadProfile(posts[0].user)
+                //                fragmentManager?.loadProfile(posts[0].user)
+                openProfile(it, posts[0].user)
             }
+
             binding.itemTopicPost2ProfilePicImageview.setOnClickListener {
-                fragmentManager?.loadProfile(posts[1].user)
+                //                fragmentManager?.loadProfile(posts[1].user)
+                openProfile(it, posts[1].user)
             }
+
             binding.itemTopicPost3ProfilePicImageview.setOnClickListener {
-                fragmentManager?.loadProfile(posts[2].user)
+                //                fragmentManager?.loadProfile(posts[2].user)
+                openProfile(it, posts[2].user)
             }
+
+            binding.itemTopicMoreButton.setOnClickListener {
+                val openTopicAction = TopicsFragmentDirections.actionOpenPosts(this.id, this.title)
+                Navigation.findNavController(it).navigate(openTopicAction)
+            }
+
+            binding.itemTopicWritersButton.setOnClickListener {
+                val openUsersAction = TopicsFragmentDirections.actionOpenUsers(this.id, this.title)
+                Navigation.findNavController(it).navigate(openUsersAction)
+            }
+
+            binding.itemTopicCommentsButton.setOnClickListener {
+                val openCommentsAction = TopicsFragmentDirections.actionOpenComments(this.id, this.title)
+                Navigation.findNavController(it).navigate(openCommentsAction)
+            }
+
         }
+    }
+
+    private fun openProfile(view: View, user: User) {
+        val openProfileAction = TopicsFragmentDirections.actionOpenProfile(user.id)
+        Navigation.findNavController(view).navigate(openProfileAction)
+    }
+
+    private fun read(view: View, post: Post) {
+        val actionRead = TopicsFragmentDirections.actionRead(post.id)
+        Navigation.findNavController(view).navigate(actionRead)
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)

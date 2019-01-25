@@ -59,6 +59,11 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.0.0'
     implementation 'jp.wasabeef:glide-transformations:4.0.1'
 
+    // navigation component
+    def nav_version = "1.0.0-alpha11"
+    implementation "android.arch.navigation:navigation-fragment:$nav_version"
+    implementation "android.arch.navigation:navigation-ui:$nav_version"
+
     // firebase libraries
     implementation 'com.google.firebase:firebase-core:16.0.6'
     implementation 'com.google.firebase:firebase-firestore:17.1.5'
@@ -69,3 +74,5 @@ dependencies {
 }
 
 apply plugin: 'com.google.gms.google-services'
+
+apply plugin: 'androidx.navigation.safeargs'

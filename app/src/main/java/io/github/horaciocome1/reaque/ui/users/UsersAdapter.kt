@@ -40,12 +40,11 @@ class UsersAdapter(private val context: Context,
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         list[position].run {
-            Glide.with(context).load(pic)
-                .apply(getItemUserTransformation())
-                .into(binding.itemUserCoverImageview)
-            Glide.with(context).load(pic)
-                .into(binding.itemUserProfilePicImageview)
             binding.user = this
+            Glide.with(context).load(pic).run {
+                apply(getItemUserTransformation()).into(binding.itemUserCoverImageview)
+                into(binding.itemUserProfilePicImageview)
+            }
         }
     }
 

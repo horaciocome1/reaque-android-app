@@ -20,22 +20,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.comments.Comment
 import io.github.horaciocome1.reaque.data.topics.Topic
-import io.github.horaciocome1.reaque.ui.menu.fragmentManager
+import io.github.horaciocome1.reaque.ui.MainActivity
 import kotlinx.android.synthetic.main.fragment_comments.*
-
-lateinit var topic: Topic
-
-fun FragmentManager.getComments(topic: Topic): CommentsFragment {
-    io.github.horaciocome1.reaque.ui.comments.topic = topic
-    fragmentManager = this
-    return CommentsFragment()
-}
 
 class CommentsFragment : Fragment() {
 
@@ -45,34 +36,39 @@ class CommentsFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        var list = listOf<Comment>()
-        getCommentsViewModel().getComments(topic).observe(this, Observer { comments ->
-            when {
-                comments.isEmpty() -> {
-                    fragment_comments_recyclerview.visibility = View.GONE
-                    fragment_comments_edittext.visibility = View.GONE
-                    fragment_comments_send_button.visibility = View.GONE
-                }
-                list.isEmpty() -> {
-                    list = comments
-                    configList(list)
-                    fragment_comments_recyclerview.visibility = View.VISIBLE
-                    fragment_comments_edittext.visibility = View.VISIBLE
-                    fragment_comments_send_button.visibility = View.VISIBLE
-                    fragment_comments_progressbar.visibility = View.GONE
-                }
-                comments != list -> {
-                    fragment_comments_tap_to_update_button.run {
-                        visibility = View.VISIBLE
-                        setOnClickListener {
-                            visibility = View.GONE
-                            list = comments
-                            configList(list)
+        arguments?.let {
+            val safeArgs = CommentsFragmentArgs.fromBundle(it)
+            val topic = Topic(safeArgs.topicId) // need to go
+            (activity as MainActivity).supportActionBar?.title = safeArgs.topicTitle
+            var list = listOf<Comment>()
+            getCommentsViewModel().getComments(topic).observe(this, Observer { comments ->
+                when {
+                    comments.isEmpty() -> {
+                        fragment_comments_recyclerview.visibility = View.GONE
+                        fragment_comments_edittext.visibility = View.GONE
+                        fragment_comments_send_button.visibility = View.GONE
+                    }
+                    list.isEmpty() -> {
+                        list = comments
+                        configList(list)
+                        fragment_comments_recyclerview.visibility = View.VISIBLE
+                        fragment_comments_edittext.visibility = View.VISIBLE
+                        fragment_comments_send_button.visibility = View.VISIBLE
+                        fragment_comments_progressbar.visibility = View.GONE
+                    }
+                    comments != list -> {
+                        fragment_comments_tap_to_update_button.run {
+                            visibility = View.VISIBLE
+                            setOnClickListener {
+                                visibility = View.GONE
+                                list = comments
+                                configList(list)
+                            }
                         }
                     }
                 }
-            }
-        })
+            })
+        }
     }
 
     private fun configList(list: List<Comment>) = fragment_comments_recyclerview.apply {

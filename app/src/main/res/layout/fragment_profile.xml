@@ -39,28 +39,28 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/fragment_profile_back_button"
-            style="@style/Base.Widget.AppCompat.Button.Borderless"
-            android:layout_width="?attr/actionBarSize"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_gravity="top|start"
-            android:tint="@color/colorPrimary"
-            app:srcCompat="@drawable/round_arrow_back_white_24" />
+        <!--<ImageButton-->
+        <!--android:id="@+id/fragment_profile_back_button"-->
+        <!--style="@style/Base.Widget.AppCompat.Button.Borderless"-->
+        <!--android:layout_width="?attr/actionBarSize"-->
+        <!--android:layout_height="?attr/actionBarSize"-->
+        <!--android:layout_gravity="top|start"-->
+        <!--android:tint="@color/colorPrimary"-->
+        <!--app:srcCompat="@drawable/round_arrow_back_white_24" />-->
 
         <ProgressBar
             android:id="@+id/fragment_profile_progressbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center|top"
-            android:layout_marginTop="80dp" />
+            android:layout_marginTop="32dp" />
 
         <ScrollView
             android:id="@+id/fragment_profile_scrollview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="?attr/actionBarSize"
-            android:scrollbars="vertical">
+            android:scrollbars="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

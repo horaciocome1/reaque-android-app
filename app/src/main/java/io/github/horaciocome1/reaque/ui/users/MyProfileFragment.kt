@@ -51,7 +51,7 @@ class MyProfileFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fragment_profile_action_button.text = "Editar"
-        fragment_profile_back_button.setOnClickListener { activity?.onBackPressed() }
+//        fragment_profile_back_button.setOnClickListener { activity?.onBackPressed() }
     }
 
     override fun onStart() {
@@ -59,11 +59,11 @@ class MyProfileFragment: Fragment() {
         getUsersViewModel().getUsers().observe(this, Observer { users ->
             when {
                 users.isEmpty() -> {
-                    fragment_profile_cover_imageview.visibility = View.GONE
+//                    fragment_profile_cover_imageview.visibility = View.GONE
                     fragment_profile_scrollview.visibility = View.GONE
                 }
                 else -> {
-                    fragment_profile_cover_imageview.visibility = View.VISIBLE
+//                    fragment_profile_cover_imageview.visibility = View.VISIBLE
                     fragment_profile_scrollview.visibility = View.VISIBLE
                     fragment_profile_progressbar.visibility = View.GONE
                     user = users[0]

@@ -55,37 +55,40 @@ class ProfileFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fragment_profile_action_button.text = "Seguir"
-        fragment_profile_action_button.setOnClickListener { fragment_profile_action_button.text = "Seguindo" }
-        fragment_profile_back_button.setOnClickListener { activity?.onBackPressed() }
+//        fragment_profile_action_button.setOnClickListener { fragment_profile_action_button.text = "Seguindo" }
+//        fragment_profile_back_button.setOnClickListener { activity?.onBackPressed() }
     }
 
     override fun onStart() {
         super.onStart()
-        getUsersViewModel().getUsers(user).observe(this, Observer { users ->
-            when {
-                users.isEmpty() -> {
-                    fragment_profile_cover_imageview.visibility = View.GONE
-                    fragment_profile_scrollview.visibility = View.GONE
-                }
-                else -> {
-                    fragment_profile_cover_imageview.visibility = View.VISIBLE
-                    fragment_profile_scrollview.visibility = View.VISIBLE
-                    fragment_profile_progressbar.visibility = View.GONE
-                    user = users[0]
-                    binding.user = user
-                    Glide.with(this).run {
-                        load(user.pic)
-                            .apply(getProfileCoverTransformation())
-                            .into(fragment_profile_cover_imageview)
-                        load(user.pic)
-                            .apply(RequestOptions.circleCropTransform())
-                            .into(binding.fragmentProfileProfilePicImageview)
+        arguments?.let {
+            val userId = ProfileFragmentArgs.fromBundle(it).userId
+            getUsersViewModel().getUsers(User(userId)).observe(this, Observer { users ->
+                when {
+                    users.isEmpty() -> {
+                        fragment_profile_cover_imageview.visibility = View.GONE
+                        fragment_profile_scrollview.visibility = View.GONE
                     }
-                    fragment_profile_more_button.setOnClickListener { fragmentManager?.loadUserPosts(user) }
-                    fragment_profile_profile_pic_imageview.setOnClickListener { fragmentManager?.viewPic(user.pic) }
+                    else -> {
+                        fragment_profile_cover_imageview.visibility = View.VISIBLE
+                        fragment_profile_scrollview.visibility = View.VISIBLE
+                        fragment_profile_progressbar.visibility = View.GONE
+                        user = users[0]
+                        binding.user = user
+                        Glide.with(this).run {
+                            load(user.pic)
+                                .apply(getProfileCoverTransformation())
+                                .into(fragment_profile_cover_imageview)
+                            load(user.pic)
+                                .apply(RequestOptions.circleCropTransform())
+                                .into(binding.fragmentProfileProfilePicImageview)
+                        }
+                        fragment_profile_more_button.setOnClickListener { fragmentManager?.loadUserPosts(user) }
+                        fragment_profile_profile_pic_imageview.setOnClickListener { fragmentManager?.viewPic(user.pic) }
+                    }
                 }
-            }
-        })
+            })
+        }
     }
 
 }

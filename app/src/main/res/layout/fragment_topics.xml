@@ -18,44 +18,44 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/fragment_topics_appbarlayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?android:colorBackground"
-        app:elevation="0dp">
+    <!--<com.google.android.material.appbar.AppBarLayout-->
+    <!--android:id="@+id/fragment_topics_appbarlayout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="?android:colorBackground"-->
+    <!--app:elevation="0dp">-->
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+    <!--<androidx.coordinatorlayout.widget.CoordinatorLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
 
-            <TextView
-                style="@style/TextAppearance.MaterialComponents.Headline5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top|center_horizontal"
-                android:fontFamily="@font/roboto_medium"
-                android:padding="12dp"
-                android:text="Tópicos" />
+    <!--<TextView-->
+    <!--style="@style/TextAppearance.MaterialComponents.Headline5"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="top|center_horizontal"-->
+    <!--android:fontFamily="@font/roboto_medium"-->
+    <!--android:padding="12dp"-->
+    <!--android:text="Tópicos" />-->
 
-            <ImageButton
-                android:id="@+id/fragment_topics_notifications_button"
-                style="@style/Base.Widget.AppCompat.Button.Borderless"
-                android:layout_width="?attr/actionBarSize"
-                android:layout_height="?attr/actionBarSize"
-                app:srcCompat="@drawable/outline_notifications_none_black_24" />
+    <!--<ImageButton-->
+    <!--android:id="@+id/fragment_topics_notifications_button"-->
+    <!--style="@style/Base.Widget.AppCompat.Button.Borderless"-->
+    <!--android:layout_width="?attr/actionBarSize"-->
+    <!--android:layout_height="?attr/actionBarSize"-->
+    <!--app:srcCompat="@drawable/outline_notifications_none_black_24" />-->
 
-            <ImageButton
-                android:id="@+id/fragment_topics_add_button"
-                style="@style/Base.Widget.AppCompat.Button.Borderless"
-                android:layout_width="?attr/actionBarSize"
-                android:layout_height="?attr/actionBarSize"
-                android:layout_gravity="top|end"
-                app:srcCompat="@drawable/outline_add_box_black_24" />
+    <!--<ImageButton-->
+    <!--android:id="@+id/fragment_topics_add_button"-->
+    <!--style="@style/Base.Widget.AppCompat.Button.Borderless"-->
+    <!--android:layout_width="?attr/actionBarSize"-->
+    <!--android:layout_height="?attr/actionBarSize"-->
+    <!--android:layout_gravity="top|end"-->
+    <!--app:srcCompat="@drawable/outline_add_box_black_24" />-->
 
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <!--</androidx.coordinatorlayout.widget.CoordinatorLayout>-->
 
-    </com.google.android.material.appbar.AppBarLayout>
+    <!--</com.google.android.material.appbar.AppBarLayout>-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragment_topics_recyclerview"

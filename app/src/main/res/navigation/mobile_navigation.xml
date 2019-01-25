@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~    Copyright 2018 Horácio Flávio Comé Júnior
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and limitations under the License.
+  -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/destination_topics">
+
+    <fragment
+        android:id="@+id/destination_topics"
+        android:name="io.github.horaciocome1.reaque.ui.topics.TopicsFragment">
+        <action
+            android:id="@+id/action_open_profile"
+            app:destination="@id/destination_profile" />
+        <action
+            android:id="@+id/action_read"
+            app:destination="@id/destination_read" />
+        <action
+            android:id="@+id/action_open_posts"
+            app:destination="@id/destination_posts" />
+        <action
+            android:id="@+id/action_open_users"
+            app:destination="@id/destination_users" />
+        <action
+            android:id="@+id/action_open_comments"
+            app:destination="@id/destination_comments" />
+    </fragment>
+    <fragment
+        android:id="@+id/destination_read"
+        android:name="io.github.horaciocome1.reaque.ui.posts.ReadFragment">
+        <argument
+            android:name="post_id"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_open_image"
+            app:destination="@id/destination_viewer" />
+    </fragment>
+    <fragment
+        android:id="@+id/destination_profile"
+        android:name="io.github.horaciocome1.reaque.ui.users.ProfileFragment"
+        android:label="ProfileFragment">
+        <argument
+            android:name="user_id"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_open_image"
+            app:destination="@id/destination_viewer" />
+    </fragment>
+    <fragment
+        android:id="@+id/destination_my_profile"
+        android:name="io.github.horaciocome1.reaque.ui.users.MyProfileFragment">
+        <action
+            android:id="@+id/action_open_user_posts"
+            app:destination="@id/destination_user_posts" />
+        <action
+            android:id="@+id/action_open_image"
+            app:destination="@id/destination_viewer" />
+    </fragment>
+    <fragment
+        android:id="@+id/destination_user_posts"
+        android:name="io.github.horaciocome1.reaque.ui.posts.UserPostsFragment">
+        <argument
+            android:name="user_id"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_read"
+            app:destination="@id/destination_read" />
+    </fragment>
+    <fragment
+        android:id="@+id/destination_viewer"
+        android:name="io.github.horaciocome1.reaque.ui.imageviewer.ViewerFragment" />
+    <fragment
+        android:id="@+id/destination_posts"
+        android:name="io.github.horaciocome1.reaque.ui.posts.PostsFragment">
+        <action
+            android:id="@+id/action_read"
+            app:destination="@id/destination_read" />
+        <argument
+            android:name="topic_id"
+            app:argType="string" />
+        <argument android:name="topic_title" />
+    </fragment>
+    <fragment
+        android:id="@+id/destination_users"
+        android:name="io.github.horaciocome1.reaque.ui.users.UsersFragment">
+        <action
+            android:id="@+id/action_open_profile"
+            app:destination="@id/destination_profile" />
+        <argument
+            android:name="topic_id"
+            app:argType="string" />
+        <argument
+            android:name="topic_title"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/destination_comments"
+        android:name="io.github.horaciocome1.reaque.ui.comments.CommentsFragment">
+        <argument
+            android:name="topic_id"
+            app:argType="string" />
+        <argument
+            android:name="topic_title"
+            app:argType="string" />
+    </fragment>
+</navigation>

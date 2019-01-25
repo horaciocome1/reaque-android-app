@@ -20,10 +20,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.databinding.ItemPostBinding
+import io.github.horaciocome1.reaque.ui.topics.TopicsFragmentDirections
 import io.github.horaciocome1.reaque.utilities.getItemPostTransformation
 
 class PostsAdapter(private val context: Context,
@@ -48,7 +50,10 @@ class PostsAdapter(private val context: Context,
             Glide.with(context).load(cover)
                 .apply(getItemPostTransformation())
                 .into(binding.itemPostCoverImageview)
-            binding.itemPostReadMoreButton.setOnClickListener { fragmentManager?.loadPost(this) }
+            binding.itemPostReadMoreButton.setOnClickListener {
+                val actionRead = TopicsFragmentDirections.actionRead(id)
+                Navigation.findNavController(it).navigate(actionRead)
+            }
         }
     }
 

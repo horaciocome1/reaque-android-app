@@ -23,10 +23,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.bottomappbar.BottomAppBar
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.topics.Topic
-import io.github.horaciocome1.reaque.ui.MainActivity
 import io.github.horaciocome1.reaque.ui.menu.fragmentManager
 import kotlinx.android.synthetic.main.fragment_topics.*
 
@@ -37,19 +35,13 @@ fun FragmentManager.loadTopics() {
 
 class TopicsFragment : Fragment() {
 
-    private lateinit var bottomAppBarShadow: View
-    private lateinit var bottomAppBar: BottomAppBar
+//    private lateinit var bottomAppBarShadow: View
+//    private lateinit var bottomAppBar: BottomAppBar
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        bottomAppBar = (activity as MainActivity).findViewById(R.id.activity_main_bottomappbar)
-        bottomAppBarShadow = (activity as MainActivity).findViewById(R.id.activity_main_bottomappbar_shadow)
+//        bottomAppBar = (activity as MainActivity).findViewById(R.id.activity_main_bottomappbar)
+//        bottomAppBarShadow = (activity as MainActivity).findViewById(R.id.activity_main_bottomappbar_shadow)
         return inflater.inflate(R.layout.fragment_topics, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        bottomAppBar.visibility = View.VISIBLE
-        bottomAppBarShadow.visibility = View.VISIBLE
     }
 
     override fun onStart() {
@@ -59,16 +51,16 @@ class TopicsFragment : Fragment() {
             when {
                 topics.isEmpty() -> {
                     fragment_topics_recyclerview.visibility = View.GONE
-                    fragment_topics_appbarlayout.visibility = View.GONE
-                    bottomAppBar.visibility = View.GONE
-                    bottomAppBarShadow.visibility = View.GONE
+//                    fragment_topics_appbarlayout.visibility = View.GONE
+//                    bottomAppBar.visibility = View.GONE
+//                    bottomAppBarShadow.visibility = View.GONE
                 }
                 list.isEmpty() -> {
                     list = topics
                     configList(list)
-                    bottomAppBar.visibility = View.VISIBLE
-                    bottomAppBarShadow.visibility = View.VISIBLE
-                    fragment_topics_appbarlayout.visibility = View.VISIBLE
+//                    bottomAppBar.visibility = View.VISIBLE
+//                    bottomAppBarShadow.visibility = View.VISIBLE
+//                    fragment_topics_appbarlayout.visibility = View.VISIBLE
                     fragment_topics_recyclerview.visibility = View.VISIBLE
                     fragment_topics_progressbar.visibility = View.GONE
                 }
@@ -82,12 +74,6 @@ class TopicsFragment : Fragment() {
     private fun configList(list: List<Topic>) = fragment_topics_recyclerview.apply {
         layoutManager = LinearLayoutManager(context)
         adapter = TopicsAdapter(context, list, fragmentManager)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        bottomAppBar.visibility = View.GONE
-        bottomAppBarShadow.visibility = View.GONE
     }
 
 }

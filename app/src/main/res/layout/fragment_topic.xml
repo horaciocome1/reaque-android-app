@@ -18,66 +18,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/fragment_topic_tablayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:colorBackground"
-        app:elevation="0dp">
-
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_scrollFlags="enterAlways">
-
-            <TextView
-                android:id="@+id/fragment_topic_title"
-                style="@style/TextAppearance.MaterialComponents.Headline5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top|center_horizontal"
-                android:layout_marginStart="?attr/actionBarSize"
-                android:layout_marginLeft="?attr/actionBarSize"
-                android:layout_marginEnd="?attr/actionBarSize"
-                android:layout_marginRight="?attr/actionBarSize"
-                android:ellipsize="end"
-                android:fontFamily="@font/roboto_thin"
-                android:maxLines="2"
-                android:padding="12dp"
-                android:text="@{post.title}"
-                android:textAlignment="center" />
-
-            <ImageButton
-                android:id="@+id/fragment_topic_more_button"
-                style="@style/Base.Widget.AppCompat.Button.Borderless"
-                android:layout_width="?attr/actionBarSize"
-                android:layout_height="?attr/actionBarSize"
-                android:layout_gravity="end"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/outline_more_vert_black_24" />
-
-            <ImageButton
-                android:id="@+id/fragment_topic_back_button"
-                style="@style/Base.Widget.AppCompat.Button.Borderless"
-                android:layout_width="?attr/actionBarSize"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/round_arrow_back_white_24" />
-
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/fragment_topic_tablayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabBackground="?android:colorBackground"
-            app:tabIndicatorFullWidth="false"
-            app:tabSelectedTextColor="@color/primary_text"
-            app:tabTextAppearance="@style/AppTheme.Text.TabItem" />
-
-    </com.google.android.material.appbar.AppBarLayout>
+        app:tabBackground="?android:colorBackground"
+        app:tabIndicatorFullWidth="false"
+        app:tabSelectedTextColor="@color/primary_text"
+        app:tabTextAppearance="@style/AppTheme.Text.TabItem" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/fragment_topic_viewpager"
