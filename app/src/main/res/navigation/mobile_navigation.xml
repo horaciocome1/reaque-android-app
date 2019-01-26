@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~    Copyright 2018 Horácio Flávio Comé Júnior
+  ~    Copyright 2019 Horácio Flávio Comé Júnior
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
   ~    you may not use this file except in compliance with the License.
@@ -20,7 +20,8 @@
 
     <fragment
         android:id="@+id/destination_topics"
-        android:name="io.github.horaciocome1.reaque.ui.topics.TopicsFragment">
+        android:name="io.github.horaciocome1.reaque.ui.topics.TopicsFragment"
+        android:label="Tópicos">
         <action
             android:id="@+id/action_open_profile"
             app:destination="@id/destination_profile" />
@@ -50,17 +51,21 @@
     <fragment
         android:id="@+id/destination_profile"
         android:name="io.github.horaciocome1.reaque.ui.users.ProfileFragment"
-        android:label="ProfileFragment">
+        android:label="Perfil">
         <argument
             android:name="user_id"
             app:argType="string" />
         <action
             android:id="@+id/action_open_image"
             app:destination="@id/destination_viewer" />
+        <action
+            android:id="@+id/action_open_user_posts"
+            app:destination="@id/destination_user_posts" />
     </fragment>
     <fragment
         android:id="@+id/destination_my_profile"
-        android:name="io.github.horaciocome1.reaque.ui.users.MyProfileFragment">
+        android:name="io.github.horaciocome1.reaque.ui.users.MyProfileFragment"
+        android:label="Meu perfil">
         <action
             android:id="@+id/action_open_user_posts"
             app:destination="@id/destination_user_posts" />
@@ -77,10 +82,17 @@
         <action
             android:id="@+id/action_read"
             app:destination="@id/destination_read" />
+        <argument
+            android:name="user_name"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/destination_viewer"
-        android:name="io.github.horaciocome1.reaque.ui.imageviewer.ViewerFragment" />
+        android:name="io.github.horaciocome1.reaque.ui.imageviewer.ViewerFragment">
+        <argument
+            android:name="link"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/destination_posts"
         android:name="io.github.horaciocome1.reaque.ui.posts.PostsFragment">

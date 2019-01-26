@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -20,19 +20,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
+import com.bumptech.glide.Glide
 import io.github.horaciocome1.reaque.R
-import io.github.horaciocome1.reaque.utilities.getGlide
 import kotlinx.android.synthetic.main.fragment_image_viewer.*
-
-lateinit var link: String
-
-fun FragmentManager.viewPic(pic: String) {
-    val fragment = ViewerFragment()
-    beginTransaction().replace(R.id.activity_main_container, fragment)
-        .addToBackStack(fragment.tag).commit()
-    link = pic
-}
 
 class ViewerFragment: Fragment() {
 
@@ -40,14 +30,12 @@ class ViewerFragment: Fragment() {
         return inflater.inflate(R.layout.fragment_image_viewer, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        fragment_image_viewer_back_button.setOnClickListener { activity?.onBackPressed() }
-    }
-
     override fun onStart() {
         super.onStart()
-        getGlide().load(link).into(fragment_image_viewer_imageview)
+        arguments?.let {
+            val link = ViewerFragmentArgs.fromBundle(it).link
+            Glide.with(this).load(link).into(fragment_image_viewer_imageview)
+        }
     }
 
 }

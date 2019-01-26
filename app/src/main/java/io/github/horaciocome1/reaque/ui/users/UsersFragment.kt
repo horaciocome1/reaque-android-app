@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -74,9 +74,9 @@ class UsersFragment : Fragment() {
     private fun configList(list: List<User>) = fragment_users_recyclerview.apply {
         layoutManager = StaggeredGridLayoutManager(columns, RecyclerView.VERTICAL)
         adapter = UsersAdapter(context, list)
-        setOnClick { _, position ->
-            val actionRead = UsersFragmentDirections.actionOpenProfile(list[position].id)
-            Navigation.findNavController(this).navigate(actionRead)
+        setOnClick { view, position ->
+            val openProfile = UsersFragmentDirections.actionOpenProfile(list[position].id)
+            Navigation.findNavController(view).navigate(openProfile)
         }
         addSimpleTouchListener()
     }

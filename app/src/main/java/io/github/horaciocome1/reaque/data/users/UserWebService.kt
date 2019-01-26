@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import io.github.horaciocome1.reaque.utilities.toUser
 class UserWebService {
 
     private val tag = "UserWebService"
-    private val myId = "IojGZNYQm40Zl7Xe59lx"
+    private val myId = "FRWsZTrrI0PTp1Fqftdb"
 
     /*list of users that belong to the same topic*/
     private var topicUsersList = mutableListOf<User>()

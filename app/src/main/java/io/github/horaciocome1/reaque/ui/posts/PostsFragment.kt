@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -20,23 +20,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.ui.MainActivity
-import io.github.horaciocome1.reaque.ui.menu.fragmentManager
 import kotlinx.android.synthetic.main.fragment_posts.*
-
-var topic = Topic("")
-
-fun FragmentManager.getPosts(topic: Topic): PostsFragment {
-    io.github.horaciocome1.reaque.ui.posts.topic = topic
-    fragmentManager = this
-    return PostsFragment()
-}
 
 class PostsFragment: Fragment() {
 
@@ -77,6 +67,6 @@ class PostsFragment: Fragment() {
 
     private fun configList(list: List<Post>) = fragment_posts_recyclerview.apply {
         layoutManager = LinearLayoutManager(context)
-        adapter = PostsAdapter(context, list, fragmentManager)
+        adapter = PostsAdapter(context, list)
     }
 }

@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
@@ -46,38 +47,19 @@ class TopicsAdapter(private val context: Context,
         list[position].run {
             binding.topic = this
 
-            Glide.with(context).load(posts[0].user.pic).into(binding.itemTopicPost1ProfilePicImageview)
-            Glide.with(context).load(posts[1].user.pic).into(binding.itemTopicPost2ProfilePicImageview)
-            Glide.with(context).load(posts[2].user.pic).into(binding.itemTopicPost3ProfilePicImageview)
-
-            binding.itemTopicPost1TitleTextview.setOnClickListener {
-                //                fragmentManager?.loadPost(posts[0])
-                read(it, posts[0])
-            }
-            binding.itemTopicPost2TitleTextview.setOnClickListener {
-                //                fragmentManager?.loadPost(posts[1])
-                read(it, posts[1])
-            }
-            binding.itemTopicPost3TitleTextview.setOnClickListener {
-                //                fragmentManager?.loadPost(posts[2])
-                read(it, posts[2])
+            Glide.with(context).applyDefaultRequestOptions(RequestOptions().circleCrop()).run {
+                load(posts[0].user.pic).into(binding.itemTopicPost1ProfilePicImageview)
+                load(posts[1].user.pic).into(binding.itemTopicPost2ProfilePicImageview)
+                load(posts[2].user.pic).into(binding.itemTopicPost3ProfilePicImageview)
             }
 
+            binding.itemTopicPost1TitleTextview.setOnClickListener { read(it, posts[0]) }
+            binding.itemTopicPost2TitleTextview.setOnClickListener { read(it, posts[1]) }
+            binding.itemTopicPost3TitleTextview.setOnClickListener { read(it, posts[2]) }
 
-            binding.itemTopicPost1ProfilePicImageview.setOnClickListener {
-                //                fragmentManager?.loadProfile(posts[0].user)
-                openProfile(it, posts[0].user)
-            }
-
-            binding.itemTopicPost2ProfilePicImageview.setOnClickListener {
-                //                fragmentManager?.loadProfile(posts[1].user)
-                openProfile(it, posts[1].user)
-            }
-
-            binding.itemTopicPost3ProfilePicImageview.setOnClickListener {
-                //                fragmentManager?.loadProfile(posts[2].user)
-                openProfile(it, posts[2].user)
-            }
+            binding.itemTopicPost1ProfilePicImageview.setOnClickListener { openProfile(it, posts[0].user) }
+            binding.itemTopicPost2ProfilePicImageview.setOnClickListener { openProfile(it, posts[1].user) }
+            binding.itemTopicPost3ProfilePicImageview.setOnClickListener { openProfile(it, posts[2].user) }
 
             binding.itemTopicMoreButton.setOnClickListener {
                 val openTopicAction = TopicsFragmentDirections.actionOpenPosts(this.id, this.title)
@@ -93,7 +75,6 @@ class TopicsAdapter(private val context: Context,
                 val openCommentsAction = TopicsFragmentDirections.actionOpenComments(this.id, this.title)
                 Navigation.findNavController(it).navigate(openCommentsAction)
             }
-
         }
     }
 

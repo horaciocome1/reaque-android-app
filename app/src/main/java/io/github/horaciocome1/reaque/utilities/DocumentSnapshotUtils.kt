@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import io.github.horaciocome1.reaque.data.users.User
 fun DocumentSnapshot.toUser() = User(id).apply {
     name = this@toUser["name"].toString()
     description = this@toUser["description"].toString()
-    pic = this@toUser["link"].toString()
+    pic = this@toUser["pic"].toString()
     totalFollowers = this@toUser["total_followers"].toString()
     totalPosts = this@toUser["total_posts"].toString()
     topics = this@toUser["topics"].toString()
@@ -56,7 +56,7 @@ fun DocumentSnapshot.toPost() = Post(id).apply {
     title = this@toPost["title"].toString()
     topic = this@toPost["topic"].toString()
     user = User(this@toPost["writer_id"].toString()).apply {
-        name = this@toPost["writerName"].toString()
-        pic = this@toPost["writerPic"].toString()
+        name = this@toPost["writer_name"].toString()
+        pic = this@toPost["writer_pic"].toString()
     }
 }

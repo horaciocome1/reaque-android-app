@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -21,27 +21,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.databinding.FragmentDrawerBinding
-import io.github.horaciocome1.reaque.ui.favorites.loadFavorites
-import io.github.horaciocome1.reaque.ui.topics.loadTopics
 import io.github.horaciocome1.reaque.ui.users.getUsersViewModel
-import io.github.horaciocome1.reaque.ui.users.loadMyProfile
-import io.github.horaciocome1.reaque.ui.users.user
-import io.github.horaciocome1.reaque.utilities.getGlide
 import kotlinx.android.synthetic.main.fragment_drawer.*
-
-lateinit var fragmentManager: FragmentManager
-
-fun FragmentManager.loadDrawer(): Boolean {
-    val fragment = DrawerFragment()
-    fragment.show(this, fragment.tag)
-    fragmentManager = this
-    return true
-}
 
 class DrawerFragment: BottomSheetDialogFragment() {
 
@@ -56,11 +41,9 @@ class DrawerFragment: BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         fragment_drawer_topics_constraintLayout.setOnClickListener {
             dismiss()
-            fragmentManager?.loadTopics()
         }
         fragment_drawer_favorites_constraintLayout.setOnClickListener {
             dismiss()
-            fragmentManager?.loadFavorites()
         }
         fragment_drawer_settings_constraintLayout.setOnClickListener {
             dismiss()
@@ -76,13 +59,13 @@ class DrawerFragment: BottomSheetDialogFragment() {
         super.onStart()
         getUsersViewModel().getUsers().observe(this, Observer { users ->
             if (users.isNotEmpty()) {
-                user = users[0]
-                binding.user = user
-                getGlide().load(user.pic).into(binding.fragmentDrawerProfilePicImageview)
-                fragment_drawer_profile_pic_imageview.setOnClickListener {
-                    dismiss()
-                    fragmentManager?.loadMyProfile()
-                }
+//                user = users[0]
+//                binding.user = user
+//                getGlide().load(user.pic).into(binding.fragmentDrawerProfilePicImageview)
+//                fragment_drawer_profile_pic_imageview.setOnClickListener {
+//                    dismiss()
+//                    fragmentManager?.loadMyProfile()
+//                }
             }
         })
     }

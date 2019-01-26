@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -15,19 +15,18 @@
 
 package io.github.horaciocome1.reaque.ui.favorites
 
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import io.github.horaciocome1.reaque.ui.posts.getPostsListFragment
-import io.github.horaciocome1.reaque.ui.topics.getTopicsListFragment
 
 class TabAdapter(fragmentManager: FragmentManager?) : FragmentStatePagerAdapter(fragmentManager as FragmentManager) {
 
     private val topics = "Tópicos"
     private val posts = "Publicações"
 
-    private val fragments = arrayListOf(
-        fragmentManager?.getTopicsListFragment(),
-        fragmentManager?.getPostsListFragment()
+    private val fragments = arrayListOf<Fragment>(
+//        fragmentManager?.getTopicsListFragment(),
+//        fragmentManager?.getPostsListFragment()
     )
 
     private val titles = arrayListOf(topics, posts)

@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -20,22 +20,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.ui.favorites.getFavoritesViewModel
-import io.github.horaciocome1.reaque.ui.menu.fragmentManager
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addSimpleTouchListener
-import io.github.horaciocome1.simplerecyclerviewtouchlistener.setOnClick
-import kotlinx.android.synthetic.main.fragment_list.*
 import kotlinx.android.synthetic.main.fragment_posts_list.*
-
-fun FragmentManager.getPostsListFragment(): PostsListFragment {
-    fragmentManager = this
-    return PostsListFragment()
-}
 
 class PostsListFragment: Fragment() {
 
@@ -48,7 +39,7 @@ class PostsListFragment: Fragment() {
         var list = listOf<Post>()
         getFavoritesViewModel().getPosts().observe(this, Observer { posts ->
             when {
-                posts.isEmpty() -> fragment_list_recyclerview.visibility = View.GONE
+                posts.isEmpty() -> fragment_posts_list_recyclerview.visibility = View.GONE
                 list.isEmpty() -> {
                     list = posts
                     configList(list)
@@ -72,7 +63,7 @@ class PostsListFragment: Fragment() {
     private fun configList(list: List<Post>) = fragment_posts_list_recyclerview.apply {
         layoutManager = LinearLayoutManager(context)
         adapter = FavoritePostAdapter(context, list)
-        setOnClick { _, position -> fragmentManager?.loadPost(list[position]) }
+//        setOnClick { _, position -> fragmentManager?.loadPost(list[position]) }
         addSimpleTouchListener()
     }
 

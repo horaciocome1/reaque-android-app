@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -20,26 +20,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.users.User
-import io.github.horaciocome1.reaque.ui.menu.fragmentManager
-import io.github.horaciocome1.reaque.ui.users.user
-import io.github.horaciocome1.simplerecyclerviewtouchlistener.addSimpleTouchListener
-import io.github.horaciocome1.simplerecyclerviewtouchlistener.setOnClick
-import kotlinx.android.synthetic.main.fragment_list.*
+import io.github.horaciocome1.reaque.ui.MainActivity
 import kotlinx.android.synthetic.main.fragment_user_posts.*
-
-fun FragmentManager.loadUserPosts(user: User) {
-    val fragment = UserPostsFragment()
-    beginTransaction().replace(R.id.activity_main_container, fragment)
-        .addToBackStack(fragment.tag).commit()
-    fragmentManager = this
-    io.github.horaciocome1.reaque.ui.users.user = user
-}
 
 class UserPostsFragment : Fragment() {
 
@@ -47,41 +34,40 @@ class UserPostsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_user_posts, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        fragment_user_posts_back_button.setOnClickListener { activity?.onBackPressed() }
-    }
-
     override fun onStart() {
         super.onStart()
-        var list = listOf<Post>()
-        getPostsViewModel().getPosts(user).observe(this, Observer { posts ->
-            when {
-                posts.isEmpty() -> fragment_user_posts_recyclerview.visibility = View.GONE
-                list.isEmpty() -> {
-                    list = posts
-                    configList(list)
-                    fragment_user_posts_recyclerview.visibility = View.VISIBLE
-                }
-                posts != list -> {
-                    fragment_list_tap_to_update_button.run {
-                        visibility = View.VISIBLE
-                        setOnClickListener {
-                            list = posts
-                            configList(list)
-                            visibility = View.GONE
+        arguments?.let { args ->
+            val userId = UserPostsFragmentArgs.fromBundle(args).userId
+            val userName = UserPostsFragmentArgs.fromBundle(args).userName
+            var list = listOf<Post>()
+            (activity as MainActivity).supportActionBar?.title = userName
+            getPostsViewModel().getPosts(User(userId)).observe(this, Observer { posts ->
+                when {
+                    posts.isEmpty() -> fragment_user_posts_recyclerview.visibility = View.GONE
+                    list.isEmpty() -> {
+                        list = posts
+                        configList(list)
+                        fragment_user_posts_recyclerview.visibility = View.VISIBLE
+                        fragment_user_posts_progressbar.visibility = View.GONE
+                    }
+                    posts != list -> {
+                        fragment_user_posts_tap_to_update_button.run {
+                            visibility = View.VISIBLE
+                            setOnClickListener {
+                                list = posts
+                                configList(list)
+                                visibility = View.GONE
+                            }
                         }
                     }
                 }
-            }
-        })
+            })
+        }
     }
 
     private fun configList(list: List<Post>) = fragment_user_posts_recyclerview.apply {
         layoutManager = LinearLayoutManager(context)
-        adapter = PostsAdapter(context, list, fragmentManager)
-        setOnClick { _, position -> fragmentManager?.loadPost(list[position]) }
-        addSimpleTouchListener()
+        adapter = PostsAdapter(context, list)
     }
 
 }

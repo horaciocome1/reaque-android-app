@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -29,6 +29,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import io.github.horaciocome1.reaque.R
+import io.github.horaciocome1.reaque.ui.signin.getSignInActivityIntent
 import kotlinx.android.synthetic.main.activity_main.*
 
 var firstInit = true
@@ -42,8 +43,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         myFragmentManager = supportFragmentManager
-//        if (firstInit)
-//            startActivityForResult(getSignInActivityIntent(), 101)
+        if (firstInit)
+            startActivityForResult(getSignInActivityIntent(), 101)
         firstInit = false
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
@@ -62,12 +63,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-//        return when (item?.itemId) {
-//            android.R.id.home -> supportFragmentManager.loadDrawer()
-//            R.id.main_menu_overflow -> supportFragmentManager.loadMainMenu()
-//            else -> super.onOptionsItemSelected(item)
-//        }
-
         val navigated = NavigationUI.onNavDestinationSelected(item!!, navController)
         return navigated || super.onOptionsItemSelected(item)
     }

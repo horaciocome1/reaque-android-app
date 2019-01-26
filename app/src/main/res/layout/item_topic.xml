@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~    Copyright 2018 Horácio Flávio Comé Júnior
+  ~    Copyright 2019 Horácio Flávio Comé Júnior
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
   ~    you may not use this file except in compliance with the License.
@@ -81,13 +81,12 @@
             app:layout_constraintStart_toEndOf="@+id/item_topic_post1_rating_textview"
             app:layout_constraintTop_toBottomOf="@+id/item_topic_post1_title_textview" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:id="@+id/item_topic_post2_profile_pic_imageview"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:clickable="true"
             android:focusable="true"
-            android:foreground="?attr/selectableItemBackground"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="@+id/item_topic_post2_title_textview"
             app:layout_constraintEnd_toEndOf="@+id/item_topic_post1_profile_pic_imageview"
@@ -107,7 +106,7 @@
             android:fontFamily="@font/roboto_light"
             android:maxLines="3"
             android:text="@{topic.title}"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             app:layout_constraintEnd_toStartOf="@+id/item_topic_more_button"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -180,7 +179,7 @@
             app:layout_constraintStart_toEndOf="@+id/item_topic_post1_rating_textview"
             app:layout_constraintTop_toBottomOf="@+id/divider" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:id="@+id/item_topic_post1_profile_pic_imageview"
             android:layout_width="45dp"
             android:layout_height="45dp"
@@ -227,7 +226,7 @@
             app:layout_constraintStart_toEndOf="@+id/item_topic_post1_rating_textview"
             app:layout_constraintTop_toBottomOf="@+id/item_topic_post2_title_textview" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:id="@+id/item_topic_post3_profile_pic_imageview"
             android:layout_width="45dp"
             android:layout_height="45dp"

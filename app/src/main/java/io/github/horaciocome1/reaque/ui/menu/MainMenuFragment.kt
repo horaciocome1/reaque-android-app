@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -19,16 +19,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import io.github.horaciocome1.reaque.R
-
-fun FragmentManager.loadMainMenu(): Boolean {
-    val fragment = MainMenuFragment()
-    fragment.show(this, fragment.tag)
-    fragmentManager = this
-    return true
-}
 
 class MainMenuFragment: BottomSheetDialogFragment() {
 

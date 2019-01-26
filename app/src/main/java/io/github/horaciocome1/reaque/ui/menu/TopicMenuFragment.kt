@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -19,20 +19,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import io.github.horaciocome1.reaque.R
-import io.github.horaciocome1.reaque.data.topics.Topic
 import kotlinx.android.synthetic.main.fragment_topic_menu.*
-
-lateinit var topic: Topic
-
-fun FragmentManager.loadTopicMenu(topic: Topic) {
-    val fragment = TopicMenuFragment()
-    fragment.show(this, fragment.tag)
-    io.github.horaciocome1.reaque.ui.menu.topic = topic
-    fragmentManager = this
-}
 
 class TopicMenuFragment : BottomSheetDialogFragment() {
 
