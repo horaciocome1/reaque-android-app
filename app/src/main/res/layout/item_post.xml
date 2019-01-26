@@ -129,7 +129,7 @@
                         android:maxLines="6"
                         android:text="@{post.message}"
                         android:textAlignment="center"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                         app:layout_constraintBottom_toTopOf="@+id/item_post_title_textview"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"

@@ -127,4 +127,7 @@
             android:name="topic_title"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/destination_settings"
+        android:name="io.github.horaciocome1.reaque.ui.settings.SettingsFragment" />
 </navigation>

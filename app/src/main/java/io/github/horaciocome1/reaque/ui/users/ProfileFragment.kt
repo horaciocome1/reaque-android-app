@@ -15,6 +15,7 @@
 
 package io.github.horaciocome1.reaque.ui.users
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.databinding.FragmentProfileBinding
+import io.github.horaciocome1.reaque.ui.MainActivity
 import io.github.horaciocome1.reaque.utilities.getProfileCoverTransformation
 import kotlinx.android.synthetic.main.fragment_profile.*
 
@@ -79,6 +81,12 @@ class ProfileFragment: Fragment() {
                 }
             })
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+            (activity as MainActivity).supportActionBar?.show()
     }
 
 }

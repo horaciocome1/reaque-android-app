@@ -15,6 +15,7 @@
 
 package io.github.horaciocome1.reaque.ui.users
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -79,6 +80,12 @@ class UsersFragment : Fragment() {
             Navigation.findNavController(view).navigate(openProfile)
         }
         addSimpleTouchListener()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+            (activity as MainActivity).supportActionBar?.show()
     }
 
 }

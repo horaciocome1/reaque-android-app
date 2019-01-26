@@ -15,6 +15,7 @@
 
 package io.github.horaciocome1.reaque.ui.topics
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +25,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.topics.Topic
+import io.github.horaciocome1.reaque.ui.MainActivity
 import kotlinx.android.synthetic.main.fragment_topics.*
 
 class TopicsFragment : Fragment() {
@@ -60,7 +62,13 @@ class TopicsFragment : Fragment() {
 
     private fun configList(list: List<Topic>) = fragment_topics_recyclerview.apply {
         layoutManager = LinearLayoutManager(context)
-        adapter = TopicsAdapter(context, list, fragmentManager)
+        adapter = TopicsAdapter(list)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+            (activity as MainActivity).supportActionBar?.hide()
     }
 
 }

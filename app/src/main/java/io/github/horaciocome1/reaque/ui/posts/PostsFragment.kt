@@ -15,6 +15,7 @@
 
 package io.github.horaciocome1.reaque.ui.posts
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -69,4 +70,11 @@ class PostsFragment: Fragment() {
         layoutManager = LinearLayoutManager(context)
         adapter = PostsAdapter(context, list)
     }
+
+    override fun onResume() {
+        super.onResume()
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+            (activity as MainActivity).supportActionBar?.show()
+    }
+
 }

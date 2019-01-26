@@ -15,6 +15,7 @@
 
 package io.github.horaciocome1.reaque.ui.imageviewer
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +23,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import io.github.horaciocome1.reaque.R
+import io.github.horaciocome1.reaque.ui.MainActivity
 import kotlinx.android.synthetic.main.fragment_image_viewer.*
 
 class ViewerFragment: Fragment() {
@@ -36,6 +38,12 @@ class ViewerFragment: Fragment() {
             val link = ViewerFragmentArgs.fromBundle(it).link
             Glide.with(this).load(link).into(fragment_image_viewer_imageview)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+            (activity as MainActivity).supportActionBar?.show()
     }
 
 }

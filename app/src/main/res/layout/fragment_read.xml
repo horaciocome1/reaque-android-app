@@ -79,7 +79,7 @@
                         android:lineSpacingExtra="16sp"
                         android:text="@{post.message}"
                         android:textAlignment="center"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                         app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
