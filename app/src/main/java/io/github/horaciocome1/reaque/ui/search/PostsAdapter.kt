@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -13,32 +13,37 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.ui.posts
+package io.github.horaciocome1.reaque.ui.search
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import io.github.horaciocome1.reaque.data.posts.Post
-import io.github.horaciocome1.reaque.databinding.ItemFavoriteBinding
+import io.github.horaciocome1.reaque.databinding.ItemSearchResultBinding
 
-class FavoritePostAdapter(
-    private val context: Context,
-    private val list: List<Post>
-) : RecyclerView.Adapter<FavoritePostAdapter.ViewHolder>() {
+class PostsAdapter(private val list: List<Post>) : RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
 
-    private lateinit var binding: ItemFavoriteBinding
+    lateinit var binding: ItemSearchResultBinding
+    lateinit var context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        binding = ItemFavoriteBinding.inflate(LayoutInflater.from(context), parent, false)
+        context = parent.context
+        binding = ItemSearchResultBinding.inflate(LayoutInflater.from(context), parent, false)
         return ViewHolder(binding.root)
     }
 
     override fun getItemCount() = list.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        binding.itemFavoriteTitle.text = list[position].title
+        list[position].run {
+            binding.let { b ->
+                b.itemSearchResultTextview.text = title
+                Glide.with(context).load(cover).into(b.itemSearchResultImageview)
+            }
+        }
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)

@@ -25,7 +25,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
-import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.databinding.ItemTopicBinding
 
 class TopicsAdapter(private val list: List<Topic>) : RecyclerView.Adapter<TopicsAdapter.ViewHolder>() {
@@ -46,19 +45,22 @@ class TopicsAdapter(private val list: List<Topic>) : RecyclerView.Adapter<Topics
             binding.let { b ->
                 b.topic = this
 
-                Glide.with(context).applyDefaultRequestOptions(RequestOptions().circleCrop()).run {
-                    load(posts[0].user.pic).into(b.itemTopicPost1ProfilePicImageview)
-                    load(posts[1].user.pic).into(b.itemTopicPost2ProfilePicImageview)
-                    load(posts[2].user.pic).into(b.itemTopicPost3ProfilePicImageview)
+                Glide.with(context).run {
+                    load(posts[0].user.pic).apply(RequestOptions.circleCropTransform())
+                        .into(b.itemTopicPost1ProfilePicImageview)
+                    load(posts[1].user.pic).apply(RequestOptions.circleCropTransform())
+                        .into(b.itemTopicPost2ProfilePicImageview)
+                    load(posts[2].user.pic).apply(RequestOptions.circleCropTransform())
+                        .into(b.itemTopicPost3ProfilePicImageview)
                 }
 
                 b.itemTopicPost1TitleTextview.setOnClickListener { read(it, posts[0]) }
                 b.itemTopicPost2TitleTextview.setOnClickListener { read(it, posts[1]) }
                 b.itemTopicPost3TitleTextview.setOnClickListener { read(it, posts[2]) }
 
-                b.itemTopicPost1ProfilePicImageview.setOnClickListener { openProfile(it, posts[0].user) }
-                b.itemTopicPost2ProfilePicImageview.setOnClickListener { openProfile(it, posts[1].user) }
-                b.itemTopicPost3ProfilePicImageview.setOnClickListener { openProfile(it, posts[2].user) }
+                b.itemTopicPost1ProfilePicImageview.setOnClickListener { openProfile(it, posts[0]) }
+                b.itemTopicPost2ProfilePicImageview.setOnClickListener { openProfile(it, posts[1]) }
+                b.itemTopicPost3ProfilePicImageview.setOnClickListener { openProfile(it, posts[2]) }
 
                 b.itemTopicMoreButton.setOnClickListener {
                     val openTopicAction = TopicsFragmentDirections.actionOpenPosts(id, title)
@@ -78,8 +80,8 @@ class TopicsAdapter(private val list: List<Topic>) : RecyclerView.Adapter<Topics
         }
     }
 
-    private fun openProfile(view: View, user: User) {
-        val openProfileAction = TopicsFragmentDirections.actionOpenProfile(user.id)
+    private fun openProfile(view: View, post: Post) {
+        val openProfileAction = TopicsFragmentDirections.actionOpenProfile(post.user.id)
         Navigation.findNavController(view).navigate(openProfileAction)
     }
 

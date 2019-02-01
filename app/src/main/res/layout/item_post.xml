@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:background="@drawable/backround_item_post_gradient">
+        android:background="@drawable/background_item_post_gradient">
 
         <com.google.android.material.card.MaterialCardView
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -42,7 +42,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/backround_item_post">
+                android:background="@drawable/background_item_post">
 
                 <ImageView
                     android:id="@+id/item_post_cover_imageview"
@@ -107,7 +107,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="120dp"
                     android:layout_marginLeft="120dp"
-                    android:background="@drawable/backround_item_post"
+                    android:background="@drawable/background_item_post"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

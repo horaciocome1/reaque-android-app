@@ -257,7 +257,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            app:icon="@drawable/outline_account_circle_16"
+            app:icon="@drawable/outline_people_outline_16"
             app:layout_constraintBottom_toBottomOf="@+id/item_topic_comments_button"
             app:layout_constraintEnd_toStartOf="@+id/item_topic_comments_button"
             app:layout_constraintTop_toTopOf="@+id/item_topic_comments_button" />

@@ -17,7 +17,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backround_comments_gradient">
+    android:background="@drawable/background_comments_gradient">
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -59,7 +59,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/backround_rounded_view_white"
+            android:background="@drawable/background_rounded_view_white"
             android:hint="Seu comentario  . . ."
             android:inputType="textMultiLine"
             android:maxLines="7"
@@ -82,7 +82,7 @@
             android:layout_height="45dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:background="@drawable/backround_rounded_view_white"
+            android:background="@drawable/background_rounded_view_white"
             android:text="Enviar"
             android:tint="@color/deep_blue"
             app:layout_constraintBottom_toBottomOf="@+id/fragment_comments_edittext"

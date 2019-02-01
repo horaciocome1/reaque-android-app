@@ -130,4 +130,7 @@
     <fragment
         android:id="@+id/destination_settings"
         android:name="io.github.horaciocome1.reaque.ui.settings.SettingsFragment" />
+    <fragment
+        android:id="@+id/destination_search"
+        android:name="io.github.horaciocome1.reaque.ui.search.SearchFragment" />
 </navigation>

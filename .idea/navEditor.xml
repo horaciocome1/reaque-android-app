@@ -114,6 +114,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="destination_search">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-680" />
+                            <option name="y" value="-268" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="destination_settings">
                     <value>
                       <LayoutPositions>

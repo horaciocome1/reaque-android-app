@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~    Copyright 2018 Horácio Flávio Comé Júnior
+  ~    Copyright 2019 Horácio Flávio Comé Júnior
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
   ~    you may not use this file except in compliance with the License.
@@ -14,48 +14,8 @@
   ~    See the License for the specific language governing permissions and limitations under the License.
   -->
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?android:colorBackground"
-        app:elevation="0dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Favoritos"
-            style="@style/TextAppearance.MaterialComponents.Headline5"
-            android:layout_gravity="top|center_horizontal"
-            android:padding="12dp"
-            android:fontFamily="@font/roboto_medium"/>
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/fragment_favorites_tablayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabTextAppearance="@style/AppTheme.Text.TabItem"
-            app:tabIndicatorFullWidth="false"
-            app:tabSelectedTextColor="@color/primary_text"
-            android:background="?android:colorBackground"/>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <ImageButton
-        android:id="@+id/fragment_favorites_notifications_button"
-        style="@style/Base.Widget.AppCompat.Button.Borderless"
-        android:layout_width="?attr/actionBarSize"
-        android:layout_height="?attr/actionBarSize"
-        app:srcCompat="@drawable/outline_notifications_none_black_24" />
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/fragment_favorites_viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</ScrollView>
