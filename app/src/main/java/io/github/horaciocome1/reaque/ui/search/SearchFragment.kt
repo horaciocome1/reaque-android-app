@@ -100,7 +100,12 @@ class SearchFragment : Fragment() {
         super.onResume()
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
             (activity as MainActivity).supportActionBar?.hide()
-
+        fragment_search_recyclerview.visibility = View.GONE
+        fragment_search_back_imageview.visibility = View.INVISIBLE
+        View.VISIBLE.run {
+            fragment_search_cardview1.visibility = this
+            fragment_search_icon_imageview.visibility = this
+        }
     }
 
 }
