@@ -15,6 +15,7 @@
 
 package io.github.horaciocome1.reaque.ui.search
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,7 @@ import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
+import io.github.horaciocome1.reaque.ui.MainActivity
 import kotlinx.android.synthetic.main.fragment_search.*
 
 class SearchFragment : Fragment() {
@@ -94,110 +96,117 @@ class SearchFragment : Fragment() {
         visibility = View.VISIBLE
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+            (activity as MainActivity).supportActionBar?.hide()
 
-    private fun topics() = mutableListOf(
-        Topic("").apply {
-            title = "Aventura"
-        },
-        Topic("").apply {
-            title = "Casamento"
-        }, Topic("").apply {
-            title = "Vida a dois"
-        }, Topic("").apply {
-            title = "Nostalgia"
-        },
-        Topic("").apply {
-            title = "Reflexão"
-        },
-        Topic("").apply {
-            title = "Aventura"
-        },
-        Topic("").apply {
-            title = "Casamento"
-        }, Topic("").apply {
-            title = "Vida a dois"
-        }, Topic("").apply {
-            title = "Nostalgia"
-        },
-        Topic("").apply {
-            title = "Reflexão"
-        },
-        Topic("").apply {
-            title = "Aventura"
-        },
-        Topic("").apply {
-            title = "Casamento"
-        }, Topic("").apply {
-            title = "Vida a dois"
-        }, Topic("").apply {
-            title = "Nostalgia"
-        },
-        Topic("").apply {
-            title = "Reflexão"
-        },
-        Topic("").apply {
-            title = "Aventura"
-        },
-        Topic("").apply {
-            title = "Casamento"
-        }, Topic("").apply {
-            title = "Vida a dois"
-        }, Topic("").apply {
-            title = "Nostalgia"
-        },
-        Topic("").apply {
-            title = "Reflexão"
-        },
-        Topic("").apply {
-            title = "Aventura"
-        },
-        Topic("").apply {
-            title = "Casamento"
-        }, Topic("").apply {
-            title = "Vida a dois"
-        }, Topic("").apply {
-            title = "Nostalgia"
-        },
-        Topic("").apply {
-            title = "Reflexão"
-        }
-    )
-
-    private fun posts() = mutableListOf(
-        Post("").apply {
-            title = "AUTOPSICOGRAFIA"
-            cover = "https://cdn.culturagenial.com/imagens/fernando-pessoa1-800x445-cke.jpg"
-        },
-        Post("").apply {
-            title = "SIMULTANEIDADE"
-            cover = "https://farm6.static.flickr.com/5833/30628049752_4259b406a7_b.jpg"
-        },
-        Post("").apply {
-            title = "Carta familiar"
-            cover = "https://cdn.culturagenial.com/imagens/fernando-pessoa1-800x445-cke.jpg"
-        },
-        Post("").apply {
-            title = "Forte é quem os seus maus pensamentos domina"
-            cover = "https://timendi.files.wordpress.com/2012/02/forte.jpg"
-        },
-        Post("").apply {
-            title = "Se não soubermos esquecer, nunca estaremos livres de tristeza."
-            cover =
-                "https://img-s3.onedio.com/id-57ed1004b196dbaf0c2dc9cd/rev-0/raw/s-002a9da11813f5ebefe82adcb21b8c0d9f6c28d4.jpg"
-        }
-    )
-
-    private fun users() = mutableListOf(
-        User("").apply {
-            name = "Angela Zerbab"
-            pic =
-                "https://www.alvinailey.org/sites/default/files/styles/slideshow_image/public/melanie-person.jpg?itok=ocw3xkx_"
-        },
-        User("").apply {
-            name = "Fernando Joaquim"
-            pic =
-                "https://image.al.com/home/bama-media/width600/img/sports_impact/photo/chuck-personjpg-28f27a6d761b6a09.jpg"
-        }
-    )
+    }
 
 }
+
+
+fun topics() = mutableListOf(
+    Topic("").apply {
+        title = "Aventura"
+    },
+    Topic("").apply {
+        title = "Casamento"
+    }, Topic("").apply {
+        title = "Vida a dois"
+    }, Topic("").apply {
+        title = "Nostalgia"
+    },
+    Topic("").apply {
+        title = "Reflexão"
+    },
+    Topic("").apply {
+        title = "Aventura"
+    },
+    Topic("").apply {
+        title = "Casamento"
+    }, Topic("").apply {
+        title = "Vida a dois"
+    }, Topic("").apply {
+        title = "Nostalgia"
+    },
+    Topic("").apply {
+        title = "Reflexão"
+    },
+    Topic("").apply {
+        title = "Aventura"
+    },
+    Topic("").apply {
+        title = "Casamento"
+    }, Topic("").apply {
+        title = "Vida a dois"
+    }, Topic("").apply {
+        title = "Nostalgia"
+    },
+    Topic("").apply {
+        title = "Reflexão"
+    },
+    Topic("").apply {
+        title = "Aventura"
+    },
+    Topic("").apply {
+        title = "Casamento"
+    }, Topic("").apply {
+        title = "Vida a dois"
+    }, Topic("").apply {
+        title = "Nostalgia"
+    },
+    Topic("").apply {
+        title = "Reflexão"
+    },
+    Topic("").apply {
+        title = "Aventura"
+    },
+    Topic("").apply {
+        title = "Casamento"
+    }, Topic("").apply {
+        title = "Vida a dois"
+    }, Topic("").apply {
+        title = "Nostalgia"
+    },
+    Topic("").apply {
+        title = "Reflexão"
+    }
+)
+
+fun posts() = mutableListOf(
+    Post("").apply {
+        title = "AUTOPSICOGRAFIA"
+        cover = "https://cdn.culturagenial.com/imagens/fernando-pessoa1-800x445-cke.jpg"
+    },
+    Post("").apply {
+        title = "SIMULTANEIDADE"
+        cover = "https://farm6.static.flickr.com/5833/30628049752_4259b406a7_b.jpg"
+    },
+    Post("").apply {
+        title = "Carta familiar"
+        cover = "https://cdn.culturagenial.com/imagens/fernando-pessoa1-800x445-cke.jpg"
+    },
+    Post("").apply {
+        title = "Forte é quem os seus maus pensamentos domina"
+        cover = "https://timendi.files.wordpress.com/2012/02/forte.jpg"
+    },
+    Post("").apply {
+        title = "Se não soubermos esquecer, nunca estaremos livres de tristeza."
+        cover =
+            "https://img-s3.onedio.com/id-57ed1004b196dbaf0c2dc9cd/rev-0/raw/s-002a9da11813f5ebefe82adcb21b8c0d9f6c28d4.jpg"
+    }
+)
+
+fun users() = mutableListOf(
+    User("").apply {
+        name = "Angela Zerbab"
+        pic =
+            "https://www.alvinailey.org/sites/default/files/styles/slideshow_image/public/melanie-person.jpg?itok=ocw3xkx_"
+    },
+    User("").apply {
+        name = "Fernando Joaquim"
+        pic =
+            "https://image.al.com/home/bama-media/width600/img/sports_impact/photo/chuck-personjpg-28f27a6d761b6a09.jpg"
+    }
+)

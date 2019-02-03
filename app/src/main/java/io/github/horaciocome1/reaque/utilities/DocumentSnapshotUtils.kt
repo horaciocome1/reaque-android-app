@@ -16,6 +16,7 @@
 package io.github.horaciocome1.reaque.utilities
 
 import com.google.firebase.firestore.DocumentSnapshot
+import io.github.horaciocome1.reaque.data.comments.Comment
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
@@ -55,8 +56,17 @@ fun DocumentSnapshot.toPost() = Post(id).apply {
     rating = this@toPost["rating"].toString().toFloat()
     title = this@toPost["title"].toString()
     topic = this@toPost["topic"].toString()
-    user = User(this@toPost["writer_id"].toString()).apply {
+    user = User(this@toPost["writerId"].toString()).apply {
         name = this@toPost["writer_name"].toString()
         pic = this@toPost["writer_pic"].toString()
     }
+}
+
+fun DocumentSnapshot.toComment() = Comment(id).apply {
+    message = this@toComment["message"].toString()
+    date = this@toComment["date"].toString()
+    totalLikes = this@toComment["total_likes"].toString().toInt()
+    writerId = this@toComment["writer_id"].toString()
+    writerName = this@toComment["writer_name"].toString()
+    writerPic = this@toComment["writer_pic"].toString()
 }

@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -17,24 +17,76 @@ package io.github.horaciocome1.reaque.data.comments
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.firestore.FirebaseFirestore
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
+import io.github.horaciocome1.reaque.utilities.onListenFailed
+import io.github.horaciocome1.reaque.utilities.onSnapshotNull
+import io.github.horaciocome1.reaque.utilities.toComment
+
+//FRWsZTrrI0PTp1Fqftdb
+//Augusto Filipe
+//http://manda-te.com/blog/wp-content/uploads/2014/07/bored-manda-te-700x360.jpg
+//
+//IojGZNYQm40Zl7Xe59lx
+//Matilde Zen Kardif
+//https://osegredo.com.br/wp-content/uploads/2017/09/O-que-as-pessoas-felizes-t%C3%AAm-em-comum-site-830x450.jpg
 
 class CommentsWebService {
 
-    var topicCommentsList = mutableListOf<Comment>()
-    val topicComments = MutableLiveData<List<Comment>>()
+    private val tag = "CommentsWebService"
 
-    var postCommentsList = mutableListOf<Comment>()
-    val postComments = MutableLiveData<List<Comment>>()
+    private var topicCommentsList = mutableListOf<Comment>()
+    private val topicComments = MutableLiveData<List<Comment>>()
+    private var topicId = ""
+
+    private var postCommentsList = mutableListOf<Comment>()
+    private val postComments = MutableLiveData<List<Comment>>()
+    private var postId = ""
+
+    private val ref = FirebaseFirestore.getInstance().collection("comments")
 
     fun getComments(topic: Topic): LiveData<List<Comment>> {
-        topicComments.value = generate()
+        if (!topic.id.equals(topicId, true)) {
+            topicComments.value = mutableListOf()
+            topicId = topic.id
+            ref.whereEqualTo(topicId, true).addSnapshotListener { snapshot, exception ->
+                when {
+                    exception != null -> onListenFailed(tag, exception)
+                    snapshot != null -> {
+                        topicCommentsList = mutableListOf()
+                        for (doc in snapshot)
+                            topicCommentsList.add(
+                                doc.toComment()
+                            )
+                        topicComments.value = topicCommentsList
+                    }
+                    else -> onSnapshotNull(tag)
+                }
+            }
+        }
         return topicComments
     }
 
     fun getComments(post: Post): LiveData<List<Comment>> {
-        postComments.value = generate()
+        if (!post.id.equals(postId, true)) {
+            postComments.value = mutableListOf()
+            postId = post.id
+            ref.whereEqualTo(postId, true).addSnapshotListener { snapshot, exception ->
+                when {
+                    exception != null -> onListenFailed(tag, exception)
+                    snapshot != null -> {
+                        postCommentsList = mutableListOf()
+                        for (doc in snapshot)
+                            postCommentsList.add(
+                                doc.toComment()
+                            )
+                        postComments.value = postCommentsList
+                    }
+                    else -> onSnapshotNull(tag)
+                }
+            }
+        }
         return postComments
     }
 
