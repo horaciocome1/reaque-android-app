@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ data class Comment(var id: String) {
     var message = ""
     var totalLikes = 0
     var date = ""
-    var writer_id = ""
+    var writerId = ""
     var writerPic = ""
     var writerName = ""
 

@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -41,10 +42,16 @@ class CommentsAdapter(private val list: List<Comment>) : RecyclerView.Adapter<Co
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         list[position].run {
             binding.comment = this
-            Glide.with(context)
-                .load(writerPic)
-                .apply(RequestOptions.circleCropTransform())
-                .into(binding.itemCommenWriterPicImageview)
+            binding.itemCommenWriterPicImageview.run {
+                Glide.with(context)
+                    .load(writerPic)
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(this)
+                setOnClickListener {
+                    val openProfile = CommentsFragmentDirections.actionOpenProfile2(writerId)
+                    Navigation.findNavController(it).navigate(openProfile)
+                }
+            }
         }
     }
 

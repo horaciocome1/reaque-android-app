@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~    Copyright 2018 Horácio Flávio Comé Júnior
+  ~    Copyright 2019 Horácio Flávio Comé Júnior
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
   ~    you may not use this file except in compliance with the License.
@@ -18,54 +18,11 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/fragment_topics_appbarlayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?android:colorBackground"
-        app:elevation="0dp">
-
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                style="@style/TextAppearance.MaterialComponents.Headline5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top|center_horizontal"
-                android:fontFamily="@font/roboto_medium"
-                android:padding="12dp"
-                android:text="Tópicos" />
-
-            <ImageButton
-                android:id="@+id/fragment_topics_notifications_button"
-                style="@style/Base.Widget.AppCompat.Button.Borderless"
-                android:layout_width="?attr/actionBarSize"
-                android:layout_height="?attr/actionBarSize"
-                app:srcCompat="@drawable/outline_notifications_none_black_24" />
-
-            <ImageButton
-                android:id="@+id/fragment_topics_add_button"
-                style="@style/Base.Widget.AppCompat.Button.Borderless"
-                android:layout_width="?attr/actionBarSize"
-                android:layout_height="?attr/actionBarSize"
-                android:layout_gravity="top|end"
-                app:srcCompat="@drawable/outline_add_box_black_24" />
-
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragment_topics_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:paddingLeft="4dp"
-        android:paddingStart="4dp"
-        android:paddingRight="4dp"
-        android:paddingEnd="4dp"/>
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <ProgressBar
         android:id="@+id/fragment_topics_progressbar"
@@ -74,5 +31,16 @@
         android:layout_gravity="center|top"
         android:layout_marginTop="32dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/fragment_topics_tap_to_update_button"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="32dp"
+        android:text="Actualizar"
+        android:textSize="12sp"
+        android:visibility="gone"
+        app:cornerRadius="12dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

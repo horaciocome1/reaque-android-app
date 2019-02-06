@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -19,22 +19,20 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import io.github.horaciocome1.reaque.data.posts.Post
-import io.github.horaciocome1.reaque.databinding.ItemPostBinding
-import io.github.horaciocome1.reaque.utilities.getItemPostTransformation
+import io.github.horaciocome1.reaque.databinding.ItemPost2Binding
 
-class PostsAdapter(private val context: Context,
-                   private val list: List<Post>,
-                   private val fragmentManager: FragmentManager?)
+class PostsAdapter(private val list: List<Post>)
     : RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
 
-    private lateinit var binding: ItemPostBinding
+    private lateinit var binding: ItemPost2Binding
+    private lateinit var context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        binding = ItemPostBinding.inflate(LayoutInflater.from(context), parent, false)
+        context = parent.context
+        binding = ItemPost2Binding.inflate(LayoutInflater.from(context), parent, false)
         return ViewHolder(binding.root)
     }
 
@@ -43,12 +41,14 @@ class PostsAdapter(private val context: Context,
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         list[position].run {
             binding.post = this
-            Glide.with(context).load(user.pic)
-                .into(binding.itemPostProfileImageview)
-            Glide.with(context).load(cover)
-                .apply(getItemPostTransformation())
-                .into(binding.itemPostCoverImageview)
-            binding.itemPostReadMoreButton.setOnClickListener { fragmentManager?.loadPost(this) }
+            Glide.with(context).run {
+                //                load(user.pic).apply(RequestOptions.circleCropTransform()).into(binding.itemPostProfileImageview)
+                load(cover).into(binding.itemPostCoverImageview)
+            }
+//            binding.itemPostReadMoreButton.setOnClickListener {
+//                val read = TopicsFragmentDirections.actionRead(id)
+//                Navigation.findNavController(it).navigate(read)
+//            }
         }
     }
 

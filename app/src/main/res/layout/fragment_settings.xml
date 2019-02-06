@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~    Copyright 2019 Horácio Flávio Comé Júnior
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and limitations under the License.
+  -->
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="1.0"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+            android:textColor="@color/deep_blue"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Versao"
+            android:textAllCaps="true"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            app:layout_constraintBottom_toTopOf="@+id/textView13"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="400dp"
+            android:layout_marginBottom="96dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/divider" />
+
+            <TextView
+                android:id="@+id/fragment_settings_terms_and_conditions"
+                style="@style/AppTheme.CompleteClickableEffect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="56dp"
+                android:paddingLeft="56dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="32dp"
+                android:paddingRight="32dp"
+                android:paddingBottom="16dp"
+                android:text="Termos e condições"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginLeft="48dp"
+                android:background="@color/divider" />
+
+            <TextView
+                android:id="@+id/fragment_settings_privacy_policy"
+                style="@style/AppTheme.CompleteClickableEffect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="56dp"
+                android:paddingLeft="56dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="32dp"
+                android:paddingRight="32dp"
+                android:paddingBottom="16dp"
+                android:text="Política de privacidade"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginLeft="48dp"
+                android:background="@color/divider" />
+
+            <TextView
+                android:id="@+id/fragment_settings_licenses"
+                style="@style/AppTheme.CompleteClickableEffect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="56dp"
+                android:paddingLeft="56dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="32dp"
+                android:paddingRight="32dp"
+                android:paddingBottom="16dp"
+                android:text="Licenças open source"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginLeft="48dp"
+                android:background="@color/divider" />
+
+            <TextView
+                android:id="@+id/fragment_settings_project_page"
+                style="@style/AppTheme.CompleteClickableEffect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="56dp"
+                android:paddingLeft="56dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="32dp"
+                android:paddingRight="32dp"
+                android:paddingBottom="16dp"
+                android:text="Repositório"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginLeft="48dp"
+                android:background="@color/divider" />
+
+            <TextView
+                android:id="@+id/fragment_settings_donate"
+                style="@style/AppTheme.CompleteClickableEffect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="56dp"
+                android:paddingLeft="56dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="32dp"
+                android:paddingRight="32dp"
+                android:paddingBottom="16dp"
+                android:text="Apoie ao desenvolvedor"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginLeft="48dp"
+                android:background="@color/divider" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="56dp"
+            android:layout_marginLeft="56dp"
+            android:fontFamily="@font/roboto_thin"
+            android:text="@string/app_name"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline2"
+            android:textColor="@color/deep_blue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

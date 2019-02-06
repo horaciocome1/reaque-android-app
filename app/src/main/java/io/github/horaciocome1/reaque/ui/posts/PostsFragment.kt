@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -15,27 +15,22 @@
 
 package io.github.horaciocome1.reaque.ui.posts
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
-import io.github.horaciocome1.reaque.ui.menu.fragmentManager
+import io.github.horaciocome1.reaque.ui.MainActivity
+import io.github.horaciocome1.simplerecyclerviewtouchlistener.addSimpleTouchListener
+import io.github.horaciocome1.simplerecyclerviewtouchlistener.setOnClick
 import kotlinx.android.synthetic.main.fragment_posts.*
-
-var topic = Topic("")
-
-fun FragmentManager.getPosts(topic: Topic): PostsFragment {
-    io.github.horaciocome1.reaque.ui.posts.topic = topic
-    fragmentManager = this
-    return PostsFragment()
-}
 
 class PostsFragment: Fragment() {
 
@@ -45,32 +40,49 @@ class PostsFragment: Fragment() {
 
     override fun onStart() {
         super.onStart()
-        var list = listOf<Post>()
-        getPostsViewModel().getPosts(topic).observe(this, Observer { posts ->
-            when {
-                posts.isEmpty() -> fragment_posts_recyclerview.visibility = View.INVISIBLE
-                list.isEmpty() -> {
-                    list = posts
-                    configList(list)
-                    fragment_posts_recyclerview.visibility = View.VISIBLE
-                    fragment_posts_progressbar.visibility = View.GONE
-                }
-                posts != list -> {
-                    fragment_posts_tap_to_update_button.run {
-                        visibility = View.VISIBLE
-                        setOnClickListener {
-                            list = posts
-                            configList(list)
-                            visibility = View.GONE
+        arguments?.let {
+            val safeArgs = PostsFragmentArgs.fromBundle(it)
+            val topic = Topic(safeArgs.topicId)
+            (activity as MainActivity).supportActionBar?.title = safeArgs.topicTitle
+            var list = listOf<Post>()
+            getPostsViewModel().getPosts(topic).observe(this, Observer { posts ->
+                when {
+                    posts.isEmpty() -> fragment_posts_recyclerview.visibility = View.INVISIBLE
+                    list.isEmpty() -> {
+                        list = posts
+                        configList(list)
+                        fragment_posts_recyclerview.visibility = View.VISIBLE
+                        fragment_posts_progressbar.visibility = View.GONE
+                    }
+                    posts != list -> {
+                        fragment_posts_tap_to_update_button.run {
+                            visibility = View.VISIBLE
+                            setOnClickListener {
+                                list = posts
+                                configList(list)
+                                visibility = View.GONE
+                            }
                         }
                     }
                 }
-            }
-        })
+            })
+        }
     }
 
     private fun configList(list: List<Post>) = fragment_posts_recyclerview.apply {
         layoutManager = LinearLayoutManager(context)
-        adapter = PostsAdapter(context, list, fragmentManager)
+        adapter = PostsAdapter(list)
+        setOnClick { view, position ->
+            val read = PostsFragmentDirections.actionRead(list[position].id)
+            Navigation.findNavController(view).navigate(read)
+        }
+        addSimpleTouchListener()
     }
+
+    override fun onResume() {
+        super.onResume()
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+            (activity as MainActivity).supportActionBar?.show()
+    }
+
 }

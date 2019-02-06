@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~    Copyright 2018 Horácio Flávio Comé Júnior
+  ~    Copyright 2019 Horácio Flávio Comé Júnior
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
   ~    you may not use this file except in compliance with the License.
@@ -35,9 +35,9 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/fragment_posts_tap_to_update_button"
         android:layout_width="wrap_content"
-        android:layout_height="38dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
-        android:textSize="12sp"
+        android:textSize="14sp"
         android:text="Actualizar"
         android:layout_gravity="bottom|center"
         android:visibility="gone"

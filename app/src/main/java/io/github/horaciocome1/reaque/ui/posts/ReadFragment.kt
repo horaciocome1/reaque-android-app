@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -15,31 +15,20 @@
 
 package io.github.horaciocome1.reaque.ui.posts
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
-import io.github.horaciocome1.reaque.R
+import androidx.navigation.Navigation
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.databinding.FragmentReadBinding
-import io.github.horaciocome1.reaque.ui.imageviewer.viewPic
-import io.github.horaciocome1.reaque.ui.menu.fragmentManager
-import io.github.horaciocome1.reaque.ui.menu.loadReadMenu
-import io.github.horaciocome1.reaque.utilities.getGlide
+import io.github.horaciocome1.reaque.ui.MainActivity
 import kotlinx.android.synthetic.main.fragment_read.*
-
-var post = Post("")
-
-fun FragmentManager.loadPost(post: Post) {
-    val fragment = ReadFragment()
-    beginTransaction().replace(R.id.activity_main_container, fragment)
-        .addToBackStack(fragment.tag).commit()
-    io.github.horaciocome1.reaque.ui.posts.post = post
-    fragmentManager = this
-}
 
 class ReadFragment: Fragment() {
 
@@ -50,35 +39,44 @@ class ReadFragment: Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        fragment_read_more_button.setOnClickListener { fragmentManager?.loadReadMenu(post) }
-        fragment_read_back_button.setOnClickListener { activity?.onBackPressed() }
-    }
-
     override fun onStart() {
         super.onStart()
-        getPostsViewModel().getPosts(post).observe(this, Observer { posts ->
-            when {
-                posts.isEmpty() -> {
-                    fragment_read_appbar.visibility = View.GONE
-                    fragment_read_message_scrollview.visibility = View.GONE
-                    fragment_read_details_scrollview.visibility = View.GONE
+        arguments?.let { args ->
+            val postId = ReadFragmentArgs.fromBundle(args).postId
+            getPostsViewModel().getPosts(Post(postId)).observe(this, Observer { posts ->
+                when {
+                    posts.isEmpty() -> {
+                        fragment_read_content_scrollview.visibility = View.GONE
+                        fragment_read_cover_imageview.visibility = View.GONE
+                    }
+                    else -> {
+                        fragment_read_content_scrollview.visibility = View.VISIBLE
+                        fragment_read_cover_imageview.visibility = View.VISIBLE
+                        fragment_read_progressbar.visibility = View.GONE
+
+                        posts[0].run {
+                            binding.post = this
+                            (activity as MainActivity).supportActionBar?.title = title
+                            Glide.with(this@ReadFragment).run {
+                                load(cover).into(fragment_read_cover_imageview)
+                                load(user.pic).apply(RequestOptions.circleCropTransform())
+                                    .into(fragment_read_profile_pic_imageview)
+                            }
+                            fragment_read_profile_pic_imageview.setOnClickListener {
+                                val openImage = ReadFragmentDirections.actionOpenImage(user.pic)
+                                Navigation.findNavController(it).navigate(openImage)
+                            }
+                        }
+                    }
                 }
-                else -> {
-                    fragment_read_appbar.visibility = View.VISIBLE
-                    fragment_read_message_scrollview.visibility = View.VISIBLE
-                    fragment_read_details_scrollview.visibility = View.VISIBLE
-                    fragment_read_progressbar.visibility = View.GONE
-                    post = posts[0]
-                    binding.post = post
-                    getGlide().load(post.cover).into(fragment_read_cover)
-                    getGlide().load(post.user.pic).into(fragment_read_profile_pic)
-                    fragment_read_cover.setOnClickListener { fragmentManager?.viewPic(post.cover) }
-                    fragment_read_profile_pic.setOnClickListener { fragmentManager?.viewPic(post.user.pic) }
-                }
-            }
-        })
+            })
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+            (activity as MainActivity).supportActionBar?.show()
     }
 
 }

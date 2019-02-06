@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -15,30 +15,23 @@
 
 package io.github.horaciocome1.reaque.ui.users
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
-import io.github.horaciocome1.reaque.ui.menu.fragmentManager
+import io.github.horaciocome1.reaque.ui.MainActivity
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addSimpleTouchListener
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.setOnClick
 import kotlinx.android.synthetic.main.fragment_users.*
-
-var topic = Topic("")
-
-fun FragmentManager.getUsers(topic: Topic): UsersFragment {
-    io.github.horaciocome1.reaque.ui.users.topic = topic
-    fragmentManager = this
-    return UsersFragment()
-}
 
 class UsersFragment : Fragment() {
 
@@ -50,35 +43,49 @@ class UsersFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        var list = listOf<User>()
-        getUsersViewModel().getUsers(topic).observe(this, Observer { users ->
-            when {
-                users.isEmpty() -> fragment_users_recyclerview.visibility = View.GONE
-                list.isEmpty() -> {
-                    list = users
-                    configList(list)
-                    fragment_users_recyclerview.visibility = View.VISIBLE
-                    fragment_users_progressbar.visibility = View.GONE
-                }
-                users != list -> {
-                    fragment_users_tap_to_update_button.run {
-                        visibility = View.VISIBLE
-                        setOnClickListener {
-                            list = users
-                            configList(list)
-                            visibility = View.GONE
+        arguments?.let {
+            val safeArgs = UsersFragmentArgs.fromBundle(it)
+            val topic = Topic(safeArgs.topicId)
+            (activity as MainActivity).supportActionBar?.title = safeArgs.topicTitle
+            var list = listOf<User>()
+            getUsersViewModel().getUsers(topic).observe(this, Observer { users ->
+                when {
+                    users.isEmpty() -> fragment_users_recyclerview.visibility = View.GONE
+                    list.isEmpty() -> {
+                        list = users
+                        configList(list)
+                        fragment_users_recyclerview.visibility = View.VISIBLE
+                        fragment_users_progressbar.visibility = View.GONE
+                    }
+                    users != list -> {
+                        fragment_users_tap_to_update_button.run {
+                            visibility = View.VISIBLE
+                            setOnClickListener {
+                                list = users
+                                configList(list)
+                                visibility = View.GONE
+                            }
                         }
                     }
                 }
-            }
-        })
+            })
+        }
     }
 
     private fun configList(list: List<User>) = fragment_users_recyclerview.apply {
         layoutManager = StaggeredGridLayoutManager(columns, RecyclerView.VERTICAL)
         adapter = UsersAdapter(context, list)
-        setOnClick { _, position -> fragmentManager?.loadProfile(list[position]) }
+        setOnClick { view, position ->
+            val openProfile = UsersFragmentDirections.actionOpenProfile(list[position].id)
+            Navigation.findNavController(view).navigate(openProfile)
+        }
         addSimpleTouchListener()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+            (activity as MainActivity).supportActionBar?.show()
     }
 
 }

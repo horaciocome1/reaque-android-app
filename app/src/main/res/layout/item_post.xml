@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~    Copyright 2018 Horácio Flávio Comé Júnior
+  ~    Copyright 2019 Horácio Flávio Comé Júnior
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
   ~    you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:background="@drawable/backround_item_post_gradient">
+        android:background="@drawable/background_item_post_gradient">
 
         <com.google.android.material.card.MaterialCardView
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -42,7 +42,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/backround_item_post">
+                android:background="@drawable/background_item_post">
 
                 <ImageView
                     android:id="@+id/item_post_cover_imageview"
@@ -54,7 +54,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     android:foreground="@drawable/background_item_user"/>
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <ImageView
                     android:id="@+id/item_post_profile_imageview"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
@@ -107,7 +107,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="120dp"
                     android:layout_marginLeft="120dp"
-                    android:background="@drawable/backround_item_post"
+                    android:background="@drawable/background_item_post"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -129,7 +129,7 @@
                         android:maxLines="6"
                         android:text="@{post.message}"
                         android:textAlignment="center"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                         app:layout_constraintBottom_toTopOf="@+id/item_post_title_textview"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"

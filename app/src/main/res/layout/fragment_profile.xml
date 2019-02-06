@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~    Copyright 2018 Horácio Flávio Comé Júnior
+  ~    Copyright 2019 Horácio Flávio Comé Júnior
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
   ~    you may not use this file except in compliance with the License.
@@ -39,28 +39,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/fragment_profile_back_button"
-            style="@style/Base.Widget.AppCompat.Button.Borderless"
-            android:layout_width="?attr/actionBarSize"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_gravity="top|start"
-            android:tint="@color/colorPrimary"
-            app:srcCompat="@drawable/round_arrow_back_white_24" />
-
         <ProgressBar
             android:id="@+id/fragment_profile_progressbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center|top"
-            android:layout_marginTop="80dp" />
+            android:layout_marginTop="32dp" />
 
         <ScrollView
             android:id="@+id/fragment_profile_scrollview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="?attr/actionBarSize"
-            android:scrollbars="vertical">
+            android:scrollbars="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -147,9 +138,10 @@
                         android:layout_marginLeft="32dp"
                         android:layout_marginEnd="32dp"
                         android:layout_marginRight="32dp"
-                        android:fontFamily="@font/roboto_thin"
+                        android:fontFamily="@font/roboto_medium"
                         android:text="@{user.totalFollowers}"
-                        android:textSize="14sp"
+                        android:textColor="@color/primary_text"
+                        android:textSize="16sp"
                         app:layout_constraintEnd_toStartOf="@+id/view"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/view" />
@@ -163,7 +155,6 @@
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="32dp"
                         android:layout_marginRight="32dp"
-                        android:fontFamily="@font/roboto_thin"
                         android:text="Seguidores"
                         android:textAllCaps="true"
                         android:textSize="12sp"
@@ -180,7 +171,6 @@
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="32dp"
                         android:layout_marginRight="32dp"
-                        android:fontFamily="@font/roboto_thin"
                         android:text="Posts"
                         android:textAllCaps="true"
                         android:textSize="12sp"
@@ -196,16 +186,17 @@
                         android:layout_marginLeft="32dp"
                         android:layout_marginEnd="32dp"
                         android:layout_marginRight="32dp"
-                        android:fontFamily="@font/roboto_thin"
+                        android:fontFamily="@font/roboto_medium"
                         android:text="@{user.totalPosts}"
-                        android:textSize="14sp"
+                        android:textColor="@color/primary_text"
+                        android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="@+id/fragment_profile_followers_textview"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/view"
                         app:layout_constraintTop_toTopOf="@+id/fragment_profile_followers_textview" />
 
                     <ImageView
-                        android:id="@+id/item_topic_post1_profile_pic_imageview"
+                        android:id="@+id/imageView4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"

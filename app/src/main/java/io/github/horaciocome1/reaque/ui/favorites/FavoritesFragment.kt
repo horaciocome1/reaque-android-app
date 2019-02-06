@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -15,50 +15,45 @@
 
 package io.github.horaciocome1.reaque.ui.favorites
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import com.google.android.material.bottomappbar.BottomAppBar
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.ui.MainActivity
-import io.github.horaciocome1.reaque.ui.menu.fragmentManager
+import io.github.horaciocome1.reaque.ui.search.*
 import kotlinx.android.synthetic.main.fragment_favorites.*
-
-fun FragmentManager.loadFavorites() {
-    beginTransaction().replace(R.id.activity_main_container, FavoritesFragment()).commit()
-    fragmentManager = this
-}
 
 class FavoritesFragment : Fragment() {
 
-    private lateinit var bottomAppBarShadow: View
-    private lateinit var bottomAppBar: BottomAppBar
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        bottomAppBarShadow = (activity as MainActivity).findViewById(R.id.activity_main_bottomappbar_shadow)
-        bottomAppBar = (activity as MainActivity).findViewById(R.id.activity_main_bottomappbar)
         return inflater.inflate(R.layout.fragment_favorites, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        bottomAppBarShadow.visibility = View.VISIBLE
-        bottomAppBar.visibility = View.VISIBLE
     }
 
     override fun onStart() {
         super.onStart()
-        fragment_favorites_viewpager.adapter = TabAdapter(fragmentManager)
-        fragment_favorites_tablayout.setupWithViewPager(fragment_favorites_viewpager)
+        fragment_favorites_topics_recyclerview.apply {
+            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+            adapter = TopicsAdapter(topics())
+        }
+        fragment_favorites_posts_recyclerview.apply {
+            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+            adapter = PostsAdapter(posts())
+        }
+        fragment_favorites_users_recyclerview.apply {
+            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+            adapter = UsersAdapter(users())
+        }
     }
 
-    override fun onStop() {
-        super.onStop()
-        bottomAppBarShadow.visibility = View.GONE
-        bottomAppBar.visibility = View.GONE
+    override fun onResume() {
+        super.onResume()
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+            (activity as MainActivity).supportActionBar?.hide()
     }
 
 }

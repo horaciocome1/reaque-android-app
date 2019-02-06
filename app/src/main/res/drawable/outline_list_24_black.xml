@@ -1,5 +1,5 @@
 <!--
-  ~    Copyright 2018 Horácio Flávio Comé Júnior
+  ~    Copyright 2019 Horácio Flávio Comé Júnior
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
   ~    you may not use this file except in compliance with the License.
@@ -14,8 +14,8 @@
   -->
 
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="24dp"
-    android:height="24dp"
+    android:width="16dp"
+    android:height="16dp"
     android:tint="?attr/colorControlNormal"
     android:viewportWidth="24.0"
     android:viewportHeight="24.0">

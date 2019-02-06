@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -15,33 +15,21 @@
 
 package io.github.horaciocome1.reaque.ui.users
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.databinding.FragmentProfileBinding
-import io.github.horaciocome1.reaque.ui.imageviewer.viewPic
-import io.github.horaciocome1.reaque.ui.menu.fragmentManager
-import io.github.horaciocome1.reaque.ui.posts.loadUserPosts
+import io.github.horaciocome1.reaque.ui.MainActivity
 import io.github.horaciocome1.reaque.utilities.getProfileCoverTransformation
 import kotlinx.android.synthetic.main.fragment_profile.*
-
-var user = User("")
-
-fun FragmentManager.loadProfile(user: User) {
-    val fragment = ProfileFragment()
-    this.beginTransaction().replace(R.id.activity_main_container, fragment)
-        .addToBackStack(fragment.tag).commit()
-    fragmentManager = this
-    io.github.horaciocome1.reaque.ui.users.user = user
-}
 
 class ProfileFragment: Fragment() {
 
@@ -55,37 +43,50 @@ class ProfileFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fragment_profile_action_button.text = "Seguir"
-        fragment_profile_action_button.setOnClickListener { fragment_profile_action_button.text = "Seguindo" }
-        fragment_profile_back_button.setOnClickListener { activity?.onBackPressed() }
     }
 
     override fun onStart() {
         super.onStart()
-        getUsersViewModel().getUsers(user).observe(this, Observer { users ->
-            when {
-                users.isEmpty() -> {
-                    fragment_profile_cover_imageview.visibility = View.GONE
-                    fragment_profile_scrollview.visibility = View.GONE
-                }
-                else -> {
-                    fragment_profile_cover_imageview.visibility = View.VISIBLE
-                    fragment_profile_scrollview.visibility = View.VISIBLE
-                    fragment_profile_progressbar.visibility = View.GONE
-                    user = users[0]
-                    binding.user = user
-                    Glide.with(this).run {
-                        load(user.pic)
-                            .apply(getProfileCoverTransformation())
-                            .into(fragment_profile_cover_imageview)
-                        load(user.pic)
-                            .apply(RequestOptions.circleCropTransform())
-                            .into(binding.fragmentProfileProfilePicImageview)
+        arguments?.let { args ->
+            val userId = ProfileFragmentArgs.fromBundle(args).userId
+            getUsersViewModel().getUsers(User(userId)).observe(this, Observer { users ->
+                when {
+                    users.isEmpty() -> {
+                        fragment_profile_cover_imageview.visibility = View.GONE
+                        fragment_profile_scrollview.visibility = View.GONE
                     }
-                    fragment_profile_more_button.setOnClickListener { fragmentManager?.loadUserPosts(user) }
-                    fragment_profile_profile_pic_imageview.setOnClickListener { fragmentManager?.viewPic(user.pic) }
+                    else -> {
+                        fragment_profile_cover_imageview.visibility = View.VISIBLE
+                        fragment_profile_scrollview.visibility = View.VISIBLE
+                        fragment_profile_progressbar.visibility = View.GONE
+
+                        users[0].run {
+                            binding.user = this
+                            Glide.with(this@ProfileFragment).load(pic).run {
+                                apply(getProfileCoverTransformation()).into(fragment_profile_cover_imageview)
+                                apply(RequestOptions.circleCropTransform()).into(fragment_profile_profile_pic_imageview)
+                            }
+
+                            fragment_profile_more_button.setOnClickListener {
+                                val openUserPosts = ProfileFragmentDirections.actionOpenUserPosts(id, name)
+                                Navigation.findNavController(it).navigate(openUserPosts)
+                            }
+
+                            fragment_profile_profile_pic_imageview.setOnClickListener {
+                                val openImage = ProfileFragmentDirections.actionOpenImage(pic)
+                                Navigation.findNavController(it).navigate(openImage)
+                            }
+                        }
+                    }
                 }
-            }
-        })
+            })
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+            (activity as MainActivity).supportActionBar?.show()
     }
 
 }

@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -79,7 +79,7 @@ class PostWebService {
     fun getPosts(user: User): LiveData<List<Post>> {
         if (!this.user.id.equals(user.id, true)) {
             userPosts.value = mutableListOf()
-            reference.whereEqualTo("writer_id", user.id).addSnapshotListener { snapshot, exception ->
+            reference.whereEqualTo("writerId", user.id).addSnapshotListener { snapshot, exception ->
                 when {
                     exception != null -> onListenFailed(tag, exception)
                     snapshot != null -> {

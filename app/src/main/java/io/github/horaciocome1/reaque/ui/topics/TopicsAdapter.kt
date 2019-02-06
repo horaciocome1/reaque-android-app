@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -19,24 +19,22 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import io.github.horaciocome1.reaque.data.topics.Topic
-import io.github.horaciocome1.reaque.databinding.ItemTopicBinding
-import io.github.horaciocome1.reaque.ui.posts.loadPost
-import io.github.horaciocome1.reaque.ui.topics.details.loadTopic
-import io.github.horaciocome1.reaque.ui.users.loadProfile
+import io.github.horaciocome1.reaque.databinding.ItemTopic2Binding
+import jp.wasabeef.glide.transformations.BlurTransformation
 
-class TopicsAdapter(private val context: Context,
-                    private val list: List<Topic>,
-                    private val fragmentManager: FragmentManager?)
-    : RecyclerView.Adapter<TopicsAdapter.ViewHolder>() {
+class TopicsAdapter(private val list: List<Topic>) : RecyclerView.Adapter<TopicsAdapter.ViewHolder>() {
 
-    lateinit var binding: ItemTopicBinding
+    lateinit var binding: ItemTopic2Binding
+    lateinit var context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        binding = ItemTopicBinding.inflate(LayoutInflater.from(context), parent, false)
+        context = parent.context
+        binding = ItemTopic2Binding.inflate(LayoutInflater.from(context), parent, false)
         return ViewHolder(binding.root)
     }
 
@@ -45,21 +43,25 @@ class TopicsAdapter(private val context: Context,
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         list[position].run {
             binding.topic = this
-            Glide.with(context).load(posts[0].user.pic).into(binding.itemTopicPost1ProfilePicImageview)
-            Glide.with(context).load(posts[1].user.pic).into(binding.itemTopicPost2ProfilePicImageview)
-            Glide.with(context).load(posts[2].user.pic).into(binding.itemTopicPost3ProfilePicImageview)
-            binding.itemTopicMoreButton.setOnClickListener { fragmentManager?.loadTopic(this) }
-            binding.itemTopicPost1TitleTextview.setOnClickListener { fragmentManager?.loadPost(posts[0]) }
-            binding.itemTopicPost2TitleTextview.setOnClickListener { fragmentManager?.loadPost(posts[1]) }
-            binding.itemTopicPost3TitleTextview.setOnClickListener { fragmentManager?.loadPost(posts[2]) }
-            binding.itemTopicPost1ProfilePicImageview.setOnClickListener {
-                fragmentManager?.loadProfile(posts[0].user)
+
+            Glide.with(context)
+                .load(cover)
+                .apply(RequestOptions.bitmapTransform(BlurTransformation(7, 1)))
+                .into(binding.itemTopicCoverImageview)
+
+            binding.itemTopicMoreButton.setOnClickListener {
+                val openTopicAction = TopicsFragmentDirections.actionOpenPosts(id, title)
+                Navigation.findNavController(it).navigate(openTopicAction)
             }
-            binding.itemTopicPost2ProfilePicImageview.setOnClickListener {
-                fragmentManager?.loadProfile(posts[1].user)
+
+            binding.itemTopicWritersButton.setOnClickListener {
+                val openUsersAction = TopicsFragmentDirections.actionOpenUsers(id, title)
+                Navigation.findNavController(it).navigate(openUsersAction)
             }
-            binding.itemTopicPost3ProfilePicImageview.setOnClickListener {
-                fragmentManager?.loadProfile(posts[2].user)
+
+            binding.itemTopicCommentsButton.setOnClickListener {
+                val openCommentsAction = TopicsFragmentDirections.actionOpenComments(id, title)
+                Navigation.findNavController(it).navigate(openCommentsAction)
             }
         }
     }

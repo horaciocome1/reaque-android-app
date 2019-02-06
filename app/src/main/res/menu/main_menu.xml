@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~    Copyright 2018 Horácio Flávio Comé Júnior
+  ~    Copyright 2019 Horácio Flávio Comé Júnior
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
   ~    you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
     <item
         android:id="@+id/main_menu_search"
         android:title="Search"
-        android:icon="@drawable/round_search_black_24"
+        android:icon="@drawable/outline_search_24"
         app:showAsAction="always" />
 
     <item
