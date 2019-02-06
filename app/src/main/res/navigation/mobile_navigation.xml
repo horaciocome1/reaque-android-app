@@ -157,4 +157,7 @@
             android:id="@+id/action_open_my_profile"
             app:destination="@id/destination_my_profile" />
     </fragment>
+    <fragment
+        android:id="@+id/destination_notifications"
+        android:name="io.github.horaciocome1.reaque.ui.notifications.NotificationsFragment" />
 </navigation>

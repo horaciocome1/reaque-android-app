@@ -17,9 +17,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/destination_my_profile"
-        android:icon="@drawable/outline_account_circle_24"
-        android:title="Perfil"
+        android:id="@+id/destination_notifications"
+        android:icon="@drawable/outline_notifications_24"
+        android:title="Notificações"
         app:showAsAction="always" />
 
     <item
