@@ -21,12 +21,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragment_topics_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:paddingLeft="4dp"
-        android:paddingStart="4dp"
-        android:paddingRight="4dp"
-        android:paddingEnd="4dp"/>
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <ProgressBar
         android:id="@+id/fragment_topics_progressbar"

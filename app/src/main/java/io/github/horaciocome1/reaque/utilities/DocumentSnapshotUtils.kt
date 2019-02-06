@@ -35,18 +35,18 @@ fun DocumentSnapshot.toUser() = User(id).apply {
 
 fun DocumentSnapshot.toTopic() = Topic(id).apply {
     title = this@toTopic["title"].toString()
-    totalPosts = this@toTopic["totalPosts"].toString().toInt()
     totalReaders = this@toTopic["totalReaders"].toString().toInt()
-    for (i in 1 until 4)
-        posts.add(
-            Post(this@toTopic["post${i}_id"].toString()).apply {
-                rating = this@toTopic["post${i}_rating"].toString().toFloat()
-                title = this@toTopic["post${i}_title"].toString()
-                user = User(this@toTopic["post${i}_writer_id"].toString()).apply {
-                    pic = this@toTopic["post${i}_writer_pic"].toString()
-                }
-            }
-        )
+    cover = this@toTopic["cover"].toString()
+//    for (i in 1 until 4)
+//        posts.add(
+//            Post(this@toTopic["post${i}_id"].toString()).apply {
+//                rating = this@toTopic["post${i}_rating"].toString().toFloat()
+//                title = this@toTopic["post${i}_title"].toString()
+//                user = User(this@toTopic["post${i}_writer_id"].toString()).apply {
+//                    pic = this@toTopic["post${i}_writer_pic"].toString()
+//                }
+//            }
+//        )
 }
 
 fun DocumentSnapshot.toPost() = Post(id).apply {

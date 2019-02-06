@@ -23,6 +23,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
+import androidx.recyclerview.widget.RecyclerView
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.ui.MainActivity
@@ -30,14 +32,21 @@ import kotlinx.android.synthetic.main.fragment_topics.*
 
 class TopicsFragment : Fragment() {
 
+    lateinit var topicsViewModel: TopicsViewModel
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_topics, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        topicsViewModel = getTopicsViewModel()
     }
 
     override fun onStart() {
         super.onStart()
         var list = listOf<Topic>()
-        getTopicsViewModel().getTopics().observe(this, Observer { topics ->
+        topicsViewModel.getTopics().observe(this, Observer { topics ->
             when {
                 topics.isEmpty() -> fragment_topics_recyclerview.visibility = View.GONE
                 list.isEmpty() -> {
@@ -60,9 +69,12 @@ class TopicsFragment : Fragment() {
         })
     }
 
-    private fun configList(list: List<Topic>) = fragment_topics_recyclerview.apply {
-        layoutManager = LinearLayoutManager(context)
+    private fun configList(list: List<Topic>) = fragment_topics_recyclerview.run {
+        layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         adapter = TopicsAdapter(list)
+        onFlingListener = null
+        val snapHelper = PagerSnapHelper()
+        snapHelper.attachToRecyclerView(this)
     }
 
     override fun onResume() {

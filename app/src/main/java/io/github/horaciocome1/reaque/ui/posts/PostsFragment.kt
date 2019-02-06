@@ -22,11 +22,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.ui.MainActivity
+import io.github.horaciocome1.simplerecyclerviewtouchlistener.addSimpleTouchListener
+import io.github.horaciocome1.simplerecyclerviewtouchlistener.setOnClick
 import kotlinx.android.synthetic.main.fragment_posts.*
 
 class PostsFragment: Fragment() {
@@ -68,7 +71,12 @@ class PostsFragment: Fragment() {
 
     private fun configList(list: List<Post>) = fragment_posts_recyclerview.apply {
         layoutManager = LinearLayoutManager(context)
-        adapter = PostsAdapter(context, list)
+        adapter = PostsAdapter(list)
+        setOnClick { view, position ->
+            val read = PostsFragmentDirections.actionRead(list[position].id)
+            Navigation.findNavController(view).navigate(read)
+        }
+        addSimpleTouchListener()
     }
 
     override fun onResume() {

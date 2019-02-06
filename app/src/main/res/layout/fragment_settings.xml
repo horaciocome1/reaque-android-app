@@ -137,27 +137,6 @@
                 android:background="@color/divider" />
 
             <TextView
-                android:id="@+id/fragment_settings_documentation"
-                style="@style/AppTheme.CompleteClickableEffect"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="56dp"
-                android:paddingLeft="56dp"
-                android:paddingTop="16dp"
-                android:paddingEnd="32dp"
-                android:paddingRight="32dp"
-                android:paddingBottom="16dp"
-                android:text="Leia a documentação"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.1dp"
-                android:layout_marginStart="48dp"
-                android:layout_marginLeft="48dp"
-                android:background="@color/divider" />
-
-            <TextView
                 android:id="@+id/fragment_settings_project_page"
                 style="@style/AppTheme.CompleteClickableEffect"
                 android:layout_width="match_parent"

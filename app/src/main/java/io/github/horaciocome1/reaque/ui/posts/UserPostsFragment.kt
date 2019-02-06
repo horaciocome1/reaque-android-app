@@ -68,7 +68,7 @@ class UserPostsFragment : Fragment() {
 
     private fun configList(list: List<Post>) = fragment_user_posts_recyclerview.apply {
         layoutManager = LinearLayoutManager(context)
-        adapter = PostsAdapter(context, list)
+        adapter = PostsAdapter(list)
     }
 
     override fun onResume() {

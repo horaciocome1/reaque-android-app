@@ -39,7 +39,6 @@ class SettingsFragment : Fragment() {
         fragment_settings_terms_and_conditions.setOnClickListener(this::onUrlOnClickListener)
         fragment_settings_privacy_policy.setOnClickListener(this::onUrlOnClickListener)
         fragment_settings_licenses.setOnClickListener(this::onUrlOnClickListener)
-        fragment_settings_documentation.setOnClickListener(this::onUrlOnClickListener)
         fragment_settings_project_page.setOnClickListener(this::onUrlOnClickListener)
     }
 
@@ -49,7 +48,6 @@ class SettingsFragment : Fragment() {
                 fragment_settings_terms_and_conditions -> R.string.terms_and_conditions_url
                 fragment_settings_privacy_policy -> R.string.privacy_policy_url
                 fragment_settings_licenses -> R.string.licence_url
-                fragment_settings_documentation -> R.string.read_me_url
                 fragment_settings_project_page -> R.string.project_url
                 else -> Log.w(tag, "View not found!")
             }
@@ -61,7 +59,7 @@ class SettingsFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
-            (activity as MainActivity).supportActionBar?.hide()
+            (activity as MainActivity).supportActionBar?.show()
     }
 
 }

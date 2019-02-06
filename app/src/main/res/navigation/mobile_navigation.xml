@@ -146,4 +146,15 @@
         android:id="@+id/destination_favorites"
         android:name="io.github.horaciocome1.reaque.ui.favorites.FavoritesFragment"
         android:label="Favoritos" />
+    <fragment
+        android:id="@+id/destination_more"
+        android:name="io.github.horaciocome1.reaque.ui.more.MoreFragment"
+        android:label="Mais">
+        <action
+            android:id="@+id/action_open_settings"
+            app:destination="@id/destination_settings" />
+        <action
+            android:id="@+id/action_open_my_profile"
+            app:destination="@id/destination_my_profile" />
+    </fragment>
 </navigation>

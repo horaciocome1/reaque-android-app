@@ -41,9 +41,9 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/destination_settings"
-        android:icon="@drawable/outline_settings_24_black"
-        android:title="Definições"
+        android:id="@+id/destination_more"
+        android:icon="@drawable/outline_more_horiz_black_24"
+        android:title="Mais"
         app:showAsAction="always" />
 
 </menu>
