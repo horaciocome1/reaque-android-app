@@ -68,12 +68,9 @@
             style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
             android:layout_width="42dp"
             android:layout_height="42dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
             app:icon="@drawable/outline_more_horiz_black_24"
             app:layout_constraintBottom_toBottomOf="@+id/fragment_more_name_textview"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/textView3"
             app:layout_constraintTop_toTopOf="@+id/fragment_more_name_textview" />
 
         <com.google.android.material.button.MaterialButton
@@ -108,7 +105,83 @@
 
     <View
         android:layout_width="match_parent"
+        android:layout_height="0.6dp"
+        android:background="@color/divider" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragment_more_write_constraintlayout"
+        style="@style/AppTheme.CompleteClickableEffect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="45dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/outline_add_circle_outline_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:text="Publicar"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView8"
+            app:layout_constraintStart_toEndOf="@+id/imageView8"
+            app:layout_constraintTop_toTopOf="@+id/imageView8" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
         android:layout_height="0.1dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:background="@color/divider" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragment_more_messages_constraintlayout"
+        style="@style/AppTheme.CompleteClickableEffect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageView9"
+            android:layout_width="45dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/outline_chat_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:text="Conversas"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView9"
+            app:layout_constraintStart_toEndOf="@+id/imageView9"
+            app:layout_constraintTop_toTopOf="@+id/imageView9" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.6dp"
         android:background="@color/divider" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -183,6 +256,8 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0.1dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
         android:background="@color/divider" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -219,7 +294,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.1dp"
+        android:layout_height="0.6dp"
         android:background="@color/divider" />
 
 </LinearLayout>
