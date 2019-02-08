@@ -16,13 +16,20 @@
 package io.github.horaciocome1.reaque.ui.topics
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
+import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.databinding.ItemTopic2Binding
 import jp.wasabeef.glide.transformations.BlurTransformation
@@ -46,7 +53,13 @@ class TopicsAdapter(private val list: List<Topic>) : RecyclerView.Adapter<Topics
 
             Glide.with(context)
                 .load(cover)
-                .apply(RequestOptions.bitmapTransform(BlurTransformation(7, 1)))
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .apply(
+                    RequestOptions
+                        .bitmapTransform(BlurTransformation(7, 1))
+                        .placeholder(R.drawable.background_comments_gradient)
+                )
+                .listener(RequestListener(binding.itemTopicProgressbar))
                 .into(binding.itemTopicCoverImageview)
 
             binding.itemTopicMoreButton.setOnClickListener {
@@ -67,5 +80,29 @@ class TopicsAdapter(private val list: List<Topic>) : RecyclerView.Adapter<Topics
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
+
+    class RequestListener(private val progressBar: ProgressBar) : com.bumptech.glide.request.RequestListener<Drawable> {
+
+        override fun onLoadFailed(
+            e: GlideException?,
+            model: Any?,
+            target: Target<Drawable>?,
+            isFirstResource: Boolean
+        ): Boolean {
+            return false
+        }
+
+        override fun onResourceReady(
+            resource: Drawable?,
+            model: Any?,
+            target: Target<Drawable>?,
+            dataSource: DataSource?,
+            isFirstResource: Boolean
+        ): Boolean {
+            progressBar.visibility = View.GONE
+            return false // false - let glide do the loading thing itself
+        }
+
+    }
 
 }
