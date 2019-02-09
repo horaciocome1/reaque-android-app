@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 Horácio Flávio Comé Júnior
+ *    Copyright 2018 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -44,11 +44,11 @@ class CommentsAdapter(private val list: List<Comment>) : RecyclerView.Adapter<Co
             binding.comment = this
             binding.itemCommenWriterPicImageview.run {
                 Glide.with(context)
-                    .load(writerPic)
+                    .load(list[position].user.pic)
                     .apply(RequestOptions.circleCropTransform())
                     .into(this)
                 setOnClickListener {
-                    val openProfile = CommentsFragmentDirections.actionOpenProfile2(writerId)
+                    val openProfile = CommentsFragmentDirections.actionOpenProfile2(list[position].user.id)
                     Navigation.findNavController(it).navigate(openProfile)
                 }
             }

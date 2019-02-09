@@ -68,9 +68,11 @@ val DocumentSnapshot.comment: Comment
             message = this@comment["message"].toString()
             date = this@comment["date"].toString()
             totalLikes = this@comment["total_likes"].toString().toInt()
-            writerId = this@comment["writer_id"].toString()
-            writerName = this@comment["writer_name"].toString()
-            writerPic = this@comment["writer_pic"].toString()
+            user.apply {
+                id = this@comment["writer_id"].toString()
+                name = this@comment["writer_name"].toString()
+                pic = this@comment["writer_pic"].toString()
+            }
         }
     }
 
