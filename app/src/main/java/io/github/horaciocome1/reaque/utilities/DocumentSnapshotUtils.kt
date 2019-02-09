@@ -22,45 +22,57 @@ import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
 
-fun DocumentSnapshot.toUser() = User(id).apply {
-    name = this@toUser["name"].toString()
-    description = this@toUser["description"].toString()
-    pic = this@toUser["pic"].toString()
-    totalFollowers = this@toUser["total_followers"].toString()
-    totalPosts = this@toUser["total_posts"].toString()
-    topics = this@toUser["topics"].toString()
-    town = this@toUser["town"].toString()
-    since = this@toUser["since"].toString()
-    email = this@toUser["email"].toString()
-}
-
-fun DocumentSnapshot.toTopic() = Topic(id).apply {
-    title = this@toTopic["title"].toString()
-    totalReaders = this@toTopic["totalReaders"].toString().toInt()
-    cover = this@toTopic["cover"].toString()
-}
-
-fun DocumentSnapshot.toPost() = Post(id).apply {
-    cover = this@toPost["cover"].toString()
-    date = this@toPost["date"].toString()
-    message = this@toPost["message"].toString()
-    rating = this@toPost["rating"].toString().toFloat()
-    title = this@toPost["title"].toString()
-    topic = this@toPost["topic"].toString()
-    user = User(this@toPost["writerId"].toString()).apply {
-        name = this@toPost["writer_name"].toString()
-        pic = this@toPost["writer_pic"].toString()
+val DocumentSnapshot.user: User
+    get() {
+        return User(id).apply {
+            name = this@user["name"].toString()
+            description = this@user["description"].toString()
+            pic = this@user["pic"].toString()
+            totalFollowers = this@user["total_followers"].toString()
+            totalPosts = this@user["total_posts"].toString()
+            topics = this@user["topics"].toString()
+            town = this@user["town"].toString()
+            since = this@user["since"].toString()
+            email = this@user["email"].toString()
+        }
     }
-}
 
-fun DocumentSnapshot.toComment() = Comment(id).apply {
-    message = this@toComment["message"].toString()
-    date = this@toComment["date"].toString()
-    totalLikes = this@toComment["total_likes"].toString().toInt()
-    writerId = this@toComment["writer_id"].toString()
-    writerName = this@toComment["writer_name"].toString()
-    writerPic = this@toComment["writer_pic"].toString()
-}
+val DocumentSnapshot.topic: Topic
+    get() {
+        return Topic(id).apply {
+            title = this@topic["title"].toString()
+            totalReaders = this@topic["totalReaders"].toString().toInt()
+            cover = this@topic["cover"].toString()
+        }
+    }
+
+val DocumentSnapshot.post: Post
+    get() {
+        return Post(id).apply {
+            cover = this@post["cover"].toString()
+            date = this@post["date"].toString()
+            message = this@post["message"].toString()
+            rating = this@post["rating"].toString().toFloat()
+            title = this@post["title"].toString()
+            topic = this@post["topic"].toString()
+            user = User(this@post["writerId"].toString()).apply {
+                name = this@post["writer_name"].toString()
+                pic = this@post["writer_pic"].toString()
+            }
+        }
+    }
+
+val DocumentSnapshot.comment: Comment
+    get() {
+        return Comment(id).apply {
+            message = this@comment["message"].toString()
+            date = this@comment["date"].toString()
+            totalLikes = this@comment["total_likes"].toString().toInt()
+            writerId = this@comment["writer_id"].toString()
+            writerName = this@comment["writer_name"].toString()
+            writerPic = this@comment["writer_pic"].toString()
+        }
+    }
 
 val DocumentSnapshot.notification: Notification
     get() {

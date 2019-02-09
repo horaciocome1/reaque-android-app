@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 Horácio Flávio Comé Júnior
+ *    Copyright 2018 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -20,9 +20,9 @@ import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
+import io.github.horaciocome1.reaque.utilities.comment
 import io.github.horaciocome1.reaque.utilities.onListenFailed
 import io.github.horaciocome1.reaque.utilities.onSnapshotNull
-import io.github.horaciocome1.reaque.utilities.toComment
 
 //FRWsZTrrI0PTp1Fqftdb
 //Augusto Filipe
@@ -57,7 +57,7 @@ class CommentsWebService {
                         topicCommentsList = mutableListOf()
                         for (doc in snapshot)
                             topicCommentsList.add(
-                                doc.toComment()
+                                doc.comment()
                             )
                         topicComments.value = topicCommentsList
                     }
@@ -79,7 +79,7 @@ class CommentsWebService {
                         postCommentsList = mutableListOf()
                         for (doc in snapshot)
                             postCommentsList.add(
-                                doc.toComment()
+                                doc.comment()
                             )
                         postComments.value = postCommentsList
                     }

@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 Horácio Flávio Comé Júnior
+ *    Copyright 2018 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.utilities.onListenFailed
 import io.github.horaciocome1.reaque.utilities.onSnapshotNull
-import io.github.horaciocome1.reaque.utilities.toPost
+import io.github.horaciocome1.reaque.utilities.post
 
 class PostWebService {
 
@@ -64,7 +64,7 @@ class PostWebService {
                     snapshot != null -> {
                         topicPostList = mutableListOf()
                         for (doc in snapshot.documents)
-                            topicPostList.add(doc.toPost())
+                            topicPostList.add(doc.post())
                         topicPosts.value = topicPostList
                     }
                     else -> onSnapshotNull(tag)
@@ -85,7 +85,7 @@ class PostWebService {
                     snapshot != null -> {
                         userPostList = mutableListOf()
                         for (doc in snapshot.documents)
-                            userPostList.add(doc.toPost())
+                            userPostList.add(doc.post())
                         userPosts.value = userPostList
                     }
                     else -> onSnapshotNull(tag)
@@ -104,7 +104,7 @@ class PostWebService {
                 when {
                     exception != null -> onListenFailed(tag, exception)
                     snapshot != null -> {
-                        readingPostList = mutableListOf(snapshot.toPost())
+                        readingPostList = mutableListOf(snapshot.post())
                         readingPosts.value = readingPostList
                     }
                     else -> onSnapshotNull(tag)

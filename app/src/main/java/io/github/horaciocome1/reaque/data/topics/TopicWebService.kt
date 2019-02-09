@@ -20,7 +20,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
 import io.github.horaciocome1.reaque.utilities.onListenFailed
 import io.github.horaciocome1.reaque.utilities.onSnapshotNull
-import io.github.horaciocome1.reaque.utilities.toTopic
+import io.github.horaciocome1.reaque.utilities.topic
 
 class TopicWebService {
 
@@ -43,7 +43,7 @@ class TopicWebService {
                     exception != null -> onListenFailed(tag, exception)
                     snapshot != null -> {
                         for (doc in snapshot.documents)
-                            topicList.add(doc.toTopic())
+                            topicList.add(doc.topic())
                         topics.value = topicList
                     }
                     else -> onSnapshotNull(tag)
