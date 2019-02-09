@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 Horácio Flávio Comé Júnior
+ *    Copyright 2018 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@ package io.github.horaciocome1.reaque.utilities
 
 import com.google.firebase.firestore.DocumentSnapshot
 import io.github.horaciocome1.reaque.data.comments.Comment
+import io.github.horaciocome1.reaque.data.notifications.Notification
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
@@ -37,16 +38,6 @@ fun DocumentSnapshot.toTopic() = Topic(id).apply {
     title = this@toTopic["title"].toString()
     totalReaders = this@toTopic["totalReaders"].toString().toInt()
     cover = this@toTopic["cover"].toString()
-//    for (i in 1 until 4)
-//        posts.add(
-//            Post(this@toTopic["post${i}_id"].toString()).apply {
-//                rating = this@toTopic["post${i}_rating"].toString().toFloat()
-//                title = this@toTopic["post${i}_title"].toString()
-//                user = User(this@toTopic["post${i}_writer_id"].toString()).apply {
-//                    pic = this@toTopic["post${i}_writer_pic"].toString()
-//                }
-//            }
-//        )
 }
 
 fun DocumentSnapshot.toPost() = Post(id).apply {
@@ -70,3 +61,11 @@ fun DocumentSnapshot.toComment() = Comment(id).apply {
     writerName = this@toComment["writer_name"].toString()
     writerPic = this@toComment["writer_pic"].toString()
 }
+
+val DocumentSnapshot.notification: Notification
+    get() {
+        return Notification(id).apply {
+            message = this@notification["message"].toString()
+            date = this@notification["date"].toString()
+        }
+    }

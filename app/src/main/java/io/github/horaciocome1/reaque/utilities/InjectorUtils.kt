@@ -18,11 +18,13 @@ package io.github.horaciocome1.reaque.utilities
 import io.github.horaciocome1.reaque.data.Database
 import io.github.horaciocome1.reaque.data.comments.CommentsRepository
 import io.github.horaciocome1.reaque.data.favorites.FavoriteRepository
+import io.github.horaciocome1.reaque.data.notifications.NotificationsRepository
 import io.github.horaciocome1.reaque.data.posts.PostRepository
 import io.github.horaciocome1.reaque.data.topics.TopicRepository
 import io.github.horaciocome1.reaque.data.users.UserRepository
 import io.github.horaciocome1.reaque.ui.comments.CommentsViewModelFactory
 import io.github.horaciocome1.reaque.ui.favorites.FavoritesViewModelFactory
+import io.github.horaciocome1.reaque.ui.notifications.NotificationsViewModelFactory
 import io.github.horaciocome1.reaque.ui.posts.PostsViewModelFactory
 import io.github.horaciocome1.reaque.ui.topics.TopicsViewModelFactory
 import io.github.horaciocome1.reaque.ui.users.UsersVewModelFactory
@@ -53,5 +55,11 @@ object InjectorUtils {
         val repository = CommentsRepository.getInstance(Database.getInstance().commentsWebService)
         return CommentsViewModelFactory(repository)
     }
+
+    val notificationsViewModelFactory: NotificationsViewModelFactory
+        get() {
+            val repository = NotificationsRepository.getInstance(Database.getInstance().notificationsWebService)
+            return NotificationsViewModelFactory(repository)
+        }
 
 }

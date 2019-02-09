@@ -13,12 +13,16 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.data.topics
+package io.github.horaciocome1.reaque.ui.notifications
 
-data class Topic(var id: String) {
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import io.github.horaciocome1.reaque.data.notifications.NotificationsRepository
 
-    var title = ""
-    var totalReaders = 0
-    var cover = ""
+class NotificationsViewModelFactory(private val repository: NotificationsRepository) :
+    ViewModelProvider.NewInstanceFactory() {
+
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : ViewModel?> create(modelClass: Class<T>) = NotificationsViewModel(repository) as T
 
 }

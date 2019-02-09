@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 Horácio Flávio Comé Júnior
+ *    Copyright 2018 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -31,17 +31,17 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.topics.Topic
-import io.github.horaciocome1.reaque.databinding.ItemTopic2Binding
+import io.github.horaciocome1.reaque.databinding.ItemTopicBinding
 import jp.wasabeef.glide.transformations.BlurTransformation
 
 class TopicsAdapter(private val list: List<Topic>) : RecyclerView.Adapter<TopicsAdapter.ViewHolder>() {
 
-    lateinit var binding: ItemTopic2Binding
+    lateinit var binding: ItemTopicBinding
     lateinit var context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
-        binding = ItemTopic2Binding.inflate(LayoutInflater.from(context), parent, false)
+        binding = ItemTopicBinding.inflate(LayoutInflater.from(context), parent, false)
         return ViewHolder(binding.root)
     }
 

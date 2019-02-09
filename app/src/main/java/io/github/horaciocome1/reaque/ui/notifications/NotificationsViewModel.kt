@@ -13,12 +13,21 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.data.topics
+package io.github.horaciocome1.reaque.ui.notifications
 
-data class Topic(var id: String) {
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProviders
+import io.github.horaciocome1.reaque.data.notifications.NotificationsRepository
+import io.github.horaciocome1.reaque.utilities.InjectorUtils
 
-    var title = ""
-    var totalReaders = 0
-    var cover = ""
+val NotificationsFragment.viewModel: NotificationsViewModel
+    get() {
+        val factory = InjectorUtils.notificationsViewModelFactory
+        return ViewModelProviders.of(this, factory)[NotificationsViewModel::class.java]
+    }
+
+class NotificationsViewModel(repository: NotificationsRepository) : ViewModel() {
+
+    val notifications = repository.notifications
 
 }

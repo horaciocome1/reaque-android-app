@@ -17,6 +17,7 @@ package io.github.horaciocome1.reaque.data
 
 import io.github.horaciocome1.reaque.data.comments.CommentsWebService
 import io.github.horaciocome1.reaque.data.favorites.FavoriteWebService
+import io.github.horaciocome1.reaque.data.notifications.NotificationsWebService
 import io.github.horaciocome1.reaque.data.posts.PostWebService
 import io.github.horaciocome1.reaque.data.topics.TopicWebService
 import io.github.horaciocome1.reaque.data.users.UserWebService
@@ -28,6 +29,7 @@ class Database private constructor() {
     var postWebService = PostWebService()
     var favoriteWebService = FavoriteWebService()
     var commentsWebService = CommentsWebService()
+    var notificationsWebService = NotificationsWebService()
 
     companion object {
         @Volatile private var instance: Database? = null

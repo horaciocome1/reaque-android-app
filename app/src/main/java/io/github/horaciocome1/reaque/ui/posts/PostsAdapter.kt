@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 Horácio Flávio Comé Júnior
+ *    Copyright 2018 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -22,17 +22,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import io.github.horaciocome1.reaque.data.posts.Post
-import io.github.horaciocome1.reaque.databinding.ItemPost2Binding
+import io.github.horaciocome1.reaque.databinding.ItemPostBinding
 
 class PostsAdapter(private val list: List<Post>)
     : RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
 
-    private lateinit var binding: ItemPost2Binding
+    private lateinit var binding: ItemPostBinding
     private lateinit var context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
-        binding = ItemPost2Binding.inflate(LayoutInflater.from(context), parent, false)
+        binding = ItemPostBinding.inflate(LayoutInflater.from(context), parent, false)
         return ViewHolder(binding.root)
     }
 

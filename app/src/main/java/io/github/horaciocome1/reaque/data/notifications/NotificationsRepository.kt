@@ -13,12 +13,21 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.data.topics
+package io.github.horaciocome1.reaque.data.notifications
 
-data class Topic(var id: String) {
+class NotificationsRepository private constructor(private val notificationsWebService: NotificationsWebService) {
 
-    var title = ""
-    var totalReaders = 0
-    var cover = ""
+    val notifications = notificationsWebService.notifications
+
+    companion object {
+        @Volatile
+        private var instance: NotificationsRepository? = null
+
+        fun getInstance(notificationsWebService: NotificationsWebService) = instance ?: synchronized(this) {
+            instance ?: NotificationsRepository(notificationsWebService).also {
+                instance = it
+            }
+        }
+    }
 
 }
