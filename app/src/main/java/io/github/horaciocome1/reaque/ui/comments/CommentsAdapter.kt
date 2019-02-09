@@ -42,15 +42,13 @@ class CommentsAdapter(private val list: List<Comment>) : RecyclerView.Adapter<Co
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         list[position].run {
             binding.comment = this
-            binding.itemCommenWriterPicImageview.run {
-                Glide.with(context)
-                    .load(list[position].user.pic)
-                    .apply(RequestOptions.circleCropTransform())
-                    .into(this)
-                setOnClickListener {
-                    val openProfile = CommentsFragmentDirections.actionOpenProfile2(list[position].user.id)
-                    Navigation.findNavController(it).navigate(openProfile)
-                }
+            Glide.with(context)
+                .load(user.pic)
+                .apply(RequestOptions.circleCropTransform())
+                .into(binding.itemCommenWriterPicImageview)
+            binding.itemCommenWriterPicImageview.setOnClickListener {
+                val openProfile = CommentsFragmentDirections.actionOpenProfile2(user.id)
+                Navigation.findNavController(it).navigate(openProfile)
             }
         }
     }
