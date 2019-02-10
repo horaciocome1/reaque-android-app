@@ -11,3 +11,34 @@ modelaar os dados
 terminar o processo para obter dados pesquisados (por um progressbar onde aparece butao)
 
 fazer com que seja possivel conversar e escrever posts
+
+
+
+FRAGMENT_POST
+design -> new displacements. {
+    writer pic goes on top right corner with small relevant details (writer name, rating and date)
+    all buttons go to menu
+}
+landscape design on large screens -> special displacements. {
+    blurred background
+    two cards side by side
+        1. white on right for text
+        2. other one for cover (bottom left with with small relevant details (writer name, rating and date))
+}
+
+MYPROFILEFRAGMENT && PROFILEFRAGMENT
+merge into one class -> {
+    simple check if the nullable id is passed or not
+}
+
+USERPOSTSFRAGMENT && POSTSFRAGMENT
+merge into one class -> {
+    require two nullable strings (topicId and userId)
+    sequent actions are based on which is not null
+}
+
+READFRAGMENT && PROFILEFRAGMENT
+no need for dealing with lists (
+    simple check if id isEmpty
+    only if not stop showing progressbar
+)

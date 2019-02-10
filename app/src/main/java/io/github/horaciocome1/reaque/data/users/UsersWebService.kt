@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ class UsersWebService {
 
     /*
     * not a list at all
-    * only used the firt position filled by the writer that the user is currently viewing its profile
+    * only used the firt position filled by the writer that the user is currently viewing its menu_profile
     */
     private var viewingUsersList = mutableListOf(User(""))
     private val viewingUsers = MutableLiveData<List<User>>()
