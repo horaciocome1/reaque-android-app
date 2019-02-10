@@ -13,22 +13,25 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.data.favorites
+package io.github.horaciocome1.reaque.data.topics
 
-class FavoriteRepository private constructor(private val favoriteWebService: FavoriteWebService) {
+class TopicsRepository private constructor(private val topicsWebService: TopicsWebService) {
 
-    fun getPosts() = favoriteWebService.getPosts()
+    fun addTopic(topic: Topic) = topicsWebService.addTopic(topic)
 
-    fun getTopics() = favoriteWebService.getTopics()
+    val topics = topicsWebService.topics
+
+    val favorites = topicsWebService.getFavorites()
 
     companion object {
+        @Volatile
+        private var instance: TopicsRepository? = null
 
-        @Volatile private var instance: FavoriteRepository? = null
-
-        fun getInstance(favoriteWebService: FavoriteWebService) = instance ?: synchronized(this) {
-            instance ?: FavoriteRepository(favoriteWebService).also { instance = it }
+        fun getInstance(topicsWebService: TopicsWebService) = instance ?: synchronized(this) {
+            instance ?: TopicsRepository(topicsWebService).also {
+                instance = it
+            }
         }
-
     }
 
 }

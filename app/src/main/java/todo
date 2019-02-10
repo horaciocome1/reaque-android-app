@@ -11,10 +11,3 @@ modelaar os dados
 terminar o processo para obter dados pesquisados (por um progressbar onde aparece butao)
 
 fazer com que seja possivel conversar e escrever posts
-
-limpar datasnapshotutils = tornar todos os metodos em variaveis
-topics = tornar gettopics variavel
-viewmodels = tornar a package function em variaveis, viewmodels especificos estendem classes especificas
-injectorutils = tornar as funcoes em  variaveis
-
-CADA FRAGMENT TEM UM VIEWMODEL QUE PODE RECEBER DADOS DE DIFERENTES REPOSITORIOS

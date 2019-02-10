@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 Horácio Flávio Comé Júnior
+ *    Copyright 2018 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import io.github.horaciocome1.reaque.databinding.FragmentProfileBinding
 import io.github.horaciocome1.reaque.ui.MainActivity
-import io.github.horaciocome1.reaque.utilities.getProfileCoverTransformation
+import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class MyProfileFragment: Fragment() {
@@ -46,7 +46,7 @@ class MyProfileFragment: Fragment() {
 
     override fun onStart() {
         super.onStart()
-        getUsersViewModel().getUsers().observe(this, Observer { users ->
+        viewModel.getUsers().observe(this, Observer { users ->
             when {
                 users.isEmpty() -> {
                     fragment_profile_cover_imageview.visibility = View.GONE
@@ -62,8 +62,10 @@ class MyProfileFragment: Fragment() {
                     users[0].run {
                         binding.user = this
                         Glide.with(this@MyProfileFragment).load(pic).run {
-                            apply(getProfileCoverTransformation()).into(fragment_profile_cover_imageview)
-                            apply(RequestOptions.circleCropTransform()).into(binding.fragmentProfileProfilePicImageview)
+                            apply(RequestOptions.bitmapTransform(BlurTransformation(7, 14)))
+                                .into(fragment_profile_cover_imageview)
+                            apply(RequestOptions.circleCropTransform())
+                                .into(binding.fragmentProfileProfilePicImageview)
                         }
 
                         fragment_profile_more_button.setOnClickListener {

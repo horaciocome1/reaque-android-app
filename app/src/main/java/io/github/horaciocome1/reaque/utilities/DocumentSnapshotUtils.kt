@@ -30,7 +30,6 @@ val DocumentSnapshot.user: User
             pic = this@user["pic"].toString()
             totalFollowers = this@user["total_followers"].toString()
             totalPosts = this@user["total_posts"].toString()
-            topics = this@user["topics"].toString()
             town = this@user["town"].toString()
             since = this@user["since"].toString()
             email = this@user["email"].toString()
@@ -41,7 +40,6 @@ val DocumentSnapshot.topic: Topic
     get() {
         return Topic(id).apply {
             title = this@topic["title"].toString()
-            totalReaders = this@topic["totalReaders"].toString().toInt()
             cover = this@topic["cover"].toString()
         }
     }
@@ -54,7 +52,7 @@ val DocumentSnapshot.post: Post
             message = this@post["message"].toString()
             rating = this@post["rating"].toString().toFloat()
             title = this@post["title"].toString()
-            topic = this@post["topic"].toString()
+            topic = this@post["topics"].toString()
             user = User(this@post["writerId"].toString()).apply {
                 name = this@post["writer_name"].toString()
                 pic = this@post["writer_pic"].toString()

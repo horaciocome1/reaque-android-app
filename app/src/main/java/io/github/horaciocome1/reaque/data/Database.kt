@@ -16,18 +16,16 @@
 package io.github.horaciocome1.reaque.data
 
 import io.github.horaciocome1.reaque.data.comments.CommentsWebService
-import io.github.horaciocome1.reaque.data.favorites.FavoriteWebService
 import io.github.horaciocome1.reaque.data.notifications.NotificationsWebService
-import io.github.horaciocome1.reaque.data.posts.PostWebService
-import io.github.horaciocome1.reaque.data.topics.TopicWebService
-import io.github.horaciocome1.reaque.data.users.UserWebService
+import io.github.horaciocome1.reaque.data.posts.PostsWebService
+import io.github.horaciocome1.reaque.data.topics.TopicsWebService
+import io.github.horaciocome1.reaque.data.users.UsersWebService
 
 class Database private constructor() {
 
-    var topicWebService = TopicWebService()
-    var userWebService = UserWebService()
-    var postWebService = PostWebService()
-    var favoriteWebService = FavoriteWebService()
+    var topicsWebService = TopicsWebService()
+    var usersWebService = UsersWebService()
+    var postsWebService = PostsWebService()
     var commentsWebService = CommentsWebService()
     var notificationsWebService = NotificationsWebService()
 

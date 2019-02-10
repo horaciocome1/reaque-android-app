@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 Horácio Flávio Comé Júnior
+ *    Copyright 2018 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ import com.bumptech.glide.request.RequestOptions
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.databinding.FragmentProfileBinding
 import io.github.horaciocome1.reaque.ui.MainActivity
-import io.github.horaciocome1.reaque.utilities.getProfileCoverTransformation
+import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment: Fragment() {
@@ -49,7 +49,7 @@ class ProfileFragment: Fragment() {
         super.onStart()
         arguments?.let { args ->
             val userId = ProfileFragmentArgs.fromBundle(args).userId
-            getUsersViewModel().getUsers(User(userId)).observe(this, Observer { users ->
+            viewModel.getUsers(User(userId)).observe(this, Observer { users ->
                 when {
                     users.isEmpty() -> {
                         fragment_profile_cover_imageview.visibility = View.GONE
@@ -63,8 +63,10 @@ class ProfileFragment: Fragment() {
                         users[0].run {
                             binding.user = this
                             Glide.with(this@ProfileFragment).load(pic).run {
-                                apply(getProfileCoverTransformation()).into(fragment_profile_cover_imageview)
-                                apply(RequestOptions.circleCropTransform()).into(fragment_profile_profile_pic_imageview)
+                                apply(RequestOptions.bitmapTransform(BlurTransformation(7, 14)))
+                                    .into(fragment_profile_cover_imageview)
+                                apply(RequestOptions.circleCropTransform())
+                                    .into(fragment_profile_profile_pic_imageview)
                             }
 
                             fragment_profile_more_button.setOnClickListener {

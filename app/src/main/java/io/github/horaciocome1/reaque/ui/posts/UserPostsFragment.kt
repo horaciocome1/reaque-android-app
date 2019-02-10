@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 Horácio Flávio Comé Júnior
+ *    Copyright 2018 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ class UserPostsFragment : Fragment() {
             val userName = UserPostsFragmentArgs.fromBundle(args).userName
             var list = listOf<Post>()
             (activity as MainActivity).supportActionBar?.title = userName
-            getPostsViewModel().getPosts(User(userId)).observe(this, Observer { posts ->
+            viewModel.getPosts(User(userId)).observe(this, Observer { posts ->
                 when {
                     posts.isEmpty() -> fragment_user_posts_recyclerview.visibility = View.GONE
                     list.isEmpty() -> {

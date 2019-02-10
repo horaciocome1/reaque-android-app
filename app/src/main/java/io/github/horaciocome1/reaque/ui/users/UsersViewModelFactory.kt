@@ -13,19 +13,16 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.data.topics
+package io.github.horaciocome1.reaque.ui.users
 
-class TopicRepository private constructor(private val topicWebService: TopicWebService) {
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import io.github.horaciocome1.reaque.data.users.UsersRepository
 
-    fun addTopic(topic: Topic) = topicWebService.addTopic(topic)
+class UsersViewModelFactory(private val repository: UsersRepository)
+    : ViewModelProvider.NewInstanceFactory() {
 
-    fun getTopics() = topicWebService.getTopics()
-
-    companion object {
-        @Volatile private var instance: TopicRepository? = null
-        fun getInstance(topicWebService: TopicWebService) = instance ?: synchronized(this) {
-            instance ?: TopicRepository(topicWebService).also { instance = it }
-        }
-    }
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : ViewModel?> create(modelClass: Class<T>) = UsersViewModel(repository) as T
 
 }

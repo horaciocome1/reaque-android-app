@@ -41,14 +41,9 @@ class PostsAdapter(private val list: List<Post>)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         list[position].run {
             binding.post = this
-            Glide.with(context).run {
-                //                load(user.pic).apply(RequestOptions.circleCropTransform()).into(binding.itemPostProfileImageview)
-                load(cover).into(binding.itemPostCoverImageview)
-            }
-//            binding.itemPostReadMoreButton.setOnClickListener {
-//                val read = TopicsFragmentDirections.actionRead(id)
-//                Navigation.findNavController(it).navigate(read)
-//            }
+            Glide.with(context)
+                .load(cover)
+                .into(binding.itemPostCoverImageview)
         }
     }
 

@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 Horácio Flávio Comé Júnior
+ *    Copyright 2018 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -29,14 +29,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.ui.MainActivity
-import io.github.horaciocome1.reaque.ui.users.UsersViewModel
-import io.github.horaciocome1.reaque.ui.users.getUsersViewModel
+import io.github.horaciocome1.reaque.ui.users.viewModel
 import kotlinx.android.synthetic.main.fragment_more.*
 
 class MoreFragment : Fragment() {
 
     private var isProfileButtonVisible = false
-    private lateinit var usersViewModel: UsersViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_more, container, false)
@@ -71,8 +69,7 @@ class MoreFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         hideProfileButton()
-        usersViewModel = getUsersViewModel()
-        usersViewModel.getUsers().observe(this, Observer {
+        viewModel.getUsers().observe(this, Observer {
             it[0].run {
                 Glide.with(this@MoreFragment)
                     .load(pic)

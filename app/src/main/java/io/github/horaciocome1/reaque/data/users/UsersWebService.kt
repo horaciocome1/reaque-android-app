@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 Horácio Flávio Comé Júnior
+ *    Copyright 2018 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -21,32 +21,35 @@ import com.google.firebase.firestore.FirebaseFirestore
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.utilities.onListenFailed
 import io.github.horaciocome1.reaque.utilities.onSnapshotNull
-import io.github.horaciocome1.reaque.utilities.toUser
+import io.github.horaciocome1.reaque.utilities.user
 
-class UserWebService {
+class UsersWebService {
 
-    private val tag = "UserWebService"
+    private val tag = "UsersWebService"
     private val myId = "FRWsZTrrI0PTp1Fqftdb"
 
-    /*list of users that belong to the same topic*/
+    /*list of users that belong to the same topics*/
     private var topicUsersList = mutableListOf<User>()
     private val topicUsers = MutableLiveData<List<User>>()
 
     /*
-    * not a list a all
+    * not a list at all
     * only used the firt position filled by the writer that the user is currently viewing its profile
     */
     private var viewingUsersList = mutableListOf(User(""))
     private val viewingUsers = MutableLiveData<List<User>>()
 
     /*
-    * not a list a all
+    * not a list at all
     * only used the firt position filled by the data of app user
     */
     private var usersList = mutableListOf<User>()
     private val users = MutableLiveData<List<User>>()
 
-    private val topic = Topic("")
+
+    private val favorites = MutableLiveData<List<User>>()
+
+    private var topicId = ""
 
     private val reference = FirebaseFirestore.getInstance().collection("users")
 
@@ -56,7 +59,7 @@ class UserWebService {
     }
 
     fun getUsers(topic: Topic): LiveData<List<User>> {
-        if (!this.topic.id.equals(topic.id, true)) {
+        if (!topicId.equals(topic.id, true)) {
             topicUsers.value = mutableListOf()
             reference.whereEqualTo(topic.id, true).addSnapshotListener { snapshot, exception ->
                 when {
@@ -64,13 +67,13 @@ class UserWebService {
                     snapshot != null -> {
                         topicUsersList = mutableListOf()
                         for (doc in snapshot.documents)
-                            topicUsersList.add(doc.toUser())
+                            topicUsersList.add(doc.user)
                         topicUsers.value = topicUsersList
                     }
                     else -> onSnapshotNull(tag)
                 }
             }
-            this.topic.id = topic.id
+            topicId = topic.id
         }
         return topicUsers
     }
@@ -82,7 +85,7 @@ class UserWebService {
                 when {
                     exception != null -> onListenFailed(tag, exception)
                     snapshot != null -> {
-                        viewingUsersList = mutableListOf(snapshot.toUser())
+                        viewingUsersList = mutableListOf(snapshot.user)
                         viewingUsers.value = viewingUsersList
                     }
                     else -> onSnapshotNull(tag)
@@ -98,7 +101,7 @@ class UserWebService {
                 when {
                     exception != null -> onListenFailed(tag, exception)
                     snapshot != null -> {
-                        usersList = mutableListOf(snapshot.toUser())
+                        usersList = mutableListOf(snapshot.user)
                         users.value = usersList
                     }
                     else -> onSnapshotNull(tag)
@@ -106,6 +109,11 @@ class UserWebService {
             }
         }
         return users
+    }
+
+    fun getFavorites(): LiveData<List<User>> {
+        favorites.value = io.github.horaciocome1.reaque.ui.search.users()
+        return favorites
     }
 
 }

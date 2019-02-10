@@ -15,28 +15,40 @@
 
 package io.github.horaciocome1.reaque.ui.posts
 
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import io.github.horaciocome1.reaque.data.posts.Post
-import io.github.horaciocome1.reaque.data.posts.PostRepository
+import io.github.horaciocome1.reaque.data.posts.PostsRepository
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.utilities.InjectorUtils
 
-fun Fragment.getPostsViewModel(): PostsViewModel {
-    val factory = InjectorUtils.providePostsViewModelFactory()
-    return ViewModelProviders.of(this, factory).get(PostsViewModel::class.java)
-}
+val PostsFragment.viewModel: PostsViewModel
+    get() {
+        val factory = InjectorUtils.postsViewModelFactory
+        return ViewModelProviders.of(this, factory)[PostsViewModel::class.java]
+    }
 
-class PostsViewModel(private val postRepository: PostRepository) : ViewModel() {
+val ReadFragment.viewModel: PostsViewModel
+    get() {
+        val factory = InjectorUtils.postsViewModelFactory
+        return ViewModelProviders.of(this, factory).get(PostsViewModel::class.java)
+    }
 
-    fun addPost(post: Post) = postRepository.addPost(post)
+val UserPostsFragment.viewModel: PostsViewModel
+    get() {
+        val factory = InjectorUtils.postsViewModelFactory
+        return ViewModelProviders.of(this, factory).get(PostsViewModel::class.java)
+    }
 
-    fun getPosts(topic: Topic) = postRepository.getPosts(topic)
+class PostsViewModel(private val postsRepository: PostsRepository) : ViewModel() {
 
-    fun getPosts(user: User) = postRepository.getPosts(user)
+    fun addPost(post: Post) = postsRepository.addPost(post)
 
-    fun getPosts(post: Post) = postRepository.getPosts(post)
+    fun getPosts(topic: Topic) = postsRepository.getPosts(topic)
+
+    fun getPosts(user: User) = postsRepository.getPosts(user)
+
+    fun getPosts(post: Post) = postsRepository.getPosts(post)
 
 }

@@ -22,34 +22,40 @@ import io.github.horaciocome1.reaque.utilities.onListenFailed
 import io.github.horaciocome1.reaque.utilities.onSnapshotNull
 import io.github.horaciocome1.reaque.utilities.topic
 
-class TopicWebService {
+class TopicsWebService {
 
-    private val tag = "TopicWebService"
+    private val tag = "TopicsWebService"
 
-    private var topicList = mutableListOf<Topic>()
-    private val topics = MutableLiveData<List<Topic>>()
+    private var topicsList = mutableListOf<Topic>()
+    val topics = MutableLiveData<List<Topic>>()
+
+    private var favoritesList = mutableListOf<Topic>()
+    private val favorites = MutableLiveData<List<Topic>>()
 
     private val reference = FirebaseFirestore.getInstance().collection("topics")
 
-    fun addTopic(topic: Topic) {
-        topicList.add(topic)
-        topics.value = topicList
+    init {
+        reference.addSnapshotListener { snapshot, exception ->
+            when {
+                exception != null -> onListenFailed(tag, exception)
+                snapshot != null -> {
+                    for (doc in snapshot.documents)
+                        topicsList.add(doc.topic)
+                    topics.value = topicsList
+                }
+                else -> onSnapshotNull(tag)
+            }
+        }
     }
 
-    fun getTopics(): LiveData<List<Topic>> {
-        if (topicList.isEmpty())
-            reference.addSnapshotListener {
-                snapshot, exception-> when {
-                    exception != null -> onListenFailed(tag, exception)
-                    snapshot != null -> {
-                        for (doc in snapshot.documents)
-                            topicList.add(doc.topic())
-                        topics.value = topicList
-                    }
-                    else -> onSnapshotNull(tag)
-                }
-            }
-        return topics
+    fun getFavorites(): LiveData<List<Topic>> {
+        favorites.value = io.github.horaciocome1.reaque.ui.search.topics()
+        return favorites
+    }
+
+    fun addTopic(topic: Topic) {
+        topicsList.add(topic)
+        topics.value = topicsList
     }
 
 }

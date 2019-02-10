@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~    Copyright 2019 Horácio Flávio Comé Júnior
+  ~    Copyright 2018 Horácio Flávio Comé Júnior
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
   ~    you may not use this file except in compliance with the License.
@@ -71,9 +71,8 @@
         <TextView
             android:id="@+id/item_user_topics_textview"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="1dp"
             android:layout_marginTop="16dp"
-            android:text="@{user.topics}"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="@+id/item_user_profile_pic_imageview"
             app:layout_constraintStart_toStartOf="@+id/item_user_profile_pic_imageview"

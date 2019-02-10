@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 Horácio Flávio Comé Júnior
+ *    Copyright 2018 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -42,16 +42,14 @@ class PostsFragment: Fragment() {
         super.onStart()
         arguments?.let {
             val safeArgs = PostsFragmentArgs.fromBundle(it)
-            val topic = Topic(safeArgs.topicId)
-            (activity as MainActivity).supportActionBar?.title = safeArgs.topicTitle
+            setActionBarTitle(safeArgs.topicTitle)
             var list = listOf<Post>()
-            getPostsViewModel().getPosts(topic).observe(this, Observer { posts ->
+            viewModel.getPosts(Topic(safeArgs.topicId)).observe(this, Observer { posts ->
                 when {
-                    posts.isEmpty() -> fragment_posts_recyclerview.visibility = View.INVISIBLE
+                    posts.isEmpty() -> fragment_posts_progressbar.visibility = View.VISIBLE
                     list.isEmpty() -> {
                         list = posts
                         configList(list)
-                        fragment_posts_recyclerview.visibility = View.VISIBLE
                         fragment_posts_progressbar.visibility = View.GONE
                     }
                     posts != list -> {
@@ -69,6 +67,16 @@ class PostsFragment: Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+            (activity as MainActivity).supportActionBar?.show()
+    }
+
+    private fun setActionBarTitle(title: String) {
+        (activity as MainActivity).supportActionBar?.title = title
+    }
+
     private fun configList(list: List<Post>) = fragment_posts_recyclerview.apply {
         layoutManager = LinearLayoutManager(context)
         adapter = PostsAdapter(list)
@@ -79,10 +87,5 @@ class PostsFragment: Fragment() {
         addSimpleTouchListener()
     }
 
-    override fun onResume() {
-        super.onResume()
-        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
-            (activity as MainActivity).supportActionBar?.show()
-    }
 
 }

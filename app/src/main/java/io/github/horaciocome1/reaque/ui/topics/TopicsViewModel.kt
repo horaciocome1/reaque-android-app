@@ -15,22 +15,24 @@
 
 package io.github.horaciocome1.reaque.ui.topics
 
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import io.github.horaciocome1.reaque.data.topics.Topic
-import io.github.horaciocome1.reaque.data.topics.TopicRepository
+import io.github.horaciocome1.reaque.data.topics.TopicsRepository
 import io.github.horaciocome1.reaque.utilities.InjectorUtils
 
-fun Fragment.getTopicsViewModel(): TopicsViewModel {
-    val factory = InjectorUtils.provideTopicsViewModelFactory()
-    return ViewModelProviders.of(this, factory).get(TopicsViewModel::class.java)
-}
+val TopicsFragment.viewModel: TopicsViewModel
+    get() {
+        val factory = InjectorUtils.topicsViewModelFactory
+        return ViewModelProviders.of(this, factory)[TopicsViewModel::class.java]
+    }
 
-class TopicsViewModel(private val topicRepository: TopicRepository): ViewModel() {
+class TopicsViewModel(private val topicsRepository: TopicsRepository) : ViewModel() {
 
-    fun addTopic(topic: Topic) = topicRepository.addTopic(topic)
+    fun addTopic(topic: Topic) = topicsRepository.addTopic(topic)
 
-    fun getTopics() = topicRepository.getTopics()
+    val topics: LiveData<List<Topic>>
+        get() = topicsRepository.topics
 
 }

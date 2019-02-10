@@ -15,21 +15,36 @@
 
 package io.github.horaciocome1.reaque.ui.favorites
 
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
-import io.github.horaciocome1.reaque.data.favorites.FavoriteRepository
+import io.github.horaciocome1.reaque.data.posts.Post
+import io.github.horaciocome1.reaque.data.posts.PostsRepository
+import io.github.horaciocome1.reaque.data.topics.Topic
+import io.github.horaciocome1.reaque.data.topics.TopicsRepository
+import io.github.horaciocome1.reaque.data.users.User
+import io.github.horaciocome1.reaque.data.users.UsersRepository
 import io.github.horaciocome1.reaque.utilities.InjectorUtils
 
-fun Fragment.getFavoritesViewModel(): FavoritesViewModel {
-    val factory = InjectorUtils.provideFavoritesViewModelFactory()
-    return ViewModelProviders.of(this, factory).get(FavoritesViewModel::class.java)
-}
+val FavoritesFragment.viewModel: FavoritesViewModel
+    get() {
+        val factory = InjectorUtils.favoritesViewModelFactory
+        return ViewModelProviders.of(this, factory)[FavoritesViewModel::class.java]
+    }
 
-class FavoritesViewModel(private val favoriteRepository: FavoriteRepository) : ViewModel() {
+class FavoritesViewModel(
+    private val topicsRepository: TopicsRepository,
+    private val postsRepository: PostsRepository,
+    private val usersRepository: UsersRepository
+) : ViewModel() {
 
-    fun getPosts() = favoriteRepository.getPosts()
+    val topics: LiveData<List<Topic>>
+        get() = topicsRepository.favorites
 
-    fun getTopics() = favoriteRepository.getTopics()
+    val posts: LiveData<List<Post>>
+        get() = postsRepository.favorites
+
+    val users: LiveData<List<User>>
+        get() = usersRepository.favorites
 
 }

@@ -15,7 +15,6 @@
 
 package io.github.horaciocome1.reaque.ui.comments
 
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import io.github.horaciocome1.reaque.data.comments.CommentsRepository
@@ -23,10 +22,11 @@ import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.utilities.InjectorUtils
 
-fun Fragment.getCommentsViewModel(): CommentsViewModel {
-    val factory = InjectorUtils.provideCommentsViewModelFactory()
-    return ViewModelProviders.of(this, factory)[CommentsViewModel::class.java]
-}
+val CommentsFragment.viewModel: CommentsViewModel
+    get() {
+        val factory = InjectorUtils.commentsViewModelFactory
+        return ViewModelProviders.of(this, factory)[CommentsViewModel::class.java]
+    }
 
 class CommentsViewModel(private val commentsRepository: CommentsRepository) : ViewModel() {
 

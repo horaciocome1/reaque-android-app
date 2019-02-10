@@ -17,11 +17,22 @@ package io.github.horaciocome1.reaque.ui.favorites
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import io.github.horaciocome1.reaque.data.favorites.FavoriteRepository
+import io.github.horaciocome1.reaque.data.posts.PostsRepository
+import io.github.horaciocome1.reaque.data.topics.TopicsRepository
+import io.github.horaciocome1.reaque.data.users.UsersRepository
 
-class FavoritesViewModelFactory(private val favoriteRepository: FavoriteRepository)
+class FavoritesViewModelFactory(
+    private val topicsRepository: TopicsRepository,
+    private val postsRepository: PostsRepository,
+    private val usersRepository: UsersRepository
+)
     : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>) = FavoritesViewModel(favoriteRepository) as T
+    override fun <T : ViewModel?> create(modelClass: Class<T>) = FavoritesViewModel(
+        topicsRepository,
+        postsRepository,
+        usersRepository
+    ) as T
+
 }

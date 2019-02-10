@@ -22,7 +22,6 @@ data class User(var id: String) {
     var pic = ""
     var totalFollowers = ""
     var totalPosts = ""
-    var topics = ""
     var town = ""
     var since = ""
     var email = ""

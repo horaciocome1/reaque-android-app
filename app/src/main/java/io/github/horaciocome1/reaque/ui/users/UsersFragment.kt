@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 Horácio Flávio Comé Júnior
+ *    Copyright 2018 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -48,7 +48,7 @@ class UsersFragment : Fragment() {
             val topic = Topic(safeArgs.topicId)
             (activity as MainActivity).supportActionBar?.title = safeArgs.topicTitle
             var list = listOf<User>()
-            getUsersViewModel().getUsers(topic).observe(this, Observer { users ->
+            viewModel.getUsers(topic).observe(this, Observer { users ->
                 when {
                     users.isEmpty() -> fragment_users_recyclerview.visibility = View.GONE
                     list.isEmpty() -> {

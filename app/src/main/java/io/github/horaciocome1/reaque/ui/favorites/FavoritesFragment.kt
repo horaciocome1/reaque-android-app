@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 Horácio Flávio Comé Júnior
+ *    Copyright 2018 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -21,11 +21,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.ui.MainActivity
-import io.github.horaciocome1.reaque.ui.search.*
+import io.github.horaciocome1.reaque.ui.search.PostsAdapter
+import io.github.horaciocome1.reaque.ui.search.TopicsAdapter
+import io.github.horaciocome1.reaque.ui.search.UsersAdapter
 import kotlinx.android.synthetic.main.fragment_favorites.*
 
 class FavoritesFragment : Fragment() {
@@ -36,24 +39,42 @@ class FavoritesFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        fragment_favorites_topics_recyclerview.apply {
-            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-            adapter = TopicsAdapter(topics())
-        }
-        fragment_favorites_posts_recyclerview.apply {
-            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-            adapter = PostsAdapter(posts())
-        }
-        fragment_favorites_users_recyclerview.apply {
-            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-            adapter = UsersAdapter(users())
-        }
+        topics()
+        posts()
+        users()
     }
 
     override fun onResume() {
         super.onResume()
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
             (activity as MainActivity).supportActionBar?.hide()
+    }
+
+    private fun topics() {
+        viewModel.topics.observe(this, Observer {
+            fragment_favorites_topics_recyclerview.apply {
+                layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                adapter = TopicsAdapter(it)
+            }
+        })
+    }
+
+    private fun posts() {
+        viewModel.posts.observe(this, Observer {
+            fragment_favorites_posts_recyclerview.apply {
+                layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                adapter = PostsAdapter(it)
+            }
+        })
+    }
+
+    private fun users() {
+        viewModel.users.observe(this, Observer {
+            fragment_favorites_users_recyclerview.apply {
+                layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                adapter = UsersAdapter(it)
+            }
+        })
     }
 
 }

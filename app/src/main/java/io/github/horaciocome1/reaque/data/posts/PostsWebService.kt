@@ -24,16 +24,16 @@ import io.github.horaciocome1.reaque.utilities.onListenFailed
 import io.github.horaciocome1.reaque.utilities.onSnapshotNull
 import io.github.horaciocome1.reaque.utilities.post
 
-class PostWebService {
+class PostsWebService {
 
-    private val tag = "PostWebService"
+    private val tag = "PostsWebService"
 
-    /*list of all posts from the same topic*/
-    private var topicPostList = mutableListOf<Post>()
+    /*list of all posts from the same topics*/
+    private var topicPostsList = mutableListOf<Post>()
     private val topicPosts = MutableLiveData<List<Post>>()
 
     /*list of all posts from the same user*/
-    private var userPostList = mutableListOf<Post>()
+    private var userPostsList = mutableListOf<Post>()
     private val userPosts = MutableLiveData<List<Post>>()
 
     /*
@@ -44,54 +44,58 @@ class PostWebService {
     private var readingPostList = mutableListOf(Post(""))
     private val readingPosts = MutableLiveData<List<Post>>()
 
+    /*list of all posts from the same user*/
+    private var favoritePostsList = mutableListOf<Post>()
+    private val favorites = MutableLiveData<List<Post>>()
+
     private val reference = FirebaseFirestore.getInstance().collection("posts")
 
-    private val topic = Topic("")
-    private val user = User("")
+    private var topicId = ""
+    private var userId = ""
 
     fun addPost(post: Post) {
-        topicPostList.add(post)
-        topicPosts.value = topicPostList
+        topicPostsList.add(post)
+        topicPosts.value = topicPostsList
     }
 
-    /*retrieve from remote server all topicPosts from the same topic*/
+    /*retrieve from remote server all topicPosts from the same topics*/
     fun getPosts(topic: Topic): LiveData<List<Post>> {
-        if (!this.topic.id.equals(topic.id, true)) {
+        if (!topicId.equals(topic.id, true)) {
             topicPosts.value = mutableListOf()
             reference.whereEqualTo(topic.id, true).addSnapshotListener { snapshot, exception ->
                 when {
                     exception != null -> onListenFailed(tag, exception)
                     snapshot != null -> {
-                        topicPostList = mutableListOf()
+                        topicPostsList = mutableListOf()
                         for (doc in snapshot.documents)
-                            topicPostList.add(doc.post())
-                        topicPosts.value = topicPostList
+                            topicPostsList.add(doc.post)
+                        topicPosts.value = topicPostsList
                     }
                     else -> onSnapshotNull(tag)
                 }
             }
-            this.topic.id = topic.id
+            topicId = topic.id
         }
         return topicPosts
     }
 
     /*retrieve from remote server every topicPosts wrote by the specified user*/
     fun getPosts(user: User): LiveData<List<Post>> {
-        if (!this.user.id.equals(user.id, true)) {
+        if (userId.equals(user.id, true)) {
             userPosts.value = mutableListOf()
             reference.whereEqualTo("writerId", user.id).addSnapshotListener { snapshot, exception ->
                 when {
                     exception != null -> onListenFailed(tag, exception)
                     snapshot != null -> {
-                        userPostList = mutableListOf()
+                        userPostsList = mutableListOf()
                         for (doc in snapshot.documents)
-                            userPostList.add(doc.post())
-                        userPosts.value = userPostList
+                            userPostsList.add(doc.post)
+                        userPosts.value = userPostsList
                     }
                     else -> onSnapshotNull(tag)
                 }
             }
-            this.user.id = user.id
+            userId = user.id
         }
         return userPosts
     }
@@ -104,7 +108,7 @@ class PostWebService {
                 when {
                     exception != null -> onListenFailed(tag, exception)
                     snapshot != null -> {
-                        readingPostList = mutableListOf(snapshot.post())
+                        readingPostList = mutableListOf(snapshot.post)
                         readingPosts.value = readingPostList
                     }
                     else -> onSnapshotNull(tag)
@@ -112,6 +116,11 @@ class PostWebService {
             }
         }
         return readingPosts
+    }
+
+    fun getFavorites(): LiveData<List<Post>> {
+        favorites.value = io.github.horaciocome1.reaque.ui.search.posts()
+        return favorites
     }
 
 }

@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 Horácio Flávio Comé Júnior
+ *    Copyright 2018 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -32,27 +32,19 @@ import kotlinx.android.synthetic.main.fragment_topics.*
 
 class TopicsFragment : Fragment() {
 
-    lateinit var topicsViewModel: TopicsViewModel
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_topics, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        topicsViewModel = getTopicsViewModel()
     }
 
     override fun onStart() {
         super.onStart()
         var list = listOf<Topic>()
-        topicsViewModel.getTopics().observe(this, Observer { topics ->
+        viewModel.topics.observe(this, Observer { topics ->
             when {
-                topics.isEmpty() -> fragment_topics_recyclerview.visibility = View.GONE
+                topics.isEmpty() -> fragment_topics_progressbar.visibility = View.VISIBLE
                 list.isEmpty() -> {
                     list = topics
                     configList(list)
-                    fragment_topics_recyclerview.visibility = View.VISIBLE
                     fragment_topics_progressbar.visibility = View.GONE
                 }
                 topics != list -> {
@@ -69,18 +61,18 @@ class TopicsFragment : Fragment() {
         })
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+            (activity as MainActivity).supportActionBar?.hide()
+    }
+
     private fun configList(list: List<Topic>) = fragment_topics_recyclerview.run {
         layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         adapter = TopicsAdapter(list)
         onFlingListener = null
         val snapHelper = PagerSnapHelper()
         snapHelper.attachToRecyclerView(this)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
-            (activity as MainActivity).supportActionBar?.hide()
     }
 
 }

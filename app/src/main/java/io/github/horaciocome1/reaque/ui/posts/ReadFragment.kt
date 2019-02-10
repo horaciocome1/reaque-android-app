@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 Horácio Flávio Comé Júnior
+ *    Copyright 2018 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -43,9 +43,10 @@ class ReadFragment: Fragment() {
         super.onStart()
         arguments?.let { args ->
             val postId = ReadFragmentArgs.fromBundle(args).postId
-            getPostsViewModel().getPosts(Post(postId)).observe(this, Observer { posts ->
+            viewModel.getPosts(Post(postId)).observe(this, Observer { posts ->
                 when {
                     posts.isEmpty() -> {
+                        fragment_read_progressbar.visibility = View.VISIBLE
                         fragment_read_content_scrollview.visibility = View.GONE
                         fragment_read_cover_imageview.visibility = View.GONE
                     }

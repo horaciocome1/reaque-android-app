@@ -17,14 +17,12 @@ package io.github.horaciocome1.reaque.ui.topics
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import io.github.horaciocome1.reaque.data.topics.TopicRepository
+import io.github.horaciocome1.reaque.data.topics.TopicsRepository
 
-class TopicsViewModelFactory(private val topicRepository: TopicRepository)
+class TopicsViewModelFactory(private val repository: TopicsRepository)
     : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return TopicsViewModel(topicRepository) as T
-    }
+    override fun <T : ViewModel?> create(modelClass: Class<T>) = TopicsViewModel(repository) as T
 
 }

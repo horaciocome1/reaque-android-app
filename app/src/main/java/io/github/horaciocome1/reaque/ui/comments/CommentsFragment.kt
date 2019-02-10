@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 Horácio Flávio Comé Júnior
+ *    Copyright 2018 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -39,20 +39,17 @@ class CommentsFragment : Fragment() {
         super.onStart()
         arguments?.let {
             val safeArgs = CommentsFragmentArgs.fromBundle(it)
-            val topic = Topic(safeArgs.topicId) // need to go
-            (activity as MainActivity).supportActionBar?.title = safeArgs.topicTitle
+            setActionBarTitle(safeArgs.topicTitle)
             var list = listOf<Comment>()
-            getCommentsViewModel().getComments(topic).observe(this, Observer { comments ->
+            viewModel.getComments(Topic(safeArgs.topicId)).observe(this, Observer { comments ->
                 when {
                     comments.isEmpty() -> {
-                        fragment_comments_recyclerview.visibility = View.GONE
                         fragment_comments_edittext.visibility = View.GONE
                         fragment_comments_send_button.visibility = View.GONE
                     }
                     list.isEmpty() -> {
                         list = comments
                         configList(list)
-                        fragment_comments_recyclerview.visibility = View.VISIBLE
                         fragment_comments_edittext.visibility = View.VISIBLE
                         fragment_comments_send_button.visibility = View.VISIBLE
                         fragment_comments_progressbar.visibility = View.GONE
@@ -81,6 +78,10 @@ class CommentsFragment : Fragment() {
         super.onResume()
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
             (activity as MainActivity).supportActionBar?.show()
+    }
+
+    private fun setActionBarTitle(title: String) {
+        (activity as MainActivity).supportActionBar?.title = title
     }
 
 }

@@ -13,25 +13,28 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.data.posts
+package io.github.horaciocome1.reaque.data.users
 
 import io.github.horaciocome1.reaque.data.topics.Topic
-import io.github.horaciocome1.reaque.data.users.User
 
-class PostRepository private constructor(private val postWebService: PostWebService) {
+class UsersRepository private constructor(private val usersWebService: UsersWebService) {
 
-    fun addPost(post: Post) = postWebService.addPost(post)
+    fun addUser(user: User) = usersWebService.addUser(user)
 
-    fun getPosts(topic: Topic) = postWebService.getPosts(topic)
+    fun getUsers(topic: Topic) = usersWebService.getUsers(topic)
 
-    fun getPosts(post: Post) = postWebService.getPosts(post)
+    fun getUsers(user: User) = usersWebService.getUsers(user)
 
-    fun getPosts(user: User) = postWebService.getPosts(user)
+    fun getUsers() = usersWebService.getUsers()
+
+    val favorites = usersWebService.getFavorites()
 
     companion object {
-        @Volatile private var instance: PostRepository? = null
-        fun getInstance(postWebService: PostWebService) = instance ?: synchronized(this) {
-            instance ?: PostRepository(postWebService).also { instance = it }
+        @Volatile
+        private var instance: UsersRepository? = null
+
+        fun getInstance(usersWebService: UsersWebService) = instance ?: synchronized(this) {
+            instance ?: UsersRepository(usersWebService).also { instance = it }
         }
     }
 

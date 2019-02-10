@@ -15,27 +15,46 @@
 
 package io.github.horaciocome1.reaque.ui.users
 
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
-import io.github.horaciocome1.reaque.data.users.UserRepository
+import io.github.horaciocome1.reaque.data.users.UsersRepository
+import io.github.horaciocome1.reaque.ui.more.MoreFragment
 import io.github.horaciocome1.reaque.utilities.InjectorUtils
 
-fun Fragment.getUsersViewModel(): UsersViewModel {
-    val factory = InjectorUtils.provideUsersViewModelFactory()
-    return ViewModelProviders.of(this, factory).get(UsersViewModel::class.java)
-}
+val UsersFragment.viewModel: UsersViewModel
+    get() {
+        val factory = InjectorUtils.usersViewModelFactory
+        return ViewModelProviders.of(this, factory).get(UsersViewModel::class.java)
+    }
 
-class UsersViewModel(private val userRepository: UserRepository) : ViewModel() {
+val ProfileFragment.viewModel: UsersViewModel
+    get() {
+        val factory = InjectorUtils.usersViewModelFactory
+        return ViewModelProviders.of(this, factory).get(UsersViewModel::class.java)
+    }
 
-    fun addUser(user: User) = userRepository.addUser(user)
+val MyProfileFragment.viewModel: UsersViewModel
+    get() {
+        val factory = InjectorUtils.usersViewModelFactory
+        return ViewModelProviders.of(this, factory).get(UsersViewModel::class.java)
+    }
 
-    fun getUsers(topic: Topic) = userRepository.getUsers(topic)
+val MoreFragment.viewModel: UsersViewModel
+    get() {
+        val factory = InjectorUtils.usersViewModelFactory
+        return ViewModelProviders.of(this, factory).get(UsersViewModel::class.java)
+    }
 
-    fun getUsers(user: User) = userRepository.getUsers(user)
+class UsersViewModel(private val usersRepository: UsersRepository) : ViewModel() {
 
-    fun getUsers() = userRepository.getUsers()
+    fun addUser(user: User) = usersRepository.addUser(user)
+
+    fun getUsers(topic: Topic) = usersRepository.getUsers(topic)
+
+    fun getUsers(user: User) = usersRepository.getUsers(user)
+
+    fun getUsers() = usersRepository.getUsers()
 
 }

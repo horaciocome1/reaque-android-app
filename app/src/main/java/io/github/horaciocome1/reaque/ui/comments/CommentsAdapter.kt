@@ -28,8 +28,8 @@ import io.github.horaciocome1.reaque.databinding.ItemCommentBinding
 
 class CommentsAdapter(private val list: List<Comment>) : RecyclerView.Adapter<CommentsAdapter.ViewHolder>() {
 
-    lateinit var context: Context
-    lateinit var binding: ItemCommentBinding
+    private lateinit var context: Context
+    private lateinit var binding: ItemCommentBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
