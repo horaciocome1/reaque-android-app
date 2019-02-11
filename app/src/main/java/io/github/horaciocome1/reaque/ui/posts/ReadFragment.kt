@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -28,6 +28,7 @@ import com.bumptech.glide.request.RequestOptions
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.databinding.FragmentReadBinding
 import io.github.horaciocome1.reaque.ui.MainActivity
+import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.fragment_read.*
 
 class ReadFragment: Fragment() {
@@ -60,6 +61,8 @@ class ReadFragment: Fragment() {
                             (activity as MainActivity).supportActionBar?.title = title
                             Glide.with(this@ReadFragment).run {
                                 load(cover).into(fragment_read_cover_imageview)
+                                load(cover).apply(RequestOptions.bitmapTransform(BlurTransformation(2, 14)))
+                                    .into(fragment_read_cover2_imageview)
                                 load(user.pic).apply(RequestOptions.circleCropTransform())
                                     .into(fragment_read_profile_pic_imageview)
                             }

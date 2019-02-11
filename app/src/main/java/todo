@@ -14,17 +14,7 @@ fazer com que seja possivel conversar e escrever posts
 
 
 
-FRAGMENT_POST
-design -> new displacements. {
-    writer pic goes on top right corner with small relevant details (writer name, rating and date)
-    all buttons go to menu
-}
-landscape design on large screens -> special displacements. {
-    blurred background
-    two cards side by side
-        1. white on right for text
-        2. other one for cover (bottom left with with small relevant details (writer name, rating and date))
-}
+
 
 MYPROFILEFRAGMENT && PROFILEFRAGMENT
 merge into one class -> {
