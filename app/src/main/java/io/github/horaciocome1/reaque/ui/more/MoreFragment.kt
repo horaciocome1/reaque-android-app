@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -88,12 +88,14 @@ class MoreFragment : Fragment() {
 
     private fun hideProfileButton() = View.GONE.run {
         fragment_more_profile_button.visibility = this
+        fragment_more_edit_button.visibility = this
         fragment_more_logout_button.visibility = this
         isProfileButtonVisible = false
     }
 
     private fun showProfileButton() = View.VISIBLE.run {
         fragment_more_profile_button.visibility = this
+        fragment_more_edit_button.visibility = this
         fragment_more_logout_button.visibility = this
         isProfileButtonVisible = true
     }
