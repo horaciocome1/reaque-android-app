@@ -89,6 +89,8 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
                 android:text="Perfil"
+                app:icon="@drawable/outline_account_circle_24"
+                app:iconSize="18dp"
                 app:cornerRadius="56dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -104,6 +106,8 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
                 android:text="Editar"
+                app:icon="@drawable/outline_edit_24"
+                app:iconSize="18dp"
                 app:cornerRadius="56dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -120,6 +124,8 @@
                 android:layout_marginRight="32dp"
                 android:layout_marginBottom="32dp"
                 android:text="Sair"
+                app:icon="@drawable/outline_exit_to_app_24"
+                app:iconSize="18dp"
                 app:cornerRadius="56dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -189,7 +195,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/outline_chat_24" />
+                app:srcCompat="@drawable/outline_chat_bubble_outline_24" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -243,7 +249,46 @@
 
         <View
             android:layout_width="match_parent"
+            android:layout_height="0.6dp"
+            android:background="@color/divider" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fragment_more_asked_questions_constraintlayout"
+            style="@style/AppTheme.CompleteClickableEffect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="45dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/outline_help_outline_24" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:text="Perguntas frequentes"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView10"
+                app:layout_constraintStart_toEndOf="@+id/imageView10"
+                app:layout_constraintTop_toTopOf="@+id/imageView10" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:layout_width="match_parent"
             android:layout_height="0.1dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
             android:background="@color/divider" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -263,7 +308,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/outline_chat_bubble_outline_24" />
+                app:srcCompat="@drawable/outline_feedback_24" />
 
             <TextView
                 android:layout_width="wrap_content"
