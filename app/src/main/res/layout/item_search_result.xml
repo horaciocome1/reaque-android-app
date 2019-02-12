@@ -16,7 +16,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.card.MaterialCardView
-        style="@style/AppTheme.CompleteClickableEffect"
         android:layout_width="96dp"
         android:layout_height="96dp"
         android:layout_marginStart="8dp"
@@ -29,6 +28,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
+            style="@style/AppTheme.CompleteClickableEffect"
             android:layout_height="match_parent">
 
             <ImageView
