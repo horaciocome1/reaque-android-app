@@ -104,7 +104,7 @@
             android:layout_marginLeft="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginRight="32dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="56dp"
             android:padding="8dp"
             android:text="Ao entrar, concorda com os Termos e Condições aplicáveis. E com a Política de Privacidade."
             android:textAlignment="center"
