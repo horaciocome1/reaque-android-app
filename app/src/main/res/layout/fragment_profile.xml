@@ -100,7 +100,7 @@
                         android:layout_marginEnd="32dp"
                         android:layout_marginRight="32dp"
                         android:fontFamily="@font/roboto_thin"
-                        android:orientation="vertical"
+                        android:textColor="@color/primaryTextColor"
                         android:text="@{user.name}"
                         android:textAlignment="center"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -122,10 +122,10 @@
 
                     <View
                         android:id="@+id/view"
-                        android:layout_width="0.1dp"
+                        android:layout_width="1dp"
                         android:layout_height="56dp"
                         android:layout_marginTop="32dp"
-                        android:background="@drawable/background_divider_vertical"
+                        android:background="@drawable/background_divider_vertical_gradient"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/fragment_profile_email_textview" />
@@ -140,7 +140,7 @@
                         android:layout_marginRight="32dp"
                         android:fontFamily="@font/roboto_medium"
                         android:text="@{user.totalFollowers}"
-                        android:textColor="@color/primary_text"
+                        android:textColor="@color/primaryTextColor"
                         android:textSize="16sp"
                         app:layout_constraintEnd_toStartOf="@+id/view"
                         app:layout_constraintStart_toStartOf="parent"
@@ -156,6 +156,7 @@
                         android:layout_marginEnd="32dp"
                         android:layout_marginRight="32dp"
                         android:text="Seguidores"
+                        android:textColor="@color/primaryTextColor"
                         android:textAllCaps="true"
                         android:textSize="12sp"
                         app:layout_constraintEnd_toStartOf="@+id/view"
@@ -172,6 +173,7 @@
                         android:layout_marginEnd="32dp"
                         android:layout_marginRight="32dp"
                         android:text="Publicações"
+                        android:textColor="@color/primaryTextColor"
                         android:textAllCaps="true"
                         android:textSize="12sp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -188,7 +190,7 @@
                         android:layout_marginRight="32dp"
                         android:fontFamily="@font/roboto_medium"
                         android:text="@{user.totalPosts}"
-                        android:textColor="@color/primary_text"
+                        android:textColor="@color/primaryTextColor"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="@+id/fragment_profile_followers_textview"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -204,7 +206,7 @@
                         app:layout_constraintBottom_toBottomOf="@+id/fragment_profile_town_textview"
                         app:layout_constraintEnd_toStartOf="@+id/fragment_profile_town_textview"
                         app:layout_constraintTop_toTopOf="@+id/fragment_profile_town_textview"
-                        app:srcCompat="@drawable/ic_location_on_black_24dp" />
+                        app:srcCompat="@drawable/outline_location_on_24" />
 
                     <TextView
                         android:id="@+id/fragment_profile_town_textview"
@@ -217,7 +219,7 @@
                         android:layout_marginRight="32dp"
                         android:fontFamily="@font/roboto_light"
                         android:text="@{user.town}"
-                        android:textColor="@color/secondary_text"
+                        android:textColor="@color/primaryTextColor"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/view" />
@@ -231,7 +233,7 @@
                         app:layout_constraintBottom_toBottomOf="@+id/fragment_profile_since_textview"
                         app:layout_constraintEnd_toStartOf="@+id/fragment_profile_since_textview"
                         app:layout_constraintTop_toTopOf="@+id/fragment_profile_since_textview"
-                        app:srcCompat="@drawable/ic_history_black_24dp" />
+                        app:srcCompat="@drawable/outline_access_time_24" />
 
                     <TextView
                         android:id="@+id/fragment_profile_since_textview"
@@ -245,7 +247,7 @@
                         android:layout_marginBottom="32dp"
                         android:fontFamily="@font/roboto_light"
                         android:text="@{user.since}"
-                        android:textColor="@color/secondary_text"
+                        android:textColor="@color/primaryTextColor"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/fragment_profile_town_textview" />
@@ -264,7 +266,7 @@
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/fragment_profile_more_button"
                             style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-                            android:layout_width="42dp"
+                            android:layout_width="32dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
                             app:icon="@drawable/outline_list_18_black" />
@@ -272,7 +274,7 @@
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/fragment_profile_message_button"
                             style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-                            android:layout_width="42dp"
+                            android:layout_width="32dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
                             app:icon="@drawable/outline_chat_bubble_outline_18" />
@@ -280,7 +282,7 @@
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/fragment_profile_action_button"
                             style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-                            android:layout_width="42dp"
+                            android:layout_width="32dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
                             app:icon="@drawable/outline_bookmark_border_black_18" />
