@@ -53,7 +53,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="64dp"
         app:cardCornerRadius="8dp"
-        app:cardBackgroundColor="@color/primaryDarkColor"
+        app:cardBackgroundColor="@color/primaryLightColor20percent"
         app:cardElevation="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -209,7 +209,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         app:cardCornerRadius="8dp"
-        app:cardBackgroundColor="@color/primaryDarkColor"
+        app:cardBackgroundColor="@color/primaryLightColor20percent"
         app:cardElevation="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
