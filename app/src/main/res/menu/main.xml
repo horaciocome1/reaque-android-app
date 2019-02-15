@@ -18,12 +18,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/main_menu_search"
-        android:title="Search"
-        android:icon="@drawable/outline_search_24"
-        app:showAsAction="always" />
-
-    <item
         android:id="@+id/main_menu_overflow"
         android:title="More"
         android:icon="@drawable/outline_more_vert_black_24"
