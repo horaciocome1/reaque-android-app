@@ -57,7 +57,7 @@
         app:itemIconTint="@drawable/colors_bottom_navigation"
         app:itemTextColor="@drawable/colors_bottom_navigation"
         app:labelVisibilityMode="labeled"
-        android:background="@color/primaryDarkColor"
+        android:background="@color/primaryColor"
         app:menu="@menu/navigation" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

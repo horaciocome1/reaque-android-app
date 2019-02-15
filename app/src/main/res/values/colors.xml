@@ -17,6 +17,7 @@
 
     <color name="primaryColor">#ef9a9a</color>
     <color name="primaryLightColor">#ffcccb</color>
+    <color name="primaryLightColor20percent">#20ffcccb</color>
     <color name="primaryDarkColor">#ba6b6c</color>
     <color name="secondaryColor">#eeff41</color>
     <color name="secondaryLightColor">#ffff78</color>

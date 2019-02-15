@@ -42,9 +42,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         myFragmentManager = supportFragmentManager
-        if (firstInit)
-            startActivityForResult(getSignInActivityIntent(), 101)
-        firstInit = false
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 //            window.statusBarColor = Color.TRANSPARENT
@@ -55,6 +52,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        if (firstInit) {
+            startActivityForResult(getSignInActivityIntent(), 101)
+            firstInit = false
+        }
         setupBottomNavigationMenu()
         setupSideNavigationMenu()
         setupActionBar()
@@ -74,8 +75,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 101 && resultCode != Activity.RESULT_OK)
+        if (requestCode == 101 && resultCode != Activity.RESULT_OK) {
+            firstInit = true
             finish()
+        }
     }
 
     private fun setupBottomNavigationMenu() = activity_main_bottomnavigationview?.let {

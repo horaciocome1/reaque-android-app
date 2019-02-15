@@ -21,13 +21,20 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import io.github.horaciocome1.reaque.R
+import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.activity_sign_in.*
 
 fun Context.getSignInActivityIntent() = Intent(this, SignInActivity::class.java)
 
 class SignInActivity : AppCompatActivity() {
+
+    private val backgroundUrl =
+        "http://assets.worldwildlife.org/photos/15262/images/story_full_width/Medium_WW146784.jpg?1520455432"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,13 +42,24 @@ class SignInActivity : AppCompatActivity() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-//            window.statusBarColor = Color.TRANSPARENT
-//        }
+
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
 
         activity_sign_in_button.setOnClickListener {
             setResult(Activity.RESULT_OK)
             finish()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Glide.with(this)
+            .load(backgroundUrl)
+            .apply(RequestOptions.bitmapTransform(BlurTransformation(3, 7)))
+            .into(activity_sign_in_imageview)
     }
 
 }
