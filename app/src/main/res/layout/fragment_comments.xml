@@ -17,7 +17,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_comments_gradient">
+    android:background="@drawable/background_fragment_comments_gradient">
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -68,7 +68,7 @@
             android:paddingLeft="24dp"
             android:paddingEnd="24dp"
             android:paddingRight="24dp"
-            android:textColorHint="@color/deep_blue_light"
+            android:textColorHint="@color/primaryLightColor"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/fragment_comments_send_button"
@@ -84,7 +84,7 @@
             android:layout_marginRight="8dp"
             android:background="@drawable/background_rounded_view_white"
             android:text="Enviar"
-            android:tint="@color/deep_blue"
+            android:tint="@color/primaryDarkColor"
             app:layout_constraintBottom_toBottomOf="@+id/fragment_comments_edittext"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/fragment_comments_edittext"

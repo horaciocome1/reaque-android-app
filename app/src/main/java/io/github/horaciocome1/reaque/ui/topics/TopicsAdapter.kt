@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -29,7 +29,6 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
-import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.databinding.ItemTopicBinding
 import jp.wasabeef.glide.transformations.BlurTransformation
@@ -55,9 +54,7 @@ class TopicsAdapter(private val list: List<Topic>) : RecyclerView.Adapter<Topics
                 .load(cover)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .apply(
-                    RequestOptions
-                        .bitmapTransform(BlurTransformation(7, 1))
-                        .placeholder(R.drawable.background_comments_gradient)
+                    RequestOptions.bitmapTransform(BlurTransformation(7, 1))
                 )
                 .listener(RequestListener(binding.itemTopicProgressbar))
                 .into(binding.itemTopicCoverImageview)

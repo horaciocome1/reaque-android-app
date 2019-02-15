@@ -32,15 +32,13 @@
             android:id="@+id/fragment_read_cover2_imageview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/profile2" />
+            android:scaleType="centerCrop" />
 
         <ImageView
             android:id="@+id/fragment_read_cover_imageview"
             android:layout_width="match_parent"
             android:layout_height="400dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/profile2" />
+            android:scaleType="centerCrop" />
 
         <ProgressBar
             android:id="@+id/fragment_read_progressbar"
@@ -94,7 +92,7 @@
                         android:text="@{post.user.name}"
                         android:textAlignment="viewEnd"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                        android:textColor="@color/text_on_primary" />
+                        android:textColor="@color/text_on_dark" />
 
                     <TextView
                         android:id="@+id/textView9"
@@ -107,7 +105,7 @@
                         android:text="@{post.date}"
                         android:textAlignment="viewEnd"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                        android:textColor="@color/text_on_primary" />
+                        android:textColor="@color/text_on_dark" />
 
                     <TextView
                         android:id="@+id/textView12"
@@ -120,7 +118,7 @@
                         android:text="@{Float.toString(post.rating)}"
                         android:textAlignment="viewEnd"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                        android:textColor="@color/text_on_primary" />
+                        android:textColor="@color/text_on_dark" />
 
                 </LinearLayout>
 
@@ -146,6 +144,7 @@
                         android:layout_marginEnd="32dp"
                         android:layout_marginRight="32dp"
                         android:text="@{post.title}"
+                        android:lineSpacingExtra="16sp"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -157,7 +156,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="32dp"
                         android:layout_marginLeft="32dp"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="32dp"
                         android:layout_marginEnd="32dp"
                         android:layout_marginRight="32dp"
                         android:layout_marginBottom="96dp"

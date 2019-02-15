@@ -70,7 +70,7 @@
                     android:lines="4"
                     android:text="@{user.description}"
                     android:textAlignment="center"
-                    android:textColor="@color/text_on_primary"
+                    android:textColor="@color/text_on_dark"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -131,7 +131,7 @@
                             android:layout_width="0.1dp"
                             android:layout_height="56dp"
                             android:layout_marginTop="32dp"
-                            android:background="@drawable/background_divider_vertical"
+                            android:background="@drawable/background_divider_vertical_gradient"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/fragment_profile_email_textview" />

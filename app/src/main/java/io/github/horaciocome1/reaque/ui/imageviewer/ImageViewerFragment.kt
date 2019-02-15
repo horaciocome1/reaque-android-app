@@ -42,8 +42,11 @@ class ViewerFragment: Fragment() {
 
     override fun onResume() {
         super.onResume()
-        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
-            (activity as MainActivity).supportActionBar?.show()
+        (activity as MainActivity).supportActionBar?.run {
+            if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+                show()
+            title = ""
+        }
     }
 
 }

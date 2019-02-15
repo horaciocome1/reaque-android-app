@@ -15,8 +15,10 @@
 
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <corners android:topLeftRadius="56dp" />
+    <corners
+        android:topLeftRadius="8dp"
+        android:topRightRadius="8dp" />
 
-    <solid android:color="@color/deep_blue" />
+    <solid android:color="#99ba6b6c" />
 
 </shape>

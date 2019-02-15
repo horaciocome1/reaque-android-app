@@ -17,7 +17,6 @@ package io.github.horaciocome1.reaque.ui
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.Menu
@@ -43,15 +42,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         myFragmentManager = supportFragmentManager
-        if (firstInit)
-            startActivityForResult(getSignInActivityIntent(), 101)
-        firstInit = false
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-            window.statusBarColor = Color.TRANSPARENT
-        }
+//            window.statusBarColor = Color.TRANSPARENT
+//        }
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
         setSupportActionBar(activity_main_toolbar)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (firstInit) {
+            startActivityForResult(getSignInActivityIntent(), 101)
+            firstInit = false
+        }
         setupBottomNavigationMenu()
         setupSideNavigationMenu()
         setupActionBar()
@@ -71,8 +75,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 101 && resultCode != Activity.RESULT_OK)
+        if (requestCode == 101 && resultCode != Activity.RESULT_OK) {
+            firstInit = true
             finish()
+        }
     }
 
     private fun setupBottomNavigationMenu() = activity_main_bottomnavigationview?.let {
