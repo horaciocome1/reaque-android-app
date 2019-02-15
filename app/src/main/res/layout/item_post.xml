@@ -37,6 +37,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
         app:cardCornerRadius="8dp"
+        app:cardBackgroundColor="@color/primaryDarkColor"
         app:cardElevation="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -74,7 +75,7 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/background_item_topic_gradient"
+                        android:src="@drawable/background_item_post_gradient"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -88,7 +89,7 @@
                         android:text="@{Float.toString(post.rating)}"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                        android:textColor="@color/text_on_primary"
+                        android:textColor="@color/text_on_dark"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />

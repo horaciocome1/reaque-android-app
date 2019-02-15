@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~    Copyright 2019 Horácio Flávio Comé Júnior
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,11 +16,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
     <gradient
-        android:startColor="#0401579b"
-        android:centerColor="#2401579b"
         android:angle="90"
-        android:centerY="0.1"/>
-
-    <corners android:radius="2dp" />
+        android:startColor="@color/primaryDarkColor" />
 
 </shape>

@@ -31,8 +31,7 @@
             android:id="@+id/fragment_read_cover2_imageview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/profile2" />
+            android:scaleType="centerCrop" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -58,7 +57,6 @@
                         android:layout_height="0dp"
                         android:layout_gravity="center_horizontal"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/profile2"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -97,7 +95,7 @@
                             android:text="@{post.user.name}"
                             android:textAlignment="viewEnd"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                            android:textColor="@color/text_on_primary" />
+                            android:textColor="@color/text_on_dark" />
 
                         <TextView
                             android:id="@+id/textView9"
@@ -110,7 +108,7 @@
                             android:text="@{post.date}"
                             android:textAlignment="viewEnd"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                            android:textColor="@color/text_on_primary" />
+                            android:textColor="@color/text_on_dark" />
 
                         <TextView
                             android:id="@+id/textView12"
@@ -123,7 +121,7 @@
                             android:text="@{Float.toString(post.rating)}"
                             android:textAlignment="viewEnd"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                            android:textColor="@color/text_on_primary" />
+                            android:textColor="@color/text_on_dark" />
 
                     </LinearLayout>
 
@@ -137,6 +135,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="16dp"
                 android:layout_weight="1.0"
+                app:cardBackgroundColor="@color/primaryColor"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="0dp">
 
@@ -159,6 +158,7 @@
                             android:layout_marginEnd="32dp"
                             android:layout_marginRight="32dp"
                             android:text="@{post.title}"
+                            android:lineSpacingExtra="16sp"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -170,7 +170,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="32dp"
                             android:layout_marginLeft="32dp"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginTop="32dp"
                             android:layout_marginEnd="32dp"
                             android:layout_marginRight="32dp"
                             android:layout_marginBottom="32dp"

@@ -14,14 +14,17 @@
   -->
 
 <resources>
-    <color name="deep_blue">#01579b</color>
-    <color name="deep_blue_light">#4f83cc</color>
-    <color name="deep_blue_dark">#002f6c</color>
-    <color name="colorSecondary">#c51162</color>
-    <color name="secondaryLightColor">#fd558f</color>
-    <color name="secondaryDarkColor">#8e0038</color>
-    <color name="text_on_primary">#ffffff</color>
-    <color name="text_on_secondary">#ffffff</color>
+
+    <color name="primaryColor">#ef9a9a</color>
+    <color name="primaryLightColor">#ffcccb</color>
+    <color name="primaryDarkColor">#ba6b6c</color>
+    <color name="secondaryColor">#eeff41</color>
+    <color name="secondaryLightColor">#ffff78</color>
+    <color name="secondaryDarkColor">#b8cc00</color>
+    <color name="primaryTextColor">#000000</color>
+    <color name="secondaryTextColor">#000000</color>
+
+    <color name="text_on_dark">#ffffff</color>
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#757575</color>
 
@@ -30,8 +33,17 @@
 
     <color name="colorError">#b00020</color>
 
-    <color name="colorPrimary">#fafafa</color>
-    <color name="primaryLightColor">#ffffff</color>
-    <color name="primaryDarkColor">#c7c7c7</color>
+
+    <!--<color name="colorPrimary">#01579b</color>-->
+    <!--<color name="primaryLightColor">#4f83cc</color>-->
+    <!--<color name="primaryDarkColor">#002f6c</color>-->
+    <!--<color name="colorSecondary">#c51162</color>-->
+    <!--<color name="secondaryLightColor">#fd558f</color>-->
+    <!--<color name="secondaryDarkColor">#8e0038</color>-->
+    <!--<color name="text_on_secondary">#ffffff</color>-->
+
+    <!--<color name="colorPrimary">#fafafa</color>-->
+    <!--<color name="primaryLightColor">#ffffff</color>-->
+    <!--<color name="primaryDarkColor">#c7c7c7</color>-->
 
 </resources>
