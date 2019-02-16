@@ -15,15 +15,23 @@
 
 <resources>
 
-    <color name="primaryColor">#ef9a9a</color>
-    <color name="primaryLightColor">#ffcccb</color>
-    <color name="primaryLightColor20percent">#20ffcccb</color>
-    <color name="primaryDarkColor">#ba6b6c</color>
-    <color name="secondaryColor">#eeff41</color>
-    <color name="secondaryLightColor">#ffff78</color>
-    <color name="secondaryDarkColor">#b8cc00</color>
+    <color name="primaryColor">#fafafa</color>
+    <color name="primaryLightColor">#ffffff</color>
+    <color name="primaryDarkColor">#c7c7c7</color>
+    <color name="secondaryColor">#69f0ae</color>
+    <color name="secondaryLightColor">#9fffe0</color>
+    <color name="secondaryDarkColor">#2bbd7e</color>
     <color name="primaryTextColor">#000000</color>
     <color name="secondaryTextColor">#000000</color>
+
+    <!--<color name="primaryColor">#ef9a9a</color>-->
+    <!--<color name="primaryLightColor">#ffcccb</color>-->
+    <!--<color name="primaryDarkColor">#ba6b6c</color>-->
+    <!--<color name="secondaryColor">#eeff41</color>-->
+    <!--<color name="secondaryLightColor">#ffff78</color>-->
+    <!--<color name="secondaryDarkColor">#b8cc00</color>-->
+    <!--<color name="primaryTextColor">#000000</color>-->
+    <!--<color name="secondaryTextColor">#000000</color>-->
 
     <color name="text_on_dark">#ffffff</color>
     <color name="primary_text">#212121</color>

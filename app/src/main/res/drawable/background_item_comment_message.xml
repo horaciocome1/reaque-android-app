@@ -15,7 +15,7 @@
 
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <solid android:color="@color/primaryLightColor20percent" />
+    <solid android:color="@color/primaryLightColor" />
 
     <corners
         android:bottomLeftRadius="24dp"

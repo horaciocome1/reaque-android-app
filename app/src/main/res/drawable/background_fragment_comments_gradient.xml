@@ -17,6 +17,6 @@
 
     <gradient
         android:angle="135"
-        android:startColor="@color/primaryLightColor20percent" />
+        android:startColor="@color/primaryLightColor" />
 
 </shape>

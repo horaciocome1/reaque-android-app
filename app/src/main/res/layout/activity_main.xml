@@ -43,11 +43,11 @@
         android:layout_marginBottom="?attr/actionBarSize"
         app:navGraph="@navigation/mobile_navigation" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:background="@drawable/background_bottom_navigation_shadow"
-        app:layout_anchor="@id/activity_main_bottomnavigationview" />
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="4dp"-->
+    <!--android:background="@drawable/background_bottom_navigation_shadow"-->
+    <!--app:layout_anchor="@id/activity_main_bottomnavigationview" />-->
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/activity_main_bottomnavigationview"
@@ -57,7 +57,7 @@
         app:itemIconTint="@drawable/colors_bottom_navigation"
         app:itemTextColor="@drawable/colors_bottom_navigation"
         app:labelVisibilityMode="labeled"
-        android:background="@color/primaryColor"
+        android:background="@color/primaryLightColor"
         app:menu="@menu/navigation" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

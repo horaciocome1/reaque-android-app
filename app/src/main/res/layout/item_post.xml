@@ -37,7 +37,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
         app:cardCornerRadius="8dp"
-        app:cardBackgroundColor="@color/primaryLightColor20percent"
+        app:cardBackgroundColor="@color/primaryLightColor"
         app:cardElevation="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
