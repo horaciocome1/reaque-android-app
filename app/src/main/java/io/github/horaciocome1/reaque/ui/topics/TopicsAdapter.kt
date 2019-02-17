@@ -29,16 +29,16 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.target.Target
 import io.github.horaciocome1.reaque.data.topics.Topic
-import io.github.horaciocome1.reaque.databinding.ItemTopic2Binding
+import io.github.horaciocome1.reaque.databinding.ItemTopicBinding
 
 class TopicsAdapter(private val list: List<Topic>) : RecyclerView.Adapter<TopicsAdapter.ViewHolder>() {
 
-    lateinit var binding: ItemTopic2Binding
+    lateinit var binding: ItemTopicBinding
     lateinit var context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
-        binding = ItemTopic2Binding.inflate(LayoutInflater.from(context), parent, false)
+        binding = ItemTopicBinding.inflate(LayoutInflater.from(context), parent, false)
         return ViewHolder(binding.root)
     }
 

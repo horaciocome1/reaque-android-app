@@ -13,7 +13,8 @@
   ~    See the License for the specific language governing permissions and limitations under the License.
   -->
 
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -23,113 +24,97 @@
 
     </data>
 
-    <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="8dp"
-        app:cardCornerRadius="8dp"
-        app:cardBackgroundColor="@color/primaryColor"
-        app:cardElevation="0dp">
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/item_topic_cover_imageview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:tint="#50ef9a9a"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp">
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/background_item_topic_gradient"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                <ImageView
+                    android:id="@+id/item_topic_imageview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="250dp"
+                    android:scaleType="centerCrop" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/item_topic_comments_button"
-                style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-                android:layout_width="32dp"
-                android:layout_height="42dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="8dp"
-                app:icon="@drawable/outline_forum_24"
-                app:iconTint="@color/secondaryColor"
-                app:layout_constraintBottom_toTopOf="@id/item_topic_title_textview"
-                app:layout_constraintEnd_toEndOf="@+id/item_topic_cover_imageview"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/item_topic_writers_button"
-                style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-                android:layout_width="32dp"
-                android:layout_height="42dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                app:icon="@drawable/outline_people_outline_24"
-                app:iconTint="@color/secondaryColor"
-                app:layout_constraintBottom_toBottomOf="@+id/item_topic_comments_button"
-                app:layout_constraintEnd_toStartOf="@+id/item_topic_comments_button"
-                app:layout_constraintTop_toTopOf="@+id/item_topic_comments_button" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/item_topic_more_button"
-                style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                app:icon="@drawable/outline_list_18_black"
-                app:iconTint="@color/secondaryColor"
-                app:layout_constraintBottom_toBottomOf="@+id/item_topic_comments_button"
-                app:layout_constraintStart_toEndOf="@+id/item_topic_comments_button"
-                app:layout_constraintTop_toTopOf="@+id/item_topic_comments_button" />
+            </com.google.android.material.card.MaterialCardView>
 
             <TextView
                 android:id="@+id/item_topic_title_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@{topic.title}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
+                android:textColor="@color/primaryTextColor" />
+
+            <TextView
+                android:id="@+id/item_topic_description_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:lineSpacingExtra="8dp"
+                android:text="Eu nao sei se pode ser cinsiderado importante, mas uma descricao me parece fundamental para nocao acerca da questao."
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textColor="@color/primaryTextColor" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/item_topic_comments_button"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginLeft="32dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginRight="32dp"
-                android:layout_marginBottom="16dp"
-                android:text="@{topic.title}"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-                android:textColor="@color/primaryTextColor"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                android:layout_marginTop="32dp"
+                android:text="Comentarios"
+                app:icon="@drawable/outline_forum_24" />
 
-            <ProgressBar
-                android:id="@+id/item_topic_progressbar"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/imageView"
-                app:layout_constraintEnd_toEndOf="@+id/item_topic_cover_imageview"
-                app:layout_constraintStart_toStartOf="parent" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/item_topic_more_button"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:text="Publicacoes"
+                app:icon="@drawable/outline_list_18_black" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/item_topic_writers_button"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginBottom="32dp"
+                android:text="Autores"
+                app:icon="@drawable/outline_people_outline_24" />
 
-    </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+
+    </ScrollView>
 
 </layout>
