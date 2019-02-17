@@ -27,20 +27,18 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import io.github.horaciocome1.reaque.data.topics.Topic
-import io.github.horaciocome1.reaque.databinding.ItemTopicBinding
-import jp.wasabeef.glide.transformations.BlurTransformation
+import io.github.horaciocome1.reaque.databinding.ItemTopic2Binding
 
 class TopicsAdapter(private val list: List<Topic>) : RecyclerView.Adapter<TopicsAdapter.ViewHolder>() {
 
-    lateinit var binding: ItemTopicBinding
+    lateinit var binding: ItemTopic2Binding
     lateinit var context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
-        binding = ItemTopicBinding.inflate(LayoutInflater.from(context), parent, false)
+        binding = ItemTopic2Binding.inflate(LayoutInflater.from(context), parent, false)
         return ViewHolder(binding.root)
     }
 
@@ -53,11 +51,7 @@ class TopicsAdapter(private val list: List<Topic>) : RecyclerView.Adapter<Topics
             Glide.with(context)
                 .load(cover)
                 .transition(DrawableTransitionOptions.withCrossFade())
-                .apply(
-                    RequestOptions.bitmapTransform(BlurTransformation(7, 1))
-                )
-                .listener(RequestListener(binding.itemTopicProgressbar))
-                .into(binding.itemTopicCoverImageview)
+                .into(binding.itemTopicImageview)
 
             binding.itemTopicMoreButton.setOnClickListener {
                 val openTopicAction = TopicsFragmentDirections.actionOpenPosts(id, title)

@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
 
 package io.github.horaciocome1.reaque.ui.topics
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import io.github.horaciocome1.reaque.data.topics.Topic
@@ -32,7 +31,6 @@ class TopicsViewModel(private val topicsRepository: TopicsRepository) : ViewMode
 
     fun addTopic(topic: Topic) = topicsRepository.addTopic(topic)
 
-    val topics: LiveData<List<Topic>>
-        get() = topicsRepository.topics
+    val topics = topicsRepository.topics
 
 }
