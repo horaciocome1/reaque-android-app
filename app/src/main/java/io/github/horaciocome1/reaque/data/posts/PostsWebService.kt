@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -41,8 +41,11 @@ class PostsWebService {
     * only has one element that is the post the user is reading at the moment
     * i used a list to be easy to check if the post exists or not later
     * */
-    private var readingPostList = mutableListOf(Post(""))
-    private val readingPosts = MutableLiveData<List<Post>>()
+//    private var readingPostList = mutableListOf(Post(""))
+//    private val readingPosts = MutableLiveData<List<Post>>()
+    private val post = MutableLiveData<Post>().apply {
+        value = Post("")
+    }
 
     /*list of all posts from the same user*/
     private var favoritePostsList = mutableListOf<Post>()
@@ -101,21 +104,19 @@ class PostsWebService {
     }
 
     /*retrieve from remote server the post that the user wants to read*/
-    fun getPosts(post: Post): LiveData<List<Post>> {
-        if (!post.id.equals(readingPostList[0].id, true)) {
-            readingPosts.value = mutableListOf()
+    fun getPosts(post: Post): LiveData<Post> {
+        if (!post.id.equals(this.post.value?.id, true)) {
+//            readingPosts.value = mutableListOf()
+            this.post.value = Post("")
             reference.document(post.id).addSnapshotListener { snapshot, exception ->
                 when {
                     exception != null -> onListenFailed(tag, exception)
-                    snapshot != null -> {
-                        readingPostList = mutableListOf(snapshot.post)
-                        readingPosts.value = readingPostList
-                    }
+                    snapshot != null -> this.post.value = snapshot.post
                     else -> onSnapshotNull(tag)
                 }
             }
         }
-        return readingPosts
+        return this.post
     }
 
     fun getFavorites(): LiveData<List<Post>> {
