@@ -41,16 +41,15 @@
             android:orientation="vertical">
 
             <com.google.android.material.card.MaterialCardView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="0dp">
 
                 <ImageView
                     android:id="@+id/item_topic_imageview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="250dp"
-                    android:scaleType="centerCrop" />
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
             </com.google.android.material.card.MaterialCardView>
 
