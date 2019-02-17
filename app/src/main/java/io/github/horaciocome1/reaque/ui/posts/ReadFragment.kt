@@ -28,17 +28,17 @@ import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.posts.Post
-import io.github.horaciocome1.reaque.databinding.FragmentRead2Binding
+import io.github.horaciocome1.reaque.databinding.FragmentReadBinding
 import io.github.horaciocome1.reaque.ui.MainActivity
 import jp.wasabeef.glide.transformations.BlurTransformation
-import kotlinx.android.synthetic.main.fragment_read_2.*
+import kotlinx.android.synthetic.main.fragment_read.*
 
 class ReadFragment: Fragment() {
 
-    lateinit var binding: FragmentRead2Binding
+    lateinit var binding: FragmentReadBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentRead2Binding.inflate(inflater, container, false)
+        binding = FragmentReadBinding.inflate(inflater, container, false)
         return binding.root
     }
 

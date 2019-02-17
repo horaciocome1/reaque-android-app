@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~    Copyright 2019 Horácio Flávio Comé Júnior
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,7 @@
   ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~    See the License for the specific language governing permissions and limitations under the License.
   -->
+
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -37,142 +37,139 @@
         <ImageView
             android:id="@+id/fragment_read_cover_imageview"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:scaleType="centerCrop" />
-
-        <ProgressBar
-            android:id="@+id/fragment_read_progressbar"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center|top"
-            android:layout_marginTop="32dp" />
+            android:layout_gravity="center"
+            android:layout_marginBottom="112dp" />
 
-
-        <ScrollView
-            android:id="@+id/fragment_read_content_scrollview"
+        <LinearLayout
+            android:id="@+id/fragment_read_bottom_sheet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="vertical"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:background="@drawable/background_bottom_sheet"
+            android:orientation="vertical"
+            app:behavior_hideable="false"
+            app:behavior_peekHeight="112dp"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/fragment_read_profile_pic_imageview"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/linearLayout2" />
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
 
                 <LinearLayout
-                    android:id="@+id/linearLayout2"
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_margin="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textView7"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:background="@drawable/background_fragment_read_details"
-                        android:padding="8dp"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginEnd="32dp"
+                        android:layout_marginRight="32dp"
+                        android:lineSpacingExtra="8dp"
+                        android:text="@{post.title}"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+                        android:textColor="@color/primaryTextColor" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="32dp"
+                        android:layout_marginRight="32dp"
+                        android:lineSpacingExtra="16sp"
+                        android:text="@{post.message}"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                        android:textColor="@color/primaryTextColor" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginEnd="32dp"
+                        android:layout_marginRight="32dp"
                         android:text="@{post.user.name}"
-                        android:textAlignment="viewEnd"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                        android:textColor="@color/text_on_dark" />
+                        android:fontFamily="@font/roboto_light"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                        android:textColor="@color/primaryTextColor" />
 
                     <TextView
-                        android:id="@+id/textView9"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="end"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginLeft="32dp"
                         android:layout_marginTop="8dp"
-                        android:background="@drawable/background_fragment_read_details"
-                        android:padding="8dp"
+                        android:layout_marginEnd="32dp"
+                        android:layout_marginRight="32dp"
                         android:text="@{post.date}"
-                        android:textAlignment="viewEnd"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                        android:textColor="@color/text_on_dark" />
+                        android:fontFamily="@font/roboto_light"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                        android:textColor="@color/primaryTextColor" />
 
                     <TextView
-                        android:id="@+id/textView12"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="end"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginLeft="32dp"
                         android:layout_marginTop="8dp"
-                        android:background="@drawable/background_fragment_read_details"
-                        android:padding="8dp"
+                        android:layout_marginEnd="32dp"
+                        android:layout_marginRight="32dp"
                         android:text="@{Float.toString(post.rating)}"
-                        android:textAlignment="viewEnd"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                        android:textColor="@color/text_on_dark" />
+                        android:fontFamily="@font/roboto_light"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                        android:textColor="@color/primaryTextColor" />
+
+                    <Button
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginEnd="32dp"
+                        android:layout_marginRight="32dp"
+                        android:text="Adicionar aos favoritos" />
+
+                    <Button
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginEnd="32dp"
+                        android:layout_marginRight="32dp"
+                        android:layout_width="wrap_content"
+                        android:text="Comentar" />
+
+                    <Button
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginEnd="32dp"
+                        android:layout_marginRight="32dp"
+                        android:layout_width="wrap_content"
+                        android:layout_marginBottom="32dp"
+                        android:text="Avaliar" />
 
                 </LinearLayout>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraintLayout2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="328dp"
-                    android:background="@drawable/background_bottom_sheet"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0">
+            </androidx.core.widget.NestedScrollView>
 
-                    <TextView
-                        android:id="@+id/textView8"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginLeft="32dp"
-                        android:layout_marginTop="32dp"
-                        android:layout_marginEnd="32dp"
-                        android:layout_marginRight="32dp"
-                        android:text="@{post.title}"
-                        android:lineSpacingExtra="16sp"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/textView6"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginLeft="32dp"
-                        android:layout_marginTop="32dp"
-                        android:layout_marginEnd="32dp"
-                        android:layout_marginRight="32dp"
-                        android:layout_marginBottom="96dp"
-                        android:lineSpacingExtra="16sp"
-                        android:text="@{post.message}"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView8" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </ScrollView>
+        <ImageView
+            android:id="@+id/fragment_read_profile_pic_imageview"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_margin="32dp"
+            android:scaleType="centerCrop" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

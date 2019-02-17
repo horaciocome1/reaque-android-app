@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.databinding.ItemUserBinding
-import jp.wasabeef.glide.transformations.BlurTransformation
 
 class UsersAdapter(private val context: Context,
                    private val list: List<User>)
@@ -45,8 +44,6 @@ class UsersAdapter(private val context: Context,
             Glide.with(context).load(pic).run {
                 apply(RequestOptions.circleCropTransform())
                     .into(binding.itemUserProfilePicImageview)
-                apply(RequestOptions.bitmapTransform(BlurTransformation(14, 7)))
-                    .into(binding.itemUserCoverImageview)
             }
         }
     }
