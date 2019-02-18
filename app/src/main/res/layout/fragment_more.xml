@@ -148,7 +148,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            app:cardBackgroundColor="#50ba68c8"
+            app:cardBackgroundColor="#10ba68c8"
             app:cardCornerRadius="8dp"
             app:cardElevation="0dp">
 
@@ -176,10 +176,10 @@
                     android:fontFamily="@font/roboto_medium"
                     android:paddingStart="32dp"
                     android:paddingLeft="32dp"
-                    android:paddingTop="8dp"
+                    android:paddingTop="16dp"
                     android:paddingEnd="32dp"
                     android:paddingRight="32dp"
-                    android:paddingBottom="8dp"
+                    android:paddingBottom="16dp"
                     android:text="Publicar"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
 
@@ -192,10 +192,10 @@
                     android:fontFamily="@font/roboto_medium"
                     android:paddingStart="32dp"
                     android:paddingLeft="32dp"
-                    android:paddingTop="8dp"
+                    android:paddingTop="16dp"
                     android:paddingEnd="32dp"
                     android:paddingRight="32dp"
-                    android:paddingBottom="8dp"
+                    android:paddingBottom="16dp"
                     android:text="Conversas"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
 
@@ -207,7 +207,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            app:cardBackgroundColor="#50ef5350"
+            app:cardBackgroundColor="#10ef5350"
             app:cardCornerRadius="8dp"
             app:cardElevation="0dp">
 
@@ -236,10 +236,10 @@
                     android:fontFamily="@font/roboto_medium"
                     android:paddingStart="32dp"
                     android:paddingLeft="32dp"
-                    android:paddingTop="8dp"
+                    android:paddingTop="16dp"
                     android:paddingEnd="32dp"
                     android:paddingRight="32dp"
-                    android:paddingBottom="8dp"
+                    android:paddingBottom="16dp"
                     android:text="Configurações"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
 
@@ -251,7 +251,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            app:cardBackgroundColor="#5026a69a"
+            app:cardBackgroundColor="#1026a69a"
             app:cardCornerRadius="8dp"
             app:cardElevation="0dp">
 
@@ -279,10 +279,10 @@
                     android:fontFamily="@font/roboto_medium"
                     android:paddingStart="32dp"
                     android:paddingLeft="32dp"
-                    android:paddingTop="8dp"
+                    android:paddingTop="16dp"
                     android:paddingEnd="32dp"
                     android:paddingRight="32dp"
-                    android:paddingBottom="8dp"
+                    android:paddingBottom="16dp"
                     android:text="Perguntas frequentes"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
 
@@ -294,10 +294,10 @@
                     android:fontFamily="@font/roboto_medium"
                     android:paddingStart="32dp"
                     android:paddingLeft="32dp"
-                    android:paddingTop="8dp"
+                    android:paddingTop="16dp"
                     android:paddingEnd="32dp"
                     android:paddingRight="32dp"
-                    android:paddingBottom="8dp"
+                    android:paddingBottom="16dp"
                     android:text="Feedback"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
 
@@ -310,249 +310,16 @@
                     android:fontFamily="@font/roboto_medium"
                     android:paddingStart="32dp"
                     android:paddingLeft="32dp"
-                    android:paddingTop="8dp"
+                    android:paddingTop="16dp"
                     android:paddingEnd="32dp"
                     android:paddingRight="32dp"
-                    android:paddingBottom="8dp"
+                    android:paddingBottom="16dp"
                     android:text="Sobre"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
 
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
-
-        <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0.6dp"-->
-        <!--android:background="@color/divider" />-->
-
-        <!--<androidx.constraintlayout.widget.ConstraintLayout-->
-        <!--android:id="@+id/fragment_more_write_constraintlayout"-->
-        <!--style="@style/AppTheme.CompleteClickableEffect"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content">-->
-
-        <!--<ImageView-->
-        <!--android:id="@+id/imageView8"-->
-        <!--android:layout_width="45dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="32dp"-->
-        <!--android:layout_marginLeft="32dp"-->
-        <!--android:layout_marginTop="16dp"-->
-        <!--android:layout_marginBottom="16dp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:srcCompat="@drawable/outline_add_circle_outline_24" />-->
-
-        <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="32dp"-->
-        <!--android:layout_marginLeft="32dp"-->
-        <!--android:text="Publicar"-->
-        <!--android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"-->
-        <!--app:layout_constraintBottom_toBottomOf="@+id/imageView8"-->
-        <!--app:layout_constraintStart_toEndOf="@+id/imageView8"-->
-        <!--app:layout_constraintTop_toTopOf="@+id/imageView8" />-->
-
-        <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
-
-        <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0.1dp"-->
-        <!--android:layout_marginStart="32dp"-->
-        <!--android:layout_marginLeft="32dp"-->
-        <!--android:background="@color/divider" />-->
-
-        <!--<androidx.constraintlayout.widget.ConstraintLayout-->
-        <!--android:id="@+id/fragment_more_messages_constraintlayout"-->
-        <!--style="@style/AppTheme.CompleteClickableEffect"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content">-->
-
-        <!--<ImageView-->
-        <!--android:id="@+id/imageView9"-->
-        <!--android:layout_width="45dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="32dp"-->
-        <!--android:layout_marginLeft="32dp"-->
-        <!--android:layout_marginTop="16dp"-->
-        <!--android:layout_marginBottom="16dp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:srcCompat="@drawable/outline_chat_bubble_outline_24" />-->
-
-        <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="32dp"-->
-        <!--android:layout_marginLeft="32dp"-->
-        <!--android:text="Conversas"-->
-        <!--android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"-->
-        <!--app:layout_constraintBottom_toBottomOf="@+id/imageView9"-->
-        <!--app:layout_constraintStart_toEndOf="@+id/imageView9"-->
-        <!--app:layout_constraintTop_toTopOf="@+id/imageView9" />-->
-
-        <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
-
-        <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0.6dp"-->
-        <!--android:background="@color/divider" />-->
-
-        <!--<androidx.constraintlayout.widget.ConstraintLayout-->
-        <!--android:id="@+id/fragment_more_settings_constraintlayout"-->
-        <!--style="@style/AppTheme.CompleteClickableEffect"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content">-->
-
-        <!--<ImageView-->
-        <!--android:id="@+id/imageView5"-->
-        <!--android:layout_width="45dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="32dp"-->
-        <!--android:layout_marginLeft="32dp"-->
-        <!--android:layout_marginTop="16dp"-->
-        <!--android:layout_marginBottom="16dp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:srcCompat="@drawable/outline_settings_24_black" />-->
-
-        <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="32dp"-->
-        <!--android:layout_marginLeft="32dp"-->
-        <!--android:text="Avançadas"-->
-        <!--android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"-->
-        <!--app:layout_constraintBottom_toBottomOf="@+id/imageView5"-->
-        <!--app:layout_constraintStart_toEndOf="@+id/imageView5"-->
-        <!--app:layout_constraintTop_toTopOf="@+id/imageView5" />-->
-
-        <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
-
-        <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0.6dp"-->
-        <!--android:background="@color/divider" />-->
-
-        <!--<androidx.constraintlayout.widget.ConstraintLayout-->
-        <!--android:id="@+id/fragment_more_asked_questions_constraintlayout"-->
-        <!--style="@style/AppTheme.CompleteClickableEffect"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content">-->
-
-        <!--<ImageView-->
-        <!--android:id="@+id/imageView10"-->
-        <!--android:layout_width="45dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="32dp"-->
-        <!--android:layout_marginLeft="32dp"-->
-        <!--android:layout_marginTop="16dp"-->
-        <!--android:layout_marginBottom="16dp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:srcCompat="@drawable/outline_help_outline_24" />-->
-
-        <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="32dp"-->
-        <!--android:layout_marginLeft="32dp"-->
-        <!--android:text="Perguntas frequentes"-->
-        <!--android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"-->
-        <!--app:layout_constraintBottom_toBottomOf="@+id/imageView10"-->
-        <!--app:layout_constraintStart_toEndOf="@+id/imageView10"-->
-        <!--app:layout_constraintTop_toTopOf="@+id/imageView10" />-->
-
-        <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
-
-        <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0.1dp"-->
-        <!--android:layout_marginStart="32dp"-->
-        <!--android:layout_marginLeft="32dp"-->
-        <!--android:background="@color/divider" />-->
-
-        <!--<androidx.constraintlayout.widget.ConstraintLayout-->
-        <!--android:id="@+id/fragment_more_feedback_constraintlayout"-->
-        <!--style="@style/AppTheme.CompleteClickableEffect"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content">-->
-
-        <!--<ImageView-->
-        <!--android:id="@+id/imageView6"-->
-        <!--android:layout_width="45dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="32dp"-->
-        <!--android:layout_marginLeft="32dp"-->
-        <!--android:layout_marginTop="16dp"-->
-        <!--android:layout_marginBottom="16dp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:srcCompat="@drawable/outline_feedback_24" />-->
-
-        <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="32dp"-->
-        <!--android:layout_marginLeft="32dp"-->
-        <!--android:text="Feedback"-->
-        <!--android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"-->
-        <!--app:layout_constraintBottom_toBottomOf="@+id/imageView6"-->
-        <!--app:layout_constraintStart_toEndOf="@+id/imageView6"-->
-        <!--app:layout_constraintTop_toTopOf="@+id/imageView6" />-->
-
-        <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
-
-        <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0.1dp"-->
-        <!--android:layout_marginStart="32dp"-->
-        <!--android:layout_marginLeft="32dp"-->
-        <!--android:background="@color/divider" />-->
-
-        <!--<androidx.constraintlayout.widget.ConstraintLayout-->
-        <!--android:id="@+id/fragment_more_about_constraintlayout"-->
-        <!--style="@style/AppTheme.CompleteClickableEffect"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content">-->
-
-        <!--<ImageView-->
-        <!--android:id="@+id/imageView7"-->
-        <!--android:layout_width="45dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="32dp"-->
-        <!--android:layout_marginLeft="32dp"-->
-        <!--android:layout_marginTop="16dp"-->
-        <!--android:layout_marginBottom="16dp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:srcCompat="@drawable/outline_info_24_black" />-->
-
-        <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="32dp"-->
-        <!--android:layout_marginLeft="32dp"-->
-        <!--android:text="Sobre"-->
-        <!--android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"-->
-        <!--app:layout_constraintBottom_toBottomOf="@+id/imageView7"-->
-        <!--app:layout_constraintStart_toEndOf="@+id/imageView7"-->
-        <!--app:layout_constraintTop_toTopOf="@+id/imageView7" />-->
-
-        <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
-
-        <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0.6dp"-->
-        <!--android:background="@color/divider" />-->
 
     </LinearLayout>
 
