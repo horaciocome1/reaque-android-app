@@ -88,7 +88,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginLeft="32dp"
                 android:layout_marginTop="32dp"
-                android:text="Comentarios"
+                android:text="Comentários"
                 app:icon="@drawable/outline_forum_24" />
 
             <com.google.android.material.button.MaterialButton
@@ -98,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginLeft="32dp"
-                android:text="Publicacoes"
+                android:text="Publicações"
                 app:icon="@drawable/outline_list_18_black" />
 
             <com.google.android.material.button.MaterialButton
