@@ -152,7 +152,7 @@
                         android:layout_marginEnd="32dp"
                         android:layout_marginRight="32dp"
                         android:layout_width="wrap_content"
-                        android:text="Comentar" />
+                        android:text="Comentários" />
 
                     <Button
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
