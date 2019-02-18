@@ -26,7 +26,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.ui.MainActivity
-import io.github.horaciocome1.reaque.ui.search.PostsAdapter
 import kotlinx.android.synthetic.main.fragment_favorites.*
 
 class FavoritesFragment : Fragment() {
