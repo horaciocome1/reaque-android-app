@@ -36,13 +36,6 @@ class PostsWebService {
     private var userPostsList = mutableListOf<Post>()
     private val userPosts = MutableLiveData<List<Post>>()
 
-    /*
-    * not a list at all
-    * only has one element that is the post the user is reading at the moment
-    * i used a list to be easy to check if the post exists or not later
-    * */
-//    private var readingPostList = mutableListOf(Post(""))
-//    private val readingPosts = MutableLiveData<List<Post>>()
     private val post = MutableLiveData<Post>().apply {
         value = Post("")
     }
