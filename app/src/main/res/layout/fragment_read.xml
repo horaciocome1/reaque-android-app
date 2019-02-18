@@ -52,6 +52,7 @@
             android:id="@+id/fragment_read_bottom_sheet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="54.5dp"
             android:background="@drawable/background_bottom_sheet"
             android:orientation="vertical"
             app:behavior_hideable="false"
