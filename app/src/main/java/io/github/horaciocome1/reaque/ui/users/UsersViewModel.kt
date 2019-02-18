@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -55,6 +55,6 @@ class UsersViewModel(private val usersRepository: UsersRepository) : ViewModel()
 
     fun getUsers(user: User) = usersRepository.getUsers(user)
 
-    fun getUsers() = usersRepository.getUsers()
+    val me = usersRepository.me
 
 }

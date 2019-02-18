@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
 
 package io.github.horaciocome1.reaque.data.users
 
+import androidx.lifecycle.LiveData
 import io.github.horaciocome1.reaque.data.topics.Topic
 
 class UsersRepository private constructor(private val usersWebService: UsersWebService) {
@@ -25,7 +26,7 @@ class UsersRepository private constructor(private val usersWebService: UsersWebS
 
     fun getUsers(user: User) = usersWebService.getUsers(user)
 
-    fun getUsers() = usersWebService.getUsers()
+    val me = usersWebService.me as LiveData<User>
 
     val favorites = usersWebService.getFavorites()
 

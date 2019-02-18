@@ -32,20 +32,13 @@ class UsersWebService {
     private var topicUsersList = mutableListOf<User>()
     private val topicUsers = MutableLiveData<List<User>>()
 
-    /*
-    * not a list at all
-    * only used the firt position filled by the writer that the user is currently viewing its menu_profile
-    */
-    private var viewingUsersList = mutableListOf(User(""))
-    private val viewingUsers = MutableLiveData<List<User>>()
+    private val user = MutableLiveData<User>().apply {
+        value = User("")
+    }
 
-    /*
-    * not a list at all
-    * only used the firt position filled by the data of app user
-    */
-    private var usersList = mutableListOf<User>()
-    private val users = MutableLiveData<List<User>>()
-
+    val me = MutableLiveData<User>().apply {
+        value = User("")
+    }
 
     private val favorites = MutableLiveData<List<User>>()
 
@@ -53,9 +46,19 @@ class UsersWebService {
 
     private val reference = FirebaseFirestore.getInstance().collection("users")
 
+    init {
+        reference.document(myId).addSnapshotListener { snapshot, exception ->
+            when {
+                exception != null -> onListenFailed(tag, exception)
+                snapshot != null -> me.value = snapshot.user
+                else -> onSnapshotNull(tag)
+            }
+        }
+    }
+
     fun addUser(user: User) {
-        usersList.add(user)
-        users.value = usersList
+//        usersList.add(user)
+//        users.value = usersList
     }
 
     fun getUsers(topic: Topic): LiveData<List<User>> {
@@ -78,38 +81,20 @@ class UsersWebService {
         return topicUsers
     }
 
-    fun getUsers(user: User): LiveData<List<User>> {
-        if (!user.id.equals(viewingUsersList[0].id, true)) {
-            viewingUsers.value = mutableListOf()
+    fun getUsers(user: User): LiveData<User> {
+        if (!user.id.equals(this.user.value?.id, true)) {
+            this.user.value = User("")
             reference.document(user.id).addSnapshotListener { snapshot, exception ->
                 when {
                     exception != null -> onListenFailed(tag, exception)
-                    snapshot != null -> {
-                        viewingUsersList = mutableListOf(snapshot.user)
-                        viewingUsers.value = viewingUsersList
-                    }
+                    snapshot != null -> this.user.value = snapshot.user
                     else -> onSnapshotNull(tag)
                 }
             }
         }
-        return viewingUsers
+        return this.user
     }
 
-    fun getUsers(): LiveData<List<User>> {
-        if (usersList.isEmpty()) {
-            reference.document(myId).addSnapshotListener { snapshot, exception ->
-                when {
-                    exception != null -> onListenFailed(tag, exception)
-                    snapshot != null -> {
-                        usersList = mutableListOf(snapshot.user)
-                        users.value = usersList
-                    }
-                    else -> onSnapshotNull(tag)
-                }
-            }
-        }
-        return users
-    }
 
     fun getFavorites(): LiveData<List<User>> {
         favorites.value = io.github.horaciocome1.reaque.ui.search.users()

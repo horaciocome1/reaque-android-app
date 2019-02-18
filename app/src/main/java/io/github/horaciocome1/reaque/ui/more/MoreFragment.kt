@@ -69,8 +69,8 @@ class MoreFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         hideProfileButton()
-        viewModel.getUsers().observe(this, Observer {
-            it[0].run {
+        viewModel.me.observe(this, Observer {
+            it.run {
                 Glide.with(this@MoreFragment)
                     .load(pic)
                     .apply(RequestOptions.circleCropTransform())

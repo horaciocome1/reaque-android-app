@@ -41,9 +41,9 @@ class MyProfileFragment: Fragment() {
 
     override fun onStart() {
         super.onStart()
-        viewModel.getUsers().observe(this, Observer { users ->
+        viewModel.me.observe(this, Observer { user ->
             when {
-                users.isEmpty() -> {
+                user.id == "" -> {
                     fragment_profile_cover_imageview.visibility = View.GONE
                     fragment_profile_scrollview.visibility = View.GONE
                     fragment_profile_profile_pic_imageview.visibility = View.GONE
@@ -54,7 +54,7 @@ class MyProfileFragment: Fragment() {
                     fragment_profile_scrollview.visibility = View.VISIBLE
                     fragment_profile_progressbar.visibility = View.GONE
 
-                    users[0].run {
+                    user.run {
                         binding.user = this
                         Glide.with(this@MyProfileFragment).load(pic).run {
                             apply(RequestOptions.bitmapTransform(BlurTransformation(7, 14)))

@@ -44,9 +44,9 @@ class ProfileFragment: Fragment() {
         super.onStart()
         arguments?.let { args ->
             val userId = ProfileFragmentArgs.fromBundle(args).userId
-            viewModel.getUsers(User(userId)).observe(this, Observer { users ->
+            viewModel.getUsers(User(userId)).observe(this, Observer { user ->
                 when {
-                    users.isEmpty() -> {
+                    user.id == "" -> {
                         fragment_profile_cover_imageview.visibility = View.GONE
                         fragment_profile_scrollview.visibility = View.GONE
                     }
@@ -55,7 +55,7 @@ class ProfileFragment: Fragment() {
                         fragment_profile_scrollview.visibility = View.VISIBLE
                         fragment_profile_progressbar.visibility = View.GONE
 
-                        users[0].run {
+                        user.run {
                             binding.user = this
                             Glide.with(this@ProfileFragment).load(pic).run {
                                 apply(RequestOptions.bitmapTransform(BlurTransformation(7, 14)))
