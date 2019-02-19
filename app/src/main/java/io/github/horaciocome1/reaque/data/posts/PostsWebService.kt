@@ -99,7 +99,6 @@ class PostsWebService {
     /*retrieve from remote server the post that the user wants to read*/
     fun getPosts(post: Post): LiveData<Post> {
         if (!post.id.equals(this.post.value?.id, true)) {
-//            readingPosts.value = mutableListOf()
             this.post.value = Post("")
             reference.document(post.id).addSnapshotListener { snapshot, exception ->
                 when {
