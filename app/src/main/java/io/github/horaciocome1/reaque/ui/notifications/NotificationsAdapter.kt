@@ -15,10 +15,13 @@
 
 package io.github.horaciocome1.reaque.ui.notifications
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.notifications.Notification
 import io.github.horaciocome1.reaque.databinding.ItemNotificationBinding
 
@@ -26,16 +29,23 @@ class NotificationsAdapter(private val list: List<Notification>) :
     RecyclerView.Adapter<NotificationsAdapter.ViewHolder>() {
 
     private lateinit var binding: ItemNotificationBinding
+    private lateinit var context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        binding = ItemNotificationBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        context = parent.context
+        binding = ItemNotificationBinding.inflate(LayoutInflater.from(context), parent, false)
         return ViewHolder(binding.root)
     }
 
     override fun getItemCount() = list.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        binding.notification = list[position]
+        list[position].run {
+            Glide.with(context)
+                .load(R.drawable.profile3)
+                .into(binding.itemNotificationImageview)
+            binding.notification = this
+        }
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
