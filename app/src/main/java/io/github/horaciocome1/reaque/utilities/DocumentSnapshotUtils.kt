@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -79,5 +79,9 @@ val DocumentSnapshot.notification: Notification
         return Notification(id).apply {
             message = this@notification["message"].toString()
             date = this@notification["date"].toString()
+            cover = this@notification["cover"].toString()
+            topicId = this@notification["topic_id"].toString()
+            postId = this@notification["post_id"].toString()
+            userId = this@notification["user_id"].toString()
         }
     }

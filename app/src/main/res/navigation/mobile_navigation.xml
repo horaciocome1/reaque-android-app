@@ -23,12 +23,6 @@
         android:name="io.github.horaciocome1.reaque.ui.topics.TopicsFragment"
         android:label="Tópicos">
         <action
-            android:id="@+id/action_open_profile"
-            app:destination="@id/destination_profile" />
-        <action
-            android:id="@+id/action_read"
-            app:destination="@id/destination_read" />
-        <action
             android:id="@+id/action_open_posts"
             app:destination="@id/destination_posts" />
         <action
@@ -160,5 +154,15 @@
     <fragment
         android:id="@+id/destination_notifications"
         android:name="io.github.horaciocome1.reaque.ui.notifications.NotificationsFragment"
-        android:label="Notificações" />
+        android:label="Notificações">
+        <action
+            android:id="@+id/action_open_comments2"
+            app:destination="@id/destination_comments" />
+        <action
+            android:id="@+id/action_read2"
+            app:destination="@id/destination_read" />
+        <action
+            android:id="@+id/action_open_profile3"
+            app:destination="@id/destination_profile" />
+    </fragment>
 </navigation>

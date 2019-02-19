@@ -21,7 +21,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.notifications.Notification
 import io.github.horaciocome1.reaque.databinding.ItemNotificationBinding
 
@@ -42,9 +41,21 @@ class NotificationsAdapter(private val list: List<Notification>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         list[position].run {
             Glide.with(context)
-                .load(R.drawable.profile3)
+                .load(cover)
                 .into(binding.itemNotificationImageview)
             binding.notification = this
+
+            when {
+                topicId != "" -> {
+
+                }
+                postId != "" -> {
+
+                }
+                userId != "" -> {
+
+                }
+            }
         }
     }
 

@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -17,6 +17,8 @@ package io.github.horaciocome1.reaque.data.notifications
 
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
+import io.github.horaciocome1.reaque.utilities.notification
+import io.github.horaciocome1.reaque.utilities.onListenFailed
 
 class NotificationsWebService {
 
@@ -27,18 +29,18 @@ class NotificationsWebService {
     val notifications = MutableLiveData<List<Notification>>()
 
     init {
-//        ref.addSnapshotListener { snapshot, exception ->
-//            when {
-//                exception != null -> onListenFailed(tag, exception)
-//                snapshot != null -> {
-//                    val notificationsList = mutableListOf<Notification>()
-//                    for (doc in snapshot)
-//                        notificationsList.add(doc.notification)
-//                    notifications.value = notificationsList
-//                }
-//            }
-//        }
-        notifications.value = notificationsFake
+        ref.addSnapshotListener { snapshot, exception ->
+            when {
+                exception != null -> onListenFailed(tag, exception)
+                snapshot != null -> {
+                    val notificationsList = mutableListOf<Notification>()
+                    for (doc in snapshot)
+                        notificationsList.add(doc.notification)
+                    notifications.value = notificationsList
+                }
+            }
+        }
+//        notifications.value = notificationsFake
     }
 
 }
