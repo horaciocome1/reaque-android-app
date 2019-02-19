@@ -147,9 +147,13 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            app:cardBackgroundColor="#10ba68c8"
-            app:cardCornerRadius="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            app:cardBackgroundColor="@color/primaryLightColor"
+            app:cardCornerRadius="16dp"
             app:cardElevation="0dp">
 
             <LinearLayout
@@ -181,7 +185,7 @@
                     android:paddingRight="32dp"
                     android:paddingBottom="16dp"
                     android:text="Publicar"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                 <TextView
                     android:id="@+id/fragment_more_messages_constraintlayout"
@@ -197,7 +201,7 @@
                     android:paddingRight="32dp"
                     android:paddingBottom="16dp"
                     android:text="Conversas"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
             </LinearLayout>
 
@@ -206,9 +210,13 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            app:cardBackgroundColor="#10ef5350"
-            app:cardCornerRadius="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            app:cardBackgroundColor="@color/primaryLightColor"
+            app:cardCornerRadius="16dp"
             app:cardElevation="0dp">
 
             <LinearLayout
@@ -241,7 +249,7 @@
                     android:paddingRight="32dp"
                     android:paddingBottom="16dp"
                     android:text="Configurações"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
             </LinearLayout>
 
@@ -251,8 +259,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            app:cardBackgroundColor="#1026a69a"
-            app:cardCornerRadius="8dp"
+            app:cardBackgroundColor="@color/primaryLightColor"
+            app:cardCornerRadius="16dp"
             app:cardElevation="0dp">
 
             <LinearLayout
@@ -284,7 +292,7 @@
                     android:paddingRight="32dp"
                     android:paddingBottom="16dp"
                     android:text="Perguntas frequentes"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                 <TextView
                     android:id="@+id/fragment_more_feedback_constraintlayout"
@@ -299,7 +307,7 @@
                     android:paddingRight="32dp"
                     android:paddingBottom="16dp"
                     android:text="Feedback"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                 <TextView
                     android:id="@+id/fragment_more_about_constraintlayout"
@@ -315,7 +323,7 @@
                     android:paddingRight="32dp"
                     android:paddingBottom="16dp"
                     android:text="Sobre"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
             </LinearLayout>
 
