@@ -84,15 +84,9 @@
                 android:paddingEnd="32dp"
                 android:paddingRight="32dp"
                 android:paddingBottom="16dp"
+                android:layout_marginTop="16dp"
                 android:text="Termos e condições"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.1dp"
-                android:layout_marginStart="48dp"
-                android:layout_marginLeft="48dp"
-                android:background="@color/divider" />
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
             <TextView
                 android:id="@+id/fragment_settings_privacy_policy"
@@ -106,14 +100,7 @@
                 android:paddingRight="32dp"
                 android:paddingBottom="16dp"
                 android:text="Política de privacidade"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.1dp"
-                android:layout_marginStart="48dp"
-                android:layout_marginLeft="48dp"
-                android:background="@color/divider" />
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
             <TextView
                 android:id="@+id/fragment_settings_licenses"
@@ -127,35 +114,7 @@
                 android:paddingRight="32dp"
                 android:paddingBottom="16dp"
                 android:text="Licenças open source"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.1dp"
-                android:layout_marginStart="48dp"
-                android:layout_marginLeft="48dp"
-                android:background="@color/divider" />
-
-            <TextView
-                android:id="@+id/fragment_settings_documentation"
-                style="@style/AppTheme.CompleteClickableEffect"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="56dp"
-                android:paddingLeft="56dp"
-                android:paddingTop="16dp"
-                android:paddingEnd="32dp"
-                android:paddingRight="32dp"
-                android:paddingBottom="16dp"
-                android:text="Leia a documentação"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.1dp"
-                android:layout_marginStart="48dp"
-                android:layout_marginLeft="48dp"
-                android:background="@color/divider" />
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
             <TextView
                 android:id="@+id/fragment_settings_project_page"
@@ -169,14 +128,7 @@
                 android:paddingRight="32dp"
                 android:paddingBottom="16dp"
                 android:text="Repositório"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.1dp"
-                android:layout_marginStart="48dp"
-                android:layout_marginLeft="48dp"
-                android:background="@color/divider" />
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
             <TextView
                 android:id="@+id/fragment_settings_donate"
@@ -189,15 +141,9 @@
                 android:paddingEnd="32dp"
                 android:paddingRight="32dp"
                 android:paddingBottom="16dp"
+                android:layout_marginBottom="16dp"
                 android:text="Apoie ao desenvolvedor"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.1dp"
-                android:layout_marginStart="48dp"
-                android:layout_marginLeft="48dp"
-                android:background="@color/divider" />
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
         </LinearLayout>
 
@@ -209,7 +155,7 @@
             android:fontFamily="@font/roboto_thin"
             android:text="@string/app_name"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline2"
-            android:textColor="@color/primaryTextColor"
+            android:textColor="@color/secondaryColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
