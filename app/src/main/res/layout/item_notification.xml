@@ -65,7 +65,8 @@
                 android:layout_marginRight="32dp"
                 android:layout_marginBottom="32dp"
                 android:text="@{notification.message}"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                android:lineSpacingExtra="8dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView4" />
