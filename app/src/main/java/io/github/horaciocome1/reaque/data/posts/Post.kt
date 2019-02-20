@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -20,11 +20,9 @@ import io.github.horaciocome1.reaque.data.users.User
 data class Post(var id: String) {
 
     var title = ""
-    var rating = 0f
     var date = ""
     var user = User("")
     var cover = ""
     var message = ""
-    var topic = ""
 
 }

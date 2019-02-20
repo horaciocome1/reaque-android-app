@@ -51,9 +51,7 @@ val DocumentSnapshot.post: Post
             cover = this@post["cover"].toString()
             date = this@post["date"].toString()
             message = this@post["message"].toString()
-            rating = this@post["rating"].toString().toFloat()
             title = this@post["title"].toString()
-            topic = this@post["topics"].toString()
             user = User(this@post["writerId"].toString()).apply {
                 name = this@post["writer_name"].toString()
                 pic = this@post["writer_pic"].toString()

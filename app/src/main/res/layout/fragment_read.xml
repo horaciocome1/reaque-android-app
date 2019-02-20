@@ -105,7 +105,7 @@
                         android:layout_marginRight="32dp"
                         android:text="@{post.user.name}"
                         android:fontFamily="@font/roboto_light"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                         android:textColor="@color/primaryTextColor" />
 
                     <TextView
@@ -117,19 +117,7 @@
                         android:layout_marginEnd="32dp"
                         android:layout_marginRight="32dp"
                         android:text="@{post.date}"
-                        android:fontFamily="@font/roboto_light"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-                        android:textColor="@color/primaryTextColor" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginLeft="32dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="32dp"
-                        android:layout_marginRight="32dp"
-                        android:text="@{Float.toString(post.rating)}"
+                        android:textAllCaps="true"
                         android:fontFamily="@font/roboto_light"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                         android:textColor="@color/primaryTextColor" />
@@ -152,19 +140,9 @@
                         android:layout_marginLeft="32dp"
                         android:layout_marginEnd="32dp"
                         android:layout_marginRight="32dp"
+                        android:layout_marginBottom="32dp"
                         android:layout_width="wrap_content"
                         android:text="Comentários" />
-
-                    <Button
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginLeft="32dp"
-                        android:layout_marginEnd="32dp"
-                        android:layout_marginRight="32dp"
-                        android:layout_width="wrap_content"
-                        android:layout_marginBottom="32dp"
-                        android:text="Avaliar" />
 
                 </LinearLayout>
 
