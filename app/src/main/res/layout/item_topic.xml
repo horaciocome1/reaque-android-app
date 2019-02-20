@@ -76,7 +76,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
                 android:lineSpacingExtra="8dp"
-                android:text="Eu nao sei se pode ser cinsiderado importante, mas uma descricao me parece fundamental para nocao acerca da questao."
+                android:text="@{topic.description}"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 android:textColor="@color/primaryTextColor" />
 
@@ -85,9 +85,9 @@
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
                 android:text="Comentários"
                 app:icon="@drawable/outline_forum_24" />
 
@@ -96,8 +96,8 @@
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginLeft="32dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
                 android:text="Publicações"
                 app:icon="@drawable/outline_list_18_black" />
 
@@ -106,9 +106,9 @@
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginLeft="32dp"
-                android:layout_marginBottom="32dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginBottom="16dp"
                 android:text="Autores"
                 app:icon="@drawable/outline_people_outline_24" />
 

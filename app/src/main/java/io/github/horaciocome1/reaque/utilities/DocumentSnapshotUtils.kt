@@ -41,6 +41,7 @@ val DocumentSnapshot.topic: Topic
         return Topic(id).apply {
             title = this@topic["title"].toString()
             cover = this@topic["cover"].toString()
+            description = this@topic["description"].toString()
         }
     }
 
