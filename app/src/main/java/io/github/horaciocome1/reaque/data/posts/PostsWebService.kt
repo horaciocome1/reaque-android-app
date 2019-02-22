@@ -27,6 +27,7 @@ import io.github.horaciocome1.reaque.utilities.post
 class PostsWebService {
 
     private val tag = "PostsWebService"
+    private val myId = "FRWsZTrrI0PTp1Fqftdb"
 
     /*list of all posts from the same topics*/
     private var topicPostsList = mutableListOf<Post>()
@@ -41,10 +42,12 @@ class PostsWebService {
     }
 
     /*list of all posts from the same user*/
-    private var favoritePostsList = mutableListOf<Post>()
+    private var favoritesList = mutableListOf<Post>()
     private val favorites = MutableLiveData<List<Post>>()
 
-    private val reference = FirebaseFirestore.getInstance().collection("posts")
+    private val db = FirebaseFirestore.getInstance()
+    private val ref = db.collection("posts")
+    private val favoritesRef = db.collection("favorites")
 
     private var topicId = ""
     private var userId = ""
@@ -58,7 +61,7 @@ class PostsWebService {
     fun getPosts(topic: Topic): LiveData<List<Post>> {
         if (!topicId.equals(topic.id, true)) {
             topicPosts.value = mutableListOf()
-            reference.whereEqualTo(topic.id, true).addSnapshotListener { snapshot, exception ->
+            ref.whereEqualTo(topic.id, true).addSnapshotListener { snapshot, exception ->
                 when {
                     exception != null -> onListenFailed(tag, exception)
                     snapshot != null -> {
@@ -79,7 +82,7 @@ class PostsWebService {
     fun getPosts(user: User): LiveData<List<Post>> {
         if (userId.equals(user.id, true)) {
             userPosts.value = mutableListOf()
-            reference.whereEqualTo("writerId", user.id).addSnapshotListener { snapshot, exception ->
+            ref.whereEqualTo("writerId", user.id).addSnapshotListener { snapshot, exception ->
                 when {
                     exception != null -> onListenFailed(tag, exception)
                     snapshot != null -> {
@@ -100,7 +103,7 @@ class PostsWebService {
     fun getPosts(post: Post): LiveData<Post> {
         if (!post.id.equals(this.post.value?.id, true)) {
             this.post.value = Post("")
-            reference.document(post.id).addSnapshotListener { snapshot, exception ->
+            ref.document(post.id).addSnapshotListener { snapshot, exception ->
                 when {
                     exception != null -> onListenFailed(tag, exception)
                     snapshot != null -> this.post.value = snapshot.post
@@ -112,7 +115,20 @@ class PostsWebService {
     }
 
     fun getFavorites(): LiveData<List<Post>> {
-        favorites.value = io.github.horaciocome1.reaque.ui.search.posts()
+        if (favoritesList.isEmpty())
+            favoritesRef.whereEqualTo("post", true)
+                .whereEqualTo(myId, true)
+                .addSnapshotListener { snapshot, exception ->
+                    when {
+                        exception != null -> onListenFailed(tag, exception)
+                        snapshot != null -> {
+                            for (doc in snapshot)
+                                favoritesList.add(doc.post)
+                            favorites.value = favoritesList
+                        }
+                        else -> onSnapshotNull(tag)
+                    }
+                }
         return favorites
     }
 
