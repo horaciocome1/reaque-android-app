@@ -40,14 +40,17 @@ class UsersWebService {
         value = User("")
     }
 
+    private var favoritesList = mutableListOf<User>()
     private val favorites = MutableLiveData<List<User>>()
 
     private var topicId = ""
 
-    private val reference = FirebaseFirestore.getInstance().collection("users")
+    private val db = FirebaseFirestore.getInstance()
+    private val ref = db.collection("users")
+    private val favoritesRef = db.collection("favorites")
 
     init {
-        reference.document(myId).addSnapshotListener { snapshot, exception ->
+        ref.document(myId).addSnapshotListener { snapshot, exception ->
             when {
                 exception != null -> onListenFailed(tag, exception)
                 snapshot != null -> me.value = snapshot.user
@@ -64,7 +67,7 @@ class UsersWebService {
     fun getUsers(topic: Topic): LiveData<List<User>> {
         if (!topicId.equals(topic.id, true)) {
             topicUsers.value = mutableListOf()
-            reference.whereEqualTo(topic.id, true).addSnapshotListener { snapshot, exception ->
+            ref.whereEqualTo(topic.id, true).addSnapshotListener { snapshot, exception ->
                 when {
                     exception != null -> onListenFailed(tag, exception)
                     snapshot != null -> {
@@ -84,7 +87,7 @@ class UsersWebService {
     fun getUsers(user: User): LiveData<User> {
         if (!user.id.equals(this.user.value?.id, true)) {
             this.user.value = User("")
-            reference.document(user.id).addSnapshotListener { snapshot, exception ->
+            ref.document(user.id).addSnapshotListener { snapshot, exception ->
                 when {
                     exception != null -> onListenFailed(tag, exception)
                     snapshot != null -> this.user.value = snapshot.user
@@ -97,7 +100,20 @@ class UsersWebService {
 
 
     fun getFavorites(): LiveData<List<User>> {
-        favorites.value = io.github.horaciocome1.reaque.ui.search.users()
+        if (favoritesList.isEmpty())
+            favoritesRef.whereEqualTo("user", true)
+                .whereEqualTo(myId, true)
+                .addSnapshotListener { snapshot, exception ->
+                    when {
+                        exception != null -> onListenFailed(tag, exception)
+                        snapshot != null -> {
+                            for (doc in snapshot.documents)
+                                favoritesList.add(doc.user)
+                            favorites.value = favoritesList
+                        }
+                        else -> onSnapshotNull(tag)
+                    }
+                }
         return favorites
     }
 
