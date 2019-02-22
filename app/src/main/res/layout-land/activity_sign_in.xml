@@ -95,7 +95,7 @@
         android:text="Ao entrar, concorda com os Termos e Condições aplicáveis. E com a Política de Privacidade."
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-        android:textColor="@color/primaryTextColor"
+        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/textView10"
         app:layout_constraintStart_toStartOf="parent" />
