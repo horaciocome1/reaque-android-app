@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -15,14 +15,10 @@
 
 package io.github.horaciocome1.reaque.ui.favorites
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
-import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.posts.PostsRepository
-import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.topics.TopicsRepository
-import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.data.users.UsersRepository
 import io.github.horaciocome1.reaque.utilities.InjectorUtils
 
@@ -33,18 +29,15 @@ val FavoritesFragment.viewModel: FavoritesViewModel
     }
 
 class FavoritesViewModel(
-    private val topicsRepository: TopicsRepository,
-    private val postsRepository: PostsRepository,
-    private val usersRepository: UsersRepository
+    topicsRepository: TopicsRepository,
+    postsRepository: PostsRepository,
+    usersRepository: UsersRepository
 ) : ViewModel() {
 
-    val topics: LiveData<List<Topic>>
-        get() = topicsRepository.favorites
+    val topics = topicsRepository.favorites
 
-    val posts: LiveData<List<Post>>
-        get() = postsRepository.favorites
+    val posts = postsRepository.favorites
 
-    val users: LiveData<List<User>>
-        get() = usersRepository.favorites
+    val users = usersRepository.favorites
 
 }

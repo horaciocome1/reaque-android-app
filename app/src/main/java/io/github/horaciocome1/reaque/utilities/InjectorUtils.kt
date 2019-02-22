@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -53,11 +53,7 @@ object InjectorUtils {
             val topicsRepository = TopicsRepository.getInstance(Database.getInstance().topicsWebService)
             val postsRepository = PostsRepository.getInstance(Database.getInstance().postsWebService)
             val usersRepository = UsersRepository.getInstance(Database.getInstance().usersWebService)
-            return FavoritesViewModelFactory(
-                topicsRepository,
-                postsRepository,
-                usersRepository
-            )
+            return FavoritesViewModelFactory(topicsRepository, postsRepository, usersRepository)
         }
 
     val commentsViewModelFactory: CommentsViewModelFactory

@@ -27,12 +27,12 @@
         style="@style/AppTheme.CompleteClickableEffect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp">
+        android:layout_margin="8dp">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardview"
             android:layout_width="wrap_content"
-            android:layout_height="80dp"
+            android:layout_height="150dp"
             app:cardCornerRadius="16dp"
             app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -42,7 +42,7 @@
             <ImageView
                 android:id="@+id/item_topic_favorite_imageview"
                 android:layout_width="wrap_content"
-                android:layout_height="80dp" />
+                android:layout_height="match_parent" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -59,7 +59,7 @@
             android:maxLines="2"
             android:text="@{topic.title}"
             android:textAllCaps="true"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
             android:textColor="@color/primaryTextColor"
             app:layout_constraintEnd_toEndOf="@id/cardview"
             app:layout_constraintStart_toStartOf="@id/cardview"

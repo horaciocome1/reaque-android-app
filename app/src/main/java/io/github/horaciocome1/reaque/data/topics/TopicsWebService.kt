@@ -25,6 +25,7 @@ import io.github.horaciocome1.reaque.utilities.topic
 class TopicsWebService {
 
     private val tag = "TopicsWebService"
+    private val myId = "FRWsZTrrI0PTp1Fqftdb"
 
     private var topicsList = mutableListOf<Topic>()
     val topics = MutableLiveData<List<Topic>>()
@@ -32,10 +33,12 @@ class TopicsWebService {
     private var favoritesList = mutableListOf<Topic>()
     private val favorites = MutableLiveData<List<Topic>>()
 
-    private val reference = FirebaseFirestore.getInstance().collection("topics")
+    private val db = FirebaseFirestore.getInstance()
+    private val ref = db.collection("topics")
+    private val favoritesRef = db.collection("favorites")
 
     init {
-        reference.addSnapshotListener { snapshot, exception ->
+        ref.addSnapshotListener { snapshot, exception ->
             when {
                 exception != null -> onListenFailed(tag, exception)
                 snapshot != null -> {
@@ -49,9 +52,22 @@ class TopicsWebService {
     }
 
     fun getFavorites(): LiveData<List<Topic>> {
-        favorites.value = io.github.horaciocome1.reaque.ui.search.topics()
-//        return favorites
-        return topics
+        if (favoritesList.isEmpty()) {
+            favoritesRef.whereEqualTo("topic", true)
+                .whereEqualTo(myId, true)
+                .addSnapshotListener { snapshot, exception ->
+                    when {
+                        exception != null -> onListenFailed(tag, exception)
+                        snapshot != null -> {
+                            for (doc in snapshot.documents)
+                                favoritesList.add(doc.topic)
+                            favorites.value = favoritesList
+                        }
+                        else -> onSnapshotNull(tag)
+                    }
+                }
+        }
+        return favorites
     }
 
     fun addTopic(topic: Topic) {
