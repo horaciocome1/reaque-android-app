@@ -22,6 +22,7 @@ import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import io.github.horaciocome1.reaque.R
 import jp.wasabeef.glide.transformations.BlurTransformation
@@ -38,9 +39,6 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
 
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-//            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-
         window.setFlags(
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
@@ -56,6 +54,7 @@ class SignInActivity : AppCompatActivity() {
         super.onResume()
         Glide.with(this)
             .load(backgroundUrl)
+            .transition(DrawableTransitionOptions.withCrossFade())
             .apply(RequestOptions.bitmapTransform(BlurTransformation(3, 7)))
             .into(activity_sign_in_imageview)
     }
