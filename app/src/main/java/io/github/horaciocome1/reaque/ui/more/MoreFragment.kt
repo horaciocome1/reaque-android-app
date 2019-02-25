@@ -34,20 +34,12 @@ import kotlinx.android.synthetic.main.fragment_more.*
 
 class MoreFragment : Fragment() {
 
-    private var isProfileButtonVisible = false
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_more, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fragment_more_button.setOnClickListener {
-            if (isProfileButtonVisible)
-                hideProfileButton()
-            else
-                showProfileButton()
-        }
         fragment_more_profile_button.setOnClickListener {
             val openMyProfile = MoreFragmentDirections.actionOpenMyProfile()
             Navigation.findNavController(it).navigate(openMyProfile)
@@ -68,7 +60,6 @@ class MoreFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        hideProfileButton()
         viewModel.me.observe(this, Observer {
             it.run {
                 Glide.with(this@MoreFragment)
@@ -84,20 +75,6 @@ class MoreFragment : Fragment() {
         super.onResume()
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
             (activity as MainActivity).supportActionBar?.hide()
-    }
-
-    private fun hideProfileButton() = View.GONE.run {
-        fragment_more_profile_button.visibility = this
-        fragment_more_edit_button.visibility = this
-        fragment_more_logout_button.visibility = this
-        isProfileButtonVisible = false
-    }
-
-    private fun showProfileButton() = View.VISIBLE.run {
-        fragment_more_profile_button.visibility = this
-        fragment_more_edit_button.visibility = this
-        fragment_more_logout_button.visibility = this
-        isProfileButtonVisible = true
     }
 
 }

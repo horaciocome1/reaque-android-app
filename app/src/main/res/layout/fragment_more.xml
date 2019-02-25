@@ -31,58 +31,33 @@
             android:layout_height="wrap_content"
             android:layout_gravity="top">
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/roboto_thin"
-                android:text="@string/app_name"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-                android:textColor="@color/primaryTextColor"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <ImageView
                 android:id="@+id/fragment_more_profile_pic_imageview"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginBottom="32dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="56dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/fragment_more_name_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="32dp"
-                android:fontFamily="@font/roboto_medium"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                app:layout_constraintBottom_toBottomOf="@+id/fragment_more_profile_pic_imageview"
-                app:layout_constraintStart_toEndOf="@+id/fragment_more_profile_pic_imageview"
-                app:layout_constraintTop_toTopOf="@+id/fragment_more_profile_pic_imageview" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/fragment_more_button"
-                style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
-                app:icon="@drawable/outline_more_horiz_black_24"
-                app:layout_constraintBottom_toBottomOf="@+id/fragment_more_name_textview"
+                android:fontFamily="@font/roboto_medium"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/fragment_more_name_textview" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_more_profile_pic_imageview" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/fragment_more_profile_button"
-                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -90,11 +65,11 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:text="Perfil"
-                android:textColor="@color/secondaryTextColor"
-                app:cornerRadius="8dp"
+                android:textColor="?colorControlNormal"
+                app:cornerRadius="16dp"
                 app:icon="@drawable/outline_account_circle_24"
                 app:iconSize="18dp"
-                app:iconTint="@color/secondaryTextColor"
+                app:iconTint="?colorControlNormal"
                 app:layout_constraintBottom_toBottomOf="@+id/fragment_more_edit_button"
                 app:layout_constraintEnd_toStartOf="@+id/fragment_more_edit_button"
                 app:layout_constraintStart_toStartOf="parent"
@@ -102,29 +77,29 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/fragment_more_edit_button"
-                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginLeft="32dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
                 android:layout_marginBottom="32dp"
                 android:text="Editar"
-                android:textColor="@color/secondaryTextColor"
-                app:cornerRadius="8dp"
+                android:textColor="?colorControlNormal"
+                app:cornerRadius="16dp"
                 app:icon="@drawable/outline_edit_24"
                 app:iconSize="18dp"
-                app:iconTint="@color/secondaryTextColor"
+                app:iconTint="?colorControlNormal"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_more_profile_pic_imageview" />
+                app:layout_constraintTop_toBottomOf="@+id/fragment_more_name_textview" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/fragment_more_logout_button"
-                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -132,11 +107,11 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
                 android:text="Sair"
-                android:textColor="@color/secondaryTextColor"
-                app:cornerRadius="8dp"
+                android:textColor="?colorControlNormal"
+                app:cornerRadius="16dp"
                 app:icon="@drawable/outline_exit_to_app_24"
                 app:iconSize="18dp"
-                app:iconTint="@color/secondaryTextColor"
+                app:iconTint="?colorControlNormal"
                 app:layout_constraintBottom_toBottomOf="@+id/fragment_more_edit_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/fragment_more_edit_button"
@@ -156,52 +131,21 @@
             app:cardCornerRadius="16dp"
             app:cardElevation="0dp">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/fragment_more_write_constraintlayout"
+                style="@style/AppTheme.CompleteClickableEffect"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginLeft="32dp"
-                    android:layout_marginTop="16dp"
-                    android:text="Criar"
-                    android:fontFamily="@font/roboto_thin"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
-
-                <TextView
-                    android:id="@+id/fragment_more_write_constraintlayout"
-                    style="@style/AppTheme.CompleteClickableEffect"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:paddingStart="32dp"
-                    android:paddingLeft="32dp"
-                    android:paddingTop="16dp"
-                    android:paddingEnd="32dp"
-                    android:paddingRight="32dp"
-                    android:paddingBottom="16dp"
-                    android:text="Publicar"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-                <TextView
-                    android:id="@+id/fragment_more_messages_constraintlayout"
-                    style="@style/AppTheme.CompleteClickableEffect"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:paddingStart="32dp"
-                    android:paddingLeft="32dp"
-                    android:paddingTop="16dp"
-                    android:paddingEnd="32dp"
-                    android:paddingRight="32dp"
-                    android:paddingBottom="16dp"
-                    android:text="Conversas"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-            </LinearLayout>
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:paddingStart="32dp"
+                android:paddingLeft="32dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="32dp"
+                android:paddingRight="32dp"
+                android:paddingBottom="16dp"
+                android:text="Publicar"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -213,42 +157,27 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
             app:cardBackgroundColor="@color/primaryLightColor"
             app:cardCornerRadius="16dp"
             app:cardElevation="0dp">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/fragment_more_settings_constraintlayout"
+                style="@style/AppTheme.CompleteClickableEffect"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginLeft="32dp"
-                    android:layout_marginTop="16dp"
-                    android:text="Avançadas"
-                    android:fontFamily="@font/roboto_thin"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
-
-                <TextView
-                    android:id="@+id/fragment_more_settings_constraintlayout"
-                    style="@style/AppTheme.CompleteClickableEffect"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
-                    android:paddingStart="32dp"
-                    android:paddingLeft="32dp"
-                    android:paddingTop="16dp"
-                    android:paddingEnd="32dp"
-                    android:paddingRight="32dp"
-                    android:paddingBottom="16dp"
-                    android:text="Configurações"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-            </LinearLayout>
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:paddingStart="32dp"
+                android:paddingLeft="32dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="32dp"
+                android:paddingRight="32dp"
+                android:paddingBottom="16dp"
+                android:text="Configurações"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -263,24 +192,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginLeft="32dp"
-                    android:layout_marginTop="16dp"
-                    android:text="Ajuda"
-                    android:fontFamily="@font/roboto_thin"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+                android:orientation="vertical"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp">
 
                 <TextView
                     android:id="@+id/fragment_more_asked_questions_constraintlayout"
                     style="@style/AppTheme.CompleteClickableEffect"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:paddingStart="32dp"
                     android:paddingLeft="32dp"
                     android:paddingTop="16dp"
