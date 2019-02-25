@@ -80,7 +80,7 @@
         app:cornerRadius="24dp"
         app:icon="@drawable/googleg_standard_color_18"
         app:iconSize="18dp"
-        app:iconTint="@color/primaryColor"
+        app:iconTint="@android:color/black"
         app:layout_constraintBottom_toBottomOf="@+id/textView10"
         app:layout_constraintEnd_toStartOf="@+id/textView10"
         app:layout_constraintStart_toStartOf="parent"

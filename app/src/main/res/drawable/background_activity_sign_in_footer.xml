@@ -16,9 +16,11 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
     <corners
-        android:topLeftRadius="8dp"
-        android:topRightRadius="8dp" />
+        android:topLeftRadius="16dp"
+        android:topRightRadius="16dp" />
 
-    <solid android:color="#20000000" />
+    <gradient
+        android:angle="90"
+        android:startColor="#99000000" />
 
 </shape>
