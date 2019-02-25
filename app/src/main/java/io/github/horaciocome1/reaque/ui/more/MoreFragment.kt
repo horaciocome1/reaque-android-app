@@ -29,7 +29,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.ui.MainActivity
-import io.github.horaciocome1.reaque.ui.users.viewModel
 import kotlinx.android.synthetic.main.fragment_more.*
 
 class MoreFragment : Fragment() {

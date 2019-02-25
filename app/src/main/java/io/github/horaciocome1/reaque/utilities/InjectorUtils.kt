@@ -23,6 +23,7 @@ import io.github.horaciocome1.reaque.data.topics.TopicsRepository
 import io.github.horaciocome1.reaque.data.users.UsersRepository
 import io.github.horaciocome1.reaque.ui.comments.CommentsViewModelFactory
 import io.github.horaciocome1.reaque.ui.favorites.FavoritesViewModelFactory
+import io.github.horaciocome1.reaque.ui.more.MoreViewModelFactory
 import io.github.horaciocome1.reaque.ui.notifications.NotificationsViewModelFactory
 import io.github.horaciocome1.reaque.ui.posts.PostsViewModelFactory
 import io.github.horaciocome1.reaque.ui.topics.TopicsViewModelFactory
@@ -40,6 +41,12 @@ object InjectorUtils {
         get() {
             val repository = UsersRepository.getInstance(Database.getInstance().usersWebService)
             return UsersViewModelFactory(repository)
+        }
+
+    val moreViewModelFactory: MoreViewModelFactory
+        get() {
+            val repository = UsersRepository.getInstance(Database.getInstance().usersWebService)
+            return MoreViewModelFactory(repository)
         }
 
     val postsViewModelFactory: PostsViewModelFactory

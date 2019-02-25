@@ -20,7 +20,6 @@ import androidx.lifecycle.ViewModelProviders
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.data.users.UsersRepository
-import io.github.horaciocome1.reaque.ui.more.MoreFragment
 import io.github.horaciocome1.reaque.utilities.InjectorUtils
 
 val UsersFragment.viewModel: UsersViewModel
@@ -41,20 +40,14 @@ val MyProfileFragment.viewModel: UsersViewModel
         return ViewModelProviders.of(this, factory).get(UsersViewModel::class.java)
     }
 
-val MoreFragment.viewModel: UsersViewModel
-    get() {
-        val factory = InjectorUtils.usersViewModelFactory
-        return ViewModelProviders.of(this, factory).get(UsersViewModel::class.java)
-    }
+class UsersViewModel(private val repository: UsersRepository) : ViewModel() {
 
-class UsersViewModel(private val usersRepository: UsersRepository) : ViewModel() {
+    fun addUser(user: User) = repository.addUser(user)
 
-    fun addUser(user: User) = usersRepository.addUser(user)
+    fun getUsers(topic: Topic) = repository.getUsers(topic)
 
-    fun getUsers(topic: Topic) = usersRepository.getUsers(topic)
+    fun getUsers(user: User) = repository.getUsers(user)
 
-    fun getUsers(user: User) = usersRepository.getUsers(user)
-
-    val me = usersRepository.me
+    val me = repository.me
 
 }
