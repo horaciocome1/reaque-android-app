@@ -49,6 +49,7 @@ class ProfileFragment: Fragment() {
                     user.id == "" -> {
                         fragment_profile_cover_imageview.visibility = View.GONE
                         fragment_profile_scrollview.visibility = View.GONE
+                        fragment_profile_progressbar.visibility = View.VISIBLE
                     }
                     else -> {
                         fragment_profile_cover_imageview.visibility = View.VISIBLE
@@ -82,8 +83,12 @@ class ProfileFragment: Fragment() {
 
     override fun onResume() {
         super.onResume()
-        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
-            (activity as MainActivity).supportActionBar?.show()
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            (activity as MainActivity).supportActionBar?.run {
+                show()
+                title = ""
+            }
+        }
     }
 
 }

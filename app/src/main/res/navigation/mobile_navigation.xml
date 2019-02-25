@@ -57,17 +57,6 @@
             app:destination="@id/destination_user_posts" />
     </fragment>
     <fragment
-        android:id="@+id/destination_my_profile"
-        android:name="io.github.horaciocome1.reaque.ui.users.MyProfileFragment"
-        android:label="Meu perfil">
-        <action
-            android:id="@+id/action_open_user_posts"
-            app:destination="@id/destination_user_posts" />
-        <action
-            android:id="@+id/action_open_image"
-            app:destination="@id/destination_viewer" />
-    </fragment>
-    <fragment
         android:id="@+id/destination_user_posts"
         android:name="io.github.horaciocome1.reaque.ui.posts.UserPostsFragment">
         <argument
@@ -148,8 +137,8 @@
             android:id="@+id/action_open_settings"
             app:destination="@id/destination_settings" />
         <action
-            android:id="@+id/action_open_my_profile"
-            app:destination="@id/destination_my_profile" />
+            android:id="@+id/action_open_myprofile"
+            app:destination="@id/destination_profile" />
     </fragment>
     <fragment
         android:id="@+id/destination_notifications"

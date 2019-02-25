@@ -34,12 +34,6 @@ val ProfileFragment.viewModel: UsersViewModel
         return ViewModelProviders.of(this, factory).get(UsersViewModel::class.java)
     }
 
-val MyProfileFragment.viewModel: UsersViewModel
-    get() {
-        val factory = InjectorUtils.usersViewModelFactory
-        return ViewModelProviders.of(this, factory).get(UsersViewModel::class.java)
-    }
-
 class UsersViewModel(private val repository: UsersRepository) : ViewModel() {
 
     fun addUser(user: User) = repository.addUser(user)
@@ -47,7 +41,5 @@ class UsersViewModel(private val repository: UsersRepository) : ViewModel() {
     fun getUsers(topic: Topic) = repository.getUsers(topic)
 
     fun getUsers(user: User) = repository.getUsers(user)
-
-    val me = repository.me
 
 }
