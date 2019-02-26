@@ -16,8 +16,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/background_fragment_comments_gradient">
+    android:layout_height="match_parent">
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -59,7 +58,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
             app:cardBackgroundColor="@color/primaryLightColor"
-            app:cardCornerRadius="16dp"
+            app:cardCornerRadius="32dp"
             app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/fragment_comments_send_button"
@@ -72,10 +71,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="4dp"
+                android:background="@android:color/transparent"
                 android:hint="Seu comentario  . . ."
                 android:inputType="textMultiLine"
                 android:maxLines="7"
@@ -94,6 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
+            app:elevation="0dp"
             app:layout_constraintBottom_toBottomOf="@+id/fragment_comments_cardview1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/fragment_comments_cardview1"
