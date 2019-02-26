@@ -47,14 +47,18 @@ class MoreFragment : Fragment() {
                 Navigation.findNavController(it).navigate(openProfile)
             }
         }
-        fragment_more_settings_constraintlayout.setOnClickListener {
+        fragment_more_search_textview.setOnClickListener {
+            val openSearch = MoreFragmentDirections.actionOpenSearch()
+            Navigation.findNavController(it).navigate(openSearch)
+        }
+        fragment_more_setting_textview.setOnClickListener {
             val openSettings = MoreFragmentDirections.actionOpenSettings()
             Navigation.findNavController(it).navigate(openSettings)
         }
-        fragment_more_feedback_constraintlayout.setOnClickListener {
+        fragment_more_feedback_textview.setOnClickListener {
 
         }
-        fragment_more_about_constraintlayout.setOnClickListener {
+        fragment_more_about_textview.setOnClickListener {
             val url = resources.getString(R.string.read_me_url)
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(intent)

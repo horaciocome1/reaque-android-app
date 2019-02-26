@@ -23,7 +23,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="56dp"
+        android:layout_marginBottom="32dp"
         android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -64,6 +64,7 @@
                 android:layout_marginLeft="32dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
+                android:padding="16dp"
                 android:text="Perfil"
                 android:textColor="?colorControlNormal"
                 app:cornerRadius="16dp"
@@ -86,6 +87,7 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
                 android:layout_marginBottom="32dp"
+                android:padding="16dp"
                 android:text="Editar"
                 android:textColor="?colorControlNormal"
                 app:cornerRadius="16dp"
@@ -106,6 +108,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
+                android:padding="16dp"
                 android:text="Sair"
                 android:textColor="?colorControlNormal"
                 app:cornerRadius="16dp"
@@ -131,21 +134,42 @@
             app:cardCornerRadius="16dp"
             app:cardElevation="0dp">
 
-            <TextView
-                android:id="@+id/fragment_more_write_constraintlayout"
-                style="@style/AppTheme.CompleteClickableEffect"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
-                android:paddingStart="32dp"
-                android:paddingLeft="32dp"
-                android:paddingTop="16dp"
-                android:paddingEnd="32dp"
-                android:paddingRight="32dp"
-                android:paddingBottom="16dp"
-                android:text="Publicar"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/fragment_more_write_textview"
+                    style="@style/AppTheme.CompleteClickableEffect"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="32dp"
+                    android:paddingLeft="32dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="32dp"
+                    android:paddingRight="32dp"
+                    android:paddingBottom="16dp"
+                    android:text="Publicar"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                <TextView
+                    android:id="@+id/fragment_more_search_textview"
+                    style="@style/AppTheme.CompleteClickableEffect"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="32dp"
+                    android:paddingLeft="32dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="32dp"
+                    android:paddingRight="32dp"
+                    android:paddingBottom="16dp"
+                    android:text="Pesquisar"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -164,7 +188,7 @@
             app:cardElevation="0dp">
 
             <TextView
-                android:id="@+id/fragment_more_settings_constraintlayout"
+                android:id="@+id/fragment_more_setting_textview"
                 style="@style/AppTheme.CompleteClickableEffect"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -197,7 +221,7 @@
                 android:paddingBottom="16dp">
 
                 <TextView
-                    android:id="@+id/fragment_more_asked_questions_constraintlayout"
+                    android:id="@+id/fragment_more_asked_questions_textview"
                     style="@style/AppTheme.CompleteClickableEffect"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -211,7 +235,7 @@
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                 <TextView
-                    android:id="@+id/fragment_more_feedback_constraintlayout"
+                    android:id="@+id/fragment_more_feedback_textview"
                     style="@style/AppTheme.CompleteClickableEffect"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -225,7 +249,7 @@
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                 <TextView
-                    android:id="@+id/fragment_more_about_constraintlayout"
+                    android:id="@+id/fragment_more_about_textview"
                     style="@style/AppTheme.CompleteClickableEffect"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -66,12 +66,12 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_destination_more_to_destination_search">
+                            <entry key="action_open_profile_from_more">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_open_profile_from_more">
+                            <entry key="action_open_search">
                               <value>
                                 <LayoutPositions />
                               </value>

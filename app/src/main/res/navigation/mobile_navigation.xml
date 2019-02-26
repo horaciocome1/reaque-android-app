@@ -157,7 +157,7 @@
             android:id="@+id/action_open_profile_from_more"
             app:destination="@id/destination_profile" />
         <action
-            android:id="@+id/action_destination_more_to_destination_search"
+            android:id="@+id/action_open_search"
             app:destination="@id/destination_search" />
     </fragment>
     <fragment

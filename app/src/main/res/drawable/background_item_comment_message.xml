@@ -18,8 +18,8 @@
     <solid android:color="@color/primaryLightColor" />
 
     <corners
-        android:bottomLeftRadius="24dp"
-        android:bottomRightRadius="24dp"
-        android:topRightRadius="24dp" />
+        android:bottomLeftRadius="32dp"
+        android:bottomRightRadius="32dp"
+        android:topRightRadius="32dp" />
 
 </shape>

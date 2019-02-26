@@ -19,8 +19,8 @@
 
     <item
         android:id="@+id/main_menu_overflow"
-        android:title="More"
-        android:icon="@drawable/outline_more_vert_black_24"
+        android:icon="@drawable/outline_search_24"
+        android:title="Pesquisar"
         app:showAsAction="always" />
 
 </menu>

@@ -88,6 +88,8 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
+                android:padding="16dp"
+                app:cornerRadius="16dp"
                 android:text="Comentários"
                 app:icon="@drawable/outline_forum_24" />
 
@@ -98,8 +100,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
+                android:padding="16dp"
+                app:cornerRadius="16dp"
                 android:text="Publicações"
-                app:icon="@drawable/outline_list_18_black" />
+                app:icon="@drawable/outline_list_24_black" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/item_topic_writers_button"
@@ -109,6 +113,8 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginBottom="16dp"
+                android:padding="16dp"
+                app:cornerRadius="16dp"
                 android:text="Autores"
                 app:icon="@drawable/outline_people_outline_24" />
 

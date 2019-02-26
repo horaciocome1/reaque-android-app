@@ -50,7 +50,7 @@
             android:id="@+id/fragment_profile_scrollview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="vertical"
+            android:scrollbars="none"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -269,7 +269,7 @@
                             android:layout_width="32dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
-                            app:icon="@drawable/outline_list_18_black" />
+                            app:icon="@drawable/outline_list_24_black" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/fragment_profile_message_button"
@@ -277,7 +277,7 @@
                             android:layout_width="32dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
-                            app:icon="@drawable/outline_chat_bubble_outline_18" />
+                            app:icon="@drawable/outline_chat_bubble_outline_24" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/fragment_profile_action_button"
@@ -285,7 +285,7 @@
                             android:layout_width="32dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
-                            app:icon="@drawable/outline_bookmark_border_black_18" />
+                            app:icon="@drawable/outline_bookmark_border_black_24" />
 
                     </LinearLayout>
 
