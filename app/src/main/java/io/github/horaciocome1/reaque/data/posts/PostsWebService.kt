@@ -80,7 +80,7 @@ class PostsWebService {
 
     /*retrieve from remote server every topicPosts wrote by the specified user*/
     fun getPosts(user: User): LiveData<List<Post>> {
-        if (userId.equals(user.id, true)) {
+        if (!userId.equals(user.id, true)) {
             userPosts.value = mutableListOf()
             ref.whereEqualTo(user.id, true).addSnapshotListener { snapshot, exception ->
                 when {
