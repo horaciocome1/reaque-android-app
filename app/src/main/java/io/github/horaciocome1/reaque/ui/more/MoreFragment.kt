@@ -43,7 +43,7 @@ class MoreFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         fragment_more_profile_button.setOnClickListener {
             if (userId != "") {
-                val openProfile = MoreFragmentDirections.actionOpenMyprofile(userId)
+                val openProfile = MoreFragmentDirections.actionOpenProfileFromMore(userId)
                 Navigation.findNavController(it).navigate(openProfile)
             }
         }

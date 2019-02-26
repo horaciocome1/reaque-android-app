@@ -35,12 +35,6 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/destination_search"
-        android:icon="@drawable/outline_search_24"
-        android:title="Busca"
-        app:showAsAction="always" />
-
-    <item
         android:id="@+id/destination_more"
         android:icon="@drawable/outline_more_horiz_black_24"
         android:title="Mais"

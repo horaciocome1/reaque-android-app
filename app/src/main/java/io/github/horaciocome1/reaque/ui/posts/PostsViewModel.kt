@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -30,12 +30,6 @@ val PostsFragment.viewModel: PostsViewModel
     }
 
 val ReadFragment.viewModel: PostsViewModel
-    get() {
-        val factory = InjectorUtils.postsViewModelFactory
-        return ViewModelProviders.of(this, factory).get(PostsViewModel::class.java)
-    }
-
-val UserPostsFragment.viewModel: PostsViewModel
     get() {
         val factory = InjectorUtils.postsViewModelFactory
         return ViewModelProviders.of(this, factory).get(PostsViewModel::class.java)

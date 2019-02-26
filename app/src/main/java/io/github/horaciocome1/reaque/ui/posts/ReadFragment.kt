@@ -33,7 +33,7 @@ import kotlinx.android.synthetic.main.fragment_read.*
 
 class ReadFragment: Fragment() {
 
-    lateinit var binding: FragmentReadBinding
+    private lateinit var binding: FragmentReadBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentReadBinding.inflate(inflater, container, false)

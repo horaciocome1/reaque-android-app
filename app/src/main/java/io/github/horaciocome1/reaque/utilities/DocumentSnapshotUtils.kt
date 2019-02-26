@@ -52,7 +52,7 @@ val DocumentSnapshot.post: Post
             date = this@post["date"].toString()
             message = this@post["message"].toString()
             title = this@post["title"].toString()
-            user = User(this@post["writerId"].toString()).apply {
+            user = User(this@post["writer_id"].toString()).apply {
                 name = this@post["writer_name"].toString()
                 pic = this@post["writer_pic"].toString()
             }

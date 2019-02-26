@@ -66,13 +66,14 @@ class ProfileFragment: Fragment() {
                             }
 
                             fragment_profile_more_button.setOnClickListener {
-                                val openUserPosts = ProfileFragmentDirections.actionOpenUserPosts(id, name)
-                                Navigation.findNavController(it).navigate(openUserPosts)
+                                val openPosts =
+                                    ProfileFragmentDirections.actionOpenPostsFromProfile(userId, name, false, true)
+                                Navigation.findNavController(it).navigate(openPosts)
                             }
 
                             fragment_profile_profile_pic_imageview.setOnClickListener {
-                                val openImage = ProfileFragmentDirections.actionOpenImage(pic)
-                                Navigation.findNavController(it).navigate(openImage)
+                                val openViewer = ProfileFragmentDirections.actionOpenViewerFromProfile(pic)
+                                Navigation.findNavController(it).navigate(openViewer)
                             }
                         }
                     }

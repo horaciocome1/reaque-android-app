@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
+import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.ui.MainActivity
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addSimpleTouchListener
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.setOnClick
@@ -34,58 +35,63 @@ import kotlinx.android.synthetic.main.fragment_posts.*
 
 class PostsFragment: Fragment() {
 
+    private var list = listOf<Post>()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_posts, container, false)
     }
 
     override fun onStart() {
         super.onStart()
-        arguments?.let {
-            val safeArgs = PostsFragmentArgs.fromBundle(it)
-            setActionBarTitle(safeArgs.topicTitle)
-            var list = listOf<Post>()
-            viewModel.getPosts(Topic(safeArgs.topicId)).observe(this, Observer { posts ->
-                when {
-                    posts.isEmpty() -> fragment_posts_progressbar.visibility = View.VISIBLE
-                    list.isEmpty() -> {
-                        list = posts
-                        configList(list)
-                        fragment_posts_progressbar.visibility = View.GONE
-                    }
-                    posts != list -> {
-                        fragment_posts_tap_to_update_button.run {
-                            visibility = View.VISIBLE
-                            setOnClickListener {
-                                list = posts
-                                configList(list)
-                                visibility = View.GONE
-                            }
-                        }
-                    }
-                }
-            })
+        arguments?.let { bundle ->
+            val safeArgs = PostsFragmentArgs.fromBundle(bundle)
+            safeArgs.run {
+                if (isFromTopic)
+                    viewModel.getPosts(Topic(id)).observe(this@PostsFragment, Observer { configPosts(it) })
+                else if (isFromUser)
+                    viewModel.getPosts(User(id)).observe(this@PostsFragment, Observer { configPosts(it) })
+            }
         }
     }
 
     override fun onResume() {
         super.onResume()
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
-            (activity as MainActivity).supportActionBar?.show()
-    }
-
-    private fun setActionBarTitle(title: String) {
-        (activity as MainActivity).supportActionBar?.title = title
+            (activity as MainActivity).supportActionBar?.run {
+                show()
+                title = ""
+            }
     }
 
     private fun configList(list: List<Post>) = fragment_posts_recyclerview.apply {
         layoutManager = LinearLayoutManager(context)
         adapter = PostsAdapter(list)
         setOnClick { view, position ->
-            val read = PostsFragmentDirections.actionRead(list[position].id)
-            Navigation.findNavController(view).navigate(read)
+            val openRead = PostsFragmentDirections.actionOpenReadFromPosts(list[position].id)
+            Navigation.findNavController(view).navigate(openRead)
         }
         addSimpleTouchListener()
     }
 
+    private fun configPosts(posts: List<Post>) {
+        when {
+            posts.isEmpty() -> fragment_posts_progressbar.visibility = View.VISIBLE
+            list.isEmpty() -> {
+                list = posts
+                configList(list)
+                fragment_posts_progressbar.visibility = View.GONE
+            }
+            posts != list -> {
+                fragment_posts_tap_to_update_button.run {
+                    visibility = View.VISIBLE
+                    setOnClickListener {
+                        list = posts
+                        configList(list)
+                        visibility = View.GONE
+                    }
+                }
+            }
+        }
+    }
 
 }

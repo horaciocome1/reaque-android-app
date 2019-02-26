@@ -16,20 +16,24 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/destination_topics">
+    app:startDestination="@+id/destination_topics">
 
     <fragment
         android:id="@+id/destination_topics"
         android:name="io.github.horaciocome1.reaque.ui.topics.TopicsFragment"
         android:label="Tópicos">
         <action
-            android:id="@+id/action_open_posts"
-            app:destination="@id/destination_posts" />
+            android:id="@+id/action_open_posts_from_topics"
+            app:destination="@id/destination_posts">
+            <argument
+                android:name="is_topic"
+                android:defaultValue="true" />
+        </action>
         <action
             android:id="@+id/action_open_users"
             app:destination="@id/destination_users" />
         <action
-            android:id="@+id/action_open_comments"
+            android:id="@+id/action_open_comments_from_topics"
             app:destination="@id/destination_comments" />
     </fragment>
     <fragment
@@ -39,7 +43,7 @@
             android:name="post_id"
             app:argType="string" />
         <action
-            android:id="@+id/action_open_image"
+            android:id="@+id/action_open_viewer_from_profile"
             app:destination="@id/destination_viewer" />
     </fragment>
     <fragment
@@ -50,24 +54,15 @@
             android:name="user_id"
             app:argType="string" />
         <action
-            android:id="@+id/action_open_image"
+            android:id="@+id/action_open_viewer_from_profile"
             app:destination="@id/destination_viewer" />
         <action
-            android:id="@+id/action_open_user_posts"
-            app:destination="@id/destination_user_posts" />
-    </fragment>
-    <fragment
-        android:id="@+id/destination_user_posts"
-        android:name="io.github.horaciocome1.reaque.ui.posts.UserPostsFragment">
-        <argument
-            android:name="user_id"
-            app:argType="string" />
-        <action
-            android:id="@+id/action_read"
-            app:destination="@id/destination_read" />
-        <argument
-            android:name="user_name"
-            app:argType="string" />
+            android:id="@+id/action_open_posts_from_profile"
+            app:destination="@id/destination_posts">
+            <argument
+                android:name="is_user"
+                android:defaultValue="true" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/destination_viewer"
@@ -80,12 +75,20 @@
         android:id="@+id/destination_posts"
         android:name="io.github.horaciocome1.reaque.ui.posts.PostsFragment">
         <action
-            android:id="@+id/action_read"
+            android:id="@+id/action_open_read_from_posts"
             app:destination="@id/destination_read" />
         <argument
-            android:name="topic_id"
+            android:name="id"
             app:argType="string" />
-        <argument android:name="topic_title" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="is_from_topic"
+            app:argType="boolean" />
+        <argument
+            android:name="is_from_user"
+            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/destination_users"
@@ -110,7 +113,7 @@
             android:name="topic_title"
             app:argType="string" />
         <action
-            android:id="@+id/action_open_profile2"
+            android:id="@+id/action_open_profile_from_comments"
             app:destination="@id/destination_profile"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
@@ -124,11 +127,25 @@
     <fragment
         android:id="@+id/destination_search"
         android:name="io.github.horaciocome1.reaque.ui.search.SearchFragment"
-        android:label="Busca" />
+        android:label="Busca">
+        <action
+            android:id="@+id/action_open_profile_from_search"
+            app:destination="@id/destination_profile" />
+        <action
+            android:id="@+id/action_open_read_from_search"
+            app:destination="@id/destination_read" />
+    </fragment>
     <fragment
         android:id="@+id/destination_favorites"
         android:name="io.github.horaciocome1.reaque.ui.favorites.FavoritesFragment"
-        android:label="Favoritos" />
+        android:label="Favoritos">
+        <action
+            android:id="@+id/action_open_read_from_favorites"
+            app:destination="@id/destination_read" />
+        <action
+            android:id="@+id/action_open_profile_from_favorites"
+            app:destination="@id/destination_profile" />
+    </fragment>
     <fragment
         android:id="@+id/destination_more"
         android:name="io.github.horaciocome1.reaque.ui.more.MoreFragment"
@@ -137,21 +154,24 @@
             android:id="@+id/action_open_settings"
             app:destination="@id/destination_settings" />
         <action
-            android:id="@+id/action_open_myprofile"
+            android:id="@+id/action_open_profile_from_more"
             app:destination="@id/destination_profile" />
+        <action
+            android:id="@+id/action_destination_more_to_destination_search"
+            app:destination="@id/destination_search" />
     </fragment>
     <fragment
         android:id="@+id/destination_notifications"
         android:name="io.github.horaciocome1.reaque.ui.notifications.NotificationsFragment"
         android:label="Notificações">
         <action
-            android:id="@+id/action_open_comments2"
+            android:id="@+id/action_open_comments_from_notifications"
             app:destination="@id/destination_comments" />
         <action
-            android:id="@+id/action_read2"
+            android:id="@+id/action_open_read_from_notifications"
             app:destination="@id/destination_read" />
         <action
-            android:id="@+id/action_open_profile3"
+            android:id="@+id/action_open_profile_from_notifications"
             app:destination="@id/destination_profile" />
     </fragment>
 </navigation>

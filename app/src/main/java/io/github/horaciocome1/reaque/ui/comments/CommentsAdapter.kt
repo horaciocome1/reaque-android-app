@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -47,7 +47,7 @@ class CommentsAdapter(private val list: List<Comment>) : RecyclerView.Adapter<Co
                 .apply(RequestOptions.circleCropTransform())
                 .into(binding.itemCommenWriterPicImageview)
             binding.itemCommenWriterPicImageview.setOnClickListener {
-                val openProfile = CommentsFragmentDirections.actionOpenProfile2(user.id)
+                val openProfile = CommentsFragmentDirections.actionOpenProfileFromComments(user.id)
                 Navigation.findNavController(it).navigate(openProfile)
             }
         }
