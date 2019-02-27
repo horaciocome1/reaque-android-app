@@ -91,7 +91,7 @@
                 android:padding="16dp"
                 app:cornerRadius="16dp"
                 android:text="Comentários"
-                app:icon="@drawable/outline_forum_24" />
+                app:icon="@drawable/outline_forum_18" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/item_topic_more_button"
@@ -103,7 +103,7 @@
                 android:padding="16dp"
                 app:cornerRadius="16dp"
                 android:text="Publicações"
-                app:icon="@drawable/outline_list_24_black" />
+                app:icon="@drawable/outline_list_18" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/item_topic_writers_button"
@@ -116,7 +116,7 @@
                 android:padding="16dp"
                 app:cornerRadius="16dp"
                 android:text="Autores"
-                app:icon="@drawable/outline_people_outline_24" />
+                app:icon="@drawable/outline_people_outline_18" />
 
         </LinearLayout>
 

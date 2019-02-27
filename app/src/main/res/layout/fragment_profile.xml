@@ -206,7 +206,7 @@
                         app:layout_constraintBottom_toBottomOf="@+id/fragment_profile_town_textview"
                         app:layout_constraintEnd_toStartOf="@+id/fragment_profile_town_textview"
                         app:layout_constraintTop_toTopOf="@+id/fragment_profile_town_textview"
-                        app:srcCompat="@drawable/outline_location_on_24" />
+                        app:srcCompat="@drawable/outline_location_on_18" />
 
                     <TextView
                         android:id="@+id/fragment_profile_town_textview"
@@ -233,7 +233,7 @@
                         app:layout_constraintBottom_toBottomOf="@+id/fragment_profile_since_textview"
                         app:layout_constraintEnd_toStartOf="@+id/fragment_profile_since_textview"
                         app:layout_constraintTop_toTopOf="@+id/fragment_profile_since_textview"
-                        app:srcCompat="@drawable/outline_access_time_24" />
+                        app:srcCompat="@drawable/outline_access_time_18" />
 
                     <TextView
                         android:id="@+id/fragment_profile_since_textview"
@@ -269,7 +269,7 @@
                             android:layout_width="32dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
-                            app:icon="@drawable/outline_list_24_black" />
+                            app:icon="@drawable/outline_list_18" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/fragment_profile_message_button"
@@ -285,7 +285,7 @@
                             android:layout_width="32dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
-                            app:icon="@drawable/outline_bookmark_border_black_24" />
+                            app:icon="@drawable/outline_bookmark_border_24" />
 
                     </LinearLayout>
 

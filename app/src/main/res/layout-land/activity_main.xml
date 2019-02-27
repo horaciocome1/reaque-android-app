@@ -53,6 +53,7 @@
         android:id="@+id/activity_main_navigationview"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:paddingTop="?attr/actionBarSize"
         android:layout_gravity="start"
         app:itemIconTint="@drawable/color_navigation_drawer"
         app:itemTextColor="@drawable/color_navigation_drawer"
