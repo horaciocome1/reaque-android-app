@@ -145,6 +145,15 @@
         <action
             android:id="@+id/action_open_profile_from_favorites"
             app:destination="@id/destination_profile" />
+        <action
+            android:id="@+id/action_open_posts_from_favorites"
+            app:destination="@id/destination_posts" />
+        <action
+            android:id="@+id/action_open_users_from_favorites"
+            app:destination="@id/destination_users" />
+        <action
+            android:id="@+id/action_open_comments_from_favorites"
+            app:destination="@id/destination_comments" />
     </fragment>
     <fragment
         android:id="@+id/destination_more"

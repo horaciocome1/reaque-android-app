@@ -18,6 +18,7 @@ package io.github.horaciocome1.reaque.ui.favorites
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import io.github.horaciocome1.reaque.data.posts.PostsRepository
+import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.topics.TopicsRepository
 import io.github.horaciocome1.reaque.data.users.UsersRepository
 import io.github.horaciocome1.reaque.utilities.InjectorUtils
@@ -29,12 +30,14 @@ val FavoritesFragment.viewModel: FavoritesViewModel
     }
 
 class FavoritesViewModel(
-    topicsRepository: TopicsRepository,
+    private val topicsRepository: TopicsRepository,
     postsRepository: PostsRepository,
     usersRepository: UsersRepository
 ) : ViewModel() {
 
     val topics = topicsRepository.favorites
+
+    fun getTopics(topic: Topic) = topicsRepository.getTopics(topic)
 
     val posts = postsRepository.favorites
 

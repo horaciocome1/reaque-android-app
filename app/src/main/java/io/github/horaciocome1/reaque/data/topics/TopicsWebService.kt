@@ -30,6 +30,10 @@ class TopicsWebService {
     private var topicsList = mutableListOf<Topic>()
     val topics = MutableLiveData<List<Topic>>()
 
+    val topic = MutableLiveData<Topic>().apply {
+        value = Topic("")
+    }
+
     private var favoritesList = mutableListOf<Topic>()
     private val favorites = MutableLiveData<List<Topic>>()
 
@@ -49,6 +53,20 @@ class TopicsWebService {
                 else -> onSnapshotNull(tag)
             }
         }
+    }
+
+    fun getTopics(topic: Topic): LiveData<Topic> {
+        if (!topic.id.equals(this.topic.value?.id, true)) {
+            this.topic.value = Topic("")
+            ref.document(topic.id).addSnapshotListener { snapshot, exception ->
+                when {
+                    exception != null -> onListenFailed(tag, exception)
+                    snapshot != null -> this.topic.value = snapshot.topic
+                    else -> onSnapshotNull(tag)
+                }
+            }
+        }
+        return this.topic
     }
 
     fun getFavorites(): LiveData<List<Topic>> {

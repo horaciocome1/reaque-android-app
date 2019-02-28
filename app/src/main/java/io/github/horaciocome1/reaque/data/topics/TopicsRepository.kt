@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -20,6 +20,8 @@ class TopicsRepository private constructor(private val topicsWebService: TopicsW
     fun addTopic(topic: Topic) = topicsWebService.addTopic(topic)
 
     val topics = topicsWebService.topics
+
+    fun getTopics(topic: Topic) = topicsWebService.getTopics(topic)
 
     val favorites = topicsWebService.getFavorites()
 

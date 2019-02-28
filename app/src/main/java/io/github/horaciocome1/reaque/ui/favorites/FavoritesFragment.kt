@@ -25,7 +25,9 @@ import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import io.github.horaciocome1.reaque.R
+import io.github.horaciocome1.reaque.databinding.FragmentFavoritesTopicsBottomsheetBinding
 import io.github.horaciocome1.reaque.ui.MainActivity
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addSimpleTouchListener
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.setOnClick
@@ -55,6 +57,32 @@ class FavoritesFragment : Fragment() {
             fragment_favorites_topics_recyclerview.apply {
                 layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
                 adapter = TopicsAdapter(it)
+                setOnClick { view, position ->
+                    BottomSheetDialog(context).apply {
+                        val binding = FragmentFavoritesTopicsBottomsheetBinding.inflate(layoutInflater)
+                        setContentView(binding.root)
+                        show()
+                        viewModel.getTopics(it[position]).observe(this@FavoritesFragment, Observer { topic ->
+                            binding.topic = topic
+                            binding.commentsButton.setOnClickListener {
+                                val openComments =
+                                    FavoritesFragmentDirections.actionOpenCommentsFromFavorites(topic.id, topic.title)
+                                Navigation.findNavController(view).navigate(openComments)
+                            }
+                            binding.moreButton.setOnClickListener {
+                                val openRead = FavoritesFragmentDirections.actionOpenReadFromFavorites(topic.id)
+                                Navigation.findNavController(view).navigate(openRead)
+                            }
+                            binding.writersButton.setOnClickListener {
+                                val openUsers =
+                                    FavoritesFragmentDirections.actionOpenUsersFromFavorites(topic.id, topic.title)
+                                Navigation.findNavController(view).navigate(openUsers)
+                            }
+                        })
+                    }
+
+                }
+                addSimpleTouchListener()
             }
         })
     }

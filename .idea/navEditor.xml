@@ -40,12 +40,27 @@
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_open_comments_from_favorites">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_open_posts_from_favorites">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_open_profile_from_favorites">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
                             <entry key="action_open_read_from_favorites">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_open_users_from_favorites">
                               <value>
                                 <LayoutPositions />
                               </value>
