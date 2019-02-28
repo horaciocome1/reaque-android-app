@@ -22,10 +22,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.ui.MainActivity
+import io.github.horaciocome1.simplerecyclerviewtouchlistener.addSimpleTouchListener
+import io.github.horaciocome1.simplerecyclerviewtouchlistener.setOnClick
 import kotlinx.android.synthetic.main.fragment_favorites.*
 
 class FavoritesFragment : Fragment() {
@@ -61,6 +64,11 @@ class FavoritesFragment : Fragment() {
             fragment_favorites_posts_recyclerview.apply {
                 layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
                 adapter = PostsAdapter(it)
+                setOnClick { view, position ->
+                    val openRead = FavoritesFragmentDirections.actionOpenReadFromFavorites(it[position].id)
+                    Navigation.findNavController(view).navigate(openRead)
+                }
+                addSimpleTouchListener()
             }
         })
     }
@@ -70,6 +78,11 @@ class FavoritesFragment : Fragment() {
             fragment_favorites_users_recyclerview.apply {
                 layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
                 adapter = UsersAdapter(it)
+                setOnClick { view, position ->
+                    val openProfile = FavoritesFragmentDirections.actionOpenProfileFromFavorites(it[position].id)
+                    Navigation.findNavController(view).navigate(openProfile)
+                }
+                addSimpleTouchListener()
             }
         })
     }
