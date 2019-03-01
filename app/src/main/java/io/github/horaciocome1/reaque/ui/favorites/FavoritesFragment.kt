@@ -20,14 +20,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import io.github.horaciocome1.reaque.R
-import io.github.horaciocome1.reaque.databinding.FragmentFavoritesTopicsBottomsheetBinding
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import io.github.horaciocome1.reaque.databinding.FragmentFavoritesBinding
 import io.github.horaciocome1.reaque.ui.MainActivity
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addSimpleTouchListener
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.setOnClick
@@ -35,12 +35,23 @@ import kotlinx.android.synthetic.main.fragment_favorites.*
 
 class FavoritesFragment : Fragment() {
 
+    lateinit var binding: FragmentFavoritesBinding
+    lateinit var behavior: BottomSheetBehavior<NestedScrollView>
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_favorites, container, false)
+        binding = FragmentFavoritesBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        behavior = BottomSheetBehavior.from(fragment_favorites_bottomsheet)
     }
 
     override fun onStart() {
         super.onStart()
+        behavior.isHideable = true
+        behavior.state = BottomSheetBehavior.STATE_HIDDEN
         topics()
         posts()
         users()
@@ -58,29 +69,29 @@ class FavoritesFragment : Fragment() {
                 layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
                 adapter = TopicsAdapter(it)
                 setOnClick { view, position ->
-                    BottomSheetDialog(context).apply {
-                        val binding = FragmentFavoritesTopicsBottomsheetBinding.inflate(layoutInflater)
-                        setContentView(binding.root)
-                        show()
-                        viewModel.getTopics(it[position]).observe(this@FavoritesFragment, Observer { topic ->
-                            binding.topic = topic
-                            binding.commentsButton.setOnClickListener {
-                                val openComments =
-                                    FavoritesFragmentDirections.actionOpenCommentsFromFavorites(topic.id, topic.title)
-                                Navigation.findNavController(view).navigate(openComments)
-                            }
-                            binding.moreButton.setOnClickListener {
-                                val openRead = FavoritesFragmentDirections.actionOpenReadFromFavorites(topic.id)
-                                Navigation.findNavController(view).navigate(openRead)
-                            }
-                            binding.writersButton.setOnClickListener {
-                                val openUsers =
-                                    FavoritesFragmentDirections.actionOpenUsersFromFavorites(topic.id, topic.title)
-                                Navigation.findNavController(view).navigate(openUsers)
-                            }
-                        })
-                    }
-
+                    viewModel.getTopics(it[position]).observe(this@FavoritesFragment, Observer { topic ->
+                        binding.topic = topic
+                        behavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+                        comments_button.setOnClickListener {
+                            val openComments =
+                                FavoritesFragmentDirections.actionOpenCommentsFromFavorites(topic.id, topic.title)
+                            Navigation.findNavController(it).navigate(openComments)
+                        }
+                        more_button.setOnClickListener {
+                            val openPosts = FavoritesFragmentDirections.actionOpenPostsFromFavorites(
+                                topic.id,
+                                topic.title,
+                                true,
+                                false
+                            )
+                            Navigation.findNavController(it).navigate(openPosts)
+                        }
+                        writers_button.setOnClickListener {
+                            val openUsers =
+                                FavoritesFragmentDirections.actionOpenUsersFromFavorites(topic.id, topic.title)
+                            Navigation.findNavController(it).navigate(openUsers)
+                        }
+                    })
                 }
                 addSimpleTouchListener()
             }

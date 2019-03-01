@@ -54,7 +54,7 @@ class TopicsAdapter(private val list: List<Topic>) : RecyclerView.Adapter<Topics
             }
 
             binding.itemTopicWritersButton.setOnClickListener {
-                val openUsersAction = TopicsFragmentDirections.actionOpenUsers(id, title)
+                val openUsersAction = TopicsFragmentDirections.actionOpenUsersFromTopics(id, title)
                 Navigation.findNavController(it).navigate(openUsersAction)
             }
 

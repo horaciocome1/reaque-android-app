@@ -30,7 +30,7 @@
                 android:defaultValue="true" />
         </action>
         <action
-            android:id="@+id/action_open_users"
+            android:id="@+id/action_open_users_from_topics"
             app:destination="@id/destination_users" />
         <action
             android:id="@+id/action_open_comments_from_topics"

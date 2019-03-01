@@ -47,7 +47,10 @@ class PostsFragment: Fragment() {
             val safeArgs = PostsFragmentArgs.fromBundle(bundle)
             safeArgs.run {
                 if (isFromTopic)
-                    viewModel.getPosts(Topic(id)).observe(this@PostsFragment, Observer { configPosts(it) })
+                    viewModel.getPosts(Topic(id)).observe(this@PostsFragment, Observer {
+                        configPosts(it)
+                        (activity as MainActivity).supportActionBar?.title = title
+                    })
                 else if (isFromUser)
                     viewModel.getPosts(User(id)).observe(this@PostsFragment, Observer { configPosts(it) })
             }
@@ -57,10 +60,7 @@ class PostsFragment: Fragment() {
     override fun onResume() {
         super.onResume()
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
-            (activity as MainActivity).supportActionBar?.run {
-                show()
-                title = ""
-            }
+            (activity as MainActivity).supportActionBar?.show()
     }
 
     private fun configList(list: List<Post>) = fragment_posts_recyclerview.apply {
