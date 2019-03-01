@@ -22,6 +22,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -44,13 +45,13 @@ class ReadFragment: Fragment() {
         super.onStart()
         arguments?.let { args ->
             val postId = ReadFragmentArgs.fromBundle(args).postId
-            viewModel.getPosts(Post(postId)).observe(this, Observer {
-                if (it.id == "")
+            viewModel.getPosts(Post(postId)).observe(this, Observer { post ->
+                if (post.id == "")
                     fragment_read_bottom_sheet.visibility = View.GONE
                 else {
                     fragment_read_bottom_sheet.visibility = View.VISIBLE
                     BottomSheetBehavior.from(fragment_read_bottom_sheet).state = BottomSheetBehavior.STATE_COLLAPSED
-                    it.run {
+                    post.run {
                         binding.post = this
                         Glide.with(this@ReadFragment).run {
                             load(cover)
@@ -61,6 +62,14 @@ class ReadFragment: Fragment() {
                             load(user.pic)
                                 .apply(RequestOptions.circleCropTransform())
                                 .into(fragment_read_profile_pic_imageview)
+                        }
+                        fragment_read_profile_pic_imageview.setOnClickListener {
+                            val openProfile = ReadFragmentDirections.actionOpenProfileFromRead(this.user.id)
+                            Navigation.findNavController(it).navigate(openProfile)
+                        }
+                        fragment_read_cover_imageview.setOnClickListener {
+                            val openViewer = ReadFragmentDirections.actionOpenViewerFromRead(this.cover)
+                            Navigation.findNavController(it).navigate(openViewer)
                         }
                     }
                 }

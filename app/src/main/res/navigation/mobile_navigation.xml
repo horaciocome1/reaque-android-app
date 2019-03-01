@@ -43,8 +43,11 @@
             android:name="post_id"
             app:argType="string" />
         <action
-            android:id="@+id/action_open_viewer_from_profile"
+            android:id="@+id/action_open_viewer_from_read"
             app:destination="@id/destination_viewer" />
+        <action
+            android:id="@+id/action_open_profile_from_read"
+            app:destination="@id/destination_profile" />
     </fragment>
     <fragment
         android:id="@+id/destination_profile"

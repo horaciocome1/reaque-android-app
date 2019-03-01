@@ -190,7 +190,12 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_open_viewer_from_profile">
+                            <entry key="action_open_profile_from_read">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_open_viewer_from_read">
                               <value>
                                 <LayoutPositions />
                               </value>
