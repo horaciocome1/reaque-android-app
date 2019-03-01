@@ -49,8 +49,7 @@ class ReadFragment: Fragment() {
                     fragment_read_bottom_sheet.visibility = View.GONE
                 else {
                     fragment_read_bottom_sheet.visibility = View.VISIBLE
-                    val behavior = BottomSheetBehavior.from(fragment_read_bottom_sheet)
-                    behavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                    BottomSheetBehavior.from(fragment_read_bottom_sheet).state = BottomSheetBehavior.STATE_COLLAPSED
                     it.run {
                         binding.post = this
                         Glide.with(this@ReadFragment).run {
