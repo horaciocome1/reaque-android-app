@@ -68,7 +68,7 @@ class FavoritesFragment : Fragment() {
             fragment_favorites_topics_recyclerview.apply {
                 layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
                 adapter = TopicsAdapter(it)
-                setOnClick { view, position ->
+                setOnClick { _, position ->
                     viewModel.getTopics(it[position]).observe(this@FavoritesFragment, Observer { topic ->
                         binding.topic = topic
                         behavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED

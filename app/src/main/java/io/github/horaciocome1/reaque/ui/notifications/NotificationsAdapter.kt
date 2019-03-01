@@ -44,18 +44,6 @@ class NotificationsAdapter(private val list: List<Notification>) :
                 .load(cover)
                 .into(binding.itemNotificationImageview)
             binding.notification = this
-
-            when {
-                topicId != "" -> {
-
-                }
-                postId != "" -> {
-
-                }
-                userId != "" -> {
-
-                }
-            }
         }
     }
 

@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -21,8 +21,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.horaciocome1.reaque.R
+import io.github.horaciocome1.simplerecyclerviewtouchlistener.addSimpleTouchListener
+import io.github.horaciocome1.simplerecyclerviewtouchlistener.setOnClick
 import kotlinx.android.synthetic.main.fragment_notifications.*
 
 class NotificationsFragment : Fragment() {
@@ -40,6 +43,27 @@ class NotificationsFragment : Fragment() {
                 fragment_notifications_recyclerview.run {
                     layoutManager = LinearLayoutManager(context)
                     adapter = NotificationsAdapter(it)
+                    setOnClick { view, position ->
+                        it[position].run {
+                            when {
+                                isComment -> {
+                                    val openComments =
+                                        NotificationsFragmentDirections.actionOpenCommentsFromNotifications(id2, "")
+                                    Navigation.findNavController(view).navigate(openComments)
+                                }
+                                isPost -> {
+                                    val openRead = NotificationsFragmentDirections.actionOpenReadFromNotifications(id2)
+                                    Navigation.findNavController(view).navigate(openRead)
+                                }
+                                isUser -> {
+                                    val openProfile =
+                                        NotificationsFragmentDirections.actionOpenProfileFromNotifications(id2)
+                                    Navigation.findNavController(view).navigate(openProfile)
+                                }
+                            }
+                        }
+                    }
+                    addSimpleTouchListener()
                 }
                 fragment_notifications_progressbar.visibility = View.GONE
             }

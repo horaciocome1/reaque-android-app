@@ -19,9 +19,10 @@ data class Notification(var id: String) {
 
     var message = ""
     var date = ""
-    var topicId = "" // if it is not empty, the notification references a topic comments
-    var postId = "" // if it is not empty, the notification references a post
-    var userId = "" // if it is not empty, the notification references a user or writer
     var cover = ""
+    var isComment = false
+    var isPost = false
+    var isUser = false
+    var id2 = ""
 
 }

@@ -78,8 +78,9 @@ val DocumentSnapshot.notification: Notification
             message = this@notification["message"].toString()
             date = this@notification["date"].toString()
             cover = this@notification["cover"].toString()
-            topicId = this@notification["topic_id"].toString()
-            postId = this@notification["post_id"].toString()
-            userId = this@notification["user_id"].toString()
+            isComment = this@notification["comment"].toString().toBoolean()
+            isPost = this@notification["post"].toString().toBoolean()
+            isUser = this@notification["user"].toString().toBoolean()
+            id2 = this@notification["id"].toString()
         }
     }
