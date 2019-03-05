@@ -168,7 +168,7 @@
                     app:icon="@drawable/outline_list_18" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/writers_button"
+                    android:id="@+id/users_button"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

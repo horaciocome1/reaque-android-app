@@ -86,7 +86,7 @@ class FavoritesFragment : Fragment() {
                             )
                             Navigation.findNavController(it).navigate(openPosts)
                         }
-                        writers_button.setOnClickListener {
+                        users_button.setOnClickListener {
                             val openUsers =
                                 FavoritesFragmentDirections.actionOpenUsersFromFavorites(topic.id, topic.title)
                             Navigation.findNavController(it).navigate(openUsers)

@@ -47,14 +47,14 @@
                 app:cardElevation="0dp">
 
                 <ImageView
-                    android:id="@+id/item_topic_imageview"
+                    android:id="@+id/imageview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
-                android:id="@+id/item_topic_title_textview"
+                android:id="@+id/title_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -67,7 +67,7 @@
                 android:textColor="@color/primaryTextColor" />
 
             <TextView
-                android:id="@+id/item_topic_description_textview"
+                android:id="@+id/description_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -80,49 +80,62 @@
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 android:textColor="@color/primaryTextColor" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/item_topic_comments_button"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-                android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:padding="16dp"
-                android:text="Comentários"
-                android:layout_gravity="start"
-                android:textAlignment="textStart"
-                app:cornerRadius="16dp"
-                app:icon="@drawable/outline_forum_18" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/item_topic_posts_button"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-                android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:padding="16dp"
-                android:text="Publicações"
-                android:layout_gravity="start"
-                android:textAlignment="textStart"
-                app:cornerRadius="16dp"
-                app:icon="@drawable/outline_list_18" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/comments_button"
+                    style="@style/Widget.MaterialComponents.Button.UnelevatedButton.Icon"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:padding="16dp"
+                    android:text="Comentários"
+                    android:textAlignment="textStart"
+                    app:cornerRadius="16dp"
+                    app:icon="@drawable/outline_forum_18"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/item_topic_writers_button"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-                android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginBottom="16dp"
-                android:padding="16dp"
-                app:cornerRadius="16dp"
-                android:text="Autores"
-                android:layout_gravity="start"
-                android:textAlignment="textStart"
-                app:icon="@drawable/outline_people_outline_18" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/posts_button"
+                    style="@style/Widget.MaterialComponents.Button.UnelevatedButton.Icon"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:padding="16dp"
+                    android:text="Publicações"
+                    android:textAlignment="textStart"
+                    app:cornerRadius="16dp"
+                    app:icon="@drawable/outline_list_18"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/comments_button" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/users_button"
+                    style="@style/Widget.MaterialComponents.Button.UnelevatedButton.Icon"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="32dp"
+                    android:padding="16dp"
+                    android:text="Autores"
+                    android:textAlignment="textStart"
+                    app:cornerRadius="16dp"
+                    app:icon="@drawable/outline_people_outline_18"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/posts_button" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
 

@@ -46,19 +46,19 @@ class TopicsAdapter(private val list: List<Topic>) : RecyclerView.Adapter<Topics
             Glide.with(context)
                 .load(cover)
                 .transition(DrawableTransitionOptions.withCrossFade())
-                .into(binding.itemTopicImageview)
+                .into(binding.imageview)
 
-            binding.itemTopicPostsButton.setOnClickListener {
+            binding.postsButton.setOnClickListener {
                 val openTopicAction = TopicsFragmentDirections.actionOpenPostsFromTopics(id, title, true, false)
                 Navigation.findNavController(it).navigate(openTopicAction)
             }
 
-            binding.itemTopicWritersButton.setOnClickListener {
+            binding.usersButton.setOnClickListener {
                 val openUsersAction = TopicsFragmentDirections.actionOpenUsersFromTopics(id, title)
                 Navigation.findNavController(it).navigate(openUsersAction)
             }
 
-            binding.itemTopicCommentsButton.setOnClickListener {
+            binding.commentsButton.setOnClickListener {
                 val openCommentsAction = TopicsFragmentDirections.actionOpenCommentsFromTopics(id, title)
                 Navigation.findNavController(it).navigate(openCommentsAction)
             }
