@@ -15,6 +15,7 @@
 
 package io.github.horaciocome1.reaque.utilities
 
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentSnapshot
 import io.github.horaciocome1.reaque.data.comments.Comment
 import io.github.horaciocome1.reaque.data.notifications.Notification
@@ -31,7 +32,9 @@ val DocumentSnapshot.user: User
             totalFollowers = this@user["total_followers"].toString()
             totalPosts = this@user["total_posts"].toString()
             town = this@user["town"].toString()
-            since = this@user["since"].toString()
+            val timestamp = this@user["since"]
+            if (timestamp is Timestamp)
+                since = timestamp.string
             email = this@user["email"].toString()
         }
     }
@@ -49,10 +52,13 @@ val DocumentSnapshot.post: Post
     get() {
         return Post(id).apply {
             cover = this@post["cover"].toString()
-            date = this@post["date"].toString()
+            val timestamp = this@post["date"]
+            if (timestamp is Timestamp)
+                date = timestamp.string
             message = this@post["message"].toString()
             title = this@post["title"].toString()
-            user = User(this@post["writer_id"].toString()).apply {
+            user.apply {
+                id = this@post["writer_id"].toString()
                 name = this@post["writer_name"].toString()
                 pic = this@post["writer_pic"].toString()
             }
@@ -63,7 +69,9 @@ val DocumentSnapshot.comment: Comment
     get() {
         return Comment(id).apply {
             message = this@comment["message"].toString()
-            date = this@comment["date"].toString()
+            val timestamp = this@comment["date"]
+            if (timestamp is Timestamp)
+                date = timestamp.string
             user.apply {
                 id = this@comment["writer_id"].toString()
                 name = this@comment["writer_name"].toString()
@@ -76,7 +84,9 @@ val DocumentSnapshot.notification: Notification
     get() {
         return Notification(id).apply {
             message = this@notification["message"].toString()
-            date = this@notification["date"].toString()
+            val timestamp = this@notification["date"]
+            if (timestamp is Timestamp)
+                date = timestamp.string
             cover = this@notification["cover"].toString()
             isComment = this@notification["comment"].toString().toBoolean()
             isPost = this@notification["post"].toString().toBoolean()
