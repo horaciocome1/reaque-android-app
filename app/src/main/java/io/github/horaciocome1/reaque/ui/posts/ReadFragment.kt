@@ -61,9 +61,9 @@ class ReadFragment: Fragment() {
                                 .into(fragment_read_cover2_imageview)
                             load(user.pic)
                                 .apply(RequestOptions.circleCropTransform())
-                                .into(fragment_read_profile_pic_imageview)
+                                .into(profile_pic_imageview)
                         }
-                        fragment_read_profile_pic_imageview.setOnClickListener {
+                        profile_pic_imageview.setOnClickListener {
                             val openProfile = ReadFragmentDirections.actionOpenProfileFromRead(this.user.id)
                             Navigation.findNavController(it).navigate(openProfile)
                         }

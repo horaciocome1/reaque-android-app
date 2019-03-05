@@ -123,7 +123,7 @@
                         android:textColor="@color/primaryTextColor" />
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/fragment_read_add_to_favorites_button"
+                        android:id="@+id/add_to_favorites_button"
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -138,7 +138,7 @@
                         android:text="Adicionar aos favoritos" />
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/fragment_read_comments_button"
+                        android:id="@+id/comments_button"
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="32dp"
@@ -159,10 +159,11 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/fragment_read_profile_pic_imageview"
+            android:id="@+id/profile_pic_imageview"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_margin="32dp"
+            android:layout_gravity="top|end"
             android:scaleType="centerCrop" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
