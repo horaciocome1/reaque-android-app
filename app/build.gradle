@@ -59,13 +59,13 @@ dependencies {
     implementation 'jp.wasabeef:glide-transformations:4.0.1'
 
     // navigation component
-    def nav_version = "1.0.0-beta01"
+    def nav_version = "1.0.0-rc02"
     implementation "android.arch.navigation:navigation-fragment:$nav_version"
     implementation "android.arch.navigation:navigation-ui:$nav_version"
 
     // firebase
     implementation 'com.google.firebase:firebase-core:16.0.7'
-    implementation 'com.google.firebase:firebase-firestore:18.0.1'
+    implementation 'com.google.firebase:firebase-firestore:18.1.0'
 
     // test
     testImplementation 'junit:junit:4.12'
