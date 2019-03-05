@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -25,11 +25,14 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.comments.Comment
+import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.ui.MainActivity
 import kotlinx.android.synthetic.main.fragment_comments.*
 
 class CommentsFragment : Fragment() {
+
+    private var list = listOf<Comment>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_comments, container, false)
@@ -38,40 +41,18 @@ class CommentsFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         arguments?.let {
-            val safeArgs = CommentsFragmentArgs.fromBundle(it)
-            setActionBarTitle(safeArgs.topicTitle)
-            var list = listOf<Comment>()
-            viewModel.getComments(Topic(safeArgs.topicId)).observe(this, Observer { comments ->
-                when {
-                    comments.isEmpty() -> {
-                        fragment_comments_edittext.visibility = View.GONE
-                        fragment_comments_send_button.visibility = View.GONE
-                    }
-                    list.isEmpty() -> {
-                        list = comments
-                        configList(list)
-                        fragment_comments_edittext.visibility = View.VISIBLE
-                        fragment_comments_send_button.visibility = View.VISIBLE
-                        fragment_comments_progressbar.visibility = View.GONE
-                    }
-                    comments != list -> {
-                        fragment_comments_tap_to_update_button.run {
-                            visibility = View.VISIBLE
-                            setOnClickListener {
-                                visibility = View.GONE
-                                list = comments
-                                configList(list)
-                            }
-                        }
-                    }
-                }
-            })
+            CommentsFragmentArgs.fromBundle(it).run {
+                setActionBarTitle(title)
+                if (isTopic)
+                    viewModel.getComments(Topic(id)).observe(
+                        this@CommentsFragment,
+                        Observer { comments -> configComments(comments) })
+                else if (isPost)
+                    viewModel.getComments(Post(id)).observe(
+                        this@CommentsFragment,
+                        Observer { comments -> configComments(comments) })
+            }
         }
-    }
-
-    private fun configList(list: List<Comment>) = fragment_comments_recyclerview.apply {
-        layoutManager = LinearLayoutManager(context).apply { reverseLayout = true }
-        adapter = CommentsAdapter(list)
     }
 
     override fun onResume() {
@@ -82,6 +63,37 @@ class CommentsFragment : Fragment() {
 
     private fun setActionBarTitle(title: String) {
         (activity as MainActivity).supportActionBar?.title = title
+    }
+
+    private fun configList(list: List<Comment>) = fragment_comments_recyclerview.apply {
+        layoutManager = LinearLayoutManager(context).apply { reverseLayout = true }
+        adapter = CommentsAdapter(list)
+    }
+
+    private fun configComments(comments: List<Comment>) {
+        when {
+            comments.isEmpty() -> {
+                fragment_comments_edittext.visibility = View.GONE
+                fragment_comments_send_button.hide()
+            }
+            list.isEmpty() -> {
+                list = comments
+                configList(list)
+                fragment_comments_edittext.visibility = View.VISIBLE
+                fragment_comments_send_button.show()
+                fragment_comments_progressbar.visibility = View.GONE
+            }
+            comments != list -> {
+                fragment_comments_tap_to_update_button.run {
+                    visibility = View.VISIBLE
+                    setOnClickListener {
+                        visibility = View.GONE
+                        list = comments
+                        configList(list)
+                    }
+                }
+            }
+        }
     }
 
 }

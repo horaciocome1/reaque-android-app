@@ -71,6 +71,11 @@ class ReadFragment: Fragment() {
                             val openViewer = ReadFragmentDirections.actionOpenViewerFromRead(this.cover)
                             Navigation.findNavController(it).navigate(openViewer)
                         }
+                        comments_button.setOnClickListener {
+                            val openComments =
+                                ReadFragmentDirections.actionOpenCommentsFromRead(post.id, "", false, true)
+                            Navigation.findNavController(it).navigate(openComments)
+                        }
                     }
                 }
             })

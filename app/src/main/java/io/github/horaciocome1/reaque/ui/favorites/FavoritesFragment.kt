@@ -74,7 +74,12 @@ class FavoritesFragment : Fragment() {
                         behavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
                         comments_button.setOnClickListener {
                             val openComments =
-                                FavoritesFragmentDirections.actionOpenCommentsFromFavorites(topic.id, topic.title)
+                                FavoritesFragmentDirections.actionOpenCommentsFromFavorites(
+                                    topic.id,
+                                    topic.title,
+                                    true,
+                                    false
+                                )
                             Navigation.findNavController(it).navigate(openComments)
                         }
                         more_button.setOnClickListener {

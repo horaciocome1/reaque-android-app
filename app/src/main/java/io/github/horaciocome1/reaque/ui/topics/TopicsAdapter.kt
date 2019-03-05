@@ -59,7 +59,7 @@ class TopicsAdapter(private val list: List<Topic>) : RecyclerView.Adapter<Topics
             }
 
             binding.commentsButton.setOnClickListener {
-                val openCommentsAction = TopicsFragmentDirections.actionOpenCommentsFromTopics(id, title)
+                val openCommentsAction = TopicsFragmentDirections.actionOpenCommentsFromTopics(id, title, true, false)
                 Navigation.findNavController(it).navigate(openCommentsAction)
             }
         }

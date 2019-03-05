@@ -48,7 +48,12 @@ class NotificationsFragment : Fragment() {
                             when {
                                 isComment -> {
                                     val openComments =
-                                        NotificationsFragmentDirections.actionOpenCommentsFromNotifications(id2, "")
+                                        NotificationsFragmentDirections.actionOpenCommentsFromNotifications(
+                                            id2,
+                                            "",
+                                            true,
+                                            false
+                                        )
                                     Navigation.findNavController(view).navigate(openComments)
                                 }
                                 isPost -> {
