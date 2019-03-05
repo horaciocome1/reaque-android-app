@@ -48,7 +48,7 @@ class TopicsAdapter(private val list: List<Topic>) : RecyclerView.Adapter<Topics
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(binding.itemTopicImageview)
 
-            binding.itemTopicMoreButton.setOnClickListener {
+            binding.itemTopicPostsButton.setOnClickListener {
                 val openTopicAction = TopicsFragmentDirections.actionOpenPostsFromTopics(id, title, true, false)
                 Navigation.findNavController(it).navigate(openTopicAction)
             }

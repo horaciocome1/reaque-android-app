@@ -83,32 +83,36 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/item_topic_comments_button"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-                android:layout_width="wrap_content"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:padding="16dp"
-                app:cornerRadius="16dp"
                 android:text="Comentários"
+                android:layout_gravity="start"
+                android:textAlignment="textStart"
+                app:cornerRadius="16dp"
                 app:icon="@drawable/outline_forum_18" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/item_topic_more_button"
+                android:id="@+id/item_topic_posts_button"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-                android:layout_width="wrap_content"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:padding="16dp"
-                app:cornerRadius="16dp"
                 android:text="Publicações"
+                android:layout_gravity="start"
+                android:textAlignment="textStart"
+                app:cornerRadius="16dp"
                 app:icon="@drawable/outline_list_18" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/item_topic_writers_button"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-                android:layout_width="wrap_content"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
@@ -116,6 +120,8 @@
                 android:padding="16dp"
                 app:cornerRadius="16dp"
                 android:text="Autores"
+                android:layout_gravity="start"
+                android:textAlignment="textStart"
                 app:icon="@drawable/outline_people_outline_18" />
 
         </LinearLayout>
