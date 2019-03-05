@@ -17,6 +17,7 @@ package io.github.horaciocome1.reaque.data.notifications
 
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import io.github.horaciocome1.reaque.utilities.notification
 import io.github.horaciocome1.reaque.utilities.onListenFailed
 
@@ -29,52 +30,18 @@ class NotificationsWebService {
     val notifications = MutableLiveData<List<Notification>>()
 
     init {
-        ref.addSnapshotListener { snapshot, exception ->
-            when {
-                exception != null -> onListenFailed(tag, exception)
-                snapshot != null -> {
-                    val notificationsList = mutableListOf<Notification>()
-                    for (doc in snapshot)
-                        notificationsList.add(doc.notification)
-                    notifications.value = notificationsList
+        ref.orderBy("date", Query.Direction.DESCENDING)
+            .addSnapshotListener { snapshot, exception ->
+                when {
+                    exception != null -> onListenFailed(tag, exception)
+                    snapshot != null -> {
+                        val notificationsList = mutableListOf<Notification>()
+                        for (doc in snapshot)
+                            notificationsList.add(doc.notification)
+                        notifications.value = notificationsList
+                    }
                 }
             }
-        }
-//        notifications.value = notificationsFake
     }
 
 }
-
-val notificationsFake = mutableListOf(
-    Notification("").apply {
-        date = "22, Abril de 2018"
-        message =
-            "Lorem ipsum dolor sit amet, pri nusquam euripidis voluptaria ea, eam et ullum reprehendunt. Usu mucius phaedrum posidonium no. Ex eos equidem explicari, cibo rebum ludus mei no. In usu quaeque civibus, dicant dolores mea ad. Saperet periculis ad sea, et paulo alterum efficiendi vel."
-    },
-    Notification("").apply {
-        date = "22, Julho de 2018"
-        message = "Et adolescens ullamcorper sit."
-    },
-    Notification("").apply {
-        date = "22, Setembro de 2018"
-        message = "Ea pri quaeque pertinax, veritus habemus his ei."
-    },
-    Notification("").apply {
-        date = "22, Julho de 2018"
-        message = "His ad expetendis percipitur, duo ut veritus atomorum sensibus, mei cu vocibus eligendi."
-    },
-    Notification("").apply {
-        date = "22, Dezembro de 2018"
-        message =
-            "Vim ludus graece deterruisset eu, ne iriure accusata theophrastus nec. Modus doming pertinacia ad vel. Ex his possit civibus voluptatum."
-    },
-    Notification("").apply {
-        date = "22, Julho de 2018"
-        message =
-            "Vim ludus graece deterruisset eu, ne iriure accusata theophrastus nec. Modus doming pertinacia ad vel. Ex his possit civibus voluptatum. Sint illud modus quo et, affert appareat voluptatibus nam ei, ea pri populo reformidans. Id sit nostrum deseruisse. Pri aliquando forensibus complectitur an, probo electram vulputate eu his."
-    },
-    Notification("").apply {
-        date = "22, Fevereiro de 2018"
-        message = "Et adolescens ullamcorper sit."
-    }
-)

@@ -18,6 +18,7 @@ package io.github.horaciocome1.reaque.data.users
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.utilities.onListenFailed
 import io.github.horaciocome1.reaque.utilities.onSnapshotNull
@@ -67,18 +68,20 @@ class UsersWebService {
     fun getUsers(topic: Topic): LiveData<List<User>> {
         if (!topicId.equals(topic.id, true)) {
             topicUsers.value = mutableListOf()
-            ref.whereEqualTo(topic.id, true).addSnapshotListener { snapshot, exception ->
-                when {
-                    exception != null -> onListenFailed(tag, exception)
-                    snapshot != null -> {
-                        topicUsersList = mutableListOf()
-                        for (doc in snapshot.documents)
-                            topicUsersList.add(doc.user)
-                        topicUsers.value = topicUsersList
+            ref.whereEqualTo(topic.id, true)
+                .orderBy("date", Query.Direction.DESCENDING)
+                .addSnapshotListener { snapshot, exception ->
+                    when {
+                        exception != null -> onListenFailed(tag, exception)
+                        snapshot != null -> {
+                            topicUsersList = mutableListOf()
+                            for (doc in snapshot.documents)
+                                topicUsersList.add(doc.user)
+                            topicUsers.value = topicUsersList
+                        }
+                        else -> onSnapshotNull(tag)
                     }
-                    else -> onSnapshotNull(tag)
                 }
-            }
             topicId = topic.id
         }
         return topicUsers
@@ -103,6 +106,7 @@ class UsersWebService {
         if (favoritesList.isEmpty())
             favoritesRef.whereEqualTo("user", true)
                 .whereEqualTo(myId, true)
+                .orderBy("date", Query.Direction.DESCENDING)
                 .addSnapshotListener { snapshot, exception ->
                     when {
                         exception != null -> onListenFailed(tag, exception)

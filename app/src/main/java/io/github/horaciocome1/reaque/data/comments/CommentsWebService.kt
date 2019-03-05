@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package io.github.horaciocome1.reaque.data.comments
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.utilities.comment
@@ -42,18 +43,20 @@ class CommentsWebService {
         if (!topic.id.equals(topicId, true)) {
             topicComments.value = mutableListOf()
             topicId = topic.id
-            ref.whereEqualTo(topicId, true).addSnapshotListener { snapshot, exception ->
-                when {
-                    exception != null -> onListenFailed(tag, exception)
-                    snapshot != null -> {
-                        topicCommentsList = mutableListOf()
-                        for (doc in snapshot)
-                            topicCommentsList.add(doc.comment)
-                        topicComments.value = topicCommentsList
+            ref.whereEqualTo(topicId, true)
+                .orderBy("date", Query.Direction.DESCENDING)
+                .addSnapshotListener { snapshot, exception ->
+                    when {
+                        exception != null -> onListenFailed(tag, exception)
+                        snapshot != null -> {
+                            topicCommentsList = mutableListOf()
+                            for (doc in snapshot)
+                                topicCommentsList.add(doc.comment)
+                            topicComments.value = topicCommentsList
+                        }
+                        else -> onSnapshotNull(tag)
                     }
-                    else -> onSnapshotNull(tag)
                 }
-            }
         }
         return topicComments
     }
@@ -62,18 +65,20 @@ class CommentsWebService {
         if (!post.id.equals(postId, true)) {
             postComments.value = mutableListOf()
             postId = post.id
-            ref.whereEqualTo(postId, true).addSnapshotListener { snapshot, exception ->
-                when {
-                    exception != null -> onListenFailed(tag, exception)
-                    snapshot != null -> {
-                        postCommentsList = mutableListOf()
-                        for (doc in snapshot)
-                            postCommentsList.add(doc.comment)
-                        postComments.value = postCommentsList
+            ref.whereEqualTo(postId, true)
+                .orderBy("date", Query.Direction.DESCENDING)
+                .addSnapshotListener { snapshot, exception ->
+                    when {
+                        exception != null -> onListenFailed(tag, exception)
+                        snapshot != null -> {
+                            postCommentsList = mutableListOf()
+                            for (doc in snapshot)
+                                postCommentsList.add(doc.comment)
+                            postComments.value = postCommentsList
+                        }
+                        else -> onSnapshotNull(tag)
                     }
-                    else -> onSnapshotNull(tag)
                 }
-            }
         }
         return postComments
     }
