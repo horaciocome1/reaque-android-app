@@ -106,7 +106,6 @@ class UsersWebService {
         if (favoritesList.isEmpty())
             favoritesRef.whereEqualTo("user", true)
                 .whereEqualTo(myId, true)
-                .orderBy("date", Query.Direction.DESCENDING)
                 .addSnapshotListener { snapshot, exception ->
                     when {
                         exception != null -> onListenFailed(tag, exception)

@@ -123,7 +123,6 @@ class PostsWebService {
         if (favoritesList.isEmpty())
             favoritesRef.whereEqualTo("post", true)
                 .whereEqualTo(myId, true)
-                .orderBy("date", Query.Direction.DESCENDING)
                 .addSnapshotListener { snapshot, exception ->
                     when {
                         exception != null -> onListenFailed(tag, exception)
