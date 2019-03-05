@@ -118,6 +118,19 @@
                     app:srcCompat="@drawable/outline_drag_handle_24" />
 
                 <TextView
+                    style="@style/TextAppearance.MaterialComponents.Headline3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginRight="32dp"
+                    android:lineSpacingExtra="8dp"
+                    android:text="@{topic.title}"
+                    android:textColor="@color/primaryTextColor" />
+
+                <TextView
                     style="@style/TextAppearance.MaterialComponents.Body1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -139,10 +152,8 @@
                     android:layout_marginTop="16dp"
                     android:padding="16dp"
                     android:text="Comentários"
-                    android:textColor="?colorControlNormal"
                     app:cornerRadius="16dp"
-                    app:icon="@drawable/outline_forum_18"
-                    app:iconTint="?colorControlNormal" />
+                    app:icon="@drawable/outline_forum_18" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/more_button"
@@ -153,10 +164,8 @@
                     android:layout_marginLeft="16dp"
                     android:padding="16dp"
                     android:text="Publicações"
-                    android:textColor="?colorControlNormal"
                     app:cornerRadius="16dp"
-                    app:icon="@drawable/outline_list_18"
-                    app:iconTint="?colorControlNormal" />
+                    app:icon="@drawable/outline_list_18" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/writers_button"
@@ -168,10 +177,8 @@
                     android:layout_marginBottom="16dp"
                     android:padding="16dp"
                     android:text="Autores"
-                    android:textColor="?colorControlNormal"
                     app:cornerRadius="16dp"
-                    app:icon="@drawable/outline_people_outline_18"
-                    app:iconTint="?colorControlNormal" />
+                    app:icon="@drawable/outline_people_outline_18" />
 
             </LinearLayout>
 
