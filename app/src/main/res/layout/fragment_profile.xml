@@ -70,7 +70,7 @@
                     android:lines="4"
                     android:text="@{user.description}"
                     android:textAlignment="center"
-                    android:textColor="@color/text_on_dark"
+                    android:textColor="@android:color/white"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
                     app:layout_constraintEnd_toEndOf="parent"
