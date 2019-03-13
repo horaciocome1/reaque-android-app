@@ -18,7 +18,6 @@ package io.github.horaciocome1.reaque.data.users
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.utilities.onListenFailed
 import io.github.horaciocome1.reaque.utilities.onSnapshotNull
@@ -69,7 +68,6 @@ class UsersWebService {
         if (!topicId.equals(topic.id, true)) {
             topicUsers.value = mutableListOf()
             ref.whereEqualTo(topic.id, true)
-                .orderBy("date", Query.Direction.DESCENDING)
                 .addSnapshotListener { snapshot, exception ->
                     when {
                         exception != null -> onListenFailed(tag, exception)

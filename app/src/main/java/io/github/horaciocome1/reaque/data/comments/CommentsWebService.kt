@@ -18,7 +18,6 @@ package io.github.horaciocome1.reaque.data.comments
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.utilities.comment
@@ -44,7 +43,6 @@ class CommentsWebService {
             topicComments.value = mutableListOf()
             topicId = topic.id
             ref.whereEqualTo(topicId, true)
-                .orderBy("date", Query.Direction.DESCENDING)
                 .addSnapshotListener { snapshot, exception ->
                     when {
                         exception != null -> onListenFailed(tag, exception)
@@ -66,7 +64,6 @@ class CommentsWebService {
             postComments.value = mutableListOf()
             postId = post.id
             ref.whereEqualTo(postId, true)
-                .orderBy("date", Query.Direction.DESCENDING)
                 .addSnapshotListener { snapshot, exception ->
                     when {
                         exception != null -> onListenFailed(tag, exception)

@@ -17,20 +17,20 @@ package io.github.horaciocome1.reaque.data.notifications
 
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import io.github.horaciocome1.reaque.utilities.notification
 import io.github.horaciocome1.reaque.utilities.onListenFailed
 
 class NotificationsWebService {
 
     private val tag = "NotificationsWebService"
+    private val myId = "FRWsZTrrI0PTp1Fqftdb"
 
     private val ref = FirebaseFirestore.getInstance().collection("notifications")
 
     val notifications = MutableLiveData<List<Notification>>()
 
     init {
-        ref.orderBy("date", Query.Direction.DESCENDING)
+        ref.whereEqualTo(myId, true)
             .addSnapshotListener { snapshot, exception ->
                 when {
                     exception != null -> onListenFailed(tag, exception)

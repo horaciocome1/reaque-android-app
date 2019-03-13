@@ -18,7 +18,6 @@ package io.github.horaciocome1.reaque.data.posts
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.utilities.onListenFailed
@@ -63,7 +62,6 @@ class PostsWebService {
         if (!topicId.equals(topic.id, true)) {
             topicPosts.value = mutableListOf()
             ref.whereEqualTo(topic.id, true)
-                .orderBy("date", Query.Direction.DESCENDING)
                 .addSnapshotListener { snapshot, exception ->
                     when {
                         exception != null -> onListenFailed(tag, exception)
@@ -86,7 +84,6 @@ class PostsWebService {
         if (!userId.equals(user.id, true)) {
             userPosts.value = mutableListOf()
             ref.whereEqualTo(user.id, true)
-                .orderBy("date", Query.Direction.DESCENDING)
                 .addSnapshotListener { snapshot, exception ->
                     when {
                         exception != null -> onListenFailed(tag, exception)
