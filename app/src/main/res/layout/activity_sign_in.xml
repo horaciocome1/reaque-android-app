@@ -40,7 +40,7 @@
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/roboto_light"
         android:gravity="end"
-        android:text="Vamos começar por descobrir Moçambique."
+        android:text="Seja bem-vindo."
         android:textAlignment="viewEnd"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
         android:textColor="@color/secondaryColor"
