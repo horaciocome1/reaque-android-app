@@ -23,9 +23,6 @@
     <color name="secondaryDarkColor">#2bbd7e</color>
     <color name="primaryTextColor">#000000</color>
     <color name="secondaryTextColor">#000000</color>
-
-    <color name="divider">#BDBDBD</color>
-
-    <color name="colorError">#b00020</color>
+    <color name="colorError">#f44336</color>
 
 </resources>

@@ -41,24 +41,24 @@ class MoreFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fragment_more_profile_button.setOnClickListener {
+        profile_pic_imageview.setOnClickListener {
             if (userId != "") {
                 val openProfile = MoreFragmentDirections.actionOpenProfileFromMore(userId)
                 Navigation.findNavController(it).navigate(openProfile)
             }
         }
-        fragment_more_search_textview.setOnClickListener {
+        search_textview.setOnClickListener {
             val openSearch = MoreFragmentDirections.actionOpenSearch()
             Navigation.findNavController(it).navigate(openSearch)
         }
-        fragment_more_setting_textview.setOnClickListener {
+        setting_textview.setOnClickListener {
             val openSettings = MoreFragmentDirections.actionOpenSettings()
             Navigation.findNavController(it).navigate(openSettings)
         }
-        fragment_more_feedback_textview.setOnClickListener {
+        feedback_textview.setOnClickListener {
 
         }
-        fragment_more_about_textview.setOnClickListener {
+        about_textview.setOnClickListener {
             val url = resources.getString(R.string.read_me_url)
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(intent)
@@ -72,8 +72,8 @@ class MoreFragment : Fragment() {
                 Glide.with(this@MoreFragment)
                     .load(it.pic)
                     .apply(RequestOptions.circleCropTransform())
-                    .into(fragment_more_profile_pic_imageview)
-            fragment_more_name_textview.text = it.name
+                    .into(profile_pic_imageview)
+            name_textview.text = it.name
             if (it.id != "") {
                 userId = it.id
                 showButtons()
@@ -88,15 +88,13 @@ class MoreFragment : Fragment() {
     }
 
     private fun hideButtons() = View.GONE.run {
-        fragment_more_profile_button.visibility = this
-        fragment_more_edit_button.visibility = this
-        fragment_more_logout_button.visibility = this
+        edit_button.visibility = this
+        logout_button.visibility = this
     }
 
     private fun showButtons() = View.VISIBLE.run {
-        fragment_more_profile_button.visibility = this
-        fragment_more_edit_button.visibility = this
-        fragment_more_logout_button.visibility = this
+        edit_button.visibility = this
+        logout_button.visibility = this
     }
 
 }
