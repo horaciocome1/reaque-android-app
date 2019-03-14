@@ -27,6 +27,8 @@ import io.github.horaciocome1.reaque.utilities.onSnapshotNull
 class CommentsWebService {
 
     private val tag = "CommentsWebService"
+    private val topicIdField = "topic_id"
+    private val postIdField = "post_id"
 
     private var topicCommentsList = mutableListOf<Comment>()
     private val topicComments = MutableLiveData<List<Comment>>()
@@ -41,8 +43,7 @@ class CommentsWebService {
     fun getComments(topic: Topic): LiveData<List<Comment>> {
         if (!topic.id.equals(topicId, true)) {
             topicComments.value = mutableListOf()
-            topicId = topic.id
-            ref.whereEqualTo(topicId, true)
+            ref.whereEqualTo(topicIdField, topic.id)
                 .addSnapshotListener { snapshot, exception ->
                     when {
                         exception != null -> onListenFailed(tag, exception)
@@ -56,14 +57,14 @@ class CommentsWebService {
                     }
                 }
         }
+        topicId = topic.id
         return topicComments
     }
 
     fun getComments(post: Post): LiveData<List<Comment>> {
         if (!post.id.equals(postId, true)) {
             postComments.value = mutableListOf()
-            postId = post.id
-            ref.whereEqualTo(postId, true)
+            ref.whereEqualTo(postIdField, post.id)
                 .addSnapshotListener { snapshot, exception ->
                     when {
                         exception != null -> onListenFailed(tag, exception)
@@ -77,6 +78,7 @@ class CommentsWebService {
                     }
                 }
         }
+        postId = post.id
         return postComments
     }
 

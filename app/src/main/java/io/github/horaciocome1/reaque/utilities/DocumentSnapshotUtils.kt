@@ -51,16 +51,16 @@ val DocumentSnapshot.topic: Topic
 val DocumentSnapshot.post: Post
     get() {
         return Post(id).apply {
-            cover = this@post["cover"].toString()
+            cover = this@post["pic"].toString()
             val timestamp = this@post["date"]
             if (timestamp is Timestamp)
                 date = timestamp.string
             message = this@post["message"].toString()
             title = this@post["title"].toString()
             user.apply {
-                id = this@post["writer_id"].toString()
-                name = this@post["writer_name"].toString()
-                pic = this@post["writer_pic"].toString()
+                id = this@post["user.id"].toString()
+                name = this@post["user.name"].toString()
+                pic = this@post["user.pic"].toString()
             }
         }
     }
@@ -73,9 +73,9 @@ val DocumentSnapshot.comment: Comment
             if (timestamp is Timestamp)
                 date = timestamp.string
             user.apply {
-                id = this@comment["writer_id"].toString()
-                name = this@comment["writer_name"].toString()
-                pic = this@comment["writer_pic"].toString()
+                id = this@comment["user.id"].toString()
+                name = this@comment["user.name"].toString()
+                pic = this@comment["user.pic"].toString()
             }
         }
     }
@@ -91,6 +91,6 @@ val DocumentSnapshot.notification: Notification
             isComment = this@notification["comment"].toString().toBoolean()
             isPost = this@notification["post"].toString().toBoolean()
             isUser = this@notification["user"].toString().toBoolean()
-            id2 = this@notification["id"].toString()
+            contentId = this@notification["id"].toString()
         }
     }
