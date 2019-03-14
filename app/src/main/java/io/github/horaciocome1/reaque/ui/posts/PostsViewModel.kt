@@ -15,6 +15,8 @@
 
 package io.github.horaciocome1.reaque.ui.posts
 
+import androidx.databinding.BaseObservable
+import androidx.databinding.Bindable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import io.github.horaciocome1.reaque.data.posts.Post
@@ -35,6 +37,12 @@ val ReadFragment.viewModel: PostsViewModel
         return ViewModelProviders.of(this, factory).get(PostsViewModel::class.java)
     }
 
+val PostFragment.viewModel: PostsViewModel
+    get() {
+        val factory = InjectorUtils.postsViewModelFactory
+        return ViewModelProviders.of(this, factory).get(PostsViewModel::class.java)
+    }
+
 class PostsViewModel(private val postsRepository: PostsRepository) : ViewModel() {
 
     fun addPost(post: Post) = postsRepository.addPost(post)
@@ -44,5 +52,16 @@ class PostsViewModel(private val postsRepository: PostsRepository) : ViewModel()
     fun getPosts(user: User) = postsRepository.getPosts(user)
 
     fun getPosts(post: Post) = postsRepository.getPosts(post)
+
+    class PostViewModel : BaseObservable() {
+
+//        val
+
+        @Bindable
+        fun getTitle(): Boolean {
+            return true
+        }
+
+    }
 
 }

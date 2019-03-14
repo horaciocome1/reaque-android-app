@@ -39,4 +39,9 @@ class PostFragment : Fragment() {
             (activity as MainActivity).supportActionBar?.show()
     }
 
+    override fun onStart() {
+        super.onStart()
+        binding.post?.title
+    }
+
 }
