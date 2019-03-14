@@ -18,11 +18,11 @@
     <color name="primaryColor">#fafafa</color>
     <color name="primaryLightColor">#ffffff</color>
     <color name="primaryDarkColor">#c7c7c7</color>
-    <color name="secondaryColor">#69f0ae</color>
-    <color name="secondaryLightColor">#9fffe0</color>
-    <color name="secondaryDarkColor">#2bbd7e</color>
+    <color name="secondaryColor">#7c4dff</color>
+    <color name="secondaryLightColor">#b47cff</color>
+    <color name="secondaryDarkColor">#3f1dcb</color>
     <color name="primaryTextColor">#000000</color>
-    <color name="secondaryTextColor">#000000</color>
+    <color name="secondaryTextColor">#ffffff</color>
     <color name="colorError">#f44336</color>
 
 </resources>
