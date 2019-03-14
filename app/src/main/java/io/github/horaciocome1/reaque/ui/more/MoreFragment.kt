@@ -47,6 +47,10 @@ class MoreFragment : Fragment() {
                 Navigation.findNavController(it).navigate(openProfile)
             }
         }
+        post_textview.setOnClickListener {
+            val openPost = MoreFragmentDirections.actionOpenPost()
+            Navigation.findNavController(it).navigate(openPost)
+        }
         search_textview.setOnClickListener {
             val openSearch = MoreFragmentDirections.actionOpenSearch()
             Navigation.findNavController(it).navigate(openSearch)

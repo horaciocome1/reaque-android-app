@@ -180,6 +180,9 @@
         <action
             android:id="@+id/action_open_search"
             app:destination="@id/destination_search" />
+        <action
+            android:id="@+id/action_open_post"
+            app:destination="@id/destination_post" />
     </fragment>
     <fragment
         android:id="@+id/destination_notifications"
@@ -195,4 +198,8 @@
             android:id="@+id/action_open_profile_from_notifications"
             app:destination="@id/destination_profile" />
     </fragment>
+    <fragment
+        android:id="@+id/destination_post"
+        android:name="io.github.horaciocome1.reaque.ui.posts.PostFragment"
+        android:label="Publicar" />
 </navigation>
