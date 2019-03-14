@@ -18,6 +18,7 @@ package io.github.horaciocome1.reaque.data.topics
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import io.github.horaciocome1.reaque.utilities.onListenFailed
 import io.github.horaciocome1.reaque.utilities.onSnapshotNull
 import io.github.horaciocome1.reaque.utilities.topic
@@ -42,7 +43,9 @@ class TopicsWebService {
     private val favoritesRef = db.collection("favorites")
 
     init {
-        ref.addSnapshotListener { snapshot, exception ->
+        ref
+            .orderBy("title", Query.Direction.ASCENDING)
+            .addSnapshotListener { snapshot, exception ->
             when {
                 exception != null -> onListenFailed(tag, exception)
                 snapshot != null -> {

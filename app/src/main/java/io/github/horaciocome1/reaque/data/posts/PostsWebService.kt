@@ -28,6 +28,8 @@ class PostsWebService {
 
     private val tag = "PostsWebService"
     private val myId = "FRWsZTrrI0PTp1Fqftdb"
+    private val userIdPath = "user.id"
+    private val topicIdPath = "topic_id"
 
     /*list of all posts from the same topics*/
     private var topicPostsList = mutableListOf<Post>()
@@ -61,7 +63,7 @@ class PostsWebService {
     fun getPosts(topic: Topic): LiveData<List<Post>> {
         if (!topicId.equals(topic.id, true)) {
             topicPosts.value = mutableListOf()
-            ref.whereEqualTo(topic.id, true)
+            ref.whereEqualTo(topicIdPath, topic.id)
                 .addSnapshotListener { snapshot, exception ->
                     when {
                         exception != null -> onListenFailed(tag, exception)
@@ -83,7 +85,7 @@ class PostsWebService {
     fun getPosts(user: User): LiveData<List<Post>> {
         if (!userId.equals(user.id, true)) {
             userPosts.value = mutableListOf()
-            ref.whereEqualTo(user.id, true)
+            ref.whereEqualTo(userIdPath, user.id)
                 .addSnapshotListener { snapshot, exception ->
                     when {
                         exception != null -> onListenFailed(tag, exception)
