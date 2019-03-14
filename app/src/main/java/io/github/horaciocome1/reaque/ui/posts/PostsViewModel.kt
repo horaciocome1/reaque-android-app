@@ -17,6 +17,8 @@ package io.github.horaciocome1.reaque.ui.posts
 
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import io.github.horaciocome1.reaque.data.posts.Post
@@ -44,6 +46,17 @@ val PostFragment.viewModel: PostsViewModel
     }
 
 class PostsViewModel(private val postsRepository: PostsRepository) : ViewModel() {
+
+    private val _post = MutableLiveData<Post>()
+
+    val post: LiveData<Post>
+        get() = _post
+
+    @Bindable
+    val postTitle = MutableLiveData<String>()
+
+    @Bindable
+    val postMessage = MutableLiveData<String>()
 
     fun addPost(post: Post) = postsRepository.addPost(post)
 

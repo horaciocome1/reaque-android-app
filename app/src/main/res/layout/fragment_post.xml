@@ -18,8 +18,8 @@
     <data>
 
         <variable
-            name="post"
-            type="io.github.horaciocome1.reaque.data.posts.Post" />
+            name="viewmodel"
+            type="io.github.horaciocome1.reaque.ui.posts.PostsViewModel" />
 
     </data>
 
@@ -64,7 +64,7 @@
                             android:background="@android:color/transparent"
                             android:hint="Título"
                             android:padding="16dp"
-                            android:text="@={post.title}"
+                            android:text="@={viewmodel.postTitle}"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -80,7 +80,7 @@
                             android:background="@android:color/transparent"
                             android:hint="Mensagem"
                             android:padding="16dp"
-                            android:text="@={post.message}"
+                            android:text="@={viewmodel.postMessage}"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                     </com.google.android.material.textfield.TextInputLayout>
