@@ -45,7 +45,7 @@
                 app:layout_constraintTop_toTopOf="@+id/fragment_search_edittext"
                 app:layout_constraintBottom_toBottomOf="@+id/fragment_search_edittext"
                 app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@drawable/outline_arrow_back_24" />
+                app:srcCompat="@drawable/outline_close_24" />
 
             <EditText
                 android:id="@+id/fragment_search_edittext"
