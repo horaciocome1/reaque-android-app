@@ -20,6 +20,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.ui.MainActivity
 import kotlinx.android.synthetic.main.fragment_search.*
@@ -33,7 +34,7 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fragment_search_back_imageview.setOnClickListener {
-            (activity as MainActivity).onBackPressed()
+            Navigation.findNavController(it).navigateUp()
         }
     }
 
