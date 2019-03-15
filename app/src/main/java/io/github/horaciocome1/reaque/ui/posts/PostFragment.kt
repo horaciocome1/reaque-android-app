@@ -23,8 +23,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import io.github.horaciocome1.reaque.databinding.FragmentPostBinding
 import io.github.horaciocome1.reaque.ui.MainActivity
+import kotlinx.android.synthetic.main.fragment_post.*
 
 class PostFragment : Fragment() {
 
@@ -35,10 +37,17 @@ class PostFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        cancel_button.setOnClickListener {
+            Navigation.findNavController(it).navigateUp()
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
-            (activity as MainActivity).supportActionBar?.show()
+            (activity as MainActivity).supportActionBar?.hide()
     }
 
     override fun onStart() {
