@@ -41,6 +41,7 @@ class PostFragment : Fragment() {
         cancel_button.setOnClickListener {
             Navigation.findNavController(it).navigateUp()
         }
+        post_button.isEnabled = false
     }
 
     override fun onResume() {
