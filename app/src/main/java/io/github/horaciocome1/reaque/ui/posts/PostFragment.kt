@@ -23,6 +23,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
+import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.databinding.FragmentPostBinding
 import io.github.horaciocome1.reaque.ui.MainActivity
 import kotlinx.android.synthetic.main.fragment_post.*
@@ -56,8 +57,20 @@ class PostFragment : Fragment() {
             lifecycleOwner = this@PostFragment
             this.viewmodel = viewModel
         }
-        viewModel.post.observe(this, Observer {
-            post_button.isEnabled = (it.title.isNotBlank() && it.message.isNotBlank())
+        val post = Post("")
+        viewModel.postTitle.observe(this, Observer {
+            post.title = it
+            when {
+                post.title.isNotBlank() && post.message.isNotBlank() -> post_button.isEnabled = true
+                else -> post_button.isEnabled = false
+            }
+        })
+        viewModel.postMessage.observe(this, Observer {
+            post.message = it
+            when {
+                post.title.isNotBlank() && post.message.isNotBlank() -> post_button.isEnabled = true
+                else -> post_button.isEnabled = false
+            }
         })
     }
 
