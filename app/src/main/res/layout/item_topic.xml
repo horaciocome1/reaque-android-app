@@ -103,6 +103,7 @@
                         android:padding="16dp"
                         android:text="Comentários"
                         app:cornerRadius="16dp"
+                        app:backgroundTint="@color/commentsColor"
                         app:icon="@drawable/outline_forum_18" />
 
                     <com.google.android.material.button.MaterialButton
@@ -116,6 +117,7 @@
                         android:padding="16dp"
                         android:text="Autores"
                         app:cornerRadius="16dp"
+                        app:backgroundTint="@color/usersColor"
                         app:icon="@drawable/outline_people_outline_18" />
 
                 </LinearLayout>
@@ -137,6 +139,7 @@
                         android:padding="16dp"
                         android:text="Favorito"
                         app:cornerRadius="16dp"
+                        app:backgroundTint="@color/favoriteColor"
                         app:icon="@drawable/outline_bookmark_border_18" />
 
                     <com.google.android.material.button.MaterialButton

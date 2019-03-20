@@ -90,6 +90,7 @@
                     android:padding="16dp"
                     android:text="Editar"
                     app:cornerRadius="16dp"
+                    app:backgroundTint="@color/usersColor"
                     app:icon="@drawable/outline_edit_18" />
 
             </LinearLayout>

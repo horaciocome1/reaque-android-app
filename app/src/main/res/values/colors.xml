@@ -25,4 +25,9 @@
     <color name="secondaryTextColor">#ffffff</color>
     <color name="colorError">#f44336</color>
 
+    <!-- CUSTOM COLORS -->
+    <color name="favoriteColor">#ff6d00</color>
+    <color name="commentsColor">#00c853</color>
+    <color name="usersColor">#0091ea</color>
+
 </resources>
