@@ -56,8 +56,8 @@ class PostFragment : Fragment() {
             lifecycleOwner = this@PostFragment
             this.viewmodel = viewModel
         }
-        viewModel.postTitle.observe(this, Observer {
-            post_button.isEnabled = !it.isBlank()
+        viewModel.post.observe(this, Observer {
+            post_button.isEnabled = (it.title.isNotBlank() && it.message.isNotBlank())
         })
     }
 
