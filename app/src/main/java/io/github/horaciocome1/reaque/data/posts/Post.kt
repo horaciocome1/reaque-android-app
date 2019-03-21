@@ -15,6 +15,7 @@
 
 package io.github.horaciocome1.reaque.data.posts
 
+import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
 
 data class Post(var id: String) {
@@ -24,5 +25,6 @@ data class Post(var id: String) {
     var user = User("")
     var cover = ""
     var message = ""
+    var topic = Topic("")
 
 }

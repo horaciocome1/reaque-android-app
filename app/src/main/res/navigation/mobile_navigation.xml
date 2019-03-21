@@ -182,7 +182,7 @@
             app:destination="@id/destination_search" />
         <action
             android:id="@+id/action_open_post"
-            app:destination="@id/destination_post" />
+            app:destination="@id/destination_posting" />
     </fragment>
     <fragment
         android:id="@+id/destination_notifications"
@@ -199,7 +199,7 @@
             app:destination="@id/destination_profile" />
     </fragment>
     <fragment
-        android:id="@+id/destination_post"
-        android:name="io.github.horaciocome1.reaque.ui.posts.PostFragment"
+        android:id="@+id/destination_posting"
+        android:name="io.github.horaciocome1.reaque.ui.posts.PostingFragment"
         android:label="Publicar" />
 </navigation>

@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModelProviders
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.posts.PostsRepository
 import io.github.horaciocome1.reaque.data.topics.Topic
+import io.github.horaciocome1.reaque.data.topics.TopicsRepository
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.utilities.InjectorUtils
 
@@ -37,19 +38,28 @@ val ReadFragment.viewModel: PostsViewModel
         return ViewModelProviders.of(this, factory).get(PostsViewModel::class.java)
     }
 
-val PostFragment.viewModel: PostsViewModel
+val PostingFragment.viewModel: PostsViewModel
     get() {
         val factory = InjectorUtils.postsViewModelFactory
         return ViewModelProviders.of(this, factory).get(PostsViewModel::class.java)
     }
 
-class PostsViewModel(private val postsRepository: PostsRepository) : ViewModel() {
+class PostsViewModel(
+    private val postsRepository: PostsRepository,
+    topicsRepository: TopicsRepository
+) : ViewModel() {
+
+    val post = Post("").apply {
+        topic.title = "Nenhum tópico selecionado!"
+    }
 
     @Bindable
     val postTitle = MutableLiveData<String>()
 
     @Bindable
     val postMessage = MutableLiveData<String>()
+
+    val topics = topicsRepository.topics
 
     fun addPost(post: Post) = postsRepository.addPost(post)
 
@@ -58,5 +68,6 @@ class PostsViewModel(private val postsRepository: PostsRepository) : ViewModel()
     fun getPosts(user: User) = postsRepository.getPosts(user)
 
     fun getPosts(post: Post) = postsRepository.getPosts(post)
+
 
 }

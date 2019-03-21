@@ -139,7 +139,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:padding="16dp"
-                android:text="Cancel"
+                android:text="Cancelar"
                 android:textColor="?colorControlNormal"
                 app:cornerRadius="16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/select_pic_button"
@@ -149,6 +149,42 @@
                 app:layout_constraintTop_toTopOf="@+id/select_pic_button" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/select_topics_bottomsheet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_bottom_sheet_stroke"
+            android:orientation="vertical"
+            app:behavior_hideable="true"
+            app:behavior_peekHeight="112dp"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+            <TextView
+                android:id="@+id/selected_topic_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="56dp"
+                android:layout_marginLeft="56dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="56dp"
+                android:layout_marginRight="56dp"
+                android:layout_marginBottom="32dp"
+                android:text="@{viewmodel.post.topic.title}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textColor="@color/secondaryColor" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@android:color/black" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/topics_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
