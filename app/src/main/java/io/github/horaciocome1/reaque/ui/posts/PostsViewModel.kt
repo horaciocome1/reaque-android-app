@@ -15,6 +15,7 @@
 
 package io.github.horaciocome1.reaque.ui.posts
 
+import android.net.Uri
 import androidx.databinding.Bindable
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -52,6 +53,8 @@ class PostsViewModel(
     val post = Post("").apply {
         topic.title = "Nenhum tópico selecionado!"
     }
+
+    var imageUri: Uri = Uri.EMPTY
 
     @Bindable
     val postTitle = MutableLiveData<String>()
