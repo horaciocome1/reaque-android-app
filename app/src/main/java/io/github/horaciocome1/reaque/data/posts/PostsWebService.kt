@@ -29,7 +29,7 @@ class PostsWebService {
     private val tag = "PostsWebService"
     private val myId = "FRWsZTrrI0PTp1Fqftdb"
     private val userIdPath = "user.id"
-    private val topicIdPath = "topic_id"
+    private val topicIdPath = "topic.id"
 
     /*list of all posts from the same topics*/
     private var topicPostsList = mutableListOf<Post>()

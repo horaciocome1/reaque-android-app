@@ -27,8 +27,8 @@ import io.github.horaciocome1.reaque.utilities.onSnapshotNull
 class CommentsWebService {
 
     private val tag = "CommentsWebService"
-    private val topicIdField = "topic_id"
-    private val postIdField = "post_id"
+    private val topicIdField = "topic.id"
+    private val postIdField = "post.id"
 
     private var topicCommentsList = mutableListOf<Comment>()
     private val topicComments = MutableLiveData<List<Comment>>()

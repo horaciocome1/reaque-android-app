@@ -49,7 +49,7 @@ class NotificationsFragment : Fragment() {
                                 isComment -> {
                                     val openComments =
                                         NotificationsFragmentDirections.actionOpenCommentsFromNotifications(
-                                            contentId,
+                                            destinyId,
                                             "",
                                             true,
                                             false
@@ -58,12 +58,12 @@ class NotificationsFragment : Fragment() {
                                 }
                                 isPost -> {
                                     val openRead =
-                                        NotificationsFragmentDirections.actionOpenReadFromNotifications(contentId)
+                                        NotificationsFragmentDirections.actionOpenReadFromNotifications(destinyId)
                                     Navigation.findNavController(view).navigate(openRead)
                                 }
                                 isUser -> {
                                     val openProfile =
-                                        NotificationsFragmentDirections.actionOpenProfileFromNotifications(contentId)
+                                        NotificationsFragmentDirections.actionOpenProfileFromNotifications(destinyId)
                                     Navigation.findNavController(view).navigate(openProfile)
                                 }
                             }

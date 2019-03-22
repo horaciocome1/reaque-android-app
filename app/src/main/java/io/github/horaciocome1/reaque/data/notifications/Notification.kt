@@ -23,6 +23,6 @@ data class Notification(var id: String) {
     var isComment = false
     var isPost = false
     var isUser = false
-    var contentId = ""
+    var destinyId = ""
 
 }
