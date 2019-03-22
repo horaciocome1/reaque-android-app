@@ -103,7 +103,7 @@
             android:id="@+id/fragment_favorites_bottomsheet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/background_bottom_sheet_stroke"
+            android:background="@drawable/background_bottomsheet_stroke_light"
             app:layout_behavior="@string/bottom_sheet_behavior">
 
             <LinearLayout

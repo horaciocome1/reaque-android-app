@@ -27,6 +27,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.card.MaterialCardView
 import io.github.horaciocome1.reaque.databinding.FragmentPostingBinding
 import io.github.horaciocome1.reaque.ui.MainActivity
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addSimpleTouchListener
@@ -35,9 +36,10 @@ import kotlinx.android.synthetic.main.fragment_posting.*
 
 class PostingFragment : Fragment() {
 
-    lateinit var selectTopicBehavior: BottomSheetBehavior<LinearLayout>
+    private lateinit var selectTopicBehavior: BottomSheetBehavior<LinearLayout>
+    private lateinit var selectPicBehavior: BottomSheetBehavior<MaterialCardView>
 
-    lateinit var binding: FragmentPostingBinding
+    private lateinit var binding: FragmentPostingBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentPostingBinding.inflate(inflater, container, false)
@@ -46,11 +48,15 @@ class PostingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        post_button.isEnabled = false
         cancel_button.setOnClickListener {
             Navigation.findNavController(it).navigateUp()
         }
-        post_button.isEnabled = false
         selectTopicBehavior = BottomSheetBehavior.from(select_topics_bottomsheet).apply {
+            state = BottomSheetBehavior.STATE_HIDDEN
+            skipCollapsed = true
+        }
+        selectPicBehavior = BottomSheetBehavior.from(select_pic_bottomsheet).apply {
             state = BottomSheetBehavior.STATE_HIDDEN
             skipCollapsed = true
         }
@@ -91,6 +97,11 @@ class PostingFragment : Fragment() {
         })
         select_topic_button.setOnClickListener {
             selectTopicBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+        }
+        select_pic_button.setOnClickListener {
+            //            Glide.with(this).load(R.drawable.profile3).into(imageview)
+            selectPicBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+
         }
     }
 
