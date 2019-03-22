@@ -64,8 +64,9 @@ dependencies {
     implementation "android.arch.navigation:navigation-ui:$nav_version"
 
     // firebase
-    implementation 'com.google.firebase:firebase-core:16.0.7'
+    implementation 'com.google.firebase:firebase-core:16.0.8'
     implementation 'com.google.firebase:firebase-firestore:18.1.0'
+    implementation 'com.google.firebase:firebase-storage:16.1.0'
 
     // test
     testImplementation 'junit:junit:4.12'

@@ -13,12 +13,23 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.utilities
+package io.github.horaciocome1.reaque.data.media
 
-import android.util.Log
+import android.net.Uri
+import io.github.horaciocome1.reaque.data.posts.Post
+import io.github.horaciocome1.reaque.data.topics.Topic
 
-fun onListenFailed(tag: String, exception: Exception) = Log.w(tag, "Listen failed.", exception)
+class ImageRepository private constructor(private val imageRepository: ImageRepository) {
 
-fun onUploadFailed(tag: String) = Log.w(tag, "Upload failed.")
+    fun uploadImage(
+        imageUri: Uri, topic: Topic, post: Post,
+        onComplete: (String) -> Unit, onFailure: () -> Unit
+    ) = imageRepository.uploadImage(
+        imageUri = imageUri,
+        topic = topic,
+        post = post,
+        onComplete = onComplete,
+        onFailure = onFailure
+    )
 
-fun onSnapshotNull(tag: String) = Log.w(tag, "Snapshot is null.")
+}

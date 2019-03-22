@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 package io.github.horaciocome1.reaque.data
 
 import io.github.horaciocome1.reaque.data.comments.CommentsWebService
+import io.github.horaciocome1.reaque.data.media.ImageUploader
 import io.github.horaciocome1.reaque.data.notifications.NotificationsWebService
 import io.github.horaciocome1.reaque.data.posts.PostsWebService
 import io.github.horaciocome1.reaque.data.topics.TopicsWebService
@@ -28,6 +29,7 @@ class Database private constructor() {
     var postsWebService = PostsWebService()
     var commentsWebService = CommentsWebService()
     var notificationsWebService = NotificationsWebService()
+    var imageUploader = ImageUploader()
 
     companion object {
         @Volatile private var instance: Database? = null

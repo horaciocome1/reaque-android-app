@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 
 package io.github.horaciocome1.reaque.data.notifications
 
-class NotificationsRepository private constructor(private val notificationsWebService: NotificationsWebService) {
+class NotificationsRepository private constructor(notificationsWebService: NotificationsWebService) {
 
     val notifications = notificationsWebService.notifications
 
