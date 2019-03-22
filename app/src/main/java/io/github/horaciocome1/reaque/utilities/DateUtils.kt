@@ -22,10 +22,7 @@ val Timestamp.string: String
     get() {
         val calendar = Calendar.getInstance()
         calendar.time = toDate()
-        var string = "${calendar[Calendar.DAY_OF_MONTH]},"
-        string += " ${calendar.month}"
-        string += " ${calendar[Calendar.YEAR]}"
-        return string
+        return "${calendar[Calendar.DAY_OF_MONTH]}, ${calendar.month} ${calendar[Calendar.YEAR]}"
     }
 
 val Calendar.month: String
