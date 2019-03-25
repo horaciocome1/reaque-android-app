@@ -16,7 +16,7 @@
 package io.github.horaciocome1.reaque.data
 
 import io.github.horaciocome1.reaque.data.comments.CommentsWebService
-import io.github.horaciocome1.reaque.data.media.ImageUploader
+import io.github.horaciocome1.reaque.data.media.ImageUploaderWebService
 import io.github.horaciocome1.reaque.data.notifications.NotificationsWebService
 import io.github.horaciocome1.reaque.data.posts.PostsWebService
 import io.github.horaciocome1.reaque.data.topics.TopicsWebService
@@ -29,7 +29,7 @@ class Database private constructor() {
     var postsWebService = PostsWebService()
     var commentsWebService = CommentsWebService()
     var notificationsWebService = NotificationsWebService()
-    var imageUploader = ImageUploader()
+    var imageUploaderWebService = ImageUploaderWebService()
 
     companion object {
         @Volatile private var instance: Database? = null

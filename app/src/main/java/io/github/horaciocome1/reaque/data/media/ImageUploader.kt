@@ -16,39 +16,13 @@
 package io.github.horaciocome1.reaque.data.media
 
 import android.net.Uri
-import com.google.android.gms.tasks.Continuation
-import com.google.android.gms.tasks.Task
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.UploadTask
 import io.github.horaciocome1.reaque.data.posts.Post
-import io.github.horaciocome1.reaque.data.topics.Topic
-import io.github.horaciocome1.reaque.utilities.onUploadFailed
 
 class ImageUploader {
 
-    private val tag = "ImageUploader"
-    private val myId = "FRWsZTrrI0PTp1Fqftdb"
-
-    private val storage = FirebaseStorage.getInstance()
-
-    fun upload(imageUri: Uri, topic: Topic, post: Post, onComplete: (String) -> Unit, onFailure: () -> Unit) {
-        val ref = storage.reference.child("images/${topic.id}/${post.id}/${imageUri.lastPathSegment}")
-        val uploadTask = ref.putFile(imageUri)
-        val urlTask = uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
-            if (!task.isSuccessful)
-                task.exception?.let {
-                    throw it
-                }
-            return@Continuation ref.downloadUrl
-        }).addOnCompleteListener { task ->
-            when (task.isSuccessful) {
-                true -> onComplete(task.result.toString())
-                else -> {
-                    onUploadFailed(tag)
-                    onFailure()
-                }
-            }
-        }
-    }
+    var imageUri = Uri.EMPTY!!
+    var post = Post("")
+    var onComplete = { _: String -> Unit }
+    var onFailure = { }
 
 }

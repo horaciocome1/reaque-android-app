@@ -15,21 +15,19 @@
 
 package io.github.horaciocome1.reaque.data.media
 
-import android.net.Uri
-import io.github.horaciocome1.reaque.data.posts.Post
-import io.github.horaciocome1.reaque.data.topics.Topic
+class ImageRepository private constructor(private val webservice: ImageUploaderWebService) {
 
-class ImageRepository private constructor(private val imageRepository: ImageRepository) {
+    fun uploadImage(uploader: ImageUploader) = webservice.upload(uploader)
 
-    fun uploadImage(
-        imageUri: Uri, topic: Topic, post: Post,
-        onComplete: (String) -> Unit, onFailure: () -> Unit
-    ) = imageRepository.uploadImage(
-        imageUri = imageUri,
-        topic = topic,
-        post = post,
-        onComplete = onComplete,
-        onFailure = onFailure
-    )
+    companion object {
+        @Volatile
+        private var instance: ImageRepository? = null
+
+        fun getInstance(webservice: ImageUploaderWebService) = instance ?: synchronized(this) {
+            instance ?: ImageRepository(webservice).also {
+                instance = it
+            }
+        }
+    }
 
 }

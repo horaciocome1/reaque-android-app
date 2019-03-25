@@ -17,16 +17,21 @@ package io.github.horaciocome1.reaque.ui.posts
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import io.github.horaciocome1.reaque.data.media.ImageRepository
 import io.github.horaciocome1.reaque.data.posts.PostsRepository
 import io.github.horaciocome1.reaque.data.topics.TopicsRepository
+import io.github.horaciocome1.reaque.data.users.UsersRepository
 
 class PostsViewModelFactory(
     private val postsRepository: PostsRepository,
-    private val topicsRepository: TopicsRepository
+    private val topicsRepository: TopicsRepository,
+    private val usersRepository: UsersRepository,
+    private val imageRepository: ImageRepository
 )
     : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>) = PostsViewModel(postsRepository, topicsRepository) as T
+    override fun <T : ViewModel?> create(modelClass: Class<T>) =
+        PostsViewModel(postsRepository, topicsRepository, usersRepository, imageRepository) as T
 
 }
