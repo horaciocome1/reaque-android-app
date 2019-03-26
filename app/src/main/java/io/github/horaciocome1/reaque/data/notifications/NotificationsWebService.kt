@@ -16,6 +16,7 @@
 package io.github.horaciocome1.reaque.data.notifications
 
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import io.github.horaciocome1.reaque.utilities.notification
 import io.github.horaciocome1.reaque.utilities.onListenFailed
@@ -23,25 +24,31 @@ import io.github.horaciocome1.reaque.utilities.onListenFailed
 class NotificationsWebService {
 
     private val tag = "NotificationsWebService"
-    private val myId = "FRWsZTrrI0PTp1Fqftdb"
 
     private val ref = FirebaseFirestore.getInstance().collection("notifications")
 
-    val notifications = MutableLiveData<List<Notification>>()
+    private lateinit var auth: FirebaseAuth
 
-    init {
-        ref.whereEqualTo(myId, true)
-            .addSnapshotListener { snapshot, exception ->
-                when {
-                    exception != null -> onListenFailed(tag, exception)
-                    snapshot != null -> {
-                        val notificationsList = mutableListOf<Notification>()
-                        for (doc in snapshot)
-                            notificationsList.add(doc.notification)
-                        notifications.value = notificationsList
+    val notifications = MutableLiveData<List<Notification>>()
+        get() {
+            auth = FirebaseAuth.getInstance()
+            ref.whereEqualTo(auth.currentUser?.uid.toString(), true)
+                .addSnapshotListener { snapshot, exception ->
+                    when {
+                        exception != null -> onListenFailed(tag, exception)
+                        snapshot != null -> {
+                            val notificationsList = mutableListOf<Notification>()
+                            for (doc in snapshot)
+                                notificationsList.add(doc.notification)
+                            field.value = notificationsList
+                        }
                     }
                 }
-            }
+            return field
+        }
+
+    init {
+
     }
 
 }

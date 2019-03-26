@@ -17,6 +17,7 @@ package io.github.horaciocome1.reaque.data.posts
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
@@ -27,7 +28,6 @@ import io.github.horaciocome1.reaque.utilities.post
 class PostsWebService {
 
     private val tag = "PostsWebService"
-    private val myId = "FRWsZTrrI0PTp1Fqftdb"
     private val userIdPath = "user.id"
     private val topicIdPath = "topic.id"
 
@@ -50,6 +50,8 @@ class PostsWebService {
     private val db = FirebaseFirestore.getInstance()
     private val ref = db.collection("posts")
     private val favoritesRef = db.collection("favorites")
+
+    private lateinit var auth: FirebaseAuth
 
     private var topicId = ""
     private var userId = ""
@@ -119,9 +121,10 @@ class PostsWebService {
     }
 
     fun getFavorites(): LiveData<List<Post>> {
-        if (favoritesList.isEmpty())
+        if (favoritesList.isEmpty()) {
+            auth = FirebaseAuth.getInstance()
             favoritesRef.whereEqualTo("post", true)
-                .whereEqualTo(myId, true)
+                .whereEqualTo(auth.currentUser?.uid.toString(), true)
                 .addSnapshotListener { snapshot, exception ->
                     when {
                         exception != null -> onListenFailed(tag, exception)
@@ -133,6 +136,7 @@ class PostsWebService {
                         else -> onSnapshotNull(tag)
                     }
                 }
+        }
         return favorites
     }
 
