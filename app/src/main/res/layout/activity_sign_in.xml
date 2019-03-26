@@ -16,87 +16,101 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/black">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/activity_sign_in_imageview"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scaleType="centerCrop"
-        android:tint="#99000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!--<ImageView-->
+    <!--android:id="@+id/activity_sign_in_imageview"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:scaleType="centerCrop"-->
+    <!--android:tint="#99000000"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--app:layout_constraintTop_toTopOf="parent" />-->
 
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="296dp"
+    <!--<TextView-->
+    <!--android:id="@+id/textView10"-->
+    <!--android:layout_width="296dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="8dp"-->
+    <!--android:layout_marginEnd="8dp"-->
+    <!--android:layout_marginRight="8dp"-->
+    <!--android:layout_marginBottom="8dp"-->
+    <!--android:fontFamily="@font/roboto_light"-->
+    <!--android:gravity="end"-->
+    <!--android:text="Seja bem-vindo."-->
+    <!--android:textAlignment="viewEnd"-->
+    <!--android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"-->
+    <!--android:textColor="@color/secondaryLightColor"-->
+    <!--app:layout_constraintBottom_toTopOf="@+id/constraintLayout"-->
+    <!--app:layout_constraintEnd_toEndOf="parent"-->
+    <!--app:layout_constraintTop_toTopOf="parent"-->
+    <!--app:layout_constraintVertical_bias="0.565" />-->
+
+    <!--<androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--android:id="@+id/constraintLayout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="@drawable/background_activity_sign_in_footer"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintEnd_toEndOf="parent"-->
+    <!--app:layout_constraintStart_toStartOf="parent">-->
+
+    <!--<com.google.android.material.button.MaterialButton-->
+    <!--android:id="@+id/activity_sign_in_button"-->
+    <!--style="@style/Widget.MaterialComponents.Button.UnelevatedButton.Icon"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginStart="8dp"-->
+    <!--android:layout_marginLeft="8dp"-->
+    <!--android:layout_marginTop="56dp"-->
+    <!--android:layout_marginEnd="8dp"-->
+    <!--android:layout_marginRight="8dp"-->
+    <!--android:layout_marginBottom="32dp"-->
+    <!--android:text="Entrar"-->
+    <!--app:cornerRadius="24dp"-->
+    <!--app:icon="@drawable/googleg_standard_color_18"-->
+    <!--android:padding="16dp"-->
+    <!--app:layout_constraintBottom_toTopOf="@+id/textView11"-->
+    <!--app:layout_constraintEnd_toEndOf="parent"-->
+    <!--app:layout_constraintStart_toStartOf="parent"-->
+    <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/textView11"-->
+    <!--style="@style/AppTheme.CompleteClickableEffect"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginStart="32dp"-->
+    <!--android:layout_marginLeft="32dp"-->
+    <!--android:layout_marginEnd="32dp"-->
+    <!--android:layout_marginRight="32dp"-->
+    <!--android:layout_marginBottom="56dp"-->
+    <!--android:padding="8dp"-->
+    <!--android:text="Ao entrar, concorda com os Termos e Condições aplicáveis. E com a Política de Privacidade."-->
+    <!--android:textAlignment="center"-->
+    <!--android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"-->
+    <!--android:textColor="@color/primaryDarkColor"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintEnd_toEndOf="parent"-->
+    <!--app:layout_constraintStart_toStartOf="parent" />-->
+
+    <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:fontFamily="@font/roboto_light"
-        android:gravity="end"
-        android:text="Seja bem-vindo."
-        android:textAlignment="viewEnd"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
-        android:textColor="@color/secondaryLightColor"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.565" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/background_activity_sign_in_footer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/activity_sign_in_button"
-            style="@style/Widget.MaterialComponents.Button.UnelevatedButton.Icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="56dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="32dp"
-            android:text="Entrar"
-            app:cornerRadius="24dp"
-            app:icon="@drawable/googleg_standard_color_18"
-            android:padding="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/textView11"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView11"
-            style="@style/AppTheme.CompleteClickableEffect"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginRight="32dp"
-            android:layout_marginBottom="56dp"
-            android:padding="8dp"
-            android:text="Ao entrar, concorda com os Termos e Condições aplicáveis. E com a Política de Privacidade."
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-            android:textColor="@color/primaryDarkColor"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -34,9 +34,15 @@ val ProfileFragment.viewModel: UsersViewModel
         return ViewModelProviders.of(this, factory).get(UsersViewModel::class.java)
     }
 
+val SignInActivity.viewModel: UsersViewModel
+    get() {
+        val factory = InjectorUtils.usersViewModelFactory
+        return ViewModelProviders.of(this, factory).get(UsersViewModel::class.java)
+    }
+
 class UsersViewModel(private val repository: UsersRepository) : ViewModel() {
 
-    fun addUser(user: User) = repository.addUser(user)
+    fun addUser(onSuccessful: () -> Unit) = repository.addUser(onSuccessful)
 
     fun getUsers(topic: Topic) = repository.getUsers(topic)
 

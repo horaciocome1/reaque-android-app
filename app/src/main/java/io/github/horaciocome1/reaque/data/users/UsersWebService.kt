@@ -15,9 +15,12 @@
 
 package io.github.horaciocome1.reaque.data.users
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.utilities.onListenFailed
 import io.github.horaciocome1.reaque.utilities.onSnapshotNull
@@ -26,7 +29,6 @@ import io.github.horaciocome1.reaque.utilities.user
 class UsersWebService {
 
     private val tag = "UsersWebService"
-    private val myId = "FRWsZTrrI0PTp1Fqftdb"
 
     /*list of users that belong to the same topics*/
     private var topicUsersList = mutableListOf<User>()
@@ -39,6 +41,18 @@ class UsersWebService {
     val me = MutableLiveData<User>().apply {
         value = User("")
     }
+        get() {
+            auth = FirebaseAuth.getInstance()
+            ref.document(auth.currentUser?.uid.toString())
+                .addSnapshotListener { snapshot, exception ->
+                    when {
+                        exception != null -> onListenFailed(tag, exception)
+                        snapshot != null -> field.value = snapshot.user
+                        else -> onSnapshotNull(tag)
+                    }
+                }
+            return field
+        }
 
     private var favoritesList = mutableListOf<User>()
     private val favorites = MutableLiveData<List<User>>()
@@ -49,19 +63,26 @@ class UsersWebService {
     private val ref = db.collection("users")
     private val favoritesRef = db.collection("favorites")
 
-    init {
-        ref.document(myId).addSnapshotListener { snapshot, exception ->
-            when {
-                exception != null -> onListenFailed(tag, exception)
-                snapshot != null -> me.value = snapshot.user
-                else -> onSnapshotNull(tag)
-            }
-        }
-    }
+    private lateinit var auth: FirebaseAuth
 
-    fun addUser(user: User) {
-//        usersList.add(user)
-//        users.value = usersList
+    fun addUser(onSuccessful: () -> Unit) {
+        auth = FirebaseAuth.getInstance()
+        auth.currentUser?.let { user ->
+            val data = HashMap<String, String?>().apply {
+                put("name", user.displayName)
+                put("email", user.email)
+                put("pic", user.photoUrl.toString())
+            }
+            ref.document(user.uid)
+                .set(data, SetOptions.merge())
+                .addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        Log.d(tag, "User successfully written!")
+                        onSuccessful()
+                    } else
+                        Log.w(tag, "Error writing document", it.exception)
+                }
+        }
     }
 
     fun getUsers(topic: Topic): LiveData<List<User>> {
@@ -101,9 +122,10 @@ class UsersWebService {
 
 
     fun getFavorites(): LiveData<List<User>> {
+        auth = FirebaseAuth.getInstance()
         if (favoritesList.isEmpty())
             favoritesRef.whereEqualTo("user", true)
-                .whereEqualTo(myId, true)
+                .whereEqualTo(auth.currentUser?.uid.toString(), true)
                 .addSnapshotListener { snapshot, exception ->
                     when {
                         exception != null -> onListenFailed(tag, exception)

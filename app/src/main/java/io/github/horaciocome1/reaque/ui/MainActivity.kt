@@ -23,42 +23,38 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
+import com.google.firebase.auth.FirebaseAuth
 import io.github.horaciocome1.reaque.R
-import io.github.horaciocome1.reaque.ui.signin.getSignInActivityIntent
+import io.github.horaciocome1.reaque.ui.users.getSignInActivityIntent
+import io.github.horaciocome1.reaque.utilities.Constants
 import kotlinx.android.synthetic.main.activity_main.*
-
-var firstInit = true
-lateinit var myFragmentManager: FragmentManager
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var navController: NavController
+    private val auth = FirebaseAuth.getInstance()
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        myFragmentManager = supportFragmentManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-//            window.statusBarColor = Color.TRANSPARENT
-//        }
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
         setSupportActionBar(activity_main_toolbar)
     }
 
     override fun onResume() {
         super.onResume()
-        if (firstInit) {
-            startActivityForResult(getSignInActivityIntent(), 101)
-            firstInit = false
+        if (auth.currentUser == null)
+            startActivityForResult(getSignInActivityIntent(), Constants.ACTIVITY_SIGN_IN_REQUEST_CODE)
+        else {
+            setupBottomNavigationMenu()
+            setupSideNavigationMenu()
+            setupActionBar()
         }
-        setupBottomNavigationMenu()
-        setupSideNavigationMenu()
-        setupActionBar()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -75,9 +71,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 101 && resultCode != Activity.RESULT_OK) {
-            firstInit = true
-            finish()
+        when (requestCode) {
+            Constants.ACTIVITY_SIGN_IN_REQUEST_CODE -> {
+                when (resultCode) {
+                    Activity.RESULT_OK -> {
+                        setupBottomNavigationMenu()
+                        setupSideNavigationMenu()
+                        setupActionBar()
+                    }
+                    else -> finish()
+                }
+            }
         }
     }
 

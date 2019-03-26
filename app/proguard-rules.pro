@@ -19,3 +19,7 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file namePostsFragment.
 #-renamesourcefileattribute SourceFile
+
+# Firebase auth
+-keepattributes Signature
+-keepattributes *Annotation*

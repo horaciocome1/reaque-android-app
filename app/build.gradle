@@ -45,6 +45,8 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    // kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     // android x
@@ -67,6 +69,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.8'
     implementation 'com.google.firebase:firebase-firestore:18.1.0'
     implementation 'com.google.firebase:firebase-storage:16.1.0'
+    implementation 'com.google.firebase:firebase-auth:16.2.0'
+
+    // google
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
 
     // test
     testImplementation 'junit:junit:4.12'
