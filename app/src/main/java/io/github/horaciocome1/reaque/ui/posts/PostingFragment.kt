@@ -108,6 +108,10 @@ class PostingFragment : Fragment() {
             viewModel.user = it
             post_button.isEnabled = isPostReady
         })
+        viewModel.isFinished.observe(this, Observer {
+            if (it)
+                Navigation.findNavController(post_button).navigateUp()
+        })
         select_topic_button.setOnClickListener {
             selectTopicBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
         }

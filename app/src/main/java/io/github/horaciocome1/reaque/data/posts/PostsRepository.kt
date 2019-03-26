@@ -20,7 +20,7 @@ import io.github.horaciocome1.reaque.data.users.User
 
 class PostsRepository private constructor(private val postsWebService: PostsWebService) {
 
-    fun submitPost(post: Post) = postsWebService.addPost(post)
+    fun submitPost(post: Post, onSuccessful: () -> Unit) = postsWebService.submitPost(post, onSuccessful)
 
     fun getPosts(topic: Topic) = postsWebService.getPosts(topic)
 

@@ -1,5 +1,5 @@
 <!--
-  ~    Copyright 2018 Horácio Flávio Comé Júnior
+  ~    Copyright 2019 Horácio Flávio Comé Júnior
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
   ~    you may not use this file except in compliance with the License.
@@ -22,4 +22,5 @@
     <string name="licence_url">https://github.com/horaciocome1/reaque/blob/master/LICENSE</string>
     <string name="read_me_url">https://github.com/horaciocome1/reaque/blob/master/README.md</string>
     <string name="project_url">https://github.com/horaciocome1/reaque</string>
+
 </resources>

@@ -17,6 +17,8 @@ package io.github.horaciocome1.reaque.utilities
 
 object Constants {
 
-    val PICK_IMAGE_FROM_GALLERY_REQUEST_CODE = 1207
+    const val PICK_IMAGE_FROM_GALLERY_REQUEST_CODE = 1207
+    const val ACTIVITY_SIGN_IN_REQUEST_CODE = 1208
+    const val GOOGLE_SIGN_IN_REQUEST_CODE = 1209
 
 }

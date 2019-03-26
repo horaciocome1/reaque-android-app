@@ -25,7 +25,6 @@ import io.github.horaciocome1.reaque.utilities.onUploadFailed
 class ImageUploaderWebService {
 
     private val tag = "ImageUploaderWebService"
-    private val myId = "FRWsZTrrI0PTp1Fqftdb"
 
     private val storage = FirebaseStorage.getInstance()
 

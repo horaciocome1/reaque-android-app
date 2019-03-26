@@ -17,6 +17,7 @@ package io.github.horaciocome1.reaque.ui.posts
 
 import android.net.Uri
 import androidx.databinding.Bindable
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
@@ -51,27 +52,27 @@ val PostingFragment.viewModel: PostsViewModel
 class PostsViewModel(
     private val postsRepository: PostsRepository,
     topicsRepository: TopicsRepository,
-    private val usersRepository: UsersRepository,
+    usersRepository: UsersRepository,
     private val imageRepository: ImageRepository
 ) : ViewModel() {
 
+    // PostingFragment
     val post = Post("").apply {
         topic.title = "Nenhum tópico selecionado!"
     }
-
     var imageUri: Uri = Uri.EMPTY
-
     var user = User("")
-
     @Bindable
     val postTitle = MutableLiveData<String>()
-
     @Bindable
     val postMessage = MutableLiveData<String>()
-
     val topics = topicsRepository.topics
-
     val me = usersRepository.me
+    private val _isSuccessful = MutableLiveData<Boolean>().apply {
+        value = false
+    }
+    val isFinished: LiveData<Boolean>
+        get() = _isSuccessful
 
     fun getPosts(topic: Topic) = postsRepository.getPosts(topic)
 
@@ -87,7 +88,9 @@ class PostsViewModel(
                 this@PostsViewModel.post.run {
                     pic = link
                     user = this@PostsViewModel.user
-                    postsRepository.submitPost(this)
+                    postsRepository.submitPost(this) {
+                        _isSuccessful.value = true
+                    }
                 }
             }
             onFailure = {

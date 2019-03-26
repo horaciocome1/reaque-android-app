@@ -17,6 +17,7 @@ package io.github.horaciocome1.reaque.data.topics
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import io.github.horaciocome1.reaque.utilities.onListenFailed
@@ -26,7 +27,6 @@ import io.github.horaciocome1.reaque.utilities.topic
 class TopicsWebService {
 
     private val tag = "TopicsWebService"
-    private val myId = "FRWsZTrrI0PTp1Fqftdb"
 
     private var topicsList = mutableListOf<Topic>()
     val topics = MutableLiveData<List<Topic>>()
@@ -42,20 +42,21 @@ class TopicsWebService {
     private val ref = db.collection("topics")
     private val favoritesRef = db.collection("favorites")
 
+    private lateinit var auth: FirebaseAuth
+
     init {
-        ref
-            .orderBy("title", Query.Direction.ASCENDING)
+        ref.orderBy("title", Query.Direction.ASCENDING)
             .addSnapshotListener { snapshot, exception ->
-            when {
-                exception != null -> onListenFailed(tag, exception)
-                snapshot != null -> {
-                    for (doc in snapshot.documents)
-                        topicsList.add(doc.topic)
-                    topics.value = topicsList
+                when {
+                    exception != null -> onListenFailed(tag, exception)
+                    snapshot != null -> {
+                        for (doc in snapshot.documents)
+                            topicsList.add(doc.topic)
+                        topics.value = topicsList
+                    }
+                    else -> onSnapshotNull(tag)
                 }
-                else -> onSnapshotNull(tag)
             }
-        }
     }
 
     fun getTopics(topic: Topic): LiveData<Topic> {
@@ -74,8 +75,9 @@ class TopicsWebService {
 
     fun getFavorites(): LiveData<List<Topic>> {
         if (favoritesList.isEmpty()) {
+            auth = FirebaseAuth.getInstance()
             favoritesRef.whereEqualTo("topic", true)
-                .whereEqualTo(myId, true)
+                .whereEqualTo(auth.currentUser?.uid.toString(), true)
                 .addSnapshotListener { snapshot, exception ->
                     when {
                         exception != null -> onListenFailed(tag, exception)
