@@ -23,7 +23,7 @@ data class Post(var id: String) {
     var title = ""
     var date = ""
     var user = User("")
-    var cover = ""
+    var pic = ""
     var message = ""
     var topic = Topic("")
 

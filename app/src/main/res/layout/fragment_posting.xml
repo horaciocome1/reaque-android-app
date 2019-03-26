@@ -100,6 +100,7 @@
                 android:layout_marginBottom="8dp"
                 android:padding="16dp"
                 android:text="Publicar"
+                android:onClick="@{() -> viewmodel.submitPost()}"
                 app:cornerRadius="16dp"
                 app:icon="@drawable/outline_done_outline_18"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -195,36 +196,43 @@
             app:cardElevation="0dp"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-            <LinearLayout
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_bottomsheet_stroke"
-                android:orientation="vertical">
+                android:scrollbars="none">
 
-                <ImageView
-                    android:id="@+id/imageview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/select_pic_from_camera_button"
-                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:text="Camera"
-                    app:icon="@drawable/outline_camera_18" />
+                    android:background="@drawable/background_bottomsheet_stroke"
+                    android:orientation="vertical">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/select_pic_from_gallery_button"
-                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:text="Galeria"
-                    app:icon="@drawable/outline_collections_18" />
+                    <ImageView
+                        android:id="@+id/imageview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
-            </LinearLayout>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/select_pic_from_camera_button"
+                        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text="Camera"
+                        app:icon="@drawable/outline_camera_18" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/select_pic_from_gallery_button"
+                        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text="Galeria"
+                        app:icon="@drawable/outline_collections_18" />
+
+                </LinearLayout>
+
+            </androidx.core.widget.NestedScrollView>
 
         </com.google.android.material.card.MaterialCardView>
 

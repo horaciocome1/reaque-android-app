@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ class PostsAdapter(private val list: List<Post>)
         list[position].run {
             binding.post = this
             Glide.with(context)
-                .load(cover)
+                .load(pic)
                 .into(binding.itemPostCoverImageview)
         }
     }

@@ -13,12 +13,21 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.utilities
+package io.github.horaciocome1.reaque.data.media
 
-import android.util.Log
+class ImageRepository private constructor(private val webservice: ImageUploaderWebService) {
 
-fun onListenFailed(tag: String, exception: Exception) = Log.w(tag, "Listen failed.", exception)
+    fun uploadImage(uploader: ImageUploader) = webservice.upload(uploader)
 
-fun onUploadFailed(tag: String) = Log.w(tag, "Upload failed.")
+    companion object {
+        @Volatile
+        private var instance: ImageRepository? = null
 
-fun onSnapshotNull(tag: String) = Log.w(tag, "Snapshot is null.")
+        fun getInstance(webservice: ImageUploaderWebService) = instance ?: synchronized(this) {
+            instance ?: ImageRepository(webservice).also {
+                instance = it
+            }
+        }
+    }
+
+}

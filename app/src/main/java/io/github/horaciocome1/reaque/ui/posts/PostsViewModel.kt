@@ -20,11 +20,14 @@ import androidx.databinding.Bindable
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
+import io.github.horaciocome1.reaque.data.media.ImageRepository
+import io.github.horaciocome1.reaque.data.media.ImageUploader
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.posts.PostsRepository
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.topics.TopicsRepository
 import io.github.horaciocome1.reaque.data.users.User
+import io.github.horaciocome1.reaque.data.users.UsersRepository
 import io.github.horaciocome1.reaque.utilities.InjectorUtils
 
 val PostsFragment.viewModel: PostsViewModel
@@ -47,7 +50,9 @@ val PostingFragment.viewModel: PostsViewModel
 
 class PostsViewModel(
     private val postsRepository: PostsRepository,
-    topicsRepository: TopicsRepository
+    topicsRepository: TopicsRepository,
+    private val usersRepository: UsersRepository,
+    private val imageRepository: ImageRepository
 ) : ViewModel() {
 
     val post = Post("").apply {
@@ -55,6 +60,8 @@ class PostsViewModel(
     }
 
     var imageUri: Uri = Uri.EMPTY
+
+    var user = User("")
 
     @Bindable
     val postTitle = MutableLiveData<String>()
@@ -64,13 +71,31 @@ class PostsViewModel(
 
     val topics = topicsRepository.topics
 
-    fun addPost(post: Post) = postsRepository.addPost(post)
+    val me = usersRepository.me
 
     fun getPosts(topic: Topic) = postsRepository.getPosts(topic)
 
     fun getPosts(user: User) = postsRepository.getPosts(user)
 
     fun getPosts(post: Post) = postsRepository.getPosts(post)
+
+    fun submitPost() {
+        val uploader = ImageUploader().apply {
+            imageUri = this@PostsViewModel.imageUri
+            post = this@PostsViewModel.post
+            onComplete = { link: String ->
+                this@PostsViewModel.post.run {
+                    pic = link
+                    user = this@PostsViewModel.user
+                    postsRepository.submitPost(this)
+                }
+            }
+            onFailure = {
+
+            }
+        }
+        imageRepository.uploadImage(uploader)
+    }
 
 
 }

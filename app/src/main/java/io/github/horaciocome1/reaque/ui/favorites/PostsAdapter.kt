@@ -41,7 +41,7 @@ class PostsAdapter(private val list: List<Post>) : RecyclerView.Adapter<PostsAda
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         list[position].run {
             Glide.with(context)
-                .load(cover)
+                .load(pic)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(binding.itemPostFavoriteImageview)
             binding.post = this

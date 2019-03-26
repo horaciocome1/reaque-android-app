@@ -104,6 +104,10 @@ class PostingFragment : Fragment() {
                 addSimpleTouchListener()
             }
         })
+        viewModel.me.observe(this, Observer {
+            viewModel.user = it
+            post_button.isEnabled = isPostReady
+        })
         select_topic_button.setOnClickListener {
             selectTopicBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
         }
@@ -120,7 +124,7 @@ class PostingFragment : Fragment() {
     private val isPostReady: Boolean
         get() {
             viewModel.post.run {
-                return (title.isNotBlank() && message.isNotBlank() && topic.id.isNotBlank() && viewModel.imageUri != Uri.EMPTY)
+                return (title.isNotBlank() && message.isNotBlank() && topic.id.isNotBlank() && viewModel.imageUri != Uri.EMPTY/* && user.id.isNotBlank()*/)
             }
         }
 

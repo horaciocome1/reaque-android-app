@@ -54,9 +54,9 @@ class ReadFragment: Fragment() {
                     post.run {
                         binding.post = this
                         Glide.with(this@ReadFragment).run {
-                            load(cover)
+                            load(pic)
                                 .into(fragment_read_cover_imageview)
-                            load(cover)
+                            load(pic)
                                 .apply(RequestOptions.bitmapTransform(BlurTransformation(2, 14)))
                                 .into(fragment_read_cover2_imageview)
                             load(user.pic)
@@ -68,7 +68,7 @@ class ReadFragment: Fragment() {
                             Navigation.findNavController(it).navigate(openProfile)
                         }
                         fragment_read_cover_imageview.setOnClickListener {
-                            val openViewer = ReadFragmentDirections.actionOpenViewerFromRead(this.cover)
+                            val openViewer = ReadFragmentDirections.actionOpenViewerFromRead(this.pic)
                             Navigation.findNavController(it).navigate(openViewer)
                         }
                         comments_button.setOnClickListener {

@@ -13,12 +13,16 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.utilities
+package io.github.horaciocome1.reaque.data.media
 
-import android.util.Log
+import android.net.Uri
+import io.github.horaciocome1.reaque.data.posts.Post
 
-fun onListenFailed(tag: String, exception: Exception) = Log.w(tag, "Listen failed.", exception)
+class ImageUploader {
 
-fun onUploadFailed(tag: String) = Log.w(tag, "Upload failed.")
+    var imageUri = Uri.EMPTY!!
+    var post = Post("")
+    var onComplete = { _: String -> Unit }
+    var onFailure = { }
 
-fun onSnapshotNull(tag: String) = Log.w(tag, "Snapshot is null.")
+}

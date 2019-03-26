@@ -51,7 +51,7 @@ val DocumentSnapshot.topic: Topic
 val DocumentSnapshot.post: Post
     get() {
         return Post(id).apply {
-            cover = this@post["pic"].toString()
+            pic = this@post["pic"].toString()
             val timestamp = this@post["date"]
             if (timestamp is Timestamp)
                 date = timestamp.string
