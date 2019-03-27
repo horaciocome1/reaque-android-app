@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import io.github.horaciocome1.reaque.data.topics.Topic
+import io.github.horaciocome1.reaque.utilities.hashMap
 import io.github.horaciocome1.reaque.utilities.onListenFailed
 import io.github.horaciocome1.reaque.utilities.onSnapshotNull
 import io.github.horaciocome1.reaque.utilities.user
@@ -68,13 +69,8 @@ class UsersWebService {
     fun addUser(onSuccessful: () -> Unit) {
         auth = FirebaseAuth.getInstance()
         auth.currentUser?.let { user ->
-            val data = HashMap<String, String?>().apply {
-                put("name", user.displayName)
-                put("email", user.email)
-                put("pic", user.photoUrl.toString())
-            }
             ref.document(user.uid)
-                .set(data, SetOptions.merge())
+                .set(user.hashMap, SetOptions.merge())
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
                         Log.d(tag, "User successfully written!")

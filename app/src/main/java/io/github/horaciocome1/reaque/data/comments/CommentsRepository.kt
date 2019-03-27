@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -18,11 +18,13 @@ package io.github.horaciocome1.reaque.data.comments
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
 
-class CommentsRepository private constructor(private val commentsWebService: CommentsWebService) {
+class CommentsRepository private constructor(private val webService: CommentsWebService) {
 
-    fun getComments(topic: Topic) = commentsWebService.getComments(topic)
+    fun submitComment(comment: Comment, onSuccessful: () -> Unit) = webService.submitComment(comment, onSuccessful)
 
-    fun getComments(post: Post) = commentsWebService.getComments(post)
+    fun getComments(topic: Topic) = webService.getComments(topic)
+
+    fun getComments(post: Post) = webService.getComments(post)
 
     companion object {
 

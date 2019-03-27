@@ -38,20 +38,36 @@ class CommentsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_comments, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        tap_to_update_button.visibility = View.GONE
+    }
+
     override fun onStart() {
         super.onStart()
-        arguments?.let {
-            CommentsFragmentArgs.fromBundle(it).run {
+        arguments?.let { bundle ->
+            CommentsFragmentArgs.fromBundle(bundle).run {
                 setActionBarTitle(title)
-                if (isTopic)
-                    viewModel.getComments(Topic(id)).observe(
-                        this@CommentsFragment,
-                        Observer { comments -> configComments(comments) })
-                else if (isPost)
-                    viewModel.getComments(Post(id)).observe(
-                        this@CommentsFragment,
-                        Observer { comments -> configComments(comments) })
+                if (isTopic) {
+                    viewModel.getComments(Topic(id)).observe(this@CommentsFragment, Observer {
+                        configComments(it)
+                    })
+                    viewModel.comment.topic.id = id
+                } else if (isPost) {
+                    viewModel.getComments(Post(id)).observe(this@CommentsFragment, Observer {
+                        configComments(it)
+                    })
+                    viewModel.comment.post.id = id
+                }
             }
+            viewModel.message.observe(this, Observer {
+                viewModel.comment.message = it
+                send_button.isEnabled = isCommentReady
+            })
+            viewModel.isSubmitting.observe(this, Observer {
+                message_edittext.isEnabled = !it
+                send_button.isEnabled = !it
+            })
         }
     }
 
@@ -65,7 +81,7 @@ class CommentsFragment : Fragment() {
         (activity as MainActivity).supportActionBar?.title = title
     }
 
-    private fun configList(list: List<Comment>) = fragment_comments_recyclerview.apply {
+    private fun configList(list: List<Comment>) = recyclerview.apply {
         layoutManager = LinearLayoutManager(context).apply { reverseLayout = true }
         adapter = CommentsAdapter(list)
     }
@@ -73,18 +89,18 @@ class CommentsFragment : Fragment() {
     private fun configComments(comments: List<Comment>) {
         when {
             comments.isEmpty() -> {
-                fragment_comments_edittext.visibility = View.GONE
-                fragment_comments_send_button.hide()
+                message_edittext.visibility = View.GONE
+                send_button.visibility = View.GONE
             }
             list.isEmpty() -> {
                 list = comments
                 configList(list)
-                fragment_comments_edittext.visibility = View.VISIBLE
-                fragment_comments_send_button.show()
-                fragment_comments_progressbar.visibility = View.GONE
+                message_edittext.visibility = View.VISIBLE
+                send_button.visibility = View.VISIBLE
+                progressbar.visibility = View.GONE
             }
             comments != list -> {
-                fragment_comments_tap_to_update_button.run {
+                tap_to_update_button.run {
                     visibility = View.VISIBLE
                     setOnClickListener {
                         visibility = View.GONE
@@ -95,5 +111,8 @@ class CommentsFragment : Fragment() {
             }
         }
     }
+
+    private val isCommentReady: Boolean
+        get() = viewModel.comment.message.isNotBlank()
 
 }

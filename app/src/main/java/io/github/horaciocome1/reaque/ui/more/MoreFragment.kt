@@ -27,13 +27,14 @@ import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.firebase.auth.FirebaseAuth
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.ui.MainActivity
 import kotlinx.android.synthetic.main.fragment_more.*
 
 class MoreFragment : Fragment() {
 
-    var userId = ""
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_more, container, false)
@@ -41,12 +42,6 @@ class MoreFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        profile_pic_imageview.setOnClickListener {
-            if (userId != "") {
-                val openProfile = MoreFragmentDirections.actionOpenProfileFromMore(userId)
-                Navigation.findNavController(it).navigate(openProfile)
-            }
-        }
         post_textview.setOnClickListener {
             val openPost = MoreFragmentDirections.actionOpenPost()
             Navigation.findNavController(it).navigate(openPost)
@@ -71,16 +66,21 @@ class MoreFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        hideButtons()
-        viewModel.me.observe(this, Observer {
-                Glide.with(this@MoreFragment)
-                    .load(it.pic)
+        viewModel.me.observe(this, Observer { user ->
+            Glide.with(this@MoreFragment)
+                .load(user.pic)
                     .apply(RequestOptions.circleCropTransform())
                     .into(profile_pic_imageview)
-            name_textview.text = it.name
-            if (it.id != "") {
-                userId = it.id
-                showButtons()
+            name_textview.text = user.name
+            profile_pic_imageview.setOnClickListener {
+                val openProfile = MoreFragmentDirections.actionOpenProfileFromMore(user.id)
+                Navigation.findNavController(it).navigate(openProfile)
+            }
+            logout_button.setOnClickListener {
+                auth = FirebaseAuth.getInstance()
+                auth.signOut()
+                (activity as MainActivity).finish()
+
             }
         })
     }
@@ -89,16 +89,6 @@ class MoreFragment : Fragment() {
         super.onResume()
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
             (activity as MainActivity).supportActionBar?.hide()
-    }
-
-    private fun hideButtons() = View.GONE.run {
-        edit_button.visibility = this
-        logout_button.visibility = this
-    }
-
-    private fun showButtons() = View.VISIBLE.run {
-        edit_button.visibility = this
-        logout_button.visibility = this
     }
 
 }

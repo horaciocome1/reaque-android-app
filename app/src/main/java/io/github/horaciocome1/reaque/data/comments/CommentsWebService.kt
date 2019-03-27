@@ -17,12 +17,11 @@ package io.github.horaciocome1.reaque.data.comments
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
-import io.github.horaciocome1.reaque.utilities.comment
-import io.github.horaciocome1.reaque.utilities.onListenFailed
-import io.github.horaciocome1.reaque.utilities.onSnapshotNull
+import io.github.horaciocome1.reaque.utilities.*
 
 class CommentsWebService {
 
@@ -39,6 +38,25 @@ class CommentsWebService {
     private var postId = ""
 
     private val ref = FirebaseFirestore.getInstance().collection("comments")
+
+    private lateinit var auth: FirebaseAuth
+
+    fun submitComment(comment: Comment, onSuccessful: () -> Unit) {
+        auth = FirebaseAuth.getInstance()
+        comment.user.run {
+            auth.currentUser?.let {
+                id = it.uid
+                name = it.displayName!!
+                pic = it.photoUrl.toString()
+            }
+        }
+        ref.add(comment.hashMap).addOnCompleteListener {
+            if (it.isSuccessful)
+                onSuccessful()
+            else
+                onUploadFailed(tag)
+        }
+    }
 
     fun getComments(topic: Topic): LiveData<List<Comment>> {
         if (!topic.id.equals(topicId, true)) {

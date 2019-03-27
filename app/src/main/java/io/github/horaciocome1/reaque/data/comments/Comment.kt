@@ -15,6 +15,8 @@
 
 package io.github.horaciocome1.reaque.data.comments
 
+import io.github.horaciocome1.reaque.data.posts.Post
+import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
 
 data class Comment(var id: String) {
@@ -22,5 +24,7 @@ data class Comment(var id: String) {
     var message = ""
     var date = ""
     var user = User("")
+    var topic = Topic("")
+    var post = Post("")
 
 }

@@ -17,7 +17,6 @@ package io.github.horaciocome1.reaque.ui.posts
 
 import android.app.Activity
 import android.content.Intent
-import android.content.res.Configuration
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -73,8 +72,7 @@ class PostingFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
-            (activity as MainActivity).supportActionBar?.hide()
+        (activity as MainActivity).supportActionBar?.hide()
     }
 
     override fun onStart() {
@@ -104,10 +102,6 @@ class PostingFragment : Fragment() {
                 addSimpleTouchListener()
             }
         })
-        viewModel.me.observe(this, Observer {
-            viewModel.user = it
-            post_button.isEnabled = isPostReady
-        })
         viewModel.isFinished.observe(this, Observer {
             if (it)
                 Navigation.findNavController(post_button).navigateUp()
@@ -128,7 +122,7 @@ class PostingFragment : Fragment() {
     private val isPostReady: Boolean
         get() {
             viewModel.post.run {
-                return (title.isNotBlank() && message.isNotBlank() && topic.id.isNotBlank() && viewModel.imageUri != Uri.EMPTY/* && user.id.isNotBlank()*/)
+                return (title.isNotBlank() && message.isNotBlank() && topic.id.isNotBlank() && viewModel.imageUri != Uri.EMPTY)
             }
         }
 

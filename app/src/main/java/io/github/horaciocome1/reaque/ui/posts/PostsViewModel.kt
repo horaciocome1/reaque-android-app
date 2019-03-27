@@ -28,7 +28,6 @@ import io.github.horaciocome1.reaque.data.posts.PostsRepository
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.topics.TopicsRepository
 import io.github.horaciocome1.reaque.data.users.User
-import io.github.horaciocome1.reaque.data.users.UsersRepository
 import io.github.horaciocome1.reaque.utilities.InjectorUtils
 
 val PostsFragment.viewModel: PostsViewModel
@@ -52,7 +51,6 @@ val PostingFragment.viewModel: PostsViewModel
 class PostsViewModel(
     private val postsRepository: PostsRepository,
     topicsRepository: TopicsRepository,
-    usersRepository: UsersRepository,
     private val imageRepository: ImageRepository
 ) : ViewModel() {
 
@@ -61,18 +59,16 @@ class PostsViewModel(
         topic.title = "Nenhum tópico selecionado!"
     }
     var imageUri: Uri = Uri.EMPTY
-    var user = User("")
     @Bindable
     val postTitle = MutableLiveData<String>()
     @Bindable
     val postMessage = MutableLiveData<String>()
     val topics = topicsRepository.topics
-    val me = usersRepository.me
-    private val _isSuccessful = MutableLiveData<Boolean>().apply {
+    private val _isFinished = MutableLiveData<Boolean>().apply {
         value = false
     }
     val isFinished: LiveData<Boolean>
-        get() = _isSuccessful
+        get() = _isFinished
 
     fun getPosts(topic: Topic) = postsRepository.getPosts(topic)
 
@@ -87,14 +83,13 @@ class PostsViewModel(
             onComplete = { link: String ->
                 this@PostsViewModel.post.run {
                     pic = link
-                    user = this@PostsViewModel.user
                     postsRepository.submitPost(this) {
-                        _isSuccessful.value = true
+                        _isFinished.value = true
                     }
                 }
             }
             onFailure = {
-
+                // caso o upload falhe
             }
         }
         imageRepository.uploadImage(uploader)

@@ -12,86 +12,100 @@
   ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~    See the License for the specific language governing permissions and limitations under the License.
   -->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    <data>
 
+        <variable
+            name="viemodel"
+            type="io.github.horaciocome1.reaque.ui.comments.CommentsViewModel" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fragment_comments_recyclerview"
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="61dp" />
+        android:layout_height="match_parent">
 
-    <ProgressBar
-        android:id="@+id/fragment_comments_progressbar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|top"
-        android:layout_marginTop="32dp" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/fragment_comments_tap_to_update_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        android:layout_marginBottom="61dp"
-        android:text="Actualizar"
-        android:visibility="gone"
-        app:cornerRadius="16dp" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom">
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/fragment_comments_cardview1"
-            android:layout_width="0dp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            app:cardBackgroundColor="@color/primaryLightColor"
-            app:cardCornerRadius="24dp"
-            app:cardElevation="0.2dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/fragment_comments_send_button"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_marginBottom="61dp" />
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|top"
+            android:layout_marginTop="32dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/tap_to_update_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="61dp"
+            android:text="Actualizar"
+            android:visibility="gone"
+            app:cornerRadius="24dp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/primaryColor">
 
             <EditText
-                android:id="@+id/fragment_comments_edittext"
-                android:layout_width="match_parent"
+                android:id="@+id/message_edittext"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:padding="4dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
                 android:background="@android:color/transparent"
-                android:hint="Seu comentario  . . ."
+                android:hint="Seu comentario  . . . "
                 android:inputType="textMultiLine"
-                android:maxLines="7"
+                android:maxLines="4"
                 android:minHeight="45dp"
+                android:padding="4dp"
                 android:paddingStart="24dp"
                 android:paddingLeft="24dp"
                 android:paddingEnd="24dp"
-                android:paddingRight="24dp" />
+                android:paddingRight="24dp"
+                android:text="@={viemodel.message}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/send_button"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
 
-        </com.google.android.material.card.MaterialCardView>
+            <ImageButton
+                android:id="@+id/send_button"
+                style="@style/AppTheme.CompleteClickableEffect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:onClick="@{() -> viemodel.submitComment()}"
+                android:tint="@color/secondaryColor"
+                android:visibility="gone"
+                app:backgroundTint="@color/primaryColor"
+                app:elevation="2dp"
+                app:fabCustomSize="45dp"
+                app:layout_constraintBottom_toBottomOf="@+id/message_edittext"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/message_edittext"
+                app:srcCompat="@drawable/outline_send_18" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fragment_comments_send_button"
-            style="@style/AppTheme.CompleteClickableEffect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            app:elevation="2dp"
-            app:fabCustomSize="45dp"
-            app:layout_constraintBottom_toBottomOf="@+id/fragment_comments_cardview1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/fragment_comments_cardview1"
-            app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/outline_send_18" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
