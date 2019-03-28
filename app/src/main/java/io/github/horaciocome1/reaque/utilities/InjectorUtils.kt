@@ -23,20 +23,12 @@ import io.github.horaciocome1.reaque.data.posts.PostsRepository
 import io.github.horaciocome1.reaque.data.topics.TopicsRepository
 import io.github.horaciocome1.reaque.data.users.UsersRepository
 import io.github.horaciocome1.reaque.ui.comments.CommentsViewModelFactory
-import io.github.horaciocome1.reaque.ui.favorites.FavoritesViewModelFactory
 import io.github.horaciocome1.reaque.ui.more.MoreViewModelFactory
 import io.github.horaciocome1.reaque.ui.notifications.NotificationsViewModelFactory
 import io.github.horaciocome1.reaque.ui.posts.PostsViewModelFactory
-import io.github.horaciocome1.reaque.ui.topics.TopicsViewModelFactory
 import io.github.horaciocome1.reaque.ui.users.UsersViewModelFactory
 
 object InjectorUtils {
-
-    val topicsViewModelFactory: TopicsViewModelFactory
-        get() {
-            val repository = TopicsRepository.getInstance(Database.getInstance().topicsWebService)
-            return TopicsViewModelFactory(repository)
-        }
 
     val usersViewModelFactory: UsersViewModelFactory
         get() {
@@ -56,14 +48,6 @@ object InjectorUtils {
             val postsRepository = PostsRepository.getInstance(Database.getInstance().postsWebService)
             val imageRepository = ImageRepository.getInstance(Database.getInstance().imageUploaderWebService)
             return PostsViewModelFactory(postsRepository, topicsRepository, imageRepository)
-        }
-
-    val favoritesViewModelFactory: FavoritesViewModelFactory
-        get() {
-            val topicsRepository = TopicsRepository.getInstance(Database.getInstance().topicsWebService)
-            val postsRepository = PostsRepository.getInstance(Database.getInstance().postsWebService)
-            val usersRepository = UsersRepository.getInstance(Database.getInstance().usersWebService)
-            return FavoritesViewModelFactory(topicsRepository, postsRepository, usersRepository)
         }
 
     val commentsViewModelFactory: CommentsViewModelFactory

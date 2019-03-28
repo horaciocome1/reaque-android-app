@@ -16,58 +16,43 @@
 package io.github.horaciocome1.reaque.ui.comments
 
 import android.content.res.Configuration
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.comments.Comment
-import io.github.horaciocome1.reaque.data.posts.Post
-import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.ui.MainActivity
-import kotlinx.android.synthetic.main.fragment_comments.*
 
 class CommentsFragment : Fragment() {
 
     private var list = listOf<Comment>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_comments, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        tap_to_update_button.visibility = View.GONE
-    }
+//    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+//        return inflater.inflate(R.layout.fragment_comments_topic, container, false)
+//    }
 
     override fun onStart() {
         super.onStart()
         arguments?.let { bundle ->
-            CommentsFragmentArgs.fromBundle(bundle).run {
-                setActionBarTitle(title)
-                if (isTopic) {
-                    viewModel.getComments(Topic(id)).observe(this@CommentsFragment, Observer {
-                        configComments(it)
-                    })
-                    viewModel.comment.topic.id = id
-                } else if (isPost) {
-                    viewModel.getComments(Post(id)).observe(this@CommentsFragment, Observer {
-                        configComments(it)
-                    })
-                    viewModel.comment.post.id = id
-                }
-            }
-            viewModel.message.observe(this, Observer {
-                viewModel.comment.message = it
-                send_button.isEnabled = isCommentReady
-            })
-            viewModel.isSubmitting.observe(this, Observer {
-                message_edittext.isEnabled = !it
-                send_button.isEnabled = !it
-            })
+            //            CommentsFragmentArgs.fromBundle(bundle).run {
+//                setActionBarTitle(title)
+//                if (isTopic) {
+//                    viewModel.getComments(Topic(id)).observe(this@CommentsFragment, Observer {
+//                        configComments(it)
+//                    })
+//                    viewModel.comment.topic.id = id
+//                } else if (isPost) {
+//                    viewModel.getComments(Post(id)).observe(this@CommentsFragment, Observer {
+//                        configComments(it)
+//                    })
+//                    viewModel.comment.post.id = id
+//                }
+//            }
+//            viewModel.message.observe(this, Observer {
+//                viewModel.comment.message = it
+//                send_button.isEnabled = isCommentReady
+//            })
+//            viewModel.isSubmitting.observe(this, Observer {
+//                message_edittext.isEnabled = !it
+//                send_button.isEnabled = !it
+//            })
         }
     }
 
@@ -81,37 +66,37 @@ class CommentsFragment : Fragment() {
         (activity as MainActivity).supportActionBar?.title = title
     }
 
-    private fun configList(list: List<Comment>) = recyclerview.apply {
-        layoutManager = LinearLayoutManager(context).apply { reverseLayout = true }
-        adapter = CommentsAdapter(list)
-    }
-
-    private fun configComments(comments: List<Comment>) {
-        when {
-            comments.isEmpty() -> {
-                message_edittext.visibility = View.GONE
-                send_button.visibility = View.GONE
-            }
-            list.isEmpty() -> {
-                list = comments
-                configList(list)
-                message_edittext.visibility = View.VISIBLE
-                send_button.visibility = View.VISIBLE
-                progressbar.visibility = View.GONE
-            }
-            comments != list -> {
-                tap_to_update_button.run {
-                    visibility = View.VISIBLE
-                    setOnClickListener {
-                        visibility = View.GONE
-                        list = comments
-                        configList(list)
-                    }
-                }
-            }
-        }
-    }
-
+    //    private fun configList(list: List<Comment>) = recyclerview.apply {
+//        layoutManager = LinearLayoutManager(context).apply { reverseLayout = true }
+//        adapter = CommentsAdapter(list)
+//    }
+//
+//    private fun configComments(comments: List<Comment>) {
+//        when {
+//            comments.isEmpty() -> {
+//                message_edittext.visibility = View.GONE
+//                send_button.visibility = View.GONE
+//            }
+//            list.isEmpty() -> {
+//                list = comments
+//                configList(list)
+//                message_edittext.visibility = View.VISIBLE
+//                send_button.visibility = View.VISIBLE
+//                progressbar.visibility = View.GONE
+//            }
+//            comments != list -> {
+//                tap_to_update_button.run {
+//                    visibility = View.VISIBLE
+//                    setOnClickListener {
+//                        visibility = View.GONE
+//                        list = comments
+//                        configList(list)
+//                    }
+//                }
+//            }
+//        }
+//    }
+//
     private val isCommentReady: Boolean
         get() = viewModel.comment.message.isNotBlank()
 

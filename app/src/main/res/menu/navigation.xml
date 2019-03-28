@@ -13,31 +13,26 @@
   ~    See the License for the specific language governing permissions and limitations under the License.
   -->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/destination_notifications"
-        android:icon="@drawable/outline_notifications_24"
-        android:title="Notificações"
-        app:showAsAction="always" />
-
-    <item
-        android:id="@+id/destination_favorites"
-        android:icon="@drawable/outline_bookmark_border_24"
-        android:title="Favoritos"
-        app:showAsAction="always" />
-
-    <item
-        android:id="@+id/destination_topics"
+        android:id="@+id/destination_posts"
         android:icon="@drawable/outline_subject_24"
-        android:title="Tópicos"
-        app:showAsAction="always" />
+        android:title="@string/posts" />
+
+    <item
+        android:id="@+id/destination_users"
+        android:icon="@drawable/outline_people_outline_24"
+        android:title="@string/users" />
+
+    <item
+        android:id="@+id/destination_forum"
+        android:icon="@drawable/outline_forum_24"
+        android:title="@string/forum" />
 
     <item
         android:id="@+id/destination_more"
         android:icon="@drawable/outline_more_horiz_24"
-        android:title="Mais"
-        app:showAsAction="always" />
+        android:title="@string/more" />
 
 </menu>

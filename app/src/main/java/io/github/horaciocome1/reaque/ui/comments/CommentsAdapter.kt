@@ -19,7 +19,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -47,8 +46,8 @@ class CommentsAdapter(private val list: List<Comment>) : RecyclerView.Adapter<Co
                 .apply(RequestOptions.circleCropTransform())
                 .into(binding.itemCommenWriterPicImageview)
             binding.itemCommenWriterPicImageview.setOnClickListener {
-                val openProfile = CommentsFragmentDirections.actionOpenProfileFromComments(user.id)
-                Navigation.findNavController(it).navigate(openProfile)
+                //                val openProfile = CommentsFragmentDirections.actionOpenProfileFromComments(user.id)
+//                Navigation.findNavController(it).navigate(openProfile)
             }
         }
     }

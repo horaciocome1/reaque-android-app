@@ -70,6 +70,8 @@ class PostsViewModel(
     val isFinished: LiveData<Boolean>
         get() = _isFinished
 
+    val favorites = postsRepository.favorites
+
     fun getPosts(topic: Topic) = postsRepository.getPosts(topic)
 
     fun getPosts(user: User) = postsRepository.getPosts(user)

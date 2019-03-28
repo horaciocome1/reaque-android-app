@@ -21,7 +21,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addSimpleTouchListener
@@ -47,24 +46,24 @@ class NotificationsFragment : Fragment() {
                         it[position].run {
                             when {
                                 isComment -> {
-                                    val openComments =
-                                        NotificationsFragmentDirections.actionOpenCommentsFromNotifications(
-                                            destinyId,
-                                            "",
-                                            true,
-                                            false
-                                        )
-                                    Navigation.findNavController(view).navigate(openComments)
+//                                    val openComments =
+//                                        NotificationsFragmentDirections.actionOpenCommentsFromNotifications(
+//                                            destinyId,
+//                                            "",
+//                                            true,
+//                                            false
+//                                        )
+//                                    Navigation.findNavController(view).navigate(openComments)
                                 }
                                 isPost -> {
-                                    val openRead =
-                                        NotificationsFragmentDirections.actionOpenReadFromNotifications(destinyId)
-                                    Navigation.findNavController(view).navigate(openRead)
+//                                    val openRead =
+//                                        NotificationsFragmentDirections.actionOpenReadFromNotifications(destinyId)
+//                                    Navigation.findNavController(view).navigate(openRead)
                                 }
                                 isUser -> {
-                                    val openProfile =
-                                        NotificationsFragmentDirections.actionOpenProfileFromNotifications(destinyId)
-                                    Navigation.findNavController(view).navigate(openProfile)
+//                                    val openProfile =
+//                                        NotificationsFragmentDirections.actionOpenProfileFromNotifications(destinyId)
+//                                    Navigation.findNavController(view).navigate(openProfile)
                                 }
                             }
                         }

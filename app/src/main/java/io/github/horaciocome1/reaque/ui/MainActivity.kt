@@ -28,7 +28,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.google.firebase.auth.FirebaseAuth
 import io.github.horaciocome1.reaque.R
-import io.github.horaciocome1.reaque.ui.users.getSignInActivityIntent
+import io.github.horaciocome1.reaque.ui.signin.getSignInActivityIntent
 import io.github.horaciocome1.reaque.utilities.Constants
 import kotlinx.android.synthetic.main.activity_main.*
 

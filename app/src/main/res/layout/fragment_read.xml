@@ -46,17 +46,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="112dp" />
+            android:layout_marginBottom="120dp" />
 
         <LinearLayout
             android:id="@+id/fragment_read_bottom_sheet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="54.5dp"
-            android:background="@drawable/background_bottom_sheet"
+            android:background="@drawable/background_bottomsheet"
             android:orientation="vertical"
             app:behavior_hideable="false"
-            app:behavior_peekHeight="112dp"
+            app:behavior_peekHeight="120dp"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
             <androidx.core.widget.NestedScrollView
@@ -138,7 +138,7 @@
                             android:layout_marginLeft="16dp"
                             android:layout_marginEnd="4dp"
                             android:layout_marginRight="4dp"
-                            android:layout_weight="0.7"
+                            android:layout_weight="1"
                             android:padding="16dp"
                             android:text="Favorito"
                             app:cornerRadius="16dp"
@@ -154,9 +154,9 @@
                             android:layout_marginLeft="4dp"
                             android:layout_marginEnd="16dp"
                             android:layout_marginRight="16dp"
-                            android:layout_weight="1"
+                            android:layout_weight="0.7"
                             android:padding="16dp"
-                            android:text="Comentários"
+                            android:text="Partilhar"
                             app:cornerRadius="16dp"
                             app:backgroundTint="@color/commentsColor"
                             app:icon="@drawable/outline_forum_18" />

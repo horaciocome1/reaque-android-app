@@ -20,6 +20,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
@@ -27,6 +28,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import io.github.horaciocome1.reaque.data.posts.Post
+import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.databinding.FragmentReadBinding
 import io.github.horaciocome1.reaque.ui.MainActivity
 import jp.wasabeef.glide.transformations.BlurTransformation
@@ -35,6 +37,7 @@ import kotlinx.android.synthetic.main.fragment_read.*
 class ReadFragment: Fragment() {
 
     private lateinit var binding: FragmentReadBinding
+    private lateinit var behavior: BottomSheetBehavior<LinearLayout>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentReadBinding.inflate(inflater, container, false)
@@ -46,11 +49,11 @@ class ReadFragment: Fragment() {
         arguments?.let { args ->
             val postId = ReadFragmentArgs.fromBundle(args).postId
             viewModel.getPosts(Post(postId)).observe(this, Observer { post ->
-                if (post.id == "")
+                if (post.id.isBlank())
                     fragment_read_bottom_sheet.visibility = View.GONE
                 else {
                     fragment_read_bottom_sheet.visibility = View.VISIBLE
-                    BottomSheetBehavior.from(fragment_read_bottom_sheet).state = BottomSheetBehavior.STATE_COLLAPSED
+                    behavior = BottomSheetBehavior.from(fragment_read_bottom_sheet)
                     post.run {
                         binding.post = this
                         Glide.with(this@ReadFragment).run {
@@ -63,18 +66,12 @@ class ReadFragment: Fragment() {
                                 .apply(RequestOptions.circleCropTransform())
                                 .into(profile_pic_imageview)
                         }
+                        behavior.state = BottomSheetBehavior.STATE_COLLAPSED
                         profile_pic_imageview.setOnClickListener {
-                            val openProfile = ReadFragmentDirections.actionOpenProfileFromRead(this.user.id)
-                            Navigation.findNavController(it).navigate(openProfile)
+                            this.user.openProfile(it)
                         }
                         fragment_read_cover_imageview.setOnClickListener {
-                            val openViewer = ReadFragmentDirections.actionOpenViewerFromRead(this.pic)
-                            Navigation.findNavController(it).navigate(openViewer)
-                        }
-                        comments_button.setOnClickListener {
-                            val openComments =
-                                ReadFragmentDirections.actionOpenCommentsFromRead(post.id, "", false, true)
-                            Navigation.findNavController(it).navigate(openComments)
+                            openViewer(it, pic)
                         }
                     }
                 }
@@ -86,6 +83,16 @@ class ReadFragment: Fragment() {
         super.onResume()
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
             (activity as MainActivity).supportActionBar?.show()
+    }
+
+    private fun User.openProfile(view: View) {
+        val directions = ReadFragmentDirections.actionOpenProfileFromRead(id)
+        Navigation.findNavController(view).navigate(directions)
+    }
+
+    private fun openViewer(view: View, url: String) {
+        val directions = ReadFragmentDirections.actionOpenViewerFromRead(url)
+        Navigation.findNavController(view).navigate(directions)
     }
 
 }

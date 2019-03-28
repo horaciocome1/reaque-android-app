@@ -15,7 +15,6 @@
 
 package io.github.horaciocome1.reaque.ui.posts
 
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,10 +23,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
-import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.ui.MainActivity
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addSimpleTouchListener
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.setOnClick
@@ -35,63 +34,75 @@ import kotlinx.android.synthetic.main.fragment_posts.*
 
 class PostsFragment: Fragment() {
 
-    private var list = listOf<Post>()
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_posts, container, false)
     }
 
     override fun onStart() {
         super.onStart()
-        arguments?.let { bundle ->
-            val safeArgs = PostsFragmentArgs.fromBundle(bundle)
-            safeArgs.run {
-                if (isFromTopic)
-                    viewModel.getPosts(Topic(id)).observe(this@PostsFragment, Observer {
-                        configPosts(it)
-                        (activity as MainActivity).supportActionBar?.title = title
-                    })
-                else if (isFromUser)
-                    viewModel.getPosts(User(id)).observe(this@PostsFragment, Observer { configPosts(it) })
-            }
+        viewModel.topics.observe(this, Observer {
+            if (it.isNotEmpty()) {
+                topics_recyclerview.run {
+                    layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                    adapter = TopicsAdapter(it)
+                    setOnClick { _, position ->
+                        favorites_fab.show()
+                        it[position].listPosts()
+                    }
+                    addSimpleTouchListener()
+                }
+                topics_progressbar.visibility = View.GONE
+            } else
+                topics_progressbar.visibility = View.VISIBLE
+        })
+        favorites_fab.setOnClickListener {
+            viewModel.favorites.observe(this, Observer {
+                posts_recyclerview.setupWithPosts(it)
+                if (it.isNotEmpty()) {
+                    posts_progressbar.visibility = View.GONE
+                    posts_recyclerview.visibility = View.VISIBLE
+                } else {
+                    posts_progressbar.visibility = View.VISIBLE
+                    posts_recyclerview.visibility = View.GONE
+                    favorites_fab.hide()
+                }
+            })
         }
     }
 
     override fun onResume() {
         super.onResume()
-        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
-            (activity as MainActivity).supportActionBar?.show()
+        (activity as MainActivity).supportActionBar?.hide()
+        posts_progressbar.visibility = View.GONE
     }
 
-    private fun configList(list: List<Post>) = fragment_posts_recyclerview.apply {
-        layoutManager = LinearLayoutManager(context)
-        adapter = PostsAdapter(list)
-        setOnClick { view, position ->
-            val openRead = PostsFragmentDirections.actionOpenReadFromPosts(list[position].id)
-            Navigation.findNavController(view).navigate(openRead)
-        }
-        addSimpleTouchListener()
+    private fun Topic.listPosts() {
+        viewModel.getPosts(this).observe(this@PostsFragment, Observer {
+            posts_recyclerview.setupWithPosts(it)
+            if (it.isNotEmpty()) {
+                posts_progressbar.visibility = View.GONE
+                posts_recyclerview.visibility = View.VISIBLE
+            } else {
+                posts_progressbar.visibility = View.VISIBLE
+                posts_recyclerview.visibility = View.GONE
+            }
+        })
     }
 
-    private fun configPosts(posts: List<Post>) {
-        when {
-            posts.isEmpty() -> fragment_posts_progressbar.visibility = View.VISIBLE
-            list.isEmpty() -> {
-                list = posts
-                configList(list)
-                fragment_posts_progressbar.visibility = View.GONE
+    private fun RecyclerView.setupWithPosts(list: List<Post>) {
+        if (list.isNotEmpty()) {
+            layoutManager = LinearLayoutManager(context)
+            adapter = PostsAdapter(list)
+            setOnClick { view, position ->
+                list[position].read(view)
             }
-            posts != list -> {
-                fragment_posts_tap_to_update_button.run {
-                    visibility = View.VISIBLE
-                    setOnClickListener {
-                        list = posts
-                        configList(list)
-                        visibility = View.GONE
-                    }
-                }
-            }
+            addSimpleTouchListener()
         }
+    }
+
+    private fun Post.read(view: View) {
+        val directions = PostsFragmentDirections.actionOpenReadFromPosts(id)
+        Navigation.findNavController(view).navigate(directions)
     }
 
 }

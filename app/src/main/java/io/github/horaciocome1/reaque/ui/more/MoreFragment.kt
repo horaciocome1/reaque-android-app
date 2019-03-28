@@ -43,12 +43,8 @@ class MoreFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         post_textview.setOnClickListener {
-            val openPost = MoreFragmentDirections.actionOpenPost()
+            val openPost = MoreFragmentDirections.actionOpenPosting()
             Navigation.findNavController(it).navigate(openPost)
-        }
-        search_textview.setOnClickListener {
-            val openSearch = MoreFragmentDirections.actionOpenSearch()
-            Navigation.findNavController(it).navigate(openSearch)
         }
         setting_textview.setOnClickListener {
             val openSettings = MoreFragmentDirections.actionOpenSettings()

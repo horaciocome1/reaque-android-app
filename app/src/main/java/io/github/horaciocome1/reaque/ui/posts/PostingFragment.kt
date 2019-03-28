@@ -92,7 +92,7 @@ class PostingFragment : Fragment() {
         viewModel.topics.observe(this, Observer {
             topics_recyclerview.run {
                 layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-                adapter = TopicsAdapter(it)
+                adapter = PostingTopicsAdapter(it)
                 setOnClick { _, position ->
                     selectTopicBehavior.state = BottomSheetBehavior.STATE_HIDDEN
                     viewModel.post.topic = it[position]

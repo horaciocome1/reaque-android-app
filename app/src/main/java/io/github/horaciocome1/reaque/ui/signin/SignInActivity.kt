@@ -13,7 +13,7 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.ui.users
+package io.github.horaciocome1.reaque.ui.signin
 
 import android.app.Activity
 import android.content.Context
@@ -30,6 +30,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import io.github.horaciocome1.reaque.R
+import io.github.horaciocome1.reaque.ui.users.viewModel
 import io.github.horaciocome1.reaque.utilities.Constants
 
 fun Context.getSignInActivityIntent() = Intent(this, SignInActivity::class.java)

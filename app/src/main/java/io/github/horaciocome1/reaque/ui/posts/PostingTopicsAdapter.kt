@@ -13,39 +13,28 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.ui.favorites
+package io.github.horaciocome1.reaque.ui.posts
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import io.github.horaciocome1.reaque.data.posts.Post
-import io.github.horaciocome1.reaque.databinding.ItemPostFavoriteBinding
+import io.github.horaciocome1.reaque.data.topics.Topic
+import io.github.horaciocome1.reaque.databinding.ItemTopicPostingBinding
 
-class PostsAdapter(private val list: List<Post>) : RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
+class PostingTopicsAdapter(private val list: List<Topic>) : RecyclerView.Adapter<PostingTopicsAdapter.ViewHolder>() {
 
-    lateinit var binding: ItemPostFavoriteBinding
-    lateinit var context: Context
+    lateinit var binding: ItemTopicPostingBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        context = parent.context
-        binding = ItemPostFavoriteBinding.inflate(LayoutInflater.from(context), parent, false)
+        binding = ItemTopicPostingBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding.root)
     }
 
     override fun getItemCount() = list.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        list[position].run {
-            Glide.with(context)
-                .load(pic)
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(binding.itemPostFavoriteImageview)
-            binding.post = this
-        }
+        binding.topic = list[position]
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)

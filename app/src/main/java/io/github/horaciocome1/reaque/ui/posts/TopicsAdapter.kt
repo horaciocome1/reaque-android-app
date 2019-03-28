@@ -15,26 +15,37 @@
 
 package io.github.horaciocome1.reaque.ui.posts
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import io.github.horaciocome1.reaque.data.topics.Topic
-import io.github.horaciocome1.reaque.databinding.ItemTopicPostingBinding
+import io.github.horaciocome1.reaque.databinding.ItemTopicBinding
 
 class TopicsAdapter(private val list: List<Topic>) : RecyclerView.Adapter<TopicsAdapter.ViewHolder>() {
 
-    lateinit var binding: ItemTopicPostingBinding
+    lateinit var binding: ItemTopicBinding
+    lateinit var context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        binding = ItemTopicPostingBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        context = parent.context
+        binding = ItemTopicBinding.inflate(LayoutInflater.from(context), parent, false)
         return ViewHolder(binding.root)
     }
 
     override fun getItemCount() = list.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        binding.topic = list[position]
+        list[position].run {
+            Glide.with(context)
+                .load(cover)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(binding.itemTopicFavoriteImageview)
+            binding.topic = this
+        }
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)

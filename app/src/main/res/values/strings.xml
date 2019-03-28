@@ -14,7 +14,7 @@
   -->
 
 <resources>
-    <string name="app_name">reaque</string>
+    <string name="app_name">Reaque</string>
 
     <!-- 01 URL -->
     <string name="terms_and_conditions_url">https://github.com/horaciocome1/reaque/blob/master/TERMS_AND_CONDITIONS.md</string>
@@ -22,5 +22,13 @@
     <string name="licence_url">https://github.com/horaciocome1/reaque/blob/master/LICENSE</string>
     <string name="read_me_url">https://github.com/horaciocome1/reaque/blob/master/README.md</string>
     <string name="project_url">https://github.com/horaciocome1/reaque</string>
+
+    <string name="topics">Tópicos</string>
+    <string name="posts">Publicações</string>
+    <string name="users">Autores</string>
+    <string name="comments">Comentários</string>
+    <string name="forum">Fórum</string>
+    <string name="more">Mais</string>
+    <string name="posts_title">Encontre publicações do seu interesse</string>
 
 </resources>

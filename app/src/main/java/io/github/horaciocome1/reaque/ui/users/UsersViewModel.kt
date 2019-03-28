@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelProviders
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.data.users.UsersRepository
+import io.github.horaciocome1.reaque.ui.signin.SignInActivity
 import io.github.horaciocome1.reaque.utilities.InjectorUtils
 
 val UsersFragment.viewModel: UsersViewModel
