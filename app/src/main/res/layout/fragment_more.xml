@@ -127,7 +127,7 @@
                     android:paddingEnd="32dp"
                     android:paddingRight="32dp"
                     android:paddingBottom="16dp"
-                    android:text="@string/post"
+                    android:text="@string/posting"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                 <TextView
@@ -175,7 +175,7 @@
                 android:paddingEnd="32dp"
                 android:paddingRight="32dp"
                 android:paddingBottom="16dp"
-                android:text="Configurações"
+                android:text="@string/settings"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
         </com.google.android.material.card.MaterialCardView>
@@ -206,7 +206,7 @@
                     android:paddingEnd="32dp"
                     android:paddingRight="32dp"
                     android:paddingBottom="16dp"
-                    android:text="Perguntas frequentes"
+                    android:text="@string/frequently_asked_questions"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                 <TextView
@@ -220,7 +220,7 @@
                     android:paddingEnd="32dp"
                     android:paddingRight="32dp"
                     android:paddingBottom="16dp"
-                    android:text="Feedback"
+                    android:text="@string/feedback"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                 <TextView
@@ -235,7 +235,7 @@
                     android:paddingEnd="32dp"
                     android:paddingRight="32dp"
                     android:paddingBottom="16dp"
-                    android:text="Sobre"
+                    android:text="@string/about"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
             </LinearLayout>

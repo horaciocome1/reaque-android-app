@@ -36,19 +36,19 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fragment_settings_terms_and_conditions.setOnClickListener(this::onUrlOnClickListener)
-        fragment_settings_privacy_policy.setOnClickListener(this::onUrlOnClickListener)
-        fragment_settings_licenses.setOnClickListener(this::onUrlOnClickListener)
-        fragment_settings_project_page.setOnClickListener(this::onUrlOnClickListener)
+        terms_and_conditions_textview.setOnClickListener(this::onUrlOnClickListener)
+        privacy_policy_textview.setOnClickListener(this::onUrlOnClickListener)
+        licenses_textview.setOnClickListener(this::onUrlOnClickListener)
+        repository_textview.setOnClickListener(this::onUrlOnClickListener)
     }
 
     private fun onUrlOnClickListener(view: View) {
         val url = resources.getString(
             when (view) {
-                fragment_settings_terms_and_conditions -> R.string.terms_and_conditions_url
-                fragment_settings_privacy_policy -> R.string.privacy_policy_url
-                fragment_settings_licenses -> R.string.licence_url
-                fragment_settings_project_page -> R.string.project_url
+                terms_and_conditions_textview -> R.string.terms_and_conditions_url
+                privacy_policy_textview -> R.string.privacy_policy_url
+                licenses_textview -> R.string.licence_url
+                repository_textview -> R.string.project_url
                 else -> Log.w(tag, "View not found!")
             }
         )

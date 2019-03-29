@@ -36,6 +36,17 @@
     <string name="users_title">Encontre autores do seu interesse</string>
     <string name="sign_out">Sair</string>
     <string name="edit">Editar</string>
-    <string name="post">Publicar</string>
+    <string name="posting">Publicar</string>
+    <string name="settings">Opções avançadas</string>
+    <string name="frequently_asked_questions">Perguntas frequentes</string>
+    <string name="feedback">Feedback</string>
+    <string name="about">Sobre</string>
+    <string name="app_version">1.0</string>
+    <string name="version">Versão</string>
+    <string name="terms_and_conditions">Termos e condições</string>
+    <string name="privacy_policy">Política de privacidade</string>
+    <string name="open_source_licenses">Licenças open source</string>
+    <string name="repository">Repositório</string>
+    <string name="donate">Apoie ao desenvolvedor</string>
 
 </resources>

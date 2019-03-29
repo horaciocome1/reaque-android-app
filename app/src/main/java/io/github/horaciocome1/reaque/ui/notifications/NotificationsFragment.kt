@@ -21,31 +21,31 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.horaciocome1.reaque.R
+import io.github.horaciocome1.reaque.data.notifications.Notification
+import io.github.horaciocome1.reaque.ui.MainActivity
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addSimpleTouchListener
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.setOnClick
 import kotlinx.android.synthetic.main.fragment_notifications.*
 
 class NotificationsFragment : Fragment() {
 
+    private var notifications = listOf<Notification>()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_notifications, container, false)
     }
 
-    override fun onStart() {
-        super.onStart()
-        viewModel.notifications.observe(this, Observer {
-            if (it.isEmpty())
-                fragment_notifications_progressbar.visibility = View.VISIBLE
-            else {
-                fragment_notifications_recyclerview.run {
-                    layoutManager = LinearLayoutManager(context)
-                    adapter = NotificationsAdapter(it)
-                    setOnClick { view, position ->
-                        it[position].run {
-                            when {
-                                isComment -> {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        recyclerview.run {
+            setOnClick { view, position ->
+                if (notifications.isNotEmpty()) {
+                    notifications[position].run {
+                        when {
+                            isComment -> {
 //                                    val openComments =
 //                                        NotificationsFragmentDirections.actionOpenCommentsFromNotifications(
 //                                            destinyId,
@@ -54,25 +54,45 @@ class NotificationsFragment : Fragment() {
 //                                            false
 //                                        )
 //                                    Navigation.findNavController(view).navigate(openComments)
-                                }
-                                isPost -> {
-//                                    val openRead =
-//                                        NotificationsFragmentDirections.actionOpenReadFromNotifications(destinyId)
-//                                    Navigation.findNavController(view).navigate(openRead)
-                                }
-                                isUser -> {
-//                                    val openProfile =
-//                                        NotificationsFragmentDirections.actionOpenProfileFromNotifications(destinyId)
-//                                    Navigation.findNavController(view).navigate(openProfile)
-                                }
                             }
+                            isPost -> view.read(destinyId)
+                            isUser -> view.openProfile(destinyId)
                         }
                     }
-                    addSimpleTouchListener()
                 }
-                fragment_notifications_progressbar.visibility = View.GONE
             }
+            addSimpleTouchListener()
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.notifications.observe(this, Observer {
+            notifications = it
+            recyclerview.run {
+                layoutManager = LinearLayoutManager(context)
+                adapter = NotificationsAdapter(notifications)
+            }
+            if (notifications.isEmpty())
+                progressbar.visibility = View.VISIBLE
+            else
+                progressbar.visibility = View.GONE
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as MainActivity).supportActionBar?.show()
+    }
+
+    private fun View.openProfile(userId: String) {
+        val directions = NotificationsFragmentDirections.actionOpenProfileFromNotifications(userId)
+        findNavController().navigate(directions)
+    }
+
+    private fun View.read(postId: String) {
+        val directions = NotificationsFragmentDirections.actionOpenReadFromNotifications(postId)
+        findNavController().navigate(directions)
     }
 
 }

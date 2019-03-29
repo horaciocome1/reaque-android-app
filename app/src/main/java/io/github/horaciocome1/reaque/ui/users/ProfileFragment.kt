@@ -114,14 +114,14 @@ class ProfileFragment: Fragment() {
 
     private fun showContent() {
         cover_imageview.visibility = View.VISIBLE
-        fragment_profile_scrollview.visibility = View.VISIBLE
-        fragment_profile_progressbar.visibility = View.GONE
+        scrollview.visibility = View.VISIBLE
+        progressbar.visibility = View.GONE
     }
 
     private fun hideContent() {
         cover_imageview.visibility = View.GONE
-        fragment_profile_scrollview.visibility = View.GONE
-        fragment_profile_progressbar.visibility = View.VISIBLE
+        scrollview.visibility = View.GONE
+        progressbar.visibility = View.VISIBLE
     }
 
     private fun openViewer(view: View, url: String) {
