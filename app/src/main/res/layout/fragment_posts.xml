@@ -38,6 +38,7 @@
                 android:layout_marginEnd="24dp"
                 android:layout_marginRight="24dp"
                 android:text="@string/posts_title"
+                android:lineSpacingExtra="8sp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
                 android:textColor="@color/primaryTextColor" />
 

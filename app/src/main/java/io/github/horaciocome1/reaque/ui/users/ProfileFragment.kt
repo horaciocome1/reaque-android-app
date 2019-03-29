@@ -22,12 +22,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.databinding.FragmentProfileBinding
 import io.github.horaciocome1.reaque.ui.MainActivity
+import io.github.horaciocome1.reaque.ui.posts.ReadFragmentDirections
 import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.fragment_profile.*
 
@@ -46,36 +48,23 @@ class ProfileFragment: Fragment() {
             val userId = ProfileFragmentArgs.fromBundle(args).userId
             viewModel.getUsers(User(userId)).observe(this, Observer { user ->
                 when {
-                    user.id == "" -> {
-                        fragment_profile_cover_imageview.visibility = View.GONE
-                        fragment_profile_scrollview.visibility = View.GONE
-                        fragment_profile_progressbar.visibility = View.VISIBLE
-                    }
+                    user.id.isBlank() -> hideContent()
                     else -> {
-                        fragment_profile_cover_imageview.visibility = View.VISIBLE
-                        fragment_profile_scrollview.visibility = View.VISIBLE
-                        fragment_profile_progressbar.visibility = View.GONE
-
                         user.run {
                             binding.user = this
                             Glide.with(this@ProfileFragment).load(pic).run {
                                 apply(RequestOptions.bitmapTransform(BlurTransformation(7, 14)))
+                                    .transition(DrawableTransitionOptions.withCrossFade())
                                     .into(fragment_profile_cover_imageview)
                                 apply(RequestOptions.circleCropTransform())
+                                    .transition(DrawableTransitionOptions.withCrossFade())
                                     .into(fragment_profile_profile_pic_imageview)
                             }
-
-                            fragment_profile_posts_button.setOnClickListener {
-                                //                                val openPosts =
-//                                    ProfileFragmentDirections.actionOpenPostsFromProfile(userId, name, false, true)
-//                                Navigation.findNavController(it).navigate(openPosts)
-                            }
-
                             fragment_profile_profile_pic_imageview.setOnClickListener {
-                                val directions = ProfileFragmentDirections.actionOpenViewerFromProfile(pic)
-                                Navigation.findNavController(it).navigate(directions)
+                                openViewer(it, pic)
                             }
                         }
+                        showContent()
                     }
                 }
             })
@@ -90,6 +79,23 @@ class ProfileFragment: Fragment() {
                 title = ""
             }
         }
+    }
+
+    private fun showContent() {
+        fragment_profile_cover_imageview.visibility = View.VISIBLE
+        fragment_profile_scrollview.visibility = View.VISIBLE
+        fragment_profile_progressbar.visibility = View.GONE
+    }
+
+    private fun hideContent() {
+        fragment_profile_cover_imageview.visibility = View.GONE
+        fragment_profile_scrollview.visibility = View.GONE
+        fragment_profile_progressbar.visibility = View.VISIBLE
+    }
+
+    private fun openViewer(view: View, url: String) {
+        val directions = ReadFragmentDirections.actionOpenViewerFromRead(url)
+        view.findNavController().navigate(directions)
     }
 
 }

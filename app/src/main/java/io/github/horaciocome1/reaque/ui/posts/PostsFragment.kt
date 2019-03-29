@@ -21,7 +21,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.github.horaciocome1.reaque.R
@@ -34,22 +34,41 @@ import kotlinx.android.synthetic.main.fragment_posts.*
 
 class PostsFragment: Fragment() {
 
+    private var posts = listOf<Post>()
+    private var topics = listOf<Topic>()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_posts, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        topics_recyclerview.run {
+            setOnClick { _, position ->
+                if (topics.isNotEmpty()) {
+                    favorites_fab.show()
+                    topics[position].listPosts()
+                }
+            }
+            addSimpleTouchListener()
+        }
+        posts_recyclerview.run {
+            setOnClick { view, position ->
+                if (posts.isNotEmpty())
+                    posts[position].read(view)
+            }
+            addSimpleTouchListener()
+        }
     }
 
     override fun onStart() {
         super.onStart()
         viewModel.topics.observe(this, Observer {
-            if (it.isNotEmpty()) {
+            topics = it
+            if (topics.isNotEmpty()) {
                 topics_recyclerview.run {
                     layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-                    adapter = TopicsAdapter(it)
-                    setOnClick { _, position ->
-                        favorites_fab.show()
-                        it[position].listPosts()
-                    }
-                    addSimpleTouchListener()
+                    adapter = TopicsAdapter(topics)
                 }
                 topics_progressbar.visibility = View.GONE
             } else
@@ -58,14 +77,6 @@ class PostsFragment: Fragment() {
         favorites_fab.setOnClickListener {
             viewModel.favorites.observe(this, Observer {
                 posts_recyclerview.setupWithPosts(it)
-                if (it.isNotEmpty()) {
-                    posts_progressbar.visibility = View.GONE
-                    posts_recyclerview.visibility = View.VISIBLE
-                } else {
-                    posts_progressbar.visibility = View.VISIBLE
-                    posts_recyclerview.visibility = View.GONE
-                    favorites_fab.hide()
-                }
             })
         }
     }
@@ -79,30 +90,26 @@ class PostsFragment: Fragment() {
     private fun Topic.listPosts() {
         viewModel.getPosts(this).observe(this@PostsFragment, Observer {
             posts_recyclerview.setupWithPosts(it)
-            if (it.isNotEmpty()) {
-                posts_progressbar.visibility = View.GONE
-                posts_recyclerview.visibility = View.VISIBLE
-            } else {
-                posts_progressbar.visibility = View.VISIBLE
-                posts_recyclerview.visibility = View.GONE
-            }
         })
     }
 
     private fun RecyclerView.setupWithPosts(list: List<Post>) {
-        if (list.isNotEmpty()) {
+        posts = list
+        if (posts.isNotEmpty()) {
             layoutManager = LinearLayoutManager(context)
-            adapter = PostsAdapter(list)
-            setOnClick { view, position ->
-                list[position].read(view)
-            }
-            addSimpleTouchListener()
+            adapter = PostsAdapter(posts)
+            posts_progressbar.visibility = View.GONE
+            posts_recyclerview.visibility = View.VISIBLE
+        } else {
+            posts_progressbar.visibility = View.VISIBLE
+            posts_recyclerview.visibility = View.GONE
+            favorites_fab.hide()
         }
     }
 
     private fun Post.read(view: View) {
         val directions = PostsFragmentDirections.actionOpenReadFromPosts(id)
-        Navigation.findNavController(view).navigate(directions)
+        view.findNavController().navigate(directions)
     }
 
 }

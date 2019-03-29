@@ -23,8 +23,9 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import io.github.horaciocome1.reaque.data.posts.Post
@@ -44,36 +45,43 @@ class ReadFragment: Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        behavior = BottomSheetBehavior.from(fragment_read_bottom_sheet)
+    }
+
     override fun onStart() {
         super.onStart()
-        arguments?.let { args ->
-            val postId = ReadFragmentArgs.fromBundle(args).postId
+        arguments?.let { bundle ->
+            val postId = ReadFragmentArgs.fromBundle(bundle).postId
             viewModel.getPosts(Post(postId)).observe(this, Observer { post ->
                 if (post.id.isBlank())
-                    fragment_read_bottom_sheet.visibility = View.GONE
+                    behavior.state = BottomSheetBehavior.STATE_HIDDEN
                 else {
-                    fragment_read_bottom_sheet.visibility = View.VISIBLE
-                    behavior = BottomSheetBehavior.from(fragment_read_bottom_sheet)
                     post.run {
                         binding.post = this
-                        Glide.with(this@ReadFragment).run {
+                        Glide.with(this@ReadFragment)
+                            .run {
                             load(pic)
+                                .transition(DrawableTransitionOptions.withCrossFade())
                                 .into(fragment_read_cover_imageview)
                             load(pic)
                                 .apply(RequestOptions.bitmapTransform(BlurTransformation(2, 14)))
+                                .transition(DrawableTransitionOptions.withCrossFade())
                                 .into(fragment_read_cover2_imageview)
                             load(user.pic)
                                 .apply(RequestOptions.circleCropTransform())
+                                .transition(DrawableTransitionOptions.withCrossFade())
                                 .into(profile_pic_imageview)
                         }
-                        behavior.state = BottomSheetBehavior.STATE_COLLAPSED
                         profile_pic_imageview.setOnClickListener {
-                            this.user.openProfile(it)
+                            user.openProfile(it)
                         }
                         fragment_read_cover_imageview.setOnClickListener {
                             openViewer(it, pic)
                         }
                     }
+                    behavior.state = BottomSheetBehavior.STATE_COLLAPSED
                 }
             })
         }
@@ -87,12 +95,12 @@ class ReadFragment: Fragment() {
 
     private fun User.openProfile(view: View) {
         val directions = ReadFragmentDirections.actionOpenProfileFromRead(id)
-        Navigation.findNavController(view).navigate(directions)
+        view.findNavController().navigate(directions)
     }
 
     private fun openViewer(view: View, url: String) {
         val directions = ReadFragmentDirections.actionOpenViewerFromRead(url)
-        Navigation.findNavController(view).navigate(directions)
+        view.findNavController().navigate(directions)
     }
 
 }
