@@ -55,12 +55,12 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_open_profile_from_notification">
+                            <entry key="action_open_profile_from_notifications">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_open_read_from_notification">
+                            <entry key="action_open_read_from_notifications">
                               <value>
                                 <LayoutPositions />
                               </value>
