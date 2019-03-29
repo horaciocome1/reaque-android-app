@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="400dp"
             android:scaleType="centerCrop"
-            android:tint="#99000000"
+            android:tint="@color/dark_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

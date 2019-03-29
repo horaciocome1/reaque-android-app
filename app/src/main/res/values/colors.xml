@@ -29,5 +29,6 @@
     <color name="favoriteColor">#ff6d00</color>
     <color name="commentsColor">#00c853</color>
     <color name="usersColor">#0091ea</color>
+    <color name="dark_background">#99000000</color>
 
 </resources>
