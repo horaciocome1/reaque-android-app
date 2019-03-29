@@ -167,6 +167,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="usersFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-968" />
+                            <option name="y" value="644" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                 </map>
               </option>
             </LayoutPositions>

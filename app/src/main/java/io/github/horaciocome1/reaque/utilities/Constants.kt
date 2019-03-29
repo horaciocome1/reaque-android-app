@@ -21,4 +21,8 @@ object Constants {
     const val ACTIVITY_SIGN_IN_REQUEST_CODE = 1208
     const val GOOGLE_SIGN_IN_REQUEST_CODE = 1209
 
+    const val SINGLE_COLUMN = 1
+    const val TWO_COLUMNS = 2
+    const val THREE_COLUMNS = 3
+
 }

@@ -15,6 +15,7 @@
 
 package io.github.horaciocome1.reaque.ui.posts
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -78,12 +79,14 @@ class PostsFragment: Fragment() {
             viewModel.favorites.observe(this, Observer {
                 posts_recyclerview.setupWithPosts(it)
             })
+            favorites_fab.hide()
         }
     }
 
     override fun onResume() {
         super.onResume()
-        (activity as MainActivity).supportActionBar?.hide()
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+            (activity as MainActivity).supportActionBar?.hide()
         posts_progressbar.visibility = View.GONE
     }
 
@@ -91,6 +94,7 @@ class PostsFragment: Fragment() {
         viewModel.getPosts(this).observe(this@PostsFragment, Observer {
             posts_recyclerview.setupWithPosts(it)
         })
+        favorites_fab.show()
     }
 
     private fun RecyclerView.setupWithPosts(list: List<Post>) {

@@ -21,17 +21,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.databinding.ItemUserBinding
 
-class UsersAdapter(private val context: Context,
-                   private val list: List<User>)
-    : RecyclerView.Adapter<UsersAdapter.ViewHolder>() {
+class UsersAdapter(private val list: List<User>) : RecyclerView.Adapter<UsersAdapter.ViewHolder>() {
 
-    lateinit var binding: ItemUserBinding
+    private lateinit var binding: ItemUserBinding
+    private lateinit var context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        context = parent.context
         binding = ItemUserBinding.inflate(LayoutInflater.from(context), parent, false)
         return ViewHolder(binding.root)
     }
@@ -41,10 +42,10 @@ class UsersAdapter(private val context: Context,
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         list[position].run {
             binding.user = this
-            Glide.with(context).load(pic).run {
-                apply(RequestOptions.circleCropTransform())
-                    .into(binding.itemUserProfilePicImageview)
-            }
+            Glide.with(context).load(pic)
+                .apply(RequestOptions.circleCropTransform())
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(binding.itemUserProfilePicImageview)
         }
     }
 

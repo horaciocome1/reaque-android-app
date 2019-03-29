@@ -26,10 +26,18 @@
             app:argType="string" />
         <action
             android:id="@+id/action_open_profile_from_read"
-            app:destination="@id/destination_profile" />
+            app:destination="@id/destination_profile"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_open_viewer_from_read"
-            app:destination="@id/destination_viewer" />
+            app:destination="@id/destination_viewer"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/destination_profile"
@@ -40,7 +48,11 @@
             app:argType="string" />
         <action
             android:id="@+id/action_open_viewer_from_profile"
-            app:destination="@id/destination_viewer" />
+            app:destination="@id/destination_viewer"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/destination_viewer"
@@ -63,18 +75,30 @@
         android:label="Mais">
         <action
             android:id="@+id/action_open_profile_from_more"
-            app:destination="@id/destination_profile" />
+            app:destination="@id/destination_profile"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_open_posting"
-            app:destination="@+id/destination_posting" />
+            app:destination="@+id/destination_posting"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_open_settings"
-            app:destination="@id/destination_settings" />
+            app:destination="@id/destination_settings"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/destination_notifications"
         android:name="io.github.horaciocome1.reaque.ui.notifications.NotificationsFragment"
-        android:label="Notificações" />
+        android:label="@string/notifications" />
     <fragment
         android:id="@+id/destination_posting"
         android:name="io.github.horaciocome1.reaque.ui.posts.PostingFragment"
@@ -82,9 +106,25 @@
     <fragment
         android:id="@+id/destination_posts"
         android:name="io.github.horaciocome1.reaque.ui.posts.PostsFragment"
-        android:label="PostsFragment">
+        android:label="@string/posts">
         <action
             android:id="@+id/action_open_read_from_posts"
-            app:destination="@id/destination_read" />
+            app:destination="@id/destination_read"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/destination_users"
+        android:name="io.github.horaciocome1.reaque.ui.users.UsersFragment"
+        android:label="@string/users">
+        <action
+            android:id="@+id/action_open_profile_from_users"
+            app:destination="@id/destination_profile"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
 </navigation>

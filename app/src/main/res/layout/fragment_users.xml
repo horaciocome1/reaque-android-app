@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~    Copyright 2018 Horácio Flávio Comé Júnior
+  ~    Copyright 2019 Horácio Flávio Comé Júnior
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
   ~    you may not use this file except in compliance with the License.
@@ -15,32 +15,86 @@
   -->
 
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fragment_users_recyclerview"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="vertical" />
+        android:scrollbars="none">
 
-    <ProgressBar
-        android:id="@+id/fragment_users_progressbar"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:lineSpacingExtra="8sp"
+                android:text="@string/users_title"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
+                android:textColor="@color/primaryTextColor" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="24dp"
+                android:background="@color/secondaryColor" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/topics_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:scrollbars="none" />
+
+            <ProgressBar
+                android:id="@+id/topics_progressbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="32dp" />
+
+            <View
+                android:layout_width="120dp"
+                android:layout_height="0.5dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="24dp"
+                android:background="@color/secondaryColor" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/users_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:scrollbars="none" />
+
+            <ProgressBar
+                android:id="@+id/users_progressbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="32dp" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/favorites_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center|top"
-        android:layout_marginTop="32dp" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/fragment_users_tap_to_update_button"
-        android:layout_width="wrap_content"
-        android:layout_height="38dp"
-        android:layout_gravity="bottom|center"
-        android:layout_marginBottom="32dp"
-        android:text="Actualizar"
-        android:textSize="12sp"
-        android:visibility="gone"
-        app:cornerRadius="12dp" />
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:tint="@color/primaryLightColor"
+        app:srcCompat="@drawable/outline_bookmark_border_18" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

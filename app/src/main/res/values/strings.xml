@@ -29,6 +29,9 @@
     <string name="comments">Comentários</string>
     <string name="forum">Fórum</string>
     <string name="more">Mais</string>
+    <string name="notifications">Notificações</string>
+
     <string name="posts_title">Encontre publicações do seu interesse</string>
+    <string name="users_title">Encontre autores do seu interesse</string>
 
 </resources>

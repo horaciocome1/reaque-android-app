@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -17,12 +17,15 @@ package io.github.horaciocome1.reaque.ui.users
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import io.github.horaciocome1.reaque.data.topics.TopicsRepository
 import io.github.horaciocome1.reaque.data.users.UsersRepository
 
-class UsersViewModelFactory(private val repository: UsersRepository)
-    : ViewModelProvider.NewInstanceFactory() {
+class UsersViewModelFactory(
+    private val usersRepository: UsersRepository,
+    private val topicsRepository: TopicsRepository
+) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>) = UsersViewModel(repository) as T
+    override fun <T : ViewModel?> create(modelClass: Class<T>) = UsersViewModel(usersRepository, topicsRepository) as T
 
 }

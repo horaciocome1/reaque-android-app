@@ -32,8 +32,9 @@ object InjectorUtils {
 
     val usersViewModelFactory: UsersViewModelFactory
         get() {
-            val repository = UsersRepository.getInstance(Database.getInstance().usersWebService)
-            return UsersViewModelFactory(repository)
+            val usersRepository = UsersRepository.getInstance(Database.getInstance().usersWebService)
+            val topicsRepository = TopicsRepository.getInstance(Database.getInstance().topicsWebService)
+            return UsersViewModelFactory(usersRepository, topicsRepository)
         }
 
     val moreViewModelFactory: MoreViewModelFactory

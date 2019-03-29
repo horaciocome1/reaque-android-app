@@ -20,42 +20,42 @@ import com.google.firebase.firestore.FieldValue
 import io.github.horaciocome1.reaque.data.comments.Comment
 import io.github.horaciocome1.reaque.data.posts.Post
 
-val Post.hashMap: HashMap<String, Any>
-    get() = HashMap<String, Any>().apply {
-        put("title", title)
-        put("message", message)
-        put("pic", pic)
-        put("date", FieldValue.serverTimestamp())
-        put("topic", HashMap<String, Any>().apply {
-            put("id", topic.id)
-        })
-        put("user", HashMap<String, Any>().apply {
-            put("id", user.id)
-            put("name", user.name)
-            put("pic", user.pic)
-        })
+val Post.hashMap: Map<String, Any>
+    get() {
+        return mapOf(
+            "title" to title,
+            "message" to message,
+            "pic" to pic,
+            "date" to FieldValue.serverTimestamp(),
+            "topic" to mapOf("id" to topic.id),
+            "user" to mapOf(
+                "id" to user.id,
+                "name" to user.name,
+                "pic" to user.pic
+            )
+        )
     }
 
-val FirebaseUser.hashMap: HashMap<String, Any?>
-    get() = HashMap<String, Any?>().apply {
-        put("name", displayName)
-        put("email", email)
-        put("pic", photoUrl.toString())
+val FirebaseUser.hashMap: Map<String, Any?>
+    get() {
+        return mapOf(
+            "name" to displayName,
+            "email" to email,
+            "pic" to photoUrl.toString()
+        )
     }
 
-val Comment.hashMap: HashMap<String, Any>
-    get() = HashMap<String, Any>().apply {
-        put("message", message)
-        put("date", FieldValue.serverTimestamp())
-        put("topic", HashMap<String, Any>().apply {
-            put("id", topic.id)
-        })
-        put("post", HashMap<String, Any>().apply {
-            put("id", post.id)
-        })
-        put("user", HashMap<String, Any>().apply {
-            put("id", user.id)
-            put("name", user.name)
-            put("pic", user.pic)
-        })
+val Comment.hashMap: Map<String, Any>
+    get() {
+        return mapOf(
+            "message" to message,
+            "date" to FieldValue.serverTimestamp(),
+            "topic" to mapOf("id" to topic.id),
+            "post" to mapOf("id" to post.id),
+            "user" to mapOf(
+                "id" to user.id,
+                "name" to user.name,
+                "pic" to user.pic
+            )
+        )
     }

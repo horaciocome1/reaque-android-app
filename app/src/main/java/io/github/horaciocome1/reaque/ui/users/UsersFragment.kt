@@ -21,68 +21,107 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import io.github.horaciocome1.reaque.R
+import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.ui.MainActivity
+import io.github.horaciocome1.reaque.ui.posts.TopicsAdapter
+import io.github.horaciocome1.reaque.utilities.Constants
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addSimpleTouchListener
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.setOnClick
 import kotlinx.android.synthetic.main.fragment_users.*
 
 class UsersFragment : Fragment() {
 
-    private val columns = 2
+    private var topics = listOf<Topic>()
+    private var users = listOf<User>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_users, container, false)
     }
 
-    override fun onStart() {
-        super.onStart()
-        arguments?.let {
-            //            val safeArgs = UsersFragmentArgs.fromBundle(it)
-//            val topic = Topic(safeArgs.topicId)
-//            (activity as MainActivity).supportActionBar?.title = safeArgs.topicTitle
-            var list = listOf<User>()
-//            viewModel.getUsers(topic).observe(this, Observer { users ->
-//                when {
-//                    users.isEmpty() -> fragment_users_recyclerview.visibility = View.GONE
-//                    list.isEmpty() -> {
-//                        list = users
-//                        configList(list)
-//                        fragment_users_recyclerview.visibility = View.VISIBLE
-//                        fragment_users_progressbar.visibility = View.GONE
-//                    }
-//                    users != list -> {
-//                        fragment_users_tap_to_update_button.run {
-//                            visibility = View.VISIBLE
-//                            setOnClickListener {
-//                                list = users
-//                                configList(list)
-//                                visibility = View.GONE
-//                            }
-//                        }
-//                    }
-//                }
-//            })
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        topics_recyclerview.run {
+            setOnClick { _, position ->
+                if (topics.isNotEmpty()) {
+                    favorites_fab.show()
+                    topics[position].listUsers()
+                }
+            }
+            addSimpleTouchListener()
+        }
+        users_recyclerview.run {
+            setOnClick { view, position ->
+                if (users.isNotEmpty())
+                    users[position].openProfile(view)
+            }
+            addSimpleTouchListener()
         }
     }
 
-    private fun configList(list: List<User>) = fragment_users_recyclerview.apply {
-        layoutManager = StaggeredGridLayoutManager(columns, RecyclerView.VERTICAL)
-        adapter = UsersAdapter(context, list)
-        setOnClick { view, position ->
-            //            val openProfile = UsersFragmentDirections.actionOpenProfile(list[position].id)
-//            Navigation.findNavController(view).navigate(openProfile)
+    override fun onStart() {
+        super.onStart()
+        viewModel.topics.observe(this, Observer {
+            topics = it
+            if (topics.isNotEmpty()) {
+                topics_recyclerview.run {
+                    layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                    adapter = TopicsAdapter(topics)
+                }
+                topics_progressbar.visibility = View.GONE
+            } else
+                topics_progressbar.visibility = View.VISIBLE
+        })
+        favorites_fab.setOnClickListener {
+            viewModel.favorites.observe(this, Observer {
+                users_recyclerview.setupWithUsers(it)
+            })
+            favorites_fab.hide()
         }
-        addSimpleTouchListener()
     }
 
     override fun onResume() {
         super.onResume()
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
-            (activity as MainActivity).supportActionBar?.show()
+            (activity as MainActivity).supportActionBar?.hide()
+        users_progressbar.visibility = View.GONE
+    }
+
+    private fun Topic.listUsers() {
+        viewModel.getUsers(this).observe(this@UsersFragment, Observer {
+            users_recyclerview.setupWithUsers(it)
+        })
+        favorites_fab.show()
+    }
+
+    private fun RecyclerView.setupWithUsers(list: List<User>) {
+        users = list
+        if (users.isNotEmpty()) {
+            layoutManager = StaggeredGridLayoutManager(
+                when {
+                    users.size >= Constants.TWO_COLUMNS -> Constants.TWO_COLUMNS
+                    else -> Constants.SINGLE_COLUMN
+                },
+                RecyclerView.VERTICAL
+            )
+            adapter = UsersAdapter(users)
+            users_progressbar.visibility = View.GONE
+            users_recyclerview.visibility = View.VISIBLE
+        } else {
+            users_progressbar.visibility = View.VISIBLE
+            users_recyclerview.visibility = View.GONE
+        }
+    }
+
+    private fun User.openProfile(view: View) {
+        val directions = UsersFragmentDirections.actionOpenProfileFromUsers(id)
+        view.findNavController().navigate(directions)
     }
 
 }
