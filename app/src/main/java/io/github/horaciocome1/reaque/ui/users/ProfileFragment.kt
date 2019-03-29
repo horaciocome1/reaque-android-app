@@ -20,30 +20,64 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.databinding.FragmentProfileBinding
 import io.github.horaciocome1.reaque.ui.MainActivity
-import io.github.horaciocome1.reaque.ui.posts.ReadFragmentDirections
+import io.github.horaciocome1.reaque.ui.posts.PostsAdapter
+import io.github.horaciocome1.simplerecyclerviewtouchlistener.addSimpleTouchListener
+import io.github.horaciocome1.simplerecyclerviewtouchlistener.setOnClick
 import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment: Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
+    private lateinit var behavior: BottomSheetBehavior<LinearLayout>
+    private var posts = listOf<Post>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        behavior = BottomSheetBehavior.from(posts_bottomsheet)
+        posts_recyclerview.run {
+            setOnClick { view, position ->
+                if (posts.isNotEmpty())
+                    posts[position].read(view)
+            }
+            addSimpleTouchListener()
+        }
+        profile_pic_imageview.setOnClickListener {
+            binding.user?.pic?.run {
+                if (isNotBlank())
+                    openViewer(it, this)
+            }
+        }
+        posts_button.setOnClickListener {
+            binding.user?.run {
+                if (id.isNotBlank())
+                    showPosts()
+            }
+        }
+    }
+
     override fun onStart() {
         super.onStart()
+        behavior.state = BottomSheetBehavior.STATE_HIDDEN
         arguments?.let { args ->
             val userId = ProfileFragmentArgs.fromBundle(args).userId
             viewModel.getUsers(User(userId)).observe(this, Observer { user ->
@@ -55,13 +89,10 @@ class ProfileFragment: Fragment() {
                             Glide.with(this@ProfileFragment).load(pic).run {
                                 apply(RequestOptions.bitmapTransform(BlurTransformation(7, 14)))
                                     .transition(DrawableTransitionOptions.withCrossFade())
-                                    .into(fragment_profile_cover_imageview)
+                                    .into(cover_imageview)
                                 apply(RequestOptions.circleCropTransform())
                                     .transition(DrawableTransitionOptions.withCrossFade())
-                                    .into(fragment_profile_profile_pic_imageview)
-                            }
-                            fragment_profile_profile_pic_imageview.setOnClickListener {
-                                openViewer(it, pic)
+                                    .into(profile_pic_imageview)
                             }
                         }
                         showContent()
@@ -82,20 +113,43 @@ class ProfileFragment: Fragment() {
     }
 
     private fun showContent() {
-        fragment_profile_cover_imageview.visibility = View.VISIBLE
+        cover_imageview.visibility = View.VISIBLE
         fragment_profile_scrollview.visibility = View.VISIBLE
         fragment_profile_progressbar.visibility = View.GONE
     }
 
     private fun hideContent() {
-        fragment_profile_cover_imageview.visibility = View.GONE
+        cover_imageview.visibility = View.GONE
         fragment_profile_scrollview.visibility = View.GONE
         fragment_profile_progressbar.visibility = View.VISIBLE
     }
 
     private fun openViewer(view: View, url: String) {
-        val directions = ReadFragmentDirections.actionOpenViewerFromRead(url)
+        val directions = ProfileFragmentDirections.actionOpenViewerFromProfile(url)
         view.findNavController().navigate(directions)
+    }
+
+    private fun User.showPosts() {
+        viewModel.getPosts(this).observe(this@ProfileFragment, Observer {
+            posts = it
+            posts_recyclerview.run {
+                layoutManager = LinearLayoutManager(context)
+                adapter = PostsAdapter(posts)
+            }
+            if (posts.isNotEmpty())
+                posts_progressbar.visibility = View.GONE
+            else
+                posts_progressbar.visibility = View.VISIBLE
+            behavior.run {
+                state = BottomSheetBehavior.STATE_HALF_EXPANDED
+                skipCollapsed = true
+            }
+        })
+    }
+
+    private fun Post.read(view: View) {
+        val directions = ProfileFragmentDirections.actionOpenReadFromProfile(id)
+        Navigation.findNavController(view).navigate(directions)
     }
 
 }

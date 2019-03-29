@@ -17,6 +17,7 @@ package io.github.horaciocome1.reaque.ui.users
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
+import io.github.horaciocome1.reaque.data.posts.PostsRepository
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.topics.TopicsRepository
 import io.github.horaciocome1.reaque.data.users.User
@@ -44,12 +45,15 @@ val SignInActivity.viewModel: UsersViewModel
 
 class UsersViewModel(
     private val usersRepository: UsersRepository,
-    private val topicsRepository: TopicsRepository
+    topicsRepository: TopicsRepository,
+    private val postsRepository: PostsRepository
 ) : ViewModel() {
 
     val topics = topicsRepository.topics
 
     val favorites = usersRepository.favorites
+
+    fun getPosts(user: User) = postsRepository.getPosts(user)
 
     fun addUser(onSuccessful: () -> Unit) = usersRepository.addUser(onSuccessful)
 

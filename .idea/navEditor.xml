@@ -155,6 +155,27 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="destination_users">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-968" />
+                            <option name="y" value="644" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_open_profile_from_users">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="destination_viewer">
                     <value>
                       <LayoutPositions>
@@ -162,18 +183,6 @@
                           <Point>
                             <option name="x" value="-352" />
                             <option name="y" value="-679" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="usersFragment">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-968" />
-                            <option name="y" value="644" />
                           </Point>
                         </option>
                       </LayoutPositions>
