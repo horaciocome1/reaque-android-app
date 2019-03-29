@@ -34,5 +34,8 @@
 
     <string name="posts_title">Encontre publicações do seu interesse</string>
     <string name="users_title">Encontre autores do seu interesse</string>
+    <string name="sign_out">Sair</string>
+    <string name="edit">Editar</string>
+    <string name="post">Publicar</string>
 
 </resources>

@@ -66,7 +66,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/name_textview">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/logout_button"
+                    android:id="@+id/sign_out_button"
                     style="@style/Widget.MaterialComponents.Button.UnelevatedButton.Icon"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
                     android:layout_marginRight="8dp"
                     android:layout_weight="0.32"
                     android:padding="16dp"
-                    android:text="Sair"
+                    android:text="@string/sign_out"
                     app:backgroundTint="@color/colorError"
                     app:cornerRadius="16dp"
                     app:icon="@drawable/outline_exit_to_app_18" />
@@ -88,7 +88,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_weight="0.45"
                     android:padding="16dp"
-                    android:text="Editar"
+                    android:text="@string/edit"
                     app:cornerRadius="16dp"
                     app:backgroundTint="@color/usersColor"
                     app:icon="@drawable/outline_edit_18" />
@@ -117,7 +117,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/post_textview"
+                    android:id="@+id/posting_textview"
                     style="@style/AppTheme.CompleteClickableEffect"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -127,11 +127,11 @@
                     android:paddingEnd="32dp"
                     android:paddingRight="32dp"
                     android:paddingBottom="16dp"
-                    android:text="Publicar"
+                    android:text="@string/post"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                 <TextView
-                    android:id="@+id/search_textview"
+                    android:id="@+id/notifications_textview"
                     style="@style/AppTheme.CompleteClickableEffect"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -141,7 +141,7 @@
                     android:paddingEnd="32dp"
                     android:paddingRight="32dp"
                     android:paddingBottom="16dp"
-                    android:text="Pesquisar"
+                    android:text="@string/notifications"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
             </LinearLayout>

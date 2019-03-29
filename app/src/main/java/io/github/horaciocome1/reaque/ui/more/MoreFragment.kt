@@ -43,7 +43,7 @@ class MoreFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        post_textview.setOnClickListener {
+        posting_textview.setOnClickListener {
             it.openPosting()
         }
         setting_textview.setOnClickListener {
@@ -70,7 +70,7 @@ class MoreFragment : Fragment() {
             profile_pic_imageview.setOnClickListener {
                 it.openProfile(user.id)
             }
-            logout_button.setOnClickListener {
+            sign_out_button.setOnClickListener {
                 signOut()
             }
         })
