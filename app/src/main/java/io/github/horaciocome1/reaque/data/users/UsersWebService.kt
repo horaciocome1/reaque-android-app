@@ -81,9 +81,9 @@ class UsersWebService {
     }
 
     fun getUsers(topic: Topic): LiveData<List<User>> {
-        if (!topicId.equals("topics.${topic.id}", true)) {
+        if (!topicId.equals(topic.id, true)) {
             topicUsers.value = mutableListOf()
-            ref.whereEqualTo(topic.id, true)
+            ref.whereEqualTo("topics.${topic.id}", true)
                 .addSnapshotListener { snapshot, exception ->
                     when {
                         exception != null -> onListenFailed(tag, exception)
@@ -125,7 +125,6 @@ class UsersWebService {
                         exception != null -> onListenFailed(tag, exception)
                         snapshot != null -> {
                             favoritesList = mutableListOf()
-                            favorites.value = mutableListOf()
                             for (doc in snapshot.documents)
                                 favoritesList.add(doc.user)
                             favorites.value = favoritesList
