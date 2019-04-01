@@ -48,41 +48,41 @@ class ReadFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         behavior = BottomSheetBehavior.from(fragment_read_bottom_sheet)
+        profile_pic_imageview.setOnClickListener {
+            binding.post?.user?.run {
+                if (id.isNotBlank())
+                    openProfile(it)
+            }
+        }
+        fragment_read_cover_imageview.setOnClickListener {
+            binding.post?.pic?.run {
+                if (isNotBlank())
+                    openViewer(it)
+            }
+        }
     }
 
     override fun onStart() {
         super.onStart()
         arguments?.let { bundle ->
-            val postId = ReadFragmentArgs.fromBundle(bundle).postId
-            viewModel.getPosts(Post(postId)).observe(this, Observer { post ->
-                if (post.id.isBlank())
-                    behavior.state = BottomSheetBehavior.STATE_HIDDEN
-                else {
-                    post.run {
-                        binding.post = this
-                        Glide.with(this@ReadFragment)
-                            .run {
-                            load(pic)
-                                .transition(DrawableTransitionOptions.withCrossFade())
-                                .into(fragment_read_cover_imageview)
-                            load(pic)
-                                .apply(RequestOptions.bitmapTransform(BlurTransformation(2, 14)))
-                                .transition(DrawableTransitionOptions.withCrossFade())
-                                .into(fragment_read_cover2_imageview)
-                            load(user.pic)
-                                .apply(RequestOptions.circleCropTransform())
-                                .transition(DrawableTransitionOptions.withCrossFade())
-                                .into(profile_pic_imageview)
-                        }
-                        profile_pic_imageview.setOnClickListener {
-                            user.openProfile(it)
-                        }
-                        fragment_read_cover_imageview.setOnClickListener {
-                            openViewer(it, pic)
-                        }
-                    }
-                    behavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            val post = Post(ReadFragmentArgs.fromBundle(bundle).postId)
+            viewModel.getPosts(post).observe(this, Observer {
+                binding.post = it
+                Glide.with(this@ReadFragment).run {
+                    load(it.pic)
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .into(fragment_read_cover_imageview)
+                    load(it.pic)
+                        .apply(RequestOptions.bitmapTransform(BlurTransformation(2, 14)))
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .into(fragment_read_cover2_imageview)
+                    load(it.user.pic)
+                        .apply(RequestOptions.circleCropTransform())
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .into(profile_pic_imageview)
                 }
+                behavior.state =
+                    if (it.id.isBlank()) BottomSheetBehavior.STATE_HIDDEN else BottomSheetBehavior.STATE_COLLAPSED
             })
         }
     }
@@ -98,8 +98,8 @@ class ReadFragment: Fragment() {
         view.findNavController().navigate(directions)
     }
 
-    private fun openViewer(view: View, url: String) {
-        val directions = ReadFragmentDirections.actionOpenViewerFromRead(url)
+    private fun String.openViewer(view: View) {
+        val directions = ReadFragmentDirections.actionOpenViewerFromRead(this)
         view.findNavController().navigate(directions)
     }
 

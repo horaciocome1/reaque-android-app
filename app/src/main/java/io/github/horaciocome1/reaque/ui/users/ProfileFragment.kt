@@ -79,25 +79,21 @@ class ProfileFragment: Fragment() {
         super.onStart()
         behavior.state = BottomSheetBehavior.STATE_HIDDEN
         arguments?.let { args ->
-            val userId = ProfileFragmentArgs.fromBundle(args).userId
-            viewModel.getUsers(User(userId)).observe(this, Observer { user ->
-                when {
-                    user.id.isBlank() -> hideContent()
-                    else -> {
-                        user.run {
-                            binding.user = this
-                            Glide.with(this@ProfileFragment).load(pic).run {
-                                apply(RequestOptions.bitmapTransform(BlurTransformation(7, 14)))
-                                    .transition(DrawableTransitionOptions.withCrossFade())
-                                    .into(cover_imageview)
-                                apply(RequestOptions.circleCropTransform())
-                                    .transition(DrawableTransitionOptions.withCrossFade())
-                                    .into(profile_pic_imageview)
-                            }
-                        }
-                        showContent()
-                    }
+            val user = User(ProfileFragmentArgs.fromBundle(args).userId)
+            viewModel.getUsers(user).observe(this, Observer {
+                binding.user = it
+                Glide.with(this@ProfileFragment).load(it.pic).run {
+                    apply(RequestOptions.bitmapTransform(BlurTransformation(7, 14)))
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .into(cover_imageview)
+                    apply(RequestOptions.circleCropTransform())
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .into(profile_pic_imageview)
                 }
+                if (it.id.isBlank())
+                    hideContent()
+                else
+                    showContent()
             })
         }
     }
@@ -136,10 +132,7 @@ class ProfileFragment: Fragment() {
                 layoutManager = LinearLayoutManager(context)
                 adapter = PostsAdapter(posts)
             }
-            if (posts.isNotEmpty())
-                posts_progressbar.visibility = View.GONE
-            else
-                posts_progressbar.visibility = View.VISIBLE
+            posts_progressbar.visibility = if (posts.isEmpty()) View.VISIBLE else View.GONE
             behavior.run {
                 state = BottomSheetBehavior.STATE_HALF_EXPANDED
                 skipCollapsed = true
