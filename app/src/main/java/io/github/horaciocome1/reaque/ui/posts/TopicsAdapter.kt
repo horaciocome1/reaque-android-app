@@ -58,7 +58,7 @@ class TopicsAdapter(private val list: List<Topic>) : RecyclerView.Adapter<Topics
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        val indicator = view.findViewById<View>(R.id.indicator)!!
+        var indicator: View = view.findViewById<View>(R.id.indicator)
 
     }
 
