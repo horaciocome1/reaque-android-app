@@ -48,5 +48,7 @@
     <string name="open_source_licenses">Licenças open source</string>
     <string name="repository">Repositório</string>
     <string name="donate">Apoie ao desenvolvedor</string>
+    <string name="share">Partilhar</string>
+    <string name="cancel">Cancelar</string>
 
 </resources>

@@ -99,10 +99,10 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
                 android:padding="16dp"
-                android:text="Publicar"
+                android:text="@string/posting"
                 android:onClick="@{() -> viewmodel.submitPost()}"
                 app:cornerRadius="16dp"
-                app:icon="@drawable/outline_done_outline_18"
+                app:icon="@drawable/outline_done_18"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -140,7 +140,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:padding="16dp"
-                android:text="Cancelar"
+                android:text="@string/cancel"
                 android:textColor="?colorControlNormal"
                 app:cornerRadius="16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/select_pic_button"

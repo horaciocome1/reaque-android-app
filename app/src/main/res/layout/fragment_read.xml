@@ -140,7 +140,7 @@
                             android:layout_marginRight="4dp"
                             android:layout_weight="1"
                             android:padding="16dp"
-                            android:text="Favorito"
+                            android:text="@string/favorite"
                             app:cornerRadius="16dp"
                             app:backgroundTint="@color/favoriteColor"
                             app:icon="@drawable/outline_bookmark_border_18" />
@@ -156,10 +156,10 @@
                             android:layout_marginRight="16dp"
                             android:layout_weight="0.7"
                             android:padding="16dp"
-                            android:text="Partilhar"
+                            android:text="@string/share"
                             app:cornerRadius="16dp"
                             app:backgroundTint="@color/commentsColor"
-                            app:icon="@drawable/outline_forum_18" />
+                            app:icon="@drawable/outline_share_18" />
 
                     </LinearLayout>
 
