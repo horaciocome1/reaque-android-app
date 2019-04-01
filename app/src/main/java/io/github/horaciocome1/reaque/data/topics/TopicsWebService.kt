@@ -15,7 +15,6 @@
 
 package io.github.horaciocome1.reaque.data.topics
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -40,7 +39,6 @@ class TopicsWebService {
 
     private val db = FirebaseFirestore.getInstance()
     private val ref = db.collection("topics")
-    private val favoritesRef = db.collection("favorites")
 
     private lateinit var auth: FirebaseAuth
 
@@ -57,45 +55,6 @@ class TopicsWebService {
                     else -> onSnapshotNull(tag)
                 }
             }
-    }
-
-    fun getTopics(topic: Topic): LiveData<Topic> {
-        if (!topic.id.equals(this.topic.value?.id, true)) {
-            this.topic.value = Topic("")
-            ref.document(topic.id).addSnapshotListener { snapshot, exception ->
-                when {
-                    exception != null -> onListenFailed(tag, exception)
-                    snapshot != null -> this.topic.value = snapshot.topic
-                    else -> onSnapshotNull(tag)
-                }
-            }
-        }
-        return this.topic
-    }
-
-    fun getFavorites(): LiveData<List<Topic>> {
-        if (favoritesList.isEmpty()) {
-            auth = FirebaseAuth.getInstance()
-            favoritesRef.whereEqualTo("topic", true)
-                .whereEqualTo(auth.currentUser?.uid.toString(), true)
-                .addSnapshotListener { snapshot, exception ->
-                    when {
-                        exception != null -> onListenFailed(tag, exception)
-                        snapshot != null -> {
-                            for (doc in snapshot.documents)
-                                favoritesList.add(doc.topic)
-                            favorites.value = favoritesList
-                        }
-                        else -> onSnapshotNull(tag)
-                    }
-                }
-        }
-        return favorites
-    }
-
-    fun addTopic(topic: Topic) {
-        topicsList.add(topic)
-        topics.value = topicsList
     }
 
 }

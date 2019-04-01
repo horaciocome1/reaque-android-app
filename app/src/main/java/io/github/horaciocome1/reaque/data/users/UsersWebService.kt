@@ -62,7 +62,6 @@ class UsersWebService {
 
     private val db = FirebaseFirestore.getInstance()
     private val ref = db.collection("users")
-    private val favoritesRef = db.collection("favorites")
 
     private lateinit var auth: FirebaseAuth
 
@@ -82,7 +81,7 @@ class UsersWebService {
     }
 
     fun getUsers(topic: Topic): LiveData<List<User>> {
-        if (!topicId.equals(topic.id, true)) {
+        if (!topicId.equals("topics.${topic.id}", true)) {
             topicUsers.value = mutableListOf()
             ref.whereEqualTo(topic.id, true)
                 .addSnapshotListener { snapshot, exception ->
@@ -120,12 +119,13 @@ class UsersWebService {
     fun getFavorites(): LiveData<List<User>> {
         auth = FirebaseAuth.getInstance()
         if (favoritesList.isEmpty())
-            favoritesRef.whereEqualTo("user", true)
-                .whereEqualTo(auth.currentUser?.uid.toString(), true)
+            ref.whereEqualTo("favorite_users.${auth.currentUser?.uid.toString()}", true)
                 .addSnapshotListener { snapshot, exception ->
                     when {
                         exception != null -> onListenFailed(tag, exception)
                         snapshot != null -> {
+                            favoritesList = mutableListOf()
+                            favorites.value = mutableListOf()
                             for (doc in snapshot.documents)
                                 favoritesList.add(doc.user)
                             favorites.value = favoritesList

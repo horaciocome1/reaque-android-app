@@ -47,7 +47,6 @@ class PostsWebService {
 
     private val db = FirebaseFirestore.getInstance()
     private val ref = db.collection("posts")
-    private val favoritesRef = db.collection("favorites")
 
     private lateinit var auth: FirebaseAuth
 
@@ -133,8 +132,7 @@ class PostsWebService {
     fun getFavorites(): LiveData<List<Post>> {
         if (favoritesList.isEmpty()) {
             auth = FirebaseAuth.getInstance()
-            favoritesRef.whereEqualTo("post", true)
-                .whereEqualTo(auth.currentUser?.uid.toString(), true)
+            ref.whereEqualTo("favorite_users.${auth.currentUser?.uid.toString()}", true)
                 .addSnapshotListener { snapshot, exception ->
                     when {
                         exception != null -> onListenFailed(tag, exception)
