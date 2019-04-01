@@ -18,14 +18,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.core.widget.NestedScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none">
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_weight="0.3"
             android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
@@ -40,19 +45,18 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="32dp" />
 
-            <View
-                android:layout_width="120dp"
-                android:layout_height="0.5dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginLeft="24dp"
-                android:layout_marginTop="24dp"
-                android:background="@color/secondaryColor" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.9"
+            android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/posts_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
                 android:scrollbars="none" />
 
             <ProgressBar
@@ -63,7 +67,7 @@
 
         </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/favorites_fab"

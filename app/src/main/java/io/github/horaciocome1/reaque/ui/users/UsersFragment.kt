@@ -70,7 +70,10 @@ class UsersFragment : Fragment() {
         viewModel.topics.observe(this, Observer {
             topics = it
             topics_recyclerview.run {
-                layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                layoutManager = when (resources.configuration.orientation) {
+                    Configuration.ORIENTATION_LANDSCAPE -> LinearLayoutManager(context)
+                    else -> LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                }
                 adapter = TopicsAdapter(topics)
             }
             topics_progressbar.visibility = if (users.isEmpty()) View.VISIBLE else View.GONE
