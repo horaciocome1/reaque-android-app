@@ -24,7 +24,6 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        style="@style/AppTheme.CompleteClickableEffect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp">
@@ -40,14 +39,14 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/item_topic_favorite_imageview"
+                android:id="@+id/imageview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
         </com.google.android.material.card.MaterialCardView>
 
         <TextView
-            android:id="@+id/item_user_name_textview"
+            android:id="@+id/textview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"

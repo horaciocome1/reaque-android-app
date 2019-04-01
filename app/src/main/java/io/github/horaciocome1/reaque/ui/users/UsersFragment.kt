@@ -76,7 +76,7 @@ class UsersFragment : Fragment() {
                 }
                 adapter = TopicsAdapter(topics)
             }
-            topics_progressbar.visibility = if (users.isEmpty()) View.VISIBLE else View.GONE
+            topics_progressbar.visibility = if (topics.isEmpty()) View.VISIBLE else View.GONE
         })
         favorites_fab.setOnClickListener {
             viewModel.favorites.observe(this, Observer {
@@ -90,6 +90,7 @@ class UsersFragment : Fragment() {
         super.onResume()
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
             (activity as MainActivity).supportActionBar?.hide()
+        users_progressbar.visibility = View.GONE
         users_progressbar.visibility = View.GONE
     }
 

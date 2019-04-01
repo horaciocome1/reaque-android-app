@@ -22,13 +22,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.databinding.ItemTopicBinding
 
 class TopicsAdapter(private val list: List<Topic>) : RecyclerView.Adapter<TopicsAdapter.ViewHolder>() {
 
-    lateinit var binding: ItemTopicBinding
-    lateinit var context: Context
+    private lateinit var binding: ItemTopicBinding
+    private lateinit var context: Context
+    private var viewHolder: ViewHolder? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
@@ -39,15 +41,25 @@ class TopicsAdapter(private val list: List<Topic>) : RecyclerView.Adapter<Topics
     override fun getItemCount() = list.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.indicator.visibility = View.INVISIBLE
         list[position].run {
             Glide.with(context)
                 .load(cover)
                 .transition(DrawableTransitionOptions.withCrossFade())
-                .into(binding.itemTopicFavoriteImageview)
+                .into(binding.imageview)
             binding.topic = this
+        }
+        holder.itemView.setOnClickListener {
+            viewHolder?.indicator?.visibility = View.INVISIBLE
+            holder.indicator.visibility = View.VISIBLE
+            viewHolder = holder
         }
     }
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
+        val indicator = view.findViewById<View>(R.id.indicator)!!
+
+    }
 
 }
