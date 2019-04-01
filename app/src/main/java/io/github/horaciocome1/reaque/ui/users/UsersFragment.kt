@@ -69,14 +69,11 @@ class UsersFragment : Fragment() {
         super.onStart()
         viewModel.topics.observe(this, Observer {
             topics = it
-            if (topics.isNotEmpty()) {
-                topics_recyclerview.run {
-                    layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-                    adapter = TopicsAdapter(topics)
-                }
-                topics_progressbar.visibility = View.GONE
-            } else
-                topics_progressbar.visibility = View.VISIBLE
+            topics_recyclerview.run {
+                layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                adapter = TopicsAdapter(topics)
+            }
+            topics_progressbar.visibility = if (users.isEmpty()) View.VISIBLE else View.GONE
         })
         favorites_fab.setOnClickListener {
             viewModel.favorites.observe(this, Observer {
@@ -102,21 +99,16 @@ class UsersFragment : Fragment() {
 
     private fun RecyclerView.setupWithUsers(list: List<User>) {
         users = list
-        if (users.isNotEmpty()) {
-            layoutManager = StaggeredGridLayoutManager(
-                when {
-                    users.size >= Constants.TWO_COLUMNS -> Constants.TWO_COLUMNS
-                    else -> Constants.SINGLE_COLUMN
-                },
-                RecyclerView.VERTICAL
-            )
-            adapter = UsersAdapter(users)
-            users_progressbar.visibility = View.GONE
-            users_recyclerview.visibility = View.VISIBLE
-        } else {
-            users_progressbar.visibility = View.VISIBLE
-            users_recyclerview.visibility = View.GONE
-        }
+        layoutManager = StaggeredGridLayoutManager(
+            when {
+                users.size >= Constants.TWO_COLUMNS -> Constants.TWO_COLUMNS
+                else -> Constants.SINGLE_COLUMN
+            },
+            RecyclerView.VERTICAL
+        )
+        adapter = UsersAdapter(users)
+        users_progressbar.visibility = if (users.isEmpty()) View.VISIBLE else View.GONE
+        users_recyclerview.visibility = if (users.isEmpty()) View.GONE else View.VISIBLE
     }
 
     private fun User.openProfile(view: View) {

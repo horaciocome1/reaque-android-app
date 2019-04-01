@@ -32,6 +32,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.card.MaterialCardView
+import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.databinding.FragmentPostingBinding
 import io.github.horaciocome1.reaque.ui.MainActivity
 import io.github.horaciocome1.reaque.utilities.Constants
@@ -45,6 +46,8 @@ class PostingFragment : Fragment() {
     private lateinit var selectPicBehavior: BottomSheetBehavior<MaterialCardView>
 
     private lateinit var binding: FragmentPostingBinding
+
+    private var topics = listOf<Topic>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentPostingBinding.inflate(inflater, container, false)
@@ -68,6 +71,17 @@ class PostingFragment : Fragment() {
             state = BottomSheetBehavior.STATE_HIDDEN
             skipCollapsed = true
         }
+        topics_recyclerview.run {
+            setOnClick { _, position ->
+                if (topics.isNotEmpty()) {
+                    selectTopicBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                    viewModel.post.topic = topics[position]
+                    binding.viewmodel = viewModel
+                    post_button.isEnabled = isPostReady
+                }
+            }
+            addSimpleTouchListener()
+        }
     }
 
     override fun onResume() {
@@ -89,17 +103,10 @@ class PostingFragment : Fragment() {
             viewModel.post.message = it
             post_button.isEnabled = isPostReady
         })
-        viewModel.topics.observe(this, Observer {
+        viewModel.topics.observe(this, Observer { topics ->
             topics_recyclerview.run {
                 layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-                adapter = PostingTopicsAdapter(it)
-                setOnClick { _, position ->
-                    selectTopicBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-                    viewModel.post.topic = it[position]
-                    binding.viewmodel = viewModel
-                    post_button.isEnabled = isPostReady
-                }
-                addSimpleTouchListener()
+                adapter = PostingTopicsAdapter(topics)
             }
         })
         viewModel.isFinished.observe(this, Observer {

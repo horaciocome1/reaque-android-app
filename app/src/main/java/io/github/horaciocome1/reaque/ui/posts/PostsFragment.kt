@@ -66,14 +66,11 @@ class PostsFragment: Fragment() {
         super.onStart()
         viewModel.topics.observe(this, Observer {
             topics = it
-            if (topics.isNotEmpty()) {
-                topics_recyclerview.run {
+            topics_recyclerview.run {
                     layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
                     adapter = TopicsAdapter(topics)
                 }
-                topics_progressbar.visibility = View.GONE
-            } else
-                topics_progressbar.visibility = View.VISIBLE
+            topics_progressbar.visibility = if (topics.isEmpty()) View.VISIBLE else View.GONE
         })
         favorites_fab.setOnClickListener {
             viewModel.favorites.observe(this, Observer {
@@ -99,16 +96,10 @@ class PostsFragment: Fragment() {
 
     private fun RecyclerView.setupWithPosts(list: List<Post>) {
         posts = list
-        if (posts.isNotEmpty()) {
-            layoutManager = LinearLayoutManager(context)
-            adapter = PostsAdapter(posts)
-            posts_progressbar.visibility = View.GONE
-            posts_recyclerview.visibility = View.VISIBLE
-        } else {
-            posts_progressbar.visibility = View.VISIBLE
-            posts_recyclerview.visibility = View.GONE
-            favorites_fab.hide()
-        }
+        layoutManager = LinearLayoutManager(context)
+        adapter = PostsAdapter(posts)
+        posts_progressbar.visibility = if (posts.isEmpty()) View.VISIBLE else View.GONE
+        posts_recyclerview.visibility = if (posts.isEmpty()) View.GONE else View.VISIBLE
     }
 
     private fun Post.read(view: View) {
