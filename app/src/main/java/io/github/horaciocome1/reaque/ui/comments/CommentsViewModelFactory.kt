@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Horácio Flávio Comé Júnior
+ *    Copyright 2019 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -18,9 +18,14 @@ package io.github.horaciocome1.reaque.ui.comments
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import io.github.horaciocome1.reaque.data.comments.CommentsRepository
+import io.github.horaciocome1.reaque.data.topics.TopicsRepository
 
-class CommentsViewModelFactory(private val repository: CommentsRepository) : ViewModelProvider.NewInstanceFactory() {
+class CommentsViewModelFactory(
+    private val commentsRepository: CommentsRepository,
+    private val topicsRepository: TopicsRepository
+) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>) = CommentsViewModel(repository) as T
+    override fun <T : ViewModel?> create(modelClass: Class<T>) =
+        CommentsViewModel(commentsRepository, topicsRepository) as T
 }

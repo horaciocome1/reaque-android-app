@@ -40,7 +40,7 @@ class NotificationsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        recyclerview.run {
+        comments_recyclerview.run {
             setOnClick { view, position ->
                 if (notifications.isNotEmpty()) {
                     notifications[position].run {
@@ -69,7 +69,7 @@ class NotificationsFragment : Fragment() {
         super.onStart()
         viewModel.notifications.observe(this, Observer {
             notifications = it
-            recyclerview.run {
+            comments_recyclerview.run {
                 layoutManager = LinearLayoutManager(context)
                 adapter = NotificationsAdapter(notifications)
             }

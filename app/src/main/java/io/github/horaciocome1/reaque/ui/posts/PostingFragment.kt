@@ -106,7 +106,7 @@ class PostingFragment : Fragment() {
         viewModel.topics.observe(this, Observer { topics ->
             topics_recyclerview.run {
                 layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-                adapter = PostingTopicsAdapter(topics)
+                adapter = SimpleTopicsAdapter(topics)
             }
         })
         viewModel.isFinished.observe(this, Observer {

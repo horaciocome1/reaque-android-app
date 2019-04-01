@@ -54,8 +54,9 @@ object InjectorUtils {
 
     val commentsViewModelFactory: CommentsViewModelFactory
         get() {
-            val repository = CommentsRepository.getInstance(Database.getInstance().commentsWebService)
-            return CommentsViewModelFactory(repository)
+            val topicsRepository = TopicsRepository.getInstance(Database.getInstance().topicsWebService)
+            val commentsRepository = CommentsRepository.getInstance(Database.getInstance().commentsWebService)
+            return CommentsViewModelFactory(commentsRepository, topicsRepository)
         }
 
     val notificationsViewModelFactory: NotificationsViewModelFactory

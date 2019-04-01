@@ -22,7 +22,7 @@ import androidx.recyclerview.widget.RecyclerView
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.databinding.ItemTopicPostingBinding
 
-class PostingTopicsAdapter(private val list: List<Topic>) : RecyclerView.Adapter<PostingTopicsAdapter.ViewHolder>() {
+class SimpleTopicsAdapter(private val list: List<Topic>) : RecyclerView.Adapter<SimpleTopicsAdapter.ViewHolder>() {
 
     lateinit var binding: ItemTopicPostingBinding
 

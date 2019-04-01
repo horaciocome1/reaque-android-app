@@ -22,17 +22,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import io.github.horaciocome1.reaque.data.comments.Comment
 import io.github.horaciocome1.reaque.data.comments.CommentsRepository
-import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
+import io.github.horaciocome1.reaque.data.topics.TopicsRepository
 import io.github.horaciocome1.reaque.utilities.InjectorUtils
 
-val CommentsFragment.viewModel: CommentsViewModel
+val ForumFragment.viewModel: CommentsViewModel
     get() {
         val factory = InjectorUtils.commentsViewModelFactory
         return ViewModelProviders.of(this, factory)[CommentsViewModel::class.java]
     }
 
-class CommentsViewModel(private val repository: CommentsRepository) : ViewModel() {
+class CommentsViewModel(
+    private val commentsRepository: CommentsRepository,
+    private val topicsRepository: TopicsRepository
+) : ViewModel() {
 
     val comment = Comment("")
 
@@ -51,13 +54,13 @@ class CommentsViewModel(private val repository: CommentsRepository) : ViewModel(
     val isSubmitting: LiveData<Boolean>
         get() = _isSubmitting
 
-    fun getComments(topic: Topic) = repository.getComments(topic)
+    val topics = topicsRepository.topics
 
-    fun getComments(post: Post) = repository.getComments(post)
+    fun getComments(topic: Topic) = commentsRepository.getComments(topic)
 
     fun submitComment() {
         _isSubmitting.value = true
-        repository.submitComment(comment) {
+        commentsRepository.submitComment(comment) {
             _isFinished.value = true
             _isSubmitting.value = false
         }
