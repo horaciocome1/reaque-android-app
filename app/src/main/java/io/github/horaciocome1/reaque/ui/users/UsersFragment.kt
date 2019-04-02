@@ -15,7 +15,6 @@
 
 package io.github.horaciocome1.reaque.ui.users
 
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,6 +31,7 @@ import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.ui.MainActivity
 import io.github.horaciocome1.reaque.ui.posts.TopicsAdapter
 import io.github.horaciocome1.reaque.utilities.Constants
+import io.github.horaciocome1.reaque.utilities.isPortrait
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addSimpleTouchListener
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.setOnClick
 import kotlinx.android.synthetic.main.fragment_users.*
@@ -70,10 +70,11 @@ class UsersFragment : Fragment() {
         viewModel.topics.observe(this, Observer {
             topics = it
             topics_recyclerview.run {
-                layoutManager = when (resources.configuration.orientation) {
-                    Configuration.ORIENTATION_LANDSCAPE -> LinearLayoutManager(context)
-                    else -> LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-                }
+                layoutManager = if (isPortrait) LinearLayoutManager(
+                    context,
+                    RecyclerView.HORIZONTAL,
+                    false
+                ) else LinearLayoutManager(context)
                 adapter = TopicsAdapter(topics)
             }
             topics_progressbar.visibility = if (topics.isEmpty()) View.VISIBLE else View.GONE
@@ -88,9 +89,8 @@ class UsersFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+        if (isPortrait)
             (activity as MainActivity).supportActionBar?.hide()
-        users_progressbar.visibility = View.GONE
         users_progressbar.visibility = View.GONE
     }
 

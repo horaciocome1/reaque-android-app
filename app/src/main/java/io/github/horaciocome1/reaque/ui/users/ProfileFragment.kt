@@ -15,7 +15,6 @@
 
 package io.github.horaciocome1.reaque.ui.users
 
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -35,6 +34,7 @@ import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.databinding.FragmentProfileBinding
 import io.github.horaciocome1.reaque.ui.MainActivity
 import io.github.horaciocome1.reaque.ui.posts.PostsAdapter
+import io.github.horaciocome1.reaque.utilities.isPortrait
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addSimpleTouchListener
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.setOnClick
 import jp.wasabeef.glide.transformations.BlurTransformation
@@ -100,7 +100,7 @@ class ProfileFragment: Fragment() {
 
     override fun onResume() {
         super.onResume()
-        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+        if (isPortrait) {
             (activity as MainActivity).supportActionBar?.run {
                 show()
                 title = ""

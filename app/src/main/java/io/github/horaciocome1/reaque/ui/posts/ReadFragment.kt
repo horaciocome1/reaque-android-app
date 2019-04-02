@@ -15,7 +15,6 @@
 
 package io.github.horaciocome1.reaque.ui.posts
 
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,6 +31,7 @@ import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.databinding.FragmentReadBinding
 import io.github.horaciocome1.reaque.ui.MainActivity
+import io.github.horaciocome1.reaque.utilities.isPortrait
 import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.fragment_read.*
 
@@ -89,7 +89,7 @@ class ReadFragment: Fragment() {
 
     override fun onResume() {
         super.onResume()
-        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+        if (isPortrait)
             (activity as MainActivity).supportActionBar?.show()
     }
 
