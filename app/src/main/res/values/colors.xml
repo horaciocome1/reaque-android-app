@@ -16,6 +16,7 @@
 <resources>
 
     <color name="primaryColor">#fafafa</color>
+    <color name="primaryColorTransparent">#99fafafa</color>
     <color name="primaryLightColor">#ffffff</color>
     <color name="primaryDarkColor">#c7c7c7</color>
     <color name="secondaryColor">#7c4dff</color>

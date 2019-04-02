@@ -82,11 +82,17 @@ class PostingFragment : Fragment() {
             }
             addSimpleTouchListener()
         }
-    }
+        select_topic_button.setOnClickListener {
+            selectTopicBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+        }
+        select_pic_button.setOnClickListener {
+            viewModel.run {
+                if (viewModel.imageUri != Uri.EMPTY)
+                    Glide.with(this@PostingFragment).load(imageUri).into(imageview)
+            }
+            selectPicBehavior.state = BottomSheetBehavior.STATE_EXPANDED
 
-    override fun onResume() {
-        super.onResume()
-        (activity as MainActivity).supportActionBar?.hide()
+        }
     }
 
     override fun onStart() {
@@ -114,17 +120,15 @@ class PostingFragment : Fragment() {
             if (it)
                 Navigation.findNavController(post_button).navigateUp()
         })
-        select_topic_button.setOnClickListener {
-            selectTopicBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
-        }
-        select_pic_button.setOnClickListener {
-            viewModel.run {
-                if (viewModel.imageUri != Uri.EMPTY)
-                    Glide.with(this@PostingFragment).load(imageUri).into(imageview)
-            }
-            selectPicBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        viewModel.isSubmitting.observe(this, Observer {
+            progressbar.visibility = if (it) View.VISIBLE else View.GONE
+            content_constraintlayout.visibility = if (it) View.GONE else View.VISIBLE
+        })
+    }
 
-        }
+    override fun onResume() {
+        super.onResume()
+        (activity as MainActivity).supportActionBar?.hide()
     }
 
     private val isPostReady: Boolean

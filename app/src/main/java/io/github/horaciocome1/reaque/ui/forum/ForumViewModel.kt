@@ -34,10 +34,12 @@ val ForumFragment.viewModel: CommentsViewModel
 
 class CommentsViewModel(
     private val commentsRepository: CommentsRepository,
-    private val topicsRepository: TopicsRepository
+    topicsRepository: TopicsRepository
 ) : ViewModel() {
 
-    val comment = Comment("")
+    val comment = Comment("").apply {
+        topic.title = "Selecione um tópico."
+    }
 
     @Bindable
     val message = MutableLiveData<String>()

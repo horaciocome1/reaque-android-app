@@ -28,9 +28,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ProgressBar
+            android:id="@+id/progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="32dp" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/content_constraintlayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/primaryColor">
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -218,7 +227,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="16dp"
-                        android:text="Camera"
+                        android:text="@string/camera"
                         app:icon="@drawable/outline_camera_18" />
 
                     <com.google.android.material.button.MaterialButton
@@ -227,7 +236,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="16dp"
-                        android:text="Galeria"
+                        android:text="@string/gallery"
                         app:icon="@drawable/outline_collections_18" />
 
                 </LinearLayout>

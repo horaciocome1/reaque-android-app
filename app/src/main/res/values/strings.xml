@@ -51,5 +51,7 @@
     <string name="share">Partilhar</string>
     <string name="cancel">Cancelar</string>
     <string name="send">Enviar</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Galeria</string>
 
 </resources>

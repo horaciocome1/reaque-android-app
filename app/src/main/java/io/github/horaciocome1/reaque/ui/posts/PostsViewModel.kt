@@ -58,7 +58,7 @@ class PostsViewModel(
 
     // PostingFragment
     val post = Post("").apply {
-        topic.title = "Nenhum tópico selecionado!"
+        topic.title = "Selecione um tópico."
     }
     var imageUri: Uri = Uri.EMPTY
     @Bindable
@@ -71,6 +71,12 @@ class PostsViewModel(
     }
     val isFinished: LiveData<Boolean>
         get() = _isFinished
+    private val _isSubmitting = MutableLiveData<Boolean>().apply {
+        value = false
+    }
+    val isSubmitting: LiveData<Boolean>
+        get() = _isSubmitting
+
 
     val favorites = postsRepository.favorites
 
@@ -81,6 +87,7 @@ class PostsViewModel(
     fun getPosts(post: Post) = postsRepository.getPosts(post)
 
     fun submitPost() {
+        _isSubmitting.value = true
         val uploader = ImageUploader().apply {
             imageUri = this@PostsViewModel.imageUri
             post = this@PostsViewModel.post
