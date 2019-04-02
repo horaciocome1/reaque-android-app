@@ -53,9 +53,11 @@ class UsersViewModel(
 
     val favorites = usersRepository.favorites
 
-    fun getPosts(user: User) = postsRepository.getPosts(user)
-
     fun addUser(onSuccessful: () -> Unit) = usersRepository.addUser(onSuccessful)
+
+    fun addTopicToUser(topic: Topic, onSuccessful: () -> Unit) = usersRepository.addTopicToUser(topic, onSuccessful)
+
+    fun getPosts(user: User) = postsRepository.getPosts(user)
 
     fun getUsers(topic: Topic) = usersRepository.getUsers(topic)
 

@@ -15,16 +15,16 @@
 
 package io.github.horaciocome1.reaque.data.media
 
-class ImageRepository private constructor(private val webservice: ImageUploaderWebService) {
+class MediaRepository private constructor(private val webservice: ImageUploaderWebService) {
 
     fun uploadImage(uploader: ImageUploader) = webservice.upload(uploader)
 
     companion object {
         @Volatile
-        private var instance: ImageRepository? = null
+        private var instance: MediaRepository? = null
 
         fun getInstance(webservice: ImageUploaderWebService) = instance ?: synchronized(this) {
-            instance ?: ImageRepository(webservice).also {
+            instance ?: MediaRepository(webservice).also {
                 instance = it
             }
         }

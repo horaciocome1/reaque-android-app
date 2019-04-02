@@ -18,17 +18,19 @@ package io.github.horaciocome1.reaque.data.users
 import androidx.lifecycle.LiveData
 import io.github.horaciocome1.reaque.data.topics.Topic
 
-class UsersRepository private constructor(private val usersWebService: UsersWebService) {
+class UsersRepository private constructor(private val webService: UsersWebService) {
 
-    fun addUser(onSuccessful: () -> Unit) = usersWebService.addUser(onSuccessful)
+    fun addUser(onSuccessful: () -> Unit) = webService.addUser(onSuccessful)
 
-    fun getUsers(topic: Topic) = usersWebService.getUsers(topic)
+    fun addTopicToUser(topic: Topic, onSuccessful: () -> Unit) = webService.addTopicToUser(topic, onSuccessful)
 
-    fun getUsers(user: User) = usersWebService.getUsers(user)
+    fun getUsers(topic: Topic) = webService.getUsers(topic)
 
-    val me = usersWebService.me as LiveData<User>
+    fun getUsers(user: User) = webService.getUsers(user)
 
-    val favorites = usersWebService.getFavorites()
+    val me = webService.me as LiveData<User>
+
+    val favorites = webService.getFavorites()
 
     companion object {
         @Volatile

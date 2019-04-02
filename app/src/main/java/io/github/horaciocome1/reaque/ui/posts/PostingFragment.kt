@@ -103,7 +103,8 @@ class PostingFragment : Fragment() {
             viewModel.post.message = it
             post_button.isEnabled = isPostReady
         })
-        viewModel.topics.observe(this, Observer { topics ->
+        viewModel.topics.observe(this, Observer {
+            topics = it
             topics_recyclerview.run {
                 layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
                 adapter = SimpleTopicsAdapter(topics)

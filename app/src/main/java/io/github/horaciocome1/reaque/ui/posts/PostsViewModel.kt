@@ -21,13 +21,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
-import io.github.horaciocome1.reaque.data.media.ImageRepository
 import io.github.horaciocome1.reaque.data.media.ImageUploader
+import io.github.horaciocome1.reaque.data.media.MediaRepository
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.posts.PostsRepository
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.topics.TopicsRepository
 import io.github.horaciocome1.reaque.data.users.User
+import io.github.horaciocome1.reaque.data.users.UsersRepository
 import io.github.horaciocome1.reaque.utilities.InjectorUtils
 
 val PostsFragment.viewModel: PostsViewModel
@@ -51,7 +52,8 @@ val PostingFragment.viewModel: PostsViewModel
 class PostsViewModel(
     private val postsRepository: PostsRepository,
     topicsRepository: TopicsRepository,
-    private val imageRepository: ImageRepository
+    private val mediaRepository: MediaRepository,
+    private val usersRepository: UsersRepository
 ) : ViewModel() {
 
     // PostingFragment
@@ -86,7 +88,9 @@ class PostsViewModel(
                 this@PostsViewModel.post.run {
                     pic = link
                     postsRepository.submitPost(this) {
-                        _isFinished.value = true
+                        usersRepository.addTopicToUser(topic) {
+                            _isFinished.value = true
+                        }
                     }
                 }
             }
@@ -94,7 +98,7 @@ class PostsViewModel(
                 // caso o upload falhe
             }
         }
-        imageRepository.uploadImage(uploader)
+        mediaRepository.uploadImage(uploader)
     }
 
 

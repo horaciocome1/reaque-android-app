@@ -80,6 +80,26 @@ class UsersWebService {
         }
     }
 
+    fun addTopicToUser(topic: Topic, onSuccessful: () -> Unit) {
+        auth = FirebaseAuth.getInstance()
+        auth.currentUser?.let { user ->
+            val data = mapOf(
+                "topics" to mapOf(
+                    topic.id to true
+                )
+            )
+            ref.document(user.uid)
+                .set(data, SetOptions.merge())
+                .addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        Log.d(tag, "User successfully written!")
+                        onSuccessful()
+                    } else
+                        Log.w(tag, "Error writing document", it.exception)
+                }
+        }
+    }
+
     fun getUsers(topic: Topic): LiveData<List<User>> {
         if (!topicId.equals(topic.id, true)) {
             topicUsers.value = mutableListOf()
