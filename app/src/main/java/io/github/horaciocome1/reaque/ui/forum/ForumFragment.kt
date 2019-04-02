@@ -13,9 +13,8 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.ui.comments
+package io.github.horaciocome1.reaque.ui.forum
 
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -31,6 +30,7 @@ import io.github.horaciocome1.reaque.databinding.FragmentForumBinding
 import io.github.horaciocome1.reaque.ui.MainActivity
 import io.github.horaciocome1.reaque.ui.posts.SimpleTopicsAdapter
 import io.github.horaciocome1.reaque.ui.posts.TopicsAdapter
+import io.github.horaciocome1.reaque.utilities.isPortrait
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addSimpleTouchListener
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.setOnClick
 import kotlinx.android.synthetic.main.fragment_forum.*
@@ -100,10 +100,5 @@ class ForumFragment : Fragment() {
         if (isPortrait)
             (activity as MainActivity).supportActionBar?.hide()
     }
-
-    private val isPortrait: Boolean
-        get() {
-            return (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
-        }
 
 }

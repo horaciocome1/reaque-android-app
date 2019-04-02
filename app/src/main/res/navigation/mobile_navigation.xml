@@ -158,7 +158,7 @@
     </fragment>
     <fragment
         android:id="@+id/destination_forum"
-        android:name="io.github.horaciocome1.reaque.ui.comments.ForumFragment"
+        android:name="io.github.horaciocome1.reaque.ui.forum.ForumFragment"
         android:label="@string/forum">
         <action
             android:id="@+id/action_open_profile_from_forum"

@@ -20,7 +20,7 @@
 
         <variable
             name="viewmodel"
-            type="io.github.horaciocome1.reaque.ui.comments.CommentsViewModel" />
+            type="io.github.horaciocome1.reaque.ui.forum.CommentsViewModel" />
 
     </data>
 

@@ -13,7 +13,7 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.ui.comments
+package io.github.horaciocome1.reaque.ui.forum
 
 import android.content.Context
 import android.view.LayoutInflater

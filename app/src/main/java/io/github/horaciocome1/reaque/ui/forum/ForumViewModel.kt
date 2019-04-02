@@ -13,7 +13,7 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.ui.comments
+package io.github.horaciocome1.reaque.ui.forum
 
 import androidx.databinding.Bindable
 import androidx.lifecycle.LiveData
@@ -28,7 +28,7 @@ import io.github.horaciocome1.reaque.utilities.InjectorUtils
 
 val ForumFragment.viewModel: CommentsViewModel
     get() {
-        val factory = InjectorUtils.commentsViewModelFactory
+        val factory = InjectorUtils.forumViewModelFactory
         return ViewModelProviders.of(this, factory)[CommentsViewModel::class.java]
     }
 

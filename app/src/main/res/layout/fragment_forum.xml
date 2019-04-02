@@ -20,7 +20,7 @@
 
         <variable
             name="viewmodel"
-            type="io.github.horaciocome1.reaque.ui.comments.CommentsViewModel" />
+            type="io.github.horaciocome1.reaque.ui.forum.CommentsViewModel" />
 
     </data>
 
@@ -90,7 +90,7 @@
             android:id="@+id/select_topics_bottomsheet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/background_bottomsheet_stroke"
+            android:background="@drawable/background_bottomsheet_stroke_light"
             android:orientation="vertical"
             app:behavior_hideable="true"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
