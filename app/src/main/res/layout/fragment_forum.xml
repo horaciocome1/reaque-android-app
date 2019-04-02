@@ -72,7 +72,7 @@
                     android:background="@android:color/transparent"
                     android:hint="@string/comments"
                     android:maxLines="4"
-                    android:padding="16dp"
+                    android:padding="24dp"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                 <com.google.android.material.button.MaterialButton
@@ -90,7 +90,7 @@
             android:id="@+id/select_topics_bottomsheet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/background_bottomsheet_stroke_light"
+            android:background="@drawable/background_bottomsheet_stroke"
             android:orientation="vertical"
             app:behavior_hideable="true"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
@@ -112,7 +112,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.1dp"
-                android:background="@android:color/black" />
+                android:background="@android:color/darker_gray" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/topics_recyclerview"
@@ -123,7 +123,8 @@
                 android:id="@+id/topics_progressbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="32dp" />
+                android:layout_margin="32dp"
+                android:visibility="gone" />
 
         </LinearLayout>
 

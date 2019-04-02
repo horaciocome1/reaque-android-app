@@ -13,7 +13,7 @@
   ~    See the License for the specific language governing permissions and limitations under the License.
   -->
 
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -57,7 +57,7 @@
 
             </LinearLayout>
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.9"
@@ -67,20 +67,42 @@
                     android:id="@+id/comments_recyclerview"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1" />
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ProgressBar
                     android:id="@+id/comments_progressbar"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="32dp" />
+                    android:layout_margin="32dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
+                    android:id="@+id/linearLayout2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
+                    android:layout_marginBottom="8dp"
                     android:background="@drawable/background_bottomsheet_light"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/select_topic_button"
@@ -91,6 +113,7 @@
                         android:layout_marginLeft="8dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
+                        android:padding="16dp"
                         android:visibility="gone"
                         app:icon="@drawable/outline_subject_18" />
 
@@ -102,7 +125,7 @@
                         android:background="@android:color/transparent"
                         android:hint="@string/comments"
                         android:maxLines="4"
-                        android:padding="16dp"
+                        android:padding="24dp"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                     <com.google.android.material.button.MaterialButton
@@ -110,11 +133,12 @@
                         style="@style/Widget.MaterialComponents.Button.TextButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:padding="16dp"
                         android:text="@string/send" />
 
                 </LinearLayout>
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
 
