@@ -57,24 +57,23 @@ class ForumFragment : Fragment() {
         topics_recyclerview.run {
             setOnClick { _, position ->
                 if (topics.isNotEmpty()) {
-                    viewModel.let {
-                        it.comment.topic = topics[position]
-                        binding.viewmodel = it
-                        it.getComments(it.comment.topic).observe(this@ForumFragment, Observer { comments ->
-                            comments_recyclerview.run {
-                                layoutManager = LinearLayoutManager(context)
-                                adapter = CommentsAdapter(comments)
-                            }
-                            comments_progressbar.visibility = if (comments.isEmpty()) View.VISIBLE else View.GONE
-                        })
-                    }
+                    viewModel.comment.topic = topics[position]
+                    binding.viewmodel = viewModel
+                    viewModel.getComments(viewModel.comment.topic).observe(this@ForumFragment, Observer { comments ->
+                        comments_recyclerview.run {
+                            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, true)
+                            adapter = CommentsAdapter(comments)
+                        }
+                        comments_progressbar.visibility = if (comments.isEmpty()) View.VISIBLE else View.GONE
+                    })
                     behavior.state = BottomSheetBehavior.STATE_HIDDEN
                 }
             }
             addSimpleTouchListener()
         }
         select_topic_button.setOnClickListener {
-            behavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+            if (isPortrait)
+                behavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
         }
     }
 
@@ -88,14 +87,8 @@ class ForumFragment : Fragment() {
         viewModel.topics.observe(this, Observer {
             topics = it
             topics_recyclerview.run {
-                layoutManager = when (resources.configuration.orientation) {
-                    Configuration.ORIENTATION_LANDSCAPE -> LinearLayoutManager(context)
-                    else -> LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-                }
-                adapter = when (resources.configuration.orientation) {
-                    Configuration.ORIENTATION_LANDSCAPE -> TopicsAdapter(topics)
-                    else -> SimpleTopicsAdapter(topics)
-                }
+                layoutManager = LinearLayoutManager(context)
+                adapter = if (isPortrait) SimpleTopicsAdapter(topics) else TopicsAdapter(topics)
             }
             topics_progressbar.visibility = if (topics.isEmpty()) View.VISIBLE else View.GONE
         })
@@ -104,8 +97,13 @@ class ForumFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+        if (isPortrait)
             (activity as MainActivity).supportActionBar?.hide()
     }
+
+    private val isPortrait: Boolean
+        get() {
+            return (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+        }
 
 }
