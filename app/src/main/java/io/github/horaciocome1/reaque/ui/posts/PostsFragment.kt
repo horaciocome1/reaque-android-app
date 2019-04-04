@@ -103,7 +103,6 @@ class PostsFragment: Fragment() {
         layoutManager = LinearLayoutManager(context)
         adapter = PostsAdapter(posts)
         posts_progressbar.visibility = if (posts.isEmpty()) View.VISIBLE else View.GONE
-        posts_recyclerview.visibility = if (posts.isEmpty()) View.GONE else View.VISIBLE
     }
 
     private fun Post.read(view: View) {

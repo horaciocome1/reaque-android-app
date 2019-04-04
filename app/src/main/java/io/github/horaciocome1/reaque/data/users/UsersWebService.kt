@@ -137,8 +137,8 @@ class UsersWebService {
 
 
     fun getFavorites(): LiveData<List<User>> {
-        auth = FirebaseAuth.getInstance()
         if (favoritesList.isEmpty())
+            auth = FirebaseAuth.getInstance()
             ref.whereEqualTo("favorite_users.${auth.currentUser?.uid.toString()}", true)
                 .addSnapshotListener { snapshot, exception ->
                     when {

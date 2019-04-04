@@ -112,7 +112,6 @@ class UsersFragment : Fragment() {
         )
         adapter = UsersAdapter(users)
         users_progressbar.visibility = if (users.isEmpty()) View.VISIBLE else View.GONE
-        users_recyclerview.visibility = if (users.isEmpty()) View.GONE else View.VISIBLE
     }
 
     private fun User.openProfile(view: View) {
