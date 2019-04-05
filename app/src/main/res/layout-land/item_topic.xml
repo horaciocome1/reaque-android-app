@@ -40,6 +40,7 @@
 
             <ImageView
                 android:id="@+id/imageview"
+                style="@style/AppTheme.CompleteClickableEffect"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

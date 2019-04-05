@@ -27,7 +27,6 @@ import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.posts.PostsRepository
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.topics.TopicsRepository
-import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.data.users.UsersRepository
 import io.github.horaciocome1.reaque.utilities.InjectorUtils
 
@@ -77,14 +76,23 @@ class PostsViewModel(
     val isSubmitting: LiveData<Boolean>
         get() = _isSubmitting
 
+    // ReadFragment
+    private val _post = Post("")
+    private val _isAddingToFavorites = MutableLiveData<Boolean>().apply {
+        value = false
+    }
+    val isAddingToFavorites: LiveData<Boolean>
+        get() = _isAddingToFavorites
+
 
     val favorites = postsRepository.favorites
 
     fun getPosts(topic: Topic) = postsRepository.getPosts(topic)
 
-    fun getPosts(user: User) = postsRepository.getPosts(user)
-
-    fun getPosts(post: Post) = postsRepository.getPosts(post)
+    fun getPosts(post: Post): LiveData<Post> {
+        _post.id = post.id
+        return postsRepository.getPosts(post)
+    }
 
     fun submitPost() {
         _isSubmitting.value = true
@@ -108,5 +116,13 @@ class PostsViewModel(
         mediaRepository.uploadImage(uploader)
     }
 
+    fun addToFavorites() {
+        _isAddingToFavorites.value = true
+        postsRepository.addToFavorites(_post) {
+            usersRepository.addToFavorites(_post) {
+                _isAddingToFavorites.value = false
+            }
+        }
+    }
 
 }

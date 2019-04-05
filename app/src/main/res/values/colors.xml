@@ -27,9 +27,9 @@
     <color name="colorError">#f44336</color>
 
     <!-- CUSTOM COLORS -->
-    <color name="favoriteColor">#ff6d00</color>
-    <color name="commentsColor">#00c853</color>
-    <color name="usersColor">#0091ea</color>
+    <color name="orange">#ff6d00</color>
+    <color name="green">#00c853</color>
+    <color name="blue">#0091ea</color>
     <color name="dark_background">#99000000</color>
 
 </resources>

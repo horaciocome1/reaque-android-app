@@ -53,5 +53,6 @@
     <string name="send">Enviar</string>
     <string name="camera">Camera</string>
     <string name="gallery">Galeria</string>
+    <string name="done_adding_to_favorites">Adicionado aos favoritos</string>
 
 </resources>

@@ -31,8 +31,4 @@
         <item name="android:focusable">true</item>
     </style>
 
-    <style name="AppTheme.Text.TabItem" parent="TextAppearance.MaterialComponents.Subtitle1">
-        <item name="fontFamily">@font/roboto_medium</item>
-    </style>
-
 </resources>

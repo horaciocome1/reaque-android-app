@@ -21,6 +21,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.utilities.hashMap
 import io.github.horaciocome1.reaque.utilities.onListenFailed
@@ -139,7 +140,7 @@ class UsersWebService {
     fun getFavorites(): LiveData<List<User>> {
         if (favoritesList.isEmpty())
             auth = FirebaseAuth.getInstance()
-            ref.whereEqualTo("favorite_users.${auth.currentUser?.uid.toString()}", true)
+        ref.whereEqualTo("favorite_for.${auth.currentUser?.uid.toString()}", true)
                 .addSnapshotListener { snapshot, exception ->
                     when {
                         exception != null -> onListenFailed(tag, exception)
@@ -153,6 +154,49 @@ class UsersWebService {
                     }
                 }
         return favorites
+    }
+
+    // add id from the post i like to my profile
+    fun addToFavorites(post: Post, onSuccessful: () -> Unit) {
+        auth = FirebaseAuth.getInstance()
+        auth.currentUser?.let { user ->
+            val data = mapOf(
+                "favorites" to mapOf(
+                    post.id to true
+                )
+            )
+            ref.document(user.uid).set(data, SetOptions.merge()).addOnCompleteListener {
+                if (it.isSuccessful)
+                    onSuccessful()
+            }
+        }
+    }
+
+    fun addToFavorites(user: User, onSuccessful: () -> Unit) {
+        auth = FirebaseAuth.getInstance()
+        auth.currentUser?.let { me ->
+            // add the id from the user i like to my profile
+            var data = mapOf(
+                "favorites" to mapOf(
+                    user.id to true
+                )
+            )
+            ref.document(me.uid).set(data, SetOptions.merge()).addOnCompleteListener {
+                if (it.isSuccessful) {
+                    // add my id to the profile of the user i like
+                    data = mapOf(
+                        "favorite_for" to mapOf(
+                            me.uid to true
+                        )
+                    )
+                    ref.document(user.id).set(data, SetOptions.merge()).addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            onSuccessful()
+                        }
+                    }
+                }
+            }
+        }
     }
 
 }

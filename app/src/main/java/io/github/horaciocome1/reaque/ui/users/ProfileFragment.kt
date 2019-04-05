@@ -96,6 +96,9 @@ class ProfileFragment: Fragment() {
                     showContent()
             })
         }
+        viewModel.isAddingToFavorites.observe(this, Observer {
+            add_to_favorite_button.isEnabled = !it
+        })
     }
 
     override fun onResume() {

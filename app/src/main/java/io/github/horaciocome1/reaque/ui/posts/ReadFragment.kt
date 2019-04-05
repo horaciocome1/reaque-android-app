@@ -64,6 +64,7 @@ class ReadFragment: Fragment() {
 
     override fun onStart() {
         super.onStart()
+        binding.viewmodel = viewModel
         arguments?.let { bundle ->
             val post = Post(ReadFragmentArgs.fromBundle(bundle).postId)
             viewModel.getPosts(post).observe(this, Observer {
@@ -85,6 +86,9 @@ class ReadFragment: Fragment() {
                     if (it.id.isBlank()) BottomSheetBehavior.STATE_HIDDEN else BottomSheetBehavior.STATE_COLLAPSED
             })
         }
+        viewModel.isAddingToFavorites.observe(this, Observer {
+            add_to_favorite_button.isEnabled = !it
+        })
     }
 
     override fun onResume() {

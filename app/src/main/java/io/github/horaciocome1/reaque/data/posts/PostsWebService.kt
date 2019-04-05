@@ -19,9 +19,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
-import io.github.horaciocome1.reaque.utilities.*
+import io.github.horaciocome1.reaque.utilities.hashMap
+import io.github.horaciocome1.reaque.utilities.onListenFailed
+import io.github.horaciocome1.reaque.utilities.onSnapshotNull
+import io.github.horaciocome1.reaque.utilities.post
 
 class PostsWebService {
 
@@ -65,8 +69,6 @@ class PostsWebService {
         ref.add(post.hashMap).addOnCompleteListener {
             if (it.isSuccessful)
                 onSuccessful()
-            else
-                onUploadFailed(tag)
         }
     }
 
@@ -132,20 +134,37 @@ class PostsWebService {
     fun getFavorites(): LiveData<List<Post>> {
         if (favoritesList.isEmpty()) {
             auth = FirebaseAuth.getInstance()
-            ref.whereEqualTo("favorite_users.${auth.currentUser?.uid.toString()}", true)
-                .addSnapshotListener { snapshot, exception ->
-                    when {
-                        exception != null -> onListenFailed(tag, exception)
-                        snapshot != null -> {
-                            for (doc in snapshot)
-                                favoritesList.add(doc.post)
-                            favorites.value = favoritesList
+            auth.currentUser?.let {
+                ref.whereEqualTo("favorite_for.${it.uid}", true)
+                    .addSnapshotListener { snapshot, exception ->
+                        when {
+                            exception != null -> onListenFailed(tag, exception)
+                            snapshot != null -> {
+                                for (doc in snapshot)
+                                    favoritesList.add(doc.post)
+                                favorites.value = favoritesList
+                            }
+                            else -> onSnapshotNull(tag)
                         }
-                        else -> onSnapshotNull(tag)
                     }
-                }
+            }
         }
         return favorites
+    }
+
+    fun addToFavorite(post: Post, onSuccessful: () -> Unit) {
+        auth = FirebaseAuth.getInstance()
+        auth.currentUser?.let { user ->
+            val data = mapOf(
+                "favorite_for" to mapOf(
+                    user.uid to true
+                )
+            )
+            ref.document(post.id).set(data, SetOptions.merge()).addOnCompleteListener {
+                if (it.isSuccessful)
+                    onSuccessful()
+            }
+        }
     }
 
 }

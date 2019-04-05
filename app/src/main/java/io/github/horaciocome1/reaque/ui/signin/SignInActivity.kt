@@ -87,7 +87,11 @@ class SignInActivity : AppCompatActivity() {
                             finish()
                         }
                     }
-                    else -> Log.w(tag, "firebaseAuthWithGoogle:failure", it.exception)
+                    else -> {
+                        Log.w(tag, "firebaseAuthWithGoogle:failure", it.exception)
+                        setResult(Activity.RESULT_CANCELED)
+                        finish()
+                    }
                 }
             }
     }

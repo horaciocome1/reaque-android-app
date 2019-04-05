@@ -23,6 +23,10 @@
             name="user"
             type="io.github.horaciocome1.reaque.data.users.User" />
 
+        <variable
+            name="viewmodel"
+            type="io.github.horaciocome1.reaque.ui.users.UsersViewModel" />
+
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -203,7 +207,8 @@
                         android:maxWidth="300dp"
                         android:padding="16dp"
                         android:text="@string/favorite"
-                        app:backgroundTint="@color/favoriteColor"
+                        android:onClick="@{ () -> viewmodel.addToFavorites() }"
+                        app:backgroundTint="@color/orange"
                         style="@style/Widget.MaterialComponents.Button.UnelevatedButton.Icon"
                         app:cornerRadius="16dp"
                         app:icon="@drawable/outline_bookmark_border_18"

@@ -15,6 +15,8 @@
 
 package io.github.horaciocome1.reaque.ui.users
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import io.github.horaciocome1.reaque.data.posts.PostsRepository
@@ -53,14 +55,31 @@ class UsersViewModel(
 
     val favorites = usersRepository.favorites
 
-    fun addUser(onSuccessful: () -> Unit) = usersRepository.addUser(onSuccessful)
+    private val _isAddingToFavorites = MutableLiveData<Boolean>().apply {
+        value = false
+    }
 
-    fun addTopicToUser(topic: Topic, onSuccessful: () -> Unit) = usersRepository.addTopicToUser(topic, onSuccessful)
+    val isAddingToFavorites: LiveData<Boolean>
+        get() = _isAddingToFavorites
+
+    private val _user = User("")
+
+    fun addUser(onSuccessful: () -> Unit) = usersRepository.addUser(onSuccessful)
 
     fun getPosts(user: User) = postsRepository.getPosts(user)
 
     fun getUsers(topic: Topic) = usersRepository.getUsers(topic)
 
-    fun getUsers(user: User) = usersRepository.getUsers(user)
+    fun getUsers(user: User): LiveData<User> {
+        _user.id = user.id
+        return usersRepository.getUsers(user)
+    }
+
+    fun addToFavorites() {
+        _isAddingToFavorites.value = true
+        usersRepository.addToFavorites(_user) {
+            _isAddingToFavorites.value = false
+        }
+    }
 
 }
