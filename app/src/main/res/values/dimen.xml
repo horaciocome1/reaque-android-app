@@ -13,10 +13,9 @@
   ~    See the License for the specific language governing permissions and limitations under the License.
   -->
 
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
+<resources>
 
-    <gradient
-        android:angle="270"
-        android:startColor="@color/primaryDarkColor" />
+    <dimen name="default_corner_radius">16dp</dimen>
+    <dimen name="default_stroke_width">0.01dp</dimen>
 
-</shape>
+</resources>
