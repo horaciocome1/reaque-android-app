@@ -15,10 +15,10 @@
 
 package io.github.horaciocome1.reaque.ui.users
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import io.github.horaciocome1.reaque.data.posts.PostsRepository
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.topics.TopicsRepository
@@ -55,30 +55,27 @@ class UsersViewModel(
 
     val favorites = usersRepository.favorites
 
-    private val _isAddingToFavorites = MutableLiveData<Boolean>().apply {
-        value = false
-    }
-
-    val isAddingToFavorites: LiveData<Boolean>
-        get() = _isAddingToFavorites
-
-    private val _user = User("")
-
     fun addUser(onSuccessful: () -> Unit) = usersRepository.addUser(onSuccessful)
 
     fun getPosts(user: User) = postsRepository.getPosts(user)
 
     fun getUsers(topic: Topic) = usersRepository.getUsers(topic)
 
-    fun getUsers(user: User): LiveData<User> {
-        _user.id = user.id
-        return usersRepository.getUsers(user)
+    fun getUsers(user: User) = usersRepository.getUsers(user)
+
+    fun addToFavorites(view: View, user: User) {
+        if (user.id.isNotBlank()) {
+            view.isEnabled = false
+            usersRepository.addToFavorites(user) {
+                view.isEnabled = true
+            }
+        }
     }
 
-    fun addToFavorites() {
-        _isAddingToFavorites.value = true
-        usersRepository.addToFavorites(_user) {
-            _isAddingToFavorites.value = false
+    private fun openViewer(view: View, user: User) {
+        if (user.pic.isNotBlank()) {
+            val directions = ProfileFragmentDirections.actionOpenViewerFromProfile(user.pic)
+            view.findNavController().navigate(directions)
         }
     }
 

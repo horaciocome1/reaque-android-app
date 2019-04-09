@@ -78,17 +78,11 @@ class PostsViewModel(
     val isSubmitting: LiveData<Boolean>
         get() = _isSubmitting
 
-    // ReadFragment
-    private val _post = Post("")
-
     val favorites = postsRepository.favorites
 
     fun getPosts(topic: Topic) = postsRepository.getPosts(topic)
 
-    fun getPosts(post: Post): LiveData<Post> {
-        _post.id = post.id
-        return postsRepository.getPosts(post)
-    }
+    fun getPosts(post: Post) = postsRepository.getPosts(post)
 
     fun submitPost() {
         _isSubmitting.value = true
@@ -112,11 +106,13 @@ class PostsViewModel(
         mediaRepository.uploadImage(uploader)
     }
 
-    fun addToFavorites(view: View) {
-        view.isEnabled = false
-        postsRepository.addToFavorites(_post) {
-            usersRepository.addToFavorites(_post) {
-                view.isEnabled = true
+    fun addToFavorites(view: View, post: Post) {
+        if (post.id.isNotBlank() && post.user.id.isNotBlank()) {
+            view.isEnabled = false
+            postsRepository.addToFavorites(post) {
+                usersRepository.addToFavorites(post) {
+                    view.isEnabled = true
+                }
             }
         }
     }

@@ -147,7 +147,7 @@
                             android:layout_weight="1"
                             android:padding="16dp"
                             android:text="@string/favorite"
-                            android:onClick="@{viewmodel::addToFavorites}"
+                            android:onClick="@{(button) -> viewmodel.addToFavorites(button, post)}"
                             android:textColor="@color/orange"
                             app:cornerRadius="16dp"
                             app:icon="@drawable/outline_bookmark_border_18"

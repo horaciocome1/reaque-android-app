@@ -23,7 +23,6 @@ import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -61,12 +60,6 @@ class ProfileFragment: Fragment() {
             }
             addSimpleTouchListener()
         }
-        imageview.setOnClickListener {
-            binding.user?.pic?.run {
-                if (isNotBlank())
-                    openViewer(it, this)
-            }
-        }
         posts_button.setOnClickListener {
             binding.user?.run {
                 if (id.isNotBlank())
@@ -96,9 +89,6 @@ class ProfileFragment: Fragment() {
                     showContent()
             })
         }
-        viewModel.isAddingToFavorites.observe(this, Observer {
-            add_to_favorite_button.isEnabled = !it
-        })
     }
 
     override fun onResume() {
@@ -121,11 +111,6 @@ class ProfileFragment: Fragment() {
         cover_imageview.visibility = View.GONE
         scrollview.visibility = View.GONE
         progressbar.visibility = View.VISIBLE
-    }
-
-    private fun openViewer(view: View, url: String) {
-        val directions = ProfileFragmentDirections.actionOpenViewerFromProfile(url)
-        view.findNavController().navigate(directions)
     }
 
     private fun User.showPosts() {
