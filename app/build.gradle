@@ -19,6 +19,11 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'com.google.gms.google-services'
+
+apply plugin: 'androidx.navigation.safeargs'
+
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -49,29 +54,30 @@ dependencies {
     // kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    // android x
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    // multidex
     implementation 'androidx.multidex:multidex:2.0.1'
 
-    // ui utils
+    // lifecycle
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+
+    // ui
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.github.horaciocome1:simple-recyclerview-touch-listener:0.1.7'
     implementation 'jp.wasabeef:glide-transformations:4.0.1'
 
-    // navigation component
-    def nav_version = "1.0.0"
+    // navigation
     implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
     implementation "android.arch.navigation:navigation-ui:$nav_version"
 
     // firebase
     implementation 'com.google.firebase:firebase-core:16.0.8'
-    implementation 'com.google.firebase:firebase-firestore:18.1.0'
+    implementation 'com.google.firebase:firebase-firestore:18.2.0'
     implementation 'com.google.firebase:firebase-storage:16.1.0'
-    implementation 'com.google.firebase:firebase-auth:16.2.0'
+    implementation 'com.google.firebase:firebase-auth:16.2.1'
 
-    // google
+    // google auth
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
 
     // test
@@ -79,7 +85,3 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 }
-
-apply plugin: 'com.google.gms.google-services'
-
-apply plugin: 'androidx.navigation.safeargs'
