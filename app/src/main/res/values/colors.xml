@@ -32,4 +32,6 @@
     <color name="blue">#0091ea</color>
     <color name="dark_background">#99000000</color>
 
+    <color name="default_stroke_color">#353f1dcb</color>
+
 </resources>
