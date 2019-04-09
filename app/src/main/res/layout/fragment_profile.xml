@@ -218,6 +218,7 @@
                         app:icon="@drawable/outline_bookmark_border_18"
                         app:iconTint="@color/orange"
                         app:strokeColor="@color/orange"
+                        app:rippleColor="@color/orange"
                         app:strokeWidth="@dimen/default_stroke_width"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
