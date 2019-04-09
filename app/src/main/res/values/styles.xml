@@ -26,6 +26,7 @@
         <item name="android:textColor">@color/primaryTextColor</item>
         <item name="materialCardViewStyle">@style/AppTheme.CardView</item>
         <item name="buttonStyle">@style/AppTheme.Button</item>
+        <item name="floatingActionButtonStyle">@style/AppTheme.Fab</item>
     </style>
 
     <style name="AppTheme.CompleteClickableEffect">
@@ -42,6 +43,10 @@
 
     <style name="AppTheme.Button" parent="Widget.MaterialComponents.Button">
         <item name="cornerRadius">@dimen/default_corner_radius</item>
+    </style>
+
+    <style name="AppTheme.Fab" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="android:tint">@color/primaryColor</item>
     </style>
 
 </resources>
