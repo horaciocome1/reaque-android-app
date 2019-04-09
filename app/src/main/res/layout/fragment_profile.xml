@@ -220,7 +220,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <ImageView
-                    android:id="@+id/profile_pic_imageview"
+                    android:id="@+id/imageview"
                     android:layout_width="112dp"
                     android:layout_height="112dp"
                     android:layout_marginStart="8dp"

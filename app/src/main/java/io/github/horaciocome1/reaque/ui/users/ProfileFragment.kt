@@ -61,7 +61,7 @@ class ProfileFragment: Fragment() {
             }
             addSimpleTouchListener()
         }
-        profile_pic_imageview.setOnClickListener {
+        imageview.setOnClickListener {
             binding.user?.pic?.run {
                 if (isNotBlank())
                     openViewer(it, this)
@@ -88,7 +88,7 @@ class ProfileFragment: Fragment() {
                         .into(cover_imageview)
                     apply(RequestOptions.circleCropTransform())
                         .transition(DrawableTransitionOptions.withCrossFade())
-                        .into(profile_pic_imageview)
+                        .into(imageview)
                 }
                 if (it.id.isBlank())
                     hideContent()

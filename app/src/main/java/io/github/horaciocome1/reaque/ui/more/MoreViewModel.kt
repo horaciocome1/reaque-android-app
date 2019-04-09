@@ -15,8 +15,11 @@
 
 package io.github.horaciocome1.reaque.ui.more
 
+import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
+import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.data.users.UsersRepository
 import io.github.horaciocome1.reaque.utilities.InjectorUtils
 
@@ -29,5 +32,24 @@ val MoreFragment.viewModel: MoreViewModel
 class MoreViewModel(repository: UsersRepository) : ViewModel() {
 
     val me = repository.me
+
+    fun openEditProfile(view: View) {
+
+    }
+
+    fun openPosting(view: View) {
+        val directions = MoreFragmentDirections.actionOpenPosting()
+        view.findNavController().navigate(directions)
+    }
+
+    fun openSettings(view: View) {
+        val directions = MoreFragmentDirections.actionOpenSettings()
+        view.findNavController().navigate(directions)
+    }
+
+    fun openProfile(view: View, user: User) {
+        val directions = MoreFragmentDirections.actionOpenProfileFromMore(user.id)
+        view.findNavController().navigate(directions)
+    }
 
 }

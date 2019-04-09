@@ -73,7 +73,7 @@ class ReadFragment: Fragment() {
                     load(it.user.pic)
                         .apply(RequestOptions.circleCropTransform())
                         .transition(DrawableTransitionOptions.withCrossFade())
-                        .into(profile_pic_imageview)
+                        .into(imageview)
                 }
                 behavior.state =
                     if (it.id.isBlank()) BottomSheetBehavior.STATE_HIDDEN else BottomSheetBehavior.STATE_COLLAPSED
