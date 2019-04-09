@@ -72,7 +72,7 @@ class UsersViewModel(
         }
     }
 
-    private fun openViewer(view: View, user: User) {
+    fun openViewer(view: View, user: User) {
         if (user.pic.isNotBlank()) {
             val directions = ProfileFragmentDirections.actionOpenViewerFromProfile(user.pic)
             view.findNavController().navigate(directions)
