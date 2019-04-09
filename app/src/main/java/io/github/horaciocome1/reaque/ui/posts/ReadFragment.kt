@@ -28,7 +28,6 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import io.github.horaciocome1.reaque.data.posts.Post
-import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.databinding.FragmentReadBinding
 import io.github.horaciocome1.reaque.ui.MainActivity
 import io.github.horaciocome1.reaque.utilities.isPortrait
@@ -48,12 +47,6 @@ class ReadFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         behavior = BottomSheetBehavior.from(fragment_read_bottom_sheet)
-        profile_pic_imageview.setOnClickListener {
-            binding.post?.user?.run {
-                if (id.isNotBlank())
-                    openProfile(it)
-            }
-        }
         fragment_read_cover_imageview.setOnClickListener {
             binding.post?.pic?.run {
                 if (isNotBlank())
@@ -95,11 +88,6 @@ class ReadFragment: Fragment() {
         super.onResume()
         if (isPortrait)
             (activity as MainActivity).supportActionBar?.show()
-    }
-
-    private fun User.openProfile(view: View) {
-        val directions = ReadFragmentDirections.actionOpenProfileFromRead(id)
-        view.findNavController().navigate(directions)
     }
 
     private fun String.openViewer(view: View) {

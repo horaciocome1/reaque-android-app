@@ -17,7 +17,6 @@ package io.github.horaciocome1.reaque.utilities
 
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentSnapshot
-import io.github.horaciocome1.reaque.data.comments.Comment
 import io.github.horaciocome1.reaque.data.notifications.Notification
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
@@ -62,21 +61,6 @@ val DocumentSnapshot.post: Post
                 id = this@post["user.id"].toString()
                 name = this@post["user.name"].toString()
                 pic = this@post["user.pic"].toString()
-            }
-        }
-    }
-
-val DocumentSnapshot.comment: Comment
-    get() {
-        return Comment(id).apply {
-            message = this@comment["message"].toString()
-            val timestamp = this@comment["date"]
-            if (timestamp is Timestamp)
-                date = timestamp.string
-            user.apply {
-                id = this@comment["user.id"].toString()
-                name = this@comment["user.name"].toString()
-                pic = this@comment["user.pic"].toString()
             }
         }
     }

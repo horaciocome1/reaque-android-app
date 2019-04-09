@@ -26,9 +26,9 @@
         android:title="@string/users" />
 
     <item
-        android:id="@+id/destination_forum"
-        android:icon="@drawable/outline_forum_24"
-        android:title="@string/forum" />
+        android:id="@+id/destination_notifications"
+        android:icon="@drawable/outline_notifications_24"
+        android:title="@string/notifications" />
 
     <item
         android:id="@+id/destination_more"

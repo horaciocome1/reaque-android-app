@@ -25,13 +25,6 @@
             android:name="post_id"
             app:argType="string" />
         <action
-            android:id="@+id/action_open_profile_from_read"
-            app:destination="@id/destination_profile"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
-        <action
             android:id="@+id/action_open_viewer_from_read"
             app:destination="@id/destination_viewer"
             app:enterAnim="@anim/nav_default_enter_anim"
@@ -55,11 +48,7 @@
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_open_read_from_profile"
-            app:destination="@id/destination_read"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:destination="@id/destination_read" />
     </fragment>
     <fragment
         android:id="@+id/destination_viewer"
@@ -72,10 +61,6 @@
         android:id="@+id/destination_settings"
         android:name="io.github.horaciocome1.reaque.ui.settings.SettingsFragment"
         android:label="Avançadas" />
-    <fragment
-        android:id="@+id/destination_search"
-        android:name="io.github.horaciocome1.reaque.ui.search.SearchFragment"
-        android:label="Busca" />
     <fragment
         android:id="@+id/destination_more"
         android:name="io.github.horaciocome1.reaque.ui.more.MoreFragment"
@@ -97,13 +82,6 @@
         <action
             android:id="@+id/action_open_settings"
             app:destination="@id/destination_settings"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
-        <action
-            android:id="@+id/action_open_notifications"
-            app:destination="@id/destination_notifications"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
@@ -150,18 +128,6 @@
         android:label="@string/users">
         <action
             android:id="@+id/action_open_profile_from_users"
-            app:destination="@id/destination_profile"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
-    </fragment>
-    <fragment
-        android:id="@+id/destination_forum"
-        android:name="io.github.horaciocome1.reaque.ui.forum.ForumFragment"
-        android:label="@string/forum">
-        <action
-            android:id="@+id/action_open_profile_from_forum"
             app:destination="@id/destination_profile"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"

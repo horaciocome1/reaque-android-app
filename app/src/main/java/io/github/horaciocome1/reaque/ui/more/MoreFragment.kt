@@ -46,9 +46,6 @@ class MoreFragment : Fragment() {
         posting_textview.setOnClickListener {
             it.openPosting()
         }
-        notifications_textview.setOnClickListener {
-            it.openNotifications()
-        }
         setting_textview.setOnClickListener {
             it.openSettings()
         }
@@ -87,11 +84,6 @@ class MoreFragment : Fragment() {
 
     private fun View.openPosting() {
         val directions = MoreFragmentDirections.actionOpenPosting()
-        findNavController().navigate(directions)
-    }
-
-    private fun View.openNotifications() {
-        val directions = MoreFragmentDirections.actionOpenNotifications()
         findNavController().navigate(directions)
     }
 
