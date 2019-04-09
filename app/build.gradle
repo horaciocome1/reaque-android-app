@@ -52,7 +52,10 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     // kotlin
+    def coroutines_version = '1.1.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:$coroutines_version"
 
     // multidex
     implementation 'androidx.multidex:multidex:2.0.1'
@@ -73,11 +76,13 @@ dependencies {
 
     // firebase
     implementation 'com.google.firebase:firebase-core:16.0.8'
+    implementation 'com.google.firebase:firebase-common-ktx:16.1.0'
     implementation 'com.google.firebase:firebase-firestore:18.2.0'
+    implementation 'com.google.firebase:firebase-firestore-ktx:18.2.0'
     implementation 'com.google.firebase:firebase-storage:16.1.0'
     implementation 'com.google.firebase:firebase-auth:16.2.1'
 
-    // google auth
+    // play services
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
 
     // test
