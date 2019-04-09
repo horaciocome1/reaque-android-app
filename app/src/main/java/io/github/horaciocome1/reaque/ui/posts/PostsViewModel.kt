@@ -16,11 +16,13 @@
 package io.github.horaciocome1.reaque.ui.posts
 
 import android.net.Uri
+import android.view.View
 import androidx.databinding.Bindable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import io.github.horaciocome1.reaque.data.media.ImageUploader
 import io.github.horaciocome1.reaque.data.media.MediaRepository
 import io.github.horaciocome1.reaque.data.posts.Post
@@ -78,12 +80,6 @@ class PostsViewModel(
 
     // ReadFragment
     private val _post = Post("")
-    private val _isAddingToFavorites = MutableLiveData<Boolean>().apply {
-        value = false
-    }
-    val isAddingToFavorites: LiveData<Boolean>
-        get() = _isAddingToFavorites
-
 
     val favorites = postsRepository.favorites
 
@@ -116,12 +112,19 @@ class PostsViewModel(
         mediaRepository.uploadImage(uploader)
     }
 
-    fun addToFavorites() {
-        _isAddingToFavorites.value = true
+    fun addToFavorites(view: View) {
+        view.isEnabled = false
         postsRepository.addToFavorites(_post) {
             usersRepository.addToFavorites(_post) {
-                _isAddingToFavorites.value = false
+                view.isEnabled = true
             }
+        }
+    }
+
+    fun openViewer(view: View, post: Post) {
+        if (post.pic.isNotBlank()) {
+            val directions = ReadFragmentDirections.actionOpenViewerFromRead(post.pic)
+            view.findNavController().navigate(directions)
         }
     }
 
