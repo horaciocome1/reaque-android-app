@@ -71,6 +71,10 @@ class ProfileFragment: Fragment() {
     override fun onStart() {
         super.onStart()
         behavior.state = BottomSheetBehavior.STATE_HIDDEN
+        binding.let {
+            it.lifecycleOwner = this
+            it.viewmodel = viewModel
+        }
         arguments?.let { args ->
             val user = User(ProfileFragmentArgs.fromBundle(args).userId)
             viewModel.getUsers(user).observe(this, Observer {
