@@ -55,5 +55,7 @@
     <string name="gallery">Galeria</string>
     <string name="done_adding_to_favorites">Adicionado aos favoritos</string>
     <string name="profile">Perfil</string>
+    <string name="title">Título</string>
+    <string name="message">Mensagem</string>
 
 </resources>

@@ -26,7 +26,6 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -57,9 +56,6 @@ class PostingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         post_button.isEnabled = false
-        cancel_button.setOnClickListener {
-            Navigation.findNavController(it).navigateUp()
-        }
         select_pic_from_gallery_button.setOnClickListener {
             picImageFromGallery()
         }
@@ -115,14 +111,6 @@ class PostingFragment : Fragment() {
                 layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
                 adapter = SimpleTopicsAdapter(topics)
             }
-        })
-        viewModel.isFinished.observe(this, Observer {
-            if (it)
-                Navigation.findNavController(post_button).navigateUp()
-        })
-        viewModel.isSubmitting.observe(this, Observer {
-            progressbar.visibility = if (it) View.VISIBLE else View.GONE
-            content_constraintlayout.visibility = if (it) View.GONE else View.VISIBLE
         })
     }
 

@@ -18,7 +18,6 @@ package io.github.horaciocome1.reaque.ui.posts
 import android.net.Uri
 import android.view.View
 import androidx.databinding.Bindable
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
@@ -67,16 +66,6 @@ class PostsViewModel(
     @Bindable
     val postMessage = MutableLiveData<String>()
     val topics = topicsRepository.topics
-    private val _isFinished = MutableLiveData<Boolean>().apply {
-        value = false
-    }
-    val isFinished: LiveData<Boolean>
-        get() = _isFinished
-    private val _isSubmitting = MutableLiveData<Boolean>().apply {
-        value = false
-    }
-    val isSubmitting: LiveData<Boolean>
-        get() = _isSubmitting
 
     val favorites = postsRepository.favorites
 
@@ -84,8 +73,9 @@ class PostsViewModel(
 
     fun getPosts(post: Post) = postsRepository.getPosts(post)
 
-    fun submitPost() {
-        _isSubmitting.value = true
+    fun submitPost(view: View) {
+        view.visibility = View.INVISIBLE
+        view.isEnabled = false
         val uploader = ImageUploader().apply {
             imageUri = this@PostsViewModel.imageUri
             post = this@PostsViewModel.post
@@ -94,7 +84,7 @@ class PostsViewModel(
                     pic = link
                     postsRepository.submitPost(this) {
                         usersRepository.addTopicToUser(topic) {
-                            _isFinished.value = true
+                            view.findNavController().navigateUp()
                         }
                     }
                 }
@@ -122,6 +112,10 @@ class PostsViewModel(
             val directions = ReadFragmentDirections.actionOpenViewerFromRead(post.pic)
             view.findNavController().navigate(directions)
         }
+    }
+
+    fun cancel(view: View) {
+        view.findNavController().navigateUp()
     }
 
 }
