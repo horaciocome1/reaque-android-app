@@ -142,9 +142,24 @@
                 android:paddingEnd="32dp"
                 android:paddingRight="32dp"
                 android:paddingBottom="16dp"
-                android:layout_marginBottom="16dp"
                 android:text="@string/donate"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <TextView
+                android:id="@+id/sign_out_textview"
+                style="@style/AppTheme.CompleteClickableEffect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:paddingStart="56dp"
+                android:paddingLeft="56dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="32dp"
+                android:paddingRight="32dp"
+                android:paddingBottom="16dp"
+                android:text="@string/sign_out"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textColor="@color/colorError" />
 
         </LinearLayout>
 
