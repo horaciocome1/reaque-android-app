@@ -78,11 +78,6 @@ class ProfileFragment: Fragment() {
             val user = User(ProfileFragmentArgs.fromBundle(args).userId)
             viewModel.getUsers(user).observe(this, Observer {
                 binding.user = it
-                Glide.with(this@ProfileFragment).load(it.pic).run {
-                    apply(RequestOptions.bitmapTransform(BlurTransformation(7, 14)))
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .into(cover_imageview)
-                }
                 if (it.id.isBlank())
                     hideContent()
                 else

@@ -23,6 +23,9 @@ object Constants {
 
     const val SINGLE_COLUMN = 1
     const val TWO_COLUMNS = 2
-    const val THREE_COLUMNS = 3
+
+    const val PROFILE_CIRCLE = 2307
+    const val PROFILE_BLUR = 2308
+    const val ITEM_PROFILE = 2308
 
 }

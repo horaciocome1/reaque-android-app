@@ -30,8 +30,10 @@ import io.github.horaciocome1.reaque.data.topics.TopicsRepository
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.data.users.UsersRepository
 import io.github.horaciocome1.reaque.ui.signin.SignInActivity
+import io.github.horaciocome1.reaque.utilities.Constants
 import io.github.horaciocome1.reaque.utilities.InjectorUtils
 import io.github.horaciocome1.reaque.utilities.ObservableViewModel
+import jp.wasabeef.glide.transformations.BlurTransformation
 
 val UsersFragment.viewModel: UsersViewModel
     get() {
@@ -86,14 +88,17 @@ class UsersViewModel(
     }
 
     companion object {
-        @BindingAdapter("url")
+        @BindingAdapter("url", "type")
         @JvmStatic
-        fun ImageView.loadImage(url: String?, cover: Boolean) {
+        fun ImageView.loadImage(url: String?, type: Int?) {
             if (!url.isNullOrBlank())
                 Glide.with(context).load(url)
                     .apply(
-                        if (cover)
-                            RequestOptions.bitmapTransform()
+                        when (type) {
+                            Constants.PROFILE_BLUR -> RequestOptions.bitmapTransform(BlurTransformation(7, 14))
+                            Constants.PROFILE_CIRCLE -> RequestOptions.circleCropTransform()
+                            else -> RequestOptions()
+                        }
                     )
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .into(this)
