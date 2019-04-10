@@ -76,6 +76,6 @@ val DocumentSnapshot.notification: Notification
             isComment = this@notification["comment"].toString().toBoolean()
             isPost = this@notification["post"].toString().toBoolean()
             isUser = this@notification["user"].toString().toBoolean()
-            destinyId = this@notification["destiny"].toString()
+            contentId = this@notification["destiny"].toString()
         }
     }

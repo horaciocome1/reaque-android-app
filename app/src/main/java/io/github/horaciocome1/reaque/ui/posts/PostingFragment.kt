@@ -35,8 +35,7 @@ import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.databinding.FragmentPostingBinding
 import io.github.horaciocome1.reaque.ui.MainActivity
 import io.github.horaciocome1.reaque.utilities.Constants
-import io.github.horaciocome1.simplerecyclerviewtouchlistener.addSimpleTouchListener
-import io.github.horaciocome1.simplerecyclerviewtouchlistener.setOnClick
+import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_posting.*
 
 class PostingFragment : Fragment() {
@@ -68,7 +67,7 @@ class PostingFragment : Fragment() {
             skipCollapsed = true
         }
         topics_recyclerview.run {
-            setOnClick { _, position ->
+            addOnItemClickListener { _, position ->
                 if (topics.isNotEmpty()) {
                     selectTopicBehavior.state = BottomSheetBehavior.STATE_HIDDEN
                     viewModel.post.topic = topics[position]
@@ -76,7 +75,6 @@ class PostingFragment : Fragment() {
                     post_button.isEnabled = isPostReady
                 }
             }
-            addSimpleTouchListener()
         }
         select_topic_button.setOnClickListener {
             selectTopicBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED

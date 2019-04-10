@@ -26,8 +26,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.notifications.Notification
 import io.github.horaciocome1.reaque.ui.MainActivity
-import io.github.horaciocome1.simplerecyclerviewtouchlistener.addSimpleTouchListener
-import io.github.horaciocome1.simplerecyclerviewtouchlistener.setOnClick
+import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_notifications.*
 
 class NotificationsFragment : Fragment() {
@@ -41,27 +40,16 @@ class NotificationsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         comments_recyclerview.run {
-            setOnClick { view, position ->
+            addOnItemClickListener { view, position ->
                 if (notifications.isNotEmpty()) {
                     notifications[position].run {
                         when {
-                            isComment -> {
-//                                    val openComments =
-//                                        NotificationsFragmentDirections.actionOpenCommentsFromNotifications(
-//                                            destinyId,
-//                                            "",
-//                                            true,
-//                                            false
-//                                        )
-//                                    Navigation.findNavController(view).navigate(openComments)
-                            }
-                            isPost -> view.read(destinyId)
-                            isUser -> view.openProfile(destinyId)
+                            isPost -> view.read(contentId)
+                            isUser -> view.openProfile(contentId)
                         }
                     }
                 }
             }
-            addSimpleTouchListener()
         }
     }
 

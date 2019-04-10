@@ -34,8 +34,7 @@ import io.github.horaciocome1.reaque.databinding.FragmentProfileBinding
 import io.github.horaciocome1.reaque.ui.MainActivity
 import io.github.horaciocome1.reaque.ui.posts.PostsAdapter
 import io.github.horaciocome1.reaque.utilities.isPortrait
-import io.github.horaciocome1.simplerecyclerviewtouchlistener.addSimpleTouchListener
-import io.github.horaciocome1.simplerecyclerviewtouchlistener.setOnClick
+import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
 import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.fragment_profile.*
 
@@ -54,11 +53,10 @@ class ProfileFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         behavior = BottomSheetBehavior.from(posts_bottomsheet)
         posts_recyclerview.run {
-            setOnClick { view, position ->
+            addOnItemClickListener { view, position ->
                 if (posts.isNotEmpty())
                     posts[position].read(view)
             }
-            addSimpleTouchListener()
         }
         posts_button.setOnClickListener {
             binding.user?.run {

@@ -32,8 +32,7 @@ import io.github.horaciocome1.reaque.ui.MainActivity
 import io.github.horaciocome1.reaque.ui.posts.TopicsAdapter
 import io.github.horaciocome1.reaque.utilities.Constants
 import io.github.horaciocome1.reaque.utilities.isPortrait
-import io.github.horaciocome1.simplerecyclerviewtouchlistener.addSimpleTouchListener
-import io.github.horaciocome1.simplerecyclerviewtouchlistener.setOnClick
+import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_users.*
 
 class UsersFragment : Fragment() {
@@ -48,20 +47,18 @@ class UsersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         topics_recyclerview.run {
-            setOnClick { _, position ->
+            addOnItemClickListener { _, position ->
                 if (topics.isNotEmpty()) {
                     favorites_fab.show()
                     topics[position].listUsers()
                 }
             }
-            addSimpleTouchListener()
         }
         users_recyclerview.run {
-            setOnClick { view, position ->
+            addOnItemClickListener { view, position ->
                 if (users.isNotEmpty())
                     users[position].openProfile(view)
             }
-            addSimpleTouchListener()
         }
     }
 
