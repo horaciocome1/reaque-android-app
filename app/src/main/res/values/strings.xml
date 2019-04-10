@@ -54,5 +54,6 @@
     <string name="camera">Camera</string>
     <string name="gallery">Galeria</string>
     <string name="done_adding_to_favorites">Adicionado aos favoritos</string>
+    <string name="profile">Perfil</string>
 
 </resources>
