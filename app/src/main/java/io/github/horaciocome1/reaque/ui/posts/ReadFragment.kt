@@ -50,7 +50,10 @@ class ReadFragment: Fragment() {
 
     override fun onStart() {
         super.onStart()
-        binding.viewmodel = viewModel
+        binding.let {
+            it.lifecycleOwner = this
+            it.viewmodel = viewModel
+        }
         arguments?.let { bundle ->
             val post = Post(ReadFragmentArgs.fromBundle(bundle).postId)
             viewModel.getPosts(post).observe(this, Observer {
