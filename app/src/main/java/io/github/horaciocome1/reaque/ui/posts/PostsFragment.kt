@@ -43,19 +43,15 @@ class PostsFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        topics_recyclerview.run {
-            addOnItemClickListener { _, position ->
-                if (topics.isNotEmpty()) {
-                    favorites_fab.show()
-                    topics[position].listPosts()
-                }
+        topics_recyclerview.addOnItemClickListener { _, position ->
+            if (topics.isNotEmpty()) {
+                favorites_fab.show()
+                topics[position].listPosts()
             }
         }
-        posts_recyclerview.run {
-            addOnItemClickListener { view, position ->
-                if (posts.isNotEmpty())
-                    posts[position].read(view)
-            }
+        posts_recyclerview.addOnItemClickListener { view, position ->
+            if (posts.isNotEmpty())
+                posts[position].read(view)
         }
     }
 

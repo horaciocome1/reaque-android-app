@@ -52,6 +52,10 @@ class ProfileFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         behavior = BottomSheetBehavior.from(posts_bottomsheet)
+        binding.let {
+            it.lifecycleOwner = this
+            it.viewmodel = viewModel
+        }
         posts_recyclerview.run {
             addOnItemClickListener { view, position ->
                 if (posts.isNotEmpty())
@@ -69,10 +73,7 @@ class ProfileFragment: Fragment() {
     override fun onStart() {
         super.onStart()
         behavior.state = BottomSheetBehavior.STATE_HIDDEN
-        binding.let {
-            it.lifecycleOwner = this
-            it.viewmodel = viewModel
-        }
+
         arguments?.let { args ->
             val user = User(ProfileFragmentArgs.fromBundle(args).userId)
             viewModel.getUsers(user).observe(this, Observer {
@@ -81,9 +82,6 @@ class ProfileFragment: Fragment() {
                     apply(RequestOptions.bitmapTransform(BlurTransformation(7, 14)))
                         .transition(DrawableTransitionOptions.withCrossFade())
                         .into(cover_imageview)
-                    apply(RequestOptions.circleCropTransform())
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .into(imageview)
                 }
                 if (it.id.isBlank())
                     hideContent()

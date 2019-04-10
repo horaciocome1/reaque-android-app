@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="120dp"
-            android:onClick="@{(imageview) -> viewmodel.openViewer(imageview, post)}" />
+            android:onClick="@{(view) -> viewmodel.openViewer(view, post)}" />
 
         <LinearLayout
             android:id="@+id/fragment_read_bottom_sheet"

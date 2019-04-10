@@ -18,6 +18,8 @@ package io.github.horaciocome1.reaque.ui.posts
 import android.net.Uri
 import android.view.View
 import androidx.databinding.Bindable
+import androidx.databinding.Observable
+import androidx.databinding.PropertyChangeRegistry
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
@@ -30,6 +32,7 @@ import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.topics.TopicsRepository
 import io.github.horaciocome1.reaque.data.users.UsersRepository
 import io.github.horaciocome1.reaque.utilities.InjectorUtils
+import io.github.horaciocome1.reaque.utilities.ObservableViewModel
 
 val PostsFragment.viewModel: PostsViewModel
     get() {
@@ -54,7 +57,7 @@ class PostsViewModel(
     topicsRepository: TopicsRepository,
     private val mediaRepository: MediaRepository,
     private val usersRepository: UsersRepository
-) : ViewModel() {
+) : ObservableViewModel() {
 
     // PostingFragment
     val post = Post("").apply {

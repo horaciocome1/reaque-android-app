@@ -16,9 +16,14 @@
 package io.github.horaciocome1.reaque.ui.users
 
 import android.view.View
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestOptions
 import io.github.horaciocome1.reaque.data.posts.PostsRepository
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.topics.TopicsRepository
@@ -26,6 +31,7 @@ import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.data.users.UsersRepository
 import io.github.horaciocome1.reaque.ui.signin.SignInActivity
 import io.github.horaciocome1.reaque.utilities.InjectorUtils
+import io.github.horaciocome1.reaque.utilities.ObservableViewModel
 
 val UsersFragment.viewModel: UsersViewModel
     get() {
@@ -49,7 +55,7 @@ class UsersViewModel(
     private val usersRepository: UsersRepository,
     topicsRepository: TopicsRepository,
     private val postsRepository: PostsRepository
-) : ViewModel() {
+) : ObservableViewModel() {
 
     val topics = topicsRepository.topics
 
@@ -76,6 +82,21 @@ class UsersViewModel(
         if (user.pic.isNotBlank()) {
             val directions = ProfileFragmentDirections.actionOpenViewerFromProfile(user.pic)
             view.findNavController().navigate(directions)
+        }
+    }
+
+    companion object {
+        @BindingAdapter("url")
+        @JvmStatic
+        fun ImageView.loadImage(url: String?, cover: Boolean) {
+            if (!url.isNullOrBlank())
+                Glide.with(context).load(url)
+                    .apply(
+                        if (cover)
+                            RequestOptions.bitmapTransform()
+                    )
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(this)
         }
     }
 

@@ -29,6 +29,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.card.MaterialCardView
 import io.github.horaciocome1.reaque.data.topics.Topic
@@ -66,23 +67,24 @@ class PostingFragment : Fragment() {
             state = BottomSheetBehavior.STATE_HIDDEN
             skipCollapsed = true
         }
-        topics_recyclerview.run {
-            addOnItemClickListener { _, position ->
-                if (topics.isNotEmpty()) {
-                    selectTopicBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-                    viewModel.post.topic = topics[position]
-                    binding.viewmodel = viewModel
-                    post_button.isEnabled = isPostReady
-                }
+        topics_recyclerview.addOnItemClickListener { _, position ->
+            if (topics.isNotEmpty()) {
+                selectTopicBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                viewModel.post.topic = topics[position]
+                binding.viewmodel = viewModel
+                post_button.isEnabled = isPostReady
             }
         }
         select_topic_button.setOnClickListener {
             selectTopicBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
         }
         select_pic_button.setOnClickListener {
-            viewModel.run {
-                if (viewModel.imageUri != Uri.EMPTY)
-                    Glide.with(this@PostingFragment).load(imageUri).into(imageview)
+            viewModel.let {
+                if (it.imageUri != Uri.EMPTY)
+                    Glide.with(this)
+                        .load(it.imageUri)
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .into(imageview)
             }
             selectPicBehavior.state = BottomSheetBehavior.STATE_EXPANDED
 
@@ -91,9 +93,9 @@ class PostingFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        binding.apply {
-            lifecycleOwner = this@PostingFragment
-            this.viewmodel = viewModel
+        binding.let {
+            it.lifecycleOwner = this
+            it.viewmodel = viewModel
         }
         viewModel.postTitle.observe(this, Observer {
             viewModel.post.title = it

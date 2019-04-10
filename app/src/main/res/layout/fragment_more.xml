@@ -77,7 +77,7 @@
                         android:layout_width="96dp"
                         android:layout_height="96dp"
                         android:layout_marginTop="56dp"
-                        android:onClick="@{(imageview) -> viewmodel.openProfile(imageview, user)}"
+                        android:onClick="@{(view) -> viewmodel.openProfile(view, user)}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
