@@ -24,8 +24,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.google.firebase.ktx.Firebase
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.ui.MainActivity
+import io.github.horaciocome1.reaque.utilities.isPortrait
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 class SettingsFragment : Fragment() {
@@ -58,8 +60,12 @@ class SettingsFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+        if (isPortrait)
             (activity as MainActivity).supportActionBar?.show()
+    }
+
+    private fun signOut() {
+//        val auth = Firebase.
     }
 
 }
