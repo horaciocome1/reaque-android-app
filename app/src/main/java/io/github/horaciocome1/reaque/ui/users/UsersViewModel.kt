@@ -18,7 +18,6 @@ package io.github.horaciocome1.reaque.ui.users
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
@@ -87,22 +86,22 @@ class UsersViewModel(
         }
     }
 
-    companion object {
-        @BindingAdapter("url", "type")
-        @JvmStatic
-        fun ImageView.loadImage(url: String?, type: Int?) {
-            if (!url.isNullOrBlank())
-                Glide.with(context).load(url)
-                    .apply(
-                        when (type) {
-                            Constants.PROFILE_BLUR -> RequestOptions.bitmapTransform(BlurTransformation(7, 14))
-                            Constants.PROFILE_CIRCLE -> RequestOptions.circleCropTransform()
-                            else -> RequestOptions()
-                        }
-                    )
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .into(this)
-        }
-    }
+//    companion object {
+//        @BindingAdapter("url", "type")
+//        @JvmStatic
+//        fun ImageView.loadImage(url: String?, type: Int?) {
+//            if (!url.isNullOrBlank())
+//                Glide.with(context).load(url)
+//                    .apply(
+//                        when (type) {
+//                            Constants.BLUR -> RequestOptions.bitmapTransform(BlurTransformation(7, 14))
+//                            Constants.CIRCLE -> RequestOptions.circleCropTransform()
+//                            else -> RequestOptions()
+//                        }
+//                    )
+//                    .transition(DrawableTransitionOptions.withCrossFade())
+//                    .into(this)
+//        }
+//    }
 
 }

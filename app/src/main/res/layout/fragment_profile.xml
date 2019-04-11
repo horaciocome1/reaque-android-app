@@ -42,7 +42,7 @@
             android:scaleType="centerCrop"
             android:tint="@color/dark_background"
             app:url="@{user.pic}"
-            app:type="@{Constants.PROFILE_BLUR}"
+            app:type="@{Constants.BLUR}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -241,7 +241,7 @@
                     android:layout_marginRight="8dp"
                     android:layout_marginBottom="8dp"
                     app:url="@{user.pic}"
-                    app:type="@{Constants.PROFILE_CIRCLE}"
+                    app:type="@{Constants.CIRCLE}"
                     android:scaleType="centerCrop"
                     android:onClick="@{(view) -> viewmodel.openViewer(view, user)}"
                     app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"

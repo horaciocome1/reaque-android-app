@@ -18,6 +18,8 @@
 
     <data>
 
+        <import type="io.github.horaciocome1.reaque.utilities.Constants" />
+
         <variable
             name="post"
             type="io.github.horaciocome1.reaque.data.posts.Post" />
@@ -43,7 +45,9 @@
             android:id="@+id/fragment_read_cover2_imageview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            app:url="@{post.pic}"
+            app:type="@{Constants.BLUR}"/>
 
         <ImageView
             android:id="@+id/fragment_read_cover_imageview"
@@ -51,7 +55,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="120dp"
-            android:onClick="@{(view) -> viewmodel.openViewer(view, post)}" />
+            android:onClick="@{(view) -> viewmodel.openViewer(view, post)}"
+            app:url="@{post.pic}"
+            app:type="@{Constants.DEFAULT}"/>
 
         <LinearLayout
             android:id="@+id/fragment_read_bottom_sheet"
@@ -190,7 +196,9 @@
             android:layout_height="45dp"
             android:layout_margin="32dp"
             android:layout_gravity="top|end"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            app:url="@{post.user.pic}"
+            app:type="@{Constants.CIRCLE}"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

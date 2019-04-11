@@ -58,19 +58,6 @@ class ReadFragment: Fragment() {
             val post = Post(ReadFragmentArgs.fromBundle(bundle).postId)
             viewModel.getPosts(post).observe(this, Observer {
                 binding.post = it
-                Glide.with(this@ReadFragment).run {
-                    load(it.pic)
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .into(fragment_read_cover_imageview)
-                    load(it.pic)
-                        .apply(RequestOptions.bitmapTransform(BlurTransformation(2, 14)))
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .into(fragment_read_cover2_imageview)
-                    load(it.user.pic)
-                        .apply(RequestOptions.circleCropTransform())
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .into(imageview)
-                }
                 behavior.state =
                     if (it.id.isBlank()) BottomSheetBehavior.STATE_HIDDEN else BottomSheetBehavior.STATE_HALF_EXPANDED
             })
