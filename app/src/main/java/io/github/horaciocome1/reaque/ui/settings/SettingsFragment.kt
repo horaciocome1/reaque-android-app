@@ -24,6 +24,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.ui.MainActivity
@@ -61,11 +62,19 @@ class SettingsFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         if (isPortrait)
-            (activity as MainActivity).supportActionBar?.show()
+            activity.run {
+                if (this is MainActivity)
+                    supportActionBar?.show()
+            }
     }
 
     private fun signOut() {
-//        val auth = Firebase.
+        val auth = FirebaseAuth.getInstance()
+        auth.signOut()
+        activity.run {
+            if (this is MainActivity)
+                finish()
+        }
     }
 
 }
