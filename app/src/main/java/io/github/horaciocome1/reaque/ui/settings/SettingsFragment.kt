@@ -23,6 +23,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
@@ -39,10 +40,13 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        terms_and_conditions_textview.setOnClickListener(this::onUrlOnClickListener)
-        privacy_policy_textview.setOnClickListener(this::onUrlOnClickListener)
-        licenses_textview.setOnClickListener(this::onUrlOnClickListener)
-        repository_textview.setOnClickListener(this::onUrlOnClickListener)
+        terms_and_conditions_textview.onUrlOnClickListener()
+        privacy_policy_textview.onUrlOnClickListener()
+        licenses_textview.onUrlOnClickListener()
+        repository_textview.onUrlOnClickListener()
+        sign_out_textview.setOnClickListener {
+            signOut()
+        }
     }
 
     override fun onResume() {
@@ -54,14 +58,13 @@ class SettingsFragment : Fragment() {
             }
     }
 
-    private fun onUrlOnClickListener(view: View) {
+    private fun TextView.onUrlOnClickListener() {
         val url = resources.getString(
-            when (view) {
+            when (this) {
                 terms_and_conditions_textview -> R.string.terms_and_conditions_url
                 privacy_policy_textview -> R.string.privacy_policy_url
                 licenses_textview -> R.string.licence_url
-                repository_textview -> R.string.project_url
-                else -> Log.w(tag, "View not found!")
+                else -> R.string.project_url
             }
         )
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
