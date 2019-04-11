@@ -45,6 +45,15 @@ class SettingsFragment : Fragment() {
         repository_textview.setOnClickListener(this::onUrlOnClickListener)
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (isPortrait)
+            activity.run {
+                if (this is MainActivity)
+                    supportActionBar?.show()
+            }
+    }
+
     private fun onUrlOnClickListener(view: View) {
         val url = resources.getString(
             when (view) {
@@ -57,15 +66,6 @@ class SettingsFragment : Fragment() {
         )
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (isPortrait)
-            activity.run {
-                if (this is MainActivity)
-                    supportActionBar?.show()
-            }
     }
 
     private fun signOut() {
