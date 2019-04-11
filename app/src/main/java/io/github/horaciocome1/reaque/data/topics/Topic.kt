@@ -18,7 +18,7 @@ package io.github.horaciocome1.reaque.data.topics
 data class Topic(var id: String) {
 
     var title = ""
-    var cover = ""
+    var pic = ""
     var description = ""
 
 }

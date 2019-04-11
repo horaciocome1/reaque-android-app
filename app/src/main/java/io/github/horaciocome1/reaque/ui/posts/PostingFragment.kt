@@ -55,7 +55,6 @@ class PostingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        post_button.isEnabled = false
         select_pic_from_gallery_button.setOnClickListener {
             picImageFromGallery()
         }
@@ -70,8 +69,10 @@ class PostingFragment : Fragment() {
         topics_recyclerview.addOnItemClickListener { _, position ->
             if (topics.isNotEmpty()) {
                 selectTopicBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-                viewModel.post.topic = topics[position]
-                binding.viewmodel = viewModel
+                viewModel.let {
+                    it.post.topic = topics[position]
+                    binding.viewmodel = it
+                }
                 post_button.isEnabled = isPostReady
             }
         }
@@ -79,15 +80,7 @@ class PostingFragment : Fragment() {
             selectTopicBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
         }
         select_pic_button.setOnClickListener {
-            viewModel.let {
-                if (it.imageUri != Uri.EMPTY)
-                    Glide.with(this)
-                        .load(it.imageUri)
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .into(imageview)
-            }
             selectPicBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-
         }
     }
 
@@ -116,7 +109,10 @@ class PostingFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        (activity as MainActivity).supportActionBar?.hide()
+        activity.run {
+            if (this is MainActivity)
+                supportActionBar?.hide()
+        }
     }
 
     private val isPostReady: Boolean
@@ -142,8 +138,10 @@ class PostingFragment : Fragment() {
             Activity.RESULT_OK -> {
                 when (requestCode) {
                     Constants.PICK_IMAGE_FROM_GALLERY_REQUEST_CODE -> {
-                        viewModel.imageUri = data?.data!!
-                        Glide.with(this).load(viewModel.imageUri).into(imageview)
+                        viewModel.let {
+                            it.imageUri = data?.data!!
+                            binding.viewmodel = it
+                        }
                     }
                 }
             }

@@ -18,6 +18,8 @@
 
     <data>
 
+        <import type="io.github.horaciocome1.reaque.utilities.Constants" />
+
         <variable
             name="viewmodel"
             type="io.github.horaciocome1.reaque.ui.posts.PostsViewModel" />
@@ -112,6 +114,7 @@
                 android:onClick="@{ (view) -> viewmodel.submitPost(view) }"
                 app:cornerRadius="16dp"
                 app:icon="@drawable/outline_done_18"
+                android:enabled="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -220,7 +223,9 @@
                     <ImageView
                         android:id="@+id/imageview"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        app:uri="@{viewmodel.imageUri}"
+                        app:type="@{Constants.DEFAULT}"/>
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/select_pic_from_camera_button"

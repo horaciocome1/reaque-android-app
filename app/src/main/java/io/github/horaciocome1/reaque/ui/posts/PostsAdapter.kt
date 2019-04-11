@@ -40,13 +40,7 @@ class PostsAdapter(private val list: List<Post>)
     override fun getItemCount() = list.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        list[position].run {
-            binding.post = this
-            Glide.with(context)
-                .load(pic)
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(binding.itemPostCoverImageview)
-        }
+        binding.post = list[position]
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)

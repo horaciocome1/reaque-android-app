@@ -40,13 +40,7 @@ class UsersAdapter(private val list: List<User>) : RecyclerView.Adapter<UsersAda
     override fun getItemCount() = list.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        list[position].run {
-            binding.user = this
-            Glide.with(context).load(pic)
-                .apply(RequestOptions.circleCropTransform())
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(binding.itemUserProfilePicImageview)
-        }
+        binding.user = list[position]
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)

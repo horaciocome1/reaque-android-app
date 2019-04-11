@@ -41,14 +41,8 @@ class TopicsAdapter(private val list: List<Topic>) : RecyclerView.Adapter<Topics
     override fun getItemCount() = list.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        binding.topic = list[position]
         holder.indicator.visibility = View.INVISIBLE
-        list[position].run {
-            Glide.with(context)
-                .load(cover)
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(binding.imageview)
-            binding.topic = this
-        }
         holder.itemView.setOnClickListener {
             viewHolder?.indicator?.visibility = View.INVISIBLE
             holder.indicator.visibility = View.VISIBLE

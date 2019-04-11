@@ -19,7 +19,7 @@ data class Notification(var id: String) {
 
     var message = ""
     var date = ""
-    var cover = ""
+    var pic = ""
     var isComment = false
     var isPost = false
     var isUser = false

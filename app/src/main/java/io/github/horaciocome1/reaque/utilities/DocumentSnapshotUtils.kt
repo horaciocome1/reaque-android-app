@@ -42,7 +42,7 @@ val DocumentSnapshot.topic: Topic
     get() {
         return Topic(id).apply {
             title = this@topic["title"].toString()
-            cover = this@topic["pic"].toString()
+            pic = this@topic["pic"].toString()
             description = this@topic["description"].toString()
         }
     }
@@ -72,7 +72,7 @@ val DocumentSnapshot.notification: Notification
             val timestamp = this@notification["date"]
             if (timestamp is Timestamp)
                 date = timestamp.string
-            cover = this@notification["pic"].toString()
+            pic = this@notification["pic"].toString()
             isComment = this@notification["comment"].toString().toBoolean()
             isPost = this@notification["post"].toString().toBoolean()
             isUser = this@notification["user"].toString().toBoolean()

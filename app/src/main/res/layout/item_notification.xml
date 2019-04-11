@@ -17,6 +17,8 @@
 
     <data>
 
+        <import type="io.github.horaciocome1.reaque.utilities.Constants" />
+
         <variable
             name="notification"
             type="io.github.horaciocome1.reaque.data.notifications.Notification" />
@@ -75,6 +77,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
+                app:url="@{notification.pic}"
+                app:type="@{Constants.DEFAULT}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

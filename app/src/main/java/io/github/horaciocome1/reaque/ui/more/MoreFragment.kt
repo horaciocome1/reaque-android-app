@@ -56,11 +56,6 @@ class MoreFragment : Fragment() {
         binding.viewmodel = viewModel
         viewModel.me.observe(this, Observer {
             binding.user = it
-            Glide.with(this@MoreFragment)
-                .load(it.pic)
-                .apply(RequestOptions.circleCropTransform())
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(imageview)
         })
     }
 

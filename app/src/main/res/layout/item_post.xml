@@ -20,6 +20,8 @@
 
     <data>
 
+        <import type="io.github.horaciocome1.reaque.utilities.Constants" />
+
         <variable
             name="post"
             type="io.github.horaciocome1.reaque.data.posts.Post" />
@@ -60,6 +62,8 @@
                     android:id="@+id/item_post_cover_imageview"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    app:url="@{post.pic}"
+                    app:type="@{Constants.DEFAULT}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

@@ -20,7 +20,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import io.github.horaciocome1.reaque.data.notifications.Notification
 import io.github.horaciocome1.reaque.databinding.ItemNotificationBinding
 
@@ -39,12 +38,7 @@ class NotificationsAdapter(private val list: List<Notification>) :
     override fun getItemCount() = list.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        list[position].run {
-            Glide.with(context)
-                .load(cover)
-                .into(binding.itemNotificationImageview)
-            binding.notification = this
-        }
+        binding.notification = list[position]
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
