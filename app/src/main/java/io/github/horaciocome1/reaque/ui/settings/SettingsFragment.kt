@@ -18,10 +18,10 @@ package io.github.horaciocome1.reaque.ui.settings
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import io.github.horaciocome1.reaque.R
@@ -37,10 +37,10 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        terms_and_conditions_textview.onUrlOnClickListener()
-        privacy_policy_textview.onUrlOnClickListener()
-        licenses_textview.onUrlOnClickListener()
-        repository_textview.onUrlOnClickListener()
+        terms_and_conditions_textview.setOnClickListener(this::onUrlOnClickListener)
+        privacy_policy_textview.setOnClickListener(this::onUrlOnClickListener)
+        licenses_textview.setOnClickListener(this::onUrlOnClickListener)
+        repository_textview.setOnClickListener(this::onUrlOnClickListener)
         sign_out_textview.setOnClickListener {
             signOut()
         }
@@ -55,13 +55,14 @@ class SettingsFragment : Fragment() {
             }
     }
 
-    private fun TextView.onUrlOnClickListener() {
+    private fun onUrlOnClickListener(view: View) {
         val url = resources.getString(
-            when (this) {
+            when (view) {
                 terms_and_conditions_textview -> R.string.terms_and_conditions_url
                 privacy_policy_textview -> R.string.privacy_policy_url
                 licenses_textview -> R.string.licence_url
-                else -> R.string.project_url
+                repository_textview -> R.string.project_url
+                else -> Log.w(tag, "View not found!")
             }
         )
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))

@@ -34,7 +34,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val auth = FirebaseAuth.getInstance()
+    private lateinit var auth: FirebaseAuth
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        auth = FirebaseAuth.getInstance()
         if (auth.currentUser == null)
             startActivityForResult(getSignInActivityIntent(), Constants.ACTIVITY_SIGN_IN_REQUEST_CODE)
         else {
@@ -95,7 +96,5 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupActionBar() =
         NavigationUI.setupActionBarWithNavController(this, navController, activity_main_drawerlayout)
-
-
 
 }

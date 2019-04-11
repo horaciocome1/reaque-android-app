@@ -68,7 +68,13 @@ class SignInActivity : AppCompatActivity() {
                     }
                 } catch (e: ApiException) {
                     Log.w(tag, "Google sign in failed", e)
+                    setResult(Activity.RESULT_CANCELED)
+                    finish()
                 }
+            }
+            else -> {
+                setResult(Activity.RESULT_CANCELED)
+                finish()
             }
         }
     }
