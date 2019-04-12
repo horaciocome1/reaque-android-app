@@ -50,6 +50,7 @@
         app:itemIconTint="@drawable/color_bottom_navigation"
         app:itemTextColor="@drawable/color_bottom_navigation"
         app:labelVisibilityMode="labeled"
+        android:theme="@style/AppTheme.BottomNavigationView"
         app:menu="@menu/navigation" />
 
 </LinearLayout>

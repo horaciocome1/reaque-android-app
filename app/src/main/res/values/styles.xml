@@ -44,4 +44,8 @@
         <item name="android:tint">@color/primaryColor</item>
     </style>
 
+    <style name="AppTheme.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
 </resources>
