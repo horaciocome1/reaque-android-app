@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.notifications.Notification
 import io.github.horaciocome1.reaque.ui.MainActivity
+import io.github.horaciocome1.reaque.utilities.isPortrait
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_notifications.*
 
@@ -70,7 +71,11 @@ class NotificationsFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        (activity as MainActivity).supportActionBar?.show()
+        if (isPortrait)
+            activity.run {
+                if (this is MainActivity)
+                    supportActionBar?.hide()
+            }
     }
 
     private fun View.openProfile(userId: String) {
