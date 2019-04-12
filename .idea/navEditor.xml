@@ -31,7 +31,7 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_destination_more_to_action_open_edit_profile">
+                            <entry key="action_open_edit_profile">
                               <value>
                                 <LayoutPositions />
                               </value>

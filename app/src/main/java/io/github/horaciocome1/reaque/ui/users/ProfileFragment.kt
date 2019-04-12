@@ -24,9 +24,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.users.User
@@ -35,7 +32,6 @@ import io.github.horaciocome1.reaque.ui.MainActivity
 import io.github.horaciocome1.reaque.ui.posts.PostsAdapter
 import io.github.horaciocome1.reaque.utilities.isPortrait
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
-import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment: Fragment() {
@@ -73,7 +69,6 @@ class ProfileFragment: Fragment() {
     override fun onStart() {
         super.onStart()
         behavior.state = BottomSheetBehavior.STATE_HIDDEN
-
         arguments?.let { args ->
             val user = User(ProfileFragmentArgs.fromBundle(args).userId)
             viewModel.getUsers(user).observe(this, Observer {

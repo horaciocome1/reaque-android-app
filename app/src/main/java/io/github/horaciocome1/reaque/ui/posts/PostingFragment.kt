@@ -28,8 +28,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.card.MaterialCardView
 import io.github.horaciocome1.reaque.data.topics.Topic
@@ -56,7 +54,7 @@ class PostingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         select_pic_from_gallery_button.setOnClickListener {
-            picImageFromGallery()
+            pickImageFromGallery()
         }
         selectTopicBehavior = BottomSheetBehavior.from(select_topics_bottomsheet).apply {
             state = BottomSheetBehavior.STATE_HIDDEN
@@ -122,7 +120,7 @@ class PostingFragment : Fragment() {
             }
         }
 
-    private fun picImageFromGallery() {
+    private fun pickImageFromGallery() {
         val intent = Intent(Intent.ACTION_PICK).apply {
             type = "image/*"
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {

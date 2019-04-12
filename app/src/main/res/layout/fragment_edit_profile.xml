@@ -7,12 +7,12 @@
         <import type="io.github.horaciocome1.reaque.utilities.Constants" />
 
         <variable
-            name="viewmodel"
-            type="io.github.horaciocome1.reaque.ui.users.UsersViewModel" />
-
-        <variable
             name="user"
             type="io.github.horaciocome1.reaque.data.users.User" />
+
+        <variable
+            name="viewmodel"
+            type="io.github.horaciocome1.reaque.ui.users.UsersViewModel" />
 
     </data>
 
@@ -35,11 +35,11 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:type="@{Constants.CIRCLE}"
+                app:uri="@{viewmodel.imageUri}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@mipmap/ic_launcher"
-                app:type="@{Constants.CIRCLE}"
                 app:url="@{user.pic}" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -61,6 +61,7 @@
                     android:background="@android:color/transparent"
                     android:hint="@string/name"
                     android:padding="@dimen/default_padding"
+                    android:text="@={viewmodel.name}"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -84,6 +85,7 @@
                     android:background="@android:color/transparent"
                     android:hint="@string/bio"
                     android:padding="@dimen/default_padding"
+                    android:text="@={viewmodel.bio}"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -110,6 +112,7 @@
                     android:background="@android:color/transparent"
                     android:hint="@string/address"
                     android:padding="@dimen/default_padding"
+                    android:text="@={viewmodel.address}"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
             </com.google.android.material.textfield.TextInputLayout>

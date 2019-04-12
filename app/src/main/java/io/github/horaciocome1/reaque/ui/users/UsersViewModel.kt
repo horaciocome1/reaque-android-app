@@ -15,6 +15,7 @@
 
 package io.github.horaciocome1.reaque.ui.users
 
+import android.net.Uri
 import android.view.View
 import androidx.databinding.Bindable
 import androidx.lifecycle.MutableLiveData
@@ -61,6 +62,8 @@ class UsersViewModel(
 
     val user = User("")
 
+    var imageUri = Uri.EMPTY
+
     @Bindable
     val name = MutableLiveData<String>()
 
@@ -70,7 +73,7 @@ class UsersViewModel(
     @Bindable
     val address = MutableLiveData<String>()
 
-    val me = usersRepository.me.value
+    val me = usersRepository.me
 
     val topics = topicsRepository.topics
 
