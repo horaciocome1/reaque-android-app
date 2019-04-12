@@ -87,6 +87,9 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_open_edit_profile"
+            app:destination="@id/action_open_edit_profile" />
     </fragment>
     <fragment
         android:id="@+id/destination_notifications"
@@ -134,5 +137,13 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/action_open_edit_profile"
+        android:name="io.github.horaciocome1.reaque.ui.users.EditProfileFragment"
+        android:label="Editar">
+        <argument
+            android:name="user_id"
+            app:argType="string" />
     </fragment>
 </navigation>

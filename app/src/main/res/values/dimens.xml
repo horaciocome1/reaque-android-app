@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="default_progressbar_size">16dp</dimen>
+    <dimen name="default_padding">16dp</dimen>
+    <dimen name="title_line_spacing_extra">8sp</dimen>
 </resources>

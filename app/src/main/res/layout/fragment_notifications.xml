@@ -31,12 +31,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginLeft="24dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginRight="24dp"
-                android:lineSpacingExtra="8sp"
+                android:layout_margin="32dp"
+                android:lineSpacingExtra="@dimen/title_line_spacing_extra"
                 android:text="@string/whats_new"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
                 android:textColor="@color/primaryTextColor" />

@@ -16,23 +16,18 @@
 package io.github.horaciocome1.reaque.ui.users
 
 import android.view.View
-import android.widget.ImageView
-import androidx.databinding.BindingAdapter
+import androidx.databinding.Bindable
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestOptions
 import io.github.horaciocome1.reaque.data.posts.PostsRepository
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.topics.TopicsRepository
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.data.users.UsersRepository
 import io.github.horaciocome1.reaque.ui.signin.SignInActivity
-import io.github.horaciocome1.reaque.utilities.Constants
 import io.github.horaciocome1.reaque.utilities.InjectorUtils
 import io.github.horaciocome1.reaque.utilities.ObservableViewModel
-import jp.wasabeef.glide.transformations.BlurTransformation
 
 val UsersFragment.viewModel: UsersViewModel
     get() {
@@ -52,11 +47,30 @@ val SignInActivity.viewModel: UsersViewModel
         return ViewModelProviders.of(this, factory).get(UsersViewModel::class.java)
     }
 
+val EditProfileFragment.viewModel: UsersViewModel
+    get() {
+        val factory = InjectorUtils.usersViewModelFactory
+        return ViewModelProviders.of(this, factory).get(UsersViewModel::class.java)
+    }
+
 class UsersViewModel(
     private val usersRepository: UsersRepository,
     topicsRepository: TopicsRepository,
     private val postsRepository: PostsRepository
 ) : ObservableViewModel() {
+
+    val user = User("")
+
+    @Bindable
+    val name = MutableLiveData<String>()
+
+    @Bindable
+    val bio = MutableLiveData<String>()
+
+    @Bindable
+    val address = MutableLiveData<String>()
+
+    val me = usersRepository.me.value
 
     val topics = topicsRepository.topics
 
@@ -86,22 +100,5 @@ class UsersViewModel(
         }
     }
 
-//    companion object {
-//        @BindingAdapter("url", "type")
-//        @JvmStatic
-//        fun ImageView.loadImage(url: String?, type: Int?) {
-//            if (!url.isNullOrBlank())
-//                Glide.with(context).load(url)
-//                    .apply(
-//                        when (type) {
-//                            Constants.BLUR -> RequestOptions.bitmapTransform(BlurTransformation(7, 14))
-//                            Constants.CIRCLE -> RequestOptions.circleCropTransform()
-//                            else -> RequestOptions()
-//                        }
-//                    )
-//                    .transition(DrawableTransitionOptions.withCrossFade())
-//                    .into(this)
-//        }
-//    }
 
 }

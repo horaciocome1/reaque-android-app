@@ -17,15 +17,10 @@ package io.github.horaciocome1.reaque.ui.posts
 
 import android.net.Uri
 import android.view.View
-import android.widget.ImageView
 import androidx.databinding.Bindable
-import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestOptions
 import io.github.horaciocome1.reaque.data.media.ImageUploader
 import io.github.horaciocome1.reaque.data.media.MediaRepository
 import io.github.horaciocome1.reaque.data.posts.Post
@@ -33,10 +28,8 @@ import io.github.horaciocome1.reaque.data.posts.PostsRepository
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.topics.TopicsRepository
 import io.github.horaciocome1.reaque.data.users.UsersRepository
-import io.github.horaciocome1.reaque.utilities.Constants
 import io.github.horaciocome1.reaque.utilities.InjectorUtils
 import io.github.horaciocome1.reaque.utilities.ObservableViewModel
-import jp.wasabeef.glide.transformations.BlurTransformation
 
 val PostsFragment.viewModel: PostsViewModel
     get() {
@@ -68,10 +61,13 @@ class PostsViewModel(
         topic.title = "Selecione um tópico."
     }
     var imageUri: Uri = Uri.EMPTY
+
     @Bindable
     val postTitle = MutableLiveData<String>()
+
     @Bindable
     val postMessage = MutableLiveData<String>()
+
     val topics = topicsRepository.topics
 
     val favorites = postsRepository.favorites

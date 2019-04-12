@@ -33,8 +33,9 @@ class MoreViewModel(repository: UsersRepository) : ViewModel() {
 
     val me = repository.me
 
-    fun openEditProfile(view: View) {
-
+    fun openEditProfile(view: View, user: User) {
+        val directions = MoreFragmentDirections.actionOpenEditProfile(user.id)
+        view.findNavController().navigate(directions)
     }
 
     fun openPosting(view: View) {
