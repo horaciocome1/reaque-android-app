@@ -1,7 +1,7 @@
 # Reaque
 Reaque is where you share and read about experiences in Mozambique. Intend to show and find what great things we can do here now. Personal comments about it and a cover photo. Or just sharing a thought with those for who you are the favorite!
 
-![Reading a post on an android nougat](screenshots/read_collapsed.jpg)
+![Reading a post on an android nougat](screenshots/read_collapsed.png)
 
 ## Getting started
 The app right now isnt avaible in none android apps repository. If you are an developer, you can make the build by cloning this and you already know it. Just take a look brief at the requirements section before.
@@ -46,4 +46,4 @@ If you feel the need to touch the model part or the backend it self, please emai
 ## Screenshots
 This is how it looks on an 5.7 inch phone running [Android Nougat](https://www.android.com/versions/nougat-7-0/)
 
-![Posts list](screenshots/posts.jpg) ![reading](screenshots/read_collapsed.jpg) ![reading](screenshots/read_expanded.jpg) ![users](screenshots/users.jpg) ![profile](screenshots/profile.jpg) ![notifications](screenshots/notifications.jpg) ![more](screenshots/more.jpg) ![posting](screenshots/posting.jpg) ![posting pick image](screenshots/posting_pick_image.jpg) ![posting pick topic](screenshots/posting_pick_topic.jpg) ![edit profile](screenshots/edit_profile.jpg) ![settings](screenshots/settings.jpg)
+![Posts list](screenshots/posts.jpg) ![reading](screenshots/read_collapsed.png) ![reading](screenshots/read_expanded.png) ![users](screenshots/users.jpg) ![profile](screenshots/profile.jpg) ![notifications](screenshots/notifications.jpg) ![more](screenshots/more.png) ![posting](screenshots/posting.png) ![posting pick image](screenshots/posting_pick_image.png) ![posting pick topic](screenshots/posting_pick_topic.png) ![edit profile](screenshots/edit_profile.png) ![settings](screenshots/settings.jpg)
