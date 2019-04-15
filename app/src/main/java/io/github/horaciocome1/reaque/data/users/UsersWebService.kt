@@ -45,14 +45,16 @@ class UsersWebService {
     }
         get() {
             auth = FirebaseAuth.getInstance()
-            ref.document(auth.currentUser?.uid.toString())
-                .addSnapshotListener { snapshot, exception ->
-                    when {
-                        exception != null -> onListenFailed(tag, exception)
-                        snapshot != null -> field.value = snapshot.user
-                        else -> onSnapshotNull(tag)
+            auth.currentUser?.let {
+                ref.document(it.uid)
+                    .addSnapshotListener { snapshot, exception ->
+                        when {
+                            exception != null -> onListenFailed(tag, exception)
+                            snapshot != null -> field.value = snapshot.user
+                            else -> onSnapshotNull(tag)
+                        }
                     }
-                }
+            }
             return field
         }
 
@@ -138,21 +140,24 @@ class UsersWebService {
 
 
     fun getFavorites(): LiveData<List<User>> {
-        if (favoritesList.isEmpty())
+        if (favoritesList.isEmpty()) {
             auth = FirebaseAuth.getInstance()
-        ref.whereEqualTo("favorite_for.${auth.currentUser?.uid.toString()}", true)
-                .addSnapshotListener { snapshot, exception ->
-                    when {
-                        exception != null -> onListenFailed(tag, exception)
-                        snapshot != null -> {
-                            favoritesList = mutableListOf()
-                            for (doc in snapshot.documents)
-                                favoritesList.add(doc.user)
-                            favorites.value = favoritesList
+            auth.currentUser?.let {
+                ref.whereEqualTo("favorite_for.${it.uid}", true)
+                    .addSnapshotListener { snapshot, exception ->
+                        when {
+                            exception != null -> onListenFailed(tag, exception)
+                            snapshot != null -> {
+                                favoritesList = mutableListOf()
+                                for (doc in snapshot.documents)
+                                    favoritesList.add(doc.user)
+                                favorites.value = favoritesList
+                            }
+                            else -> onSnapshotNull(tag)
                         }
-                        else -> onSnapshotNull(tag)
                     }
-                }
+            }
+        }
         return favorites
     }
 

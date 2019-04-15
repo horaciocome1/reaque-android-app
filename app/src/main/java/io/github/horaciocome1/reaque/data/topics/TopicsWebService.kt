@@ -16,7 +16,6 @@
 package io.github.horaciocome1.reaque.data.topics
 
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import io.github.horaciocome1.reaque.utilities.onListenFailed
@@ -34,13 +33,8 @@ class TopicsWebService {
         value = Topic("")
     }
 
-    private var favoritesList = mutableListOf<Topic>()
-    private val favorites = MutableLiveData<List<Topic>>()
-
     private val db = FirebaseFirestore.getInstance()
     private val ref = db.collection("topics")
-
-    private lateinit var auth: FirebaseAuth
 
     init {
         ref.orderBy("title", Query.Direction.ASCENDING)

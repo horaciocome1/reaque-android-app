@@ -32,18 +32,20 @@ class NotificationsWebService {
     val notifications = MutableLiveData<List<Notification>>()
         get() {
             auth = FirebaseAuth.getInstance()
-            ref.whereEqualTo("users.${auth.currentUser?.uid.toString()}", true)
-                .addSnapshotListener { snapshot, exception ->
-                    when {
-                        exception != null -> onListenFailed(tag, exception)
-                        snapshot != null -> {
-                            val notificationsList = mutableListOf<Notification>()
-                            for (doc in snapshot)
-                                notificationsList.add(doc.notification)
-                            field.value = notificationsList
+            auth.currentUser?.let {
+                ref.whereEqualTo("users.${it.uid}", true)
+                    .addSnapshotListener { snapshot, exception ->
+                        when {
+                            exception != null -> onListenFailed(tag, exception)
+                            snapshot != null -> {
+                                val notificationsList = mutableListOf<Notification>()
+                                for (doc in snapshot)
+                                    notificationsList.add(doc.notification)
+                                field.value = notificationsList
+                            }
                         }
                     }
-                }
+            }
             return field
         }
 
