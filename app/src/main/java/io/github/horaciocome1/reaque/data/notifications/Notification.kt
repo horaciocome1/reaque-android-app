@@ -15,6 +15,9 @@
 
 package io.github.horaciocome1.reaque.data.notifications
 
+import com.google.firebase.Timestamp
+import io.github.horaciocome1.reaque.utilities.string
+
 data class Notification(var id: String) {
 
     var message = ""
@@ -24,5 +27,10 @@ data class Notification(var id: String) {
     var isPost = false
     var isUser = false
     var contentId = ""
+    var timestamp = Timestamp(0, 0)
+        set(value) {
+            date = value.string
+            field = value
+        }
 
 }

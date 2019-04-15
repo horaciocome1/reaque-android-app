@@ -112,9 +112,11 @@ class UsersWebService {
                         exception != null -> onListenFailed(tag, exception)
                         snapshot != null -> {
                             topicUsersList = mutableListOf()
-                            for (doc in snapshot.documents)
-                                topicUsersList.add(doc.user)
-                            topicUsers.value = topicUsersList
+                            topicUsers.value = topicUsersList.apply {
+                                for (doc in snapshot.documents)
+                                    add(doc.user)
+                                sortBy { it.name }
+                            }
                         }
                         else -> onSnapshotNull(tag)
                     }
@@ -142,16 +144,18 @@ class UsersWebService {
     fun getFavorites(): LiveData<List<User>> {
         if (favoritesList.isEmpty()) {
             auth = FirebaseAuth.getInstance()
-            auth.currentUser?.let {
-                ref.whereEqualTo("favorite_for.${it.uid}", true)
+            auth.currentUser?.let { firebaseUser ->
+                ref.whereEqualTo("favorite_for.${firebaseUser.uid}", true)
                     .addSnapshotListener { snapshot, exception ->
                         when {
                             exception != null -> onListenFailed(tag, exception)
                             snapshot != null -> {
                                 favoritesList = mutableListOf()
-                                for (doc in snapshot.documents)
-                                    favoritesList.add(doc.user)
-                                favorites.value = favoritesList
+                                favorites.value = favoritesList.apply {
+                                    for (doc in snapshot.documents)
+                                        add(doc.user)
+                                    sortBy { it.name }
+                                }
                             }
                             else -> onSnapshotNull(tag)
                         }

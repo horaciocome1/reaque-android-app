@@ -49,9 +49,9 @@ val DocumentSnapshot.post: Post
     get() {
         return Post(id).apply {
             pic = this@post["pic"].toString()
-            val timestamp = this@post["date"]
-            if (timestamp is Timestamp)
-                date = timestamp.string
+            val stamp = this@post["date"]
+            if (stamp is Timestamp)
+                timestamp = stamp
             message = this@post["message"].toString()
             title = this@post["title"].toString()
             topic = Topic(this@post["topic.id"].toString())
@@ -67,9 +67,9 @@ val DocumentSnapshot.notification: Notification
     get() {
         return Notification(id).apply {
             message = this@notification["message"].toString()
-            val timestamp = this@notification["date"]
-            if (timestamp is Timestamp)
-                date = timestamp.string
+            val stamp = this@notification["date"]
+            if (stamp is Timestamp)
+                timestamp = stamp
             pic = this@notification["pic"].toString()
             isComment = this@notification["comment"].toString().toBoolean()
             isPost = this@notification["post"].toString().toBoolean()

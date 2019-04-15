@@ -81,10 +81,11 @@ class PostsWebService {
                     when {
                         exception != null -> onListenFailed(tag, exception)
                         snapshot != null -> {
-                            topicPostsList = mutableListOf()
-                            for (doc in snapshot.documents)
-                                topicPostsList.add(doc.post)
-                            topicPosts.value = topicPostsList
+                            topicPosts.value = topicPostsList.apply {
+                                for (doc in snapshot)
+                                    add(doc.post)
+                                sortByDescending { it.timestamp }
+                            }
                         }
                         else -> onSnapshotNull(tag)
                     }
@@ -103,10 +104,11 @@ class PostsWebService {
                     when {
                         exception != null -> onListenFailed(tag, exception)
                         snapshot != null -> {
-                            userPostsList = mutableListOf()
-                            for (doc in snapshot.documents)
-                                userPostsList.add(doc.post)
-                            userPosts.value = userPostsList
+                            userPosts.value = userPostsList.apply {
+                                for (doc in snapshot)
+                                    add(doc.post)
+                                sortByDescending { it.timestamp }
+                            }
                         }
                         else -> onSnapshotNull(tag)
                     }
@@ -134,15 +136,17 @@ class PostsWebService {
     fun getFavorites(): LiveData<List<Post>> {
         if (favoritesList.isEmpty()) {
             auth = FirebaseAuth.getInstance()
-            auth.currentUser?.let {
-                ref.whereEqualTo("favorite_for.${it.uid}", true)
+            auth.currentUser?.let { user ->
+                ref.whereEqualTo("favorite_for.${user.uid}", true)
                     .addSnapshotListener { snapshot, exception ->
                         when {
                             exception != null -> onListenFailed(tag, exception)
                             snapshot != null -> {
-                                for (doc in snapshot)
-                                    favoritesList.add(doc.post)
-                                favorites.value = favoritesList
+                                favorites.value = favoritesList.apply {
+                                    for (doc in snapshot)
+                                        add(doc.post)
+                                    sortByDescending { it.timestamp }
+                                }
                             }
                             else -> onSnapshotNull(tag)
                         }
