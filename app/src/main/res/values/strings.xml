@@ -62,5 +62,6 @@
     <string name="bio">Bio</string>
     <string name="name">Nome</string>
     <string name="undo">Desfazer</string>
+    <string name="submit">Submeter</string>
 
 </resources>

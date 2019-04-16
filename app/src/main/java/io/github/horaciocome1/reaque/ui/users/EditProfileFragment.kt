@@ -51,7 +51,7 @@ class EditProfileFragment : Fragment() {
         super.onResume()
         activity.run {
             if (this is MainActivity)
-                supportActionBar?.show()
+                supportActionBar?.hide()
         }
     }
 

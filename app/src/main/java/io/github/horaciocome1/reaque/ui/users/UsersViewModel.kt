@@ -114,5 +114,12 @@ class UsersViewModel(
         }
     }
 
+    fun submitProfile(view: View, user: User) {
+        view.findNavController().navigateUp()
+    }
+
+    fun cancel(view: View) {
+        view.findNavController().navigateUp()
+    }
 
 }
