@@ -76,6 +76,8 @@ class MainActivity : AppCompatActivity() {
             Constants.ACTIVITY_SIGN_IN_REQUEST_CODE -> {
                 when (resultCode) {
                     Activity.RESULT_OK -> {
+                        if (auth.currentUser == null)
+                            startActivityForResult(getSignInActivityIntent(), Constants.ACTIVITY_SIGN_IN_REQUEST_CODE)
                         setupBottomNavigationMenu()
                         setupSideNavigationMenu()
                         setupActionBar()
