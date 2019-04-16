@@ -33,6 +33,7 @@ import com.google.android.material.card.MaterialCardView
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.databinding.FragmentPostingBinding
 import io.github.horaciocome1.reaque.ui.MainActivity
+import io.github.horaciocome1.reaque.ui.topics.TopicsAdapter
 import io.github.horaciocome1.reaque.utilities.Constants
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_posting.*
@@ -78,7 +79,7 @@ class PostingFragment : Fragment() {
             selectTopicBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
         }
         select_pic_button.setOnClickListener {
-            selectPicBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            selectPicBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
         }
     }
 
@@ -100,7 +101,7 @@ class PostingFragment : Fragment() {
             topics = it
             topics_recyclerview.run {
                 layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-                adapter = SimpleTopicsAdapter(topics)
+                adapter = TopicsAdapter.Simple(topics)
             }
         })
     }

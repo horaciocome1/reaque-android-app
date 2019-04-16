@@ -29,7 +29,7 @@ import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.ui.MainActivity
-import io.github.horaciocome1.reaque.ui.posts.TopicsAdapter
+import io.github.horaciocome1.reaque.ui.topics.TopicsAdapter
 import io.github.horaciocome1.reaque.utilities.Constants
 import io.github.horaciocome1.reaque.utilities.isPortrait
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener

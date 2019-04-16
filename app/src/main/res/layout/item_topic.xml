@@ -70,13 +70,13 @@
         <View
             android:id="@+id/indicator"
             android:layout_width="0dp"
-            android:layout_height="0.5dp"
+            android:layout_height="@dimen/default_stroke_width"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:background="@color/secondaryColor"
+            android:background="@drawable/background_indicator"
             app:layout_constraintEnd_toEndOf="@id/cardview"
             app:layout_constraintStart_toStartOf="@id/cardview"
             app:layout_constraintTop_toBottomOf="@+id/title_textview" />
