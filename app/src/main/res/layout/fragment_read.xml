@@ -142,7 +142,7 @@
                         android:orientation="horizontal">
 
                         <com.google.android.material.button.MaterialButton
-                            android:id="@+id/add_to_favorite_button"
+                            android:id="@+id/favorite_linearlayout"
                             style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"

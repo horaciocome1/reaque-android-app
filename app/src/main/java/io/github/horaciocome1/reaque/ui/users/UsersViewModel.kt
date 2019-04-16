@@ -96,6 +96,15 @@ class UsersViewModel(
         }
     }
 
+    fun removeFromFavorites(view: View, user: User) {
+        if (user.id.isNotBlank()) {
+            view.isEnabled = false
+//            usersRepository.addToFavorites(user) {
+//                view.isEnabled = true
+//            }
+        }
+    }
+
     fun openViewer(view: View, user: User) {
         if (user.pic.isNotBlank()) {
             val directions = ProfileFragmentDirections.actionOpenViewerFromProfile(user.pic)

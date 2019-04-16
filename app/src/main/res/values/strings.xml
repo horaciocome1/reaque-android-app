@@ -61,5 +61,6 @@
     <string name="address">Morada</string>
     <string name="bio">Bio</string>
     <string name="name">Nome</string>
+    <string name="undo">Desfazer</string>
 
 </resources>
