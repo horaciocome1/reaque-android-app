@@ -62,7 +62,7 @@ class UsersViewModel(
 
     val user = User("")
 
-    var imageUri = Uri.EMPTY
+    var imageUri: Uri = Uri.EMPTY
 
     @Bindable
     val name = MutableLiveData<String>()
@@ -99,11 +99,13 @@ class UsersViewModel(
     fun removeFromFavorites(view: View, user: User) {
         if (user.id.isNotBlank()) {
             view.isEnabled = false
-//            usersRepository.addToFavorites(user) {
-//                view.isEnabled = true
-//            }
+            usersRepository.removeFromFavorites(user) {
+                view.isEnabled = true
+            }
         }
     }
+
+    fun isThisFavoriteForMe(user: User) = usersRepository.isThisFavoriteForMe(user)
 
     fun openViewer(view: View, user: User) {
         if (user.pic.isNotBlank()) {

@@ -22,15 +22,11 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.databinding.FragmentReadBinding
 import io.github.horaciocome1.reaque.ui.MainActivity
 import io.github.horaciocome1.reaque.utilities.isPortrait
-import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.fragment_read.*
 
 class ReadFragment: Fragment() {
@@ -60,6 +56,10 @@ class ReadFragment: Fragment() {
                 binding.post = it
                 behavior.state =
                     if (it.id.isBlank()) BottomSheetBehavior.STATE_HIDDEN else BottomSheetBehavior.STATE_HALF_EXPANDED
+            })
+            viewModel.isThisFavoriteForMe(post).observe(this, Observer {
+                add_to_favorites_button.visibility = if (it) View.GONE else View.VISIBLE
+                remove_from_favorites_button.visibility = if (it) View.VISIBLE else View.GONE
             })
         }
     }

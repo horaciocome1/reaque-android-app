@@ -22,7 +22,11 @@ class PostsRepository private constructor(private val service: PostsWebService) 
 
     fun submitPost(post: Post, onSuccessful: () -> Unit) = service.submitPost(post, onSuccessful)
 
-    fun addToFavorites(post: Post, onSuccessful: () -> Unit) = service.addToFavorite(post, onSuccessful)
+    fun addToFavorites(post: Post, onSuccessful: () -> Unit) = service.addToFavorites(post, onSuccessful)
+
+    fun removeFromFavorites(post: Post, onSuccessful: () -> Unit) = service.removeFromFavorites(post, onSuccessful)
+
+    fun isThisFavoriteForMe(post: Post) = service.isThisMyFavorite(post)
 
     fun getPosts(topic: Topic) = service.getPosts(topic)
 

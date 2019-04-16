@@ -57,6 +57,8 @@ class PostsWebService {
     private var topicId = ""
     private var userId = ""
 
+    private val isThisMyFavorite = MutableLiveData<Boolean>().apply { value = false }
+
     fun submitPost(post: Post, onSuccessful: () -> Unit) {
         auth = FirebaseAuth.getInstance()
         post.user.run {
@@ -81,6 +83,7 @@ class PostsWebService {
                     when {
                         exception != null -> onListenFailed(tag, exception)
                         snapshot != null -> {
+                            topicPostsList = mutableListOf()
                             topicPosts.value = topicPostsList.apply {
                                 for (doc in snapshot)
                                     add(doc.post)
@@ -104,6 +107,7 @@ class PostsWebService {
                     when {
                         exception != null -> onListenFailed(tag, exception)
                         snapshot != null -> {
+                            userPostsList = mutableListOf()
                             userPosts.value = userPostsList.apply {
                                 for (doc in snapshot)
                                     add(doc.post)
@@ -142,6 +146,7 @@ class PostsWebService {
                         when {
                             exception != null -> onListenFailed(tag, exception)
                             snapshot != null -> {
+                                favoritesList = mutableListOf()
                                 favorites.value = favoritesList.apply {
                                     for (doc in snapshot)
                                         add(doc.post)
@@ -156,7 +161,7 @@ class PostsWebService {
         return favorites
     }
 
-    fun addToFavorite(post: Post, onSuccessful: () -> Unit) {
+    fun addToFavorites(post: Post, onSuccessful: () -> Unit) {
         auth = FirebaseAuth.getInstance()
         auth.currentUser?.let { user ->
             val data = mapOf(
@@ -169,6 +174,45 @@ class PostsWebService {
                     onSuccessful()
             }
         }
+    }
+
+    fun removeFromFavorites(post: Post, onSuccessful: () -> Unit) {
+        auth = FirebaseAuth.getInstance()
+        auth.currentUser?.let { user ->
+            val data = mapOf(
+                "favorite_for" to mapOf(
+                    user.uid to null
+                )
+            )
+            ref.document(post.id).set(data, SetOptions.merge()).addOnCompleteListener {
+                if (it.isSuccessful)
+                    onSuccessful()
+            }
+        }
+    }
+
+    fun isThisMyFavorite(post: Post): LiveData<Boolean> {
+        isThisMyFavorite.value = false
+        auth = FirebaseAuth.getInstance()
+        auth.currentUser?.let {
+            ref.whereEqualTo("favorite_for.${it.uid}", true)
+                .addSnapshotListener { snapshot, exception ->
+                    when {
+                        exception != null -> onListenFailed(tag, exception)
+                        snapshot != null -> {
+                            for (doc in snapshot)
+                                if (doc.post.id.equals(post.id, false)) {
+                                    isThisMyFavorite.value = true
+                                    break
+                                } else
+                                    isThisMyFavorite.value = false
+                        }
+                        else -> onSnapshotNull(tag)
+                    }
+                }
+
+        }
+        return isThisMyFavorite
     }
 
 }

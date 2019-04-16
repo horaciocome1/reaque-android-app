@@ -22,3 +22,7 @@ fun onListenFailed(tag: String, exception: Exception) = Log.w(tag, "Listen faile
 fun onUploadFailed(tag: String) = Log.w(tag, "Upload failed.")
 
 fun onSnapshotNull(tag: String) = Log.w(tag, "Snapshot is null.")
+
+fun onAddUserSucceed(tag: String) = Log.d(tag, "User successfully written!")
+
+fun onAddUserFailed(tag: String, exception: Exception?) = Log.w(tag, "Error writing document", exception)

@@ -110,6 +110,19 @@ class PostsViewModel(
         }
     }
 
+    fun removeFromFavorites(view: View, post: Post) {
+        if (post.id.isNotBlank() && post.user.id.isNotBlank()) {
+            view.isEnabled = false
+            postsRepository.removeFromFavorites(post) {
+                usersRepository.removeFromFavorites(post) {
+                    view.isEnabled = true
+                }
+            }
+        }
+    }
+
+    fun isThisFavoriteForMe(post: Post) = postsRepository.isThisFavoriteForMe(post)
+
     fun openViewer(view: View, post: Post) {
         if (post.pic.isNotBlank()) {
             val directions = ReadFragmentDirections.actionOpenViewerFromRead(post.pic)

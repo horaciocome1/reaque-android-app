@@ -142,7 +142,7 @@
                         android:orientation="horizontal">
 
                         <com.google.android.material.button.MaterialButton
-                            android:id="@+id/favorite_linearlayout"
+                            android:id="@+id/add_to_favorites_button"
                             style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -155,6 +155,28 @@
                             android:text="@string/favorite"
                             android:onClick="@{(button) -> viewmodel.addToFavorites(button, post)}"
                             android:textColor="@color/orange"
+                            app:cornerRadius="16dp"
+                            app:icon="@drawable/outline_bookmark_border_18"
+                            app:iconTint="@color/orange"
+                            app:rippleColor="@color/orange"
+                            app:strokeColor="@color/orange"
+                            app:strokeWidth="@dimen/default_stroke_width" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/remove_from_favorites_button"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginEnd="4dp"
+                            android:layout_marginRight="4dp"
+                            android:layout_weight="1"
+                            android:onClick="@{(button) -> viewmodel.removeFromFavorites(button, post)}"
+                            android:padding="16dp"
+                            android:text="@string/undo"
+                            android:textColor="@color/orange"
+                            android:visibility="gone"
                             app:cornerRadius="16dp"
                             app:icon="@drawable/outline_bookmark_border_18"
                             app:iconTint="@color/orange"

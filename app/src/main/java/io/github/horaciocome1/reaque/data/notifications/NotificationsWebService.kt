@@ -25,34 +25,33 @@ class NotificationsWebService {
 
     private val tag = "NotificationsWebService"
 
+    private val notificationsList = mutableListOf<Notification>()
+
     private val ref = FirebaseFirestore.getInstance().collection("notifications")
 
     private lateinit var auth: FirebaseAuth
 
     val notifications = MutableLiveData<List<Notification>>()
         get() {
-            auth = FirebaseAuth.getInstance()
-            auth.currentUser?.let { user ->
-                ref.whereEqualTo("users.${user.uid}", true)
-                    .addSnapshotListener { snapshot, exception ->
-                        when {
-                            exception != null -> onListenFailed(tag, exception)
-                            snapshot != null -> {
-                                val list = mutableListOf<Notification>()
-                                field.value = list.apply {
-                                    for (doc in snapshot)
-                                        add(doc.notification)
-                                    sortByDescending { it.timestamp }
+            if (notificationsList.isEmpty()) {
+                auth = FirebaseAuth.getInstance()
+                auth.currentUser?.let { user ->
+                    ref.whereEqualTo("users.${user.uid}", true)
+                        .addSnapshotListener { snapshot, exception ->
+                            when {
+                                exception != null -> onListenFailed(tag, exception)
+                                snapshot != null -> {
+                                    field.value = notificationsList.apply {
+                                        for (doc in snapshot)
+                                            add(doc.notification)
+                                        sortByDescending { it.timestamp }
+                                    }
                                 }
                             }
                         }
-                    }
+                }
             }
             return field
         }
-
-    init {
-
-    }
 
 }

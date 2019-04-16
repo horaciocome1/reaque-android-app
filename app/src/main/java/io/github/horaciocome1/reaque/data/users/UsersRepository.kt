@@ -27,7 +27,13 @@ class UsersRepository private constructor(private val service: UsersWebService) 
 
     fun addToFavorites(post: Post, onSuccessful: () -> Unit) = service.addToFavorites(post, onSuccessful)
 
+    fun removeFromFavorites(post: Post, onSuccessful: () -> Unit) = service.removeFromFavorites(post, onSuccessful)
+
     fun addToFavorites(user: User, onSuccessful: () -> Unit) = service.addToFavorites(user, onSuccessful)
+
+    fun removeFromFavorites(user: User, onSuccessful: () -> Unit) = service.removeFromFavorites(user, onSuccessful)
+
+    fun isThisFavoriteForMe(user: User) = service.isThisFavoriteForMe(user)
 
     fun getUsers(topic: Topic) = service.getUsers(topic)
 
@@ -44,6 +50,7 @@ class UsersRepository private constructor(private val service: UsersWebService) 
         fun getInstance(usersWebService: UsersWebService) = instance ?: synchronized(this) {
             instance ?: UsersRepository(usersWebService).also { instance = it }
         }
+
     }
 
 }

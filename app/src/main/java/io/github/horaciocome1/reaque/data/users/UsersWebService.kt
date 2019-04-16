@@ -15,7 +15,6 @@
 
 package io.github.horaciocome1.reaque.data.users
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
@@ -23,10 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
-import io.github.horaciocome1.reaque.utilities.hashMap
-import io.github.horaciocome1.reaque.utilities.onListenFailed
-import io.github.horaciocome1.reaque.utilities.onSnapshotNull
-import io.github.horaciocome1.reaque.utilities.user
+import io.github.horaciocome1.reaque.utilities.*
 
 class UsersWebService {
 
@@ -40,33 +36,33 @@ class UsersWebService {
         value = User("")
     }
 
-    val me = MutableLiveData<User>().apply {
-        value = User("")
-    }
-        get() {
-            auth = FirebaseAuth.getInstance()
-            auth.currentUser?.let {
-                ref.document(it.uid)
-                    .addSnapshotListener { snapshot, exception ->
-                        when {
-                            exception != null -> onListenFailed(tag, exception)
-                            snapshot != null -> field.value = snapshot.user
-                            else -> onSnapshotNull(tag)
-                        }
-                    }
-            }
-            return field
-        }
+    val me = MutableLiveData<User>()
 
     private var favoritesList = mutableListOf<User>()
     private val favorites = MutableLiveData<List<User>>()
+
+    private val isThisMyFavorite = MutableLiveData<Boolean>().apply { value = true }
 
     private var topicId = ""
 
     private val db = FirebaseFirestore.getInstance()
     private val ref = db.collection("users")
 
-    private lateinit var auth: FirebaseAuth
+    private var auth: FirebaseAuth
+
+    init {
+        auth = FirebaseAuth.getInstance()
+        auth.currentUser?.let {
+            ref.document(it.uid)
+                .addSnapshotListener { snapshot, exception ->
+                    when {
+                        exception != null -> onListenFailed(tag, exception)
+                        snapshot != null -> me.value = snapshot.user
+                        else -> onSnapshotNull(tag)
+                    }
+                }
+        }
+    }
 
     fun addUser(onSuccessful: () -> Unit) {
         auth = FirebaseAuth.getInstance()
@@ -75,10 +71,10 @@ class UsersWebService {
                 .set(user.hashMap, SetOptions.merge())
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
-                        Log.d(tag, "User successfully written!")
+                        onAddUserSucceed(tag)
                         onSuccessful()
                     } else
-                        Log.w(tag, "Error writing document", it.exception)
+                        onAddUserFailed(tag, it.exception)
                 }
         }
     }
@@ -95,10 +91,10 @@ class UsersWebService {
                 .set(data, SetOptions.merge())
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
-                        Log.d(tag, "User successfully written!")
+                        onAddUserSucceed(tag)
                         onSuccessful()
                     } else
-                        Log.w(tag, "Error writing document", it.exception)
+                        onAddUserFailed(tag, it.exception)
                 }
         }
     }
@@ -181,6 +177,22 @@ class UsersWebService {
         }
     }
 
+    // remove id from the post i like from my profile
+    fun removeFromFavorites(post: Post, onSuccessful: () -> Unit) {
+        auth = FirebaseAuth.getInstance()
+        auth.currentUser?.let { user ->
+            val data = mapOf(
+                "favorites" to mapOf(
+                    post.id to null
+                )
+            )
+            ref.document(user.uid).set(data, SetOptions.merge()).addOnCompleteListener {
+                if (it.isSuccessful)
+                    onSuccessful()
+            }
+        }
+    }
+
     fun addToFavorites(user: User, onSuccessful: () -> Unit) {
         auth = FirebaseAuth.getInstance()
         auth.currentUser?.let { me ->
@@ -206,6 +218,57 @@ class UsersWebService {
                 }
             }
         }
+    }
+
+    fun removeFromFavorites(user: User, onSuccessful: () -> Unit) {
+        auth = FirebaseAuth.getInstance()
+        auth.currentUser?.let { me ->
+            // add the id from the user i like to my profile
+            var data = mapOf(
+                "favorites" to mapOf(
+                    user.id to null
+                )
+            )
+            ref.document(me.uid).set(data, SetOptions.merge()).addOnCompleteListener {
+                if (it.isSuccessful) {
+                    // add my id to the profile of the user i like
+                    data = mapOf(
+                        "favorite_for" to mapOf(
+                            me.uid to null
+                        )
+                    )
+                    ref.document(user.id).set(data, SetOptions.merge()).addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            onSuccessful()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    fun isThisFavoriteForMe(user: User): LiveData<Boolean> {
+        isThisMyFavorite.value = false
+        auth = FirebaseAuth.getInstance()
+        auth.currentUser?.let {
+            ref.whereEqualTo("favorite_for.${it.uid}", true)
+                .addSnapshotListener { snapshot, exception ->
+                    when {
+                        exception != null -> onListenFailed(tag, exception)
+                        snapshot != null -> {
+                            for (doc in snapshot)
+                                if (doc.post.id.equals(user.id, false)) {
+                                    isThisMyFavorite.value = true
+                                    break
+                                } else
+                                    isThisMyFavorite.value = false
+                        }
+                        else -> onSnapshotNull(tag)
+                    }
+                }
+
+        }
+        return isThisMyFavorite
     }
 
 }
