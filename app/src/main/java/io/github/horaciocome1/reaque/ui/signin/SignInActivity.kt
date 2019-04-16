@@ -52,8 +52,8 @@ class SignInActivity : AppCompatActivity() {
             .requestProfile()
             .build()
         val googleSignInClient = GoogleSignIn.getClient(this, gso)
-        val sinInItent = googleSignInClient.signInIntent
-        startActivityForResult(sinInItent, Constants.GOOGLE_SIGN_IN_REQUEST_CODE)
+        val intent = googleSignInClient.signInIntent
+        startActivityForResult(intent, Constants.GOOGLE_SIGN_IN_REQUEST_CODE)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
