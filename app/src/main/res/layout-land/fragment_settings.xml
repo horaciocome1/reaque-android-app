@@ -64,113 +64,117 @@
         android:layout_height="match_parent"
         android:background="@color/default_stroke_color" />
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.4"
-        android:scrollbars="none"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_weight="0.4">
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-
-
-            <TextView
-                android:id="@+id/terms_and_conditions_textview"
-                style="@style/AppTheme.CompleteClickableEffect"
+            <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="56dp"
-                android:paddingLeft="56dp"
-                android:paddingTop="16dp"
-                android:paddingEnd="32dp"
-                android:paddingRight="32dp"
-                android:paddingBottom="16dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/terms_and_conditions"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/privacy_policy_textview"
-                style="@style/AppTheme.CompleteClickableEffect"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="56dp"
-                android:paddingLeft="56dp"
-                android:paddingTop="16dp"
-                android:paddingEnd="32dp"
-                android:paddingRight="32dp"
-                android:paddingBottom="16dp"
-                android:text="@string/privacy_policy"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                <TextView
+                    android:id="@+id/terms_and_conditions_textview"
+                    style="@style/AppTheme.CompleteClickableEffect"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:paddingStart="56dp"
+                    android:paddingLeft="56dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="32dp"
+                    android:paddingRight="32dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/terms_and_conditions"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
-            <TextView
-                android:id="@+id/licenses_textview"
-                style="@style/AppTheme.CompleteClickableEffect"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="56dp"
-                android:paddingLeft="56dp"
-                android:paddingTop="16dp"
-                android:paddingEnd="32dp"
-                android:paddingRight="32dp"
-                android:paddingBottom="16dp"
-                android:text="@string/open_source_licenses"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                <TextView
+                    android:id="@+id/privacy_policy_textview"
+                    style="@style/AppTheme.CompleteClickableEffect"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="56dp"
+                    android:paddingLeft="56dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="32dp"
+                    android:paddingRight="32dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/privacy_policy"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
-            <TextView
-                android:id="@+id/repository_textview"
-                style="@style/AppTheme.CompleteClickableEffect"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="56dp"
-                android:paddingLeft="56dp"
-                android:paddingTop="16dp"
-                android:paddingEnd="32dp"
-                android:paddingRight="32dp"
-                android:paddingBottom="16dp"
-                android:text="@string/repository"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                <TextView
+                    android:id="@+id/licenses_textview"
+                    style="@style/AppTheme.CompleteClickableEffect"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="56dp"
+                    android:paddingLeft="56dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="32dp"
+                    android:paddingRight="32dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/open_source_licenses"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
-            <TextView
-                android:id="@+id/donate_textview"
-                style="@style/AppTheme.CompleteClickableEffect"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="56dp"
-                android:paddingLeft="56dp"
-                android:paddingTop="16dp"
-                android:paddingEnd="32dp"
-                android:paddingRight="32dp"
-                android:paddingBottom="16dp"
-                android:text="@string/donate"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                <TextView
+                    android:id="@+id/repository_textview"
+                    style="@style/AppTheme.CompleteClickableEffect"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="56dp"
+                    android:paddingLeft="56dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="32dp"
+                    android:paddingRight="32dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/repository"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
-            <TextView
-                android:id="@+id/sign_out_textview"
-                style="@style/AppTheme.CompleteClickableEffect"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:paddingStart="56dp"
-                android:paddingLeft="56dp"
-                android:paddingTop="16dp"
-                android:paddingEnd="32dp"
-                android:paddingRight="32dp"
-                android:paddingBottom="16dp"
-                android:text="@string/sign_out"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                android:textColor="@color/colorError" />
+                <TextView
+                    android:id="@+id/donate_textview"
+                    style="@style/AppTheme.CompleteClickableEffect"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="56dp"
+                    android:paddingLeft="56dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="32dp"
+                    android:paddingRight="32dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/donate"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/sign_out_textview"
+                    style="@style/AppTheme.CompleteClickableEffect"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:paddingStart="56dp"
+                    android:paddingLeft="56dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="32dp"
+                    android:paddingRight="32dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/sign_out"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                    android:textColor="@color/colorError" />
 
-    </ScrollView>
+            </LinearLayout>
+
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
