@@ -45,6 +45,18 @@ class EditProfileFragment : Fragment() {
                 binding.viewmodel = this
             }
         })
+        viewModel.name.observe(this, Observer {
+            viewModel.user.name = it
+            submit_button.isEnabled = isProfileReady
+        })
+        viewModel.bio.observe(this, Observer {
+            viewModel.user.bio = it
+            submit_button.isEnabled = isProfileReady
+        })
+        viewModel.address.observe(this, Observer {
+            viewModel.user.address = it
+            submit_button.isEnabled = isProfileReady
+        })
     }
 
     override fun onResume() {
@@ -52,6 +64,22 @@ class EditProfileFragment : Fragment() {
         activity.run {
             if (this is MainActivity)
                 supportActionBar?.hide()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when (resultCode) {
+            Activity.RESULT_OK -> {
+                when (requestCode) {
+                    Constants.PICK_IMAGE_FROM_GALLERY_REQUEST_CODE -> {
+                        data?.data?.let { uri ->
+                            binding.viewmodel = viewModel.apply {
+                                imageUri = uri
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -66,19 +94,11 @@ class EditProfileFragment : Fragment() {
         startActivityForResult(intent, Constants.PICK_IMAGE_FROM_GALLERY_REQUEST_CODE)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        when (resultCode) {
-            Activity.RESULT_OK -> {
-                when (requestCode) {
-                    Constants.PICK_IMAGE_FROM_GALLERY_REQUEST_CODE -> {
-                        viewModel.let {
-                            it.imageUri = data?.data!!
-                            binding.viewmodel = it
-                        }
-                    }
-                }
+    private val isProfileReady: Boolean
+        get() {
+            viewModel.user.run {
+                return name.isNotBlank() && bio.isNotBlank() && address.isNotBlank()
             }
         }
-    }
 
 }

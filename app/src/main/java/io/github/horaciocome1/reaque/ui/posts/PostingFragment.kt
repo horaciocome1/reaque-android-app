@@ -114,24 +114,6 @@ class PostingFragment : Fragment() {
         }
     }
 
-    private val isPostReady: Boolean
-        get() {
-            viewModel.post.run {
-                return (title.isNotBlank() && message.isNotBlank() && topic.id.isNotBlank() && viewModel.imageUri != Uri.EMPTY)
-            }
-        }
-
-    private fun pickImageFromGallery() {
-        val intent = Intent(Intent.ACTION_PICK).apply {
-            type = "image/*"
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                val mimeTypes = arrayOf("image/jpeg", "image/png")
-                putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
-            }
-        }
-        startActivityForResult(intent, Constants.PICK_IMAGE_FROM_GALLERY_REQUEST_CODE)
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (resultCode) {
             Activity.RESULT_OK -> {
@@ -145,6 +127,24 @@ class PostingFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private val isPostReady: Boolean
+        get() {
+            viewModel.post.run {
+                return title.isNotBlank() && message.isNotBlank() && topic.id.isNotBlank() && viewModel.imageUri != Uri.EMPTY
+            }
+        }
+
+    private fun pickImageFromGallery() {
+        val intent = Intent(Intent.ACTION_PICK).apply {
+            type = "image/*"
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                val mimeTypes = arrayOf("image/jpeg", "image/png")
+                putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+            }
+        }
+        startActivityForResult(intent, Constants.PICK_IMAGE_FROM_GALLERY_REQUEST_CODE)
     }
 
 }
