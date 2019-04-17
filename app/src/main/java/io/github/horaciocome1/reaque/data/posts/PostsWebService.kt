@@ -22,7 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
-import io.github.horaciocome1.reaque.util.hashMap
+import io.github.horaciocome1.reaque.util.map
 import io.github.horaciocome1.reaque.util.onListenFailed
 import io.github.horaciocome1.reaque.util.onSnapshotNull
 import io.github.horaciocome1.reaque.util.post
@@ -68,7 +68,7 @@ class PostsWebService {
                 pic = it.photoUrl.toString()
             }
         }
-        ref.add(post.hashMap).addOnCompleteListener {
+        ref.add(post.map).addOnCompleteListener {
             if (it.isSuccessful)
                 onSuccessful()
         }

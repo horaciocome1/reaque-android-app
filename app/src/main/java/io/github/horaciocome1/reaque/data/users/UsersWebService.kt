@@ -68,13 +68,28 @@ class UsersWebService {
         auth = FirebaseAuth.getInstance()
         auth.currentUser?.let { user ->
             ref.document(user.uid)
-                .set(user.hashMap, SetOptions.merge())
+                .set(user.map, SetOptions.merge())
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
                         onAddUserSucceed(tag)
                         onSuccessful()
                     } else
                         onAddUserFailed(tag, it.exception)
+                }
+        }
+    }
+
+    fun editUser(user: User, onSuccessful: () -> Unit) {
+        auth = FirebaseAuth.getInstance()
+        auth.currentUser?.let {
+            ref.document(it.uid)
+                .set(user.map, SetOptions.merge())
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        onAddUserSucceed(tag)
+                        onSuccessful()
+                    } else
+                        onAddUserFailed(tag, task.exception)
                 }
         }
     }

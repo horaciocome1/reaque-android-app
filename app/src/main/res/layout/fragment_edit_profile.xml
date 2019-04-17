@@ -45,7 +45,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:type="@{Constants.CIRCLE}"
-                    app:uri="@{viewmodel.imageUri}"
                     app:url="@{user.pic}" />
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -68,6 +67,7 @@
                         android:hint="@string/name"
                         android:padding="@dimen/default_padding"
                         android:text="@={viewmodel.name}"
+                        android:inputType="none"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                 </com.google.android.material.textfield.TextInputLayout>

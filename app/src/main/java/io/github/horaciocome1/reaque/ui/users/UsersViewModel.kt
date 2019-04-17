@@ -115,7 +115,10 @@ class UsersViewModel(
     }
 
     fun submitProfile(view: View, user: User) {
-        view.findNavController().navigateUp()
+        view.isEnabled = false
+        usersRepository.editUser(user) {
+            view.findNavController().navigateUp()
+        }
     }
 
     fun cancel(view: View) {

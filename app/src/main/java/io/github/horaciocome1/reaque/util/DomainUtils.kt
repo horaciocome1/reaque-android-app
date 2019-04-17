@@ -18,8 +18,9 @@ package io.github.horaciocome1.reaque.util
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FieldValue
 import io.github.horaciocome1.reaque.data.posts.Post
+import io.github.horaciocome1.reaque.data.users.User
 
-val Post.hashMap: Map<String, Any>
+val Post.map: Map<String, Any>
     get() {
         return mapOf(
             "title" to title,
@@ -35,7 +36,15 @@ val Post.hashMap: Map<String, Any>
         )
     }
 
-val FirebaseUser.hashMap: Map<String, Any?>
+val User.map: Map<String, Any>
+    get() {
+        return mapOf(
+            "bio" to bio,
+            "address" to address
+        )
+    }
+
+val FirebaseUser.map: Map<String, Any?>
     get() {
         return mapOf(
             "name" to displayName,
