@@ -27,8 +27,8 @@ import io.github.horaciocome1.reaque.data.topics.TopicsRepository
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.data.users.UsersRepository
 import io.github.horaciocome1.reaque.ui.signin.SignInActivity
-import io.github.horaciocome1.reaque.utilities.InjectorUtils
-import io.github.horaciocome1.reaque.utilities.ObservableViewModel
+import io.github.horaciocome1.reaque.util.InjectorUtils
+import io.github.horaciocome1.reaque.util.ObservableViewModel
 
 val UsersFragment.viewModel: UsersViewModel
     get() {

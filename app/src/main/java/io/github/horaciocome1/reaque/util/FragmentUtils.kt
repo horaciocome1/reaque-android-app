@@ -13,12 +13,12 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.utilities
+package io.github.horaciocome1.reaque.util
 
 import android.content.res.Configuration
 import androidx.fragment.app.Fragment
 
 val Fragment.isPortrait: Boolean
     get() {
-        return (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+        return resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
     }

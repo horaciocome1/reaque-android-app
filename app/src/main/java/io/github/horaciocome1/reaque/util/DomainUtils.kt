@@ -13,7 +13,7 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.utilities
+package io.github.horaciocome1.reaque.util
 
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FieldValue

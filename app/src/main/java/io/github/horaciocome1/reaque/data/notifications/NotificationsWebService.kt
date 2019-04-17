@@ -18,8 +18,8 @@ package io.github.horaciocome1.reaque.data.notifications
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import io.github.horaciocome1.reaque.utilities.notification
-import io.github.horaciocome1.reaque.utilities.onListenFailed
+import io.github.horaciocome1.reaque.util.notification
+import io.github.horaciocome1.reaque.util.onListenFailed
 
 class NotificationsWebService {
 

@@ -30,7 +30,7 @@ import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.databinding.FragmentProfileBinding
 import io.github.horaciocome1.reaque.ui.MainActivity
 import io.github.horaciocome1.reaque.ui.posts.PostsAdapter
-import io.github.horaciocome1.reaque.utilities.isPortrait
+import io.github.horaciocome1.reaque.util.isPortrait
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_profile.*
 

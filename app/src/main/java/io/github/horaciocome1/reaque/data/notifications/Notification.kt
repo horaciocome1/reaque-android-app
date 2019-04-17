@@ -16,7 +16,7 @@
 package io.github.horaciocome1.reaque.data.notifications
 
 import com.google.firebase.Timestamp
-import io.github.horaciocome1.reaque.utilities.string
+import io.github.horaciocome1.reaque.util.string
 
 data class Notification(var id: String) {
 

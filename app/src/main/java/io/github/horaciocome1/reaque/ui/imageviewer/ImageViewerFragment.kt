@@ -22,7 +22,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import io.github.horaciocome1.reaque.databinding.FragmentImageViewerBinding
 import io.github.horaciocome1.reaque.ui.MainActivity
-import io.github.horaciocome1.reaque.utilities.isPortrait
+import io.github.horaciocome1.reaque.util.isPortrait
 
 class ViewerFragment: Fragment() {
 

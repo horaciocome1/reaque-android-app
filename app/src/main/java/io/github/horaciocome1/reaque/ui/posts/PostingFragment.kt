@@ -34,7 +34,7 @@ import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.databinding.FragmentPostingBinding
 import io.github.horaciocome1.reaque.ui.MainActivity
 import io.github.horaciocome1.reaque.ui.topics.TopicsAdapter
-import io.github.horaciocome1.reaque.utilities.Constants
+import io.github.horaciocome1.reaque.util.Constants
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_posting.*
 

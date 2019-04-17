@@ -18,9 +18,9 @@ package io.github.horaciocome1.reaque.data.topics
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import io.github.horaciocome1.reaque.utilities.onListenFailed
-import io.github.horaciocome1.reaque.utilities.onSnapshotNull
-import io.github.horaciocome1.reaque.utilities.topic
+import io.github.horaciocome1.reaque.util.onListenFailed
+import io.github.horaciocome1.reaque.util.onSnapshotNull
+import io.github.horaciocome1.reaque.util.topic
 
 class TopicsWebService {
 

@@ -22,10 +22,10 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
-import io.github.horaciocome1.reaque.utilities.hashMap
-import io.github.horaciocome1.reaque.utilities.onListenFailed
-import io.github.horaciocome1.reaque.utilities.onSnapshotNull
-import io.github.horaciocome1.reaque.utilities.post
+import io.github.horaciocome1.reaque.util.hashMap
+import io.github.horaciocome1.reaque.util.onListenFailed
+import io.github.horaciocome1.reaque.util.onSnapshotNull
+import io.github.horaciocome1.reaque.util.post
 
 class PostsWebService {
 

@@ -1,4 +1,4 @@
-package io.github.horaciocome1.reaque.utilities
+package io.github.horaciocome1.reaque.util
 
 import android.net.Uri
 import android.widget.ImageView

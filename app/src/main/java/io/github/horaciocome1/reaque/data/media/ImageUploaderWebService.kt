@@ -20,7 +20,7 @@ import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
-import io.github.horaciocome1.reaque.utilities.onUploadFailed
+import io.github.horaciocome1.reaque.util.onUploadFailed
 
 class ImageUploaderWebService {
 

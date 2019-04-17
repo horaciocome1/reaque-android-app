@@ -26,7 +26,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.databinding.FragmentReadBinding
 import io.github.horaciocome1.reaque.ui.MainActivity
-import io.github.horaciocome1.reaque.utilities.isPortrait
+import io.github.horaciocome1.reaque.util.isPortrait
 import kotlinx.android.synthetic.main.fragment_read.*
 
 class ReadFragment: Fragment() {

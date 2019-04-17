@@ -1,4 +1,4 @@
-package io.github.horaciocome1.reaque.utilities
+package io.github.horaciocome1.reaque.util
 
 import androidx.databinding.Observable
 import androidx.databinding.PropertyChangeRegistry

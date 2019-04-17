@@ -26,7 +26,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.notifications.Notification
 import io.github.horaciocome1.reaque.ui.MainActivity
-import io.github.horaciocome1.reaque.utilities.isPortrait
+import io.github.horaciocome1.reaque.util.isPortrait
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_notifications.*
 

@@ -21,7 +21,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.data.users.UsersRepository
-import io.github.horaciocome1.reaque.utilities.InjectorUtils
+import io.github.horaciocome1.reaque.util.InjectorUtils
 
 val MoreFragment.viewModel: MoreViewModel
     get() {

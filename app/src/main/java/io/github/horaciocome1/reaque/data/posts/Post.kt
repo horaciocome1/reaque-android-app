@@ -18,7 +18,7 @@ package io.github.horaciocome1.reaque.data.posts
 import com.google.firebase.Timestamp
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
-import io.github.horaciocome1.reaque.utilities.string
+import io.github.horaciocome1.reaque.util.string
 
 data class Post(var id: String) {
 

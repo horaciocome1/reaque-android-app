@@ -13,19 +13,16 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.utilities
+package io.github.horaciocome1.reaque.util
 
-object Constants {
+import android.util.Log
 
-    const val PICK_IMAGE_FROM_GALLERY_REQUEST_CODE = 1207
-    const val ACTIVITY_SIGN_IN_REQUEST_CODE = 1208
-    const val GOOGLE_SIGN_IN_REQUEST_CODE = 1209
+fun onListenFailed(tag: String, exception: Exception) = Log.w(tag, "Listen failed.", exception)
 
-    const val SINGLE_COLUMN = 1
-    const val TWO_COLUMNS = 2
+fun onUploadFailed(tag: String) = Log.w(tag, "Upload failed.")
 
-    const val DEFAULT = 2300
-    const val CIRCLE = 2307
-    const val BLUR = 2308
+fun onSnapshotNull(tag: String) = Log.w(tag, "Snapshot is null.")
 
-}
+fun onAddUserSucceed(tag: String) = Log.d(tag, "User successfully written!")
+
+fun onAddUserFailed(tag: String, exception: Exception?) = Log.w(tag, "Error writing document", exception)

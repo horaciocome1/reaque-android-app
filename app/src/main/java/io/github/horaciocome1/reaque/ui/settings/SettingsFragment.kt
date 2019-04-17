@@ -26,7 +26,7 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.ui.MainActivity
-import io.github.horaciocome1.reaque.utilities.isPortrait
+import io.github.horaciocome1.reaque.util.isPortrait
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 class SettingsFragment : Fragment() {

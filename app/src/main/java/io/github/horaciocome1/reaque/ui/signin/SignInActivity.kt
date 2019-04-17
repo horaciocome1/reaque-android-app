@@ -31,7 +31,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.ui.users.viewModel
-import io.github.horaciocome1.reaque.utilities.Constants
+import io.github.horaciocome1.reaque.util.Constants
 
 fun Context.getSignInActivityIntent() = Intent(this, SignInActivity::class.java)
 

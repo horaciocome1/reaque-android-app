@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import io.github.horaciocome1.reaque.databinding.FragmentEditProfileBinding
 import io.github.horaciocome1.reaque.ui.MainActivity
-import io.github.horaciocome1.reaque.utilities.Constants
+import io.github.horaciocome1.reaque.util.Constants
 import kotlinx.android.synthetic.main.fragment_edit_profile.*
 
 class EditProfileFragment : Fragment() {

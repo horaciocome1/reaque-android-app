@@ -13,7 +13,7 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.utilities
+package io.github.horaciocome1.reaque.util
 
 import io.github.horaciocome1.reaque.data.Database
 import io.github.horaciocome1.reaque.data.media.MediaRepository

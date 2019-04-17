@@ -22,7 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
-import io.github.horaciocome1.reaque.utilities.*
+import io.github.horaciocome1.reaque.util.*
 
 class UsersWebService {
 

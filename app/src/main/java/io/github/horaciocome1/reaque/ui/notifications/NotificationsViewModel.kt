@@ -18,7 +18,7 @@ package io.github.horaciocome1.reaque.ui.notifications
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import io.github.horaciocome1.reaque.data.notifications.NotificationsRepository
-import io.github.horaciocome1.reaque.utilities.InjectorUtils
+import io.github.horaciocome1.reaque.util.InjectorUtils
 
 val NotificationsFragment.viewModel: NotificationsViewModel
     get() {
