@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
-        setSupportActionBar(activity_main_toolbar)
+        setSupportActionBar(toolbar)
     }
 
     override fun onResume() {
@@ -88,11 +88,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupBottomNavigationMenu() = activity_main_bottomnavigationview?.let {
+    private fun setupBottomNavigationMenu() = bottomnavigationview?.let {
         NavigationUI.setupWithNavController(it, navController)
     }
 
-    private fun setupSideNavigationMenu() = activity_main_navigationview?.let {
+    private fun setupSideNavigationMenu() = navigationview?.let {
         NavigationUI.setupWithNavController(it, navController)
     }
 

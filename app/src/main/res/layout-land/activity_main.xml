@@ -31,7 +31,7 @@
             app:elevation="0dp">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/activity_main_toolbar"
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:minHeight="?attr/actionBarSize" />
@@ -50,7 +50,7 @@
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/activity_main_navigationview"
+        android:id="@+id/navigationview"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:paddingTop="?attr/actionBarSize"
