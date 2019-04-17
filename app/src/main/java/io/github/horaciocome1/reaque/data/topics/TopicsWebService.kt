@@ -29,10 +29,6 @@ class TopicsWebService {
     private var topicsList = mutableListOf<Topic>()
     val topics = MutableLiveData<List<Topic>>()
 
-    val topic = MutableLiveData<Topic>().apply {
-        value = Topic("")
-    }
-
     private val db = FirebaseFirestore.getInstance()
     private val ref = db.collection("topics")
 

@@ -15,9 +15,9 @@
 
 package io.github.horaciocome1.reaque.data.topics
 
-class TopicsRepository private constructor(private val topicsWebService: TopicsWebService) {
+class TopicsRepository private constructor(service: TopicsWebService) {
 
-    val topics = topicsWebService.topics
+    val topics = service.topics
 
     companion object {
         @Volatile

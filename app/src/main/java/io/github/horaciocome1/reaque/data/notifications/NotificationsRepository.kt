@@ -15,9 +15,9 @@
 
 package io.github.horaciocome1.reaque.data.notifications
 
-class NotificationsRepository private constructor(notificationsWebService: NotificationsWebService) {
+class NotificationsRepository private constructor(service: NotificationsWebService) {
 
-    val notifications = notificationsWebService.notifications
+    val notifications = service.notifications
 
     companion object {
         @Volatile
