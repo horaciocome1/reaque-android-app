@@ -63,5 +63,6 @@
     <string name="name">Nome</string>
     <string name="undo">Desfazer</string>
     <string name="submit">Submeter</string>
+    <string name="sign_in_message">Por-favor, espere enquanto a sessão é iniciada.</string>
 
 </resources>
