@@ -37,14 +37,14 @@ I use git for versioning. Please read Contributing section.
    
 ## Contributing
 This project is open and belong to all of us who feel it is a need, and have fun with it.
-It is great to see you looking to help some way. There are plenty of this you can do. As a user, you make donation to help mantain the financial costs of building this product. Ill would be gratefull too if you just email me with you personal review. Plus, you can also help me get the texts in other languages like english, or our any you want. Whatever, just let me know.
+It is great to see you looking to help some way. There are plenty of this you can do. As a user, you might want make [donation to help me maintain the financial costs](docs/DONATE.md) of building this product. Ill would be grateful too if you just email me with you personal review. Plus, you can also help me get the texts in other languages like english, or our any you want. Whatever, just let me know.
 
 ### For developers only
 You can make pull requests at anytime. There are welcome. It would be good if you follow the coding style so others can easily take advantage of it. Thank you for being here.
 If you feel the need to touch the model part or the backend it self, please email me describing your intentions. Also could you visit the **issues** list, from time to time? It would be great!
 
 Although you might need further more details, for instance here you got the use case diagram.
-![use case diagram](diagrams/use_case.jpg)
+![use case diagram](docs/diagrams/use_case.jpg)
 
 ## Screenshots
 This is how it looks on an 5.7 inch phone running [Android Nougat](https://www.android.com/versions/nougat-7-0/)
