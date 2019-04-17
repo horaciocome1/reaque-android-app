@@ -7,17 +7,21 @@ import androidx.databinding.BindingAdapter
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import io.github.horaciocome1.reaque.data.notifications.Notification
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
+import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.ui.notifications.NotificationsAdapter
 import io.github.horaciocome1.reaque.ui.notifications.NotificationsFragmentDirections
 import io.github.horaciocome1.reaque.ui.posts.PostsAdapter
 import io.github.horaciocome1.reaque.ui.posts.PostsFragmentDirections
 import io.github.horaciocome1.reaque.ui.topics.TopicsAdapter
+import io.github.horaciocome1.reaque.ui.users.UsersAdapter
+import io.github.horaciocome1.reaque.ui.users.UsersFragmentDirections
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
 import jp.wasabeef.glide.transformations.BlurTransformation
 
@@ -138,14 +142,14 @@ class BindingAdapters {
             @JvmStatic
             fun RecyclerView.load(topics: List<Topic>?, orientation: Int?) {
                 topics?.let {
-                    layoutManager = when (orientation) {
-                        Configuration.ORIENTATION_PORTRAIT -> LinearLayoutManager(
+                    layoutManager = LinearLayoutManager(
                             context,
-                            RecyclerView.HORIZONTAL,
+                        when (orientation) {
+                            Configuration.ORIENTATION_PORTRAIT -> RecyclerView.HORIZONTAL
+                            else -> RecyclerView.VERTICAL
+                        },
                             false
                         )
-                        else -> LinearLayoutManager(context)
-                    }
                     adapter = TopicsAdapter(it)
                 }
             }
@@ -168,6 +172,36 @@ class BindingAdapters {
                         addOnItemClickListener { view, position ->
                             if (it.isNotEmpty()) {
                                 val directions = PostsFragmentDirections.actionOpenReadFromPosts(it[position].id)
+                                view.findNavController().navigate(directions)
+                            }
+                        }
+                }
+            }
+
+        }
+
+    }
+
+    class LoadUsers {
+
+        companion object {
+
+            @BindingAdapter("users")
+            @JvmStatic
+            fun RecyclerView.load(users: List<User>?) {
+                users?.let {
+                    layoutManager = StaggeredGridLayoutManager(
+                        when {
+                            it.size >= Constants.TWO_COLUMNS -> Constants.TWO_COLUMNS
+                            else -> Constants.SINGLE_COLUMN
+                        },
+                        RecyclerView.VERTICAL
+                    )
+                    adapter = UsersAdapter(it)
+                    if (!hasOnClickListeners())
+                        addOnItemClickListener { view, position ->
+                            if (it.isNotEmpty()) {
+                                val directions = UsersFragmentDirections.actionOpenProfileFromUsers(it[position].id)
                                 view.findNavController().navigate(directions)
                             }
                         }
