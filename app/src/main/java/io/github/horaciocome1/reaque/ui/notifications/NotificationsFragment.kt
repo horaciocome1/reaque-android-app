@@ -21,51 +21,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import io.github.horaciocome1.reaque.R
-import io.github.horaciocome1.reaque.data.notifications.Notification
+import io.github.horaciocome1.reaque.databinding.FragmentNotificationsBinding
 import io.github.horaciocome1.reaque.ui.MainActivity
 import io.github.horaciocome1.reaque.util.isPortrait
-import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_notifications.*
 
 class NotificationsFragment : Fragment() {
 
-    private var notifications = listOf<Notification>()
+    private lateinit var binding: FragmentNotificationsBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_notifications, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        recyclerview.run {
-            addOnItemClickListener { view, position ->
-                if (notifications.isNotEmpty()) {
-                    notifications[position].run {
-                        when {
-                            isPost -> view.read(contentId)
-                            isUser -> view.openProfile(contentId)
-                        }
-                    }
-                }
-            }
-        }
+        binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onStart() {
         super.onStart()
         viewModel.notifications.observe(this, Observer {
-            notifications = it
-            recyclerview.run {
-                layoutManager = LinearLayoutManager(context)
-                adapter = NotificationsAdapter(notifications)
-            }
-            if (notifications.isEmpty())
-                progressbar.visibility = View.VISIBLE
-            else
-                progressbar.visibility = View.GONE
+            binding.notifications = it
+            progressbar.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
         })
     }
 
@@ -76,16 +50,6 @@ class NotificationsFragment : Fragment() {
                 if (this is MainActivity)
                     supportActionBar?.hide()
             }
-    }
-
-    private fun View.openProfile(userId: String) {
-        val directions = NotificationsFragmentDirections.actionOpenProfileFromNotifications(userId)
-        findNavController().navigate(directions)
-    }
-
-    private fun View.read(postId: String) {
-        val directions = NotificationsFragmentDirections.actionOpenReadFromNotifications(postId)
-        findNavController().navigate(directions)
     }
 
 }

@@ -71,7 +71,6 @@ val DocumentSnapshot.notification: Notification
             if (stamp is Timestamp)
                 timestamp = stamp
             pic = this@notification["pic"].toString()
-            isComment = this@notification["comment"].toString().toBoolean()
             isPost = this@notification["post"].toString().toBoolean()
             isUser = this@notification["user"].toString().toBoolean()
             contentId = this@notification["content_id"].toString()
