@@ -55,7 +55,7 @@
         android:id="@+id/destination_viewer"
         android:name="io.github.horaciocome1.reaque.ui.imageviewer.ViewerFragment">
         <argument
-            android:name="link"
+            android:name="url"
             app:argType="string" />
     </fragment>
     <fragment

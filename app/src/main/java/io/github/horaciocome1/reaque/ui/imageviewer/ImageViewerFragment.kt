@@ -15,42 +15,41 @@
 
 package io.github.horaciocome1.reaque.ui.imageviewer
 
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import io.github.horaciocome1.reaque.R
+import io.github.horaciocome1.reaque.databinding.FragmentImageViewerBinding
 import io.github.horaciocome1.reaque.ui.MainActivity
-import kotlinx.android.synthetic.main.fragment_image_viewer.*
+import io.github.horaciocome1.reaque.utilities.isPortrait
 
 class ViewerFragment: Fragment() {
 
+    lateinit var binding: FragmentImageViewerBinding
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_image_viewer, container, false)
+        binding = FragmentImageViewerBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onStart() {
         super.onStart()
         arguments?.let {
-            val link = ViewerFragmentArgs.fromBundle(it).link
-            Glide.with(this)
-                .load(link)
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(fragment_image_viewer_imageview)
+            binding.url = ViewerFragmentArgs.fromBundle(it).url
         }
     }
 
     override fun onResume() {
         super.onResume()
-        (activity as MainActivity).supportActionBar?.run {
-            if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
-                show()
-            title = ""
-        }
+        if (isPortrait)
+            activity.run {
+                if (this is MainActivity)
+                    supportActionBar?.run {
+                        show()
+                        title = ""
+                    }
+            }
     }
 
 }
