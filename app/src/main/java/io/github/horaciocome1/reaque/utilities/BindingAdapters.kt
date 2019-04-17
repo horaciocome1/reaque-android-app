@@ -16,17 +16,16 @@ class BindingAdapters {
             @BindingAdapter("url", "type")
             @JvmStatic
             fun ImageView.loadImage(url: String?, type: Int?) {
-                if (!url.isNullOrBlank())
-                    Glide.with(context).load(url)
-                        .apply(
-                            when (type) {
-                                Constants.BLUR -> RequestOptions.bitmapTransform(BlurTransformation(7, 14))
-                                Constants.CIRCLE -> RequestOptions.circleCropTransform()
-                                else -> RequestOptions()
-                            }
-                        )
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .into(this)
+                Glide.with(context).load(url)
+                    .apply(
+                        when (type) {
+                            Constants.BLUR -> RequestOptions.bitmapTransform(BlurTransformation(7, 14))
+                            Constants.CIRCLE -> RequestOptions.circleCropTransform()
+                            else -> RequestOptions()
+                        }
+                    )
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(this)
             }
         }
 
@@ -38,18 +37,16 @@ class BindingAdapters {
             @BindingAdapter("uri", "type")
             @JvmStatic
             fun ImageView.loadImage(uri: Uri?, type: Int?) {
-                uri?.let {
-                    Glide.with(context).load(it)
-                        .apply(
-                            when (type) {
-                                Constants.BLUR -> RequestOptions.bitmapTransform(BlurTransformation(7, 14))
-                                Constants.CIRCLE -> RequestOptions.circleCropTransform()
-                                else -> RequestOptions()
-                            }
-                        )
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .into(this)
-                }
+                Glide.with(context).load(uri)
+                    .apply(
+                        when (type) {
+                            Constants.BLUR -> RequestOptions.bitmapTransform(BlurTransformation(7, 14))
+                            Constants.CIRCLE -> RequestOptions.circleCropTransform()
+                            else -> RequestOptions()
+                        }
+                    )
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(this)
             }
         }
 
