@@ -21,87 +21,66 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import io.github.horaciocome1.reaque.R
-import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
+import io.github.horaciocome1.reaque.databinding.FragmentPostsBinding
 import io.github.horaciocome1.reaque.ui.MainActivity
-import io.github.horaciocome1.reaque.ui.topics.TopicsAdapter
 import io.github.horaciocome1.reaque.util.isPortrait
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_posts.*
 
 class PostsFragment: Fragment() {
 
-    private var posts = listOf<Post>()
-    private var topics = listOf<Topic>()
+    private lateinit var binding: FragmentPostsBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_posts, container, false)
+        binding = FragmentPostsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         topics_recyclerview.addOnItemClickListener { _, position ->
-            if (topics.isNotEmpty()) {
-                favorites_fab.show()
-                topics[position].listPosts()
+            binding.topics?.let {
+                if (it.isNotEmpty())
+                    listPosts(it[position])
             }
-        }
-        posts_recyclerview.addOnItemClickListener { view, position ->
-            if (posts.isNotEmpty())
-                posts[position].read(view)
         }
     }
 
     override fun onStart() {
         super.onStart()
         viewModel.topics.observe(this, Observer {
-            topics = it
-            topics_recyclerview.run {
-                layoutManager = if (isPortrait) LinearLayoutManager(
-                    context,
-                    RecyclerView.HORIZONTAL,
-                    false
-                ) else LinearLayoutManager(context)
-                adapter = TopicsAdapter(topics)
-            }
-            topics_progressbar.visibility = if (topics.isEmpty()) View.VISIBLE else View.GONE
+            binding.topics = it
+            topics_progressbar.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
         })
         favorites_fab.setOnClickListener {
-            viewModel.favorites.observe(this, Observer {
-                posts_recyclerview.setupWithPosts(it)
-            })
-            favorites_fab.hide()
+            listFavorites()
         }
     }
 
     override fun onResume() {
         super.onResume()
         if (isPortrait)
-            (activity as MainActivity).supportActionBar?.hide()
-        posts_progressbar.visibility = View.GONE
+            activity?.run {
+                if (this is MainActivity)
+                    supportActionBar?.hide()
+            }
     }
 
-    private fun Topic.listPosts() {
-        viewModel.getPosts(this).observe(this@PostsFragment, Observer {
-            posts_recyclerview.setupWithPosts(it)
+    private fun listPosts(topic: Topic) {
+        viewModel.getPosts(topic).observe(this, Observer {
+            binding.posts = it
+            posts_progressbar.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
         })
         favorites_fab.show()
     }
 
-    private fun RecyclerView.setupWithPosts(list: List<Post>) {
-        posts = list
-        layoutManager = LinearLayoutManager(context)
-        adapter = PostsAdapter(posts)
-        posts_progressbar.visibility = if (posts.isEmpty()) View.VISIBLE else View.GONE
-    }
-
-    private fun Post.read(view: View) {
-        val directions = PostsFragmentDirections.actionOpenReadFromPosts(id)
-        view.findNavController().navigate(directions)
+    private fun listFavorites() {
+        viewModel.favorites.observe(this, Observer {
+            binding.posts = it
+            posts_progressbar.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
+        })
+        favorites_fab.hide()
     }
 
 }

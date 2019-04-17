@@ -1,5 +1,6 @@
 package io.github.horaciocome1.reaque.util
 
+import android.content.res.Configuration
 import android.net.Uri
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -10,8 +11,13 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import io.github.horaciocome1.reaque.data.notifications.Notification
+import io.github.horaciocome1.reaque.data.posts.Post
+import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.ui.notifications.NotificationsAdapter
 import io.github.horaciocome1.reaque.ui.notifications.NotificationsFragmentDirections
+import io.github.horaciocome1.reaque.ui.posts.PostsAdapter
+import io.github.horaciocome1.reaque.ui.posts.PostsFragmentDirections
+import io.github.horaciocome1.reaque.ui.topics.TopicsAdapter
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
 import jp.wasabeef.glide.transformations.BlurTransformation
 
@@ -91,27 +97,78 @@ class BindingAdapters {
 
     }
 
-    class LoadNotificationList {
+    class LoadNotifications {
 
         companion object {
 
             @BindingAdapter("notifications")
             @JvmStatic
-            fun RecyclerView.loadList(notifications: List<Notification>?) {
+            fun RecyclerView.load(notifications: List<Notification>?) {
                 notifications?.let {
                     layoutManager = LinearLayoutManager(context)
                     adapter = NotificationsAdapter(it)
                     if (!hasOnClickListeners())
                         addOnItemClickListener { view, position ->
-                            it[position].run {
-                                val directions = when {
-                                    isUser -> NotificationsFragmentDirections.actionOpenProfileFromNotifications(
-                                        contentId
-                                    )
-                                    isPost -> NotificationsFragmentDirections.actionOpenReadFromNotifications(contentId)
-                                    else -> null
+                            if (it.isNotEmpty())
+                                it[position].run {
+                                    val directions = when {
+                                        isUser -> NotificationsFragmentDirections.actionOpenProfileFromNotifications(
+                                            contentId
+                                        )
+                                        isPost -> NotificationsFragmentDirections.actionOpenReadFromNotifications(
+                                            contentId
+                                        )
+                                        else -> null
+                                    }
+                                    view.findNavController().navigate(directions!!)
                                 }
-                                view.findNavController().navigate(directions!!)
+                        }
+                }
+            }
+
+        }
+
+    }
+
+    class LoadTopics {
+
+        companion object {
+
+            @BindingAdapter("topics", "orientation")
+            @JvmStatic
+            fun RecyclerView.load(topics: List<Topic>?, orientation: Int?) {
+                topics?.let {
+                    layoutManager = when (orientation) {
+                        Configuration.ORIENTATION_PORTRAIT -> LinearLayoutManager(
+                            context,
+                            RecyclerView.HORIZONTAL,
+                            false
+                        )
+                        else -> LinearLayoutManager(context)
+                    }
+                    adapter = TopicsAdapter(it)
+                }
+            }
+
+        }
+
+    }
+
+    class LoadPosts {
+
+        companion object {
+
+            @BindingAdapter("posts")
+            @JvmStatic
+            fun RecyclerView.load(posts: List<Post>?) {
+                posts?.let {
+                    layoutManager = LinearLayoutManager(context)
+                    adapter = PostsAdapter(it)
+                    if (!hasOnClickListeners())
+                        addOnItemClickListener { view, position ->
+                            if (it.isNotEmpty()) {
+                                val directions = PostsFragmentDirections.actionOpenReadFromPosts(it[position].id)
+                                view.findNavController().navigate(directions)
                             }
                         }
                 }

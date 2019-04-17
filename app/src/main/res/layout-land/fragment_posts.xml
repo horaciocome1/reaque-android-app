@@ -13,69 +13,96 @@
   ~    See the License for the specific language governing permissions and limitations under the License.
   -->
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <data>
+
+        <import type="java.util.List" />
+
+        <import type="io.github.horaciocome1.reaque.data.topics.Topic" />
+
+        <import type="io.github.horaciocome1.reaque.data.posts.Post" />
+
+        <import type="android.content.res.Configuration" />
+
+        <variable
+            name="topics"
+            type="List&lt;Topic&gt;" />
+
+        <variable
+            name="posts"
+            type="List&lt;Post&gt;" />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_weight="0.3"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/topics_recyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="none" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_weight="0.3"
+                android:orientation="vertical">
 
-            <ProgressBar
-                android:id="@+id/topics_progressbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="32dp" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/topics_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none"
+                    app:orientation="@{Configuration.ORIENTATION_LANDSCAPE}"
+                    app:topics="@{topics}" />
+
+                <ProgressBar
+                    android:id="@+id/topics_progressbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.9"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/posts_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none"
+                    app:posts="@{posts}" />
+
+                <ProgressBar
+                    android:id="@+id/posts_progressbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.9"
-            android:orientation="vertical">
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/favorites_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="16dp"
+            android:tint="@color/primaryLightColor"
+            app:srcCompat="@drawable/outline_bookmark_border_18" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/posts_recyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="none" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-            <ProgressBar
-                android:id="@+id/posts_progressbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="32dp" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/favorites_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="16dp"
-        android:tint="@color/primaryLightColor"
-        app:srcCompat="@drawable/outline_bookmark_border_18" />
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
