@@ -88,7 +88,8 @@
                     android:id="@+id/users_progressbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="32dp" />
+                    android:layout_margin="32dp"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
