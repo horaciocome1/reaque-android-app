@@ -27,61 +27,15 @@ import jp.wasabeef.glide.transformations.BlurTransformation
 
 class BindingAdapters {
 
-    class LoadImageFromUrl {
-
-        companion object {
-
-            @BindingAdapter("url", "type")
-            @JvmStatic
-            fun ImageView.loadImage(url: String?, type: Int?) {
-                Glide.with(context).load(url)
-                    .apply(
-                        when (type) {
-                            Constants.BLUR -> RequestOptions.bitmapTransform(BlurTransformation(7, 14))
-                            Constants.CIRCLE -> RequestOptions.circleCropTransform()
-                            else -> RequestOptions()
-                        }
-                    )
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .into(this)
-            }
-
-        }
-
-    }
-
-    class LoadImageFromUri {
-
-        companion object {
-
-            @BindingAdapter("uri", "type")
-            @JvmStatic
-            fun ImageView.loadImage(uri: Uri?, type: Int?) {
-                Glide.with(context).load(uri)
-                    .apply(
-                        when (type) {
-                            Constants.BLUR -> RequestOptions.bitmapTransform(BlurTransformation(7, 14))
-                            Constants.CIRCLE -> RequestOptions.circleCropTransform()
-                            else -> RequestOptions()
-                        }
-                    )
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .into(this)
-            }
-
-        }
-
-    }
-
     class LoadImageFromUrlOrUri {
 
         companion object {
 
-            @BindingAdapter("url", "uri", "type")
+            @BindingAdapter("url", "uri", "type", requireAll = false)
             @JvmStatic
             fun ImageView.loadImage(url: String?, uri: Uri?, type: Int?) {
                 Glide.with(context).load(
-                    if (uri != Uri.EMPTY)
+                    if (uri != null && uri != Uri.EMPTY)
                         uri
                     else
                         url
