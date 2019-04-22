@@ -17,9 +17,9 @@
     <string name="app_name">Reaque</string>
 
     <!-- 01 URL -->
-    <string name="terms_and_conditions_url">https://github.com/horaciocome1/reaque/blob/master/TERMS_AND_CONDITIONS.md</string>
-    <string name="privacy_policy_url">https://github.com/horaciocome1/reaque/blob/master/PRIVACY_POLICY.md</string>
-    <string name="licence_url">https://github.com/horaciocome1/reaque/blob/master/LICENSE</string>
+    <string name="terms_and_conditions_url">https://github.com/horaciocome1/reaque/tree/master/docs/TERMS_AND_CONDITIONS.md</string>
+    <string name="privacy_policy_url">https://github.com/horaciocome1/reaque/tree/master/docs/PRIVACY_POLICY.md</string>
+    <string name="licence_url">https://github.com/horaciocome1/reaque/tree/master/docs/LICENSE</string>
     <string name="read_me_url">https://github.com/horaciocome1/reaque/blob/master/README.md</string>
     <string name="project_url">https://github.com/horaciocome1/reaque</string>
 
