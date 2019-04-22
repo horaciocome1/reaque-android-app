@@ -58,8 +58,7 @@
             android:id="@+id/scrollview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="none"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:scrollbars="none">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -156,34 +155,6 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/email_textview" />
 
-                    <ImageView
-                        android:id="@+id/imageView3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/since_textview"
-                        app:layout_constraintEnd_toStartOf="@+id/since_textview"
-                        app:layout_constraintTop_toTopOf="@+id/since_textview"
-                        app:srcCompat="@drawable/outline_access_time_18" />
-
-                    <TextView
-                        android:id="@+id/since_textview"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginLeft="32dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="32dp"
-                        android:layout_marginRight="32dp"
-                        android:layout_marginBottom="32dp"
-                        android:fontFamily="@font/roboto_light"
-                        android:text="@{user.since}"
-                        android:textColor="@color/primaryTextColor"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/town_textview" />
-
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/posts_button"
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
@@ -205,7 +176,7 @@
                         app:strokeWidth="@dimen/default_stroke_width"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/imageView3" />
+                        app:layout_constraintTop_toBottomOf="@id/imageView4" />
 
                     <LinearLayout
                         android:id="@+id/favorites_linearlayout"

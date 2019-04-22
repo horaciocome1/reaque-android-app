@@ -21,7 +21,6 @@ data class User(var id: String) {
     var bio = ""
     var pic = ""
     var address = ""
-    var since = ""
     var email = ""
 
 }

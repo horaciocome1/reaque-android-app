@@ -29,9 +29,6 @@ val DocumentSnapshot.user: User
             bio = this@user["bio"].toString()
             pic = this@user["pic"].toString()
             address = this@user["address"].toString()
-            val timestamp = this@user["since"]
-            if (timestamp is Timestamp)
-                since = timestamp.string
             email = this@user["email"].toString()
         }
     }
