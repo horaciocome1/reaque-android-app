@@ -63,10 +63,10 @@ class PostsViewModel(
     var imageUri: Uri = Uri.EMPTY
 
     @Bindable
-    val postTitle = MutableLiveData<String>()
+    val title = MutableLiveData<String>()
 
     @Bindable
-    val postMessage = MutableLiveData<String>()
+    val message = MutableLiveData<String>()
 
     val topics = topicsRepository.topics
 

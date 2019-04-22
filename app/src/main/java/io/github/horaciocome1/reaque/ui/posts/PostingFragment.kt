@@ -34,6 +34,7 @@ import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.databinding.FragmentPostingBinding
 import io.github.horaciocome1.reaque.ui.topics.TopicsAdapter
 import io.github.horaciocome1.reaque.util.Constants
+import io.github.horaciocome1.reaque.util.OnFocusChangeListener
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_posting.*
 
@@ -55,6 +56,10 @@ class PostingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         select_pic_from_gallery_button.setOnClickListener {
             pickImageFromGallery()
+        }
+        OnFocusChangeListener(context).let {
+            title_edittext.onFocusChangeListener = it
+            title_edittext.onFocusChangeListener = it
         }
         selectTopicBehavior = BottomSheetBehavior.from(select_topics_bottomsheet).apply {
             state = BottomSheetBehavior.STATE_HIDDEN
@@ -88,11 +93,11 @@ class PostingFragment : Fragment() {
             it.lifecycleOwner = this
             it.viewmodel = viewModel
         }
-        viewModel.postTitle.observe(this, Observer {
+        viewModel.title.observe(this, Observer {
             viewModel.post.title = it
             post_button.isEnabled = isPostReady
         })
-        viewModel.postMessage.observe(this, Observer {
+        viewModel.message.observe(this, Observer {
             viewModel.post.message = it
             post_button.isEnabled = isPostReady
         })

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import io.github.horaciocome1.reaque.databinding.FragmentEditProfileBinding
+import io.github.horaciocome1.reaque.util.OnFocusChangeListener
 import kotlinx.android.synthetic.main.fragment_edit_profile.*
 
 class EditProfileFragment : Fragment() {
@@ -16,6 +17,14 @@ class EditProfileFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentEditProfileBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        OnFocusChangeListener(context).let {
+            bio_inputlayout.editText?.onFocusChangeListener = it
+            address_inputlayout.editText?.onFocusChangeListener = it
+        }
     }
 
     override fun onStart() {

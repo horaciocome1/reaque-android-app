@@ -58,7 +58,7 @@
     <string name="title">Título</string>
     <string name="message">Mensagem</string>
     <string name="whats_new">O que há de novo?</string>
-    <string name="address">Morada [Província, Cidade]</string>
+    <string name="address">Morada [Cidade, Província]</string>
     <string name="bio">Bio</string>
     <string name="name">Nome</string>
     <string name="undo">Desfazer</string>

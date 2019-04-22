@@ -26,7 +26,7 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout2"
+                    android:id="@+id/bio_inputlayout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
@@ -50,9 +50,9 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout3"
+                    android:id="@+id/address_inputlayout"
                     android:layout_width="0dp"
-                    android:layout_height="65dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginLeft="32dp"
                     android:layout_marginTop="16dp"
@@ -62,7 +62,7 @@
                     app:layout_constraintBottom_toTopOf="@+id/submit_button"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+                    app:layout_constraintTop_toBottomOf="@+id/bio_inputlayout"
                     app:layout_constraintVertical_bias="0.0">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -93,7 +93,7 @@
                     app:cornerRadius="@dimen/default_corner_radius"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textInputLayout3"
+                    app:layout_constraintTop_toBottomOf="@id/address_inputlayout"
                     app:strokeColor="@color/secondaryColor"
                     app:strokeWidth="@dimen/default_stroke_width" />
 

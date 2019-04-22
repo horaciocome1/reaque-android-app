@@ -61,23 +61,25 @@
                     android:orientation="vertical">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/title_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
                         android:hint="@string/title"
                         android:lineSpacingExtra="16sp"
                         android:padding="16dp"
-                        android:text="@={viewmodel.postTitle}"
+                        android:text="@={viewmodel.title}"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/message_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
                         android:hint="@string/message"
                         android:lineSpacingExtra="16sp"
                         android:padding="16dp"
-                        android:text="@={viewmodel.postMessage}"
+                        android:text="@={viewmodel.message}"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                 </LinearLayout>
