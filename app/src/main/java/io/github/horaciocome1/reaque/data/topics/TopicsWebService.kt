@@ -29,7 +29,7 @@ class TopicsWebService {
     private var topicsList = mutableListOf<Topic>()
     val topics = MutableLiveData<List<Topic>>()
         get() {
-            if (topicsList.isNotEmpty())
+            if (topicsList.isEmpty())
                 ref.orderBy("title", Query.Direction.ASCENDING)
                     .addSnapshotListener { snapshot, exception ->
                         when {
