@@ -44,7 +44,7 @@ class EditProfileFragment : Fragment() {
     private val isProfileReady: Boolean
         get() {
             viewModel.user.run {
-                return name.isNotBlank() && bio.isNotBlank() && address.isNotBlank()
+                return bio.isNotBlank() && address.isNotBlank()
             }
         }
 
