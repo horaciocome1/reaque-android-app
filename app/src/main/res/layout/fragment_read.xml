@@ -83,7 +83,6 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="16dp"
-                        android:layout_margin="8dp"
                         app:srcCompat="@drawable/outline_drag_handle_24" />
 
                     <TextView

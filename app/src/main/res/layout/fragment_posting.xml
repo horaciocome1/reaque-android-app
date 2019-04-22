@@ -156,6 +156,11 @@
             app:behavior_hideable="true"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="16dp"
+                app:srcCompat="@drawable/outline_drag_handle_24" />
+
             <TextView
                 android:id="@+id/selected_topic_textview"
                 android:layout_width="wrap_content"
