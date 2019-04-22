@@ -15,7 +15,6 @@
 
 package io.github.horaciocome1.reaque.ui.users
 
-import android.net.Uri
 import android.view.View
 import androidx.databinding.Bindable
 import androidx.lifecycle.MutableLiveData
@@ -61,11 +60,6 @@ class UsersViewModel(
 ) : ObservableViewModel() {
 
     val user = User("")
-
-    var imageUri: Uri = Uri.EMPTY
-
-    @Bindable
-    val name = MutableLiveData<String>()
 
     @Bindable
     val bio = MutableLiveData<String>()

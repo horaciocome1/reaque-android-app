@@ -26,16 +26,10 @@ class EditProfileFragment : Fragment() {
         }
         viewModel.me.observe(this, Observer {
             viewModel.run {
-                name.value = it.name
                 bio.value = it.bio
                 address.value = it.address
-                binding.user = it
                 binding.viewmodel = this
             }
-        })
-        viewModel.name.observe(this, Observer {
-            viewModel.user.name = it
-            submit_button.isEnabled = isProfileReady
         })
         viewModel.bio.observe(this, Observer {
             viewModel.user.bio = it

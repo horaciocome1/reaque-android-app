@@ -58,11 +58,11 @@
     <string name="title">Título</string>
     <string name="message">Mensagem</string>
     <string name="whats_new">O que há de novo?</string>
-    <string name="address">Morada</string>
+    <string name="address">Morada [Província, Cidade]</string>
     <string name="bio">Bio</string>
     <string name="name">Nome</string>
     <string name="undo">Desfazer</string>
     <string name="submit">Submeter</string>
-    <string name="sign_in_message">Por-favor, espere enquanto a sessão é iniciada.</string>
+    <string name="sign_in_message">Por-favor, aguarde enquanto a sessão é iniciada.</string>
 
 </resources>
