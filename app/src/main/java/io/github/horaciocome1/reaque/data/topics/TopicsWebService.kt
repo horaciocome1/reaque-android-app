@@ -28,24 +28,25 @@ class TopicsWebService {
 
     private var topicsList = mutableListOf<Topic>()
     val topics = MutableLiveData<List<Topic>>()
+        get() {
+            if (topicsList.isNotEmpty())
+                ref.orderBy("title", Query.Direction.ASCENDING)
+                    .addSnapshotListener { snapshot, exception ->
+                        when {
+                            exception != null -> onListenFailed(tag, exception)
+                            snapshot != null -> {
+                                topicsList = mutableListOf()
+                                for (doc in snapshot.documents)
+                                    topicsList.add(doc.topic)
+                                field.value = topicsList
+                            }
+                            else -> onSnapshotNull(tag)
+                        }
+                    }
+            return field
+        }
 
     private val db = FirebaseFirestore.getInstance()
     private val ref = db.collection("topics")
-
-    init {
-        ref.orderBy("title", Query.Direction.ASCENDING)
-            .addSnapshotListener { snapshot, exception ->
-                when {
-                    exception != null -> onListenFailed(tag, exception)
-                    snapshot != null -> {
-                        topicsList = mutableListOf()
-                        for (doc in snapshot.documents)
-                            topicsList.add(doc.topic)
-                        topics.value = topicsList
-                    }
-                    else -> onSnapshotNull(tag)
-                }
-            }
-    }
 
 }
