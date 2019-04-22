@@ -25,8 +25,6 @@ import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.databinding.FragmentReadBinding
-import io.github.horaciocome1.reaque.ui.MainActivity
-import io.github.horaciocome1.reaque.util.isPortrait
 import kotlinx.android.synthetic.main.fragment_read.*
 
 class ReadFragment: Fragment() {
@@ -62,12 +60,6 @@ class ReadFragment: Fragment() {
                 remove_from_favorites_button.visibility = if (it) View.VISIBLE else View.GONE
             })
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (isPortrait)
-            (activity as MainActivity).supportActionBar?.show()
     }
 
 }

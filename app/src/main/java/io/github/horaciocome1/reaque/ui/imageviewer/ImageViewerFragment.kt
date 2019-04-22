@@ -21,8 +21,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import io.github.horaciocome1.reaque.databinding.FragmentImageViewerBinding
-import io.github.horaciocome1.reaque.ui.MainActivity
-import io.github.horaciocome1.reaque.util.isPortrait
 
 class ViewerFragment: Fragment() {
 
@@ -38,18 +36,6 @@ class ViewerFragment: Fragment() {
         arguments?.let {
             binding.url = ViewerFragmentArgs.fromBundle(it).url
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (isPortrait)
-            activity.run {
-                if (this is MainActivity)
-                    supportActionBar?.run {
-                        show()
-                        title = ""
-                    }
-            }
     }
 
 }

@@ -63,7 +63,7 @@
                         android:layout_marginRight="56dp"
                         android:layout_marginBottom="8dp"
                         android:layout_weight="0.45"
-                        android:onClick="@{(view) -> viewmodel.openEditProfile(view, user)}"
+                        android:onClick="@{(view) -> viewmodel.openEditProfile(view)}"
                         android:padding="16dp"
                         android:text="@string/edit"
                         app:cornerRadius="16dp"

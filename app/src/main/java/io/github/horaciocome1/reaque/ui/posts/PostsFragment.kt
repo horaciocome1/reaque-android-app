@@ -23,8 +23,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.databinding.FragmentPostsBinding
-import io.github.horaciocome1.reaque.ui.MainActivity
-import io.github.horaciocome1.reaque.util.isPortrait
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_posts.*
 
@@ -56,15 +54,6 @@ class PostsFragment: Fragment() {
         favorites_fab.setOnClickListener {
             listFavorites()
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (isPortrait)
-            activity?.run {
-                if (this is MainActivity)
-                    supportActionBar?.hide()
-            }
     }
 
     private fun listPosts(topic: Topic) {

@@ -8,7 +8,7 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
-                  <entry key="action_open_edit_profile">
+                  <entry key="destination_edit_profile">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
@@ -99,8 +99,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-312" />
-                            <option name="y" value="1783" />
+                            <option name="x" value="506" />
+                            <option name="y" value="1718" />
                           </Point>
                         </option>
                         <option name="myPositions">

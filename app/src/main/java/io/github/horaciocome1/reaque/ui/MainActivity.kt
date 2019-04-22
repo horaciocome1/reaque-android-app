@@ -17,6 +17,7 @@ package io.github.horaciocome1.reaque.ui
 
 import android.app.Activity
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.view.Menu
@@ -40,6 +41,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        auth = FirebaseAuth.getInstance()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
@@ -48,13 +50,34 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        auth = FirebaseAuth.getInstance()
         if (auth.currentUser == null)
             startActivityForResult(getSignInActivityIntent(), Constants.ACTIVITY_SIGN_IN_REQUEST_CODE)
         else {
             setupBottomNavigationMenu()
             setupSideNavigationMenu()
             setupActionBar()
+            navController.addOnDestinationChangedListener { _, destination, _ ->
+                if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    @Suppress("PLUGIN_WARNING")
+                    bottomnavigationview.visibility = when (destination.id) {
+                        R.id.destination_posting -> View.GONE
+                        R.id.destination_edit_profile -> View.GONE
+                        else -> View.VISIBLE
+                    }
+
+                    supportActionBar?.run {
+                        when (destination.id) {
+                            R.id.destination_posts -> hide()
+                            R.id.destination_users -> hide()
+                            R.id.destination_notifications -> hide()
+                            R.id.destination_more -> hide()
+                            R.id.destination_posting -> hide()
+                            R.id.destination_edit_profile -> hide()
+                            else -> show()
+                        }
+                    }
+                }
+            }
         }
     }
 

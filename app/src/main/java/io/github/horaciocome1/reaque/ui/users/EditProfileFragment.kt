@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import io.github.horaciocome1.reaque.databinding.FragmentEditProfileBinding
-import io.github.horaciocome1.reaque.ui.MainActivity
 import kotlinx.android.synthetic.main.fragment_edit_profile.*
 
 class EditProfileFragment : Fragment() {
@@ -46,14 +45,6 @@ class EditProfileFragment : Fragment() {
             viewModel.user.address = it
             submit_button.isEnabled = isProfileReady
         })
-    }
-
-    override fun onResume() {
-        super.onResume()
-        activity.run {
-            if (this is MainActivity)
-                supportActionBar?.hide()
-        }
     }
 
     private val isProfileReady: Boolean

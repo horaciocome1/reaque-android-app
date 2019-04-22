@@ -32,7 +32,6 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.card.MaterialCardView
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.databinding.FragmentPostingBinding
-import io.github.horaciocome1.reaque.ui.MainActivity
 import io.github.horaciocome1.reaque.ui.topics.TopicsAdapter
 import io.github.horaciocome1.reaque.util.Constants
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
@@ -104,14 +103,6 @@ class PostingFragment : Fragment() {
                 adapter = TopicsAdapter.Simple(topics)
             }
         })
-    }
-
-    override fun onResume() {
-        super.onResume()
-        activity.run {
-            if (this is MainActivity)
-                supportActionBar?.hide()
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

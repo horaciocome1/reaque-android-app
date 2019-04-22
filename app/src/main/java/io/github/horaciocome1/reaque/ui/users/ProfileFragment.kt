@@ -28,9 +28,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.databinding.FragmentProfileBinding
-import io.github.horaciocome1.reaque.ui.MainActivity
 import io.github.horaciocome1.reaque.ui.posts.PostsAdapter
-import io.github.horaciocome1.reaque.util.isPortrait
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_profile.*
 
@@ -82,16 +80,6 @@ class ProfileFragment: Fragment() {
                 add_to_favorites_button.visibility = if (it) View.GONE else View.VISIBLE
                 remove_from_favorites_button.visibility = if (it) View.VISIBLE else View.GONE
             })
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (isPortrait) {
-            (activity as MainActivity).supportActionBar?.run {
-                show()
-                title = ""
-            }
         }
     }
 

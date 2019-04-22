@@ -16,7 +16,6 @@
 package io.github.horaciocome1.reaque.ui.more
 
 import android.content.Intent
-import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -26,7 +25,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.databinding.FragmentMoreBinding
-import io.github.horaciocome1.reaque.ui.MainActivity
 import kotlinx.android.synthetic.main.fragment_more.*
 
 class MoreFragment : Fragment() {
@@ -54,12 +52,6 @@ class MoreFragment : Fragment() {
         viewModel.me.observe(this, Observer {
             binding.user = it
         })
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
-            (activity as MainActivity).supportActionBar?.hide()
     }
 
     private fun openReadMe() {

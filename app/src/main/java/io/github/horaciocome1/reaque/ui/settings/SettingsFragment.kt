@@ -26,7 +26,6 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.ui.MainActivity
-import io.github.horaciocome1.reaque.util.isPortrait
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 class SettingsFragment : Fragment() {
@@ -44,15 +43,6 @@ class SettingsFragment : Fragment() {
         sign_out_textview.setOnClickListener {
             signOut()
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (isPortrait)
-            activity.run {
-                if (this is MainActivity)
-                    supportActionBar?.show()
-            }
     }
 
     private fun onUrlOnClickListener(view: View) {

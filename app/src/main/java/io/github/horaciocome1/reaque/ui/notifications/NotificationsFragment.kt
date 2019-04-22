@@ -22,8 +22,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import io.github.horaciocome1.reaque.databinding.FragmentNotificationsBinding
-import io.github.horaciocome1.reaque.ui.MainActivity
-import io.github.horaciocome1.reaque.util.isPortrait
 import kotlinx.android.synthetic.main.fragment_notifications.*
 
 class NotificationsFragment : Fragment() {
@@ -41,15 +39,6 @@ class NotificationsFragment : Fragment() {
             binding.notifications = it
             progressbar.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
         })
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (isPortrait)
-            activity.run {
-                if (this is MainActivity)
-                    supportActionBar?.hide()
-            }
     }
 
 }
