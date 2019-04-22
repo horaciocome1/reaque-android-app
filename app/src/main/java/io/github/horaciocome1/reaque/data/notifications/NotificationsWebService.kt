@@ -25,7 +25,7 @@ class NotificationsWebService {
 
     private val tag = "NotificationsWebService"
 
-    private val notificationsList = mutableListOf<Notification>()
+    private var notificationsList = mutableListOf<Notification>()
 
     private val ref = FirebaseFirestore.getInstance().collection("notifications")
 
@@ -41,6 +41,7 @@ class NotificationsWebService {
                             when {
                                 exception != null -> onListenFailed(tag, exception)
                                 snapshot != null -> {
+                                    notificationsList = mutableListOf()
                                     field.value = notificationsList.apply {
                                         for (doc in snapshot)
                                             add(doc.notification)
