@@ -16,26 +16,9 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/destination_topics">
+    android:label="@string/app_name"
+    app:startDestination="@id/destination_posts">
 
-    <fragment
-        android:id="@+id/destination_topics"
-        android:name="io.github.horaciocome1.reaque.ui.topics.TopicsFragment"
-        android:label="Tópicos">
-        <action
-            android:id="@+id/action_open_posts_from_topics"
-            app:destination="@id/destination_posts">
-            <argument
-                android:name="is_topic"
-                android:defaultValue="true" />
-        </action>
-        <action
-            android:id="@+id/action_open_users_from_topics"
-            app:destination="@id/destination_users" />
-        <action
-            android:id="@+id/action_open_comments_from_topics"
-            app:destination="@id/destination_comments" />
-    </fragment>
     <fragment
         android:id="@+id/destination_read"
         android:name="io.github.horaciocome1.reaque.ui.posts.ReadFragment">
@@ -44,162 +27,123 @@
             app:argType="string" />
         <action
             android:id="@+id/action_open_viewer_from_read"
-            app:destination="@id/destination_viewer" />
-        <action
-            android:id="@+id/action_open_profile_from_read"
-            app:destination="@id/destination_profile" />
-        <action
-            android:id="@+id/action_open_comments_from_read"
-            app:destination="@id/destination_comments" />
+            app:destination="@id/destination_viewer"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/destination_profile"
         android:name="io.github.horaciocome1.reaque.ui.users.ProfileFragment"
-        android:label="Perfil">
+        android:label="@string/profile">
         <argument
             android:name="user_id"
             app:argType="string" />
         <action
             android:id="@+id/action_open_viewer_from_profile"
-            app:destination="@id/destination_viewer" />
+            app:destination="@id/destination_viewer"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
-            android:id="@+id/action_open_posts_from_profile"
-            app:destination="@id/destination_posts">
-            <argument
-                android:name="is_user"
-                android:defaultValue="true" />
-        </action>
+            android:id="@+id/action_open_read_from_profile"
+            app:destination="@id/destination_read" />
     </fragment>
     <fragment
         android:id="@+id/destination_viewer"
         android:name="io.github.horaciocome1.reaque.ui.imageviewer.ViewerFragment">
         <argument
-            android:name="link"
+            android:name="url"
             app:argType="string" />
-    </fragment>
-    <fragment
-        android:id="@+id/destination_posts"
-        android:name="io.github.horaciocome1.reaque.ui.posts.PostsFragment">
-        <action
-            android:id="@+id/action_open_read_from_posts"
-            app:destination="@id/destination_read" />
-        <argument
-            android:name="id"
-            app:argType="string" />
-        <argument
-            android:name="title"
-            app:argType="string" />
-        <argument
-            android:name="is_from_topic"
-            app:argType="boolean" />
-        <argument
-            android:name="is_from_user"
-            app:argType="boolean" />
-    </fragment>
-    <fragment
-        android:id="@+id/destination_users"
-        android:name="io.github.horaciocome1.reaque.ui.users.UsersFragment">
-        <action
-            android:id="@+id/action_open_profile"
-            app:destination="@id/destination_profile" />
-        <argument
-            android:name="topic_id"
-            app:argType="string" />
-        <argument
-            android:name="topic_title"
-            app:argType="string" />
-    </fragment>
-    <fragment
-        android:id="@+id/destination_comments"
-        android:name="io.github.horaciocome1.reaque.ui.comments.CommentsFragment">
-        <argument
-            android:name="id"
-            app:argType="string" />
-        <argument
-            android:name="title"
-            app:argType="string" />
-        <action
-            android:id="@+id/action_open_profile_from_comments"
-            app:destination="@id/destination_profile"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
-        <argument
-            android:name="is_topic"
-            app:argType="boolean" />
-        <argument
-            android:name="is_post"
-            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/destination_settings"
         android:name="io.github.horaciocome1.reaque.ui.settings.SettingsFragment"
         android:label="Avançadas" />
     <fragment
-        android:id="@+id/destination_search"
-        android:name="io.github.horaciocome1.reaque.ui.search.SearchFragment"
-        android:label="Busca">
-        <action
-            android:id="@+id/action_open_profile_from_search"
-            app:destination="@id/destination_profile" />
-        <action
-            android:id="@+id/action_open_read_from_search"
-            app:destination="@id/destination_read" />
-    </fragment>
-    <fragment
-        android:id="@+id/destination_favorites"
-        android:name="io.github.horaciocome1.reaque.ui.favorites.FavoritesFragment"
-        android:label="Favoritos">
-        <action
-            android:id="@+id/action_open_read_from_favorites"
-            app:destination="@id/destination_read" />
-        <action
-            android:id="@+id/action_open_profile_from_favorites"
-            app:destination="@id/destination_profile" />
-        <action
-            android:id="@+id/action_open_posts_from_favorites"
-            app:destination="@id/destination_posts" />
-        <action
-            android:id="@+id/action_open_users_from_favorites"
-            app:destination="@id/destination_users" />
-        <action
-            android:id="@+id/action_open_comments_from_favorites"
-            app:destination="@id/destination_comments" />
-    </fragment>
-    <fragment
         android:id="@+id/destination_more"
         android:name="io.github.horaciocome1.reaque.ui.more.MoreFragment"
         android:label="Mais">
         <action
-            android:id="@+id/action_open_settings"
-            app:destination="@id/destination_settings" />
-        <action
             android:id="@+id/action_open_profile_from_more"
-            app:destination="@id/destination_profile" />
+            app:destination="@id/destination_profile"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
-            android:id="@+id/action_open_search"
-            app:destination="@id/destination_search" />
+            android:id="@+id/action_open_posting"
+            app:destination="@+id/destination_posting"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
-            android:id="@+id/action_open_post"
-            app:destination="@id/destination_posting" />
+            android:id="@+id/action_open_settings"
+            app:destination="@id/destination_settings"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_open_edit_profile"
+            app:destination="@+id/destination_edit_profile"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/destination_notifications"
         android:name="io.github.horaciocome1.reaque.ui.notifications.NotificationsFragment"
-        android:label="Notificações">
-        <action
-            android:id="@+id/action_open_comments_from_notifications"
-            app:destination="@id/destination_comments" />
+        android:label="@string/notifications">
         <action
             android:id="@+id/action_open_read_from_notifications"
-            app:destination="@id/destination_read" />
+            app:destination="@id/destination_read"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_open_profile_from_notifications"
-            app:destination="@id/destination_profile" />
+            app:destination="@id/destination_profile"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/destination_posting"
         android:name="io.github.horaciocome1.reaque.ui.posts.PostingFragment"
         android:label="Publicar" />
+    <fragment
+        android:id="@+id/destination_posts"
+        android:name="io.github.horaciocome1.reaque.ui.posts.PostsFragment"
+        android:label="@string/posts">
+        <action
+            android:id="@+id/action_open_read_from_posts"
+            app:destination="@id/destination_read"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/destination_users"
+        android:name="io.github.horaciocome1.reaque.ui.users.UsersFragment"
+        android:label="@string/users">
+        <action
+            android:id="@+id/action_open_profile_from_users"
+            app:destination="@id/destination_profile"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/destination_edit_profile"
+        android:name="io.github.horaciocome1.reaque.ui.users.EditProfileFragment"
+        android:label="Editar" />
 </navigation>

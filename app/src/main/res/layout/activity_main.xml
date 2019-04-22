@@ -13,12 +13,12 @@
   ~    See the License for the specific language governing permissions and limitations under the License.
   -->
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/primaryColor"
+    android:orientation="vertical"
     tools:context=".ui.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -27,7 +27,7 @@
         app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/activity_main_toolbar"
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -37,27 +37,20 @@
         android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         app:defaultNavHost="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:layout_marginBottom="?attr/actionBarSize"
+        android:layout_weight="1"
         app:navGraph="@navigation/mobile_navigation" />
 
-    <!--<View-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="4dp"-->
-    <!--android:background="@drawable/background_bottom_navigation_shadow"-->
-    <!--app:layout_anchor="@id/activity_main_bottomnavigationview" />-->
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/activity_main_bottomnavigationview"
+        android:id="@+id/bottomnavigationview"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:itemIconTint="@drawable/color_bottom_navigation"
         app:itemTextColor="@drawable/color_bottom_navigation"
         app:labelVisibilityMode="labeled"
-        android:background="@color/primaryLightColor"
+        android:theme="@style/AppTheme.BottomNavigationView"
         app:menu="@menu/navigation" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

@@ -23,6 +23,9 @@
         <item name="colorAccent">@color/secondaryColor</item>
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="materialCardViewStyle">@style/AppTheme.CardView</item>
+        <item name="floatingActionButtonStyle">@style/AppTheme.Fab</item>
     </style>
 
     <style name="AppTheme.CompleteClickableEffect">
@@ -31,8 +34,18 @@
         <item name="android:focusable">true</item>
     </style>
 
-    <style name="AppTheme.Text.TabItem" parent="TextAppearance.MaterialComponents.Subtitle1">
-        <item name="fontFamily">@font/roboto_medium</item>
+    <style name="AppTheme.CardView" parent="Widget.MaterialComponents.CardView">
+        <item name="cardElevation">@dimen/default_card_elevation</item>
+        <item name="cardCornerRadius">@dimen/default_corner_radius</item>
+        <item name="cardBackgroundColor">@color/primaryLightColor</item>
+    </style>
+
+    <style name="AppTheme.Fab" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="android:tint">@color/primaryColor</item>
+    </style>
+
+    <style name="AppTheme.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:fontFamily">@font/roboto_medium</item>
     </style>
 
 </resources>

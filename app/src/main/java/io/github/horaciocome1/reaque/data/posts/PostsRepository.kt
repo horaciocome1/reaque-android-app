@@ -18,17 +18,23 @@ package io.github.horaciocome1.reaque.data.posts
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
 
-class PostsRepository private constructor(private val postsWebService: PostsWebService) {
+class PostsRepository private constructor(private val service: PostsWebService) {
 
-    fun submitPost(post: Post, onSuccessful: () -> Unit) = postsWebService.submitPost(post, onSuccessful)
+    fun submitPost(post: Post, onSuccessful: () -> Unit) = service.submitPost(post, onSuccessful)
 
-    fun getPosts(topic: Topic) = postsWebService.getPosts(topic)
+    fun addToFavorites(post: Post, onSuccessful: () -> Unit) = service.addToFavorites(post, onSuccessful)
 
-    fun getPosts(post: Post) = postsWebService.getPosts(post)
+    fun removeFromFavorites(post: Post, onSuccessful: () -> Unit) = service.removeFromFavorites(post, onSuccessful)
 
-    fun getPosts(user: User) = postsWebService.getPosts(user)
+    fun isThisFavoriteForMe(post: Post) = service.isThisMyFavorite(post)
 
-    val favorites = postsWebService.getFavorites()
+    fun getPosts(topic: Topic) = service.getPosts(topic)
+
+    fun getPosts(post: Post) = service.getPosts(post)
+
+    fun getPosts(user: User) = service.getPosts(user)
+
+    val favorites = service.getFavorites()
 
     companion object {
         @Volatile

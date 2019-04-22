@@ -15,83 +15,61 @@
 
 package io.github.horaciocome1.reaque.ui.posts
 
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
-import androidx.recyclerview.widget.LinearLayoutManager
-import io.github.horaciocome1.reaque.R
-import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
-import io.github.horaciocome1.reaque.data.users.User
-import io.github.horaciocome1.reaque.ui.MainActivity
-import io.github.horaciocome1.simplerecyclerviewtouchlistener.addSimpleTouchListener
-import io.github.horaciocome1.simplerecyclerviewtouchlistener.setOnClick
+import io.github.horaciocome1.reaque.databinding.FragmentPostsBinding
+import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_posts.*
 
 class PostsFragment: Fragment() {
 
-    private var list = listOf<Post>()
+    private lateinit var binding: FragmentPostsBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_posts, container, false)
+        binding = FragmentPostsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        topics_recyclerview.addOnItemClickListener { _, position ->
+            binding.topics?.let {
+                if (it.isNotEmpty())
+                    listPosts(it[position])
+            }
+        }
     }
 
     override fun onStart() {
         super.onStart()
-        arguments?.let { bundle ->
-            val safeArgs = PostsFragmentArgs.fromBundle(bundle)
-            safeArgs.run {
-                if (isFromTopic)
-                    viewModel.getPosts(Topic(id)).observe(this@PostsFragment, Observer {
-                        configPosts(it)
-                        (activity as MainActivity).supportActionBar?.title = title
-                    })
-                else if (isFromUser)
-                    viewModel.getPosts(User(id)).observe(this@PostsFragment, Observer { configPosts(it) })
-            }
+        viewModel.topics.observe(this, Observer {
+            binding.topics = it
+            topics_progressbar.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
+        })
+        favorites_fab.setOnClickListener {
+            listFavorites()
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
-            (activity as MainActivity).supportActionBar?.show()
+    private fun listPosts(topic: Topic) {
+        viewModel.getPosts(topic).observe(this, Observer {
+            binding.posts = it
+            posts_progressbar.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
+        })
+        favorites_fab.show()
     }
 
-    private fun configList(list: List<Post>) = fragment_posts_recyclerview.apply {
-        layoutManager = LinearLayoutManager(context)
-        adapter = PostsAdapter(list)
-        setOnClick { view, position ->
-            val openRead = PostsFragmentDirections.actionOpenReadFromPosts(list[position].id)
-            Navigation.findNavController(view).navigate(openRead)
-        }
-        addSimpleTouchListener()
-    }
-
-    private fun configPosts(posts: List<Post>) {
-        when {
-            posts.isEmpty() -> fragment_posts_progressbar.visibility = View.VISIBLE
-            list.isEmpty() -> {
-                list = posts
-                configList(list)
-                fragment_posts_progressbar.visibility = View.GONE
-            }
-            posts != list -> {
-                fragment_posts_tap_to_update_button.run {
-                    visibility = View.VISIBLE
-                    setOnClickListener {
-                        list = posts
-                        configList(list)
-                        visibility = View.GONE
-                    }
-                }
-            }
-        }
+    private fun listFavorites() {
+        viewModel.favorites.observe(this, Observer {
+            binding.posts = it
+            posts_progressbar.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
+        })
+        favorites_fab.hide()
     }
 
 }

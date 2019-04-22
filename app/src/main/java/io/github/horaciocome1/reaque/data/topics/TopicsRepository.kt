@@ -15,15 +15,9 @@
 
 package io.github.horaciocome1.reaque.data.topics
 
-class TopicsRepository private constructor(private val topicsWebService: TopicsWebService) {
+class TopicsRepository private constructor(service: TopicsWebService) {
 
-    fun addTopic(topic: Topic) = topicsWebService.addTopic(topic)
-
-    val topics = topicsWebService.topics
-
-    fun getTopics(topic: Topic) = topicsWebService.getTopics(topic)
-
-    val favorites = topicsWebService.getFavorites()
+    val topics = service.topics
 
     companion object {
         @Volatile

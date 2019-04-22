@@ -16,20 +16,20 @@
 package io.github.horaciocome1.reaque.ui.posts
 
 import android.net.Uri
+import android.view.View
 import androidx.databinding.Bindable
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
-import io.github.horaciocome1.reaque.data.media.ImageRepository
+import androidx.navigation.findNavController
 import io.github.horaciocome1.reaque.data.media.ImageUploader
+import io.github.horaciocome1.reaque.data.media.MediaRepository
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.posts.PostsRepository
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.topics.TopicsRepository
-import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.data.users.UsersRepository
-import io.github.horaciocome1.reaque.utilities.InjectorUtils
+import io.github.horaciocome1.reaque.util.InjectorUtils
+import io.github.horaciocome1.reaque.util.ObservableViewModel
 
 val PostsFragment.viewModel: PostsViewModel
     get() {
@@ -52,53 +52,86 @@ val PostingFragment.viewModel: PostsViewModel
 class PostsViewModel(
     private val postsRepository: PostsRepository,
     topicsRepository: TopicsRepository,
-    usersRepository: UsersRepository,
-    private val imageRepository: ImageRepository
-) : ViewModel() {
+    private val mediaRepository: MediaRepository,
+    private val usersRepository: UsersRepository
+) : ObservableViewModel() {
 
     // PostingFragment
     val post = Post("").apply {
-        topic.title = "Nenhum tópico selecionado!"
+        topic.title = "Selecione um tópico."
     }
     var imageUri: Uri = Uri.EMPTY
-    var user = User("")
+
     @Bindable
-    val postTitle = MutableLiveData<String>()
+    val title = MutableLiveData<String>()
+
     @Bindable
-    val postMessage = MutableLiveData<String>()
+    val message = MutableLiveData<String>()
+
     val topics = topicsRepository.topics
-    val me = usersRepository.me
-    private val _isSuccessful = MutableLiveData<Boolean>().apply {
-        value = false
-    }
-    val isFinished: LiveData<Boolean>
-        get() = _isSuccessful
+
+    val favorites = postsRepository.favorites
 
     fun getPosts(topic: Topic) = postsRepository.getPosts(topic)
 
-    fun getPosts(user: User) = postsRepository.getPosts(user)
-
     fun getPosts(post: Post) = postsRepository.getPosts(post)
 
-    fun submitPost() {
+    fun submitPost(view: View) {
+        view.visibility = View.INVISIBLE
+        view.isEnabled = false
         val uploader = ImageUploader().apply {
             imageUri = this@PostsViewModel.imageUri
             post = this@PostsViewModel.post
             onComplete = { link: String ->
                 this@PostsViewModel.post.run {
                     pic = link
-                    user = this@PostsViewModel.user
                     postsRepository.submitPost(this) {
-                        _isSuccessful.value = true
+                        usersRepository.addTopicToUser(topic) {
+                            view.findNavController().navigateUp()
+                        }
                     }
                 }
             }
             onFailure = {
-
+                // caso o upload falhe
             }
         }
-        imageRepository.uploadImage(uploader)
+        mediaRepository.uploadImage(uploader)
     }
 
+    fun addToFavorites(view: View, post: Post) {
+        if (post.id.isNotBlank() && post.user.id.isNotBlank()) {
+            view.isEnabled = false
+            postsRepository.addToFavorites(post) {
+                usersRepository.addToFavorites(post) {
+                    view.isEnabled = true
+                }
+            }
+        }
+    }
+
+    fun removeFromFavorites(view: View, post: Post) {
+        if (post.id.isNotBlank() && post.user.id.isNotBlank()) {
+            view.isEnabled = false
+            postsRepository.removeFromFavorites(post) {
+                usersRepository.removeFromFavorites(post) {
+                    view.isEnabled = true
+                }
+            }
+        }
+    }
+
+    fun isThisFavoriteForMe(post: Post) = postsRepository.isThisFavoriteForMe(post)
+
+    fun openViewer(view: View, post: Post) {
+        if (post.pic.isNotBlank()) {
+            val directions = ReadFragmentDirections.actionOpenViewerFromRead(post.pic)
+            view.findNavController().navigate(directions)
+        }
+    }
+
+    fun cancel(view: View) {
+        view.findNavController().navigateUp()
+    }
 
 }

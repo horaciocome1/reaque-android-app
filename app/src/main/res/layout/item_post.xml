@@ -20,6 +20,8 @@
 
     <data>
 
+        <import type="io.github.horaciocome1.reaque.util.Constants" />
+
         <variable
             name="post"
             type="io.github.horaciocome1.reaque.data.posts.Post" />
@@ -36,9 +38,8 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
-        app:cardCornerRadius="16dp"
-        app:cardBackgroundColor="@color/primaryLightColor"
-        app:cardElevation="0dp">
+        app:strokeColor="@color/default_stroke_color"
+        app:strokeWidth="@dimen/default_stroke_width">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -61,6 +62,8 @@
                     android:id="@+id/item_post_cover_imageview"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    app:url="@{post.pic}"
+                    app:type="@{Constants.DEFAULT}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

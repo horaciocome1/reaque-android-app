@@ -13,16 +13,16 @@
   ~    See the License for the specific language governing permissions and limitations under the License.
   -->
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbars="vertical">
+    android:orientation="horizontal">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="32dp">
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.2">
 
         <TextView
             android:id="@+id/textView13"
@@ -34,10 +34,10 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
-            android:text="1.0"
+            android:text="@string/app_version"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
             android:textColor="@color/secondaryColor"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -50,104 +50,131 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Versão"
+            android:text="@string/version"
             android:textAllCaps="true"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
             app:layout_constraintBottom_toTopOf="@+id/textView13"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:layout_width="@dimen/default_stroke_width"
+        android:layout_height="match_parent"
+        android:background="@color/default_stroke_color" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.4">
+
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="250dp"
-            android:layout_marginBottom="96dp"
-            android:orientation="vertical"
+            android:scrollbars="none"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.01dp"
-                android:background="@color/primaryTextColor" />
-
-            <TextView
-                android:id="@+id/fragment_settings_terms_and_conditions"
-                style="@style/AppTheme.CompleteClickableEffect"
+            <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="56dp"
-                android:paddingLeft="56dp"
-                android:paddingTop="16dp"
-                android:paddingEnd="32dp"
-                android:paddingRight="32dp"
-                android:paddingBottom="16dp"
-                android:layout_marginTop="16dp"
-                android:text="Termos e condições"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/fragment_settings_privacy_policy"
-                style="@style/AppTheme.CompleteClickableEffect"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="56dp"
-                android:paddingLeft="56dp"
-                android:paddingTop="16dp"
-                android:paddingEnd="32dp"
-                android:paddingRight="32dp"
-                android:paddingBottom="16dp"
-                android:text="Política de privacidade"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                <TextView
+                    android:id="@+id/terms_and_conditions_textview"
+                    style="@style/AppTheme.CompleteClickableEffect"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:paddingStart="56dp"
+                    android:paddingLeft="56dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="32dp"
+                    android:paddingRight="32dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/terms_and_conditions"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
-            <TextView
-                android:id="@+id/fragment_settings_licenses"
-                style="@style/AppTheme.CompleteClickableEffect"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="56dp"
-                android:paddingLeft="56dp"
-                android:paddingTop="16dp"
-                android:paddingEnd="32dp"
-                android:paddingRight="32dp"
-                android:paddingBottom="16dp"
-                android:text="Licenças open source"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                <TextView
+                    android:id="@+id/privacy_policy_textview"
+                    style="@style/AppTheme.CompleteClickableEffect"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="56dp"
+                    android:paddingLeft="56dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="32dp"
+                    android:paddingRight="32dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/privacy_policy"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
-            <TextView
-                android:id="@+id/fragment_settings_project_page"
-                style="@style/AppTheme.CompleteClickableEffect"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="56dp"
-                android:paddingLeft="56dp"
-                android:paddingTop="16dp"
-                android:paddingEnd="32dp"
-                android:paddingRight="32dp"
-                android:paddingBottom="16dp"
-                android:text="Repositório"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                <TextView
+                    android:id="@+id/licenses_textview"
+                    style="@style/AppTheme.CompleteClickableEffect"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="56dp"
+                    android:paddingLeft="56dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="32dp"
+                    android:paddingRight="32dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/open_source_licenses"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
-            <TextView
-                android:id="@+id/fragment_settings_donate"
-                style="@style/AppTheme.CompleteClickableEffect"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="56dp"
-                android:paddingLeft="56dp"
-                android:paddingTop="16dp"
-                android:paddingEnd="32dp"
-                android:paddingRight="32dp"
-                android:paddingBottom="16dp"
-                android:layout_marginBottom="16dp"
-                android:text="Apoie ao desenvolvedor"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                <TextView
+                    android:id="@+id/repository_textview"
+                    style="@style/AppTheme.CompleteClickableEffect"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="56dp"
+                    android:paddingLeft="56dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="32dp"
+                    android:paddingRight="32dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/repository"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/donate_textview"
+                    style="@style/AppTheme.CompleteClickableEffect"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="56dp"
+                    android:paddingLeft="56dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="32dp"
+                    android:paddingRight="32dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/donate"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                <TextView
+                    android:id="@+id/sign_out_textview"
+                    style="@style/AppTheme.CompleteClickableEffect"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:paddingStart="56dp"
+                    android:paddingLeft="56dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="32dp"
+                    android:paddingRight="32dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/sign_out"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                    android:textColor="@color/colorError" />
+
+            </LinearLayout>
+
+        </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</ScrollView>
+</LinearLayout>

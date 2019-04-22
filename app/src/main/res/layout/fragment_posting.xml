@@ -18,6 +18,8 @@
 
     <data>
 
+        <import type="io.github.horaciocome1.reaque.util.Constants" />
+
         <variable
             name="viewmodel"
             type="io.github.horaciocome1.reaque.ui.posts.PostsViewModel" />
@@ -28,9 +30,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ProgressBar
+            android:id="@+id/progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/default_progressbar_size"
+            android:layout_gravity="center"
+            android:layout_margin="32dp" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/content_constraintlayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/primaryColor">
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -46,45 +57,30 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginLeft="32dp"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="32dp"
-                    android:layout_marginRight="32dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_margin="32dp"
                     android:orientation="vertical">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/title_textinputlayout"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/title_edittext"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/title"
+                        android:lineSpacingExtra="16sp"
+                        android:padding="16dp"
+                        android:text="@={viewmodel.title}"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@android:color/transparent"
-                            android:hint="Título"
-                            android:padding="16dp"
-                            android:text="@={viewmodel.postTitle}"
-                            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/message_textinputlayout"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/message_edittext"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@android:color/transparent"
-                            android:hint="Mensagem"
-                            android:padding="16dp"
-                            android:text="@={viewmodel.postMessage}"
-                            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/message"
+                        android:lineSpacingExtra="16sp"
+                        android:padding="16dp"
+                        android:text="@={viewmodel.message}"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                 </LinearLayout>
 
@@ -99,10 +95,11 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
                 android:padding="16dp"
-                android:text="Publicar"
-                android:onClick="@{() -> viewmodel.submitPost()}"
+                android:text="@string/posting"
+                android:onClick="@{ (view) -> viewmodel.submitPost(view) }"
                 app:cornerRadius="16dp"
-                app:icon="@drawable/outline_done_outline_18"
+                app:icon="@drawable/outline_done_18"
+                android:enabled="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -140,8 +137,9 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:padding="16dp"
-                android:text="Cancelar"
+                android:text="@string/cancel"
                 android:textColor="?colorControlNormal"
+                android:onClick="@{viewmodel::cancel}"
                 app:cornerRadius="16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/select_pic_button"
                 app:layout_constraintEnd_toStartOf="@+id/select_pic_button"
@@ -160,6 +158,11 @@
             app:behavior_hideable="true"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="16dp"
+                app:srcCompat="@drawable/outline_drag_handle_24" />
+
             <TextView
                 android:id="@+id/selected_topic_textview"
                 android:layout_width="wrap_content"
@@ -176,7 +179,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="0.1dp"
+                android:layout_height="@dimen/default_stroke_width"
                 android:background="@android:color/black" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -204,13 +207,15 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/background_bottomsheet_stroke"
+                    android:background="@drawable/background_bottomsheet_stroke_light"
                     android:orientation="vertical">
 
                     <ImageView
                         android:id="@+id/imageview"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        app:uri="@{viewmodel.imageUri}"
+                        app:type="@{Constants.DEFAULT}"/>
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/select_pic_from_camera_button"
@@ -218,7 +223,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="16dp"
-                        android:text="Camera"
+                        android:text="@string/camera"
                         app:icon="@drawable/outline_camera_18" />
 
                     <com.google.android.material.button.MaterialButton
@@ -227,7 +232,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="16dp"
-                        android:text="Galeria"
+                        android:text="@string/gallery"
                         app:icon="@drawable/outline_collections_18" />
 
                 </LinearLayout>

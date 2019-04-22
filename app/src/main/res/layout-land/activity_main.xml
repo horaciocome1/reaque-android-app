@@ -19,7 +19,6 @@
     android:id="@+id/activity_main_drawerlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primaryColor"
     tools:context=".ui.MainActivity">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -28,13 +27,14 @@
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="?attr/actionBarSize"
             app:elevation="0dp">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/activity_main_toolbar"
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="?attr/actionBarSize"
+                android:minHeight="?attr/actionBarSize" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -50,14 +50,13 @@
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/activity_main_navigationview"
+        android:id="@+id/navigationview"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:paddingTop="?attr/actionBarSize"
         android:layout_gravity="start"
-        app:itemIconTint="@drawable/color_navigation_drawer"
-        app:itemTextColor="@drawable/color_navigation_drawer"
-        android:background="@color/primaryColor"
+        app:itemIconTint="@drawable/color_side_navigation"
+        app:itemTextColor="@drawable/color_side_navigation"
         app:menu="@menu/navigation" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -8,64 +8,14 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
-                  <entry key="destination_comments">
+                  <entry key="destination_edit_profile">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="126" />
-                            <option name="y" value="959" />
+                            <option name="x" value="481" />
+                            <option name="y" value="234" />
                           </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_open_profile_from_comments">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="destination_favorites">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-1542" />
-                            <option name="y" value="419" />
-                          </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_open_comments_from_favorites">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                            <entry key="action_open_posts_from_favorites">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                            <entry key="action_open_profile_from_favorites">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                            <entry key="action_open_read_from_favorites">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                            <entry key="action_open_users_from_favorites">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -75,23 +25,23 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="665" />
-                            <option name="y" value="-43" />
+                            <option name="x" value="-318" />
+                            <option name="y" value="19" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_open_post">
+                            <entry key="action_open_edit_profile">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_open_posting">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
                             <entry key="action_open_profile_from_more">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                            <entry key="action_open_search">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -111,17 +61,12 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-932" />
-                            <option name="y" value="414" />
+                            <option name="x" value="-312" />
+                            <option name="y" value="1270" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_open_comments_from_notifications">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
                             <entry key="action_open_profile_from_notifications">
                               <value>
                                 <LayoutPositions />
@@ -142,8 +87,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="1087" />
-                            <option name="y" value="-118" />
+                            <option name="x" value="467" />
+                            <option name="y" value="-581" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -154,8 +99,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="422" />
-                            <option name="y" value="-361" />
+                            <option name="x" value="506" />
+                            <option name="y" value="1718" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -175,13 +120,13 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="1045" />
-                            <option name="y" value="2022" />
+                            <option name="x" value="490" />
+                            <option name="y" value="655" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_open_posts_from_profile">
+                            <entry key="action_open_read_from_profile">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -201,49 +146,13 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="1348" />
-                            <option name="y" value="-1394" />
+                            <option name="x" value="1052" />
+                            <option name="y" value="1251" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_open_comments_from_read">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                            <entry key="action_open_profile_from_read">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
                             <entry key="action_open_viewer_from_read">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="destination_search">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="1036" />
-                            <option name="y" value="475" />
-                          </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_open_profile_from_search">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                            <entry key="action_open_read_from_search">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -258,40 +167,9 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="1162" />
-                            <option name="y" value="-565" />
+                            <option name="x" value="476" />
+                            <option name="y" value="-169" />
                           </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="destination_topics">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-473" />
-                            <option name="y" value="381" />
-                          </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_open_comments_from_topics">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                            <entry key="action_open_posts_from_topics">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                            <entry key="action_open_users_from_topics">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -301,13 +179,13 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="190" />
-                            <option name="y" value="210" />
+                            <option name="x" value="-307" />
+                            <option name="y" value="659" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_open_profile">
+                            <entry key="action_open_profile_from_users">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -322,8 +200,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="1703" />
-                            <option name="y" value="187" />
+                            <option name="x" value="1556" />
+                            <option name="y" value="666" />
                           </Point>
                         </option>
                       </LayoutPositions>

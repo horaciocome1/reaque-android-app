@@ -18,12 +18,14 @@ package io.github.horaciocome1.reaque.data.notifications
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import io.github.horaciocome1.reaque.utilities.notification
-import io.github.horaciocome1.reaque.utilities.onListenFailed
+import io.github.horaciocome1.reaque.util.notification
+import io.github.horaciocome1.reaque.util.onListenFailed
 
 class NotificationsWebService {
 
     private val tag = "NotificationsWebService"
+
+    private var notificationsList = mutableListOf<Notification>()
 
     private val ref = FirebaseFirestore.getInstance().collection("notifications")
 
@@ -31,24 +33,26 @@ class NotificationsWebService {
 
     val notifications = MutableLiveData<List<Notification>>()
         get() {
-            auth = FirebaseAuth.getInstance()
-            ref.whereEqualTo(auth.currentUser?.uid.toString(), true)
-                .addSnapshotListener { snapshot, exception ->
-                    when {
-                        exception != null -> onListenFailed(tag, exception)
-                        snapshot != null -> {
-                            val notificationsList = mutableListOf<Notification>()
-                            for (doc in snapshot)
-                                notificationsList.add(doc.notification)
-                            field.value = notificationsList
+            if (notificationsList.isEmpty()) {
+                auth = FirebaseAuth.getInstance()
+                auth.currentUser?.let { user ->
+                    ref.whereEqualTo("users.${user.uid}", true)
+                        .addSnapshotListener { snapshot, exception ->
+                            when {
+                                exception != null -> onListenFailed(tag, exception)
+                                snapshot != null -> {
+                                    notificationsList = mutableListOf()
+                                    field.value = notificationsList.apply {
+                                        for (doc in snapshot)
+                                            add(doc.notification)
+                                        sortByDescending { it.timestamp }
+                                    }
+                                }
+                            }
                         }
-                    }
                 }
+            }
             return field
         }
-
-    init {
-
-    }
 
 }

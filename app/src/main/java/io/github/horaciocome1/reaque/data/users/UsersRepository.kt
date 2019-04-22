@@ -16,19 +16,34 @@
 package io.github.horaciocome1.reaque.data.users
 
 import androidx.lifecycle.LiveData
+import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
 
-class UsersRepository private constructor(private val usersWebService: UsersWebService) {
+class UsersRepository private constructor(private val service: UsersWebService) {
 
-    fun addUser(onSuccessful: () -> Unit) = usersWebService.addUser(onSuccessful)
+    fun addUser(onSuccessful: () -> Unit) = service.addUser(onSuccessful)
 
-    fun getUsers(topic: Topic) = usersWebService.getUsers(topic)
+    fun editUser(user: User, onSuccessful: () -> Unit) = service.editUser(user, onSuccessful)
 
-    fun getUsers(user: User) = usersWebService.getUsers(user)
+    fun addTopicToUser(topic: Topic, onSuccessful: () -> Unit) = service.addTopicToUser(topic, onSuccessful)
 
-    val me = usersWebService.me as LiveData<User>
+    fun addToFavorites(post: Post, onSuccessful: () -> Unit) = service.addToFavorites(post, onSuccessful)
 
-    val favorites = usersWebService.getFavorites()
+    fun removeFromFavorites(post: Post, onSuccessful: () -> Unit) = service.removeFromFavorites(post, onSuccessful)
+
+    fun addToFavorites(user: User, onSuccessful: () -> Unit) = service.addToFavorites(user, onSuccessful)
+
+    fun removeFromFavorites(user: User, onSuccessful: () -> Unit) = service.removeFromFavorites(user, onSuccessful)
+
+    fun isThisFavoriteForMe(user: User) = service.isThisFavoriteForMe(user)
+
+    fun getUsers(topic: Topic) = service.getUsers(topic)
+
+    fun getUsers(user: User) = service.getUsers(user)
+
+    val me = service.me as LiveData<User>
+
+    val favorites = service.getFavorites()
 
     companion object {
         @Volatile
@@ -37,6 +52,7 @@ class UsersRepository private constructor(private val usersWebService: UsersWebS
         fun getInstance(usersWebService: UsersWebService) = instance ?: synchronized(this) {
             instance ?: UsersRepository(usersWebService).also { instance = it }
         }
+
     }
 
 }

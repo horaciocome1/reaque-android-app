@@ -18,9 +18,15 @@
 
     <data>
 
+        <import type="io.github.horaciocome1.reaque.util.Constants" />
+
         <variable
             name="post"
             type="io.github.horaciocome1.reaque.data.posts.Post" />
+
+        <variable
+            name="viewmodel"
+            type="io.github.horaciocome1.reaque.ui.posts.PostsViewModel" />
 
     </data>
 
@@ -39,24 +45,29 @@
             android:id="@+id/fragment_read_cover2_imageview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            app:url="@{post.pic}"
+            app:type="@{Constants.BLUR}"/>
 
         <ImageView
             android:id="@+id/fragment_read_cover_imageview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="112dp" />
+            android:layout_marginBottom="120dp"
+            android:onClick="@{(view) -> viewmodel.openViewer(view, post)}"
+            app:url="@{post.pic}"
+            app:type="@{Constants.DEFAULT}"/>
 
         <LinearLayout
             android:id="@+id/fragment_read_bottom_sheet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="54.5dp"
-            android:background="@drawable/background_bottom_sheet"
+            android:background="@drawable/background_bottomsheet"
             android:orientation="vertical"
             app:behavior_hideable="false"
-            app:behavior_peekHeight="112dp"
+            app:behavior_peekHeight="120dp"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
             <androidx.core.widget.NestedScrollView
@@ -69,9 +80,15 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="16dp"
+                        app:srcCompat="@drawable/outline_drag_handle_24" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:maxWidth="250dp"
                         android:layout_marginStart="32dp"
                         android:layout_marginLeft="32dp"
                         android:layout_marginTop="32dp"
@@ -98,8 +115,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginLeft="32dp"
+                        android:layout_marginStart="56dp"
+                        android:layout_marginLeft="56dp"
                         android:layout_marginTop="32dp"
                         android:layout_marginEnd="32dp"
                         android:layout_marginRight="32dp"
@@ -111,8 +128,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginLeft="32dp"
+                        android:layout_marginStart="56dp"
+                        android:layout_marginLeft="56dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="32dp"
                         android:layout_marginRight="32dp"
@@ -131,35 +148,66 @@
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/add_to_favorites_button"
-                            style="@style/Widget.MaterialComponents.Button.UnelevatedButton.Icon"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:layout_marginLeft="16dp"
                             android:layout_marginEnd="4dp"
                             android:layout_marginRight="4dp"
-                            android:layout_weight="0.7"
+                            android:layout_weight="1"
                             android:padding="16dp"
-                            android:text="Favorito"
+                            android:text="@string/favorite"
+                            android:onClick="@{(button) -> viewmodel.addToFavorites(button, post)}"
+                            android:textColor="@color/orange"
                             app:cornerRadius="16dp"
-                            app:backgroundTint="@color/favoriteColor"
-                            app:icon="@drawable/outline_bookmark_border_18" />
+                            app:icon="@drawable/outline_bookmark_border_18"
+                            app:iconTint="@color/orange"
+                            app:rippleColor="@color/orange"
+                            app:strokeColor="@color/orange"
+                            app:strokeWidth="@dimen/default_stroke_width" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/remove_from_favorites_button"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginEnd="4dp"
+                            android:layout_marginRight="4dp"
+                            android:layout_weight="1"
+                            android:onClick="@{(button) -> viewmodel.removeFromFavorites(button, post)}"
+                            android:padding="16dp"
+                            android:text="@string/undo"
+                            android:textColor="@color/orange"
+                            android:visibility="gone"
+                            app:cornerRadius="16dp"
+                            app:icon="@drawable/outline_bookmark_border_18"
+                            app:iconTint="@color/orange"
+                            app:rippleColor="@color/orange"
+                            app:strokeColor="@color/orange"
+                            app:strokeWidth="@dimen/default_stroke_width" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/comments_button"
-                            style="@style/Widget.MaterialComponents.Button.UnelevatedButton.Icon"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
                             android:layout_marginLeft="4dp"
                             android:layout_marginEnd="16dp"
                             android:layout_marginRight="16dp"
-                            android:layout_weight="1"
+                            android:layout_weight="0.7"
                             android:padding="16dp"
-                            android:text="Comentários"
+                            android:text="@string/share"
+                            android:textColor="@color/green"
                             app:cornerRadius="16dp"
-                            app:backgroundTint="@color/commentsColor"
-                            app:icon="@drawable/outline_forum_18" />
+                            app:icon="@drawable/outline_share_18"
+                            app:iconTint="@color/green"
+                            app:rippleColor="@color/green"
+                            app:strokeColor="@color/green"
+                            app:strokeWidth="@dimen/default_stroke_width" />
 
                     </LinearLayout>
 
@@ -170,12 +218,14 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/profile_pic_imageview"
+            android:id="@+id/imageview"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_margin="32dp"
             android:layout_gravity="top|end"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            app:url="@{post.user.pic}"
+            app:type="@{Constants.CIRCLE}"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

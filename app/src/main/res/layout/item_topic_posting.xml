@@ -32,11 +32,11 @@
             android:id="@+id/textView2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
+            android:layout_marginStart="56dp"
+            android:layout_marginLeft="56dp"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginRight="32dp"
+            android:layout_marginEnd="56dp"
+            android:layout_marginRight="56dp"
             android:layout_marginBottom="24dp"
             android:text="@{topic.title}"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
@@ -48,11 +48,14 @@
 
         <View
             android:id="@+id/divider"
-            android:layout_width="56dp"
-            android:layout_height="1dp"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/default_stroke_width"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
             android:background="@color/secondaryColor"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView2" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

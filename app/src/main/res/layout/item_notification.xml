@@ -17,6 +17,8 @@
 
     <data>
 
+        <import type="io.github.horaciocome1.reaque.util.Constants" />
+
         <variable
             name="notification"
             type="io.github.horaciocome1.reaque.data.notifications.Notification" />
@@ -32,9 +34,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="4dp"
-        app:cardCornerRadius="16dp"
-        app:cardBackgroundColor="@color/primaryLightColor"
-        app:cardElevation="0dp">
+        app:strokeColor="@color/default_stroke_color"
+        app:strokeWidth="@dimen/default_stroke_width">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -42,7 +43,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/users_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
@@ -69,13 +70,15 @@
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                app:layout_constraintTop_toBottomOf="@+id/users_textview" />
 
             <ImageView
                 android:id="@+id/item_notification_imageview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
+                app:url="@{notification.pic}"
+                app:type="@{Constants.DEFAULT}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

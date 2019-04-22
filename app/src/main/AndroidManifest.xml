@@ -37,7 +37,7 @@
             </intent-filter>
 
         </activity>
-        <activity android:name="io.github.horaciocome1.reaque.ui.users.SignInActivity" />
+        <activity android:name="io.github.horaciocome1.reaque.ui.signin.SignInActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

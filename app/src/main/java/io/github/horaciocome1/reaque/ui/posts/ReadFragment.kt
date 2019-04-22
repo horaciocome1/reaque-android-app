@@ -15,77 +15,51 @@
 
 package io.github.horaciocome1.reaque.ui.posts
 
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.databinding.FragmentReadBinding
-import io.github.horaciocome1.reaque.ui.MainActivity
-import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.fragment_read.*
 
 class ReadFragment: Fragment() {
 
     private lateinit var binding: FragmentReadBinding
+    private lateinit var behavior: BottomSheetBehavior<LinearLayout>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentReadBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onStart() {
-        super.onStart()
-        arguments?.let { args ->
-            val postId = ReadFragmentArgs.fromBundle(args).postId
-            viewModel.getPosts(Post(postId)).observe(this, Observer { post ->
-                if (post.id == "")
-                    fragment_read_bottom_sheet.visibility = View.GONE
-                else {
-                    fragment_read_bottom_sheet.visibility = View.VISIBLE
-                    BottomSheetBehavior.from(fragment_read_bottom_sheet).state = BottomSheetBehavior.STATE_COLLAPSED
-                    post.run {
-                        binding.post = this
-                        Glide.with(this@ReadFragment).run {
-                            load(pic)
-                                .into(fragment_read_cover_imageview)
-                            load(pic)
-                                .apply(RequestOptions.bitmapTransform(BlurTransformation(2, 14)))
-                                .into(fragment_read_cover2_imageview)
-                            load(user.pic)
-                                .apply(RequestOptions.circleCropTransform())
-                                .into(profile_pic_imageview)
-                        }
-                        profile_pic_imageview.setOnClickListener {
-                            val openProfile = ReadFragmentDirections.actionOpenProfileFromRead(this.user.id)
-                            Navigation.findNavController(it).navigate(openProfile)
-                        }
-                        fragment_read_cover_imageview.setOnClickListener {
-                            val openViewer = ReadFragmentDirections.actionOpenViewerFromRead(this.pic)
-                            Navigation.findNavController(it).navigate(openViewer)
-                        }
-                        comments_button.setOnClickListener {
-                            val openComments =
-                                ReadFragmentDirections.actionOpenCommentsFromRead(post.id, "", false, true)
-                            Navigation.findNavController(it).navigate(openComments)
-                        }
-                    }
-                }
-            })
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        behavior = BottomSheetBehavior.from(fragment_read_bottom_sheet).apply {
+            state = BottomSheetBehavior.STATE_HALF_EXPANDED
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
-            (activity as MainActivity).supportActionBar?.show()
+    override fun onStart() {
+        super.onStart()
+        binding.let {
+            it.lifecycleOwner = this
+            it.viewmodel = viewModel
+        }
+        arguments?.let { bundle ->
+            val post = Post(ReadFragmentArgs.fromBundle(bundle).postId)
+            viewModel.getPosts(post).observe(this, Observer {
+                binding.post = it
+            })
+            viewModel.isThisFavoriteForMe(post).observe(this, Observer {
+                add_to_favorites_button.visibility = if (it) View.GONE else View.VISIBLE
+                remove_from_favorites_button.visibility = if (it) View.VISIBLE else View.GONE
+            })
+        }
     }
 
 }

@@ -18,12 +18,9 @@ package io.github.horaciocome1.reaque.data.users
 data class User(var id: String) {
 
     var name = ""
-    var description = ""
+    var bio = ""
     var pic = ""
-    var totalFollowers = ""
-    var totalPosts = ""
-    var town = ""
-    var since = ""
+    var address = ""
     var email = ""
 
 }

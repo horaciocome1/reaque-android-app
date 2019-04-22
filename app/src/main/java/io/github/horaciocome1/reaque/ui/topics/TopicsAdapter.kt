@@ -19,17 +19,18 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.databinding.ItemTopicBinding
+import io.github.horaciocome1.reaque.databinding.ItemTopicPostingBinding
 
 class TopicsAdapter(private val list: List<Topic>) : RecyclerView.Adapter<TopicsAdapter.ViewHolder>() {
 
-    lateinit var binding: ItemTopicBinding
-    lateinit var context: Context
+    private lateinit var binding: ItemTopicBinding
+    private lateinit var context: Context
+
+    //    the indicator of last clicked topic
+    private var indicator: View? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
@@ -40,31 +41,36 @@ class TopicsAdapter(private val list: List<Topic>) : RecyclerView.Adapter<Topics
     override fun getItemCount() = list.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        list[position].run {
-            binding.topic = this
-
-            Glide.with(context)
-                .load(cover)
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(binding.imageview)
-
-            binding.postsButton.setOnClickListener {
-                val openTopicAction = TopicsFragmentDirections.actionOpenPostsFromTopics(id, title, true, false)
-                Navigation.findNavController(it).navigate(openTopicAction)
-            }
-
-            binding.usersButton.setOnClickListener {
-                val openUsersAction = TopicsFragmentDirections.actionOpenUsersFromTopics(id, title)
-                Navigation.findNavController(it).navigate(openUsersAction)
-            }
-
-            binding.commentsButton.setOnClickListener {
-                val openCommentsAction = TopicsFragmentDirections.actionOpenCommentsFromTopics(id, title, true, false)
-                Navigation.findNavController(it).navigate(openCommentsAction)
+        binding.run {
+            topic = list[position]
+            indicator.visibility = View.INVISIBLE
+            imageview.setOnClickListener {
+                this@TopicsAdapter.indicator?.visibility = View.INVISIBLE
+                indicator.visibility = View.VISIBLE
+                this@TopicsAdapter.indicator = indicator
             }
         }
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
+
+    class Simple(private val list: List<Topic>) : RecyclerView.Adapter<Simple.ViewHolder>() {
+
+        lateinit var binding: ItemTopicPostingBinding
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+            binding = ItemTopicPostingBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            return ViewHolder(binding.root)
+        }
+
+        override fun getItemCount() = list.size
+
+        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+            binding.topic = list[position]
+        }
+
+        class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
+
+    }
 
 }

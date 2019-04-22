@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~    Copyright 2018 Horácio Flávio Comé Júnior
+  ~    Copyright 2019 Horácio Flávio Comé Júnior
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
   ~    you may not use this file except in compliance with the License.
@@ -14,33 +14,102 @@
   ~    See the License for the specific language governing permissions and limitations under the License.
   -->
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fragment_users_recyclerview"
+    <data>
+
+        <import type="java.util.List" />
+
+        <import type="io.github.horaciocome1.reaque.data.topics.Topic" />
+
+        <import type="io.github.horaciocome1.reaque.data.users.User" />
+
+        <import type="android.content.res.Configuration" />
+
+        <variable
+            name="topics"
+            type="List&lt;Topic&gt;" />
+
+        <variable
+            name="users"
+            type="List&lt;User&gt;" />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="vertical" />
+        android:layout_height="match_parent">
 
-    <ProgressBar
-        android:id="@+id/fragment_users_progressbar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|top"
-        android:layout_marginTop="32dp" />
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/fragment_users_tap_to_update_button"
-        android:layout_width="wrap_content"
-        android:layout_height="38dp"
-        android:layout_gravity="bottom|center"
-        android:layout_marginBottom="32dp"
-        android:text="Actualizar"
-        android:textSize="12sp"
-        android:visibility="gone"
-        app:cornerRadius="12dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+                    android:lineSpacingExtra="8sp"
+                    android:text="@string/users_title"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
+                    android:textColor="@color/primaryTextColor" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/default_stroke_width"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginLeft="24dp"
+                    android:background="@color/secondaryColor" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/topics_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:scrollbars="none"
+                    app:orientation="@{Configuration.ORIENTATION_PORTRAIT}"
+                    app:topics="@{topics}" />
+
+                <ProgressBar
+                    android:id="@+id/topics_progressbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/users_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:scrollbars="none"
+                    app:users="@{users}" />
+
+                <ProgressBar
+                    android:id="@+id/users_progressbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/favorites_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="16dp"
+            android:tint="@color/primaryLightColor"
+            app:srcCompat="@drawable/outline_bookmark_border_18" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

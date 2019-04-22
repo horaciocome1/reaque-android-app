@@ -1,39 +1,5 @@
-matilde sem posts
+coroutines on data model
 
-write post
+edit profile
 
-FAVORITES DESTINATION
-falta cloud
-
-fazer um documento data rules
-modelaar os dados
-
-terminar o processo para obter dados pesquisados (por um progressbar onde aparece butao)
-
-fazer com que seja possivel conversar e escrever posts
-
-
-
-
-
-MYPROFILEFRAGMENT && PROFILEFRAGMENT
-merge into one class -> {
-    simple check if the nullable id is passed or not
-}
-
-USERPOSTSFRAGMENT && POSTSFRAGMENT
-merge into one class -> {
-    require two nullable strings (topicId and userId)
-    sequent actions are based on which is not null
-}
-
-READFRAGMENT && PROFILEFRAGMENT
-no need for dealing with lists (
-    simple check if id isEmpty
-    only if not stop showing progressbar
-)
-
-PostWebService {
-    package variable that say if it is an user id or an topic id. that is passed throught the functions + the id
-    it is to avoid sending complex objects while all we need is only a variable on it
-}
+check if has internet connection

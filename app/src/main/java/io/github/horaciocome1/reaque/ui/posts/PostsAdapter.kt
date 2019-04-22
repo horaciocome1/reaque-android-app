@@ -20,7 +20,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.databinding.ItemPostBinding
 
@@ -39,12 +38,7 @@ class PostsAdapter(private val list: List<Post>)
     override fun getItemCount() = list.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        list[position].run {
-            binding.post = this
-            Glide.with(context)
-                .load(pic)
-                .into(binding.itemPostCoverImageview)
-        }
+        binding.post = list[position]
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)

@@ -14,7 +14,7 @@
   -->
 
 <resources>
-    <string name="app_name">reaque</string>
+    <string name="app_name">Reaque</string>
 
     <!-- 01 URL -->
     <string name="terms_and_conditions_url">https://github.com/horaciocome1/reaque/blob/master/TERMS_AND_CONDITIONS.md</string>
@@ -22,5 +22,47 @@
     <string name="licence_url">https://github.com/horaciocome1/reaque/blob/master/LICENSE</string>
     <string name="read_me_url">https://github.com/horaciocome1/reaque/blob/master/README.md</string>
     <string name="project_url">https://github.com/horaciocome1/reaque</string>
+
+    <string name="topics">Tópicos</string>
+    <string name="posts">Publicações</string>
+    <string name="users">Autores</string>
+    <string name="comments">Comentários</string>
+    <string name="forum">Fórum</string>
+    <string name="more">Mais</string>
+    <string name="notifications">Notificações</string>
+    <string name="favorite">Favorito</string>
+
+    <string name="posts_title">Encontre publicações do seu interesse</string>
+    <string name="users_title">Encontre autores que possam lhe interessar</string>
+    <string name="sign_out">Sair</string>
+    <string name="edit">Editar</string>
+    <string name="posting">Publicar</string>
+    <string name="settings">Opções avançadas</string>
+    <string name="frequently_asked_questions">Perguntas frequentes</string>
+    <string name="feedback">Feedback</string>
+    <string name="about">Sobre</string>
+    <string name="app_version">1.0</string>
+    <string name="version">Versão</string>
+    <string name="terms_and_conditions">Termos e condições</string>
+    <string name="privacy_policy">Política de privacidade</string>
+    <string name="open_source_licenses">Licenças open source</string>
+    <string name="repository">Repositório</string>
+    <string name="donate">Apoie ao desenvolvedor</string>
+    <string name="share">Partilhar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="send">Enviar</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Galeria</string>
+    <string name="done_adding_to_favorites">Adicionado aos favoritos</string>
+    <string name="profile">Perfil</string>
+    <string name="title">Título</string>
+    <string name="message">Mensagem</string>
+    <string name="whats_new">O que há de novo?</string>
+    <string name="address">Morada [Cidade, Província]</string>
+    <string name="bio">Bio</string>
+    <string name="name">Nome</string>
+    <string name="undo">Desfazer</string>
+    <string name="submit">Submeter</string>
+    <string name="sign_in_message">Por-favor, aguarde enquanto a sessão é iniciada.</string>
 
 </resources>

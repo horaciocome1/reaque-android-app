@@ -17,6 +17,7 @@ package io.github.horaciocome1.reaque.ui
 
 import android.app.Activity
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.view.Menu
@@ -28,22 +29,23 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.google.firebase.auth.FirebaseAuth
 import io.github.horaciocome1.reaque.R
-import io.github.horaciocome1.reaque.ui.users.getSignInActivityIntent
-import io.github.horaciocome1.reaque.utilities.Constants
+import io.github.horaciocome1.reaque.ui.signin.getSignInActivityIntent
+import io.github.horaciocome1.reaque.util.Constants
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val auth = FirebaseAuth.getInstance()
+    private lateinit var auth: FirebaseAuth
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        auth = FirebaseAuth.getInstance()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
-        setSupportActionBar(activity_main_toolbar)
+        setSupportActionBar(toolbar)
     }
 
     override fun onResume() {
@@ -54,6 +56,28 @@ class MainActivity : AppCompatActivity() {
             setupBottomNavigationMenu()
             setupSideNavigationMenu()
             setupActionBar()
+            navController.addOnDestinationChangedListener { _, destination, _ ->
+                if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    @Suppress("PLUGIN_WARNING")
+                    bottomnavigationview.visibility = when (destination.id) {
+                        R.id.destination_posting -> View.GONE
+                        R.id.destination_edit_profile -> View.GONE
+                        else -> View.VISIBLE
+                    }
+
+                    supportActionBar?.run {
+                        when (destination.id) {
+                            R.id.destination_posts -> hide()
+                            R.id.destination_users -> hide()
+                            R.id.destination_notifications -> hide()
+                            R.id.destination_more -> hide()
+                            R.id.destination_posting -> hide()
+                            R.id.destination_edit_profile -> hide()
+                            else -> show()
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -75,6 +99,7 @@ class MainActivity : AppCompatActivity() {
             Constants.ACTIVITY_SIGN_IN_REQUEST_CODE -> {
                 when (resultCode) {
                     Activity.RESULT_OK -> {
+                        auth.currentUser?.reload()
                         setupBottomNavigationMenu()
                         setupSideNavigationMenu()
                         setupActionBar()
@@ -85,17 +110,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupBottomNavigationMenu() = activity_main_bottomnavigationview?.let {
+    private fun setupBottomNavigationMenu() = bottomnavigationview?.let {
         NavigationUI.setupWithNavController(it, navController)
     }
 
-    private fun setupSideNavigationMenu() = activity_main_navigationview?.let {
+    private fun setupSideNavigationMenu() = navigationview?.let {
         NavigationUI.setupWithNavController(it, navController)
     }
 
     private fun setupActionBar() =
         NavigationUI.setupActionBarWithNavController(this, navController, activity_main_drawerlayout)
-
-
 
 }
