@@ -89,6 +89,7 @@
                     android:onClick="@{viewmodel::submitProfile}"
                     android:padding="@dimen/default_padding"
                     android:text="@string/submit"
+                    android:textColor="@color/secondaryColor"
                     app:cornerRadius="@dimen/default_corner_radius"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
