@@ -24,9 +24,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestOptions
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.databinding.FragmentMoreBinding
 import io.github.horaciocome1.reaque.ui.MainActivity
