@@ -39,7 +39,9 @@ class ReadFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        behavior = BottomSheetBehavior.from(fragment_read_bottom_sheet)
+        behavior = BottomSheetBehavior.from(fragment_read_bottom_sheet).apply {
+            state = BottomSheetBehavior.STATE_HALF_EXPANDED
+        }
     }
 
     override fun onStart() {
@@ -52,8 +54,6 @@ class ReadFragment: Fragment() {
             val post = Post(ReadFragmentArgs.fromBundle(bundle).postId)
             viewModel.getPosts(post).observe(this, Observer {
                 binding.post = it
-                behavior.state =
-                    if (it.id.isBlank()) BottomSheetBehavior.STATE_HIDDEN else BottomSheetBehavior.STATE_HALF_EXPANDED
             })
             viewModel.isThisFavoriteForMe(post).observe(this, Observer {
                 add_to_favorites_button.visibility = if (it) View.GONE else View.VISIBLE
