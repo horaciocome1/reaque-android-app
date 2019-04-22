@@ -61,7 +61,7 @@ class BindingAdapters {
 
             @BindingAdapter("notifications")
             @JvmStatic
-            fun RecyclerView.load(notifications: List<Notification>?) {
+            fun RecyclerView.loadNotifications(notifications: List<Notification>?) {
                 notifications?.let {
                     layoutManager = LinearLayoutManager(context)
                     adapter = NotificationsAdapter(it)
@@ -94,7 +94,7 @@ class BindingAdapters {
 
             @BindingAdapter("topics", "orientation")
             @JvmStatic
-            fun RecyclerView.load(topics: List<Topic>?, orientation: Int?) {
+            fun RecyclerView.loadTopics(topics: List<Topic>?, orientation: Int?) {
                 topics?.let {
                     layoutManager = LinearLayoutManager(
                             context,
@@ -118,7 +118,7 @@ class BindingAdapters {
 
             @BindingAdapter("posts")
             @JvmStatic
-            fun RecyclerView.load(posts: List<Post>?) {
+            fun RecyclerView.loadPosts(posts: List<Post>?) {
                 posts?.let {
                     layoutManager = LinearLayoutManager(context)
                     adapter = PostsAdapter(it)
@@ -142,7 +142,7 @@ class BindingAdapters {
 
             @BindingAdapter("users")
             @JvmStatic
-            fun RecyclerView.load(users: List<User>?) {
+            fun RecyclerView.loadUsers(users: List<User>?) {
                 users?.let {
                     layoutManager = StaggeredGridLayoutManager(
                         when {
