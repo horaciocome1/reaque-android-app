@@ -38,6 +38,7 @@ class TopicsWebService {
                 when {
                     exception != null -> onListenFailed(tag, exception)
                     snapshot != null -> {
+                        topicsList = mutableListOf()
                         for (doc in snapshot.documents)
                             topicsList.add(doc.topic)
                         topics.value = topicsList
