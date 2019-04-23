@@ -105,6 +105,7 @@ class BindingAdapters {
                             false
                         )
                     adapter = TopicsAdapter(it)
+                    setHasFixedSize(true)
                 }
             }
 
