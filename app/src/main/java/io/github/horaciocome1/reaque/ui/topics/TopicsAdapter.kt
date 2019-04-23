@@ -52,6 +52,10 @@ class TopicsAdapter(private val list: List<Topic>) : RecyclerView.Adapter<Topics
         }
     }
 
+    override fun getItemId(position: Int) = position.toLong()
+
+    override fun getItemViewType(position: Int) = position
+
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
     class Simple(private val list: List<Topic>) : RecyclerView.Adapter<Simple.ViewHolder>() {
