@@ -20,9 +20,19 @@
 
         <import type="io.github.horaciocome1.reaque.util.Constants" />
 
+        <import type="java.util.List" />
+
+        <import type="io.github.horaciocome1.reaque.data.topics.Topic" />
+
+        <import type="android.content.res.Configuration" />
+
         <variable
             name="viewmodel"
             type="io.github.horaciocome1.reaque.ui.posts.PostsViewModel" />
+
+        <variable
+            name="topics"
+            type="List&lt;Topic&gt;" />
 
     </data>
 
@@ -185,7 +195,10 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/topics_recyclerview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:list="@{topics}"
+                app:orientation="@{Configuration.ORIENTATION_LANDSCAPE}"
+                app:type="@{Constants.SIMPLE}" />
 
         </LinearLayout>
 

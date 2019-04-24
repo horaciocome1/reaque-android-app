@@ -55,110 +55,86 @@ class BindingAdapters {
 
     }
 
-    class LoadNotifications {
+    class LoadList {
 
         companion object {
 
-            @BindingAdapter("notifications")
+            @Suppress("UNCHECKED_CAST")
+            @BindingAdapter("list", "orientation", "type", requireAll = false)
             @JvmStatic
-            fun RecyclerView.loadNotifications(notifications: List<Notification>?) {
-                notifications?.let {
-                    layoutManager = LinearLayoutManager(context)
-                    adapter = NotificationsAdapter(it)
-                    if (!hasOnClickListeners())
-                        addOnItemClickListener { view, position ->
-                            if (it.isNotEmpty())
-                                it[position].run {
-                                    val directions = when {
-                                        isUser -> NotificationsFragmentDirections.actionOpenProfileFromNotifications(
-                                            contentId
-                                        )
-                                        isPost -> NotificationsFragmentDirections.actionOpenReadFromNotifications(
-                                            contentId
-                                        )
-                                        else -> null
-                                    }
-                                    view.findNavController().navigate(directions!!)
-                                }
-                        }
+            fun RecyclerView.loadList(list: List<Any>?, orientation: Int?, type: Int?) {
+                list?.let {
+                    when {
+                        it.isListOfTopics -> loadTopics(it as List<Topic>, orientation!!, type!!)
+                        it.isListOfPosts -> loadPosts(it as List<Post>)
+                        it.isListOfUsers -> loadUsers(it as List<User>)
+                        it.isListOfNotifications -> loadNotifications(it as List<Notification>)
+                    }
                 }
             }
 
-        }
-
-    }
-
-    class LoadTopics {
-
-        companion object {
-
-            @BindingAdapter("topics", "orientation")
-            @JvmStatic
-            fun RecyclerView.loadTopics(topics: List<Topic>?, orientation: Int?) {
-                topics?.let {
-                    layoutManager = LinearLayoutManager(
-                            context,
-                        when (orientation) {
-                            Configuration.ORIENTATION_PORTRAIT -> RecyclerView.HORIZONTAL
-                            else -> RecyclerView.VERTICAL
-                        },
-                            false
-                        )
-                    adapter = TopicsAdapter(it)
-                    setItemViewCacheSize(it.size)
+            private fun RecyclerView.loadTopics(topics: List<Topic>, orientation: Int, type: Int) {
+                layoutManager = LinearLayoutManager(
+                    context,
+                    when (orientation) {
+                        Configuration.ORIENTATION_PORTRAIT -> RecyclerView.HORIZONTAL
+                        else -> RecyclerView.VERTICAL
+                    },
+                    false
+                )
+                adapter = when (type) {
+                    Constants.SIMPLE -> TopicsAdapter.Simple(topics)
+                    else -> {
+                        setItemViewCacheSize(topics.size)
+                        TopicsAdapter(topics)
+                    }
                 }
             }
 
-        }
+            private fun RecyclerView.loadPosts(posts: List<Post>) {
+                layoutManager = LinearLayoutManager(context)
+                adapter = PostsAdapter(posts)
+                addOnItemClickListener { view, position ->
+                    if (posts.isNotEmpty()) {
+                        val directions = PostsFragmentDirections.actionOpenReadFromPosts(posts[position].id)
+                        view.findNavController().navigate(directions)
+                    }
+                }
+            }
 
-    }
+            private fun RecyclerView.loadUsers(users: List<User>) {
+                layoutManager = StaggeredGridLayoutManager(
+                    when {
+                        users.size >= Constants.TWO_COLUMNS -> Constants.TWO_COLUMNS
+                        else -> Constants.SINGLE_COLUMN
+                    },
+                    RecyclerView.VERTICAL
+                )
+                adapter = UsersAdapter(users)
+                addOnItemClickListener { view, position ->
+                    if (users.isNotEmpty()) {
+                        val directions = UsersFragmentDirections.actionOpenProfileFromUsers(users[position].id)
+                        view.findNavController().navigate(directions)
+                    }
+                }
+            }
 
-    class LoadPosts {
-
-        companion object {
-
-            @BindingAdapter("posts")
-            @JvmStatic
-            fun RecyclerView.loadPosts(posts: List<Post>?) {
-                posts?.let {
-                    layoutManager = LinearLayoutManager(context)
-                    adapter = PostsAdapter(it)
-                    if (!hasOnClickListeners())
-                        addOnItemClickListener { view, position ->
-                            if (it.isNotEmpty()) {
-                                val directions = PostsFragmentDirections.actionOpenReadFromPosts(it[position].id)
-                                view.findNavController().navigate(directions)
+            private fun RecyclerView.loadNotifications(notifications: List<Notification>) {
+                layoutManager = LinearLayoutManager(context)
+                adapter = NotificationsAdapter(notifications)
+                addOnItemClickListener { view, position ->
+                    if (notifications.isNotEmpty())
+                        notifications[position].run {
+                            val directions = when {
+                                isUser -> NotificationsFragmentDirections.actionOpenProfileFromNotifications(
+                                    contentId
+                                )
+                                isPost -> NotificationsFragmentDirections.actionOpenReadFromNotifications(
+                                    contentId
+                                )
+                                else -> null
                             }
-                        }
-                }
-            }
-
-        }
-
-    }
-
-    class LoadUsers {
-
-        companion object {
-
-            @BindingAdapter("users")
-            @JvmStatic
-            fun RecyclerView.loadUsers(users: List<User>?) {
-                users?.let {
-                    layoutManager = StaggeredGridLayoutManager(
-                        when {
-                            it.size >= Constants.TWO_COLUMNS -> Constants.TWO_COLUMNS
-                            else -> Constants.SINGLE_COLUMN
-                        },
-                        RecyclerView.VERTICAL
-                    )
-                    adapter = UsersAdapter(it)
-                    if (!hasOnClickListeners())
-                        addOnItemClickListener { view, position ->
-                            if (it.isNotEmpty()) {
-                                val directions = UsersFragmentDirections.actionOpenProfileFromUsers(it[position].id)
-                                view.findNavController().navigate(directions)
-                            }
+                            view.findNavController().navigate(directions!!)
                         }
                 }
             }

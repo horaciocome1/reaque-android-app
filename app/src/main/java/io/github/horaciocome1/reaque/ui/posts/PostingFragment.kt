@@ -26,13 +26,9 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.card.MaterialCardView
-import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.databinding.FragmentPostingBinding
-import io.github.horaciocome1.reaque.ui.topics.TopicsAdapter
 import io.github.horaciocome1.reaque.util.Constants
 import io.github.horaciocome1.reaque.util.OnFocusChangeListener
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
@@ -44,8 +40,6 @@ class PostingFragment : Fragment() {
     private lateinit var selectPicBehavior: BottomSheetBehavior<MaterialCardView>
 
     private lateinit var binding: FragmentPostingBinding
-
-    private var topics = listOf<Topic>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentPostingBinding.inflate(inflater, container, false)
@@ -70,13 +64,13 @@ class PostingFragment : Fragment() {
             skipCollapsed = true
         }
         topics_recyclerview.addOnItemClickListener { _, position ->
-            if (topics.isNotEmpty()) {
-                selectTopicBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-                viewModel.let {
-                    it.post.topic = topics[position]
-                    binding.viewmodel = it
+            binding.topics?.let {
+                if (it.isNotEmpty()) {
+                    selectTopicBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                    viewModel.post.topic = it[position]
+                    binding.viewmodel = viewModel
+                    post_button.isEnabled = isPostReady
                 }
-                post_button.isEnabled = isPostReady
             }
         }
         select_topic_button.setOnClickListener {
@@ -102,11 +96,7 @@ class PostingFragment : Fragment() {
             post_button.isEnabled = isPostReady
         })
         viewModel.topics.observe(this, Observer {
-            topics = it
-            topics_recyclerview.run {
-                layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-                adapter = TopicsAdapter.Simple(topics)
-            }
+            binding.topics = it
         })
     }
 

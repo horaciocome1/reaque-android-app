@@ -27,6 +27,8 @@
 
         <import type="android.content.res.Configuration" />
 
+        <import type="io.github.horaciocome1.reaque.util.Constants" />
+
         <variable
             name="topics"
             type="List&lt;Topic&gt;" />
@@ -74,7 +76,8 @@
                     android:layout_marginTop="32dp"
                     android:scrollbars="none"
                     app:orientation="@{Configuration.ORIENTATION_PORTRAIT}"
-                    app:topics="@{topics}" />
+                    app:list="@{topics}"
+                    app:type="@{Constants.DEFAULT}" />
 
                 <ProgressBar
                     android:id="@+id/topics_progressbar"
@@ -88,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:scrollbars="none"
-                    app:posts="@{posts}" />
+                    app:list="@{posts}" />
 
                 <ProgressBar
                     android:id="@+id/posts_progressbar"
