@@ -38,14 +38,11 @@ class ImageUploaderWebService {
                         throw it
                     }
                 return@Continuation ref.downloadUrl
-            }).addOnCompleteListener { task ->
-                when (task.isSuccessful) {
-                    true -> onComplete(task.result.toString())
-                    else -> {
-                        onUploadFailed(tag)
-                        onFailure()
-                    }
-                }
+            }).addOnSuccessListener {
+                onComplete(it.toString())
+            }.addOnFailureListener {
+                onUploadFailed(tag)
+                onFailure()
             }
         }
     }
