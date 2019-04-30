@@ -204,7 +204,7 @@ class UsersWebService {
                         me.uid to true
                     )
                 )
-                ref.document(user.id).set(data, SetOptions.merge()).addOnSuccessListener { task ->
+                ref.document(user.id).set(data, SetOptions.merge()).addOnSuccessListener {
                     onSuccessful()
                 }
             }
