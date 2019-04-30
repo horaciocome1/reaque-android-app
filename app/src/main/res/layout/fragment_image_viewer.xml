@@ -34,8 +34,8 @@
 
         <ImageView
             android:id="@+id/imageview"
-            app:type="${Constants.DEFAULT}"
-            app:url="${url}"
+            app:type="@{Constants.DEFAULT}"
+            app:url="@{url}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
