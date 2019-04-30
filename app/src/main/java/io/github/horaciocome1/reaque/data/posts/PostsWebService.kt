@@ -22,10 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
-import io.github.horaciocome1.reaque.util.map
-import io.github.horaciocome1.reaque.util.onListenFailed
-import io.github.horaciocome1.reaque.util.onSnapshotNull
-import io.github.horaciocome1.reaque.util.post
+import io.github.horaciocome1.reaque.util.*
 
 class PostsWebService {
 
@@ -68,9 +65,8 @@ class PostsWebService {
                 pic = it.photoUrl.toString()
             }
         }
-        ref.add(post.map).addOnCompleteListener {
-            if (it.isSuccessful)
-                onSuccessful()
+        ref.add(post.map).addOnSuccessListener {
+            onSuccessful()
         }
     }
 
@@ -83,12 +79,8 @@ class PostsWebService {
                     when {
                         exception != null -> onListenFailed(tag, exception)
                         snapshot != null -> {
-                            topicPostsList = mutableListOf()
-                            topicPosts.value = topicPostsList.apply {
-                                for (doc in snapshot)
-                                    add(doc.post)
-                                sortByDescending { it.timestamp }
-                            }
+                            topicPostsList = snapshot.posts
+                            topicPosts.value = topicPostsList
                         }
                         else -> onSnapshotNull(tag)
                     }
@@ -107,12 +99,8 @@ class PostsWebService {
                     when {
                         exception != null -> onListenFailed(tag, exception)
                         snapshot != null -> {
-                            userPostsList = mutableListOf()
-                            userPosts.value = userPostsList.apply {
-                                for (doc in snapshot)
-                                    add(doc.post)
-                                sortByDescending { it.timestamp }
-                            }
+                            userPostsList = snapshot.posts
+                            userPosts.value = userPostsList
                         }
                         else -> onSnapshotNull(tag)
                     }
@@ -146,12 +134,8 @@ class PostsWebService {
                         when {
                             exception != null -> onListenFailed(tag, exception)
                             snapshot != null -> {
-                                favoritesList = mutableListOf()
-                                favorites.value = favoritesList.apply {
-                                    for (doc in snapshot)
-                                        add(doc.post)
-                                    sortByDescending { it.timestamp }
-                                }
+                                favoritesList = snapshot.posts
+                                favorites.value = favoritesList
                             }
                             else -> onSnapshotNull(tag)
                         }
@@ -169,9 +153,8 @@ class PostsWebService {
                     user.uid to true
                 )
             )
-            ref.document(post.id).set(data, SetOptions.merge()).addOnCompleteListener {
-                if (it.isSuccessful)
-                    onSuccessful()
+            ref.document(post.id).set(data, SetOptions.merge()).addOnSuccessListener {
+                onSuccessful()
             }
         }
     }
@@ -184,9 +167,8 @@ class PostsWebService {
                     user.uid to null
                 )
             )
-            ref.document(post.id).set(data, SetOptions.merge()).addOnCompleteListener {
-                if (it.isSuccessful)
-                    onSuccessful()
+            ref.document(post.id).set(data, SetOptions.merge()).addOnSuccessListener {
+                onSuccessful()
             }
         }
     }
@@ -195,22 +177,13 @@ class PostsWebService {
         isThisMyFavorite.value = false
         auth = FirebaseAuth.getInstance()
         auth.currentUser?.let {
-            ref.whereEqualTo("favorite_for.${it.uid}", true)
-                .addSnapshotListener { snapshot, exception ->
-                    when {
-                        exception != null -> onListenFailed(tag, exception)
-                        snapshot != null -> {
-                            for (doc in snapshot)
-                                if (doc.post.id.equals(post.id, false)) {
-                                    isThisMyFavorite.value = true
-                                    break
-                                } else
-                                    isThisMyFavorite.value = false
-                        }
-                        else -> onSnapshotNull(tag)
-                    }
+            ref.document(it.uid).addSnapshotListener { snapshot, exception ->
+                when {
+                    exception != null -> onListenFailed(tag, exception)
+                    snapshot != null -> isThisMyFavorite.value = snapshot["favorites.${post.id}"].toString().toBoolean()
+                    else -> onSnapshotNull(tag)
                 }
-
+            }
         }
         return isThisMyFavorite
     }

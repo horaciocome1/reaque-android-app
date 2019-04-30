@@ -66,68 +66,54 @@ class UsersWebService {
 
     fun addUser(onSuccessful: () -> Unit) {
         auth = FirebaseAuth.getInstance()
-        auth.currentUser?.let { user ->
-            ref.document(user.uid)
-                .set(user.map, SetOptions.merge())
-                .addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        onAddUserSucceed(tag)
-                        onSuccessful()
-                    } else
-                        onAddUserFailed(tag, it.exception)
-                }
+        auth.currentUser?.let {
+            ref.document(it.uid).set(it.map, SetOptions.merge()).addOnSuccessListener {
+                onAddUserSucceed(tag)
+                onSuccessful()
+            }.addOnFailureListener { exception ->
+                onAddUserFailed(tag, exception)
+            }
         }
     }
 
     fun editUser(user: User, onSuccessful: () -> Unit) {
         auth = FirebaseAuth.getInstance()
         auth.currentUser?.let {
-            ref.document(it.uid)
-                .set(user.map, SetOptions.merge())
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        onAddUserSucceed(tag)
-                        onSuccessful()
-                    } else
-                        onAddUserFailed(tag, task.exception)
-                }
+            ref.document(it.uid).set(user.map, SetOptions.merge()).addOnSuccessListener {
+                onAddUserSucceed(tag)
+                onSuccessful()
+            }.addOnFailureListener { exception ->
+                onAddUserFailed(tag, exception)
+            }
         }
     }
 
     fun addTopicToUser(topic: Topic, onSuccessful: () -> Unit) {
         auth = FirebaseAuth.getInstance()
-        auth.currentUser?.let { user ->
+        auth.currentUser?.let {
             val data = mapOf(
                 "topics" to mapOf(
                     topic.id to true
                 )
             )
-            ref.document(user.uid)
-                .set(data, SetOptions.merge())
-                .addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        onAddUserSucceed(tag)
-                        onSuccessful()
-                    } else
-                        onAddUserFailed(tag, it.exception)
-                }
+            ref.document(it.uid).set(data, SetOptions.merge()).addOnSuccessListener {
+                onAddUserSucceed(tag)
+                onSuccessful()
+            }.addOnFailureListener { exception ->
+                onAddUserFailed(tag, exception)
+            }
         }
     }
 
     fun getUsers(topic: Topic): LiveData<List<User>> {
         if (!topicId.equals(topic.id, true)) {
             topicUsers.value = mutableListOf()
-            ref.whereEqualTo("topics.${topic.id}", true)
-                .addSnapshotListener { snapshot, exception ->
+            ref.whereEqualTo("topics.${topic.id}", true).addSnapshotListener { snapshot, exception ->
                     when {
                         exception != null -> onListenFailed(tag, exception)
                         snapshot != null -> {
-                            topicUsersList = mutableListOf()
-                            topicUsers.value = topicUsersList.apply {
-                                for (doc in snapshot.documents)
-                                    add(doc.user)
-                                sortBy { it.name }
-                            }
+                            topicUsersList = snapshot.users
+                            topicUsers.value = topicUsersList
                         }
                         else -> onSnapshotNull(tag)
                     }
@@ -161,12 +147,8 @@ class UsersWebService {
                         when {
                             exception != null -> onListenFailed(tag, exception)
                             snapshot != null -> {
-                                favoritesList = mutableListOf()
-                                favorites.value = favoritesList.apply {
-                                    for (doc in snapshot.documents)
-                                        add(doc.user)
-                                    sortBy { it.name }
-                                }
+                                favoritesList = snapshot.users
+                                favorites.value = favoritesList
                             }
                             else -> onSnapshotNull(tag)
                         }
@@ -185,9 +167,8 @@ class UsersWebService {
                     post.id to true
                 )
             )
-            ref.document(user.uid).set(data, SetOptions.merge()).addOnCompleteListener {
-                if (it.isSuccessful)
-                    onSuccessful()
+            ref.document(user.uid).set(data, SetOptions.merge()).addOnSuccessListener {
+                onSuccessful()
             }
         }
     }
@@ -201,9 +182,8 @@ class UsersWebService {
                     post.id to null
                 )
             )
-            ref.document(user.uid).set(data, SetOptions.merge()).addOnCompleteListener {
-                if (it.isSuccessful)
-                    onSuccessful()
+            ref.document(user.uid).set(data, SetOptions.merge()).addOnSuccessListener {
+                onSuccessful()
             }
         }
     }
@@ -217,19 +197,15 @@ class UsersWebService {
                     user.id to true
                 )
             )
-            ref.document(me.uid).set(data, SetOptions.merge()).addOnCompleteListener {
-                if (it.isSuccessful) {
-                    // add my id to the profile of the user i like
-                    data = mapOf(
-                        "favorite_for" to mapOf(
-                            me.uid to true
-                        )
+            ref.document(me.uid).set(data, SetOptions.merge()).addOnSuccessListener {
+                // add my id to the profile of the user i like
+                data = mapOf(
+                    "favorite_for" to mapOf(
+                        me.uid to true
                     )
-                    ref.document(user.id).set(data, SetOptions.merge()).addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            onSuccessful()
-                        }
-                    }
+                )
+                ref.document(user.id).set(data, SetOptions.merge()).addOnSuccessListener { task ->
+                    onSuccessful()
                 }
             }
         }
@@ -244,19 +220,15 @@ class UsersWebService {
                     user.id to null
                 )
             )
-            ref.document(me.uid).set(data, SetOptions.merge()).addOnCompleteListener {
-                if (it.isSuccessful) {
-                    // add my id to the profile of the user i like
-                    data = mapOf(
-                        "favorite_for" to mapOf(
-                            me.uid to null
-                        )
+            ref.document(me.uid).set(data, SetOptions.merge()).addOnSuccessListener {
+                // add my id to the profile of the user i like
+                data = mapOf(
+                    "favorite_for" to mapOf(
+                        me.uid to null
                     )
-                    ref.document(user.id).set(data, SetOptions.merge()).addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            onSuccessful()
-                        }
-                    }
+                )
+                ref.document(user.id).set(data, SetOptions.merge()).addOnSuccessListener {
+                    onSuccessful()
                 }
             }
         }
@@ -266,22 +238,13 @@ class UsersWebService {
         isThisMyFavorite.value = false
         auth = FirebaseAuth.getInstance()
         auth.currentUser?.let {
-            ref.whereEqualTo("favorite_for.${it.uid}", true)
-                .addSnapshotListener { snapshot, exception ->
-                    when {
-                        exception != null -> onListenFailed(tag, exception)
-                        snapshot != null -> {
-                            for (doc in snapshot)
-                                if (doc.post.id.equals(user.id, false)) {
-                                    isThisMyFavorite.value = true
-                                    break
-                                } else
-                                    isThisMyFavorite.value = false
-                        }
-                        else -> onSnapshotNull(tag)
-                    }
+            ref.document(it.uid).addSnapshotListener { snapshot, exception ->
+                when {
+                    exception != null -> onListenFailed(tag, exception)
+                    snapshot != null -> isThisMyFavorite.value = snapshot["favorites.${user.id}"].toString().toBoolean()
+                    else -> onSnapshotNull(tag)
                 }
-
+            }
         }
         return isThisMyFavorite
     }

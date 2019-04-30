@@ -20,33 +20,30 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import io.github.horaciocome1.reaque.util.onListenFailed
 import io.github.horaciocome1.reaque.util.onSnapshotNull
-import io.github.horaciocome1.reaque.util.topic
+import io.github.horaciocome1.reaque.util.topics
 
 class TopicsWebService {
 
     private val tag = "TopicsWebService"
 
+    private val db = FirebaseFirestore.getInstance()
+    private val ref = db.collection("topics")
+
     private var topicsList = mutableListOf<Topic>()
     val topics = MutableLiveData<List<Topic>>()
         get() {
             if (topicsList.isEmpty())
-                ref.orderBy("title", Query.Direction.ASCENDING)
-                    .addSnapshotListener { snapshot, exception ->
-                        when {
-                            exception != null -> onListenFailed(tag, exception)
-                            snapshot != null -> {
-                                topicsList = mutableListOf()
-                                for (doc in snapshot.documents)
-                                    topicsList.add(doc.topic)
-                                field.value = topicsList
-                            }
-                            else -> onSnapshotNull(tag)
+                ref.orderBy("title", Query.Direction.ASCENDING).addSnapshotListener { snapshot, exception ->
+                    when {
+                        exception != null -> onListenFailed(tag, exception)
+                        snapshot != null -> {
+                            topicsList = snapshot.topics
+                            field.value = topicsList
                         }
+                        else -> onSnapshotNull(tag)
                     }
+                }
             return field
         }
-
-    private val db = FirebaseFirestore.getInstance()
-    private val ref = db.collection("topics")
 
 }

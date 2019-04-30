@@ -18,8 +18,9 @@ package io.github.horaciocome1.reaque.data.notifications
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import io.github.horaciocome1.reaque.util.notification
+import io.github.horaciocome1.reaque.util.notifications
 import io.github.horaciocome1.reaque.util.onListenFailed
+import io.github.horaciocome1.reaque.util.onSnapshotNull
 
 class NotificationsWebService {
 
@@ -41,13 +42,10 @@ class NotificationsWebService {
                             when {
                                 exception != null -> onListenFailed(tag, exception)
                                 snapshot != null -> {
-                                    notificationsList = mutableListOf()
-                                    field.value = notificationsList.apply {
-                                        for (doc in snapshot)
-                                            add(doc.notification)
-                                        sortByDescending { it.timestamp }
-                                    }
+                                    notificationsList = snapshot.notifications
+                                    field.value = notificationsList
                                 }
+                                else -> onSnapshotNull(tag)
                             }
                         }
                 }
