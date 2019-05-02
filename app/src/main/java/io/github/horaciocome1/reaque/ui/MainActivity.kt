@@ -35,24 +35,52 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var auth: FirebaseAuth
     private lateinit var navController: NavController
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        auth = FirebaseAuth.getInstance()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
         setSupportActionBar(toolbar)
+        auth = FirebaseAuth.getInstance()
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
         if (auth.currentUser == null)
             startActivityForResult(getSignInActivityIntent(), Constants.ACTIVITY_SIGN_IN_REQUEST_CODE)
-        else {
+        setupNavigation()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        val navigated = NavigationUI.onNavDestinationSelected(item!!, navController)
+        return navigated || super.onOptionsItemSelected(item)
+    }
+
+    override fun onSupportNavigateUp() = NavigationUI.navigateUp(navController, activity_main_drawerlayout)
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            Constants.ACTIVITY_SIGN_IN_REQUEST_CODE -> {
+                when (resultCode) {
+                    Activity.RESULT_OK -> setupNavigation()
+                    Activity.RESULT_CANCELED -> finish()
+                }
+            }
+        }
+    }
+
+    private fun setupNavigation() {
+        auth.currentUser?.let {
             setupBottomNavigationMenu()
             setupSideNavigationMenu()
             setupActionBar()
@@ -76,35 +104,6 @@ class MainActivity : AppCompatActivity() {
                             else -> show()
                         }
                     }
-                }
-            }
-        }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        val navigated = NavigationUI.onNavDestinationSelected(item!!, navController)
-        return navigated || super.onOptionsItemSelected(item)
-    }
-
-    override fun onSupportNavigateUp() = NavigationUI.navigateUp(navController, activity_main_drawerlayout)
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        when (requestCode) {
-            Constants.ACTIVITY_SIGN_IN_REQUEST_CODE -> {
-                when (resultCode) {
-                    Activity.RESULT_OK -> {
-                        auth.currentUser?.reload()
-                        setupBottomNavigationMenu()
-                        setupSideNavigationMenu()
-                        setupActionBar()
-                    }
-                    else -> finish()
                 }
             }
         }

@@ -45,15 +45,16 @@ class SignInActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign_in)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestId()
-            .requestEmail()
-            .requestProfile()
-            .build()
-        val googleSignInClient = GoogleSignIn.getClient(this, gso)
-        val intent = googleSignInClient.signInIntent
-        startActivityForResult(intent, Constants.GOOGLE_SIGN_IN_REQUEST_CODE)
+        auth = FirebaseAuth.getInstance()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        auth.currentUser?.let {
+            setResult(Activity.RESULT_OK)
+            finish()
+        }
+        signInWithGoogle()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -63,43 +64,42 @@ class SignInActivity : AppCompatActivity() {
                 val task = GoogleSignIn.getSignedInAccountFromIntent(data)
                 try {
                     val account = task.getResult(ApiException::class.java)
-                    account?.let {
-                        firebaseAuthWithGoogle(it)
-                    }
+                    firebaseAuthWithGoogle(account!!)
                 } catch (e: ApiException) {
                     Log.w(tag, "Google sign in failed", e)
                     setResult(Activity.RESULT_CANCELED)
                     finish()
                 }
             }
-            else -> {
-                setResult(Activity.RESULT_CANCELED)
-                finish()
-            }
         }
     }
 
+    private fun signInWithGoogle() {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+        val googleSignInClient = GoogleSignIn.getClient(this, gso)
+        startActivityForResult(googleSignInClient.signInIntent, Constants.GOOGLE_SIGN_IN_REQUEST_CODE)
+    }
+
     private fun firebaseAuthWithGoogle(account: GoogleSignInAccount) {
-        Log.d(tag, "firebaseAuthWithGoogle ${account.id}")
+        Log.d(tag, "firebaseAuthWithGoogle ${account.id!!}")
+
         val credential = GoogleAuthProvider.getCredential(account.idToken, null)
-        auth = FirebaseAuth.getInstance()
-        auth.signInWithCredential(credential)
-            .addOnCompleteListener {
-                when (it.isSuccessful) {
-                    true -> {
-                        Log.d(tag, "firebaseAuthWithGoogle:success")
-                        viewModel.addUser {
-                            setResult(Activity.RESULT_OK)
-                            finish()
-                        }
-                    }
-                    else -> {
-                        Log.w(tag, "firebaseAuthWithGoogle:failure", it.exception)
-                        setResult(Activity.RESULT_CANCELED)
-                        finish()
-                    }
-                }
+        auth.signInWithCredential(credential).addOnSuccessListener(this) {
+            Log.d(tag, "firebaseAuthWithGoogle:success")
+
+            viewModel.addUser {
+                setResult(Activity.RESULT_OK)
+                finish()
             }
+        }.addOnFailureListener {
+            Log.w(tag, "firebaseAuthWithGoogle:failure", it)
+
+            setResult(Activity.RESULT_CANCELED)
+            finish()
+        }
     }
 
 }
