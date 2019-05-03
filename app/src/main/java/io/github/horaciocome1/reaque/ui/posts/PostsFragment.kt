@@ -21,6 +21,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.google.firebase.auth.FirebaseAuth
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.databinding.FragmentPostsBinding
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
@@ -29,6 +30,7 @@ import kotlinx.android.synthetic.main.fragment_posts.*
 class PostsFragment: Fragment() {
 
     private lateinit var binding: FragmentPostsBinding
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentPostsBinding.inflate(inflater, container, false)
@@ -43,33 +45,46 @@ class PostsFragment: Fragment() {
                     listPosts(it[position])
             }
         }
+        auth = FirebaseAuth.getInstance()
     }
 
     override fun onStart() {
         super.onStart()
-        viewModel.topics.observe(this, Observer {
-            binding.topics = it
-            topics_progressbar.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
-        })
+        auth.addAuthStateListener {
+            it.currentUser?.let {
+                viewModel.topics.observe(this, Observer {
+                    binding.topics = it
+                    topics_progressbar.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
+                })
+            }
+        }
         favorites_fab.setOnClickListener {
             listFavorites()
         }
     }
 
     private fun listPosts(topic: Topic) {
-        viewModel.getPosts(topic).observe(this, Observer {
-            binding.posts = it
-            posts_progressbar.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
-        })
-        favorites_fab.show()
+        auth.addAuthStateListener {
+            it.currentUser?.let {
+                viewModel.getPosts(topic).observe(this, Observer { list ->
+                    binding.posts = list
+                    posts_progressbar.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
+                })
+                favorites_fab.show()
+            }
+        }
     }
 
     private fun listFavorites() {
-        viewModel.favorites.observe(this, Observer {
-            binding.posts = it
-            posts_progressbar.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
-        })
-        favorites_fab.hide()
+        auth.addAuthStateListener {
+            it.currentUser?.let {
+                viewModel.favorites.observe(this, Observer { list ->
+                    binding.posts = list
+                    posts_progressbar.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
+                })
+                favorites_fab.hide()
+            }
+        }
     }
 
 }

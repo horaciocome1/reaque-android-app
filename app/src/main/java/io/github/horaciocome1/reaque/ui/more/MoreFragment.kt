@@ -23,13 +23,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.google.firebase.auth.FirebaseAuth
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.databinding.FragmentMoreBinding
 import kotlinx.android.synthetic.main.fragment_more.*
 
 class MoreFragment : Fragment() {
 
-    lateinit var binding: FragmentMoreBinding
+    private lateinit var binding: FragmentMoreBinding
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentMoreBinding.inflate(inflater, container, false)
@@ -44,14 +46,19 @@ class MoreFragment : Fragment() {
         about_textview.setOnClickListener {
             openReadMe()
         }
+        auth = FirebaseAuth.getInstance()
     }
 
     override fun onStart() {
         super.onStart()
         binding.viewmodel = viewModel
-        viewModel.me.observe(this, Observer {
-            binding.user = it
-        })
+        auth.addAuthStateListener {
+            it.currentUser?.let {
+                viewModel.me.observe(this, Observer { user ->
+                    binding.user = user
+                })
+            }
+        }
     }
 
     private fun openReadMe() {

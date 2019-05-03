@@ -41,17 +41,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setSupportActionBar(toolbar)
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment)
+        auth = FirebaseAuth.getInstance()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-        navController = Navigation.findNavController(this, R.id.nav_host_fragment)
-        setSupportActionBar(toolbar)
-        auth = FirebaseAuth.getInstance()
     }
 
     override fun onStart() {
         super.onStart()
-        if (auth.currentUser == null)
-            startActivityForResult(getSignInActivityIntent(), Constants.ACTIVITY_SIGN_IN_REQUEST_CODE)
         setupNavigation()
     }
 
@@ -72,7 +70,6 @@ class MainActivity : AppCompatActivity() {
         when (requestCode) {
             Constants.ACTIVITY_SIGN_IN_REQUEST_CODE -> {
                 when (resultCode) {
-                    Activity.RESULT_OK -> setupNavigation()
                     Activity.RESULT_CANCELED -> finish()
                 }
             }
@@ -80,32 +77,34 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupNavigation() {
-        auth.currentUser?.let {
-            setupBottomNavigationMenu()
-            setupSideNavigationMenu()
-            setupActionBar()
-            navController.addOnDestinationChangedListener { _, destination, _ ->
-                if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-                    @Suppress("PLUGIN_WARNING")
-                    bottomnavigationview.visibility = when (destination.id) {
-                        R.id.destination_posting -> View.GONE
-                        R.id.destination_edit_profile -> View.GONE
-                        else -> View.VISIBLE
-                    }
+        auth.addAuthStateListener {
+            if (it.currentUser != null) {
+                setupBottomNavigationMenu()
+                setupSideNavigationMenu()
+                setupActionBar()
+                navController.addOnDestinationChangedListener { _, destination, _ ->
+                    if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                        bottomnavigationview?.visibility = when (destination.id) {
+                            R.id.destination_posting -> View.GONE
+                            R.id.destination_edit_profile -> View.GONE
+                            else -> View.VISIBLE
+                        }
 
-                    supportActionBar?.run {
-                        when (destination.id) {
-                            R.id.destination_posts -> hide()
-                            R.id.destination_users -> hide()
-                            R.id.destination_notifications -> hide()
-                            R.id.destination_more -> hide()
-                            R.id.destination_posting -> hide()
-                            R.id.destination_edit_profile -> hide()
-                            else -> show()
+                        supportActionBar?.run {
+                            when (destination.id) {
+                                R.id.destination_posts -> hide()
+                                R.id.destination_users -> hide()
+                                R.id.destination_notifications -> hide()
+                                R.id.destination_more -> hide()
+                                R.id.destination_posting -> hide()
+                                R.id.destination_edit_profile -> hide()
+                                else -> show()
+                            }
                         }
                     }
                 }
-            }
+            } else
+                startActivityForResult(getSignInActivityIntent(), Constants.ACTIVITY_SIGN_IN_REQUEST_CODE)
         }
     }
 
