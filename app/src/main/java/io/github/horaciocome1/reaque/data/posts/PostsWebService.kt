@@ -177,10 +177,11 @@ class PostsWebService {
         isThisMyFavorite.value = false
         auth = FirebaseAuth.getInstance()
         auth.currentUser?.let {
-            ref.document(it.uid).addSnapshotListener { snapshot, exception ->
+            ref.document(post.id).addSnapshotListener { snapshot, exception ->
                 when {
                     exception != null -> onListenFailed(tag, exception)
-                    snapshot != null -> isThisMyFavorite.value = snapshot["favorites.${post.id}"].toString().toBoolean()
+                    snapshot != null -> isThisMyFavorite.value =
+                        snapshot["favorite_for.${it.uid}"].toString().toBoolean()
                     else -> onSnapshotNull(tag)
                 }
             }
