@@ -30,7 +30,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import io.github.horaciocome1.reaque.R
-import io.github.horaciocome1.reaque.ui.users.viewModel
+import io.github.horaciocome1.reaque.data.users.UsersWebService
 import io.github.horaciocome1.reaque.util.Constants
 
 fun Context.getSignInActivityIntent() = Intent(this, SignInActivity::class.java)
@@ -90,7 +90,8 @@ class SignInActivity : AppCompatActivity() {
         auth.signInWithCredential(credential).addOnSuccessListener(this) {
             Log.d(tag, "firebaseAuthWithGoogle:success")
 
-            viewModel.addUser {
+            val service = UsersWebService()
+            service.addUser {
                 setResult(Activity.RESULT_OK)
                 finish()
             }

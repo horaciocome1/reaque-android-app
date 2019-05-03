@@ -25,7 +25,6 @@ import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.topics.TopicsRepository
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.data.users.UsersRepository
-import io.github.horaciocome1.reaque.ui.signin.SignInActivity
 import io.github.horaciocome1.reaque.util.InjectorUtils
 import io.github.horaciocome1.reaque.util.ObservableViewModel
 
@@ -36,12 +35,6 @@ val UsersFragment.viewModel: UsersViewModel
     }
 
 val ProfileFragment.viewModel: UsersViewModel
-    get() {
-        val factory = InjectorUtils.usersViewModelFactory
-        return ViewModelProviders.of(this, factory).get(UsersViewModel::class.java)
-    }
-
-val SignInActivity.viewModel: UsersViewModel
     get() {
         val factory = InjectorUtils.usersViewModelFactory
         return ViewModelProviders.of(this, factory).get(UsersViewModel::class.java)
@@ -72,8 +65,6 @@ class UsersViewModel(
     val topics = topicsRepository.topics
 
     val favorites = usersRepository.favorites
-
-    fun addUser(onSuccessful: () -> Unit) = usersRepository.addUser(onSuccessful)
 
     fun getPosts(user: User) = postsRepository.getPosts(user)
 
