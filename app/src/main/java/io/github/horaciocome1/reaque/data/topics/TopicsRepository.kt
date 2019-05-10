@@ -17,6 +17,8 @@ package io.github.horaciocome1.reaque.data.topics
 
 class TopicsRepository private constructor(service: TopicsWebService) {
 
+    val notEmptyTopics = service.notEmptyTopics
+
     val topics = service.topics
 
     companion object {

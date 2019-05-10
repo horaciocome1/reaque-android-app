@@ -11,6 +11,7 @@ val QuerySnapshot.topics: MutableList<Topic>
         val list = mutableListOf<Topic>()
         forEach { doc ->
             list.add(doc.topic)
+            list.sortBy { it.title }
         }
         return list
     }

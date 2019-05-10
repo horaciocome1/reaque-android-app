@@ -25,9 +25,27 @@ import io.github.horaciocome1.reaque.util.topics
 class TopicsWebService {
 
     private val tag = "TopicsWebService"
+    private val empty = 0
 
     private val db = FirebaseFirestore.getInstance()
     private val ref = db.collection("topics")
+
+    private var notEmptyTopicsList = mutableListOf<Topic>()
+    val notEmptyTopics = MutableLiveData<List<Topic>>()
+        get() {
+            if (notEmptyTopicsList.isEmpty())
+                ref.whereGreaterThan("posts_count", empty).addSnapshotListener { snapshot, exception ->
+                    when {
+                        exception != null -> onListenFailed(tag, exception)
+                        snapshot != null -> {
+                            notEmptyTopicsList = snapshot.topics
+                            field.value = notEmptyTopicsList
+                        }
+                        else -> onSnapshotNull(tag)
+                    }
+                }
+            return field
+        }
 
     private var topicsList = mutableListOf<Topic>()
     val topics = MutableLiveData<List<Topic>>()

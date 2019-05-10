@@ -30,24 +30,22 @@ class NotificationsWebService {
 
     private val ref = FirebaseFirestore.getInstance().collection("notifications")
 
-    private lateinit var auth: FirebaseAuth
+    private var auth = FirebaseAuth.getInstance()
 
     val notifications = MutableLiveData<List<Notification>>()
         get() {
             if (notificationsList.isEmpty()) {
-                auth = FirebaseAuth.getInstance()
                 auth.currentUser?.let { user ->
-                    ref.whereEqualTo("users.${user.uid}", true)
-                        .addSnapshotListener { snapshot, exception ->
-                            when {
-                                exception != null -> onListenFailed(tag, exception)
-                                snapshot != null -> {
-                                    notificationsList = snapshot.notifications
-                                    field.value = notificationsList
-                                }
-                                else -> onSnapshotNull(tag)
+                    ref.whereEqualTo("users.${user.uid}", true).addSnapshotListener { snapshot, exception ->
+                        when {
+                            exception != null -> onListenFailed(tag, exception)
+                            snapshot != null -> {
+                                notificationsList = snapshot.notifications
+                                field.value = notificationsList
                             }
+                            else -> onSnapshotNull(tag)
                         }
+                    }
                 }
             }
             return field

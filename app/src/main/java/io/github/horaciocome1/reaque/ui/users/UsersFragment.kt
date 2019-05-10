@@ -54,7 +54,7 @@ class UsersFragment : Fragment() {
         super.onStart()
         auth.addAuthStateListener {
             it.currentUser?.let {
-                viewModel.topics.observe(this, Observer { list ->
+                viewModel.notEmptyTopics.observe(this, Observer { list ->
                     binding.topics = list
                     topics_progressbar.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
                 })

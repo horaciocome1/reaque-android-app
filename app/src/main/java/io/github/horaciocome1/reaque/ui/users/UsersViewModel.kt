@@ -62,7 +62,7 @@ class UsersViewModel(
 
     val me = usersRepository.me
 
-    val topics = topicsRepository.topics
+    val notEmptyTopics = topicsRepository.notEmptyTopics
 
     val favorites = usersRepository.favorites
 

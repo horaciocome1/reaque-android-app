@@ -28,7 +28,7 @@ class UsersWebService {
 
     private val tag = "UsersWebService"
 
-    /*list of users that belong to the same topics*/
+    /*list of users that belong to the same notEmptyTopics*/
     private var topicUsersList = mutableListOf<User>()
     private val topicUsers = MutableLiveData<List<User>>()
 
@@ -48,24 +48,21 @@ class UsersWebService {
     private val db = FirebaseFirestore.getInstance()
     private val ref = db.collection("users")
 
-    private var auth: FirebaseAuth
+    private var auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     init {
-        auth = FirebaseAuth.getInstance()
         auth.currentUser?.let {
-            ref.document(it.uid)
-                .addSnapshotListener { snapshot, exception ->
-                    when {
-                        exception != null -> onListenFailed(tag, exception)
-                        snapshot != null -> me.value = snapshot.user
-                        else -> onSnapshotNull(tag)
-                    }
+            ref.document(it.uid).addSnapshotListener { snapshot, exception ->
+                when {
+                    exception != null -> onListenFailed(tag, exception)
+                    snapshot != null -> me.value = snapshot.user
+                    else -> onSnapshotNull(tag)
                 }
+            }
         }
     }
 
     fun addUser(onSuccessful: () -> Unit) {
-        auth = FirebaseAuth.getInstance()
         auth.currentUser?.let {
             ref.document(it.uid).set(it.map, SetOptions.merge()).addOnSuccessListener {
                 onAddUserSucceed(tag)
@@ -77,7 +74,6 @@ class UsersWebService {
     }
 
     fun editUser(user: User, onSuccessful: () -> Unit) {
-        auth = FirebaseAuth.getInstance()
         auth.currentUser?.let {
             ref.document(it.uid).set(user.map, SetOptions.merge()).addOnSuccessListener {
                 onAddUserSucceed(tag)
@@ -89,10 +85,9 @@ class UsersWebService {
     }
 
     fun addTopicToUser(topic: Topic, onSuccessful: () -> Unit) {
-        auth = FirebaseAuth.getInstance()
         auth.currentUser?.let {
             val data = mapOf(
-                "topics" to mapOf(
+                "notEmptyTopics" to mapOf(
                     topic.id to true
                 )
             )
@@ -108,7 +103,7 @@ class UsersWebService {
     fun getUsers(topic: Topic): LiveData<List<User>> {
         if (!topicId.equals(topic.id, true)) {
             topicUsers.value = mutableListOf()
-            ref.whereEqualTo("topics.${topic.id}", true).addSnapshotListener { snapshot, exception ->
+            ref.whereEqualTo("notEmptyTopics.${topic.id}", true).addSnapshotListener { snapshot, exception ->
                     when {
                         exception != null -> onListenFailed(tag, exception)
                         snapshot != null -> {
@@ -140,10 +135,8 @@ class UsersWebService {
 
     fun getFavorites(): LiveData<List<User>> {
         if (favoritesList.isEmpty()) {
-            auth = FirebaseAuth.getInstance()
-            auth.currentUser?.let { firebaseUser ->
-                ref.whereEqualTo("favorite_for.${firebaseUser.uid}", true)
-                    .addSnapshotListener { snapshot, exception ->
+            auth.currentUser?.let {
+                ref.whereEqualTo("favorite_for.${it.uid}", true).addSnapshotListener { snapshot, exception ->
                         when {
                             exception != null -> onListenFailed(tag, exception)
                             snapshot != null -> {
@@ -160,14 +153,13 @@ class UsersWebService {
 
     // add id from the post i like to my profile
     fun addToFavorites(post: Post, onSuccessful: () -> Unit) {
-        auth = FirebaseAuth.getInstance()
-        auth.currentUser?.let { user ->
+        auth.currentUser?.let {
             val data = mapOf(
                 "favorites" to mapOf(
                     post.id to true
                 )
             )
-            ref.document(user.uid).set(data, SetOptions.merge()).addOnSuccessListener {
+            ref.document(it.uid).set(data, SetOptions.merge()).addOnSuccessListener {
                 onSuccessful()
             }
         }
@@ -175,21 +167,19 @@ class UsersWebService {
 
     // remove id from the post i like from my profile
     fun removeFromFavorites(post: Post, onSuccessful: () -> Unit) {
-        auth = FirebaseAuth.getInstance()
-        auth.currentUser?.let { user ->
+        auth.currentUser?.let {
             val data = mapOf(
                 "favorites" to mapOf(
                     post.id to null
                 )
             )
-            ref.document(user.uid).set(data, SetOptions.merge()).addOnSuccessListener {
+            ref.document(it.uid).set(data, SetOptions.merge()).addOnSuccessListener {
                 onSuccessful()
             }
         }
     }
 
     fun addToFavorites(user: User, onSuccessful: () -> Unit) {
-        auth = FirebaseAuth.getInstance()
         auth.currentUser?.let { me ->
             // add the id from the user i like to my profile
             var data = mapOf(
@@ -212,7 +202,6 @@ class UsersWebService {
     }
 
     fun removeFromFavorites(user: User, onSuccessful: () -> Unit) {
-        auth = FirebaseAuth.getInstance()
         auth.currentUser?.let { me ->
             // add the id from the user i like to my profile
             var data = mapOf(
@@ -236,7 +225,6 @@ class UsersWebService {
 
     fun isThisFavoriteForMe(user: User): LiveData<Boolean> {
         isThisMyFavorite.value = false
-        auth = FirebaseAuth.getInstance()
         auth.currentUser?.let {
             ref.document(user.id).addSnapshotListener { snapshot, exception ->
                 when {
