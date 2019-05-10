@@ -46,11 +46,11 @@ class MoreFragment : Fragment() {
         about_textview.setOnClickListener {
             openReadMe()
         }
-        auth = FirebaseAuth.getInstance()
     }
 
     override fun onStart() {
         super.onStart()
+        auth = FirebaseAuth.getInstance()
         binding.viewmodel = viewModel
         auth.addAuthStateListener {
             it.currentUser?.let {

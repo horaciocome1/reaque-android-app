@@ -19,6 +19,7 @@ import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.data.users.UsersRepository
 import io.github.horaciocome1.reaque.util.InjectorUtils
@@ -32,15 +33,24 @@ val MoreFragment.viewModel: MoreViewModel
 class MoreViewModel(repository: UsersRepository) : ViewModel() {
 
     val me = repository.me
+    private val auth = FirebaseAuth.getInstance()
 
     fun openEditProfile(view: View) {
-        val directions = MoreFragmentDirections.actionOpenEditProfile()
-        view.findNavController().navigate(directions)
+        auth.addAuthStateListener {
+            if (auth != null) {
+                val directions = MoreFragmentDirections.actionOpenEditProfile()
+                view.findNavController().navigate(directions)
+            }
+        }
     }
 
     fun openPosting(view: View) {
-        val directions = MoreFragmentDirections.actionOpenPosting()
-        view.findNavController().navigate(directions)
+        auth.addAuthStateListener {
+            if (auth != null) {
+                val directions = MoreFragmentDirections.actionOpenPosting()
+                view.findNavController().navigate(directions)
+            }
+        }
     }
 
     fun openSettings(view: View) {
@@ -49,8 +59,12 @@ class MoreViewModel(repository: UsersRepository) : ViewModel() {
     }
 
     fun openProfile(view: View, user: User) {
-        val directions = MoreFragmentDirections.actionOpenProfileFromMore(user.id)
-        view.findNavController().navigate(directions)
+        auth.addAuthStateListener {
+            if (auth != null) {
+                val directions = MoreFragmentDirections.actionOpenProfileFromMore(user.id)
+                view.findNavController().navigate(directions)
+            }
+        }
     }
 
 }
