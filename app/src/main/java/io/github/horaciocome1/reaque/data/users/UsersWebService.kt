@@ -87,7 +87,7 @@ class UsersWebService {
     fun addTopicToUser(topic: Topic, onSuccessful: () -> Unit) {
         auth.currentUser?.let {
             val data = mapOf(
-                "notEmptyTopics" to mapOf(
+                "topics" to mapOf(
                     topic.id to true
                 )
             )
@@ -103,7 +103,7 @@ class UsersWebService {
     fun getUsers(topic: Topic): LiveData<List<User>> {
         if (!topicId.equals(topic.id, true)) {
             topicUsers.value = mutableListOf()
-            ref.whereEqualTo("notEmptyTopics.${topic.id}", true).addSnapshotListener { snapshot, exception ->
+            ref.whereEqualTo("topics.${topic.id}", true).addSnapshotListener { snapshot, exception ->
                     when {
                         exception != null -> onListenFailed(tag, exception)
                         snapshot != null -> {

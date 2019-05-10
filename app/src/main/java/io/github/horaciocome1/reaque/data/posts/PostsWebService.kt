@@ -72,7 +72,7 @@ class PostsWebService {
     fun getPosts(topic: Topic): LiveData<List<Post>> {
         if (!topicId.equals(topic.id, true)) {
             topicPosts.value = mutableListOf()
-            ref.whereEqualTo("topic.${topic.id}", true).addSnapshotListener { snapshot, exception ->
+            ref.whereEqualTo("topic.id", topic.id).addSnapshotListener { snapshot, exception ->
                 when {
                     exception != null -> onListenFailed(tag, exception)
                     snapshot != null -> {
