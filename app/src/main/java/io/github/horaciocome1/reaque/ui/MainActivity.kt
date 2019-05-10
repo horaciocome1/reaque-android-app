@@ -50,6 +50,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+        if (auth.currentUser == null)
+            startActivityForResult(getSignInActivityIntent(), Constants.ACTIVITY_SIGN_IN_REQUEST_CODE)
         setupNavigation()
     }
 
@@ -77,34 +79,29 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupNavigation() {
-        auth.addAuthStateListener {
-            if (it.currentUser != null) {
-                setupBottomNavigationMenu()
-                setupSideNavigationMenu()
-                setupActionBar()
-                navController.addOnDestinationChangedListener { _, destination, _ ->
-                    if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-                        bottomnavigationview?.visibility = when (destination.id) {
-                            R.id.destination_posting -> View.GONE
-                            R.id.destination_edit_profile -> View.GONE
-                            else -> View.VISIBLE
-                        }
+        setupBottomNavigationMenu()
+        setupSideNavigationMenu()
+        setupActionBar()
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                bottomnavigationview?.visibility = when (destination.id) {
+                    R.id.destination_posting -> View.GONE
+                    R.id.destination_edit_profile -> View.GONE
+                    else -> View.VISIBLE
+                }
 
-                        supportActionBar?.run {
-                            when (destination.id) {
-                                R.id.destination_posts -> hide()
-                                R.id.destination_users -> hide()
-                                R.id.destination_notifications -> hide()
-                                R.id.destination_more -> hide()
-                                R.id.destination_posting -> hide()
-                                R.id.destination_edit_profile -> hide()
-                                else -> show()
-                            }
-                        }
+                supportActionBar?.run {
+                    when (destination.id) {
+                        R.id.destination_posts -> hide()
+                        R.id.destination_users -> hide()
+                        R.id.destination_notifications -> hide()
+                        R.id.destination_more -> hide()
+                        R.id.destination_posting -> hide()
+                        R.id.destination_edit_profile -> hide()
+                        else -> show()
                     }
                 }
-            } else
-                startActivityForResult(getSignInActivityIntent(), Constants.ACTIVITY_SIGN_IN_REQUEST_CODE)
+            }
         }
     }
 
