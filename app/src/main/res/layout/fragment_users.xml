@@ -29,6 +29,8 @@
 
         <import type="io.github.horaciocome1.reaque.util.Constants" />
 
+        <import type="android.view.View" />
+
         <variable
             name="topics"
             type="List&lt;Topic&gt;" />
@@ -80,10 +82,10 @@
                     app:type="@{Constants.DEFAULT}" />
 
                 <ProgressBar
-                    android:id="@+id/topics_progressbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="32dp" />
+                    android:layout_margin="32dp"
+                    android:visibility="@{topics.isEmpty() ? View.VISIBLE : View.GONE}" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/users_recyclerview"
@@ -94,11 +96,10 @@
                     app:list="@{users}" />
 
                 <ProgressBar
-                    android:id="@+id/users_progressbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="32dp"
-                    android:visibility="gone" />
+                    android:visibility="@{users.isEmpty() ? View.VISIBLE : View.GONE}" />
 
             </LinearLayout>
 

@@ -21,6 +21,8 @@
 
         <import type="io.github.horaciocome1.reaque.data.notifications.Notification" />
 
+        <import type="android.view.View" />
+
         <variable
             name="notifications"
             type="List&lt;Notification&gt;" />
@@ -63,11 +65,11 @@
         </androidx.core.widget.NestedScrollView>
 
         <ProgressBar
-            android:id="@+id/progressbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/default_progressbar_size"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="32dp" />
+            android:layout_marginTop="32dp"
+            android:visibility="@{notifications.isEmpty() ? View.VISIBLE : View.GONE}" />
 
     </LinearLayout>
 

@@ -28,6 +28,8 @@
 
         <import type="io.github.horaciocome1.reaque.util.Constants" />
 
+        <import type="android.view.View" />
+
         <variable
             name="topics"
             type="List&lt;Topic&gt;" />
@@ -45,6 +47,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:baselineAligned="false"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -67,10 +70,10 @@
                     app:type="@{Constants.DEFAULT}" />
 
                 <ProgressBar
-                    android:id="@+id/topics_progressbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="32dp" />
+                    android:layout_margin="32dp"
+                    android:visibility="@{topics.isEmpty() ? View.VISIBLE : View.GONE}" />
 
             </LinearLayout>
 
@@ -81,7 +84,6 @@
                 android:orientation="vertical">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/users_recyclerview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:scrollbars="none"
@@ -92,7 +94,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="32dp"
-                    android:visibility="gone" />
+                    android:visibility="@{topics.isEmpty() ? View.VISIBLE : View.GONE}" />
 
             </LinearLayout>
 

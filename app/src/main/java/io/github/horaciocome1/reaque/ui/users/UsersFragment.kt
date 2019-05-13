@@ -33,6 +33,7 @@ class UsersFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        auth = FirebaseAuth.getInstance()
         binding = FragmentUsersBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -47,16 +48,14 @@ class UsersFragment : Fragment() {
                 }
             }
         }
-        auth = FirebaseAuth.getInstance()
     }
 
     override fun onStart() {
         super.onStart()
         auth.addAuthStateListener {
-            it.currentUser?.let {
+            if (!isDetached && it.currentUser != null) {
                 viewModel.notEmptyTopics.observe(this, Observer { list ->
                     binding.topics = list
-                    topics_progressbar.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
                 })
             }
         }
@@ -67,10 +66,9 @@ class UsersFragment : Fragment() {
 
     private fun listUsers(topic: Topic) {
         auth.addAuthStateListener {
-            it.currentUser?.let {
+            if (!isDetached && it.currentUser != null) {
                 viewModel.getUsers(topic).observe(this, Observer { list ->
                     binding.users = list
-                    users_progressbar.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
                 })
                 favorites_fab.show()
             }
@@ -79,10 +77,9 @@ class UsersFragment : Fragment() {
 
     private fun listFavorites() {
         auth.addAuthStateListener {
-            it.currentUser?.let {
+            if (!isDetached && it.currentUser != null) {
                 viewModel.favorites.observe(this, Observer { list ->
                     binding.users = list
-                    users_progressbar.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
                 })
                 favorites_fab.hide()
             }

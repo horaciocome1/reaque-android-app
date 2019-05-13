@@ -23,7 +23,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.google.firebase.auth.FirebaseAuth
 import io.github.horaciocome1.reaque.databinding.FragmentNotificationsBinding
-import kotlinx.android.synthetic.main.fragment_notifications.*
 
 class NotificationsFragment : Fragment() {
 
@@ -31,22 +30,17 @@ class NotificationsFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        auth = FirebaseAuth.getInstance()
         binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        auth = FirebaseAuth.getInstance()
     }
 
     override fun onStart() {
         super.onStart()
         auth.addAuthStateListener {
-            it.currentUser?.let {
+            if (!isDetached && it.currentUser != null) {
                 viewModel.notifications.observe(this, Observer { list ->
                     binding.notifications = list
-                    progressbar.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
                 })
             }
         }

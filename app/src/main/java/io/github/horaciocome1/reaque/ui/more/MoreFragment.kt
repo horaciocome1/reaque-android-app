@@ -34,15 +34,14 @@ class MoreFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        auth = FirebaseAuth.getInstance()
         binding = FragmentMoreBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        feedback_textview.setOnClickListener {
-
-        }
+        feedback_textview.setOnClickListener { }
         about_textview.setOnClickListener {
             openReadMe()
         }
@@ -50,10 +49,9 @@ class MoreFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        auth = FirebaseAuth.getInstance()
         binding.viewmodel = viewModel
         auth.addAuthStateListener {
-            it.currentUser?.let {
+            if (!isDetached && it.currentUser != null) {
                 viewModel.me.observe(this, Observer { user ->
                     binding.user = user
                 })
