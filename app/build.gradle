@@ -76,7 +76,7 @@ dependencies {
 
     // navigation
     implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
-    implementation "android.arch.navigation:navigation-ui:$nav_version"
+    implementation "android.arch.navigation:navigation-ui-ktx:$nav_version"
 
     // firebase
     implementation 'com.google.firebase:firebase-core:16.0.9'
@@ -85,7 +85,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:17.0.0'
     implementation 'com.google.firebase:firebase-auth:17.0.0'
     implementation 'com.google.firebase:firebase-perf:17.0.0'
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.9'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.0'
 
     // play services
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
