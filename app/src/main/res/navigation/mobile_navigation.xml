@@ -146,4 +146,8 @@
         android:id="@+id/destination_edit_profile"
         android:name="io.github.horaciocome1.reaque.ui.users.EditProfileFragment"
         android:label="Editar" />
+    <fragment
+        android:id="@+id/destination_sign_in"
+        android:name="io.github.horaciocome1.reaque.ui.signin.SignInFragment"
+        android:label="SignInFragment" />
 </navigation>

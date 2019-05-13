@@ -15,8 +15,6 @@
 
 package io.github.horaciocome1.reaque.ui
 
-import android.app.Activity
-import android.content.Intent
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
@@ -29,8 +27,6 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.google.firebase.auth.FirebaseAuth
 import io.github.horaciocome1.reaque.R
-import io.github.horaciocome1.reaque.ui.signin.getSignInActivityIntent
-import io.github.horaciocome1.reaque.util.Constants
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -50,9 +46,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        if (auth.currentUser == null)
-            startActivityForResult(getSignInActivityIntent(), Constants.ACTIVITY_SIGN_IN_REQUEST_CODE)
         setupNavigation()
+        if (auth.currentUser == null)
+            navController.navigate(R.id.destination_sign_in)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -67,17 +63,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp() = NavigationUI.navigateUp(navController, activity_main_drawerlayout)
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        when (requestCode) {
-            Constants.ACTIVITY_SIGN_IN_REQUEST_CODE -> {
-                when (resultCode) {
-                    Activity.RESULT_CANCELED -> finish()
-                }
-            }
-        }
-    }
-
     private fun setupNavigation() {
         setupBottomNavigationMenu()
         setupSideNavigationMenu()
@@ -87,9 +72,9 @@ class MainActivity : AppCompatActivity() {
                 bottomnavigationview?.visibility = when (destination.id) {
                     R.id.destination_posting -> View.GONE
                     R.id.destination_edit_profile -> View.GONE
+                    R.id.destination_sign_in -> View.GONE
                     else -> View.VISIBLE
                 }
-
                 supportActionBar?.run {
                     when (destination.id) {
                         R.id.destination_posts -> hide()
@@ -98,6 +83,7 @@ class MainActivity : AppCompatActivity() {
                         R.id.destination_more -> hide()
                         R.id.destination_posting -> hide()
                         R.id.destination_edit_profile -> hide()
+                        R.id.destination_sign_in -> hide()
                         else -> show()
                     }
                 }
