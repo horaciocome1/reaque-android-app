@@ -81,6 +81,11 @@ class ReadFragment: Fragment() {
                     .setFallbackUrl(Uri.parse("https://www.reaque.firebase.com"))
                     .build()
             )
+            .setIosParameters(
+                DynamicLink.IosParameters.Builder("")
+                    .setFallbackUrl(Uri.parse("https://www.reaque.firebase.com"))
+                    .build()
+            )
             .setSocialMetaTagParameters(
                 DynamicLink.SocialMetaTagParameters.Builder()
                     .setTitle("${post.title} - ${post.user.name}")
