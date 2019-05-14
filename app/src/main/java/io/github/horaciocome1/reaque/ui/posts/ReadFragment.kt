@@ -15,7 +15,10 @@
 
 package io.github.horaciocome1.reaque.ui.posts
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +26,8 @@ import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.firebase.dynamiclinks.DynamicLink
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.databinding.FragmentReadBinding
 import kotlinx.android.synthetic.main.fragment_read.*
@@ -31,8 +36,10 @@ class ReadFragment: Fragment() {
 
     private lateinit var binding: FragmentReadBinding
     private lateinit var behavior: BottomSheetBehavior<LinearLayout>
+    private lateinit var dynamicLinks: FirebaseDynamicLinks
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        dynamicLinks = FirebaseDynamicLinks.getInstance()
         binding = FragmentReadBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -41,6 +48,9 @@ class ReadFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         behavior = BottomSheetBehavior.from(fragment_read_bottom_sheet).apply {
             state = BottomSheetBehavior.STATE_HALF_EXPANDED
+        }
+        share_button.setOnClickListener {
+            buildAndSendDynamicLink(binding.post!!)
         }
     }
 
@@ -60,6 +70,42 @@ class ReadFragment: Fragment() {
                 remove_from_favorites_button.visibility = if (it) View.VISIBLE else View.GONE
             })
         }
+    }
+
+    private fun buildAndSendDynamicLink(post: Post) {
+        dynamicLinks.createDynamicLink()
+            .setLink(Uri.parse("https://www.reaque.firebase.com/${post.id}"))
+            .setDomainUriPrefix("https://reaque.page.link")
+            .setAndroidParameters(
+                DynamicLink.AndroidParameters.Builder()
+                    .setFallbackUrl(Uri.parse("https://www.reaque.firebase.com"))
+                    .build()
+            )
+            .setSocialMetaTagParameters(
+                DynamicLink.SocialMetaTagParameters.Builder()
+                    .setTitle("${post.title} - ${post.user.name}")
+                    .setDescription(
+                        "${post.message.substring(
+                            0,
+                            if (post.message.length >= 155) 155 else post.message.length
+                        )} . . . "
+                    )
+                    .setImageUrl(Uri.parse(post.pic))
+                    .build()
+            )
+            .buildShortDynamicLink()
+            .addOnSuccessListener {
+                val sendIntent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, it.shortLink.toString())
+                    type = "text/plain"
+                }
+                val chooser = Intent.createChooser(sendIntent, "Partilhar - ${post.title}")
+                startActivity(chooser)
+            }
+            .addOnFailureListener {
+                Log.e(tag, "Failed to build short link", it)
+            }
     }
 
 }

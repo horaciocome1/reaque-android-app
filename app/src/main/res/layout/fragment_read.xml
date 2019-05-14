@@ -190,7 +190,7 @@
                             app:strokeWidth="@dimen/default_stroke_width" />
 
                         <com.google.android.material.button.MaterialButton
-                            android:id="@+id/comments_button"
+                            android:id="@+id/share_button"
                             style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"

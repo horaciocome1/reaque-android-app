@@ -18,6 +18,7 @@ package io.github.horaciocome1.reaque.ui
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -26,10 +27,14 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
 import io.github.horaciocome1.reaque.R
+import io.github.horaciocome1.reaque.ui.posts.PostsFragmentDirections
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    private val tag = "MainActivity"
 
     private lateinit var navController: NavController
     private lateinit var auth: FirebaseAuth
@@ -42,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        handleDynamicLinks()
     }
 
     override fun onStart() {
@@ -101,5 +107,19 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupActionBar() =
         NavigationUI.setupActionBarWithNavController(this, navController, activity_main_drawerlayout)
+
+    private fun handleDynamicLinks() {
+        FirebaseDynamicLinks.getInstance().getDynamicLink(intent)
+            .addOnSuccessListener { pendingDynamicLinkData ->
+                pendingDynamicLinkData?.let {
+                    val postId: String = it.link.toString().removePrefix("https://www.reaque.firebase.com/")
+                    val directions = PostsFragmentDirections.actionOpenReadFromPosts(postId)
+                    navController.navigate(directions)
+                }
+            }
+            .addOnFailureListener {
+                Log.w(tag, "getDynamicLink:Failure", it)
+            }
+    }
 
 }

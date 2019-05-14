@@ -26,6 +26,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:fullBackupContent="@xml/backup_descriptor"
         android:theme="@style/AppTheme">
 
         <activity android:name="io.github.horaciocome1.reaque.ui.MainActivity">
@@ -33,11 +34,25 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
 
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="reaque.page.link"
+                    android:scheme="https" />
+                <data
+                    android:host="reaque.page.link"
+                    android:scheme="http" />
+            </intent-filter>
+
         </activity>
-        <activity android:name="io.github.horaciocome1.reaque.ui.signin.SignInActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
