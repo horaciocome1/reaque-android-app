@@ -50,7 +50,9 @@ class ReadFragment: Fragment() {
             state = BottomSheetBehavior.STATE_HALF_EXPANDED
         }
         share_button.setOnClickListener {
+            it.isEnabled = false
             buildAndSendDynamicLink(binding.post!!)
+            it.isEnabled = true
         }
     }
 
