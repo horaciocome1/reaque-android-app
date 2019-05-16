@@ -18,6 +18,7 @@ package io.github.horaciocome1.reaque.data.notifications
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import io.github.horaciocome1.reaque.util.addSimpleAuthStateListener
 import io.github.horaciocome1.reaque.util.notifications
 import io.github.horaciocome1.reaque.util.onListenFailed
 import io.github.horaciocome1.reaque.util.onSnapshotNull
@@ -30,13 +31,14 @@ class NotificationsWebService {
 
     private val ref = FirebaseFirestore.getInstance().collection("notifications")
 
-    private var auth = FirebaseAuth.getInstance()
+    private val auth = FirebaseAuth.getInstance()
 
     val notifications = MutableLiveData<List<Notification>>()
         get() {
-            if (notificationsList.isEmpty()) {
-                auth.currentUser?.let { user ->
-                    ref.whereEqualTo("users.${user.uid}", true).addSnapshotListener { snapshot, exception ->
+            auth.addSimpleAuthStateListener {
+                if (notificationsList.isEmpty()) {
+                    ref.whereEqualTo("users.${auth.currentUser!!.uid}", true)
+                        .addSnapshotListener { snapshot, exception ->
                         when {
                             exception != null -> onListenFailed(tag, exception)
                             snapshot != null -> {

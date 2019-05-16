@@ -16,8 +16,10 @@
 package io.github.horaciocome1.reaque.data.topics
 
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import io.github.horaciocome1.reaque.util.addSimpleAuthStateListener
 import io.github.horaciocome1.reaque.util.onListenFailed
 import io.github.horaciocome1.reaque.util.onSnapshotNull
 import io.github.horaciocome1.reaque.util.topics
@@ -30,37 +32,45 @@ class TopicsWebService {
     private val db = FirebaseFirestore.getInstance()
     private val ref = db.collection("topics")
 
+    private val auth = FirebaseAuth.getInstance()
+
     private var notEmptyTopicsList = mutableListOf<Topic>()
     val notEmptyTopics = MutableLiveData<List<Topic>>()
         get() {
-            if (notEmptyTopicsList.isEmpty())
-                ref.whereGreaterThan("posts_count", empty).addSnapshotListener { snapshot, exception ->
-                    when {
-                        exception != null -> onListenFailed(tag, exception)
-                        snapshot != null -> {
-                            notEmptyTopicsList = snapshot.topics
-                            field.value = notEmptyTopicsList
+            auth.addSimpleAuthStateListener {
+                if (notEmptyTopicsList.isEmpty()) {
+                    ref.whereGreaterThan("posts_count", empty).addSnapshotListener { snapshot, exception ->
+                        when {
+                            exception != null -> onListenFailed(tag, exception)
+                            snapshot != null -> {
+                                notEmptyTopicsList = snapshot.topics
+                                field.value = notEmptyTopicsList
+                            }
+                            else -> onSnapshotNull(tag)
                         }
-                        else -> onSnapshotNull(tag)
                     }
                 }
+            }
             return field
         }
 
     private var topicsList = mutableListOf<Topic>()
     val topics = MutableLiveData<List<Topic>>()
         get() {
-            if (topicsList.isEmpty())
-                ref.orderBy("title", Query.Direction.ASCENDING).addSnapshotListener { snapshot, exception ->
-                    when {
-                        exception != null -> onListenFailed(tag, exception)
-                        snapshot != null -> {
-                            topicsList = snapshot.topics
-                            field.value = topicsList
+            auth.addSimpleAuthStateListener {
+                if (topicsList.isEmpty()) {
+                    ref.orderBy("title", Query.Direction.ASCENDING).addSnapshotListener { snapshot, exception ->
+                        when {
+                            exception != null -> onListenFailed(tag, exception)
+                            snapshot != null -> {
+                                topicsList = snapshot.topics
+                                field.value = topicsList
+                            }
+                            else -> onSnapshotNull(tag)
                         }
-                        else -> onSnapshotNull(tag)
                     }
                 }
+            }
             return field
         }
 

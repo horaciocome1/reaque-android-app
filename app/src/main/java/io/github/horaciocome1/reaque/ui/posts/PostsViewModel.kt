@@ -64,12 +64,10 @@ class PostsViewModel(
 
     @Bindable
     val title = MutableLiveData<String>()
-
     @Bindable
     val message = MutableLiveData<String>()
 
     val notEmptyTopics = topicsRepository.notEmptyTopics
-
     val topics = topicsRepository.topics
 
     val favorites = postsRepository.favorites

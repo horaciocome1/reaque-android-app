@@ -37,13 +37,9 @@ class NotificationsFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        auth.addAuthStateListener {
-            if (!isDetached && it.currentUser != null) {
-                viewModel.notifications.observe(this, Observer { list ->
-                    binding.notifications = list
-                })
-            }
-        }
+        viewModel.notifications.observe(this, Observer { list ->
+            binding.notifications = list
+        })
     }
 
 }

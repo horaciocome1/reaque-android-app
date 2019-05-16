@@ -16,7 +16,6 @@
 package io.github.horaciocome1.reaque.ui.posts
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -26,10 +25,10 @@ import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.firebase.dynamiclinks.DynamicLink
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.databinding.FragmentReadBinding
+import io.github.horaciocome1.reaque.util.buildShortDynamicLinc
 import kotlinx.android.synthetic.main.fragment_read.*
 
 class ReadFragment: Fragment() {
@@ -52,7 +51,6 @@ class ReadFragment: Fragment() {
         share_button.setOnClickListener {
             it.isEnabled = false
             buildAndSendDynamicLink(binding.post!!)
-            it.isEnabled = true
         }
     }
 
@@ -75,43 +73,19 @@ class ReadFragment: Fragment() {
     }
 
     private fun buildAndSendDynamicLink(post: Post) {
-        dynamicLinks.createDynamicLink()
-            .setLink(Uri.parse("https://www.reaque.firebase.com/${post.id}"))
-            .setDomainUriPrefix("https://reaque.page.link")
-            .setAndroidParameters(
-                DynamicLink.AndroidParameters.Builder()
-                    .setFallbackUrl(Uri.parse("https://www.reaque.firebase.com"))
-                    .build()
-            )
-            .setIosParameters(
-                DynamicLink.IosParameters.Builder("")
-                    .setFallbackUrl(Uri.parse("https://www.reaque.firebase.com"))
-                    .build()
-            )
-            .setSocialMetaTagParameters(
-                DynamicLink.SocialMetaTagParameters.Builder()
-                    .setTitle("${post.title} - ${post.user.name}")
-                    .setDescription(
-                        "${post.message.substring(
-                            0,
-                            if (post.message.length >= 155) 155 else post.message.length
-                        )} . . . "
-                    )
-                    .setImageUrl(Uri.parse(post.pic))
-                    .build()
-            )
-            .buildShortDynamicLink()
-            .addOnSuccessListener {
-                val sendIntent = Intent().apply {
-                    action = Intent.ACTION_SEND
-                    putExtra(Intent.EXTRA_TEXT, it.shortLink.toString())
-                    type = "text/plain"
-                }
-                val chooser = Intent.createChooser(sendIntent, "Partilhar - ${post.title}")
-                startActivity(chooser)
+        dynamicLinks.buildShortDynamicLinc(post).addOnSuccessListener {
+            val sendIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, it.shortLink.toString())
+                type = "text/plain"
             }
+            val chooser = Intent.createChooser(sendIntent, "Partilhar - ${post.title}")
+            startActivity(chooser)
+            share_button.isEnabled = true
+        }
             .addOnFailureListener {
                 Log.e(tag, "Failed to build short link", it)
+                share_button.isEnabled = true
             }
     }
 

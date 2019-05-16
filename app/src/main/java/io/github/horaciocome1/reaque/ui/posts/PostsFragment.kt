@@ -50,38 +50,26 @@ class PostsFragment: Fragment() {
 
     override fun onStart() {
         super.onStart()
-        auth.addAuthStateListener {
-            if (!isDetached && it.currentUser != null) {
-                viewModel.notEmptyTopics.observe(this, Observer { list ->
-                    binding.topics = list
-                })
-            }
-        }
+        viewModel.notEmptyTopics.observe(this, Observer { list ->
+            binding.topics = list
+        })
         favorites_fab.setOnClickListener {
             listFavorites()
         }
     }
 
     private fun listPosts(topic: Topic) {
-        auth.addAuthStateListener {
-            if (!isDetached && it.currentUser != null) {
-                viewModel.getPosts(topic).observe(this, Observer { list ->
-                    binding.posts = list
-                })
-                favorites_fab.show()
-            }
-        }
+        viewModel.getPosts(topic).observe(this, Observer { list ->
+            binding.posts = list
+        })
+        favorites_fab.show()
     }
 
     private fun listFavorites() {
-        auth.addAuthStateListener {
-            if (!isDetached && it.currentUser != null) {
-                viewModel.favorites.observe(this, Observer { list ->
-                    binding.posts = list
-                })
-                favorites_fab.hide()
-            }
-        }
+        viewModel.favorites.observe(this, Observer { list ->
+            binding.posts = list
+        })
+        favorites_fab.hide()
     }
 
 }

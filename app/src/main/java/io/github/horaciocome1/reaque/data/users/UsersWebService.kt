@@ -48,10 +48,10 @@ class UsersWebService {
     private val db = FirebaseFirestore.getInstance()
     private val ref = db.collection("users")
 
-    private var auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     init {
-        auth.currentUser?.let {
+        auth.addSimpleAuthStateListener {
             ref.document(it.uid).addSnapshotListener { snapshot, exception ->
                 when {
                     exception != null -> onListenFailed(tag, exception)
@@ -63,7 +63,7 @@ class UsersWebService {
     }
 
     fun addUser(onSuccessful: () -> Unit) {
-        auth.currentUser?.let {
+        auth.addSimpleAuthStateListener {
             ref.document(it.uid).set(it.map, SetOptions.merge()).addOnSuccessListener {
                 onAddUserSucceed(tag)
                 onSuccessful()
@@ -74,7 +74,7 @@ class UsersWebService {
     }
 
     fun editUser(user: User, onSuccessful: () -> Unit) {
-        auth.currentUser?.let {
+        auth.addSimpleAuthStateListener {
             ref.document(it.uid).set(user.map, SetOptions.merge()).addOnSuccessListener {
                 onAddUserSucceed(tag)
                 onSuccessful()
@@ -85,7 +85,7 @@ class UsersWebService {
     }
 
     fun addTopicToUser(topic: Topic, onSuccessful: () -> Unit) {
-        auth.currentUser?.let {
+        auth.addSimpleAuthStateListener {
             val data = mapOf(
                 "topics" to mapOf(
                     topic.id to true
@@ -101,9 +101,10 @@ class UsersWebService {
     }
 
     fun getUsers(topic: Topic): LiveData<List<User>> {
-        if (!topicId.equals(topic.id, true)) {
-            topicUsers.value = mutableListOf()
-            ref.whereEqualTo("topics.${topic.id}", true).addSnapshotListener { snapshot, exception ->
+        auth.addSimpleAuthStateListener {
+            if (!topicId.equals(topic.id, true)) {
+                topicUsers.value = mutableListOf()
+                ref.whereEqualTo("topics.${topic.id}", true).addSnapshotListener { snapshot, exception ->
                     when {
                         exception != null -> onListenFailed(tag, exception)
                         snapshot != null -> {
@@ -113,19 +114,22 @@ class UsersWebService {
                         else -> onSnapshotNull(tag)
                     }
                 }
-            topicId = topic.id
+                topicId = topic.id
+            }
         }
         return topicUsers
     }
 
     fun getUsers(user: User): LiveData<User> {
-        if (!user.id.equals(this.user.value?.id, true)) {
-            this.user.value = User("")
-            ref.document(user.id).addSnapshotListener { snapshot, exception ->
-                when {
-                    exception != null -> onListenFailed(tag, exception)
-                    snapshot != null -> this.user.value = snapshot.user
-                    else -> onSnapshotNull(tag)
+        auth.addSimpleAuthStateListener {
+            if (!user.id.equals(this.user.value?.id, true)) {
+                this.user.value = User("")
+                ref.document(user.id).addSnapshotListener { snapshot, exception ->
+                    when {
+                        exception != null -> onListenFailed(tag, exception)
+                        snapshot != null -> this.user.value = snapshot.user
+                        else -> onSnapshotNull(tag)
+                    }
                 }
             }
         }
@@ -134,18 +138,18 @@ class UsersWebService {
 
 
     fun getFavorites(): LiveData<List<User>> {
-        if (favoritesList.isEmpty()) {
-            auth.currentUser?.let {
+        auth.addAuthStateListener {
+            if (favoritesList.isEmpty()) {
                 ref.whereEqualTo("favorite_for.${it.uid}", true).addSnapshotListener { snapshot, exception ->
-                        when {
-                            exception != null -> onListenFailed(tag, exception)
-                            snapshot != null -> {
-                                favoritesList = snapshot.users
-                                favorites.value = favoritesList
-                            }
-                            else -> onSnapshotNull(tag)
+                    when {
+                        exception != null -> onListenFailed(tag, exception)
+                        snapshot != null -> {
+                            favoritesList = snapshot.users
+                            favorites.value = favoritesList
                         }
+                        else -> onSnapshotNull(tag)
                     }
+                }
             }
         }
         return favorites
@@ -153,7 +157,7 @@ class UsersWebService {
 
     // add id from the post i like to my profile
     fun addToFavorites(post: Post, onSuccessful: () -> Unit) {
-        auth.currentUser?.let {
+        auth.addSimpleAuthStateListener {
             val data = mapOf(
                 "favorites" to mapOf(
                     post.id to true
@@ -167,7 +171,7 @@ class UsersWebService {
 
     // remove id from the post i like from my profile
     fun removeFromFavorites(post: Post, onSuccessful: () -> Unit) {
-        auth.currentUser?.let {
+        auth.addSimpleAuthStateListener {
             val data = mapOf(
                 "favorites" to mapOf(
                     post.id to null
@@ -180,7 +184,7 @@ class UsersWebService {
     }
 
     fun addToFavorites(user: User, onSuccessful: () -> Unit) {
-        auth.currentUser?.let { me ->
+        auth.addSimpleAuthStateListener { me ->
             // add the id from the user i like to my profile
             var data = mapOf(
                 "favorites" to mapOf(
@@ -202,7 +206,7 @@ class UsersWebService {
     }
 
     fun removeFromFavorites(user: User, onSuccessful: () -> Unit) {
-        auth.currentUser?.let { me ->
+        auth.addSimpleAuthStateListener { me ->
             // add the id from the user i like to my profile
             var data = mapOf(
                 "favorites" to mapOf(
@@ -225,7 +229,7 @@ class UsersWebService {
 
     fun isThisFavoriteForMe(user: User): LiveData<Boolean> {
         isThisMyFavorite.value = false
-        auth.currentUser?.let {
+        auth.addSimpleAuthStateListener {
             ref.document(user.id).addSnapshotListener { snapshot, exception ->
                 when {
                     exception != null -> onListenFailed(tag, exception)

@@ -50,13 +50,9 @@ class MoreFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         binding.viewmodel = viewModel
-        auth.addAuthStateListener {
-            if (!isDetached && it.currentUser != null) {
-                viewModel.me.observe(this, Observer { user ->
-                    binding.user = user
-                })
-            }
-        }
+        viewModel.me.observe(this, Observer { user ->
+            binding.user = user
+        })
     }
 
     private fun openReadMe() {

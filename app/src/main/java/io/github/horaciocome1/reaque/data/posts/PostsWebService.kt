@@ -48,7 +48,7 @@ class PostsWebService {
     private val db = FirebaseFirestore.getInstance()
     private val ref = db.collection("posts")
 
-    private var auth = FirebaseAuth.getInstance()
+    private val auth = FirebaseAuth.getInstance()
 
     private var topicId = ""
     private var userId = ""
@@ -56,65 +56,71 @@ class PostsWebService {
     private val isThisMyFavorite = MutableLiveData<Boolean>().apply { value = false }
 
     fun submitPost(post: Post, onSuccessful: () -> Unit) {
-        post.user.run {
-            auth.currentUser?.let {
+        auth.addSimpleAuthStateListener {
+            post.user.run {
                 id = it.uid
                 name = it.displayName!!
                 pic = it.photoUrl.toString()
             }
-        }
-        ref.add(post.map).addOnSuccessListener {
-            onSuccessful()
+            ref.add(post.map).addOnSuccessListener {
+                onSuccessful()
+            }
         }
     }
 
     /*retrieve from remote server all topicPosts from the same notEmptyTopics*/
     fun getPosts(topic: Topic): LiveData<List<Post>> {
-        if (!topicId.equals(topic.id, true)) {
-            topicPosts.value = mutableListOf()
-            ref.whereEqualTo("topic.id", topic.id).addSnapshotListener { snapshot, exception ->
-                when {
-                    exception != null -> onListenFailed(tag, exception)
-                    snapshot != null -> {
-                        topicPostsList = snapshot.posts
-                        topicPosts.value = topicPostsList
+        auth.addSimpleAuthStateListener {
+            if (!topicId.equals(topic.id, true)) {
+                topicPosts.value = mutableListOf()
+                ref.whereEqualTo("topic.id", topic.id).addSnapshotListener { snapshot, exception ->
+                    when {
+                        exception != null -> onListenFailed(tag, exception)
+                        snapshot != null -> {
+                            topicPostsList = snapshot.posts
+                            topicPosts.value = topicPostsList
+                        }
+                        else -> onSnapshotNull(tag)
                     }
-                    else -> onSnapshotNull(tag)
                 }
+                topicId = topic.id
             }
-            topicId = topic.id
         }
         return topicPosts
     }
 
     /*retrieve from remote server every topicPosts wrote by the specified user*/
     fun getPosts(user: User): LiveData<List<Post>> {
-        if (!userId.equals(user.id, true)) {
-            userPosts.value = mutableListOf()
-            ref.whereEqualTo(userIdPath, user.id).addSnapshotListener { snapshot, exception ->
-                when {
-                    exception != null -> onListenFailed(tag, exception)
-                    snapshot != null -> {
-                        userPostsList = snapshot.posts
-                        userPosts.value = userPostsList
+        auth.addSimpleAuthStateListener {
+            if (!userId.equals(user.id, true)) {
+                userPosts.value = mutableListOf()
+                ref.whereEqualTo(userIdPath, user.id).addSnapshotListener { snapshot, exception ->
+                    when {
+                        exception != null -> onListenFailed(tag, exception)
+                        snapshot != null -> {
+                            userPostsList = snapshot.posts
+                            userPosts.value = userPostsList
+                        }
+                        else -> onSnapshotNull(tag)
                     }
-                    else -> onSnapshotNull(tag)
                 }
+                userId = user.id
             }
-            userId = user.id
         }
         return userPosts
     }
 
     /*retrieve from remote server the post that the user wants to read*/
     fun getPosts(post: Post): LiveData<Post> {
-        if (!post.id.equals(this.post.value?.id, true)) {
-            this.post.value = Post("")
-            ref.document(post.id).addSnapshotListener { snapshot, exception ->
-                when {
-                    exception != null -> onListenFailed(tag, exception)
-                    snapshot != null -> this.post.value = snapshot.post
-                    else -> onSnapshotNull(tag)
+        auth.addSimpleAuthStateListener {
+            if (!post.id.equals(this.post.value?.id, true)) {
+                this.post.value = Post("")
+                ref.document(post.id).addSnapshotListener { snapshot, exception ->
+                    when {
+                        exception != null -> onListenFailed(tag, exception)
+                        snapshot != null -> this.post.value = snapshot.post
+                        else -> onSnapshotNull(tag)
+                    }
                 }
             }
         }
@@ -122,9 +128,9 @@ class PostsWebService {
     }
 
     fun getFavorites(): LiveData<List<Post>> {
-        if (favoritesList.isEmpty()) {
-            auth.currentUser?.let { user ->
-                ref.whereEqualTo("favorite_for.${user.uid}", true).addSnapshotListener { snapshot, exception ->
+        auth.addSimpleAuthStateListener {
+            if (favoritesList.isEmpty()) {
+                ref.whereEqualTo("favorite_for.${it.uid}", true).addSnapshotListener { snapshot, exception ->
                     when {
                         exception != null -> onListenFailed(tag, exception)
                         snapshot != null -> {
@@ -140,10 +146,10 @@ class PostsWebService {
     }
 
     fun addToFavorites(post: Post, onSuccessful: () -> Unit) {
-        auth.currentUser?.let { user ->
+        auth.addSimpleAuthStateListener {
             val data = mapOf(
                 "favorite_for" to mapOf(
-                    user.uid to true
+                    it.uid to true
                 )
             )
             ref.document(post.id).set(data, SetOptions.merge()).addOnSuccessListener {
@@ -153,10 +159,10 @@ class PostsWebService {
     }
 
     fun removeFromFavorites(post: Post, onSuccessful: () -> Unit) {
-        auth.currentUser?.let { user ->
+        auth.addSimpleAuthStateListener {
             val data = mapOf(
                 "favorite_for" to mapOf(
-                    user.uid to null
+                    it.uid to null
                 )
             )
             ref.document(post.id).set(data, SetOptions.merge()).addOnSuccessListener {
@@ -167,7 +173,7 @@ class PostsWebService {
 
     fun isThisMyFavorite(post: Post): LiveData<Boolean> {
         isThisMyFavorite.value = false
-        auth.currentUser?.let {
+        auth.addSimpleAuthStateListener {
             ref.document(post.id).addSnapshotListener { snapshot, exception ->
                 when {
                     exception != null -> onListenFailed(tag, exception)
