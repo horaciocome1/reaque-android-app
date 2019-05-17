@@ -73,16 +73,17 @@ class ReadFragment: Fragment() {
     }
 
     private fun buildAndSendDynamicLink(post: Post) {
-        dynamicLinks.buildShortDynamicLinc(post).addOnSuccessListener {
-            val sendIntent = Intent().apply {
-                action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_TEXT, it.shortLink.toString())
-                type = "text/plain"
+        dynamicLinks.buildShortDynamicLinc(post)
+            .addOnSuccessListener {
+                val sendIntent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, it.shortLink.toString())
+                    type = "text/plain"
+                }
+                val chooser = Intent.createChooser(sendIntent, "Partilhar - ${post.title}")
+                startActivity(chooser)
+                share_button.isEnabled = true
             }
-            val chooser = Intent.createChooser(sendIntent, "Partilhar - ${post.title}")
-            startActivity(chooser)
-            share_button.isEnabled = true
-        }
             .addOnFailureListener {
                 Log.e(tag, "Failed to build short link", it)
                 share_button.isEnabled = true
