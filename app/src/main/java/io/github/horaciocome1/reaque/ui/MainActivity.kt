@@ -94,6 +94,13 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
+            supportActionBar?.run {
+                when (destination.id) {
+                    R.id.destination_posting -> hide()
+                    R.id.destination_edit_profile -> hide()
+                    else -> show()
+                }
+            }
         }
     }
 
