@@ -130,8 +130,9 @@ class PostsViewModel(
         }
     }
 
-    fun cancel(view: View) {
-        view.findNavController().navigateUp()
+    fun openProfile(view: View, post: Post) {
+        val directions = ReadFragmentDirections.actionOpenProfileFromRead(post.user.id)
+        view.findNavController().navigate(directions)
     }
 
 }

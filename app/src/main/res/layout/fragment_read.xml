@@ -226,6 +226,7 @@
             android:layout_gravity="top|end"
             android:scaleType="centerCrop"
             app:url="@{post.user.pic}"
+            android:onClick="@{(imageview) -> viewmodel.openProfile(button, post)}"
             app:type="@{Constants.CIRCLE}"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
