@@ -26,6 +26,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.card.MaterialCardView
 import io.github.horaciocome1.reaque.databinding.FragmentPostingBinding
@@ -78,6 +79,9 @@ class PostingFragment : Fragment() {
         }
         select_pic_button.setOnClickListener {
             selectPicBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+        }
+        toolbar!!.setNavigationOnClickListener {
+            it.findNavController().navigateUp()
         }
     }
 
