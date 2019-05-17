@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import io.github.horaciocome1.reaque.databinding.FragmentEditProfileBinding
 import io.github.horaciocome1.reaque.util.OnFocusChangeListener
 import kotlinx.android.synthetic.main.fragment_edit_profile.*
@@ -24,6 +25,9 @@ class EditProfileFragment : Fragment() {
         OnFocusChangeListener(context).let {
             bio_inputlayout.editText?.onFocusChangeListener = it
             address_inputlayout.editText?.onFocusChangeListener = it
+        }
+        toolbar!!.setNavigationOnClickListener {
+            it.findNavController().navigateUp()
         }
     }
 
@@ -53,7 +57,7 @@ class EditProfileFragment : Fragment() {
     private val isProfileReady: Boolean
         get() {
             viewModel.user.run {
-                return bio.isNotBlank() && address.isNotBlank()
+                return bio.isNotBlank() && address.isNotBlank() && bio != "null" && address != "null"
             }
         }
 
