@@ -48,11 +48,11 @@ class MainActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         handleDynamicLinks()
+        setupNavigation()
     }
 
     override fun onStart() {
         super.onStart()
-        setupNavigation()
         if (auth.currentUser == null)
             navController.navigate(R.id.destination_sign_in)
     }
