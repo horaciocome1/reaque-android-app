@@ -74,30 +74,21 @@ class MainActivity : AppCompatActivity() {
         setupSideNavigationMenu()
         setupActionBar()
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-                bottomnavigationview?.visibility = when (destination.id) {
-                    R.id.destination_posting -> View.GONE
-                    R.id.destination_edit_profile -> View.GONE
-                    R.id.destination_sign_in -> View.GONE
-                    else -> View.VISIBLE
-                }
-                supportActionBar?.run {
-                    when (destination.id) {
-                        R.id.destination_posts -> hide()
-                        R.id.destination_users -> hide()
-                        R.id.destination_notifications -> hide()
-                        R.id.destination_more -> hide()
-                        R.id.destination_posting -> hide()
-                        R.id.destination_edit_profile -> hide()
-                        R.id.destination_sign_in -> hide()
-                        else -> show()
-                    }
-                }
+            bottomnavigationview?.visibility = when (destination.id) {
+                R.id.destination_posting -> if (isOrientationPortrait) View.GONE else View.VISIBLE
+                R.id.destination_edit_profile -> if (isOrientationPortrait) View.GONE else View.VISIBLE
+                R.id.destination_sign_in -> if (isOrientationPortrait) View.GONE else View.VISIBLE
+                else -> View.VISIBLE
             }
             supportActionBar?.run {
                 when (destination.id) {
-                    R.id.destination_posting -> hide()
+                    R.id.destination_posts -> if (isOrientationPortrait) hide() else show()
+                    R.id.destination_users -> if (isOrientationPortrait) hide() else show()
+                    R.id.destination_notifications -> if (isOrientationPortrait) hide() else show()
+                    R.id.destination_more -> if (isOrientationPortrait) hide() else show()
+                    R.id.destination_sign_in -> if (isOrientationPortrait) hide() else show()
                     R.id.destination_edit_profile -> hide()
+                    R.id.destination_posting -> hide()
                     else -> show()
                 }
             }
@@ -128,5 +119,10 @@ class MainActivity : AppCompatActivity() {
                 Log.w(tag, "getDynamicLink:Failure", it)
             }
     }
+
+    private val isOrientationPortrait: Boolean
+        get() {
+            return resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
+        }
 
 }
