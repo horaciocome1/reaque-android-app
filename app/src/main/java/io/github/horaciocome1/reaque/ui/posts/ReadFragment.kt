@@ -28,7 +28,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.databinding.FragmentReadBinding
-import io.github.horaciocome1.reaque.util.buildShortDynamicLinc
+import io.github.horaciocome1.reaque.util.buildShortDynamicLink
 import kotlinx.android.synthetic.main.fragment_read.*
 
 class ReadFragment: Fragment() {
@@ -73,7 +73,7 @@ class ReadFragment: Fragment() {
     }
 
     private fun buildAndSendDynamicLink(post: Post) {
-        dynamicLinks.buildShortDynamicLinc(post)
+        dynamicLinks.buildShortDynamicLink(post)
             .addOnSuccessListener {
                 val sendIntent = Intent().apply {
                     action = Intent.ACTION_SEND
