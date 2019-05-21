@@ -1,11 +1,14 @@
 package io.github.horaciocome1.reaque.util
 
 import android.net.Uri
+import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.firebase.dynamiclinks.DynamicLink
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
 import com.google.firebase.dynamiclinks.ShortDynamicLink
 import io.github.horaciocome1.reaque.data.posts.Post
+import io.github.horaciocome1.reaque.ui.MainActivity
+import io.github.horaciocome1.reaque.ui.posts.PostsFragmentDirections
 
 fun FirebaseDynamicLinks.buildShortDynamicLinc(post: Post): Task<ShortDynamicLink> {
     val dynamicLinks = FirebaseDynamicLinks.getInstance()
@@ -35,4 +38,18 @@ fun FirebaseDynamicLinks.buildShortDynamicLinc(post: Post): Task<ShortDynamicLin
                 .build()
         )
         .buildShortDynamicLink()
+}
+
+fun MainActivity.handleDynamicLinks(controller: ) {
+    FirebaseDynamicLinks.getInstance().getDynamicLink(intent)
+        .addOnSuccessListener { pendingDynamicLinkData ->
+            pendingDynamicLinkData?.let {
+                val postId: String = it.link.toString().removePrefix("https://www.reaque.firebase.com/")
+                val directions = PostsFragmentDirections.actionOpenReadFromPosts(postId)
+                navController.navigate(directions)
+            }
+        }
+        .addOnFailureListener {
+            Log.w(tag, "getDynamicLink:Failure", it)
+        }
 }

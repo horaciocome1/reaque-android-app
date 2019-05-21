@@ -30,6 +30,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.ui.posts.PostsFragmentDirections
+import io.github.horaciocome1.reaque.util.handleDynamicLinks
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -105,20 +106,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupActionBar() =
         NavigationUI.setupActionBarWithNavController(this, navController, activity_main_drawerlayout)
-
-    private fun handleDynamicLinks() {
-        FirebaseDynamicLinks.getInstance().getDynamicLink(intent)
-            .addOnSuccessListener { pendingDynamicLinkData ->
-                pendingDynamicLinkData?.let {
-                    val postId: String = it.link.toString().removePrefix("https://www.reaque.firebase.com/")
-                    val directions = PostsFragmentDirections.actionOpenReadFromPosts(postId)
-                    navController.navigate(directions)
-                }
-            }
-            .addOnFailureListener {
-                Log.w(tag, "getDynamicLink:Failure", it)
-            }
-    }
 
     private val isOrientationPortrait: Boolean
         get() {
