@@ -36,13 +36,13 @@ fun FirebaseDynamicLinks.buildShortDynamicLink(post: Post): Task<ShortDynamicLin
         .buildShortDynamicLink()
 }
 
-fun MainActivity.handleDynamicLinks(controller: NavController) {
+fun MainActivity.handleDynamicLinks(onSuccess: (Post) -> Unit) {
     FirebaseDynamicLinks.getInstance().getDynamicLink(intent)
         .addOnSuccessListener { pendingDynamicLinkData ->
             pendingDynamicLinkData?.let {
                 val postId: String = it.link.toString().removePrefix("${Constants.LANDING_PAGE}/")
-                val directions = PostsFragmentDirections.actionOpenReadFromPosts(postId)
-                controller.navigate(directions)
+                val post = Post(postId)
+                onSuccess(post)
             }
         }
         .addOnFailureListener {

@@ -35,6 +35,6 @@ object Constants {
     const val SIMPLE = 3300
 
     // strings
-    const val LANDING_PAGE = "https://reaque.firebaseapp.com"
+    const val LANDING_PAGE = "reaque.firebaseapp.com"
 
 }
