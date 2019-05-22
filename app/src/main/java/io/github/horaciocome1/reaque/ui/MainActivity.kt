@@ -75,9 +75,9 @@ class MainActivity : AppCompatActivity() {
         setupActionBar()
         navController.addOnDestinationChangedListener { _, destination, _ ->
             bottomnavigationview?.visibility = when (destination.id) {
-                R.id.destination_posting -> if (isOrientationPortrait) View.GONE else View.VISIBLE
-                R.id.destination_edit_profile -> if (isOrientationPortrait) View.GONE else View.VISIBLE
-                R.id.destination_sign_in -> if (isOrientationPortrait) View.GONE else View.VISIBLE
+                R.id.destination_posting -> View.GONE
+                R.id.destination_edit_profile -> View.GONE
+                R.id.destination_sign_in -> View.GONE
                 else -> View.VISIBLE
             }
             supportActionBar?.run {
