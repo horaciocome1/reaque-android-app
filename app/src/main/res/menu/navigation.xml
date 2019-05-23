@@ -16,9 +16,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/destination_posts"
-        android:icon="@drawable/outline_subject_24"
-        android:title="@string/posts" />
+        android:id="@+id/destination_notifications"
+        android:icon="@drawable/outline_whatshot_24"
+        android:title="@string/notifications" />
 
     <item
         android:id="@+id/destination_users"
@@ -26,9 +26,9 @@
         android:title="@string/users" />
 
     <item
-        android:id="@+id/destination_notifications"
-        android:icon="@drawable/outline_notifications_24"
-        android:title="@string/notifications" />
+        android:id="@+id/destination_posts"
+        android:icon="@drawable/outline_library_books_24"
+        android:title="@string/posts" />
 
     <item
         android:id="@+id/destination_more"
