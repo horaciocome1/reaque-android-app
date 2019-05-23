@@ -36,4 +36,6 @@
     <string name="submit">Submeter</string>
     <string name="sign_in_message">Por-favor, aguarde enquanto a sessão é iniciada.</string>
 
+    <string name="email_app_not_found">Aplicativo de email não encontrado.</string>
+
 </resources>

@@ -25,6 +25,8 @@
     <string name="read_me_url" translatable="false">https://reaque.firebaseapp.com</string>
     <string name="project_url" translatable="false">https://github.com/horaciocome1/reaque</string>
 
+    <string name="developer_email" translatable="false">hcome@pm.me</string>
+
     <string name="topics">Topics</string>
     <string name="posts">Posts</string>
     <string name="users">Authors</string>
@@ -59,5 +61,7 @@
     <string name="undo">unFavorite</string>
     <string name="submit">Submit</string>
     <string name="sign_in_message">Please wait while we logging you in</string>
+
+    <string name="email_app_not_found">Email app not found.</string>
 
 </resources>

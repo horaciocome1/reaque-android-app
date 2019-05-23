@@ -23,6 +23,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.databinding.FragmentMoreBinding
@@ -41,10 +42,11 @@ class MoreFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        feedback_textview.setOnClickListener { }
-        about_textview.setOnClickListener {
-            openReadMe()
+        feedback_textview.setOnClickListener {
+            emailDeveloper()
         }
+        frequently_asked_questions_textview.setOnClickListener(this::openLinks)
+        about_textview.setOnClickListener(this::openLinks)
     }
 
     override fun onStart() {
@@ -55,10 +57,27 @@ class MoreFragment : Fragment() {
         })
     }
 
-    private fun openReadMe() {
-        val url = resources.getString(R.string.read_me_url)
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+    private fun openLinks(view: View) {
+        val link = when (view) {
+            frequently_asked_questions_textview -> resources.getString(R.string.project_url)
+            about_textview -> resources.getString(R.string.read_me_url)
+            else -> null
+        }
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
         startActivity(intent)
+    }
+
+    private fun emailDeveloper() {
+        val emailIntent = Intent(Intent.ACTION_SENDTO)
+        val email = resources.getString(R.string.developer_email)
+        val subject = "Feedback - Reaque Android App"
+        val mailto = "mailto:$email&subject=${Uri.encode(subject)}"
+        emailIntent.data = Uri.parse(mailto)
+        try {
+            startActivity(emailIntent)
+        } catch (e: Exception) {
+            Snackbar.make(view!!, R.string.email_app_not_found, Snackbar.LENGTH_LONG).show()
+        }
     }
 
 }
