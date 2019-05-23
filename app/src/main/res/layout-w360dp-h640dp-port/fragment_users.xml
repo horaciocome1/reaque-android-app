@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~    Copyright 2019 Horácio Flávio Comé Júnior
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,7 +22,7 @@
 
         <import type="io.github.horaciocome1.reaque.data.topics.Topic" />
 
-        <import type="io.github.horaciocome1.reaque.data.posts.Post" />
+        <import type="io.github.horaciocome1.reaque.data.users.User" />
 
         <import type="android.content.res.Configuration" />
 
@@ -36,8 +35,8 @@
             type="List&lt;Topic&gt;" />
 
         <variable
-            name="posts"
-            type="List&lt;Post&gt;" />
+            name="users"
+            type="List&lt;User&gt;" />
 
     </data>
 
@@ -55,14 +54,30 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+                    android:lineSpacingExtra="8sp"
+                    android:text="@string/users_title"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
+                    android:textColor="@color/primaryTextColor" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/default_stroke_width"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginLeft="24dp"
+                    android:background="@color/secondaryColor" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/topics_recyclerview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="32dp"
                     android:scrollbars="none"
-                    app:orientation="@{Configuration.ORIENTATION_PORTRAIT}"
                     app:list="@{topics}"
+                    app:orientation="@{Configuration.ORIENTATION_PORTRAIT}"
                     app:type="@{Constants.DEFAULT}" />
 
                 <ProgressBar
@@ -72,18 +87,18 @@
                     android:visibility="@{topics.isEmpty() ? View.VISIBLE : View.GONE}" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/users_recyclerview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:scrollbars="none"
-                    app:list="@{posts}" />
+                    app:list="@{users}" />
 
                 <ProgressBar
-                    android:id="@+id/posts_progressbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="32dp"
-                    android:visibility="@{posts.isEmpty() ? View.VISIBLE : View.GONE}" />
+                    android:visibility="@{users.isEmpty() ? View.VISIBLE : View.GONE}" />
 
             </LinearLayout>
 

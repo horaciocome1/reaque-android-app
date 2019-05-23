@@ -55,27 +55,11 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="32dp"
-                    android:lineSpacingExtra="8sp"
-                    android:text="@string/users_title"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
-                    android:textColor="@color/primaryTextColor" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/default_stroke_width"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginLeft="24dp"
-                    android:background="@color/secondaryColor" />
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/topics_recyclerview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="16dp"
                     android:scrollbars="none"
                     app:orientation="@{Configuration.ORIENTATION_PORTRAIT}"
                     app:list="@{topics}"

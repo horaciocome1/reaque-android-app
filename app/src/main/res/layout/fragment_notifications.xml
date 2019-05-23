@@ -44,15 +44,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="32dp"
-                    android:lineSpacingExtra="@dimen/title_line_spacing_extra"
-                    android:text="@string/whats_new"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
-                    android:textColor="@color/primaryTextColor" />
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview"
                     android:layout_width="match_parent"
