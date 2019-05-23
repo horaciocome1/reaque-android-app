@@ -36,16 +36,17 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        terms_and_conditions_textview.setOnClickListener(this::onUrlOnClickListener)
-        privacy_policy_textview.setOnClickListener(this::onUrlOnClickListener)
-        licenses_textview.setOnClickListener(this::onUrlOnClickListener)
-        repository_textview.setOnClickListener(this::onUrlOnClickListener)
+        terms_and_conditions_textview.setOnClickListener(this::openLinks)
+        privacy_policy_textview.setOnClickListener(this::openLinks)
+        licenses_textview.setOnClickListener(this::openLinks)
+        repository_textview.setOnClickListener(this::openLinks)
+        donate_textview.setOnClickListener(this::openLinks)
         sign_out_textview.setOnClickListener {
             signOut()
         }
     }
 
-    private fun onUrlOnClickListener(view: View) {
+    private fun openLinks(view: View) {
         val url = resources.getString(
             when (view) {
                 terms_and_conditions_textview -> R.string.terms_and_conditions_url
@@ -60,8 +61,7 @@ class SettingsFragment : Fragment() {
     }
 
     private fun signOut() {
-        val auth = FirebaseAuth.getInstance()
-        auth.signOut()
+        FirebaseAuth.getInstance().signOut()
         activity.run {
             if (this is MainActivity)
                 finish()
