@@ -77,8 +77,6 @@ class PostsViewModel(
     fun getPosts(post: Post) = postsRepository.getPosts(post)
 
     fun submitPost(view: View) {
-        view.visibility = View.INVISIBLE
-        view.isEnabled = false
         val uploader = ImageUploader().apply {
             imageUri = this@PostsViewModel.imageUri
             post = this@PostsViewModel.post
@@ -134,5 +132,7 @@ class PostsViewModel(
         val directions = ReadFragmentDirections.actionOpenProfileFromRead(post.user.id)
         view.findNavController().navigate(directions)
     }
+
+    fun navigateUp(view: View) = view.findNavController().navigateUp()
 
 }

@@ -27,8 +27,14 @@ class EditProfileFragment : Fragment() {
             address_inputlayout.editText?.onFocusChangeListener = it
         }
         toolbar!!.setNavigationOnClickListener {
-            it.findNavController().navigateUp()
+            viewModel.navigateUp(it)
         }
+        submit_button.setOnClickListener {
+            progresslayout.visibility = View.VISIBLE
+            content.visibility = View.GONE
+            viewModel.submitProfile(it)
+        }
+        progresslayout.visibility = View.GONE
     }
 
     override fun onStart() {

@@ -54,7 +54,7 @@ class PostingFragment : Fragment() {
         }
         OnFocusChangeListener(context).let {
             title_edittext.onFocusChangeListener = it
-            title_edittext.onFocusChangeListener = it
+            message_edittext.onFocusChangeListener = it
         }
         selectTopicBehavior = BottomSheetBehavior.from(select_topics_bottomsheet).apply {
             state = BottomSheetBehavior.STATE_HIDDEN
@@ -70,7 +70,7 @@ class PostingFragment : Fragment() {
                     selectTopicBehavior.state = BottomSheetBehavior.STATE_HIDDEN
                     viewModel.post.topic = it[position]
                     binding.viewmodel = viewModel
-                    post_button.isEnabled = isPostReady
+                    submit_button.isEnabled = isPostReady
                 }
             }
         }
@@ -81,8 +81,15 @@ class PostingFragment : Fragment() {
             selectPicBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
         }
         toolbar!!.setNavigationOnClickListener {
-            it.findNavController().navigateUp()
+            viewModel.navigateUp(it)
         }
+        submit_button.setOnClickListener {
+            progresslayout.visibility = View.VISIBLE
+            content.visibility = View.GONE
+            footer.visibility = View.GONE
+            viewModel.submitPost(it)
+        }
+        progresslayout.visibility = View.GONE
     }
 
     override fun onStart() {
@@ -93,11 +100,11 @@ class PostingFragment : Fragment() {
         }
         viewModel.title.observe(this, Observer {
             viewModel.post.title = it
-            post_button.isEnabled = isPostReady
+            submit_button.isEnabled = isPostReady
         })
         viewModel.message.observe(this, Observer {
             viewModel.post.message = it
-            post_button.isEnabled = isPostReady
+            submit_button.isEnabled = isPostReady
         })
         viewModel.topics.observe(this, Observer {
             binding.topics = it

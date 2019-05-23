@@ -71,28 +71,12 @@ class ProfileFragment: Fragment() {
             val user = User(ProfileFragmentArgs.fromBundle(args).userId)
             viewModel.getUsers(user).observe(this, Observer {
                 binding.user = it
-                if (it.id.isBlank())
-                    hideContent()
-                else
-                    showContent()
             })
             viewModel.isThisFavoriteForMe(user).observe(this, Observer {
                 add_to_favorites_button.visibility = if (it) View.GONE else View.VISIBLE
                 remove_from_favorites_button.visibility = if (it) View.VISIBLE else View.GONE
             })
         }
-    }
-
-    private fun showContent() {
-        cover_imageview.visibility = View.VISIBLE
-        scrollview.visibility = View.VISIBLE
-        progressbar.visibility = View.GONE
-    }
-
-    private fun hideContent() {
-        cover_imageview.visibility = View.GONE
-        scrollview.visibility = View.GONE
-        progressbar.visibility = View.VISIBLE
     }
 
     private fun User.showPosts() {

@@ -34,12 +34,13 @@ class BindingAdapters {
             @BindingAdapter("url", "uri", "type", requireAll = false)
             @JvmStatic
             fun ImageView.loadImage(url: String?, uri: Uri?, type: Int?) {
-                Glide.with(context).load(
-                    if (uri != null && uri != Uri.EMPTY)
-                        uri
-                    else
-                        url
-                )
+                Glide.with(context)
+                    .load(
+                        if (uri != null && uri != Uri.EMPTY)
+                            uri
+                        else
+                            url
+                    )
                     .apply(
                         when (type) {
                             Constants.BLUR -> RequestOptions.bitmapTransform(BlurTransformation(7, 14))
