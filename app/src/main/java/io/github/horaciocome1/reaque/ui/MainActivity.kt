@@ -78,6 +78,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.destination_posting -> View.GONE
                 R.id.destination_edit_profile -> View.GONE
                 R.id.destination_sign_in -> View.GONE
+                R.id.destination_viewer -> View.GONE
                 else -> View.VISIBLE
             }
             supportActionBar?.run {
@@ -89,6 +90,7 @@ class MainActivity : AppCompatActivity() {
                     R.id.destination_sign_in -> if (isOrientationPortrait) hide() else show()
                     R.id.destination_edit_profile -> hide()
                     R.id.destination_posting -> hide()
+                    R.id.destination_viewer -> hide()
                     else -> show()
                 }
             }

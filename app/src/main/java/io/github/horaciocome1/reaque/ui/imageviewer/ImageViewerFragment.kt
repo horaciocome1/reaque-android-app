@@ -20,7 +20,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import io.github.horaciocome1.reaque.databinding.FragmentImageViewerBinding
+import kotlinx.android.synthetic.main.fragment_image_viewer.*
 
 class ViewerFragment: Fragment() {
 
@@ -29,6 +31,13 @@ class ViewerFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentImageViewerBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        toolbar?.setNavigationOnClickListener {
+            it.findNavController().navigateUp()
+        }
     }
 
     override fun onStart() {
