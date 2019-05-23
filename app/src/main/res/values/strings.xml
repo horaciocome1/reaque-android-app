@@ -21,7 +21,7 @@
     <string name="terms_and_conditions_url" translatable="false">https://github.com/horaciocome1/reaque/tree/master/docs/TERMS_AND_CONDITIONS.md</string>
     <string name="privacy_policy_url" translatable="false">https://github.com/horaciocome1/reaque/tree/master/docs/PRIVACY_POLICY.md</string>
     <string name="licence_url" translatable="false">https://github.com/horaciocome1/reaque/tree/master/docs/LICENSE</string>
-    <string name="contributing_url" translatable="false">https://github.com/horaciocome1/reaque/tree/master/docs/CONTRIBUTING</string>
+    <string name="contributing_url" translatable="false">https://github.com/horaciocome1/reaque/tree/master/docs/DONATE.md</string>
     <string name="read_me_url" translatable="false">https://reaque.firebaseapp.com</string>
     <string name="project_url" translatable="false">https://github.com/horaciocome1/reaque</string>
 
