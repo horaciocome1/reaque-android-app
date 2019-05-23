@@ -73,7 +73,7 @@ class UsersWebService {
         }
     }
 
-    fun editUser(user: User, onSuccessful: () -> Unit) {
+    fun submitProfileUpdates(user: User, onSuccessful: () -> Unit) {
         auth.addSimpleAuthStateListener {
             ref.document(it.uid).set(user.map, SetOptions.merge()).addOnSuccessListener {
                 onAddUserSucceed(tag)

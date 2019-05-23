@@ -26,7 +26,6 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.card.MaterialCardView
 import io.github.horaciocome1.reaque.databinding.FragmentPostingBinding
@@ -53,8 +52,8 @@ class PostingFragment : Fragment() {
             pickImageFromGallery()
         }
         OnFocusChangeListener(context).let {
-            title_edittext.onFocusChangeListener = it
-            message_edittext.onFocusChangeListener = it
+            title_edittext?.onFocusChangeListener = it
+            message_edittext?.onFocusChangeListener = it
         }
         selectTopicBehavior = BottomSheetBehavior.from(select_topics_bottomsheet).apply {
             state = BottomSheetBehavior.STATE_HIDDEN
@@ -80,16 +79,12 @@ class PostingFragment : Fragment() {
         select_pic_button.setOnClickListener {
             selectPicBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
         }
-        toolbar!!.setNavigationOnClickListener {
+        toolbar?.setNavigationOnClickListener {
             viewModel.navigateUp(it)
         }
         submit_button.setOnClickListener {
-            progresslayout.visibility = View.VISIBLE
-            content.visibility = View.GONE
-            footer.visibility = View.GONE
-            viewModel.submitPost(it)
+            binding.viewmodel = viewModel.submitPost(it)
         }
-        progresslayout.visibility = View.GONE
     }
 
     override fun onStart() {

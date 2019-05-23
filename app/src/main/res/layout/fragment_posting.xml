@@ -26,6 +26,8 @@
 
         <import type="android.content.res.Configuration" />
 
+        <import type="android.view.View" />
+
         <variable
             name="viewmodel"
             type="io.github.horaciocome1.reaque.ui.posts.PostsViewModel" />
@@ -37,14 +39,14 @@
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="@{viewmodel.isSubmittingPost == true ? View.GONE : View.VISIBLE}">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -92,7 +94,7 @@
             </ScrollView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/footer"
+                android:id="@+id/content_constraintlayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -229,13 +231,12 @@
         </com.google.android.material.card.MaterialCardView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/progresslayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/primaryColor">
+            android:background="@color/primaryColor"
+            android:visibility="@{viewmodel.isSubmittingPost == false ? View.GONE : View.VISIBLE}">
 
             <ProgressBar
-                style="?android:attr/progressBarStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"

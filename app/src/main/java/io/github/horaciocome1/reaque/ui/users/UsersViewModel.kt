@@ -40,7 +40,7 @@ val ProfileFragment.viewModel: UsersViewModel
         return ViewModelProviders.of(this, factory).get(UsersViewModel::class.java)
     }
 
-val EditProfileFragment.viewModel: UsersViewModel
+val UpdateProfileFragment.viewModel: UsersViewModel
     get() {
         val factory = InjectorUtils.usersViewModelFactory
         return ViewModelProviders.of(this, factory).get(UsersViewModel::class.java)
@@ -65,6 +65,8 @@ class UsersViewModel(
     val notEmptyTopics = topicsRepository.notEmptyTopics
 
     val favorites = usersRepository.favorites
+
+    var isSubmittingUpdates = false
 
     fun getPosts(user: User) = postsRepository.getPosts(user)
 
@@ -99,10 +101,12 @@ class UsersViewModel(
         }
     }
 
-    fun submitProfile(view: View) {
-        usersRepository.editUser(user) {
+    fun submitProfileUpdates(view: View): UsersViewModel {
+        usersRepository.submitProfileUpdates(user) {
             view.findNavController().navigateUp()
         }
+        isSubmittingUpdates = true
+        return this
     }
 
     fun navigateUp(view: View) = view.findNavController().navigateUp()

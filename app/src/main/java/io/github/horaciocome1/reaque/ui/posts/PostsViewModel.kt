@@ -72,11 +72,13 @@ class PostsViewModel(
 
     val favorites = postsRepository.favorites
 
+    var isSubmittingPost = false
+
     fun getPosts(topic: Topic) = postsRepository.getPosts(topic)
 
     fun getPosts(post: Post) = postsRepository.getPosts(post)
 
-    fun submitPost(view: View) {
+    fun submitPost(view: View): PostsViewModel {
         val uploader = ImageUploader().apply {
             imageUri = this@PostsViewModel.imageUri
             post = this@PostsViewModel.post
@@ -94,7 +96,9 @@ class PostsViewModel(
                 // caso o upload falhe
             }
         }
+        isSubmittingPost = true
         mediaRepository.uploadImage(uploader)
+        return this
     }
 
     fun addToFavorites(view: View, post: Post) {

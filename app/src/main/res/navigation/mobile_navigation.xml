@@ -151,7 +151,7 @@
     </fragment>
     <fragment
         android:id="@+id/destination_edit_profile"
-        android:name="io.github.horaciocome1.reaque.ui.users.EditProfileFragment"
+        android:name="io.github.horaciocome1.reaque.ui.users.UpdateProfileFragment"
         android:label="Editar" />
     <fragment
         android:id="@+id/destination_sign_in"

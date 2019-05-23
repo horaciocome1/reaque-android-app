@@ -21,7 +21,7 @@ import io.github.horaciocome1.reaque.data.topics.Topic
 
 class UsersRepository private constructor(private val service: UsersWebService) {
 
-    fun editUser(user: User, onSuccessful: () -> Unit) = service.editUser(user, onSuccessful)
+    fun submitProfileUpdates(user: User, onSuccessful: () -> Unit) = service.submitProfileUpdates(user, onSuccessful)
 
     fun addTopicToUser(topic: Topic, onSuccessful: () -> Unit) = service.addTopicToUser(topic, onSuccessful)
 
