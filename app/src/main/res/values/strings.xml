@@ -14,55 +14,50 @@
   -->
 
 <resources>
-    <string name="app_name">Reaque</string>
+    <string name="app_name" translatable="false">Reaque</string>
+    <string name="app_version" translatable="false">1.0</string>
 
     <!-- 01 URL -->
-    <string name="terms_and_conditions_url">https://github.com/horaciocome1/reaque/tree/master/docs/TERMS_AND_CONDITIONS.md</string>
-    <string name="privacy_policy_url">https://github.com/horaciocome1/reaque/tree/master/docs/PRIVACY_POLICY.md</string>
-    <string name="licence_url">https://github.com/horaciocome1/reaque/tree/master/docs/LICENSE</string>
-    <string name="read_me_url">https://reaque.firebaseapp.com</string>
-    <string name="project_url">https://github.com/horaciocome1/reaque</string>
+    <string name="terms_and_conditions_url" translatable="false">https://github.com/horaciocome1/reaque/tree/master/docs/TERMS_AND_CONDITIONS.md</string>
+    <string name="privacy_policy_url" translatable="false">https://github.com/horaciocome1/reaque/tree/master/docs/PRIVACY_POLICY.md</string>
+    <string name="licence_url" translatable="false">https://github.com/horaciocome1/reaque/tree/master/docs/LICENSE</string>
+    <string name="contributing_url" translatable="false">https://github.com/horaciocome1/reaque/tree/master/docs/CONTRIBUTING</string>
+    <string name="read_me_url" translatable="false">https://reaque.firebaseapp.com</string>
+    <string name="project_url" translatable="false">https://github.com/horaciocome1/reaque</string>
 
-    <string name="topics">Tópicos</string>
-    <string name="posts">Publicações</string>
-    <string name="users">Autores</string>
-    <string name="comments">Comentários</string>
-    <string name="forum">Fórum</string>
-    <string name="more">Mais</string>
-    <string name="notifications">Novidades</string>
-    <string name="favorite">Favorito</string>
+    <string name="topics">Topics</string>
+    <string name="posts">Posts</string>
+    <string name="users">Authors</string>
+    <string name="more">More</string>
+    <string name="notifications">Feed</string>
+    <string name="favorite">Favorite</string>
 
-    <string name="posts_title">Encontre publicações do seu interesse</string>
-    <string name="users_title">Encontre autores que possam lhe interessar</string>
-    <string name="sign_out">Sair</string>
-    <string name="edit">Editar</string>
-    <string name="posting">Publicar</string>
-    <string name="settings">Opções avançadas</string>
-    <string name="frequently_asked_questions">Perguntas frequentes</string>
+    <string name="posts_title">Find interesting things you might enjoy reading</string>
+    <string name="users_title">You can find here authors you interested in</string>
+    <string name="sign_out">Log out</string>
+    <string name="edit">Update</string>
+    <string name="posting">New post</string>
+    <string name="settings">Advanced options</string>
+    <string name="frequently_asked_questions">Frequently asked</string>
     <string name="feedback">Feedback</string>
-    <string name="about">Sobre</string>
-    <string name="app_version">1.0</string>
-    <string name="version">Versão</string>
-    <string name="terms_and_conditions">Termos e condições</string>
-    <string name="privacy_policy">Política de privacidade</string>
-    <string name="open_source_licenses">Licenças open source</string>
-    <string name="repository">Repositório</string>
-    <string name="donate">Apoie ao desenvolvedor</string>
-    <string name="share">Partilhar</string>
-    <string name="cancel">Cancelar</string>
-    <string name="send">Enviar</string>
-    <string name="camera">Camera</string>
-    <string name="gallery">Galeria</string>
-    <string name="done_adding_to_favorites">Adicionado aos favoritos</string>
-    <string name="profile">Perfil</string>
-    <string name="title">Título</string>
-    <string name="message">Mensagem</string>
-    <string name="whats_new">O que há de novo?</string>
-    <string name="address">Morada [Cidade, Província]</string>
+    <string name="about">About</string>
+    <string name="version">Version</string>
+    <string name="terms_and_conditions">Terms and conditions</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="open_source_licenses">Open source licenses</string>
+    <string name="repository">Project</string>
+    <string name="donate">Support the developer</string>
+    <string name="share">Share</string>
+    <string name="cancel">Cancel</string>
+    <string name="gallery">Gallery</string>
+    <string name="profile">Profile</string>
+    <string name="title">Title</string>
+    <string name="message">Message</string>
+    <string name="whats_new">Whats new?</string>
+    <string name="address">Address [Town, State]</string>
     <string name="bio">Bio</string>
-    <string name="name">Nome</string>
-    <string name="undo">Desfazer</string>
-    <string name="submit">Submeter</string>
-    <string name="sign_in_message">Por-favor, aguarde enquanto a sessão é iniciada.</string>
+    <string name="undo">unFavorite</string>
+    <string name="submit">Submit</string>
+    <string name="sign_in_message">Please wait while we logging you in</string>
 
 </resources>
