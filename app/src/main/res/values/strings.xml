@@ -63,5 +63,6 @@
     <string name="sign_in_message">Please wait while we logging you in</string>
 
     <string name="email_app_not_found">Email app not found.</string>
+    <string name="subscribers">Subscribers</string>
 
 </resources>

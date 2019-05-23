@@ -22,5 +22,8 @@ data class User(var id: String) {
     var pic = ""
     var address = ""
     var email = ""
+    var since = ""
+    var postsCount = ""
+    var favoriteForCount = ""
 
 }

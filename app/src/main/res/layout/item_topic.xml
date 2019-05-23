@@ -38,13 +38,33 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/imageview"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                style="@style/AppTheme.CompleteClickableEffect"
-                app:url="@{topic.pic}"
-                app:type="@{Constants.DEFAULT}"/>
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imageview"
+                    style="@style/AppTheme.CompleteClickableEffect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:type="@{Constants.DEFAULT}"
+                    app:url="@{topic.pic}" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_bottomsheet"
+                    android:padding="8dp"
+                    android:text="@{topic.postsCount}"
+                    app:layout_constraintBottom_toBottomOf="@id/imageview"
+                    app:layout_constraintEnd_toEndOf="@id/imageview"
+                    app:layout_constraintStart_toStartOf="@id/imageview" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -81,7 +101,6 @@
             app:layout_constraintEnd_toEndOf="@id/cardview"
             app:layout_constraintStart_toStartOf="@id/cardview"
             app:layout_constraintTop_toBottomOf="@+id/title_textview" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

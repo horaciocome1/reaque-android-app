@@ -92,7 +92,7 @@
                     app:layout_constraintVertical_bias="0.0">
 
                     <TextView
-                        android:id="@+id/title_textview"
+                        android:id="@+id/name_textview"
                         style="@style/TextAppearance.MaterialComponents.Headline4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -118,10 +118,76 @@
                         android:padding="8dp"
                         android:text="@{user.email}"
                         android:textAlignment="center"
-                        app:layout_constraintEnd_toEndOf="@+id/title_textview"
-                        app:layout_constraintStart_toStartOf="@+id/title_textview"
-                        app:layout_constraintTop_toBottomOf="@+id/title_textview" />
+                        app:layout_constraintEnd_toEndOf="@+id/name_textview"
+                        app:layout_constraintStart_toStartOf="@+id/name_textview"
+                        app:layout_constraintTop_toBottomOf="@+id/name_textview" />
 
+                    <LinearLayout
+                        android:id="@+id/statics_linearlayout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:background="@color/secondaryColor"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/email_textview">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:text="@{user.postsCount}"
+                                android:textAlignment="center"
+                                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                                android:textColor="@android:color/white" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="16dp"
+                                android:text="@string/posts"
+                                android:textAlignment="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textColor="@android:color/white" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:text="@{user.favoriteForCount}"
+                                android:textAlignment="center"
+                                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                                android:textColor="@android:color/white" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="16dp"
+                                android:text="@string/subscribers"
+                                android:textAlignment="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textColor="@android:color/white" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
 
                     <ImageView
                         android:id="@+id/imageView4"
@@ -148,7 +214,34 @@
                         android:textColor="@color/primaryTextColor"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/email_textview" />
+                        app:layout_constraintTop_toBottomOf="@+id/statics_linearlayout" />
+
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/since_textview"
+                        app:layout_constraintEnd_toStartOf="@+id/since_textview"
+                        app:layout_constraintTop_toTopOf="@+id/since_textview"
+                        app:srcCompat="@drawable/outline_location_on_18" />
+
+                    <TextView
+                        android:id="@+id/since_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginEnd="32dp"
+                        android:layout_marginRight="32dp"
+                        android:fontFamily="@font/roboto_light"
+                        android:text="@{user.since}"
+                        android:textColor="@color/primaryTextColor"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/posts_button"
@@ -171,7 +264,7 @@
                         app:strokeWidth="@dimen/default_stroke_width"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/imageView4" />
+                        app:layout_constraintTop_toBottomOf="@id/imageView5" />
 
                     <LinearLayout
                         android:id="@+id/favorites_linearlayout"

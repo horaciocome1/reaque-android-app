@@ -30,6 +30,11 @@ val DocumentSnapshot.user: User
             pic = this@user["pic"].toString()
             address = this@user["address"].toString()
             email = this@user["email"].toString()
+            val timestamp = this@user["since"]
+            if (timestamp is Timestamp)
+                since = timestamp.string
+            favoriteForCount = this@user["favorite_for_count"].toString()
+            postsCount = this@user["posts_count"].toString()
         }
     }
 
@@ -39,6 +44,7 @@ val DocumentSnapshot.topic: Topic
             title = this@topic["title"].toString()
             pic = this@topic["pic"].toString()
             description = this@topic["bio"].toString()
+            postsCount = this@topic["posts_count"].toString()
         }
     }
 
