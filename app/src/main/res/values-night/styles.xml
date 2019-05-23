@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryColor</item>
+        <item name="colorAccent">@color/secondaryColor</item>
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="materialCardViewStyle">@style/AppTheme.CardView</item>
+        <item name="floatingActionButtonStyle">@style/AppTheme.Fab</item>
+    </style>
+</resources>
