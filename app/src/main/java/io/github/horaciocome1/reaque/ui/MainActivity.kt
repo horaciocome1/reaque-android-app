@@ -27,7 +27,6 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.google.firebase.auth.FirebaseAuth
 import io.github.horaciocome1.reaque.R
-import io.github.horaciocome1.reaque.ui.posts.PostsFragmentDirections
 import io.github.horaciocome1.reaque.util.handleDynamicLinks
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -45,8 +44,10 @@ class MainActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         handleDynamicLinks {
-            val directions = PostsFragmentDirections.actionOpenReadFromPosts(it.id)
-            navController.navigate(directions)
+            val bundle = Bundle().apply {
+                putString("post_id", it.id)
+            }
+            navController.navigate(R.id.destination_read, bundle)
         }
         setupNavigation()
     }
