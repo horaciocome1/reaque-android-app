@@ -55,7 +55,7 @@
     <string name="profile">Profile</string>
     <string name="title">Title</string>
     <string name="message">Message</string>
-    <string name="whats_new">Whats new?</string>
+    <string name="whats_new">Is there something new?</string>
     <string name="address">Address [Town, State]</string>
     <string name="bio">Bio</string>
     <string name="undo">unFavorite</string>
