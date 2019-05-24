@@ -126,16 +126,18 @@ class BindingAdapters {
                 addOnItemClickListener { view, position ->
                     if (notifications.isNotEmpty())
                         notifications[position].run {
-                            val directions = when {
-                                isUser -> NotificationsFragmentDirections.actionOpenProfileFromNotifications(
-                                    contentId
-                                )
-                                isPost -> NotificationsFragmentDirections.actionOpenReadFromNotifications(
-                                    contentId
-                                )
-                                else -> null
+                            when {
+                                isPost -> {
+                                    val directions =
+                                        NotificationsFragmentDirections.actionOpenReadFromNotifications(contentId)
+                                    view.findNavController().navigate(directions)
+                                }
+                                isUser -> {
+                                    val directions =
+                                        NotificationsFragmentDirections.actionOpenProfileFromNotifications(contentId)
+                                    view.findNavController().navigate(directions)
+                                }
                             }
-                            view.findNavController().navigate(directions!!)
                         }
                 }
             }
