@@ -45,6 +45,7 @@ val DocumentSnapshot.topic: Topic
             pic = this@topic["pic"].toString()
             description = this@topic["bio"].toString()
             postsCount = this@topic["posts_count"].toString()
+            usersCount = this@topic["users_count"].toString()
         }
     }
 

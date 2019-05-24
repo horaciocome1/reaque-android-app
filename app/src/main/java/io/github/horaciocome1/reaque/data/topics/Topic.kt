@@ -21,5 +21,6 @@ data class Topic(var id: String) {
     var pic = ""
     var description = ""
     var postsCount = ""
+    var usersCount = ""
 
 }
