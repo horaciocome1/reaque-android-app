@@ -76,7 +76,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:scrollbars="none"
-                    app:list="@{posts}" />
+                    app:list="@{posts}"
+                    app:type="@{Constants.DEFAULT}" />
 
                 <ProgressBar
                     android:id="@+id/posts_progressbar"
