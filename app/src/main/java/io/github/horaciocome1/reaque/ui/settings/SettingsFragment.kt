@@ -18,7 +18,6 @@ package io.github.horaciocome1.reaque.ui.settings
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,8 +51,7 @@ class SettingsFragment : Fragment() {
                 terms_and_conditions_textview -> R.string.terms_and_conditions_url
                 privacy_policy_textview -> R.string.privacy_policy_url
                 licenses_textview -> R.string.licence_url
-                repository_textview -> R.string.project_url
-                else -> Log.w(tag, "View not found!")
+                else -> R.string.project_url
             }
         )
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
