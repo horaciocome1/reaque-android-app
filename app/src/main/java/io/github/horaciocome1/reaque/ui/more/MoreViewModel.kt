@@ -36,14 +36,14 @@ class MoreViewModel(repository: UsersRepository) : ViewModel() {
     private val auth = FirebaseAuth.getInstance()
 
     fun openEditProfile(view: View) {
-        if (auth != null) {
+        if (auth.currentUser != null) {
             val directions = MoreFragmentDirections.actionOpenEditProfile()
             view.findNavController().navigate(directions)
         }
     }
 
     fun openPosting(view: View) {
-        if (auth != null) {
+        if (auth.currentUser != null) {
             val directions = MoreFragmentDirections.actionOpenPosting()
             view.findNavController().navigate(directions)
         }
@@ -55,7 +55,7 @@ class MoreViewModel(repository: UsersRepository) : ViewModel() {
     }
 
     fun openProfile(view: View, user: User) {
-        if (auth != null) {
+        if (auth.currentUser != null) {
             val directions = MoreFragmentDirections.actionOpenProfileFromMore(user.id)
             view.findNavController().navigate(directions)
         }
