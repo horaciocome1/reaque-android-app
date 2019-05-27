@@ -15,6 +15,7 @@
 
 package io.github.horaciocome1.reaque.ui.users
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -25,6 +26,8 @@ import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.snackbar.Snackbar
+import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.databinding.FragmentProfileBinding
@@ -62,6 +65,9 @@ class ProfileFragment: Fragment() {
                     showPosts()
             }
         }
+        send_email_button.setOnClickListener {
+            sendEmail()
+        }
     }
 
     override fun onStart() {
@@ -97,6 +103,20 @@ class ProfileFragment: Fragment() {
     private fun Post.read(view: View) {
         val directions = ProfileFragmentDirections.actionOpenReadFromProfile(id)
         Navigation.findNavController(view).navigate(directions)
+    }
+
+    private fun sendEmail() {
+        val email = binding.user?.email!!
+        val subject = "Meet you in Reaque!"
+        val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
+            putExtra(Intent.EXTRA_EMAIL, email)
+            putExtra(Intent.EXTRA_SUBJECT, subject)
+        }
+        try {
+            startActivity(Intent.createChooser(emailIntent, subject))
+        } catch (e: Exception) {
+            Snackbar.make(view!!, R.string.email_app_not_found, Snackbar.LENGTH_LONG).show()
+        }
     }
 
 }
