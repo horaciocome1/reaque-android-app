@@ -34,8 +34,8 @@
     <string name="notifications">Feed</string>
     <string name="favorite">Favorite</string>
 
-    <string name="posts_title">Find interesting things you might enjoy reading</string>
-    <string name="users_title">You can find here authors you interested in</string>
+    <string name="posts_title">Explore topics and find interesting posts</string>
+    <string name="users_title">Explore authors by your topic of interest</string>
     <string name="sign_out">Log out</string>
     <string name="edit">Update</string>
     <string name="posting">New post</string>
@@ -55,7 +55,7 @@
     <string name="profile">Profile</string>
     <string name="title">Title</string>
     <string name="message">Message</string>
-    <string name="whats_new">Is there something new?</string>
+    <string name="whats_new">Whats new in here?</string>
     <string name="address">Address [Town, State]</string>
     <string name="bio">Bio</string>
     <string name="undo">unFavorite</string>
