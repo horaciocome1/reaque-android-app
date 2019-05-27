@@ -77,7 +77,7 @@ class SignInFragment : Fragment() {
                 Log.d(tag, "firebaseAuthWithGoogle:success")
                 val service = UsersWebService()
                 service.addUser {
-                    view!!.findNavController().navigateUp()
+                    root_view.findNavController().navigateUp()
                 }
             }
             .addOnFailureListener {
