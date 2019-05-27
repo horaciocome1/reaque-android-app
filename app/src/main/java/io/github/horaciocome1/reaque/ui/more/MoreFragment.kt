@@ -72,11 +72,9 @@ class MoreFragment : Fragment() {
 
     private fun emailDeveloper() {
         val email = resources.getString(R.string.developer_email)
-        val subject = "Feedback - Reaque Android App"
-        val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
-            putExtra(Intent.EXTRA_EMAIL, email)
-            putExtra(Intent.EXTRA_SUBJECT, subject)
-        }
+        val mailto = "mailto:$email"
+        val emailIntent = Intent(Intent.ACTION_SENDTO)
+        emailIntent.data = Uri.parse(mailto)
         try {
             startActivity(emailIntent)
         } catch (e: Exception) {

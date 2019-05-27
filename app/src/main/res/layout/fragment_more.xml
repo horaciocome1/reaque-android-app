@@ -31,6 +31,7 @@
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/root_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -115,7 +116,6 @@
                     android:layout_marginRight="8dp"
                     android:paddingTop="16dp"
                     android:paddingBottom="16dp"
-                    app:cardBackgroundColor="@color/primaryLightColor"
                     app:strokeColor="@color/default_stroke_color"
                     app:strokeWidth="@dimen/default_stroke_width">
 

@@ -16,6 +16,7 @@
 package io.github.horaciocome1.reaque.ui.users
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -85,15 +86,13 @@ class ProfileFragment: Fragment() {
 
     private fun sendEmail() {
         val email = binding.user?.email!!
-        val subject = "Meet you in Reaque!"
-        val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
-            putExtra(Intent.EXTRA_EMAIL, email)
-            putExtra(Intent.EXTRA_SUBJECT, subject)
-        }
+        val mailto = "mailto:$email"
+        val emailIntent = Intent(Intent.ACTION_SENDTO)
+        emailIntent.data = Uri.parse(mailto)
         try {
             startActivity(emailIntent)
         } catch (e: Exception) {
-            Snackbar.make(view!!, R.string.email_app_not_found, Snackbar.LENGTH_LONG).show()
+            Snackbar.make(root_view!!, R.string.email_app_not_found, Snackbar.LENGTH_LONG).show()
         }
     }
 
