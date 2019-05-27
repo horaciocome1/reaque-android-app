@@ -21,6 +21,10 @@ class UpdateProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.let {
+            it.lifecycleOwner = this
+            it.viewmodel = viewModel
+        }
         OnFocusChangeListener(context).let {
             bio_inputlayout.editText?.onFocusChangeListener = it
             address_inputlayout.editText?.onFocusChangeListener = it
@@ -35,10 +39,6 @@ class UpdateProfileFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        binding.let {
-            it.lifecycleOwner = this
-            it.viewmodel = viewModel
-        }
         viewModel.me.observe(this, Observer {
             viewModel.run {
                 bio.value = it.bio

@@ -35,6 +35,7 @@ class ViewerFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = this
         toolbar?.setNavigationOnClickListener {
             it.findNavController().navigateUp()
         }

@@ -35,6 +35,11 @@ class NotificationsFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = this
+    }
+
     override fun onStart() {
         super.onStart()
         viewModel.notifications.observe(this, Observer { list ->

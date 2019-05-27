@@ -42,6 +42,10 @@ class MoreFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.let {
+            it.lifecycleOwner = this
+            it.viewmodel = viewModel
+        }
         feedback_textview.setOnClickListener {
             emailDeveloper()
         }
@@ -51,7 +55,6 @@ class MoreFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        binding.viewmodel = viewModel
         viewModel.me.observe(this, Observer { user ->
             binding.user = user
         })

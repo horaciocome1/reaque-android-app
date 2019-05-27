@@ -48,6 +48,10 @@ class PostingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.let {
+            it.lifecycleOwner = this
+            it.viewmodel = viewModel
+        }
         select_pic_from_gallery_button.setOnClickListener {
             pickImageFromGallery()
         }
@@ -89,10 +93,6 @@ class PostingFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        binding.let {
-            it.lifecycleOwner = this
-            it.viewmodel = viewModel
-        }
         viewModel.title.observe(this, Observer {
             viewModel.post.title = it
             submit_button.isEnabled = isPostReady

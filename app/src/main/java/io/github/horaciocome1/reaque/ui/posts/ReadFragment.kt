@@ -45,6 +45,10 @@ class ReadFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.let {
+            it.lifecycleOwner = this
+            it.viewmodel = viewModel
+        }
         behavior = BottomSheetBehavior.from(fragment_read_bottom_sheet).apply {
             state = BottomSheetBehavior.STATE_HALF_EXPANDED
         }
@@ -56,10 +60,6 @@ class ReadFragment: Fragment() {
 
     override fun onStart() {
         super.onStart()
-        binding.let {
-            it.lifecycleOwner = this
-            it.viewmodel = viewModel
-        }
         arguments?.let { bundle ->
             val post = Post(ReadFragmentArgs.fromBundle(bundle).postId)
             viewModel.getPosts(post).observe(this, Observer {

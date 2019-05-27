@@ -40,6 +40,7 @@ class UsersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = this
         topics_recyclerview.run {
             addOnItemClickListener { _, position ->
                 binding.topics?.let {
@@ -52,38 +53,26 @@ class UsersFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-//        auth.addAuthStateListener {
-//            if (!isDetached && it.currentUser != null) {
         viewModel.notEmptyTopics.observe(this, Observer { list ->
             binding.topics = list
         })
-//            }
-//        }
         favorites_fab.setOnClickListener {
             listFavorites()
         }
     }
 
     private fun listUsers(topic: Topic) {
-//        auth.addAuthStateListener {
-//            if (!isDetached && it.currentUser != null) {
         viewModel.getUsers(topic).observe(this, Observer { list ->
             binding.users = list
         })
         favorites_fab.show()
-//            }
-//        }
     }
 
     private fun listFavorites() {
-//        auth.addAuthStateListener {
-//            if (!isDetached && it.currentUser != null) {
         viewModel.favorites.observe(this, Observer { list ->
             binding.users = list
         })
         favorites_fab.hide()
-//            }
-//        }
     }
 
 }
