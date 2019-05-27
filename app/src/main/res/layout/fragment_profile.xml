@@ -23,6 +23,14 @@
 
         <import type="android.view.View" />
 
+        <import type="java.util.List" />
+
+        <import type="io.github.horaciocome1.reaque.data.posts.Post" />
+
+        <variable
+            name="posts"
+            type="List&lt;Post&gt;" />
+
         <variable
             name="user"
             type="io.github.horaciocome1.reaque.data.users.User" />
@@ -154,7 +162,7 @@
                                 android:layout_marginTop="16dp"
                                 android:text="@{user.postsCount}"
                                 android:background="@color/secondaryColor"
-                                android:padding="16dp"
+                                android:padding="8dp"
                                 android:textAlignment="center"
                                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                                 android:textColor="@android:color/white" />
@@ -181,7 +189,7 @@
                                 android:layout_marginTop="16dp"
                                 android:text="@{user.favoriteForCount}"
                                 android:background="@color/secondaryColor"
-                                android:padding="16dp"
+                                android:padding="8dp"
                                 android:textAlignment="center"
                                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                                 android:textColor="@android:color/white" />
@@ -370,16 +378,17 @@
                 app:srcCompat="@drawable/outline_drag_handle_24" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/posts_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="8dp"
+                app:list="@{posts}" />
 
             <ProgressBar
-                android:id="@+id/posts_progressbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="32dp"
+                android:visibility="@{posts.isEmpty() ? View.VISIBLE : View.GONE}" />
 
         </LinearLayout>
 

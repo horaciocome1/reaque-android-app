@@ -20,6 +20,7 @@ import io.github.horaciocome1.reaque.ui.notifications.NotificationsFragmentDirec
 import io.github.horaciocome1.reaque.ui.posts.PostsAdapter
 import io.github.horaciocome1.reaque.ui.posts.PostsFragmentDirections
 import io.github.horaciocome1.reaque.ui.topics.TopicsAdapter
+import io.github.horaciocome1.reaque.ui.users.ProfileFragmentDirections
 import io.github.horaciocome1.reaque.ui.users.UsersAdapter
 import io.github.horaciocome1.reaque.ui.users.UsersFragmentDirections
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
@@ -67,7 +68,7 @@ class BindingAdapters {
                 list?.let {
                     when {
                         it.isListOfTopics -> loadTopics(it as List<Topic>, orientation!!, type!!)
-                        it.isListOfPosts -> loadPosts(it as List<Post>)
+                        it.isListOfPosts -> loadPosts(it as List<Post>, type!!)
                         it.isListOfUsers -> loadUsers(it as List<User>)
                         it.isListOfNotifications -> loadNotifications(it as List<Notification>)
                     }
@@ -92,12 +93,17 @@ class BindingAdapters {
                 }
             }
 
-            private fun RecyclerView.loadPosts(posts: List<Post>) {
+            private fun RecyclerView.loadPosts(posts: List<Post>, type: Int) {
                 layoutManager = LinearLayoutManager(context)
                 adapter = PostsAdapter(posts)
                 addOnItemClickListener { view, position ->
                     if (posts.isNotEmpty()) {
-                        val directions = PostsFragmentDirections.actionOpenReadFromPosts(posts[position].id)
+                        val directions = when (type) {
+                            Constants.LISTING_POSTS_ON_PROFILE -> ProfileFragmentDirections.actionOpenReadFromProfile(
+                                posts[position].id
+                            )
+                            else -> PostsFragmentDirections.actionOpenReadFromPosts(posts[position].id)
+                        }
                         view.findNavController().navigate(directions)
                     }
                 }

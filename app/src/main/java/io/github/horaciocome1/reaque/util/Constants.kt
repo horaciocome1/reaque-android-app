@@ -32,7 +32,10 @@ object Constants {
     const val BLUR = 2308
 
     // Topics Adapter
-    const val SIMPLE = 3300
+    const val SIMPLE = 3400
+
+    // posts
+    const val LISTING_POSTS_ON_PROFILE = 4500
 
     // strings
     const val LANDING_PAGE = "https://reaque.firebaseapp.com"

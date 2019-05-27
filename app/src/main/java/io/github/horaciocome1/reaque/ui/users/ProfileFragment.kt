@@ -23,23 +23,17 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
 import io.github.horaciocome1.reaque.R
-import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.databinding.FragmentProfileBinding
-import io.github.horaciocome1.reaque.ui.posts.PostsAdapter
-import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment: Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
     private lateinit var behavior: BottomSheetBehavior<LinearLayout>
-    private var posts = listOf<Post>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
@@ -52,12 +46,6 @@ class ProfileFragment: Fragment() {
         binding.let {
             it.lifecycleOwner = this
             it.viewmodel = viewModel
-        }
-        posts_recyclerview.run {
-            addOnItemClickListener { view, position ->
-                if (posts.isNotEmpty())
-                    posts[position].read(view)
-            }
         }
         posts_button.setOnClickListener {
             binding.user?.run {
@@ -87,22 +75,12 @@ class ProfileFragment: Fragment() {
 
     private fun User.showPosts() {
         viewModel.getPosts(this).observe(this@ProfileFragment, Observer {
-            posts = it
-            posts_recyclerview.run {
-                layoutManager = LinearLayoutManager(context)
-                adapter = PostsAdapter(posts)
-            }
-            posts_progressbar.visibility = if (posts.isEmpty()) View.VISIBLE else View.GONE
+            binding.posts = it
             behavior.run {
                 state = BottomSheetBehavior.STATE_HALF_EXPANDED
                 skipCollapsed = true
             }
         })
-    }
-
-    private fun Post.read(view: View) {
-        val directions = ProfileFragmentDirections.actionOpenReadFromProfile(id)
-        Navigation.findNavController(view).navigate(directions)
     }
 
     private fun sendEmail() {
