@@ -135,7 +135,6 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="32dp"
-                        android:background="@color/secondaryColor"
                         android:orientation="horizontal"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -153,25 +152,27 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="16dp"
                                 android:text="@{user.postsCount}"
+                                android:background="@color/secondaryColor"
+                                android:padding="16dp"
                                 android:textAlignment="center"
                                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                                 android:textColor="@android:color/white" />
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:text="@string/posts"
-                                android:textAlignment="center"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                android:textColor="@android:color/white" />
+                            <!--<TextView-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginTop="8dp"-->
+                            <!--android:text="@string/posts"-->
+                            <!--android:textAlignment="center"-->
+                            <!--android:textAppearance="@style/TextAppearance.AppCompat.Body2"-->
+                            <!--android:textColor="@android:color/white" />-->
 
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
                                 android:layout_marginBottom="16dp"
-                                android:tint="@color/primaryColor"
+                                android:tint="@color/secondaryColor"
                                 app:srcCompat="@drawable/outline_library_books_18" />
 
                         </LinearLayout>
@@ -187,25 +188,27 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="16dp"
                                 android:text="@{user.favoriteForCount}"
+                                android:background="@color/secondaryColor"
+                                android:padding="16dp"
                                 android:textAlignment="center"
                                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                                 android:textColor="@android:color/white" />
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:text="@string/subscribers"
-                                android:textAlignment="center"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                android:textColor="@android:color/white" />
+                            <!--<TextView-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginTop="8dp"-->
+                            <!--android:text="@string/subscribers"-->
+                            <!--android:textAlignment="center"-->
+                            <!--android:textAppearance="@style/TextAppearance.AppCompat.Body2"-->
+                            <!--android:textColor="@android:color/white" />-->
 
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
                                 android:layout_marginBottom="16dp"
-                                android:tint="@color/primaryColor"
+                                android:tint="@color/secondaryColor"
                                 app:srcCompat="@drawable/outline_people_outline_18" />
 
                         </LinearLayout>
