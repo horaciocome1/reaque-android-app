@@ -68,11 +68,11 @@
     <fragment
         android:id="@+id/destination_settings"
         android:name="io.github.horaciocome1.reaque.ui.settings.SettingsFragment"
-        android:label="Avançadas" />
+        android:label="@string/settings" />
     <fragment
         android:id="@+id/destination_more"
         android:name="io.github.horaciocome1.reaque.ui.more.MoreFragment"
-        android:label="Mais">
+        android:label="@string/more">
         <action
             android:id="@+id/action_open_profile_from_more"
             app:destination="@id/destination_profile"
@@ -124,7 +124,7 @@
     <fragment
         android:id="@+id/destination_posting"
         android:name="io.github.horaciocome1.reaque.ui.posts.PostingFragment"
-        android:label="Publicar" />
+        android:label="@string/posting" />
     <fragment
         android:id="@+id/destination_posts"
         android:name="io.github.horaciocome1.reaque.ui.posts.PostsFragment"
@@ -152,7 +152,7 @@
     <fragment
         android:id="@+id/destination_edit_profile"
         android:name="io.github.horaciocome1.reaque.ui.users.UpdateProfileFragment"
-        android:label="Editar" />
+        android:label="@string/edit" />
     <fragment
         android:id="@+id/destination_sign_in"
         android:name="io.github.horaciocome1.reaque.ui.signin.SignInFragment"
