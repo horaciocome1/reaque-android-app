@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
     private lateinit var auth: FirebaseAuth
+    private var passedThroughSignIn = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,8 +55,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        if (auth.currentUser == null)
+        passedThroughSignIn = if (auth.currentUser == null) {
             navController.navigate(R.id.destination_sign_in)
+            false
+        } else
+            false
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -94,6 +98,10 @@ class MainActivity : AppCompatActivity() {
                     R.id.destination_viewer -> hide()
                     else -> show()
                 }
+            }
+            if (destination.id == R.id.destination_notifications && auth.currentUser == null && passedThroughSignIn) {
+                passedThroughSignIn = false
+                finish()
             }
         }
     }
