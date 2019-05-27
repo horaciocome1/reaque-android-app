@@ -75,7 +75,7 @@ class MoreFragment : Fragment() {
             putExtra(Intent.EXTRA_SUBJECT, subject)
         }
         try {
-            startActivity(Intent.createChooser(emailIntent, subject))
+            startActivity(emailIntent)
         } catch (e: Exception) {
             Snackbar.make(view!!, R.string.email_app_not_found, Snackbar.LENGTH_LONG).show()
         }

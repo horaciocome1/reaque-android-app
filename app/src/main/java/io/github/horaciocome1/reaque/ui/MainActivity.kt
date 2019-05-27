@@ -96,8 +96,14 @@ class MainActivity : AppCompatActivity() {
                     R.id.destination_edit_profile -> hide()
                     R.id.destination_posting -> hide()
                     R.id.destination_viewer -> hide()
-                    R.id.destination_profile -> title = ""
-                    R.id.destination_read -> title = ""
+                    R.id.destination_profile -> {
+                        title = ""
+                        show()
+                    }
+                    R.id.destination_read -> {
+                        title = ""
+                        show()
+                    }
                     else -> show()
                 }
             }
