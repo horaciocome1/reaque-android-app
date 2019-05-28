@@ -78,8 +78,9 @@ class ProfileFragment: Fragment() {
         viewModel.getPosts(this).observe(this@ProfileFragment, Observer {
             binding.posts = it
             behavior.run {
-                state = BottomSheetBehavior.STATE_HALF_EXPANDED
                 skipCollapsed = true
+                if (it.isNotEmpty())
+                    state = BottomSheetBehavior.STATE_HALF_EXPANDED
             }
         })
     }
