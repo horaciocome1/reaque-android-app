@@ -15,8 +15,6 @@
 
 package io.github.horaciocome1.reaque.ui.users
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -29,6 +27,7 @@ import com.google.android.material.snackbar.Snackbar
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.databinding.FragmentProfileBinding
+import io.github.horaciocome1.reaque.util.getEmailIntent
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment: Fragment() {
@@ -48,15 +47,8 @@ class ProfileFragment: Fragment() {
             it.lifecycleOwner = this
             it.viewmodel = viewModel
         }
-        posts_button.setOnClickListener {
-            binding.user?.run {
-                if (id.isNotBlank())
-                    showPosts()
-            }
-        }
-        send_email_button.setOnClickListener {
-            sendEmail()
-        }
+        posts_button.setOnClickListener(this::showPosts)
+        send_email_button.setOnClickListener(this::sendEmail)
     }
 
     override fun onStart() {
@@ -74,24 +66,18 @@ class ProfileFragment: Fragment() {
         }
     }
 
-    private fun User.showPosts() {
-        viewModel.getPosts(this).observe(this@ProfileFragment, Observer {
-            binding.posts = it
-            behavior.run {
-                skipCollapsed = true
-                if (it.isNotEmpty())
-                    state = BottomSheetBehavior.STATE_HALF_EXPANDED
-            }
-        })
-    }
+    private fun showPosts(view: View) = viewModel.getPosts(binding.user!!).observe(this, Observer {
+        binding.posts = it
+        behavior.run {
+            skipCollapsed = true
+            if (it.isNotEmpty())
+                state = BottomSheetBehavior.STATE_HALF_EXPANDED
+        }
+    })
 
-    private fun sendEmail() {
-        val email = binding.user?.email!!
-        val mailto = "mailto:$email"
-        val emailIntent = Intent(Intent.ACTION_SENDTO)
-        emailIntent.data = Uri.parse(mailto)
+    private fun sendEmail(view: View) {
         try {
-            startActivity(emailIntent)
+            startActivity(getEmailIntent(binding.user!!.email))
         } catch (e: Exception) {
             Snackbar.make(root_view!!, R.string.email_app_not_found, Snackbar.LENGTH_LONG).show()
         }

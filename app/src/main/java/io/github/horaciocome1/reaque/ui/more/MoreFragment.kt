@@ -27,6 +27,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.databinding.FragmentMoreBinding
+import io.github.horaciocome1.reaque.util.getEmailIntent
 import kotlinx.android.synthetic.main.fragment_more.*
 
 class MoreFragment : Fragment() {
@@ -46,9 +47,7 @@ class MoreFragment : Fragment() {
             it.lifecycleOwner = this
             it.viewmodel = viewModel
         }
-        feedback_textview.setOnClickListener {
-            emailDeveloper()
-        }
+        feedback_textview.setOnClickListener(this::emailDeveloper)
         frequently_asked_questions_textview.setOnClickListener(this::openLinks)
         about_textview.setOnClickListener(this::openLinks)
     }
@@ -70,15 +69,12 @@ class MoreFragment : Fragment() {
         startActivity(intent)
     }
 
-    private fun emailDeveloper() {
+    private fun emailDeveloper(view: View) {
         val email = resources.getString(R.string.developer_email)
-        val mailto = "mailto:$email"
-        val emailIntent = Intent(Intent.ACTION_SENDTO)
-        emailIntent.data = Uri.parse(mailto)
         try {
-            startActivity(emailIntent)
+            startActivity(getEmailIntent(email))
         } catch (e: Exception) {
-            Snackbar.make(view!!, R.string.email_app_not_found, Snackbar.LENGTH_LONG).show()
+            Snackbar.make(root_view, R.string.email_app_not_found, Snackbar.LENGTH_LONG).show()
         }
     }
 
