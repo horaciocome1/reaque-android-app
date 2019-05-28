@@ -55,11 +55,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        passedThroughSignIn = if (auth.currentUser == null) {
+        if (auth.currentUser == null)
             navController.navigate(R.id.destination_sign_in)
-            false
-        } else
-            false
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -72,13 +69,19 @@ class MainActivity : AppCompatActivity() {
         return navigated || super.onOptionsItemSelected(item)
     }
 
-    override fun onSupportNavigateUp() = NavigationUI.navigateUp(navController, activity_main_drawerlayout)
+    override fun onSupportNavigateUp() = NavigationUI.navigateUp(navController, activity_main_drawerlayout!!)
 
     private fun setupNavigation() {
-        setupBottomNavigationMenu()
-        setupSideNavigationMenu()
-        setupActionBar()
+        NavigationUI.setupWithNavController(bottomnavigationview!!, navController)
+        NavigationUI.setupWithNavController(navigationview!!, navController)
+        NavigationUI.setupActionBarWithNavController(this, navController, activity_main_drawerlayout!!)
         navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id != R.id.destination_sign_in && auth.currentUser == null && passedThroughSignIn) {
+                passedThroughSignIn = false
+                finish()
+            }
+            if (destination.id == R.id.destination_sign_in)
+                passedThroughSignIn = true
             bottomnavigationview?.visibility = when (destination.id) {
                 R.id.destination_posting -> View.GONE
                 R.id.destination_edit_profile -> View.GONE
@@ -87,8 +90,6 @@ class MainActivity : AppCompatActivity() {
                 else -> View.VISIBLE
             }
             supportActionBar?.run {
-                title = ""
-                show()
                 when (destination.id) {
                     R.id.destination_posts -> if (isOrientationPortrait) hide() else show()
                     R.id.destination_users -> if (isOrientationPortrait) hide() else show()
@@ -98,26 +99,19 @@ class MainActivity : AppCompatActivity() {
                     R.id.destination_edit_profile -> hide()
                     R.id.destination_posting -> hide()
                     R.id.destination_viewer -> hide()
+                    R.id.destination_read -> {
+                        show()
+                        title = ""
+                    }
+                    R.id.destination_profile -> {
+                        show()
+                        title = ""
+                    }
                     else -> show()
                 }
             }
-            if (destination.id == R.id.destination_notifications && auth.currentUser == null && passedThroughSignIn) {
-                passedThroughSignIn = false
-                finish()
-            }
         }
     }
-
-    private fun setupBottomNavigationMenu() = bottomnavigationview?.let {
-        NavigationUI.setupWithNavController(it, navController)
-    }
-
-    private fun setupSideNavigationMenu() = navigationview?.let {
-        NavigationUI.setupWithNavController(it, navController)
-    }
-
-    private fun setupActionBar() =
-        NavigationUI.setupActionBarWithNavController(this, navController, activity_main_drawerlayout)
 
     private val isOrientationPortrait: Boolean
         get() {
