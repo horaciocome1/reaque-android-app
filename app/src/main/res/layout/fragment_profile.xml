@@ -401,7 +401,6 @@
             android:visibility="@{user.name.length() > 0 ? View.GONE : View.VISIBLE}">
 
             <ProgressBar
-                style="?android:attr/progressBarStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
