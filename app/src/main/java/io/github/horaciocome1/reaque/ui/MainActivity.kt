@@ -69,12 +69,12 @@ class MainActivity : AppCompatActivity() {
         return navigated || super.onOptionsItemSelected(item)
     }
 
-    override fun onSupportNavigateUp() = NavigationUI.navigateUp(navController, activity_main_drawerlayout!!)
+    override fun onSupportNavigateUp() = NavigationUI.navigateUp(navController, drawerlayout!!)
 
     private fun setupNavigation() {
-        NavigationUI.setupWithNavController(bottomnavigationview!!, navController)
-        NavigationUI.setupWithNavController(navigationview!!, navController)
-        NavigationUI.setupActionBarWithNavController(this, navController, activity_main_drawerlayout!!)
+        bottomnavigationview?.let { NavigationUI.setupWithNavController(it, navController) }
+        navigationview?.let { NavigationUI.setupWithNavController(it, navController) }
+        drawerlayout?.let { NavigationUI.setupActionBarWithNavController(this, navController, it) }
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id != R.id.destination_sign_in && auth.currentUser == null && passedThroughSignIn) {
                 passedThroughSignIn = false
