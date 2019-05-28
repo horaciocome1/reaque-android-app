@@ -69,53 +69,55 @@ class MainActivity : AppCompatActivity() {
         return navigated || super.onOptionsItemSelected(item)
     }
 
-    override fun onSupportNavigateUp() = NavigationUI.navigateUp(navController, drawerlayout!!)
+    override fun onSupportNavigateUp() = NavigationUI.navigateUp(navController, drawerlayout)
 
     private fun setupNavigation() {
         bottomnavigationview?.let { NavigationUI.setupWithNavController(it, navController) }
         navigationview?.let { NavigationUI.setupWithNavController(it, navController) }
-        drawerlayout?.let { NavigationUI.setupActionBarWithNavController(this, navController, it) }
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id != R.id.destination_sign_in && auth.currentUser == null && passedThroughSignIn) {
-                passedThroughSignIn = false
-                finish()
-            }
-            if (destination.id == R.id.destination_sign_in)
-                passedThroughSignIn = true
-            bottomnavigationview?.visibility = when (destination.id) {
-                R.id.destination_posting -> View.GONE
-                R.id.destination_edit_profile -> View.GONE
-                R.id.destination_sign_in -> View.GONE
-                R.id.destination_viewer -> View.GONE
-                else -> View.VISIBLE
-            }
-            supportActionBar?.run {
-                when (destination.id) {
-                    R.id.destination_posts -> if (isOrientationPortrait) hide() else show()
-                    R.id.destination_users -> if (isOrientationPortrait) hide() else show()
-                    R.id.destination_notifications -> if (isOrientationPortrait) hide() else show()
-                    R.id.destination_more -> if (isOrientationPortrait) hide() else show()
-                    R.id.destination_sign_in -> if (isOrientationPortrait) hide() else show()
-                    R.id.destination_edit_profile -> hide()
-                    R.id.destination_posting -> hide()
-                    R.id.destination_viewer -> hide()
-                    R.id.destination_read -> {
-                        show()
-                        title = ""
-                    }
-                    R.id.destination_profile -> {
-                        show()
-                        title = ""
-                    }
-                    else -> show()
-                }
-            }
-        }
+        NavigationUI.setupActionBarWithNavController(this, navController, drawerlayout)
+        navController.addOnDestinationChangedListener(onDestinationChangedListener)
     }
 
     private val isOrientationPortrait: Boolean
         get() {
             return resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
         }
+
+    private val onDestinationChangedListener = NavController.OnDestinationChangedListener { _, destination, _ ->
+        if (destination.id != R.id.destination_sign_in && auth.currentUser == null && passedThroughSignIn) {
+            passedThroughSignIn = false
+            finish()
+        }
+        if (destination.id == R.id.destination_sign_in)
+            passedThroughSignIn = true
+        bottomnavigationview?.visibility = when (destination.id) {
+            R.id.destination_posting -> View.GONE
+            R.id.destination_edit_profile -> View.GONE
+            R.id.destination_sign_in -> View.GONE
+            R.id.destination_viewer -> View.GONE
+            else -> View.VISIBLE
+        }
+        supportActionBar?.run {
+            when (destination.id) {
+                R.id.destination_posts -> if (isOrientationPortrait) hide() else show()
+                R.id.destination_users -> if (isOrientationPortrait) hide() else show()
+                R.id.destination_notifications -> if (isOrientationPortrait) hide() else show()
+                R.id.destination_more -> if (isOrientationPortrait) hide() else show()
+                R.id.destination_sign_in -> if (isOrientationPortrait) hide() else show()
+                R.id.destination_edit_profile -> hide()
+                R.id.destination_posting -> hide()
+                R.id.destination_viewer -> hide()
+                R.id.destination_read -> {
+                    show()
+                    title = ""
+                }
+                R.id.destination_profile -> {
+                    show()
+                    title = ""
+                }
+                else -> show()
+            }
+        }
+    }
 
 }
