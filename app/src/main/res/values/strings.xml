@@ -24,6 +24,7 @@
     <string name="contributing_url" translatable="false">https://github.com/horaciocome1/reaque/tree/master/docs/DONATE.md</string>
     <string name="read_me_url" translatable="false">https://reaque.firebaseapp.com</string>
     <string name="project_url" translatable="false">https://github.com/horaciocome1/reaque</string>
+    <string name="url_background_sign_in" translatable="false">https://firebasestorage.googleapis.com/v0/b/reaque.appspot.com/o/resources%2Fimages%2F19228.jpg?alt=media&amp;token=2f9d40b5-f2bf-47cb-8534-782c40487923</string>
 
     <string name="developer_email" translatable="false">hcome@pm.me</string>
 

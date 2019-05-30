@@ -2,9 +2,7 @@ package io.github.horaciocome1.reaque.util
 
 import android.content.res.Configuration
 import android.net.Uri
-import android.view.View
 import android.widget.ImageView
-import android.widget.ProgressBar
 import androidx.databinding.BindingAdapter
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,7 +11,6 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
-import com.google.android.material.button.MaterialButton
 import io.github.horaciocome1.reaque.data.notifications.Notification
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
@@ -54,20 +51,6 @@ class BindingAdapters {
                     )
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .into(this)
-            }
-
-        }
-
-    }
-
-    class Visibility {
-
-        companion object {
-
-            @BindingAdapter("goneUnless")
-            @JvmStatic
-            fun MaterialButton.visibility(visible: Boolean) {
-                visibility = if (visible) View.VISIBLE else View.GONE
             }
 
         }
