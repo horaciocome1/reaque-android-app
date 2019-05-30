@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
+        auth = FirebaseAuth.getInstance()
         setupNavigation()
         handleDynamicLinks {
             val bundle = Bundle().apply {
@@ -48,7 +49,6 @@ class MainActivity : AppCompatActivity() {
             }
             navController.navigate(R.id.destination_read, bundle)
         }
-        auth = FirebaseAuth.getInstance()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
     }
