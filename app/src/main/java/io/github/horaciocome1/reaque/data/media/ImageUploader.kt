@@ -22,7 +22,7 @@ class ImageUploader {
 
     var imageUri = Uri.EMPTY!!
     var post = Post("")
-    var onComplete = { _: String -> Unit }
-    var onFailure = { }
+    var onSuccessListener = { _: String -> Unit }
+    var onFailureListener = { }
 
 }

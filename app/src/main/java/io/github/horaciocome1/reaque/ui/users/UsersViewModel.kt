@@ -97,7 +97,7 @@ class UsersViewModel(
 
     fun submitProfileUpdates(view: View): UsersViewModel {
         usersRepository.submitProfileUpdates(user) {
-            view.findNavController().navigateUp()
+            navigateUp(view)
         }
         isSubmittingUpdates = true
         return this

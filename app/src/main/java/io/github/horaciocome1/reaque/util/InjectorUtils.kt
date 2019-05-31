@@ -50,7 +50,14 @@ object InjectorUtils {
             val postsRepository = PostsRepository.getInstance(Database.getInstance().postsWebService)
             val imageRepository = MediaRepository.getInstance(Database.getInstance().imageUploaderWebService)
             val usersRepository = UsersRepository.getInstance(Database.getInstance().usersWebService)
-            return PostsViewModelFactory(postsRepository, topicsRepository, imageRepository, usersRepository)
+            val favoritesRepository = FavoritesRepository.getInstance(Database.getInstance().favoritesWebService)
+            return PostsViewModelFactory(
+                postsRepository,
+                topicsRepository,
+                imageRepository,
+                usersRepository,
+                favoritesRepository
+            )
         }
 
     val notificationsViewModelFactory: NotificationsViewModelFactory

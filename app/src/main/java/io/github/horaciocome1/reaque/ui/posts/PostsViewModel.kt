@@ -21,6 +21,7 @@ import androidx.databinding.Bindable
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import io.github.horaciocome1.reaque.data.favorites.FavoritesRepository
 import io.github.horaciocome1.reaque.data.media.ImageUploader
 import io.github.horaciocome1.reaque.data.media.MediaRepository
 import io.github.horaciocome1.reaque.data.posts.Post
@@ -53,7 +54,8 @@ class PostsViewModel(
     private val postsRepository: PostsRepository,
     topicsRepository: TopicsRepository,
     private val mediaRepository: MediaRepository,
-    private val usersRepository: UsersRepository
+    private val usersRepository: UsersRepository,
+    private val favoritesRepository: FavoritesRepository
 ) : ObservableViewModel() {
 
     // PostingFragment
@@ -64,13 +66,17 @@ class PostsViewModel(
 
     @Bindable
     val title = MutableLiveData<String>()
+
     @Bindable
     val message = MutableLiveData<String>()
 
     val notEmptyTopics = topicsRepository.notEmptyTopics
+
     val topics = topicsRepository.topics
 
     val favorites = postsRepository.favorites
+
+    val isThisFavoriteForMe = postsRepository.isThisFavoriteForMe
 
     var isSubmittingPost = false
 
@@ -79,51 +85,34 @@ class PostsViewModel(
     fun getPosts(post: Post) = postsRepository.getPosts(post)
 
     fun submitPost(view: View): PostsViewModel {
-        val uploader = ImageUploader().apply {
-            imageUri = this@PostsViewModel.imageUri
-            post = this@PostsViewModel.post
-            onComplete = { link: String ->
-                this@PostsViewModel.post.run {
-                    pic = link
-                    postsRepository.submitPost(this) {
-                        usersRepository.addTopicToUser(topic) {
-                            view.findNavController().navigateUp()
-                        }
-                    }
+        isSubmittingPost = true
+        val uploader = ImageUploader()
+        uploader.let {
+            it.imageUri = imageUri
+            it.post = post
+            it.onSuccessListener = { link ->
+                post.pic = link
+                postsRepository.submitPost(post) {
+                    navigateUp(view)
                 }
             }
-            onFailure = {
+            it.onFailureListener = {
                 // caso o upload falhe
             }
         }
-        isSubmittingPost = true
         mediaRepository.uploadImage(uploader)
         return this
     }
 
     fun addToFavorites(view: View, post: Post) {
-        if (post.id.isNotBlank() && post.user.id.isNotBlank()) {
-            view.isEnabled = false
-            postsRepository.addToFavorites(post) {
-                usersRepository.addToFavorites(post) {
-                    view.isEnabled = true
-                }
-            }
-        }
+        view.visibility = View.GONE
+        favoritesRepository.addToFavorites(post)
     }
 
     fun removeFromFavorites(view: View, post: Post) {
-        if (post.id.isNotBlank() && post.user.id.isNotBlank()) {
-            view.isEnabled = false
-            postsRepository.removeFromFavorites(post) {
-                usersRepository.removeFromFavorites(post) {
-                    view.isEnabled = true
-                }
-            }
-        }
+        view.visibility = View.GONE
+        favoritesRepository.removeFromFavorites(post)
     }
-
-    fun isThisFavoriteForMe(post: Post) = postsRepository.isThisFavoriteForMe(post)
 
     fun openViewer(view: View, post: Post) {
         if (post.pic.isNotBlank()) {

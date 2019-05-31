@@ -39,10 +39,10 @@ class ImageUploaderWebService {
                     }
                 return@Continuation ref.downloadUrl
             }).addOnSuccessListener {
-                onComplete(it.toString())
+                onSuccessListener(it.toString())
             }.addOnFailureListener {
                 onUploadFailed(tag)
-                onFailure()
+                onFailureListener()
             }
         }
     }
