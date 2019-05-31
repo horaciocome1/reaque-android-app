@@ -15,6 +15,7 @@
 
 package io.github.horaciocome1.reaque.data
 
+import io.github.horaciocome1.reaque.data.favorites.FavoritesWebService
 import io.github.horaciocome1.reaque.data.media.ImageUploaderWebService
 import io.github.horaciocome1.reaque.data.notifications.NotificationsWebService
 import io.github.horaciocome1.reaque.data.posts.PostsWebService
@@ -28,13 +29,17 @@ class Database private constructor() {
     var postsWebService = PostsWebService()
     var notificationsWebService = NotificationsWebService()
     var imageUploaderWebService = ImageUploaderWebService()
+    var favoritesWebService = FavoritesWebService()
 
     companion object {
 
-        @Volatile private var instance: Database? = null
+        @Volatile
+        private var instance: Database? = null
 
         fun getInstance() = instance ?: synchronized(this) {
-            instance ?: Database().also { instance = it }
+            instance ?: Database().also {
+                instance = it
+            }
         }
 
     }

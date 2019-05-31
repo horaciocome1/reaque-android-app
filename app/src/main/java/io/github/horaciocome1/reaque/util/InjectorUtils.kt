@@ -16,6 +16,7 @@
 package io.github.horaciocome1.reaque.util
 
 import io.github.horaciocome1.reaque.data.Database
+import io.github.horaciocome1.reaque.data.favorites.FavoritesRepository
 import io.github.horaciocome1.reaque.data.media.MediaRepository
 import io.github.horaciocome1.reaque.data.notifications.NotificationsRepository
 import io.github.horaciocome1.reaque.data.posts.PostsRepository
@@ -33,7 +34,8 @@ object InjectorUtils {
             val usersRepository = UsersRepository.getInstance(Database.getInstance().usersWebService)
             val topicsRepository = TopicsRepository.getInstance(Database.getInstance().topicsWebService)
             val postsRepository = PostsRepository.getInstance(Database.getInstance().postsWebService)
-            return UsersViewModelFactory(usersRepository, topicsRepository, postsRepository)
+            val favoritesRepository = FavoritesRepository.getInstance(Database.getInstance().favoritesWebService)
+            return UsersViewModelFactory(usersRepository, topicsRepository, postsRepository, favoritesRepository)
         }
 
     val moreViewModelFactory: MoreViewModelFactory

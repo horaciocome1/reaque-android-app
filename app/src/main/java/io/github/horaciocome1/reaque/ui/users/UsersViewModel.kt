@@ -20,6 +20,7 @@ import androidx.databinding.Bindable
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import io.github.horaciocome1.reaque.data.favorites.FavoritesRepository
 import io.github.horaciocome1.reaque.data.posts.PostsRepository
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.topics.TopicsRepository
@@ -49,7 +50,8 @@ val UpdateProfileFragment.viewModel: UsersViewModel
 class UsersViewModel(
     private val usersRepository: UsersRepository,
     topicsRepository: TopicsRepository,
-    private val postsRepository: PostsRepository
+    private val postsRepository: PostsRepository,
+    private val favoritesRepository: FavoritesRepository
 ) : ObservableViewModel() {
 
     val user = User("")
@@ -66,6 +68,8 @@ class UsersViewModel(
 
     val favorites = usersRepository.favorites
 
+    val isThisFavoriteForMe = usersRepository.isThisFavoriteForMe
+
     var isSubmittingUpdates = false
 
     fun getPosts(user: User) = postsRepository.getPosts(user)
@@ -74,25 +78,15 @@ class UsersViewModel(
 
     fun getUsers(user: User) = usersRepository.getUsers(user)
 
-    fun addToFavorites(view: View, user: User) {
-        if (user.id.isNotBlank()) {
-            view.isEnabled = false
-            usersRepository.addToFavorites(user) {
-                view.isEnabled = true
-            }
-        }
+    fun addToFavorites(view: View) {
+        view.visibility = View.GONE
+        favoritesRepository.addToFavorites(user)
     }
 
     fun removeFromFavorites(view: View, user: User) {
-        if (user.id.isNotBlank()) {
-            view.isEnabled = false
-            usersRepository.removeFromFavorites(user) {
-                view.isEnabled = true
-            }
-        }
+        view.visibility = View.GONE
+        favoritesRepository.removeFromFavorites(user)
     }
-
-    fun isThisFavoriteForMe(user: User) = usersRepository.isThisFavoriteForMe(user)
 
     fun openViewer(view: View, user: User) {
         if (user.pic.isNotBlank()) {
