@@ -61,7 +61,7 @@ class ProfileFragment: Fragment() {
             })
             viewModel.isThisFavoriteForMe(user).observe(this, Observer {
                 add_to_favorites_button.visibility = if (it) View.GONE else View.VISIBLE
-                remove_from_favorites_button.visibility = if (it) View.VISIBLE else View.GONE
+                remove_from_favorites_button.visibility = if (!it) View.GONE else View.VISIBLE
             })
         }
     }

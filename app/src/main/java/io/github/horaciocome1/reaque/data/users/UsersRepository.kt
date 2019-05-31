@@ -16,39 +16,31 @@
 package io.github.horaciocome1.reaque.data.users
 
 import androidx.lifecycle.LiveData
-import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
 
 class UsersRepository private constructor(private val service: UsersWebService) {
 
     fun submitProfileUpdates(user: User, onSuccessful: () -> Unit) = service.submitProfileUpdates(user, onSuccessful)
 
-    fun addTopicToUser(topic: Topic, onSuccessful: () -> Unit) = service.addTopicToUser(topic, onSuccessful)
-
-    fun addToFavorites(post: Post, onSuccessful: () -> Unit) = service.addToFavorites(post, onSuccessful)
-
-    fun removeFromFavorites(post: Post, onSuccessful: () -> Unit) = service.removeFromFavorites(post, onSuccessful)
-
-    fun addToFavorites(user: User, onSuccessful: () -> Unit) = service.addToFavorites(user, onSuccessful)
-
-    fun removeFromFavorites(user: User, onSuccessful: () -> Unit) = service.removeFromFavorites(user, onSuccessful)
-
-    fun isThisFavoriteForMe(user: User) = service.isThisFavoriteForMe(user)
+    val isThisFavoriteForMe: LiveData<Boolean> = service.isThisMyFavorite
 
     fun getUsers(topic: Topic) = service.getUsers(topic)
 
     fun getUsers(user: User) = service.getUsers(user)
 
-    val me = service.me as LiveData<User>
+    val me: LiveData<User> = service.me
 
-    val favorites = service.getFavorites()
+    val favorites: LiveData<List<User>> = service.favorites
 
     companion object {
+
         @Volatile
         private var instance: UsersRepository? = null
 
         fun getInstance(usersWebService: UsersWebService) = instance ?: synchronized(this) {
-            instance ?: UsersRepository(usersWebService).also { instance = it }
+            instance ?: UsersRepository(usersWebService).also {
+                instance = it
+            }
         }
 
     }
