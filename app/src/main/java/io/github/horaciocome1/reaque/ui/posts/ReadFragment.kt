@@ -54,7 +54,9 @@ class ReadFragment: Fragment() {
         }
         share_button.setOnClickListener {
             it.isEnabled = false
-            buildAndSendDynamicLink(binding.post!!)
+            binding.post?.let { post ->
+                buildAndSendDynamicLink(post)
+            }
         }
     }
 
@@ -65,9 +67,9 @@ class ReadFragment: Fragment() {
             viewModel.getPosts(post).observe(this, Observer {
                 binding.post = it
             })
-            viewModel.isThisFavoriteForMe(post).observe(this, Observer {
+            viewModel.isThisFavoriteForMe.observe(this, Observer {
                 add_to_favorites_button.visibility = if (it) View.GONE else View.VISIBLE
-                remove_from_favorites_button.visibility = if (it) View.VISIBLE else View.GONE
+                remove_from_favorites_button.visibility = if (!it) View.GONE else View.VISIBLE
             })
         }
     }

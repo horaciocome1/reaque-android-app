@@ -47,8 +47,12 @@ class ProfileFragment: Fragment() {
             it.lifecycleOwner = this
             it.viewmodel = viewModel
         }
-        posts_button.setOnClickListener(this::showPosts)
-        send_email_button.setOnClickListener(this::sendEmail)
+        posts_button.setOnClickListener {
+            showPosts()
+        }
+        send_email_button.setOnClickListener {
+            sendEmail()
+        }
     }
 
     override fun onStart() {
@@ -59,25 +63,29 @@ class ProfileFragment: Fragment() {
             viewModel.getUsers(user).observe(this, Observer {
                 binding.user = it
             })
-            viewModel.isThisFavoriteForMe(user).observe(this, Observer {
+            viewModel.isThisFavoriteForMe.observe(this, Observer {
                 add_to_favorites_button.visibility = if (it) View.GONE else View.VISIBLE
                 remove_from_favorites_button.visibility = if (!it) View.GONE else View.VISIBLE
             })
         }
     }
 
-    private fun showPosts(view: View) = viewModel.getPosts(binding.user!!).observe(this, Observer {
-        binding.posts = it
-        behavior.run {
-            skipCollapsed = true
-            if (it.isNotEmpty())
-                state = BottomSheetBehavior.STATE_HALF_EXPANDED
-        }
-    })
+    private fun showPosts() = binding.user?.let { user ->
+        viewModel.getPosts(user).observe(this, Observer {
+            binding.posts = it
+            behavior.run {
+                skipCollapsed = true
+                if (it.isNotEmpty())
+                    state = BottomSheetBehavior.STATE_HALF_EXPANDED
+            }
+        })
+    }
 
-    private fun sendEmail(view: View) {
+    private fun sendEmail() {
         try {
-            startActivity(getEmailIntent(binding.user!!.email))
+            binding.user?.let {
+                startActivity(getEmailIntent(it.email))
+            }
         } catch (e: Exception) {
             Snackbar.make(root_view!!, R.string.email_app_not_found, Snackbar.LENGTH_LONG).show()
         }
