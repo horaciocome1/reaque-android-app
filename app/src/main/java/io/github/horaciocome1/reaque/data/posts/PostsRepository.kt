@@ -35,11 +35,12 @@ class PostsRepository private constructor(private val service: PostsWebService) 
 
 
     companion object {
+
         @Volatile
         private var instance: PostsRepository? = null
 
-        fun getInstance(postsWebService: PostsWebService) = instance ?: synchronized(this) {
-            instance ?: PostsRepository(postsWebService).also {
+        fun getInstance(service: PostsWebService) = instance ?: synchronized(this) {
+            instance ?: PostsRepository(service).also {
                 instance = it
             }
         }
