@@ -15,18 +15,17 @@
 
 package io.github.horaciocome1.reaque.data.posts
 
+import androidx.lifecycle.LiveData
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
 
 class PostsRepository private constructor(private val service: PostsWebService) {
 
+    val isThisFavoriteForMe: LiveData<Boolean> = service.isThisMyFavorite
+
+    val favorites: LiveData<List<Post>> = service.favorites
+
     fun submitPost(post: Post, onSuccessful: () -> Unit) = service.submitPost(post, onSuccessful)
-
-    fun addToFavorites(post: Post, onSuccessful: () -> Unit) = service.addToFavorites(post, onSuccessful)
-
-    fun removeFromFavorites(post: Post, onSuccessful: () -> Unit) = service.removeFromFavorites(post, onSuccessful)
-
-    fun isThisFavoriteForMe(post: Post) = service.isThisMyFavorite(post)
 
     fun getPosts(topic: Topic) = service.getPosts(topic)
 
@@ -34,7 +33,6 @@ class PostsRepository private constructor(private val service: PostsWebService) 
 
     fun getPosts(user: User) = service.getPosts(user)
 
-    val favorites = service.getFavorites()
 
     companion object {
         @Volatile
