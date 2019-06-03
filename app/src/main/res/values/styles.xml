@@ -41,11 +41,12 @@
     </style>
 
     <style name="AppTheme.Fab" parent="Widget.MaterialComponents.FloatingActionButton">
-        <item name="android:tint">@color/primaryColor</item>
+        <item name="tint">@color/secondaryColor</item>
+        <item name="backgroundTint">@color/primaryLightColor</item>
     </style>
 
     <style name="AppTheme.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
-        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="fontFamily">@font/roboto_medium</item>
     </style>
 
 </resources>

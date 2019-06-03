@@ -46,7 +46,6 @@
         android:id="@+id/bottomnavigationview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
         app:itemIconTint="@drawable/color_bottom_navigation"
         app:itemTextColor="@drawable/color_bottom_navigation"
         app:labelVisibilityMode="labeled"
