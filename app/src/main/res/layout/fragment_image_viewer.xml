@@ -37,6 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
+            android:background="#30000000"
             app:navigationIcon="@drawable/outline_close_24_light" />
 
         <ImageView
@@ -45,8 +46,7 @@
             app:url="@{url}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="?attr/actionBarSize" />
+            android:layout_gravity="center" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

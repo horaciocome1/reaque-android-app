@@ -22,12 +22,19 @@
             android:orientation="vertical"
             android:visibility="@{viewmodel.isSubmittingUpdates == true ? View.GONE : View.VISIBLE}">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+            <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="?attr/actionBarSize"
-                app:navigationIcon="@drawable/outline_close_24" />
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="?android:attr/actionBarSize"
+                    app:navigationIcon="@drawable/outline_close_24" />
+
+            </com.google.android.material.appbar.AppBarLayout>
+
 
             <ScrollView
                 android:layout_width="match_parent"
