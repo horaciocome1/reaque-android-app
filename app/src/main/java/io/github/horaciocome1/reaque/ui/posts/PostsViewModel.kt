@@ -70,15 +70,15 @@ class PostsViewModel(
     @Bindable
     val message = MutableLiveData<String>()
 
-    val notEmptyTopics = topicsRepository.notEmptyTopics
+    val notEmptyTopicsForPosts = topicsRepository.notEmptyTopicsForPosts
 
     val topics = topicsRepository.topics
 
     val favorites = postsRepository.favorites
 
-    val isThisFavoriteForMe = postsRepository.isThisFavoriteForMe
-
     var isSubmittingPost = false
+
+    fun isThisFavoriteForMe(post: Post) = postsRepository.isThisFavoriteForMe(post)
 
     fun getPosts(topic: Topic) = postsRepository.getPosts(topic)
 

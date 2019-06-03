@@ -67,7 +67,7 @@ class ReadFragment: Fragment() {
             viewModel.getPosts(post).observe(this, Observer {
                 binding.post = it
             })
-            viewModel.isThisFavoriteForMe.observe(this, Observer {
+            viewModel.isThisFavoriteForMe(post).observe(this, Observer {
                 add_to_favorites_button.visibility = if (it) View.GONE else View.VISIBLE
                 remove_from_favorites_button.visibility = if (!it) View.GONE else View.VISIBLE
             })

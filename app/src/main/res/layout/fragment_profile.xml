@@ -306,6 +306,7 @@
                             android:layout_marginRight="56dp"
                             android:layout_marginBottom="32dp"
                             android:onClick="@{(button) -> viewmodel.addToFavorites(button, user)}"
+                            android:visibility="gone"
                             android:padding="16dp"
                             android:text="@string/favorite"
                             android:textColor="@color/orange"

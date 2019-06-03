@@ -27,7 +27,7 @@ val Post.map: Map<String, Any>
             "message" to message,
             "pic" to pic,
             "date" to FieldValue.serverTimestamp(),
-            "topic" to mapOf("id" to topic.id),
+            "topicForPosts" to mapOf("id" to topic.id),
             "user" to mapOf(
                 "id" to user.id,
                 "name" to user.name,

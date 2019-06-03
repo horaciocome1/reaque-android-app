@@ -59,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/background_bottomsheet"
                     android:padding="8dp"
-                    android:text="@{topic.postsCount}"
+                    android:text="@{topic.contentCount}"
                     app:layout_constraintBottom_toBottomOf="@id/imageview"
                     app:layout_constraintEnd_toEndOf="@id/imageview"
                     app:layout_constraintStart_toStartOf="@id/imageview" />

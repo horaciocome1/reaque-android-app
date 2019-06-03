@@ -103,7 +103,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.destination_users -> if (isOrientationPortrait) hide() else show()
                 R.id.destination_notifications -> if (isOrientationPortrait) hide() else show()
                 R.id.destination_more -> if (isOrientationPortrait) hide() else show()
-                R.id.destination_sign_in -> if (isOrientationPortrait) hide() else show()
+                R.id.destination_sign_in -> hide()
                 R.id.destination_edit_profile -> hide()
                 R.id.destination_posting -> hide()
                 R.id.destination_viewer -> hide()

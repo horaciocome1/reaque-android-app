@@ -17,9 +17,9 @@ package io.github.horaciocome1.reaque.util
 
 import android.util.Log
 
-fun onListenFailed(tag: String, exception: Exception) = Log.w(tag, "Listen failed.", exception)
+fun onListeningFailed(tag: String, exception: Exception) = Log.w(tag, "Listen failed.", exception)
 
-fun onUploadFailed(tag: String) = Log.w(tag, "Upload failed.")
+fun onUploadingFailed(tag: String) = Log.w(tag, "Upload failed.")
 
 fun onSnapshotNull(tag: String) = Log.w(tag, "Snapshot is null.")
 

@@ -21,7 +21,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.google.firebase.auth.FirebaseAuth
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.databinding.FragmentPostsBinding
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
@@ -30,10 +29,8 @@ import kotlinx.android.synthetic.main.fragment_posts.*
 class PostsFragment: Fragment() {
 
     private lateinit var binding: FragmentPostsBinding
-    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        auth = FirebaseAuth.getInstance()
         binding = FragmentPostsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -51,7 +48,7 @@ class PostsFragment: Fragment() {
 
     override fun onStart() {
         super.onStart()
-        viewModel.notEmptyTopics.observe(this, Observer { list ->
+        viewModel.notEmptyTopicsForPosts.observe(this, Observer { list ->
             binding.topics = list
         })
         favorites_fab.setOnClickListener {

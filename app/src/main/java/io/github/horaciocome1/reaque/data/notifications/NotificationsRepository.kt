@@ -15,11 +15,14 @@
 
 package io.github.horaciocome1.reaque.data.notifications
 
+import androidx.lifecycle.LiveData
+
 class NotificationsRepository private constructor(service: NotificationsWebService) {
 
-    val notifications = service.notifications
+    val notifications: LiveData<List<Notification>> = service.notifications
 
     companion object {
+
         @Volatile
         private var instance: NotificationsRepository? = null
 
@@ -28,6 +31,7 @@ class NotificationsRepository private constructor(service: NotificationsWebServi
                 instance = it
             }
         }
+
     }
 
 }

@@ -20,6 +20,7 @@ class MediaRepository private constructor(private val webservice: ImageUploaderW
     fun uploadImage(uploader: ImageUploader) = webservice.upload(uploader)
 
     companion object {
+
         @Volatile
         private var instance: MediaRepository? = null
 
@@ -28,6 +29,7 @@ class MediaRepository private constructor(private val webservice: ImageUploaderW
                 instance = it
             }
         }
+
     }
 
 }

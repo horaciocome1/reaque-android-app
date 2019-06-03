@@ -63,9 +63,15 @@ class ProfileFragment: Fragment() {
             viewModel.getUsers(user).observe(this, Observer {
                 binding.user = it
             })
-            viewModel.isThisFavoriteForMe.observe(this, Observer {
-                add_to_favorites_button.visibility = if (it) View.GONE else View.VISIBLE
-                remove_from_favorites_button.visibility = if (!it) View.GONE else View.VISIBLE
+            viewModel.isThisFavoriteForMe(user).observe(this, Observer {
+                add_to_favorites_button.run {
+                    isEnabled = !it
+                    visibility = if (isEnabled) View.VISIBLE else View.GONE
+                }
+                remove_from_favorites_button.run {
+                    isEnabled = it
+                    visibility = if (isEnabled) View.VISIBLE else View.GONE
+                }
             })
         }
     }

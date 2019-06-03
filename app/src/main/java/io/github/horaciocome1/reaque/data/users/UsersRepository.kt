@@ -20,17 +20,17 @@ import io.github.horaciocome1.reaque.data.topics.Topic
 
 class UsersRepository private constructor(private val service: UsersWebService) {
 
+    val me: LiveData<User> = service.me
+
+    val favorites: LiveData<List<User>> = service.favorites
+
     fun submitProfileUpdates(user: User, onSuccessful: () -> Unit) = service.submitProfileUpdates(user, onSuccessful)
 
-    val isThisFavoriteForMe: LiveData<Boolean> = service.isThisMyFavorite
+    fun isThisFavoriteForMe(user: User) = service.isThisMyFavorite(user)
 
     fun getUsers(topic: Topic) = service.getUsers(topic)
 
     fun getUsers(user: User) = service.getUsers(user)
-
-    val me: LiveData<User> = service.me
-
-    val favorites: LiveData<List<User>> = service.favorites
 
     companion object {
 

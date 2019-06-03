@@ -1,16 +1,15 @@
 package io.github.horaciocome1.reaque.data.favorites
 
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.firestore.FirebaseFirestore
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.util.addSimpleAuthStateListener
 
 class FavoritesWebService {
 
-    private val addRequestRef = Firebase.firestore.collection("add_to_favorites_requests")
-    private val removeRequestRef = Firebase.firestore.collection("remove_from_favorites_requests")
+    private val addRequestRef = FirebaseFirestore.getInstance().collection("add_to_favorites_requests")
+    private val removeRequestRef = FirebaseFirestore.getInstance().collection("remove_from_favorites_requests")
     private val auth = FirebaseAuth.getInstance()
 
     fun addToFavorites(user: User) {

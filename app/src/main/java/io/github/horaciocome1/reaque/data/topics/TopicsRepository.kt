@@ -15,13 +15,18 @@
 
 package io.github.horaciocome1.reaque.data.topics
 
+import androidx.lifecycle.LiveData
+
 class TopicsRepository private constructor(service: TopicsWebService) {
 
-    val notEmptyTopics = service.notEmptyTopics
+    val notEmptyTopicsForPosts: LiveData<List<Topic>> = service.notEmptyTopicsForPosts
 
-    val topics = service.topics
+    val notEmptyTopicsForUsers: LiveData<List<Topic>> = service.notEmptyTopicsForUsers
+
+    val topics: LiveData<List<Topic>> = service.topics
 
     companion object {
+
         @Volatile
         private var instance: TopicsRepository? = null
 
@@ -30,6 +35,7 @@ class TopicsRepository private constructor(service: TopicsWebService) {
                 instance = it
             }
         }
+
     }
 
 }

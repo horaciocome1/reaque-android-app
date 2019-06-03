@@ -16,6 +16,7 @@
 package io.github.horaciocome1.reaque.util
 
 import com.google.firebase.Timestamp
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
 import io.github.horaciocome1.reaque.data.notifications.Notification
 import io.github.horaciocome1.reaque.data.posts.Post
@@ -38,14 +39,23 @@ val DocumentSnapshot.user: User
         }
     }
 
-val DocumentSnapshot.topic: Topic
+val DocumentSnapshot.topicForPosts: Topic
     get() {
         return Topic(id).apply {
-            title = this@topic["title"].toString()
-            pic = this@topic["pic"].toString()
-            description = this@topic["bio"].toString()
-            postsCount = this@topic["posts_count"].toString()
-            usersCount = this@topic["users_count"].toString()
+            title = this@topicForPosts["title"].toString()
+            pic = this@topicForPosts["pic"].toString()
+            description = this@topicForPosts["bio"].toString()
+            contentCount = this@topicForPosts["posts_count"].toString()
+        }
+    }
+
+val DocumentSnapshot.topicForUsers: Topic
+    get() {
+        return Topic(id).apply {
+            title = this@topicForUsers["title"].toString()
+            pic = this@topicForUsers["pic"].toString()
+            description = this@topicForUsers["bio"].toString()
+            contentCount = this@topicForUsers["users_count"].toString()
         }
     }
 
@@ -58,7 +68,7 @@ val DocumentSnapshot.post: Post
                 timestamp = stamp
             message = this@post["message"].toString()
             title = this@post["title"].toString()
-            topic = Topic(this@post["topic.id"].toString())
+            topic = Topic(this@post["topicForPosts.id"].toString())
             user.apply {
                 id = this@post["user.id"].toString()
                 name = this@post["user.name"].toString()
@@ -80,3 +90,13 @@ val DocumentSnapshot.notification: Notification
             contentId = this@notification["content_id"].toString()
         }
     }
+
+fun DocumentReference.addSimpleSnapshotListener(TAG: String, listener: (DocumentSnapshot) -> Unit) {
+    addSnapshotListener { snapshot, exception ->
+        when {
+            exception != null -> onListeningFailed(TAG, exception)
+            snapshot != null -> listener(snapshot)
+            else -> onSnapshotNull(TAG)
+        }
+    }
+}

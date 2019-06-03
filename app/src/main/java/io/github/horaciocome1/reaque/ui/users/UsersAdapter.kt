@@ -15,7 +15,6 @@
 
 package io.github.horaciocome1.reaque.ui.users
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,11 +25,9 @@ import io.github.horaciocome1.reaque.databinding.ItemUserBinding
 class UsersAdapter(private val list: List<User>) : RecyclerView.Adapter<UsersAdapter.ViewHolder>() {
 
     private lateinit var binding: ItemUserBinding
-    private lateinit var context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        context = parent.context
-        binding = ItemUserBinding.inflate(LayoutInflater.from(context), parent, false)
+        binding = ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding.root)
     }
 

@@ -64,13 +64,13 @@ class UsersViewModel(
 
     val me = usersRepository.me
 
-    val notEmptyTopics = topicsRepository.notEmptyTopics
+    val notEmptyTopicsForUsers = topicsRepository.notEmptyTopicsForUsers
 
     val favorites = usersRepository.favorites
 
-    val isThisFavoriteForMe = usersRepository.isThisFavoriteForMe
-
     var isSubmittingUpdates = false
+
+    fun isThisFavoriteForMe(user: User) = usersRepository.isThisFavoriteForMe(user)
 
     fun getPosts(user: User) = postsRepository.getPosts(user)
 
@@ -78,13 +78,13 @@ class UsersViewModel(
 
     fun getUsers(user: User) = usersRepository.getUsers(user)
 
-    fun addToFavorites(view: View) {
-        view.visibility = View.GONE
+    fun addToFavorites(view: View, user: User) {
+        view.isEnabled = false
         favoritesRepository.addToFavorites(user)
     }
 
     fun removeFromFavorites(view: View, user: User) {
-        view.visibility = View.GONE
+        view.isEnabled = false
         favoritesRepository.removeFromFavorites(user)
     }
 

@@ -15,7 +15,6 @@
 
 package io.github.horaciocome1.reaque.ui.topics
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,14 +26,12 @@ import io.github.horaciocome1.reaque.databinding.ItemTopicPostingBinding
 class TopicsAdapter(private val list: List<Topic>) : RecyclerView.Adapter<TopicsAdapter.ViewHolder>() {
 
     private lateinit var binding: ItemTopicBinding
-    private lateinit var context: Context
 
-    //    the indicator of last clicked topic
+    //    the indicator of last clicked topicForPosts
     private var indicator: View? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        context = parent.context
-        binding = ItemTopicBinding.inflate(LayoutInflater.from(context), parent, false)
+        binding = ItemTopicBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding.root)
     }
 

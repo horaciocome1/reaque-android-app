@@ -15,7 +15,6 @@
 
 package io.github.horaciocome1.reaque.ui.posts
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,11 +26,9 @@ class PostsAdapter(private val list: List<Post>)
     : RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
 
     private lateinit var binding: ItemPostBinding
-    private lateinit var context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        context = parent.context
-        binding = ItemPostBinding.inflate(LayoutInflater.from(context), parent, false)
+        binding = ItemPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding.root)
     }
 
