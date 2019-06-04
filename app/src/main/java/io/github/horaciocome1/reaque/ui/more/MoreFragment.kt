@@ -47,7 +47,9 @@ class MoreFragment : Fragment() {
             it.lifecycleOwner = this
             it.viewmodel = viewModel
         }
-        feedback_textview.setOnClickListener(this::emailDeveloper)
+        feedback_textview.setOnClickListener {
+            emailDeveloper()
+        }
         frequently_asked_questions_textview.setOnClickListener(this::openLinks)
         about_textview.setOnClickListener(this::openLinks)
     }
@@ -69,12 +71,14 @@ class MoreFragment : Fragment() {
         startActivity(intent)
     }
 
-    private fun emailDeveloper(view: View) {
+    private fun emailDeveloper() {
         val email = resources.getString(R.string.developer_email)
         try {
             startActivity(getEmailIntent(email))
         } catch (e: Exception) {
-            Snackbar.make(root_view, R.string.email_app_not_found, Snackbar.LENGTH_LONG).show()
+            root_view?.let {
+                Snackbar.make(root_view, R.string.email_app_not_found, Snackbar.LENGTH_LONG).show()
+            }
         }
     }
 

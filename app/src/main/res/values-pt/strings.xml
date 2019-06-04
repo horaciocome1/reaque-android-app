@@ -38,5 +38,6 @@
 
     <string name="email_app_not_found">Aplicativo de email não encontrado.</string>
     <string name="subscribers">Subscritores</string>
+    <string name="welcome">Bem-vindo</string>
 
 </resources>

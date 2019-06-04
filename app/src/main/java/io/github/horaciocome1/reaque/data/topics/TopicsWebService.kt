@@ -19,8 +19,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import io.github.horaciocome1.reaque.util.addSimpleAuthStateListener
-import io.github.horaciocome1.reaque.util.addSimpleSnapshotListener
+import io.github.horaciocome1.reaque.util.addSimpleAndSafeSnapshotListener
 import io.github.horaciocome1.reaque.util.topicsForPosts
 import io.github.horaciocome1.reaque.util.topicsForUsers
 
@@ -37,11 +36,9 @@ class TopicsWebService {
     val notEmptyTopicsForPosts = MutableLiveData<List<Topic>>()
         get() {
             if (notEmptyTopicsForPostsList.isEmpty())
-                auth.addSimpleAuthStateListener {
-                    ref.whereGreaterThan("posts_count", empty).addSimpleSnapshotListener(tag) {
-                        notEmptyTopicsForPostsList = it.topicsForPosts
-                        field.value = it.topicsForPosts
-                    }
+                ref.whereGreaterThan("posts_count", empty).addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
+                    notEmptyTopicsForPostsList = snapshot.topicsForPosts
+                    field.value = snapshot.topicsForPosts
                 }
             return field
         }
@@ -50,11 +47,9 @@ class TopicsWebService {
     val notEmptyTopicsForUsers = MutableLiveData<List<Topic>>()
         get() {
             if (notEmptyTopicsForUsersList.isEmpty())
-                auth.addSimpleAuthStateListener {
-                    ref.whereGreaterThan("users_count", empty).addSimpleSnapshotListener(tag) {
-                        notEmptyTopicsForUsersList = it.topicsForUsers
-                        field.value = it.topicsForUsers
-                    }
+                ref.whereGreaterThan("users_count", empty).addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
+                    notEmptyTopicsForUsersList = snapshot.topicsForUsers
+                    field.value = snapshot.topicsForUsers
                 }
             return field
         }
@@ -63,11 +58,12 @@ class TopicsWebService {
     val topics = MutableLiveData<List<Topic>>()
         get() {
             if (topicsList.isEmpty())
-                auth.addSimpleAuthStateListener {
-                    ref.orderBy("title", Query.Direction.ASCENDING).addSimpleSnapshotListener(tag) {
-                        topicsList = it.topicsForPosts
-                        field.value = it.topicsForPosts
-                    }
+                ref.orderBy("title", Query.Direction.ASCENDING).addSimpleAndSafeSnapshotListener(
+                    tag,
+                    auth
+                ) { snapshot, _ ->
+                    topicsList = snapshot.topicsForPosts
+                    field.value = snapshot.topicsForPosts
                 }
             return field
         }

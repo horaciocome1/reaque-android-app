@@ -1,5 +1,7 @@
 package io.github.horaciocome1.reaque.util
 
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import io.github.horaciocome1.reaque.data.notifications.Notification
@@ -63,6 +65,18 @@ fun Query.addSimpleSnapshotListener(TAG: String, listener: (QuerySnapshot) -> Un
             exception != null -> onListeningFailed(TAG, exception)
             snapshot != null -> listener(snapshot)
             else -> onSnapshotNull(TAG)
+        }
+    }
+}
+
+fun Query.addSimpleAndSafeSnapshotListener(
+    TAG: String,
+    auth: FirebaseAuth,
+    listener: (QuerySnapshot, FirebaseUser) -> Unit
+) {
+    auth.addSimpleAuthStateListener { user ->
+        addSimpleSnapshotListener(TAG) {
+            listener(it, user)
         }
     }
 }

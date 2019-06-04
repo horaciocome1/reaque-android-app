@@ -42,9 +42,8 @@ class UsersWebService {
 
     val me = MutableLiveData<User>()
         get() {
-            auth.addSimpleAuthStateListener { user ->
-                _user.id = user.uid
-                ref.document(user.uid).addSimpleSnapshotListener(tag) {
+            auth.addSimpleAuthStateListener { firebaseUser ->
+                ref.document(firebaseUser.uid).addSimpleSnapshotListener(tag) {
                     field.value = it.user
                 }
             }
@@ -54,13 +53,13 @@ class UsersWebService {
     private var favoritesList = mutableListOf<User>()
     val favorites = MutableLiveData<List<User>>()
         get() {
-            auth.addAuthStateListener { user ->
-                if (favoritesList.isEmpty())
+            if (favoritesList.isEmpty())
+                auth.addSimpleAuthStateListener { user ->
                     ref.whereEqualTo("favorite_for.${user.uid}", true).addSimpleSnapshotListener(tag) {
                         favoritesList = it.users
                         favorites.value = it.users
                     }
-            }
+                }
             return field
         }
 
@@ -68,10 +67,8 @@ class UsersWebService {
 
     fun isThisMyFavorite(user: User): LiveData<Boolean> {
         isThisMyFavorite.value = false
-        auth.addSimpleAuthStateListener { u ->
-            ref.document(user.id).addSimpleSnapshotListener(tag) {
-                isThisMyFavorite.value = it["favorite_for.${u.uid}"].toString().toBoolean()
-            }
+        ref.document(user.id).addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, firebaseUser ->
+            isThisMyFavorite.value = snapshot["favorite_for.${firebaseUser.uid}"].toString().toBoolean()
         }
         return isThisMyFavorite
     }
@@ -92,13 +89,11 @@ class UsersWebService {
     fun getUsers(topic: Topic): LiveData<List<User>> {
         if (!this.topic.id.equals(topic.id, true)) {
             topicUsers.value = mutableListOf()
-            auth.addSimpleAuthStateListener {
-                ref.whereEqualTo("topics.${topic.id}", true).addSimpleSnapshotListener(tag) {
-                    topicUsersList = it.users
-                    topicUsers.value = it.users
-                }
-                this.topic.id = topic.id
+            ref.whereEqualTo("topics.${topic.id}", true).addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
+                topicUsersList = snapshot.users
+                topicUsers.value = snapshot.users
             }
+            this.topic.id = topic.id
         }
         return topicUsers
     }
@@ -106,11 +101,9 @@ class UsersWebService {
     fun getUsers(user: User): LiveData<User> {
         if (!user.id.equals(_user.id, true)) {
             this.user.value = User("")
-            auth.addSimpleAuthStateListener {
-                ref.document(user.id).addSimpleSnapshotListener(tag) {
-                    _user.id = it.user.id
-                    this.user.value = it.user
-                }
+            ref.document(user.id).addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
+                _user.id = snapshot.user.id
+                this.user.value = snapshot.user
             }
         }
         return this.user

@@ -31,7 +31,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:minHeight="?android:attr/actionBarSize"
-                    app:navigationIcon="@drawable/outline_close_24" />
+                    app:navigationIcon="@drawable/outline_close_24"
+                    app:title="@string/edit" />
 
             </com.google.android.material.appbar.AppBarLayout>
 

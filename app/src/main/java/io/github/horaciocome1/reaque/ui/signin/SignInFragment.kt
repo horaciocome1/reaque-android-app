@@ -8,8 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -18,6 +16,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import io.github.horaciocome1.reaque.R
+import io.github.horaciocome1.reaque.databinding.FragmentSignInBinding
 import io.github.horaciocome1.reaque.ui.MainActivity
 import io.github.horaciocome1.reaque.util.Constants
 import kotlinx.android.synthetic.main.fragment_sign_in.*
@@ -26,18 +25,17 @@ class SignInFragment : Fragment() {
 
     private val tag1 = "SignInActivity"
     private lateinit var auth: FirebaseAuth
+    private lateinit var binding: FragmentSignInBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_sign_in, container, false)
+        binding = FragmentSignInBinding.inflate(inflater, container, false)
+        return binding.rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         auth = FirebaseAuth.getInstance()
-        Glide.with(this)
-            .load(getString(R.string.url_background_sign_in))
-            .transition(DrawableTransitionOptions.withCrossFade())
-            .into(imageview)
+        binding.url = getString(R.string.url_background_sign_in)
     }
 
     override fun onStart() {
@@ -52,10 +50,10 @@ class SignInFragment : Fragment() {
                 val task = GoogleSignIn.getSignedInAccountFromIntent(data)
                 try {
                     val account = task.getResult(ApiException::class.java)
-                    firebaseAuthWithGoogle(account!!)
-                } catch (e: ApiException) {
-                    Log.w(tag1, "Google sign in failed", e)
-                    retry { signInWithGoogle() }
+                    account?.let { firebaseAuthWithGoogle(account) }
+                } catch (exception: ApiException) {
+                    Log.w(tag1, "Google sign in failed", exception)
+                    retry()
                 }
             }
         }
@@ -66,37 +64,37 @@ class SignInFragment : Fragment() {
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
-        try {
+        if (activity is MainActivity) {
             val googleSignInClient = GoogleSignIn.getClient(activity as MainActivity, gso)
             startActivityForResult(googleSignInClient?.signInIntent, Constants.GOOGLE_SIGN_IN_REQUEST_CODE)
-        } catch (ex: Exception) {
-            Log.e(tag1, "This fragment is not hosted in main activity", ex)
         }
     }
 
     private fun firebaseAuthWithGoogle(account: GoogleSignInAccount) {
-        Log.d(tag, "firebaseAuthWithGoogle ${account.id!!}")
+        account.id?.let { Log.d(tag, "firebaseAuthWithGoogle ${account.id}") }
         val credential = GoogleAuthProvider.getCredential(account.idToken, null)
         auth.signInWithCredential(credential)
             .addOnSuccessListener {
                 Log.d(tag, "firebaseAuthWithGoogle:success")
-                root_view.findNavController().navigateUp()
+                root_view?.findNavController()?.navigateUp()
             }
             .addOnFailureListener {
                 Log.w(tag, "firebaseAuthWithGoogle:failure", it)
-                retry { firebaseAuthWithGoogle(account) }
+                retry()
             }
     }
 
-    private fun retry(function: () -> Unit) {
+    private fun retry() {
         progressbar?.visibility = View.GONE
-        val snackBar =
-            Snackbar.make(root_view, "Ocorreu um erro inexperado! Voltar a tentar?", Snackbar.LENGTH_INDEFINITE)
-        snackBar.setAction("Tentar") {
-            snackBar.dismiss()
-            function()
-            progressbar?.visibility = View.VISIBLE
-        }.show()
+        root_view?.let {
+            val snackBar = Snackbar
+                .make(it, "Ocorreu um erro inexperado! Voltar a tentar?", Snackbar.LENGTH_INDEFINITE)
+            snackBar.setAction("Tentar") {
+                snackBar.dismiss()
+                signInWithGoogle()
+                progressbar?.visibility = View.VISIBLE
+            }.show()
+        }
     }
 
 }

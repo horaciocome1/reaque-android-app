@@ -63,21 +63,15 @@ class PostsWebService {
 
     fun isThisMyFavorite(post: Post): LiveData<Boolean> {
         isThisMyFavorite.value = false
-        auth.addSimpleAuthStateListener { user ->
-            ref.document(post.id).addSimpleSnapshotListener(tag) {
-                isThisMyFavorite.value = it["favorite_for.${user.uid}"].toString().toBoolean()
-            }
+        ref.document(post.id).addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, user ->
+            isThisMyFavorite.value = snapshot["favorite_for.${user.uid}"].toString().toBoolean()
         }
         return isThisMyFavorite
     }
 
     fun submitPost(post: Post, onSuccessListener: () -> Unit) {
         auth.addSimpleAuthStateListener {
-            post.user.run {
-                id = it.uid
-                name = it.displayName.toString()
-                pic = it.photoUrl.toString()
-            }
+            post.user = it.user
             ref.add(post.map).addOnSuccessListener {
                 onSuccessListener()
             }
@@ -88,13 +82,11 @@ class PostsWebService {
     fun getPosts(topic: Topic): LiveData<List<Post>> {
         if (!this.topic.id.equals(topic.id, true)) {
             topicPosts.value = mutableListOf()
-            auth.addSimpleAuthStateListener {
-                ref.whereEqualTo("topic.id", topic.id).addSimpleSnapshotListener(tag) {
-                    topicPostsList = it.posts
-                    topicPosts.value = it.posts
-                }
-                this.topic.id = topic.id
+            ref.whereEqualTo("topic.id", topic.id).addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
+                topicPostsList = snapshot.posts
+                topicPosts.value = snapshot.posts
             }
+            this.topic.id = topic.id
         }
         return topicPosts
     }
@@ -103,13 +95,11 @@ class PostsWebService {
     fun getPosts(user: User): LiveData<List<Post>> {
         if (!this.user.id.equals(user.id, true)) {
             userPosts.value = mutableListOf()
-            auth.addSimpleAuthStateListener {
-                ref.whereEqualTo("user.id", user.id).addSimpleSnapshotListener(tag) {
-                    userPostsList = it.posts
-                    userPosts.value = it.posts
-                }
-                this.user.id = user.id
+            ref.whereEqualTo("user.id", user.id).addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
+                userPostsList = snapshot.posts
+                userPosts.value = snapshot.posts
             }
+            this.user.id = user.id
         }
         return userPosts
     }
@@ -118,12 +108,10 @@ class PostsWebService {
     fun getPosts(post: Post): LiveData<Post> {
         if (!post.id.equals(_post.id, true)) {
             this.post.value = Post("")
-            auth.addSimpleAuthStateListener {
-                ref.document(post.id).addSimpleSnapshotListener(tag) {
-                    _post.id = it.post.id
-                    this.post.value = it.post
-                }
+            ref.document(post.id).addSimpleAndSafeSnapshotListener(tag, auth) { it, _ ->
+                this.post.value = it.post
             }
+            _post.id = post.id
         }
         return this.post
     }

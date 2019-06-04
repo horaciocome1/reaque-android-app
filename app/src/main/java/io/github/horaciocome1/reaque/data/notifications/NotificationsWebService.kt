@@ -34,14 +34,13 @@ class NotificationsWebService {
 
     val notifications = MutableLiveData<List<Notification>>()
         get() {
-            if (notificationsList.isEmpty()) {
+            if (notificationsList.isEmpty())
                 auth.addSimpleAuthStateListener { user ->
                     ref.whereEqualTo("users.${user.uid}", true).addSimpleSnapshotListener(tag) {
                         notificationsList = it.notifications
                         notifications.value = it.notifications
                     }
                 }
-            }
             return field
         }
 

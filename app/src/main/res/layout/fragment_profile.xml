@@ -173,7 +173,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
                                 android:layout_marginBottom="16dp"
-                                android:tint="@color/secondaryColor"
+                                android:tint="@color/secondaryLightColor"
                                 app:srcCompat="@drawable/outline_library_books_18" />
 
                         </LinearLayout>
@@ -200,7 +200,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
                                 android:layout_marginBottom="16dp"
-                                android:tint="@color/secondaryColor"
+                                android:tint="@color/secondaryLightColor"
                                 app:srcCompat="@drawable/outline_people_outline_18" />
 
                         </LinearLayout>
