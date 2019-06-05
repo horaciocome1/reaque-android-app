@@ -157,6 +157,14 @@
                             android:layout_weight="1"
                             android:orientation="vertical">
 
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="16dp"
+                                android:tint="@color/secondaryLightColor"
+                                app:srcCompat="@drawable/outline_library_books_18" />
+
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -168,13 +176,14 @@
                                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                                 android:textColor="@android:color/white" />
 
-                            <ImageView
+                            <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
                                 android:layout_marginBottom="16dp"
-                                android:tint="@color/secondaryLightColor"
-                                app:srcCompat="@drawable/outline_library_books_18" />
+                                android:text="@string/posts"
+                                android:textAlignment="center"
+                                android:textColor="@color/secondaryLightColor" />
 
                         </LinearLayout>
 
@@ -184,10 +193,18 @@
                             android:layout_weight="1"
                             android:orientation="vertical">
 
-                            <TextView
+                            <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="16dp"
+                                android:tint="@color/secondaryLightColor"
+                                app:srcCompat="@drawable/outline_people_outline_18" />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
                                 android:text="@{user.favoriteForCount}"
                                 android:background="@color/secondaryColor"
                                 android:padding="8dp"
@@ -195,13 +212,15 @@
                                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                                 android:textColor="@android:color/white" />
 
-                            <ImageView
+                            <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
                                 android:layout_marginBottom="16dp"
-                                android:tint="@color/secondaryLightColor"
-                                app:srcCompat="@drawable/outline_people_outline_18" />
+                                android:text="@string/subscribers"
+                                android:textAlignment="center"
+                                android:textColor="@color/secondaryLightColor" />
+
 
                         </LinearLayout>
 
