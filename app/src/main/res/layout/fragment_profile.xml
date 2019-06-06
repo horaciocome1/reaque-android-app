@@ -46,7 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/cover_imageview"
             android:layout_width="match_parent"
             android:layout_height="400dp"
@@ -157,18 +157,17 @@
                             android:layout_weight="1"
                             android:orientation="vertical">
 
-                            <ImageView
+                            <androidx.appcompat.widget.AppCompatImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginBottom="16dp"
+                                android:layout_marginTop="16dp"
                                 android:tint="@color/secondaryLightColor"
                                 app:srcCompat="@drawable/outline_library_books_18" />
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="16dp"
+                                android:layout_marginTop="8dp"
                                 android:text="@{user.postsCount}"
                                 android:background="@color/secondaryColor"
                                 android:padding="8dp"
@@ -183,7 +182,7 @@
                                 android:layout_marginBottom="16dp"
                                 android:text="@string/posts"
                                 android:textAlignment="center"
-                                android:textColor="@color/secondaryLightColor" />
+                                android:textColor="@color/secondaryColor" />
 
                         </LinearLayout>
 
@@ -193,7 +192,7 @@
                             android:layout_weight="1"
                             android:orientation="vertical">
 
-                            <ImageView
+                            <androidx.appcompat.widget.AppCompatImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="16dp"
@@ -219,14 +218,14 @@
                                 android:layout_marginBottom="16dp"
                                 android:text="@string/subscribers"
                                 android:textAlignment="center"
-                                android:textColor="@color/secondaryLightColor" />
+                                android:textColor="@color/secondaryColor" />
 
 
                         </LinearLayout>
 
                     </LinearLayout>
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/imageView4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -253,7 +252,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/statics_linearlayout" />
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/imageView5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -362,7 +361,7 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/imageview"
                     android:layout_width="112dp"
                     android:layout_height="112dp"
@@ -393,7 +392,7 @@
             app:behavior_hideable="true"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="match_parent"
                 android:layout_height="16dp"
                 app:srcCompat="@drawable/outline_drag_handle_24" />

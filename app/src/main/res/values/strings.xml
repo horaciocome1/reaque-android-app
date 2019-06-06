@@ -14,7 +14,7 @@
   -->
 
 <resources>
-    <string name="app_name" translatable="false">Reaque</string>
+    <string name="app_name" translatable="false">ReaQue</string>
     <string name="app_version" translatable="false">1.0</string>
 
     <!-- 01 URL -->
