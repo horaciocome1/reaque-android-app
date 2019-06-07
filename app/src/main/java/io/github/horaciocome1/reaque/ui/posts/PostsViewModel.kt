@@ -21,10 +21,10 @@ import androidx.databinding.Bindable
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import io.github.horaciocome1.reaque.data._posts.Post
 import io.github.horaciocome1.reaque.data.favorites.FavoritesRepository
 import io.github.horaciocome1.reaque.data.media.ImageUploader
 import io.github.horaciocome1.reaque.data.media.MediaRepository
-import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.posts.PostsRepository
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.topics.TopicsRepository

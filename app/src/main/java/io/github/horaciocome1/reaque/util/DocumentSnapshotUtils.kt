@@ -20,10 +20,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
+import io.github.horaciocome1.reaque.data._posts.Post
+import io.github.horaciocome1.reaque.data._users.User
 import io.github.horaciocome1.reaque.data.notifications.Notification
-import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
-import io.github.horaciocome1.reaque.data.users.User
 
 val DocumentSnapshot.user: User
     get() = User(id).apply {

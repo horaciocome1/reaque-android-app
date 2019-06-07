@@ -17,8 +17,8 @@ package io.github.horaciocome1.reaque.util
 
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FieldValue
-import io.github.horaciocome1.reaque.data.posts.Post
-import io.github.horaciocome1.reaque.data.users.User
+import io.github.horaciocome1.reaque.data._posts.Post
+import io.github.horaciocome1.reaque.data._users.User
 
 val Post.map: Map<String, Any>
     get() = mapOf(

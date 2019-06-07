@@ -23,48 +23,54 @@ import io.github.horaciocome1.reaque.util.addSimpleAndSafeSnapshotListener
 import io.github.horaciocome1.reaque.util.topicsForPosts
 import io.github.horaciocome1.reaque.util.topicsForUsers
 
-class TopicsWebService {
+class TopicsService {
 
-    private val tag = "TopicsWebService"
+    private val tag = "TopicsService"
     private val empty = 0
 
     private val ref = FirebaseFirestore.getInstance().collection("topics")
 
     private val auth = FirebaseAuth.getInstance()
 
-    private var notEmptyTopicsForPostsList = mutableListOf<Topic>()
     val notEmptyTopicsForPosts = MutableLiveData<List<Topic>>()
         get() {
-            if (notEmptyTopicsForPostsList.isEmpty())
-                ref.whereGreaterThan("posts_count", empty).addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
-                    notEmptyTopicsForPostsList = snapshot.topicsForPosts
-                    field.value = snapshot.topicsForPosts
-                }
+            notEmptyTopicsForPosts.value?.let {
+                if (it.isEmpty())
+                    ref.whereGreaterThan("posts_count", empty).addSimpleAndSafeSnapshotListener(
+                        tag,
+                        auth
+                    ) { snapshot, _ ->
+                        field.value = snapshot.topicsForPosts
+                    }
+            }
             return field
         }
 
-    private var notEmptyTopicsForUsersList = mutableListOf<Topic>()
     val notEmptyTopicsForUsers = MutableLiveData<List<Topic>>()
         get() {
-            if (notEmptyTopicsForUsersList.isEmpty())
-                ref.whereGreaterThan("users_count", empty).addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
-                    notEmptyTopicsForUsersList = snapshot.topicsForUsers
-                    field.value = snapshot.topicsForUsers
-                }
+            notEmptyTopicsForUsers.value?.let {
+                if (it.isEmpty())
+                    ref.whereGreaterThan("users_count", empty).addSimpleAndSafeSnapshotListener(
+                        tag,
+                        auth
+                    ) { snapshot, _ ->
+                        field.value = snapshot.topicsForUsers
+                    }
+            }
             return field
         }
 
-    private var topicsList = mutableListOf<Topic>()
     val topics = MutableLiveData<List<Topic>>()
         get() {
-            if (topicsList.isEmpty())
-                ref.orderBy("title", Query.Direction.ASCENDING).addSimpleAndSafeSnapshotListener(
-                    tag,
-                    auth
-                ) { snapshot, _ ->
-                    topicsList = snapshot.topicsForPosts
-                    field.value = snapshot.topicsForPosts
-                }
+            topics.value?.let {
+                if (it.isEmpty())
+                    ref.orderBy("title", Query.Direction.ASCENDING).addSimpleAndSafeSnapshotListener(
+                        tag,
+                        auth
+                    ) { snapshot, _ ->
+                        field.value = snapshot.topicsForPosts
+                    }
+            }
             return field
         }
 

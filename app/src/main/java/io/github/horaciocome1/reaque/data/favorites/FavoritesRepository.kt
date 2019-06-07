@@ -1,7 +1,7 @@
 package io.github.horaciocome1.reaque.data.favorites
 
-import io.github.horaciocome1.reaque.data.posts.Post
-import io.github.horaciocome1.reaque.data.users.User
+import io.github.horaciocome1.reaque.data._posts.Post
+import io.github.horaciocome1.reaque.data._users.User
 
 class FavoritesRepository private constructor(private val service: FavoritesWebService) {
 

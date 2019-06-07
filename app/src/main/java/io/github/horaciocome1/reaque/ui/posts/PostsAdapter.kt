@@ -19,7 +19,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import io.github.horaciocome1.reaque.data.posts.Post
+import io.github.horaciocome1.reaque.data._posts.Post
 import io.github.horaciocome1.reaque.databinding.ItemPostBinding
 
 class PostsAdapter(private val list: List<Post>)

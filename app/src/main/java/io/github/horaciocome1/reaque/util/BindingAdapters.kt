@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
+import io.github.horaciocome1.reaque.data._posts.Post
+import io.github.horaciocome1.reaque.data._users.User
 import io.github.horaciocome1.reaque.data.notifications.Notification
-import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
-import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.ui.notifications.NotificationsAdapter
 import io.github.horaciocome1.reaque.ui.notifications.NotificationsFragmentDirections
 import io.github.horaciocome1.reaque.ui.posts.PostsAdapter

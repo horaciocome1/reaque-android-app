@@ -19,12 +19,12 @@ import io.github.horaciocome1.reaque.data.favorites.FavoritesWebService
 import io.github.horaciocome1.reaque.data.media.ImageUploaderWebService
 import io.github.horaciocome1.reaque.data.notifications.NotificationsWebService
 import io.github.horaciocome1.reaque.data.posts.PostsWebService
-import io.github.horaciocome1.reaque.data.topics.TopicsWebService
+import io.github.horaciocome1.reaque.data.topics.TopicsService
 import io.github.horaciocome1.reaque.data.users.UsersWebService
 
 class Database private constructor() {
 
-    var topicsWebService = TopicsWebService()
+    var topicsWebService = TopicsService()
     var usersWebService = UsersWebService()
     var postsWebService = PostsWebService()
     var notificationsWebService = NotificationsWebService()

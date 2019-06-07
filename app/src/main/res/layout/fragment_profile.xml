@@ -25,15 +25,15 @@
 
         <import type="java.util.List" />
 
-        <import type="io.github.horaciocome1.reaque.data.posts.Post" />
+        <import type="io.github.horaciocome1.reaque.data._posts.Post" />
 
         <variable
             name="posts"
-            type="List&lt;Post&gt;" />
+            type="io.github.horaciocome1.reaque.data._posts.Post" />
 
         <variable
             name="user"
-            type="io.github.horaciocome1.reaque.data.users.User" />
+            type="io.github.horaciocome1.reaque.data._users.User" />
 
         <variable
             name="viewmodel"

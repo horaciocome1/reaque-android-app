@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 Horácio Flávio Comé Júnior
+ *    Copyright 2018 Horácio Flávio Comé Júnior
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -13,25 +13,17 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.data.posts
+package io.github.horaciocome1.reaque.data._users
 
-import com.google.firebase.Timestamp
-import io.github.horaciocome1.reaque.data.topics.Topic
-import io.github.horaciocome1.reaque.data.users.User
-import io.github.horaciocome1.reaque.util.string
+data class User(var id: String) {
 
-data class Post(var id: String) {
-
-    var title = ""
-    var date = ""
-    var user = User("")
+    var name = ""
+    var bio = ""
     var pic = ""
-    var message = ""
-    var topic = Topic("")
-    var timestamp = Timestamp(0, 0)
-        set(value) {
-            date = value.string
-            field = value
-        }
+    var address = ""
+    var email = ""
+    var since = ""
+    var postsCount = ""
+    var favoriteForCount = ""
 
 }

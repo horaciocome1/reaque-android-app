@@ -2,14 +2,12 @@ package io.github.horaciocome1.reaque.util
 
 import android.net.Uri
 import android.util.Log
-import androidx.navigation.NavController
 import com.google.android.gms.tasks.Task
 import com.google.firebase.dynamiclinks.DynamicLink
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
 import com.google.firebase.dynamiclinks.ShortDynamicLink
-import io.github.horaciocome1.reaque.data.posts.Post
+import io.github.horaciocome1.reaque.data._posts.Post
 import io.github.horaciocome1.reaque.ui.MainActivity
-import io.github.horaciocome1.reaque.ui.posts.PostsFragmentDirections
 
 fun FirebaseDynamicLinks.buildShortDynamicLink(post: Post): Task<ShortDynamicLink> {
     return createDynamicLink()

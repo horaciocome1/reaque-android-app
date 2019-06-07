@@ -16,6 +16,7 @@
 package io.github.horaciocome1.reaque.data.users
 
 import androidx.lifecycle.LiveData
+import io.github.horaciocome1.reaque.data._users.User
 import io.github.horaciocome1.reaque.data.topics.Topic
 
 class UsersRepository private constructor(private val service: UsersWebService) {

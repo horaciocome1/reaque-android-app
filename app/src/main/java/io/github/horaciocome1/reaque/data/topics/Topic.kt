@@ -19,7 +19,6 @@ data class Topic(var id: String) {
 
     var title = ""
     var pic = ""
-    var description = ""
     var contentCount = ""
 
 }

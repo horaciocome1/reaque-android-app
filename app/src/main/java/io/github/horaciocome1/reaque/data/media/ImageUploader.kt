@@ -16,7 +16,7 @@
 package io.github.horaciocome1.reaque.data.media
 
 import android.net.Uri
-import io.github.horaciocome1.reaque.data.posts.Post
+import io.github.horaciocome1.reaque.data._posts.Post
 
 class ImageUploader {
 

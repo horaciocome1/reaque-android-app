@@ -23,7 +23,7 @@
 
         <import type="io.github.horaciocome1.reaque.data.topics.Topic" />
 
-        <import type="io.github.horaciocome1.reaque.data.posts.Post" />
+        <import type="io.github.horaciocome1.reaque.data._posts.Post" />
 
         <import type="android.content.res.Configuration" />
 
@@ -37,7 +37,7 @@
 
         <variable
             name="posts"
-            type="List&lt;Post&gt;" />
+            type="io.github.horaciocome1.reaque.data._posts.Post" />
 
     </data>
 
