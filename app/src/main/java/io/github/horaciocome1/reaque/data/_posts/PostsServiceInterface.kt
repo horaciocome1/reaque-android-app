@@ -2,8 +2,8 @@ package io.github.horaciocome1.reaque.data._posts
 
 import androidx.lifecycle.LiveData
 import com.google.firebase.firestore.DocumentReference
+import io.github.horaciocome1.reaque.data._topics.Topic
 import io.github.horaciocome1.reaque.data._users.User
-import io.github.horaciocome1.reaque.data.topics.Topic
 
 interface PostsServiceInterface {
 

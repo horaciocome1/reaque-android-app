@@ -13,7 +13,7 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.data.media
+package io.github.horaciocome1.reaque.data._media
 
 import android.net.Uri
 import com.google.android.gms.tasks.Continuation

@@ -4,10 +4,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
+import io.github.horaciocome1.reaque.data._bookmarks.Bookmark
 import io.github.horaciocome1.reaque.data._posts.Post
+import io.github.horaciocome1.reaque.data._topics.Topic
 import io.github.horaciocome1.reaque.data._users.User
 import io.github.horaciocome1.reaque.data.notifications.Notification
-import io.github.horaciocome1.reaque.data.topics.Topic
 
 val QuerySnapshot.topicsForPosts: MutableList<Topic>
     get() {
@@ -56,6 +57,27 @@ val QuerySnapshot.notifications: MutableList<Notification>
             list.add(doc.notification)
             list.sortByDescending { it.timestamp }
         }
+        return list
+    }
+
+val QuerySnapshot.bookmarks: MutableList<Bookmark>
+    get() {
+        val list = mutableListOf<Bookmark>()
+        forEach { list.add(it.bookmark) }
+        return list
+    }
+
+val QuerySnapshot.subscriptions: MutableList<User>
+    get() {
+        val list = mutableListOf<User>()
+        forEach { list.add(it.subscribed) }
+        return list
+    }
+
+val QuerySnapshot.subscribers: MutableList<User>
+    get() {
+        val list = mutableListOf<User>()
+        forEach { list.add(it.subscriber) }
         return list
     }
 

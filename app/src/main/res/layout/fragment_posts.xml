@@ -21,7 +21,7 @@
 
         <import type="java.util.List" />
 
-        <import type="io.github.horaciocome1.reaque.data.topics.Topic" />
+        <import type="io.github.horaciocome1.reaque.data._topics.Topic" />
 
         <import type="io.github.horaciocome1.reaque.data._posts.Post" />
 

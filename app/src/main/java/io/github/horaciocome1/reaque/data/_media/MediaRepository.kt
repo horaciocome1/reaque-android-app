@@ -13,16 +13,23 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.data.media
+package io.github.horaciocome1.reaque.data._media
 
-import android.net.Uri
-import io.github.horaciocome1.reaque.data._posts.Post
+class MediaRepository private constructor(private val webservice: ImageUploaderWebService) {
 
-class ImageUploader {
+    fun uploadImage(uploader: ImageUploader) = webservice.upload(uploader)
 
-    var imageUri = Uri.EMPTY!!
-    var post = Post("")
-    var onSuccessListener = { _: String -> Unit }
-    var onFailureListener = { }
+    companion object {
+
+        @Volatile
+        private var instance: MediaRepository? = null
+
+        fun getInstance(webservice: ImageUploaderWebService) = instance ?: synchronized(this) {
+            instance ?: MediaRepository(webservice).also {
+                instance = it
+            }
+        }
+
+    }
 
 }

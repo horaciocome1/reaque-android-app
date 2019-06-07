@@ -1,9 +1,9 @@
 package io.github.horaciocome1.reaque.util
 
 import io.github.horaciocome1.reaque.data._posts.Post
+import io.github.horaciocome1.reaque.data._topics.Topic
 import io.github.horaciocome1.reaque.data._users.User
 import io.github.horaciocome1.reaque.data.notifications.Notification
-import io.github.horaciocome1.reaque.data.topics.Topic
 
 val List<Any>.isListOfTopics: Boolean
     get() {

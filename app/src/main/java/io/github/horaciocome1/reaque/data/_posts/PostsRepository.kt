@@ -1,8 +1,8 @@
 package io.github.horaciocome1.reaque.data._posts
 
 import com.google.firebase.firestore.DocumentReference
+import io.github.horaciocome1.reaque.data._topics.Topic
 import io.github.horaciocome1.reaque.data._users.User
-import io.github.horaciocome1.reaque.data.topics.Topic
 
 class PostsRepository private constructor(private val service: PostsService) : PostsServiceInterface {
 

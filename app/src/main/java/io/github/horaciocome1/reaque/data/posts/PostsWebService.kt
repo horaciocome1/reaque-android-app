@@ -20,8 +20,8 @@ import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import io.github.horaciocome1.reaque.data._posts.Post
+import io.github.horaciocome1.reaque.data._topics.Topic
 import io.github.horaciocome1.reaque.data._users.User
-import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.util.*
 
 class PostsWebService {

@@ -19,7 +19,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import io.github.horaciocome1.reaque.data.topics.Topic
+import io.github.horaciocome1.reaque.data._topics.Topic
 import io.github.horaciocome1.reaque.databinding.ItemTopicBinding
 import io.github.horaciocome1.reaque.databinding.ItemTopicPostingBinding
 

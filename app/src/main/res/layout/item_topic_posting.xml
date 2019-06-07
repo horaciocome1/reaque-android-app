@@ -19,7 +19,7 @@
 
         <variable
             name="topic"
-            type="io.github.horaciocome1.reaque.data.topics.Topic" />
+            type="io.github.horaciocome1.reaque.data._topics.Topic" />
 
     </data>
 

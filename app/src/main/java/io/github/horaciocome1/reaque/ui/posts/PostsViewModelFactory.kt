@@ -17,10 +17,10 @@ package io.github.horaciocome1.reaque.ui.posts
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import io.github.horaciocome1.reaque.data._media.MediaRepository
+import io.github.horaciocome1.reaque.data._topics.TopicsRepository
 import io.github.horaciocome1.reaque.data.favorites.FavoritesRepository
-import io.github.horaciocome1.reaque.data.media.MediaRepository
 import io.github.horaciocome1.reaque.data.posts.PostsRepository
-import io.github.horaciocome1.reaque.data.topics.TopicsRepository
 import io.github.horaciocome1.reaque.data.users.UsersRepository
 
 class PostsViewModelFactory(

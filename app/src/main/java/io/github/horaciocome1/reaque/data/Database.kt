@@ -15,11 +15,11 @@
 
 package io.github.horaciocome1.reaque.data
 
+import io.github.horaciocome1.reaque.data._media.ImageUploaderWebService
+import io.github.horaciocome1.reaque.data._topics.TopicsService
 import io.github.horaciocome1.reaque.data.favorites.FavoritesWebService
-import io.github.horaciocome1.reaque.data.media.ImageUploaderWebService
 import io.github.horaciocome1.reaque.data.notifications.NotificationsWebService
 import io.github.horaciocome1.reaque.data.posts.PostsWebService
-import io.github.horaciocome1.reaque.data.topics.TopicsService
 import io.github.horaciocome1.reaque.data.users.UsersWebService
 
 class Database private constructor() {

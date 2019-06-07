@@ -1,6 +1,6 @@
 package io.github.horaciocome1.reaque.data._users
 
-import io.github.horaciocome1.reaque.data.topics.Topic
+import io.github.horaciocome1.reaque.data._topics.Topic
 
 class UsersRepository private constructor(private val service: UsersService) : UsersServiceInterface {
 

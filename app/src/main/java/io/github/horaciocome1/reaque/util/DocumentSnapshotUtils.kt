@@ -20,10 +20,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
+import io.github.horaciocome1.reaque.data._bookmarks.Bookmark
 import io.github.horaciocome1.reaque.data._posts.Post
+import io.github.horaciocome1.reaque.data._topics.Topic
 import io.github.horaciocome1.reaque.data._users.User
 import io.github.horaciocome1.reaque.data.notifications.Notification
-import io.github.horaciocome1.reaque.data.topics.Topic
 
 val DocumentSnapshot.user: User
     get() = User(id).apply {
@@ -79,6 +80,33 @@ val DocumentSnapshot.notification: Notification
         isPost = this@notification["post"].toString().toBoolean()
         isUser = this@notification["user"].toString().toBoolean()
         contentId = this@notification["content_id"].toString()
+    }
+
+val DocumentSnapshot.bookmark: Bookmark
+    get() = Bookmark(id).apply {
+        post.apply {
+            id = this@bookmark["post.id"].toString()
+            title = this@bookmark["post.title"].toString()
+            pic = this@bookmark["post.pic"].toString()
+        }
+        user.apply {
+            id = this@bookmark["user.id"].toString()
+            name = this@bookmark["user.name"].toString()
+        }
+    }
+
+val DocumentSnapshot.subscribed: User
+    get() = User(id).apply {
+        id = this@subscribed["subscribed.id"].toString()
+        name = this@subscribed["subscribed.name"].toString()
+        pic = this@subscribed["subscribed.pic"].toString()
+    }
+
+val DocumentSnapshot.subscriber: User
+    get() = User(id).apply {
+        id = this@subscriber["subscriber.id"].toString()
+        name = this@subscriber["subscriber.name"].toString()
+        pic = this@subscriber["subscriber.pic"].toString()
     }
 
 fun DocumentReference.addSimpleAndSafeSnapshotListener(

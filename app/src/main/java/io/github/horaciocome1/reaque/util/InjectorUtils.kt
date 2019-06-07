@@ -16,11 +16,11 @@
 package io.github.horaciocome1.reaque.util
 
 import io.github.horaciocome1.reaque.data.Database
+import io.github.horaciocome1.reaque.data._media.MediaRepository
+import io.github.horaciocome1.reaque.data._topics.TopicsRepository
 import io.github.horaciocome1.reaque.data.favorites.FavoritesRepository
-import io.github.horaciocome1.reaque.data.media.MediaRepository
 import io.github.horaciocome1.reaque.data.notifications.NotificationsRepository
 import io.github.horaciocome1.reaque.data.posts.PostsRepository
-import io.github.horaciocome1.reaque.data.topics.TopicsRepository
 import io.github.horaciocome1.reaque.data.users.UsersRepository
 import io.github.horaciocome1.reaque.ui.more.MoreViewModelFactory
 import io.github.horaciocome1.reaque.ui.notifications.NotificationsViewModelFactory

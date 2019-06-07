@@ -13,12 +13,16 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.data.topics
+package io.github.horaciocome1.reaque.data._media
 
-data class Topic(var id: String) {
+import android.net.Uri
+import io.github.horaciocome1.reaque.data._posts.Post
 
-    var title = ""
-    var pic = ""
-    var contentCount = ""
+class ImageUploader {
+
+    var imageUri = Uri.EMPTY!!
+    var post = Post("")
+    var onSuccessListener = { _: String -> Unit }
+    var onFailureListener = { }
 
 }
