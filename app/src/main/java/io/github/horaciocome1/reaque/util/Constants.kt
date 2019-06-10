@@ -39,5 +39,8 @@ object Constants {
 
     // strings
     const val LANDING_PAGE = "https://reaque.firebaseapp.com"
+    const val BOOKMARKS_REQUEST = "bookmarks"
+    const val SUBSCRIPTIONS_REQUEST = "subscriptions"
+    const val SUBSCRIBERS_REQUEST = "subscribers"
 
 }

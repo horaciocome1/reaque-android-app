@@ -20,11 +20,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
-import io.github.horaciocome1.reaque.data._bookmarks.Bookmark
 import io.github.horaciocome1.reaque.data._posts.Post
 import io.github.horaciocome1.reaque.data._topics.Topic
 import io.github.horaciocome1.reaque.data._users.User
-import io.github.horaciocome1.reaque.data.notifications.Notification
 
 val DocumentSnapshot.user: User
     get() = User(id).apply {
@@ -70,25 +68,11 @@ val DocumentSnapshot.post: Post
         }
     }
 
-val DocumentSnapshot.notification: Notification
-    get() = Notification(id).apply {
-        message = this@notification["message"].toString()
-        val stamp = this@notification["date"]
-        if (stamp is Timestamp)
-            timestamp = stamp
-        pic = this@notification["pic"].toString()
-        isPost = this@notification["post"].toString().toBoolean()
-        isUser = this@notification["user"].toString().toBoolean()
-        contentId = this@notification["content_id"].toString()
-    }
-
-val DocumentSnapshot.bookmark: Bookmark
-    get() = Bookmark(id).apply {
-        post.apply {
-            id = this@bookmark["post.id"].toString()
-            title = this@bookmark["post.title"].toString()
-            pic = this@bookmark["post.pic"].toString()
-        }
+val DocumentSnapshot.bookmark: Post
+    get() = Post(id).apply {
+        id = this@bookmark["post.id"].toString()
+        title = this@bookmark["post.title"].toString()
+        pic = this@bookmark["post.pic"].toString()
         user.apply {
             id = this@bookmark["user.id"].toString()
             name = this@bookmark["user.name"].toString()

@@ -9,7 +9,7 @@ interface BookmarksServiceInterface {
 
     fun unBookmark(post: Post, onSuccessListener: (Void) -> Unit)
 
-    fun get(): LiveData<List<Bookmark>>
+    fun get(): LiveData<List<Post>>
 
     fun isBookmarked(post: Post): LiveData<Boolean>
 

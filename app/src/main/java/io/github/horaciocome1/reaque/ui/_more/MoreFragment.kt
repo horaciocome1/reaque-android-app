@@ -13,7 +13,7 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.ui.more
+package io.github.horaciocome1.reaque.ui._more
 
 import android.content.Intent
 import android.net.Uri
@@ -22,12 +22,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.databinding.FragmentMoreBinding
+import io.github.horaciocome1.reaque.util.addSimpleAuthStateListener
 import io.github.horaciocome1.reaque.util.getEmailIntent
+import io.github.horaciocome1.reaque.util.user
 import kotlinx.android.synthetic.main.fragment_more.*
 
 class MoreFragment : Fragment() {
@@ -56,9 +57,9 @@ class MoreFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        viewModel.me.observe(this, Observer { user ->
-            binding.user = user
-        })
+        auth.addSimpleAuthStateListener {
+            binding.user = it.user
+        }
     }
 
     private fun openLinks(view: View) {

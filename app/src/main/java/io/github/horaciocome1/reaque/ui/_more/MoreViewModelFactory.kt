@@ -13,16 +13,13 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.data._storage
+package io.github.horaciocome1.reaque.ui._more
 
-import android.net.Uri
-import io.github.horaciocome1.reaque.data._posts.Post
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 
-class ImageUploader {
+class MoreViewModelFactory(private val repository: UsersRepository) : ViewModelProvider.NewInstanceFactory() {
 
-    var imageUri = Uri.EMPTY!!
-    var post = Post("")
-    var onSuccessListener = { _: String -> Unit }
-    var onFailureListener = { }
-
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : ViewModel?> create(modelClass: Class<T>) = MoreViewModel(repository) as T
 }

@@ -13,7 +13,7 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.ui.settings
+package io.github.horaciocome1.reaque.ui._settings
 
 import android.content.Intent
 import android.net.Uri
@@ -60,7 +60,7 @@ class SettingsFragment : Fragment() {
 
     private fun signOut() {
         FirebaseAuth.getInstance().signOut()
-        activity.run {
+        activity?.run {
             if (this is MainActivity)
                 finish()
         }

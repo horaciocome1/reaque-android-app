@@ -64,18 +64,18 @@
     </fragment>
     <fragment
         android:id="@+id/destination_viewer"
-        android:name="io.github.horaciocome1.reaque.ui.imageviewer.ViewerFragment">
+        android:name="io.github.horaciocome1.reaque.ui._imageviewer.ViewerFragment">
         <argument
             android:name="url"
             app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/destination_settings"
-        android:name="io.github.horaciocome1.reaque.ui.settings.SettingsFragment"
+        android:name="io.github.horaciocome1.reaque.ui._settings.SettingsFragment"
         android:label="@string/settings" />
     <fragment
         android:id="@+id/destination_more"
-        android:name="io.github.horaciocome1.reaque.ui.more.MoreFragment"
+        android:name="io.github.horaciocome1.reaque.ui._more.MoreFragment"
         android:label="@string/more">
         <action
             android:id="@+id/action_open_profile_from_more"
@@ -159,6 +159,6 @@
         android:label="@string/edit" />
     <fragment
         android:id="@+id/destination_sign_in"
-        android:name="io.github.horaciocome1.reaque.ui.signin.SignInFragment"
+        android:name="io.github.horaciocome1.reaque.ui._signin.SignInFragment"
         android:label="SignInFragment" />
 </navigation>

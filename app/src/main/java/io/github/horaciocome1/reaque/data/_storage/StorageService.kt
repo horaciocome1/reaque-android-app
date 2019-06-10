@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
+import io.github.horaciocome1.reaque.data._topics.Topic
 import io.github.horaciocome1.reaque.util.onUploadingFailed
 
 class StorageService {
@@ -28,23 +29,18 @@ class StorageService {
 
     private val storage = FirebaseStorage.getInstance()
 
-    fun upload(uploader: ImageUploader) {
-        uploader.run {
-            val ref = storage.reference.child("images/${post.topic.id}/${post.id}-${imageUri.lastPathSegment}")
-            ref.putFile(imageUri).continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
-                if (!task.isSuccessful)
-                    task.exception?.let {
-                        throw it
-                    }
-                return@Continuation ref.downloadUrl
-            })
-                .addOnSuccessListener {
-                    onSuccessListener(it.toString())
+    fun upload(imageUri: Uri, topic: Topic, onSuccessListener: (String) -> Unit) {
+        val ref = storage.reference.child("images/${topic.id}/${imageUri.lastPathSegment}")
+        ref.putFile(imageUri).continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+            if (!task.isSuccessful)
+                task.exception?.let {
+                    throw it
                 }
-                .addOnFailureListener {
-                    onUploadingFailed(tag)
-                    onFailureListener()
-                }
+            return@Continuation ref.downloadUrl
+        }).addOnSuccessListener {
+            onSuccessListener(it.toString())
+        }.addOnFailureListener {
+            onUploadingFailed(tag)
         }
     }
 

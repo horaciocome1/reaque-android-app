@@ -13,7 +13,7 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.ui.more
+package io.github.horaciocome1.reaque.ui._more
 
 import android.view.View
 import androidx.lifecycle.ViewModel
@@ -21,7 +21,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import io.github.horaciocome1.reaque.data._users.User
-import io.github.horaciocome1.reaque.data.users.UsersRepository
 import io.github.horaciocome1.reaque.util.InjectorUtils
 
 val MoreFragment.viewModel: MoreViewModel
@@ -30,19 +29,18 @@ val MoreFragment.viewModel: MoreViewModel
         return ViewModelProviders.of(this, factory).get(MoreViewModel::class.java)
     }
 
-class MoreViewModel(repository: UsersRepository) : ViewModel() {
+class MoreViewModel : ViewModel() {
 
-    val me = repository.me
     private val auth = FirebaseAuth.getInstance()
 
-    fun openEditProfile(view: View) {
+    fun openUpdateUser(view: View) {
         if (auth.currentUser != null) {
             val directions = MoreFragmentDirections.actionOpenEditProfile()
             view.findNavController().navigate(directions)
         }
     }
 
-    fun openPosting(view: View) {
+    fun openCreatePost(view: View) {
         if (auth.currentUser != null) {
             val directions = MoreFragmentDirections.actionOpenPosting()
             view.findNavController().navigate(directions)
@@ -54,7 +52,7 @@ class MoreViewModel(repository: UsersRepository) : ViewModel() {
         view.findNavController().navigate(directions)
     }
 
-    fun openProfile(view: View, user: User) {
+    fun openUserProfile(view: View, user: User) {
         if (auth.currentUser != null) {
             val directions = MoreFragmentDirections.actionOpenProfileFromMore(user.id)
             view.findNavController().navigate(directions)

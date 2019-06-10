@@ -2,7 +2,7 @@ package io.github.horaciocome1.reaque.data._ratings
 
 import io.github.horaciocome1.reaque.data._posts.Post
 
-class RatingRepository private constructor(private val service: RatingsService) : RatingsServiceIntarface {
+class RatingsRepository private constructor(private val service: RatingsService) : RatingsServiceIntarface {
 
     override fun rate(post: Post, value: Int, onSuccessListener: (Void) -> Unit) =
         service.rate(post, value, onSuccessListener)
@@ -10,11 +10,11 @@ class RatingRepository private constructor(private val service: RatingsService) 
     companion object {
 
         @Volatile
-        private var instance: RatingRepository? = null
+        private var instance: RatingsRepository? = null
 
         fun getInstance(service: RatingsService) = instance
             ?: synchronized(this) {
-                instance ?: RatingRepository(service).also { instance = it }
+                instance ?: RatingsRepository(service).also { instance = it }
             }
 
     }

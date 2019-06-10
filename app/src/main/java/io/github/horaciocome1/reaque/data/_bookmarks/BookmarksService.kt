@@ -11,11 +11,11 @@ class BookmarksService : BookmarksServiceInterface {
 
     private val tag = "BookmarksService"
 
-    private val ref = FirebaseFirestore.getInstance().collection("bookmarks")
+    private val ref = FirebaseFirestore.getInstance().collection("posts")
 
     private val auth = FirebaseAuth.getInstance()
 
-    private val bookmarks = MutableLiveData<List<Bookmark>>().apply { value = mutableListOf() }
+    private val posts = MutableLiveData<List<Post>>().apply { value = mutableListOf() }
 
     private val isBookmarked = MutableLiveData<Boolean>().apply { value = false }
 
@@ -35,16 +35,16 @@ class BookmarksService : BookmarksServiceInterface {
         }
     }
 
-    override fun get(): LiveData<List<Bookmark>> {
-        bookmarks.value?.let {
+    override fun get(): LiveData<List<Post>> {
+        posts.value?.let {
             if (it.isEmpty())
                 auth.addSimpleAuthStateListener { user ->
                     ref.whereEqualTo("user.id", user.uid).addSimpleSnapshotListener(tag) { snapshot ->
-                        bookmarks.value = snapshot.bookmarks
+                        posts.value = snapshot.bookmarks
                     }
                 }
         }
-        return bookmarks
+        return posts
     }
 
     override fun isBookmarked(post: Post): LiveData<Boolean> {

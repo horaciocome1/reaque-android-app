@@ -26,7 +26,7 @@
 
         <variable
             name="viewmodel"
-            type="io.github.horaciocome1.reaque.ui.more.MoreViewModel" />
+            type="io.github.horaciocome1.reaque.ui._more.MoreViewModel" />
 
     </data>
 

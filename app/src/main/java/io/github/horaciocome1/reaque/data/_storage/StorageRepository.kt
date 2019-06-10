@@ -15,9 +15,13 @@
 
 package io.github.horaciocome1.reaque.data._storage
 
+import android.net.Uri
+import io.github.horaciocome1.reaque.data._topics.Topic
+
 class StorageRepository private constructor(private val webservice: StorageService) {
 
-    fun uploadImage(uploader: ImageUploader) = webservice.upload(uploader)
+    fun uploadImage(imageUri: Uri, topic: Topic, onSuccessListener: (String) -> Unit) =
+        webservice.upload(imageUri, topic, onSuccessListener)
 
     companion object {
 

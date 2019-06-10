@@ -39,7 +39,7 @@ class UsersService : UsersServiceInterface {
     }
 
     override fun get(topic: Topic): LiveData<List<User>> {
-        if (topicId != topic.id)
+        if (topic.id != topicId)
             ref.whereEqualTo("topic.id", topic.id).addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
                 users.value = snapshot.users
             }
