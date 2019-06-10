@@ -21,9 +21,9 @@ import androidx.databinding.Bindable
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
-import io.github.horaciocome1.reaque.data._media.ImageUploader
-import io.github.horaciocome1.reaque.data._media.MediaRepository
 import io.github.horaciocome1.reaque.data._posts.Post
+import io.github.horaciocome1.reaque.data._storage.ImageUploader
+import io.github.horaciocome1.reaque.data._storage.StorageRepository
 import io.github.horaciocome1.reaque.data._topics.Topic
 import io.github.horaciocome1.reaque.data._topics.TopicsRepository
 import io.github.horaciocome1.reaque.data.favorites.FavoritesRepository
@@ -53,7 +53,7 @@ val PostingFragment.viewModel: PostsViewModel
 class PostsViewModel(
     private val postsRepository: PostsRepository,
     topicsRepository: TopicsRepository,
-    private val mediaRepository: MediaRepository,
+    private val storageRepository: StorageRepository,
     private val usersRepository: UsersRepository,
     private val favoritesRepository: FavoritesRepository
 ) : ObservableViewModel() {
@@ -100,7 +100,7 @@ class PostsViewModel(
                 // caso o upload falhe
             }
         }
-        mediaRepository.uploadImage(uploader)
+        storageRepository.uploadImage(uploader)
         return this
     }
 

@@ -13,19 +13,19 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.data._media
+package io.github.horaciocome1.reaque.data._storage
 
-class MediaRepository private constructor(private val webservice: ImageUploaderWebService) {
+class StorageRepository private constructor(private val webservice: StorageService) {
 
     fun uploadImage(uploader: ImageUploader) = webservice.upload(uploader)
 
     companion object {
 
         @Volatile
-        private var instance: MediaRepository? = null
+        private var instance: StorageRepository? = null
 
-        fun getInstance(webservice: ImageUploaderWebService) = instance ?: synchronized(this) {
-            instance ?: MediaRepository(webservice).also {
+        fun getInstance(webservice: StorageService) = instance ?: synchronized(this) {
+            instance ?: StorageRepository(webservice).also {
                 instance = it
             }
         }

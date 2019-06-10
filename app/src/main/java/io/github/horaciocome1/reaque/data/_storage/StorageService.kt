@@ -13,7 +13,7 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.data._media
+package io.github.horaciocome1.reaque.data._storage
 
 import android.net.Uri
 import com.google.android.gms.tasks.Continuation
@@ -22,9 +22,9 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import io.github.horaciocome1.reaque.util.onUploadingFailed
 
-class ImageUploaderWebService {
+class StorageService {
 
-    private val tag = "ImageUploaderWebService"
+    private val tag = "StorageService"
 
     private val storage = FirebaseStorage.getInstance()
 

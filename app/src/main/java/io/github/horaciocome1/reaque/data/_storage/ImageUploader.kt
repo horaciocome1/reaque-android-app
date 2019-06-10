@@ -13,7 +13,7 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.data._media
+package io.github.horaciocome1.reaque.data._storage
 
 import android.net.Uri
 import io.github.horaciocome1.reaque.data._posts.Post
