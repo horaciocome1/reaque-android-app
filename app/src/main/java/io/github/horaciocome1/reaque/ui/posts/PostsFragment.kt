@@ -21,7 +21,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import io.github.horaciocome1.reaque.data._topics.Topic
+import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.databinding.FragmentPostsBinding
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
 import kotlinx.android.synthetic.main.fragment_posts.*

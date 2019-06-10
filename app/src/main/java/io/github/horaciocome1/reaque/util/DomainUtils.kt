@@ -17,13 +17,13 @@ package io.github.horaciocome1.reaque.util
 
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FieldValue
-import io.github.horaciocome1.reaque.data._bookmarks.Bookmark
-import io.github.horaciocome1.reaque.data._posts.Post
-import io.github.horaciocome1.reaque.data._ratings.Rating
-import io.github.horaciocome1.reaque.data._readings.Reading
-import io.github.horaciocome1.reaque.data._shares.Share
-import io.github.horaciocome1.reaque.data._subscriptions.Subscription
-import io.github.horaciocome1.reaque.data._users.User
+import io.github.horaciocome1.reaque.data.bookmarks.Bookmark
+import io.github.horaciocome1.reaque.data.posts.Post
+import io.github.horaciocome1.reaque.data.ratings.Rating
+import io.github.horaciocome1.reaque.data.readings.Reading
+import io.github.horaciocome1.reaque.data.shares.Share
+import io.github.horaciocome1.reaque.data.subscriptions.Subscription
+import io.github.horaciocome1.reaque.data.users.User
 
 val Post.map: Map<String, Any>
     get() = mapOf(

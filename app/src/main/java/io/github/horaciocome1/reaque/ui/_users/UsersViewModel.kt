@@ -6,10 +6,10 @@ import androidx.databinding.Bindable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
-import io.github.horaciocome1.reaque.data._subscriptions.SubscriptionsRepository
-import io.github.horaciocome1.reaque.data._topics.Topic
-import io.github.horaciocome1.reaque.data._users.User
-import io.github.horaciocome1.reaque.data._users.UsersRepository
+import io.github.horaciocome1.reaque.data.subscriptions.SubscriptionsRepository
+import io.github.horaciocome1.reaque.data.topics.Topic
+import io.github.horaciocome1.reaque.data.users.User
+import io.github.horaciocome1.reaque.data.users.UsersRepository
 import io.github.horaciocome1.reaque.util.Constants
 import io.github.horaciocome1.reaque.util.ObservableViewModel
 

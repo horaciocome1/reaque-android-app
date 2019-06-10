@@ -24,7 +24,7 @@
 
         <variable
             name="post"
-            type="io.github.horaciocome1.reaque.data._posts.Post" />
+            type="io.github.horaciocome1.reaque.data.posts.Post" />
 
         <variable
             name="viewmodel"

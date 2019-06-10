@@ -20,7 +20,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
-import io.github.horaciocome1.reaque.data._users.User
+import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.util.InjectorUtils
 
 val MoreFragment.viewModel: MoreViewModel

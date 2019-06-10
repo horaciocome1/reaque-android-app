@@ -15,16 +15,16 @@
 
 package io.github.horaciocome1.reaque.data
 
-import io.github.horaciocome1.reaque.data._bookmarks.BookmarksService
-import io.github.horaciocome1.reaque.data._feeds.FeedsService
-import io.github.horaciocome1.reaque.data._posts.PostsService
-import io.github.horaciocome1.reaque.data._ratings.RatingsService
-import io.github.horaciocome1.reaque.data._readings.ReadingsService
-import io.github.horaciocome1.reaque.data._shares.SharesService
-import io.github.horaciocome1.reaque.data._storage.StorageService
-import io.github.horaciocome1.reaque.data._subscriptions.SubscriptionsService
-import io.github.horaciocome1.reaque.data._topics.TopicsService
-import io.github.horaciocome1.reaque.data._users.UsersService
+import io.github.horaciocome1.reaque.data.bookmarks.BookmarksService
+import io.github.horaciocome1.reaque.data.feeds.FeedsService
+import io.github.horaciocome1.reaque.data.posts.PostsService
+import io.github.horaciocome1.reaque.data.ratings.RatingsService
+import io.github.horaciocome1.reaque.data.readings.ReadingsService
+import io.github.horaciocome1.reaque.data.shares.SharesService
+import io.github.horaciocome1.reaque.data.storage.StorageService
+import io.github.horaciocome1.reaque.data.subscriptions.SubscriptionsService
+import io.github.horaciocome1.reaque.data.topics.TopicsService
+import io.github.horaciocome1.reaque.data.users.UsersService
 
 class Database private constructor() {
 

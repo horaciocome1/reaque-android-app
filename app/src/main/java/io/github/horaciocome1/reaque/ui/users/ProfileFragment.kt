@@ -25,7 +25,7 @@ import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
 import io.github.horaciocome1.reaque.R
-import io.github.horaciocome1.reaque.data._users.User
+import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.databinding.FragmentProfileBinding
 import io.github.horaciocome1.reaque.util.getEmailIntent
 import kotlinx.android.synthetic.main.fragment_profile.*

@@ -19,7 +19,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import io.github.horaciocome1.reaque.data._users.User
+import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.databinding.ItemUserBinding
 
 class UsersAdapter(private val list: List<User>) : RecyclerView.Adapter<UsersAdapter.ViewHolder>() {

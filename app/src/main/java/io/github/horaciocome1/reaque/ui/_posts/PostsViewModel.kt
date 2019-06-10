@@ -8,16 +8,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
-import io.github.horaciocome1.reaque.data._bookmarks.BookmarksRepository
-import io.github.horaciocome1.reaque.data._posts.Post
-import io.github.horaciocome1.reaque.data._posts.PostsRepository
-import io.github.horaciocome1.reaque.data._ratings.RatingsRepository
-import io.github.horaciocome1.reaque.data._readings.ReadingsRepository
-import io.github.horaciocome1.reaque.data._shares.SharesRepository
-import io.github.horaciocome1.reaque.data._storage.StorageRepository
-import io.github.horaciocome1.reaque.data._topics.Topic
-import io.github.horaciocome1.reaque.data._topics.TopicsRepository
-import io.github.horaciocome1.reaque.data._users.User
+import io.github.horaciocome1.reaque.data.bookmarks.BookmarksRepository
+import io.github.horaciocome1.reaque.data.posts.Post
+import io.github.horaciocome1.reaque.data.posts.PostsRepository
+import io.github.horaciocome1.reaque.data.ratings.RatingsRepository
+import io.github.horaciocome1.reaque.data.readings.ReadingsRepository
+import io.github.horaciocome1.reaque.data.shares.SharesRepository
+import io.github.horaciocome1.reaque.data.storage.StorageRepository
+import io.github.horaciocome1.reaque.data.topics.Topic
+import io.github.horaciocome1.reaque.data.topics.TopicsRepository
+import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.util.Constants
 import io.github.horaciocome1.reaque.util.ObservableViewModel
 

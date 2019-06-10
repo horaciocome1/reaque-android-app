@@ -20,9 +20,9 @@
 
         <import type="java.util.List" />
 
-        <import type="io.github.horaciocome1.reaque.data._topics.Topic" />
+        <import type="io.github.horaciocome1.reaque.data.topics.Topic" />
 
-        <import type="io.github.horaciocome1.reaque.data._users.User" />
+        <import type="io.github.horaciocome1.reaque.data.users.User" />
 
         <import type="android.content.res.Configuration" />
 
@@ -36,7 +36,7 @@
 
         <variable
             name="users"
-            type="io.github.horaciocome1.reaque.data._users.User" />
+            type="io.github.horaciocome1.reaque.data.users.User" />
 
     </data>
 

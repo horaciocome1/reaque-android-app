@@ -6,7 +6,7 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.dynamiclinks.DynamicLink
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
 import com.google.firebase.dynamiclinks.ShortDynamicLink
-import io.github.horaciocome1.reaque.data._posts.Post
+import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.ui.MainActivity
 
 fun FirebaseDynamicLinks.buildShortDynamicLink(post: Post): Task<ShortDynamicLink> {

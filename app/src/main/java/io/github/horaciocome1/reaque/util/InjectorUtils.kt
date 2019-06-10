@@ -16,8 +16,8 @@
 package io.github.horaciocome1.reaque.util
 
 import io.github.horaciocome1.reaque.data.Database
-import io.github.horaciocome1.reaque.data._storage.StorageRepository
-import io.github.horaciocome1.reaque.data._topics.TopicsRepository
+import io.github.horaciocome1.reaque.data.storage.StorageRepository
+import io.github.horaciocome1.reaque.data.topics.TopicsRepository
 import io.github.horaciocome1.reaque.ui._more.MoreViewModelFactory
 import io.github.horaciocome1.reaque.ui.notifications.NotificationsViewModelFactory
 import io.github.horaciocome1.reaque.ui.posts.PostsViewModelFactory
