@@ -14,11 +14,11 @@ import com.bumptech.glide.request.RequestOptions
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
+import io.github.horaciocome1.reaque.ui._topics.TopicsAdapter
 import io.github.horaciocome1.reaque.ui.notifications.NotificationsAdapter
 import io.github.horaciocome1.reaque.ui.notifications.NotificationsFragmentDirections
 import io.github.horaciocome1.reaque.ui.posts.PostsAdapter
 import io.github.horaciocome1.reaque.ui.posts.PostsFragmentDirections
-import io.github.horaciocome1.reaque.ui.topics.TopicsAdapter
 import io.github.horaciocome1.reaque.ui.users.ProfileFragmentDirections
 import io.github.horaciocome1.reaque.ui.users.UsersAdapter
 import io.github.horaciocome1.reaque.ui.users.UsersFragmentDirections
