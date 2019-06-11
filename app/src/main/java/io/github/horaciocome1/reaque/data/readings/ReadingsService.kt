@@ -1,6 +1,7 @@
 package io.github.horaciocome1.reaque.data.readings
 
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.util.addSimpleAuthStateListener
@@ -14,13 +15,20 @@ class ReadingsService : ReadingsServiceInterface {
     private val auth = FirebaseAuth.getInstance()
 
     override fun read(post: Post) {
-        auth.addSimpleAuthStateListener {
-            val reading = Reading("").apply {
-                this.post = post
-                user = it.user
+        auth.addSimpleAuthStateListener { user ->
+            val id = "${user.uid}_${post.id}"
+            ref.document(id).get().addOnSuccessListener {
+                if (it == null) addToDatabase(post, user)
             }
-            ref.add(reading.map)
         }
+    }
+
+    private fun addToDatabase(post: Post, user: FirebaseUser) {
+        val reading = Reading("").apply {
+            this.post = post
+            this.user = user.user
+        }
+        ref.document("${user.uid}_${post.id}").set(reading.map)
     }
 
 }
