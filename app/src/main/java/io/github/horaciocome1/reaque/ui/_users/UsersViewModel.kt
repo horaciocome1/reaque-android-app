@@ -33,9 +33,9 @@ class UsersViewModel(
         usersRepository.update(user) {
             view.context?.let {
                 Toast.makeText(it, "Profile updated!", Toast.LENGTH_LONG).show()
-                navigateUp(view)
             }
         }
+        navigateUp(view)
     }
 
     fun get(id: String): LiveData<List<User>> {

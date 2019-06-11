@@ -25,7 +25,7 @@ class FeedsService : FeedsServiceInterface {
         posts.value?.let {
             if (it.isEmpty())
                 auth.addSimpleAuthStateListener {
-                    ref.whereEqualTo("user.id", it.uid).limit(20).addSnapshotListener { snapshot, exception ->
+                    ref.whereEqualTo("subscriber.id", it.uid).addSnapshotListener { snapshot, exception ->
                         when {
                             exception != null -> onListeningFailed(tag, exception)
                             snapshot != null -> posts.value = snapshot.posts

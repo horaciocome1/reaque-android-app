@@ -56,10 +56,10 @@ class PostsViewModel(
             postsRepository.create(post) { _ ->
                 view.context?.let {
                     Toast.makeText(it, "Post created.", Toast.LENGTH_LONG).show()
-                    navigateUp(view)
                 }
             }
         }
+        navigateUp(view)
     }
 
     fun get(id: String): LiveData<List<Post>> {
