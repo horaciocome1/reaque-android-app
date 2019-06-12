@@ -16,7 +16,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/destination_notifications"
+        android:id="@+id/destination_feed"
         android:icon="@drawable/outline_whatshot_24"
         android:title="@string/notifications" />
 
@@ -26,7 +26,7 @@
         android:title="@string/explore" />
 
     <item
-        android:id="@+id/destination_users"
+        android:id="@+id/destination_subscriptions"
         android:icon="@drawable/outline_people_outline_24"
         android:title="@string/subscriptions" />
 
