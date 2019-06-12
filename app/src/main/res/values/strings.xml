@@ -68,5 +68,9 @@
     <string name="welcome">Welcome</string>
     <string name="content_description_post_cover_image">Post cover image</string>
     <string name="content_description_user_profile_image">User profile image</string>
+    <string name="my_profile">My profile</string>
+    <string name="my_profile">My profile</string>
+    <string name="subscriptions">Subscriptions</string>
+    <string name="explore">Explore</string>
 
 </resources>

@@ -21,14 +21,14 @@
         android:title="@string/notifications" />
 
     <item
-        android:id="@+id/destination_users"
-        android:icon="@drawable/outline_people_outline_24"
-        android:title="@string/users" />
+        android:id="@+id/destination_explore"
+        android:icon="@drawable/outline_explore_24"
+        android:title="@string/explore" />
 
     <item
-        android:id="@+id/destination_posts"
-        android:icon="@drawable/outline_library_books_24"
-        android:title="@string/posts" />
+        android:id="@+id/destination_users"
+        android:icon="@drawable/outline_people_outline_24"
+        android:title="@string/subscriptions" />
 
     <item
         android:id="@+id/destination_more"
