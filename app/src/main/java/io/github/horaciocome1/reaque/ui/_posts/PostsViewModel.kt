@@ -47,8 +47,6 @@ class PostsViewModel(
 
     val topics = topicsRepository.topics
 
-    private lateinit var posts: LiveData<List<Post>>
-
     fun create(view: View) {
         isCreatingPost.value = true
         storageRepository.uploadImage(imageUri, post.topic) { url ->
@@ -79,10 +77,12 @@ class PostsViewModel(
 
     fun get(post: Post) = postsRepository.get(post)
 
-    fun rate(view: View, post: Post, value: Int) {
+    fun setRate(view: View, post: Post, value: Int) {
         view.isEnabled = false
         ratingsRepository.rate(post, value) { view.isEnabled = true }
     }
+
+    fun getRate(post: Post) = ratingsRepository.get(post)
 
     fun read(post: Post) = readingsRepository.read(post)
 

@@ -32,7 +32,7 @@ import io.github.horaciocome1.reaque.databinding.FragmentPostingBinding
 import io.github.horaciocome1.reaque.util.Constants
 import io.github.horaciocome1.reaque.util.OnFocusChangeListener
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
-import kotlinx.android.synthetic.main.fragment_posting.*
+import kotlinx.android.synthetic.main.fragment_create_post.*
 
 class PostingFragment : Fragment() {
 

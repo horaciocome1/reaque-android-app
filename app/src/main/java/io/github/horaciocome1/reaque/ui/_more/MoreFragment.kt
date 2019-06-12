@@ -29,7 +29,7 @@ import io.github.horaciocome1.reaque.databinding.FragmentMoreBinding
 import io.github.horaciocome1.reaque.util.addSimpleAuthStateListener
 import io.github.horaciocome1.reaque.util.getEmailIntent
 import io.github.horaciocome1.reaque.util.user
-import kotlinx.android.synthetic.main.fragment_more.*
+import kotlinx.android.synthetic.main._fragment_more.*
 
 class MoreFragment : Fragment() {
 

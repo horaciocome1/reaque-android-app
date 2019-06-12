@@ -24,7 +24,7 @@ import androidx.lifecycle.Observer
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.databinding.FragmentPostsBinding
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
-import kotlinx.android.synthetic.main.fragment_posts.*
+import kotlinx.android.synthetic.main._fragment_posts.*
 
 class PostsFragment: Fragment() {
 

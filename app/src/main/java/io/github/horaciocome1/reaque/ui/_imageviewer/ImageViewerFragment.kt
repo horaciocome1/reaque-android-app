@@ -22,7 +22,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import io.github.horaciocome1.reaque.databinding.FragmentImageViewerBinding
-import kotlinx.android.synthetic.main.fragment_image_viewer.*
+import kotlinx.android.synthetic.main._fragment_image_viewer.*
 
 class ViewerFragment: Fragment() {
 

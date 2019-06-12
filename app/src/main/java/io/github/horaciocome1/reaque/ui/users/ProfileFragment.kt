@@ -28,7 +28,7 @@ import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.databinding.FragmentProfileBinding
 import io.github.horaciocome1.reaque.util.getEmailIntent
-import kotlinx.android.synthetic.main.fragment_profile.*
+import kotlinx.android.synthetic.main._fragment_profile.*
 
 class ProfileFragment: Fragment() {
 

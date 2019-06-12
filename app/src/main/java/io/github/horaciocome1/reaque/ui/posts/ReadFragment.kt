@@ -29,7 +29,7 @@ import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.databinding.FragmentReadBinding
 import io.github.horaciocome1.reaque.util.buildShortDynamicLink
-import kotlinx.android.synthetic.main.fragment_read.*
+import kotlinx.android.synthetic.main._fragment_read.*
 
 class ReadFragment: Fragment() {
 
