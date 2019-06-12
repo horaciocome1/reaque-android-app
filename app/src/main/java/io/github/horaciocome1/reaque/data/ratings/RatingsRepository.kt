@@ -7,6 +7,8 @@ class RatingsRepository private constructor(private val service: RatingsService)
     override fun rate(post: Post, value: Int, onSuccessListener: (Void) -> Unit) =
         service.rate(post, value, onSuccessListener)
 
+    override fun get(post: Post) = service.get(post)
+
     companion object {
 
         @Volatile
