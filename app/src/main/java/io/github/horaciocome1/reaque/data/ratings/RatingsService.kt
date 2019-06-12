@@ -18,7 +18,7 @@ class RatingsService : RatingsServiceIntarface {
 
     private val auth = FirebaseAuth.getInstance()
 
-    private val rate = MutableLiveData<Float>().apply { value = 0f }
+    private val rate = MutableLiveData<Float>().apply { value = 1f }
 
     override fun rate(post: Post, value: Int, onSuccessListener: (Void) -> Unit) {
         auth.addSimpleAuthStateListener {
