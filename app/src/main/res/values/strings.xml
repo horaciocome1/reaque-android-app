@@ -66,5 +66,7 @@
     <string name="email_app_not_found">Email app not found.</string>
     <string name="subscribers">Subscribers</string>
     <string name="welcome">Welcome</string>
+    <string name="content_description_post_cover_image">Post cover image</string>
+    <string name="content_description_user_profile_image">User profile image</string>
 
 </resources>
