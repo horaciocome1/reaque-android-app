@@ -23,7 +23,8 @@ data class User(var id: String) {
     var address = ""
     var email = ""
     var since = ""
-    var postsCount = ""
-    var favoriteForCount = ""
+    var posts = ""
+    var subscribers = ""
+    var subscriptions = ""
 
 }

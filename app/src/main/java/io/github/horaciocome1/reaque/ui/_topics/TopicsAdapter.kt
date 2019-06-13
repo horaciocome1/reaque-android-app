@@ -27,7 +27,7 @@ class TopicsAdapter(private val list: List<Topic>) : RecyclerView.Adapter<Topics
 
     private lateinit var binding: ItemTopicBinding
 
-    //    the indicator of last clicked topicForPosts
+    //    the indicator of last clicked topic
     private var indicator: View? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

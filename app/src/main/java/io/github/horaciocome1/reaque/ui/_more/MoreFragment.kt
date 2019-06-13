@@ -29,7 +29,7 @@ import io.github.horaciocome1.reaque.databinding.FragmentMoreBinding
 import io.github.horaciocome1.reaque.util.addSimpleAuthStateListener
 import io.github.horaciocome1.reaque.util.getEmailIntent
 import io.github.horaciocome1.reaque.util.user
-import kotlinx.android.synthetic.main._fragment_more.*
+import kotlinx.android.synthetic.main.fragment_more.*
 
 class MoreFragment : Fragment() {
 
@@ -51,7 +51,7 @@ class MoreFragment : Fragment() {
         feedback_textview.setOnClickListener {
             emailDeveloper()
         }
-        frequently_asked_questions_textview.setOnClickListener(this::openLinks)
+        licenses_textview.setOnClickListener(this::openLinks)
         about_textview.setOnClickListener(this::openLinks)
     }
 
@@ -64,7 +64,7 @@ class MoreFragment : Fragment() {
 
     private fun openLinks(view: View) {
         val link = when (view) {
-            frequently_asked_questions_textview -> resources.getString(R.string.project_url)
+            licenses_textview -> resources.getString(R.string.project_url)
             about_textview -> resources.getString(R.string.read_me_url)
             else -> null
         }
@@ -77,7 +77,7 @@ class MoreFragment : Fragment() {
         try {
             startActivity(getEmailIntent(email))
         } catch (e: Exception) {
-            root_view?.let {
+            root_view.let {
                 Snackbar.make(root_view, R.string.email_app_not_found, Snackbar.LENGTH_LONG).show()
             }
         }

@@ -20,8 +20,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import io.github.horaciocome1.reaque.util.addSimpleAndSafeSnapshotListener
-import io.github.horaciocome1.reaque.util.topicsForPosts
-import io.github.horaciocome1.reaque.util.topicsForUsers
+import io.github.horaciocome1.reaque.util.topics
 
 class TopicsService {
 
@@ -32,30 +31,14 @@ class TopicsService {
 
     private val auth = FirebaseAuth.getInstance()
 
-    val notEmptyTopicsForPosts = MutableLiveData<List<Topic>>()
+    val notEmptyTopics = MutableLiveData<List<Topic>>()
         get() {
-            notEmptyTopicsForPosts.value?.let {
+            notEmptyTopics.value?.let {
                 if (it.isEmpty())
-                    ref.whereGreaterThan("posts_count", empty).addSimpleAndSafeSnapshotListener(
+                    ref.whereGreaterThan("posts", empty).addSimpleAndSafeSnapshotListener(
                         tag,
                         auth
-                    ) { snapshot, _ ->
-                        field.value = snapshot.topicsForPosts
-                    }
-            }
-            return field
-        }
-
-    val notEmptyTopicsForUsers = MutableLiveData<List<Topic>>()
-        get() {
-            notEmptyTopicsForUsers.value?.let {
-                if (it.isEmpty())
-                    ref.whereGreaterThan("users_count", empty).addSimpleAndSafeSnapshotListener(
-                        tag,
-                        auth
-                    ) { snapshot, _ ->
-                        field.value = snapshot.topicsForUsers
-                    }
+                    ) { snapshot, _ -> field.value = snapshot.topics }
             }
             return field
         }
@@ -67,9 +50,7 @@ class TopicsService {
                     ref.orderBy("title", Query.Direction.ASCENDING).addSimpleAndSafeSnapshotListener(
                         tag,
                         auth
-                    ) { snapshot, _ ->
-                        field.value = snapshot.topicsForPosts
-                    }
+                    ) { snapshot, _ -> field.value = snapshot.topics }
             }
             return field
         }

@@ -100,8 +100,11 @@
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="8dp"
                 android:padding="@dimen/default_padding"
                 android:text="@string/submit"
+                app:backgroundTint="@android:color/white"
+                app:cornerRadius="@dimen/default_corner_radius"
                 android:textColor="@color/secondaryColor" />
 
         </LinearLayout>

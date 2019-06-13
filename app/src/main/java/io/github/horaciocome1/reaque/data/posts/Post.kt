@@ -33,5 +33,10 @@ data class Post(var id: String) {
             date = value.string
             field = value
         }
+    var score = ""
+    var bookmarks = ""
+    var readings = ""
+    var rating = ""
+    var shares = ""
 
 }

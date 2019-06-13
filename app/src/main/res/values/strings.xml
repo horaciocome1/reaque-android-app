@@ -73,5 +73,10 @@
     <string name="subscriptions">Subscriptions</string>
     <string name="explore">Explore</string>
     <string name="suggestions">Sugestions</string>
+    <string name="create_post">Create post</string>
+    <string name="browse_users">Browse users</string>
+    <string name="subscribers">Subscribers</string>
+    <string name="bookmarks">Bookmarks</string>
+    <string name="post">Post</string>
 
 </resources>

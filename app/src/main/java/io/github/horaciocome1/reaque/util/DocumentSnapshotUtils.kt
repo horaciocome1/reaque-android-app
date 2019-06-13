@@ -34,22 +34,19 @@ val DocumentSnapshot.user: User
         val timestamp = this@user["since"]
         if (timestamp is Timestamp)
             since = timestamp.string
-        favoriteForCount = this@user["favorite_for_count"].toString()
-        postsCount = this@user["posts_count"].toString()
+        posts = this@user["posts"].toString()
+        subscribers = this@user["subscribers"].toString()
+        subscriptions = this@user["subscriptions"].toString()
     }
 
-val DocumentSnapshot.topicForPosts: Topic
+val DocumentSnapshot.topic: Topic
     get() = Topic(id).apply {
-        title = this@topicForPosts["title"].toString()
-        pic = this@topicForPosts["pic"].toString()
-        contentCount = this@topicForPosts["posts_count"].toString()
-    }
-
-val DocumentSnapshot.topicForUsers: Topic
-    get() = Topic(id).apply {
-        title = this@topicForUsers["title"].toString()
-        pic = this@topicForUsers["pic"].toString()
-        contentCount = this@topicForUsers["users_count"].toString()
+        title = this@topic["title"].toString()
+        pic = this@topic["pic"].toString()
+        posts = this@topic["posts"].toString()
+        users = this@topic["users"].toString()
+        readings = this@topic["readings"].toString()
+        popularity = this@topic["popularity"].toString()
     }
 
 val DocumentSnapshot.post: Post
@@ -66,17 +63,41 @@ val DocumentSnapshot.post: Post
             name = this@post["user.name"].toString()
             pic = this@post["user.pic"].toString()
         }
+        score = this@post["score"].toString()
+        bookmarks = this@post["bookmarks"].toString()
+        readings = this@post["readings"].toString()
+        rating = this@post["rating"].toString()
+        shares = this@post["shares"].toString()
+        val content = this@post["content_id"].toString()
+        if (!content.isBlank())
+            id = content
     }
 
 val DocumentSnapshot.bookmark: Post
-    get() = Post(id).apply {
+    get() = Post(this@bookmark["content_id"].toString()).apply {
         id = this@bookmark["post.id"].toString()
         title = this@bookmark["post.title"].toString()
         pic = this@bookmark["post.pic"].toString()
         user.apply {
+            // author
             id = this@bookmark["user.id"].toString()
             name = this@bookmark["user.name"].toString()
         }
+    }
+
+val DocumentSnapshot.feed: Post
+    get() = Post(this@feed["content_id"].toString()).apply {
+        pic = this@feed["pic"].toString()
+        val stamp = this@feed["timestamp"]
+        if (stamp is Timestamp)
+            timestamp = stamp
+        title = this@feed["title"].toString()
+        user.apply {
+            id = this@feed["user.id"].toString()
+            name = this@feed["user.name"].toString()
+            pic = this@feed["user.pic"].toString()
+        }
+        score = this@feed["score"].toString()
     }
 
 val DocumentSnapshot.subscribed: User

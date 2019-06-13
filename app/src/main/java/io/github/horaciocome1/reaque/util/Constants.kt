@@ -32,10 +32,9 @@ object Constants {
     const val BLUR = 2308
 
     // Topics Adapter
-    const val SIMPLE = 3400
+    const val LISTING_TOPICS_ON_CREATE_POST = 3500
 
     // posts
-    const val LISTING_POSTS_ON_PROFILE = 4500
     const val LISTING_POSTS_ON_SUGGESTIONS = 4600
 
     // strings

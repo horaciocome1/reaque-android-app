@@ -231,13 +231,13 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/town_textview"
-                        app:layout_constraintEnd_toStartOf="@+id/town_textview"
-                        app:layout_constraintTop_toTopOf="@+id/town_textview"
+                        app:layout_constraintBottom_toBottomOf="@+id/subscribers_textview"
+                        app:layout_constraintEnd_toStartOf="@+id/subscribers_textview"
+                        app:layout_constraintTop_toTopOf="@+id/subscribers_textview"
                         app:srcCompat="@drawable/outline_location_on_18" />
 
                     <TextView
-                        android:id="@+id/town_textview"
+                        android:id="@+id/subscribers_textview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="32dp"

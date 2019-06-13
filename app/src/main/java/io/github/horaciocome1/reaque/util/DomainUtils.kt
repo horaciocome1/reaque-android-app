@@ -43,15 +43,15 @@ val Post.map: Map<String, Any>
 
 val Bookmark.map: Map<String, Any>
     get() = mapOf(
-        "post" to mapOf(
-            "title" to post.title,
-            "pic" to post.pic
-        ),
+        "title" to post.title,
+        "pic" to post.pic,
         "user" to mapOf(
             "id" to user.id,
-            "name" to user.name
+            "name" to user.name,
+            "pic" to user.pic
         ),
-        "timestamp" to FieldValue.serverTimestamp()
+        "timestamp" to FieldValue.serverTimestamp(),
+        "content_id" to post.id
     )
 
 val Subscription.map: Map<String, Any>

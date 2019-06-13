@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import io.github.horaciocome1.reaque.databinding.FragmentUpdateProfileBinding
 import io.github.horaciocome1.reaque.util.OnFocusChangeListener
-import kotlinx.android.synthetic.main.fragment_update_user.*
+import kotlinx.android.synthetic.main.fragment_update_user_profile.*
 
 class UpdateProfileFragment : Fragment() {
 

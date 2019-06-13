@@ -8,21 +8,11 @@ import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
 
-val QuerySnapshot.topicsForPosts: MutableList<Topic>
+val QuerySnapshot.topics: MutableList<Topic>
     get() {
         val list = mutableListOf<Topic>()
         forEach { doc ->
-            list.add(doc.topicForPosts)
-            list.sortBy { it.title }
-        }
-        return list
-    }
-
-val QuerySnapshot.topicsForUsers: MutableList<Topic>
-    get() {
-        val list = mutableListOf<Topic>()
-        forEach { doc ->
-            list.add(doc.topicForUsers)
+            list.add(doc.topic)
             list.sortBy { it.title }
         }
         return list
@@ -52,6 +42,16 @@ val QuerySnapshot.bookmarks: MutableList<Post>
     get() {
         val list = mutableListOf<Post>()
         forEach { list.add(it.bookmark) }
+        return list
+    }
+
+val QuerySnapshot.feeds: MutableList<Post>
+    get() {
+        val list = mutableListOf<Post>()
+        forEach { snapshot ->
+            list.add(snapshot.feed)
+            list.sortBy { it.score }
+        }
         return list
     }
 

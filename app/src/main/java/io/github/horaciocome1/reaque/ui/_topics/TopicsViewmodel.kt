@@ -5,8 +5,7 @@ import io.github.horaciocome1.reaque.data.topics.TopicsRepository
 
 class TopicsViewmodel(topicsRepository: TopicsRepository) : ViewModel() {
 
-    val topicsForUsers = topicsRepository.notEmptyTopicsForUsers
 
-    val topicsForPosts = topicsRepository.notEmptyTopicsForPosts
+    val notEmptyTopics = topicsRepository.notEmptyTopics
 
 }

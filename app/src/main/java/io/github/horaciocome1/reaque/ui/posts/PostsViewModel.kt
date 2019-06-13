@@ -66,7 +66,7 @@ class PostsViewModel(
     @Bindable
     val message = MutableLiveData<String>()
 
-    val notEmptyTopicsForPosts = topicsRepository.notEmptyTopicsForPosts
+    val notEmptyTopicsForPosts = topicsRepository.notEmptyTopics
 
     val topics = topicsRepository.topics
 

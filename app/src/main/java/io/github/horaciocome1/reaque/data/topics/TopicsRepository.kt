@@ -19,9 +19,7 @@ import androidx.lifecycle.LiveData
 
 class TopicsRepository private constructor(service: TopicsService) {
 
-    val notEmptyTopicsForPosts: LiveData<List<Topic>> = service.notEmptyTopicsForPosts
-
-    val notEmptyTopicsForUsers: LiveData<List<Topic>> = service.notEmptyTopicsForUsers
+    val notEmptyTopics: LiveData<List<Topic>> = service.notEmptyTopics
 
     val topics: LiveData<List<Topic>> = service.topics
 

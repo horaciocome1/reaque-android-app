@@ -22,13 +22,13 @@ class FeedsService : FeedsServiceInterface {
     private val posts = MutableLiveData<List<Post>>().apply { value = mutableListOf() }
 
     override fun get(): LiveData<List<Post>> {
-        posts.value?.let {
-            if (it.isEmpty())
+        posts.value?.let { posts ->
+            if (posts.isEmpty())
                 auth.addSimpleAuthStateListener {
                     ref.whereEqualTo("subscriber.id", it.uid).addSnapshotListener { snapshot, exception ->
                         when {
                             exception != null -> onListeningFailed(tag, exception)
-                            snapshot != null -> posts.value = snapshot.posts
+                            snapshot != null -> this.posts.value = snapshot.posts
                             else -> requestFeed()
                         }
                     }
