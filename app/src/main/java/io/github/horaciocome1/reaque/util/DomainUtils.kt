@@ -84,7 +84,10 @@ val Rating.map: Map<String, Any>
 val Reading.map: Map<String, Any>
     get() = mapOf(
         "post" to mapOf(
-            "id" to post.id
+            "id" to post.id,
+            "topic" to mapOf(
+                "id" to post.topic.id
+            )
         ),
         "user" to mapOf(
             "id" to user.id

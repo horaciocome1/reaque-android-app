@@ -72,5 +72,6 @@
     <string name="my_profile">My profile</string>
     <string name="subscriptions">Subscriptions</string>
     <string name="explore">Explore</string>
+    <string name="suggestions">Sugestions</string>
 
 </resources>

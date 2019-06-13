@@ -36,6 +36,7 @@ object Constants {
 
     // posts
     const val LISTING_POSTS_ON_PROFILE = 4500
+    const val LISTING_POSTS_ON_SUGGESTIONS = 4600
 
     // strings
     const val LANDING_PAGE = "https://reaque.firebaseapp.com"
