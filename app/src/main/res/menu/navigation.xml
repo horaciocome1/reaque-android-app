@@ -26,11 +26,6 @@
         android:title="@string/explore" />
 
     <item
-        android:id="@+id/destination_subscriptions"
-        android:icon="@drawable/outline_people_outline_24"
-        android:title="@string/subscriptions" />
-
-    <item
         android:id="@+id/destination_more"
         android:icon="@drawable/outline_more_horiz_24"
         android:title="@string/more" />

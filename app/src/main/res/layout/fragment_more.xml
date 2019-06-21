@@ -165,9 +165,9 @@
                             android:paddingEnd="32dp"
                             android:paddingRight="32dp"
                             android:paddingBottom="16dp"
+                            android:layout_marginTop="16dp"
                             android:text="@string/bookmarks"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -179,23 +179,16 @@
                             android:layout_marginEnd="32dp"
                             android:layout_marginRight="32dp"
                             android:layout_marginBottom="8dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/outline_bookmark_border_18" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                            app:layout_constraintBottom_toBottomOf="@id/bookmarks_textview"
+                            app:layout_constraintEnd_toEndOf="@id/bookmarks_textview"
+                            app:layout_constraintTop_toTopOf="@id/bookmarks_textview"
+                            app:srcCompat="@drawable/outline_bookmarks_18" />
 
                         <TextView
                             android:id="@+id/create_post_textview"
                             style="@style/AppTheme.CompleteClickableEffect"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
                             android:paddingStart="32dp"
                             android:paddingLeft="32dp"
                             android:paddingTop="16dp"
@@ -205,10 +198,9 @@
                             android:text="@string/create_post"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                             android:textColor="@color/secondaryColor"
-                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toBottomOf="@id/bookmarks_textview" />
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="wrap_content"
@@ -218,16 +210,10 @@
                             android:layout_marginRight="32dp"
                             android:layout_marginBottom="8dp"
                             android:tint="@color/secondaryColor"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="@id/create_post_textview"
+                            app:layout_constraintEnd_toEndOf="@id/create_post_textview"
+                            app:layout_constraintTop_toTopOf="@id/create_post_textview"
                             app:srcCompat="@drawable/outline_add_18" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
 
                         <TextView
                             android:id="@+id/browse_users_textview"
@@ -240,12 +226,13 @@
                             android:paddingEnd="32dp"
                             android:paddingRight="32dp"
                             android:paddingBottom="16dp"
+                            android:layout_marginBottom="16dp"
                             android:text="@string/browse_users"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toBottomOf="@id/create_post_textview" />
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="wrap_content"
@@ -254,45 +241,9 @@
                             android:layout_marginEnd="32dp"
                             android:layout_marginRight="32dp"
                             android:layout_marginBottom="8dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/outline_explore_18" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:id="@+id/subscribers_textview"
-                            style="@style/AppTheme.CompleteClickableEffect"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:paddingStart="32dp"
-                            android:paddingLeft="32dp"
-                            android:paddingTop="16dp"
-                            android:paddingEnd="32dp"
-                            android:paddingRight="32dp"
-                            android:paddingBottom="16dp"
-                            android:text="@string/subscribers"
-                            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginEnd="32dp"
-                            android:layout_marginRight="32dp"
-                            android:layout_marginBottom="8dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="@id/browse_users_textview"
+                            app:layout_constraintEnd_toEndOf="@id/browse_users_textview"
+                            app:layout_constraintTop_toTopOf="@id/browse_users_textview"
                             app:srcCompat="@drawable/outline_people_outline_18" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
