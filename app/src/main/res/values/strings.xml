@@ -78,5 +78,6 @@
     <string name="subscribers">Subscribers</string>
     <string name="bookmarks">Bookmarks</string>
     <string name="post">Post</string>
+    <string name="subscribe">Subscribe</string>
 
 </resources>
