@@ -79,5 +79,6 @@
     <string name="bookmarks">Bookmarks</string>
     <string name="post">Post</string>
     <string name="subscribe">Subscribe</string>
+    <string name="bullet">.</string>
 
 </resources>
