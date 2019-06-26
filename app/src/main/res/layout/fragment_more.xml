@@ -23,9 +23,9 @@
             name="user"
             type="io.github.horaciocome1.reaque.data.users.User" />
 
-        <variable
-            name="viewmodel"
-            type="io.github.horaciocome1.reaque.ui._more.MoreViewModel" />
+        <!--<variable-->
+        <!--name="viewmodel"-->
+        <!--type="io.github.horaciocome1.reaque.ui._more.MoreViewModel" />-->
 
     </data>
 

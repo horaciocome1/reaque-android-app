@@ -15,72 +15,34 @@
 
 package io.github.horaciocome1.reaque.ui._more
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
-import io.github.horaciocome1.reaque.R
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import io.github.horaciocome1.reaque.databinding.FragmentMoreBinding
-import io.github.horaciocome1.reaque.util.addSimpleAuthStateListener
-import io.github.horaciocome1.reaque.util.getEmailIntent
-import io.github.horaciocome1.reaque.util.user
-import kotlinx.android.synthetic.main.fragment_more.*
+import io.github.horaciocome1.reaque.util.InjectorUtils
 
 class MoreFragment : Fragment() {
 
     private lateinit var binding: FragmentMoreBinding
-    private lateinit var auth: FirebaseAuth
+
+    val viewModel: MoreViewModel by lazy {
+        val factory = InjectorUtils.moreViewModelFactory
+        ViewModelProviders.of(this, factory)[MoreViewModel::class.java]
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        auth = FirebaseAuth.getInstance()
         binding = FragmentMoreBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.let {
-            it.lifecycleOwner = this
-            it.viewmodel = viewModel
-        }
-        feedback_textview.setOnClickListener {
-            emailDeveloper()
-        }
-        licenses_textview.setOnClickListener(this::openLinks)
-        about_textview.setOnClickListener(this::openLinks)
-    }
-
     override fun onStart() {
         super.onStart()
-        auth.addSimpleAuthStateListener {
-            binding.user = it.user
-        }
-    }
-
-    private fun openLinks(view: View) {
-        val link = when (view) {
-            licenses_textview -> resources.getString(R.string.project_url)
-            about_textview -> resources.getString(R.string.read_me_url)
-            else -> null
-        }
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
-        startActivity(intent)
-    }
-
-    private fun emailDeveloper() {
-        val email = resources.getString(R.string.developer_email)
-        try {
-            startActivity(getEmailIntent(email))
-        } catch (e: Exception) {
-            root_view.let {
-                Snackbar.make(root_view, R.string.email_app_not_found, Snackbar.LENGTH_LONG).show()
-            }
-        }
+//        binding.viewModel = viewModel
+        viewModel.user.observe(this, Observer { binding.user = it })
     }
 
 }

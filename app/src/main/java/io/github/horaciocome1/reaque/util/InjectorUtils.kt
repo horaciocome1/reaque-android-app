@@ -16,14 +16,36 @@
 package io.github.horaciocome1.reaque.util
 
 import io.github.horaciocome1.reaque.data.Database
+import io.github.horaciocome1.reaque.data.feeds.FeedsRepository
+import io.github.horaciocome1.reaque.data.posts.PostsRepository
 import io.github.horaciocome1.reaque.data.storage.StorageRepository
 import io.github.horaciocome1.reaque.data.topics.TopicsRepository
+import io.github.horaciocome1.reaque.data.users.UsersRepository
+import io.github.horaciocome1.reaque.ui._feed.FeedViewModelFactory
 import io.github.horaciocome1.reaque.ui._more.MoreViewModelFactory
+import io.github.horaciocome1.reaque.ui._topics.ExploreViewModelFactory
 import io.github.horaciocome1.reaque.ui.notifications.NotificationsViewModelFactory
 import io.github.horaciocome1.reaque.ui.posts.PostsViewModelFactory
 import io.github.horaciocome1.reaque.ui.users.UsersViewModelFactory
 
 object InjectorUtils {
+
+    private val database = Database.getInstance()
+
+    val feedViewModelFactory: FeedViewModelFactory
+        get() {
+            val repository = FeedsRepository.getInstance(database.feedsService)
+            return FeedViewModelFactory(repository)
+        }
+
+    val exploreViewModelFactory: ExploreViewModelFactory
+        get() {
+            val topicsRepository = TopicsRepository.getInstance(database.topicsService)
+            val postsRepository = PostsRepository.getInstance(database.postsService)
+            return ExploreViewModelFactory(topicsRepository, postsRepository)
+        }
+
+    val moreViewModelFactory = MoreViewModelFactory()
 
     val usersViewModelFactory: UsersViewModelFactory
         get() {
@@ -34,11 +56,6 @@ object InjectorUtils {
             return UsersViewModelFactory(usersRepository, topicsRepository, postsRepository, favoritesRepository)
         }
 
-    val moreViewModelFactory: MoreViewModelFactory
-        get() {
-            val repository = UsersRepository.getInstance(Database.getInstance().usersWebService)
-            return MoreViewModelFactory(repository)
-        }
 
     val postsViewModelFactory: PostsViewModelFactory
         get() {
