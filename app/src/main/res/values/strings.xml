@@ -64,11 +64,9 @@
     <string name="sign_in_message">Please wait while we logging you in</string>
 
     <string name="email_app_not_found">Email app not found.</string>
-    <string name="subscribers">Subscribers</string>
     <string name="welcome">Welcome</string>
     <string name="content_description_post_cover_image">Post cover image</string>
     <string name="content_description_user_profile_image">User profile image</string>
-    <string name="my_profile">My profile</string>
     <string name="my_profile">My profile</string>
     <string name="subscriptions">Subscriptions</string>
     <string name="explore">Explore</string>
