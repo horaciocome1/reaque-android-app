@@ -16,9 +16,6 @@
 package io.github.horaciocome1.reaque.util
 
 import com.google.firebase.Timestamp
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
@@ -74,37 +71,39 @@ val DocumentSnapshot.post: Post
     }
 
 val DocumentSnapshot.bookmark: Post
-    get() = Post(this@bookmark["content_id"].toString()).apply {
-        id = this@bookmark["post.id"].toString()
+    get() = Post(this@bookmark["post.id"].toString()).apply {
         title = this@bookmark["post.title"].toString()
         pic = this@bookmark["post.pic"].toString()
+        date = this@bookmark["post.date"].toString()
         user.apply {
-            // author
-            id = this@bookmark["user.id"].toString()
-            name = this@bookmark["user.name"].toString()
+            id = this@bookmark["post.user.id"].toString()
+            name = this@bookmark["post.user.name"].toString()
+            pic = this@bookmark["post.user.pic"].toString()
         }
     }
 
 val DocumentSnapshot.feed: Post
-    get() = Post(this@feed["content_id"].toString()).apply {
-        pic = this@feed["pic"].toString()
-        val stamp = this@feed["timestamp"]
+    get() = Post(this@feed["post.id"].toString()).apply {
+        pic = this@feed["post.pic"].toString()
+        val stamp = this@feed["post.timestamp"]
         if (stamp is Timestamp)
             timestamp = stamp
-        title = this@feed["title"].toString()
+        title = this@feed["post.title"].toString()
         user.apply {
-            id = this@feed["user.id"].toString()
-            name = this@feed["user.name"].toString()
-            pic = this@feed["user.pic"].toString()
+            id = this@feed["post.user.id"].toString()
+            name = this@feed["post.user.name"].toString()
+            pic = this@feed["post.user.pic"].toString()
         }
-        score = this@feed["score"].toString()
+        score = this@feed["post.score"].toString()
     }
 
 val DocumentSnapshot.subscribed: User
     get() = User(id).apply {
-        id = this@subscribed["subscribed.id"].toString()
-        name = this@subscribed["subscribed.name"].toString()
-        pic = this@subscribed["subscribed.pic"].toString()
+        id = this@subscribed["user.id"].toString()
+        name = this@subscribed["user.name"].toString()
+        pic = this@subscribed["user.pic"].toString()
+        subscribers = this@subscribed["user.subscribers"].toString()
+        topTopic = this@subscribed["user.top_topic"].toString()
     }
 
 val DocumentSnapshot.subscriber: User
@@ -112,26 +111,6 @@ val DocumentSnapshot.subscriber: User
         id = this@subscriber["subscriber.id"].toString()
         name = this@subscriber["subscriber.name"].toString()
         pic = this@subscriber["subscriber.pic"].toString()
+        subscribers = this@subscriber["user.subscribers"].toString()
+        topTopic = this@subscriber["user.top_topic"].toString()
     }
-
-fun DocumentReference.addSimpleAndSafeSnapshotListener(
-    TAG: String,
-    auth: FirebaseAuth,
-    listener: (DocumentSnapshot, FirebaseUser) -> Unit
-) {
-    auth.addSimpleAuthStateListener { user ->
-        addSimpleSnapshotListener(TAG) {
-            listener(it, user)
-        }
-    }
-}
-
-fun DocumentReference.addSimpleSnapshotListener(TAG: String, listener: (DocumentSnapshot) -> Unit) {
-    addSnapshotListener { snapshot, exception ->
-        when {
-            exception != null -> onListeningFailed(TAG, exception)
-            snapshot != null -> listener(snapshot)
-            else -> onSnapshotNull(TAG)
-        }
-    }
-}

@@ -6,6 +6,6 @@ import io.github.horaciocome1.reaque.data.users.User
 data class Subscription(var id: String) {
 
     var subscriber = User("")
-    var subscribed = User("")
+    var user = User("")
 
 }

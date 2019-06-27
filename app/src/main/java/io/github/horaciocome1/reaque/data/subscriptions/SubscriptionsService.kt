@@ -24,7 +24,7 @@ class SubscriptionsService : SubscriptionsServiceInterface {
     override fun subscribe(user: User, onSuccessListener: (Void) -> Unit) {
         auth.addSimpleAuthStateListener {
             val subscription = Subscription("").apply {
-                subscribed = user
+                this.user = user
                 subscriber = it.user
             }
             ref.document("${it.uid}_${user.id}").set(subscription.map).addOnSuccessListener(onSuccessListener)
@@ -48,7 +48,7 @@ class SubscriptionsService : SubscriptionsServiceInterface {
 
     override fun getSubscribers(): LiveData<List<User>> {
         auth.addSimpleAuthStateListener { user ->
-            ref.whereEqualTo("subscribed.id", user.uid).addSimpleSnapshotListener(tag) {
+            ref.whereEqualTo("user.id", user.uid).addSimpleSnapshotListener(tag) {
                 subscribers.value = it.subscribers
             }
         }
