@@ -13,7 +13,7 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.ui._more
+package io.github.horaciocome1.reaque.ui.more
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

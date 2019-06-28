@@ -27,11 +27,3 @@ val List<Any>.isListOfUsers: Boolean
                 return true
         return false
     }
-
-val List<Any>.isListOfNotifications: Boolean
-    get() {
-        if (isNotEmpty())
-            if (this[0] is Notification)
-                return true
-        return false
-    }

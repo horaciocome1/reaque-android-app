@@ -1,126 +1,71 @@
-/*
- *    Copyright 2019 Horácio Flávio Comé Júnior
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and limitations under the License.
- */
-
 package io.github.horaciocome1.reaque.ui.posts
 
-import android.net.Uri
 import android.view.View
-import androidx.databinding.Bindable
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
+import com.google.firebase.auth.FirebaseAuth
+import io.github.horaciocome1.reaque.data.bookmarks.BookmarksRepository
 import io.github.horaciocome1.reaque.data.posts.Post
-import io.github.horaciocome1.reaque.data.storage.StorageRepository
+import io.github.horaciocome1.reaque.data.posts.PostsRepository
+import io.github.horaciocome1.reaque.data.ratings.RatingsRepository
+import io.github.horaciocome1.reaque.data.readings.ReadingsRepository
+import io.github.horaciocome1.reaque.data.shares.SharesRepository
 import io.github.horaciocome1.reaque.data.topics.Topic
-import io.github.horaciocome1.reaque.data.topics.TopicsRepository
-import io.github.horaciocome1.reaque.util.InjectorUtils
-import io.github.horaciocome1.reaque.util.ObservableViewModel
-
-val PostsFragment.viewModel: PostsViewModel
-    get() {
-        val factory = InjectorUtils.postsViewModelFactory
-        return ViewModelProviders.of(this, factory)[PostsViewModel::class.java]
-    }
-
-val ReadFragment.viewModel: PostsViewModel
-    get() {
-        val factory = InjectorUtils.postsViewModelFactory
-        return ViewModelProviders.of(this, factory).get(PostsViewModel::class.java)
-    }
-
-val PostingFragment.viewModel: PostsViewModel
-    get() {
-        val factory = InjectorUtils.postsViewModelFactory
-        return ViewModelProviders.of(this, factory).get(PostsViewModel::class.java)
-    }
+import io.github.horaciocome1.reaque.data.users.User
+import io.github.horaciocome1.reaque.util.Constants
 
 class PostsViewModel(
     private val postsRepository: PostsRepository,
-    topicsRepository: TopicsRepository,
-    private val storageRepository: StorageRepository,
-    private val usersRepository: UsersRepository,
-    private val favoritesRepository: FavoritesRepository
-) : ObservableViewModel() {
+    private val readingsRepository: ReadingsRepository,
+    private val sharesRepository: SharesRepository,
+    private val ratingsRepository: RatingsRepository,
+    private val bookmarksRepository: BookmarksRepository
+) : ViewModel() {
 
-    // PostingFragment
-    val post = Post("").apply {
-        topic.title = "Selecione um tópico."
-    }
-    var imageUri: Uri = Uri.EMPTY
-
-    @Bindable
-    val title = MutableLiveData<String>()
-
-    @Bindable
-    val message = MutableLiveData<String>()
-
-    val notEmptyTopicsForPosts = topicsRepository.notEmptyTopics
-
-    val topics = topicsRepository.topics
-
-    val favorites = postsRepository.favorites
-
-    var isSubmittingPost = false
-
-    fun isThisFavoriteForMe(post: Post) = postsRepository.isThisFavoriteForMe(post)
-
-    fun getPosts(topic: Topic) = postsRepository.getPosts(topic)
-
-    fun getPosts(post: Post) = postsRepository.getPosts(post)
-
-    fun submitPost(view: View): PostsViewModel {
-        isSubmittingPost = true
-        val uploader = ImageUploader()
-        uploader.let {
-            it.imageUri = imageUri
-            it.post = post
-            it.onSuccessListener = { link ->
-                post.pic = link
-                postsRepository.submitPost(post) {
-                    navigateUp(view)
-                }
-            }
-            it.onFailureListener = {
-                // caso o upload falhe
-            }
-        }
-        storageRepository.uploadImage(uploader)
-        return this
-    }
-
-    fun addToFavorites(view: View, post: Post) {
-        view.visibility = View.GONE
-        favoritesRepository.addToFavorites(post)
-    }
-
-    fun removeFromFavorites(view: View, post: Post) {
-        view.visibility = View.GONE
-        favoritesRepository.removeFromFavorites(post)
-    }
-
-    fun openViewer(view: View, post: Post) {
-        if (post.pic.isNotBlank()) {
-            val directions = ReadFragmentDirections.actionOpenViewerFromRead(post.pic)
-            view.findNavController().navigate(directions)
+    fun get(id: String): LiveData<List<Post>> {
+        return if (id == Constants.BOOKMARKS_REQUEST)
+            bookmarksRepository.get()
+        else {
+            val user = FirebaseAuth.getInstance().currentUser
+            if (user != null)
+                if (id.length == user.uid.length)
+                    postsRepository.get(User(id))
+                else
+                    postsRepository.get(Topic(id))
+            else
+                MutableLiveData<List<Post>>().apply { value = mutableListOf() }
         }
     }
 
-    fun openProfile(view: View, post: Post) {
-        val directions = ReadFragmentDirections.actionOpenProfileFromRead(post.user.id)
-        view.findNavController().navigate(directions)
+    fun get(post: Post) = postsRepository.get(post)
+
+    fun setRate(view: View, post: Post, value: Int) {
+        view.isEnabled = false
+        ratingsRepository.rate(post, value) { view.isEnabled = true }
     }
+
+    fun getRate(post: Post) = ratingsRepository.get(post)
+
+    fun read(post: Post) = readingsRepository.read(post)
+
+    fun share(view: View, post: Post) {
+        view.isEnabled = false
+        sharesRepository.share(post) { view.isEnabled = true }
+    }
+
+    fun bookmark(view: View, post: Post) {
+        view.isEnabled = false
+        bookmarksRepository.bookmark(post) {}
+    }
+
+    fun unBookmark(view: View, post: Post) {
+        view.isEnabled = false
+        bookmarksRepository.unBookmark(post) {}
+    }
+
+    fun isBookmarked(post: Post) = bookmarksRepository.isBookmarked(post)
 
     fun navigateUp(view: View) = view.findNavController().navigateUp()
 

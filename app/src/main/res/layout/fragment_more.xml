@@ -23,9 +23,9 @@
             name="user"
             type="io.github.horaciocome1.reaque.data.users.User" />
 
-        <!--<variable-->
-        <!--name="viewmodel"-->
-        <!--type="io.github.horaciocome1.reaque.ui._more.MoreViewModel" />-->
+        <variable
+            name="viewmodel"
+            type="io.github.horaciocome1.reaque.ui.more.MoreViewModel" />
 
     </data>
 
@@ -65,7 +65,7 @@
                         android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
                         android:layout_marginBottom="16dp"
-                        android:onClick="@{(view) -> viewmodel.openEditProfile(view)}"
+                        android:onClick="@{(view) -> viewmodel.openUpdateUser(view)}"
                         android:padding="16dp"
                         android:paddingStart="36dp"
                         android:paddingLeft="36dp"
@@ -89,7 +89,7 @@
                         android:layout_marginLeft="56dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
-                        android:onClick="@{(view) -> viewmodel.openProfile(view, user)}"
+                        android:onClick="@{(view) -> viewmodel.openUserProfile(view)}"
                         app:layout_constraintBottom_toBottomOf="@+id/textView"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/title_textview"
@@ -191,6 +191,7 @@
                         android:paddingRight="32dp"
                         android:paddingBottom="16dp"
                         android:text="@string/create_post"
+                        android:onClick="@{(view) -> viewmodel.openCreatePost(view)}"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                         android:textColor="@color/secondaryColor"
                         app:layout_constraintEnd_toEndOf="parent"

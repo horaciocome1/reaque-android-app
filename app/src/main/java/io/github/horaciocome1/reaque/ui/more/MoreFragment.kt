@@ -13,7 +13,7 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.ui._more
+package io.github.horaciocome1.reaque.ui.more
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -29,7 +29,7 @@ class MoreFragment : Fragment() {
 
     private lateinit var binding: FragmentMoreBinding
 
-    val viewModel: MoreViewModel by lazy {
+    private val viewModel: MoreViewModel by lazy {
         val factory = InjectorUtils.moreViewModelFactory
         ViewModelProviders.of(this, factory)[MoreViewModel::class.java]
     }
@@ -41,7 +41,7 @@ class MoreFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-//        binding.viewModel = viewModel
+        binding.viewmodel = viewModel
         viewModel.user.observe(this, Observer { binding.user = it })
     }
 

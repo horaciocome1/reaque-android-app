@@ -18,15 +18,10 @@ package io.github.horaciocome1.reaque.util
 import io.github.horaciocome1.reaque.data.Database
 import io.github.horaciocome1.reaque.data.feeds.FeedsRepository
 import io.github.horaciocome1.reaque.data.posts.PostsRepository
-import io.github.horaciocome1.reaque.data.storage.StorageRepository
 import io.github.horaciocome1.reaque.data.topics.TopicsRepository
-import io.github.horaciocome1.reaque.data.users.UsersRepository
-import io.github.horaciocome1.reaque.ui._feed.FeedViewModelFactory
-import io.github.horaciocome1.reaque.ui._more.MoreViewModelFactory
-import io.github.horaciocome1.reaque.ui._topics.ExploreViewModelFactory
-import io.github.horaciocome1.reaque.ui.notifications.NotificationsViewModelFactory
-import io.github.horaciocome1.reaque.ui.posts.PostsViewModelFactory
-import io.github.horaciocome1.reaque.ui.users.UsersViewModelFactory
+import io.github.horaciocome1.reaque.ui.explore.ExploreViewModelFactory
+import io.github.horaciocome1.reaque.ui.feed.FeedViewModelFactory
+import io.github.horaciocome1.reaque.ui.more.MoreViewModelFactory
 
 object InjectorUtils {
 
@@ -46,37 +41,5 @@ object InjectorUtils {
         }
 
     val moreViewModelFactory = MoreViewModelFactory()
-
-    val usersViewModelFactory: UsersViewModelFactory
-        get() {
-            val usersRepository = UsersRepository.getInstance(Database.getInstance().usersWebService)
-            val topicsRepository = TopicsRepository.getInstance(Database.getInstance().topicsWebService)
-            val postsRepository = PostsRepository.getInstance(Database.getInstance().postsWebService)
-            val favoritesRepository = FavoritesRepository.getInstance(Database.getInstance().favoritesWebService)
-            return UsersViewModelFactory(usersRepository, topicsRepository, postsRepository, favoritesRepository)
-        }
-
-
-    val postsViewModelFactory: PostsViewModelFactory
-        get() {
-            val topicsRepository = TopicsRepository.getInstance(Database.getInstance().topicsWebService)
-            val postsRepository = PostsRepository.getInstance(Database.getInstance().postsWebService)
-            val imageRepository = StorageRepository.getInstance(Database.getInstance().imageUploaderWebService)
-            val usersRepository = UsersRepository.getInstance(Database.getInstance().usersWebService)
-            val favoritesRepository = FavoritesRepository.getInstance(Database.getInstance().favoritesWebService)
-            return PostsViewModelFactory(
-                postsRepository,
-                topicsRepository,
-                imageRepository,
-                usersRepository,
-                favoritesRepository
-            )
-        }
-
-    val notificationsViewModelFactory: NotificationsViewModelFactory
-        get() {
-            val repository = NotificationsRepository.getInstance(Database.getInstance().notificationsWebService)
-            return NotificationsViewModelFactory(repository)
-        }
 
 }

@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="16dp"
             android:layout_marginTop="32dp"
-            android:visibility="@{posts.isEmpty() ? View.GONE : View.VISIBLE}" />
+            android:visibility="@{users.isEmpty() ? View.VISIBLE : View.GONE}" />
 
     </LinearLayout>
 

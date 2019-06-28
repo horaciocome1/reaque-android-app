@@ -1,4 +1,4 @@
-package io.github.horaciocome1.reaque.ui._signin
+package io.github.horaciocome1.reaque.ui.sign_in
 
 import android.content.Intent
 import android.os.Bundle

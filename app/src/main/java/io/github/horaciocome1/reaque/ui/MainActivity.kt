@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
             val bundle = Bundle().apply {
                 putString("post_id", it.id)
             }
-            navController.navigate(R.id.destination_read, bundle)
+//            navController.navigate(R.id.destination_read, bundle)
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
@@ -88,35 +88,12 @@ class MainActivity : AppCompatActivity() {
             passedThroughSignIn = false
             finish()
         }
-        if (destination.id == R.id.destination_sign_in)
-            passedThroughSignIn = true
-        bottomnavigationview?.visibility = when (destination.id) {
-            R.id.destination_posting -> View.GONE
-            R.id.destination_edit_profile -> View.GONE
-            R.id.destination_sign_in -> View.GONE
-            R.id.destination_viewer -> View.GONE
-            else -> View.VISIBLE
-        }
-        supportActionBar?.run {
-            when (destination.id) {
-                R.id.destination_posts -> if (isOrientationPortrait) hide() else show()
-                R.id.destination_users -> if (isOrientationPortrait) hide() else show()
-                R.id.destination_notifications -> if (isOrientationPortrait) hide() else show()
-                R.id.destination_more -> if (isOrientationPortrait) hide() else show()
-                R.id.destination_sign_in -> hide()
-                R.id.destination_edit_profile -> hide()
-                R.id.destination_posting -> hide()
-                R.id.destination_viewer -> hide()
-                R.id.destination_read -> {
-                    show()
-                    title = ""
-                }
-                R.id.destination_profile -> {
-                    show()
-                    title = ""
-                }
-                else -> show()
-            }
+        if (destination.id == R.id.destination_sign_in) {
+            supportActionBar?.hide()
+            bottomnavigationview?.visibility = View.GONE
+        } else {
+            supportActionBar?.show()
+            bottomnavigationview?.visibility = View.VISIBLE
         }
     }
 

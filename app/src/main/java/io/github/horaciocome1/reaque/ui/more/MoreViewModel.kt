@@ -13,12 +13,11 @@
  *    See the License for the specific language governing permissions and limitations under the License.
  */
 
-package io.github.horaciocome1.reaque.ui._more
+package io.github.horaciocome1.reaque.ui.more
 
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.util.addSimpleAuthStateListener
@@ -36,22 +35,16 @@ class MoreViewModel : ViewModel() {
 
     fun openUpdateUser(view: View) {
         if (auth.currentUser != null) {
-            val directions = MoreFragmentDirections.actionOpenEditProfile()
-            view.findNavController().navigate(directions)
         }
     }
 
     fun openCreatePost(view: View) {
         if (auth.currentUser != null) {
-            val directions = MoreFragmentDirections.actionOpenPosting()
-            view.findNavController().navigate(directions)
         }
     }
 
-    fun openUserProfile(view: View, user: User) {
+    fun openUserProfile(view: View) {
         if (auth.currentUser != null) {
-            val directions = MoreFragmentDirections.actionOpenProfileFromMore(user.id)
-            view.findNavController().navigate(directions)
         }
     }
 

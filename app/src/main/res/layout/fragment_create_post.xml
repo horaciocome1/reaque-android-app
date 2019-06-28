@@ -28,7 +28,7 @@
 
         <variable
             name="viewmodel"
-            type="io.github.horaciocome1.reaque.ui.posts.PostsViewModel" />
+            type="io.github.horaciocome1.reaque.ui.posts.CreatePostViewModel" />
 
         <variable
             name="topics"
@@ -44,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="@{viewmodel.isSubmittingPost == true ? View.GONE : View.VISIBLE}">
+            android:visibility="@{viewmodel.isCreatingPost == true ? View.GONE : View.VISIBLE}">
 
             <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
@@ -123,6 +123,7 @@
                         android:enabled="false"
                         android:padding="16dp"
                         android:text="@string/post"
+                        android:onClick="@{(view) -> viewmodel.create(view)}"
                         app:cornerRadius="16dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" />
@@ -248,7 +249,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/primaryColor"
-            android:visibility="@{viewmodel.isSubmittingPost == false ? View.GONE : View.VISIBLE}">
+            android:visibility="@{viewmodel.isCreatingPost == false ? View.GONE : View.VISIBLE}">
 
             <ProgressBar
                 android:layout_width="wrap_content"

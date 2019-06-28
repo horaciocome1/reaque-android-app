@@ -1,4 +1,4 @@
-package io.github.horaciocome1.reaque.ui._topics
+package io.github.horaciocome1.reaque.ui.explore
 
 import androidx.lifecycle.ViewModel
 import io.github.horaciocome1.reaque.data.posts.PostsRepository

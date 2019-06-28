@@ -8,7 +8,7 @@
 
         <variable
             name="viewmodel"
-            type="io.github.horaciocome1.reaque.ui.users.UsersViewModel" />
+            type="io.github.horaciocome1.reaque.ui.users.UpdateUserViewModel" />
 
     </data>
 
@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="@{viewmodel.isSubmittingUpdates == true ? View.GONE : View.VISIBLE}">
+            android:visibility="@{viewmodel.isUpdatingUser == true ? View.GONE : View.VISIBLE}">
 
             <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
@@ -35,7 +35,6 @@
                     app:title="@string/edit" />
 
             </com.google.android.material.appbar.AppBarLayout>
-
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -113,7 +112,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/primaryColor"
-            android:visibility="@{viewmodel.isSubmittingUpdates == false ? View.GONE : View.VISIBLE}">
+            android:visibility="@{viewmodel.isUpdatingUser == false ? View.GONE : View.VISIBLE}">
 
             <ProgressBar
                 android:layout_width="wrap_content"
