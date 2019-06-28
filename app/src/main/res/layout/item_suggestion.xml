@@ -15,6 +15,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="96dp"
         android:layout_height="96dp"
+        android:layout_margin="8dp"
         app:cardCornerRadius="@dimen/default_corner_radius"
         app:cardElevation="@dimen/default_card_elevation">
 
@@ -22,8 +23,9 @@
             android:id="@+id/imageView3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="8dp"
-            app:type="@{Constants.CIRCLE}"
+            style="@style/AppTheme.CompleteClickableEffect"
+            android:scaleType="centerCrop"
+            app:type="@{Constants.DEFAULT}"
             app:url="@{post.pic}" />
 
     </androidx.cardview.widget.CardView>

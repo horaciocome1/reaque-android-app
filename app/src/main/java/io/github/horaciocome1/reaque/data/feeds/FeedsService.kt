@@ -7,8 +7,8 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.util.addSimpleAuthStateListener
+import io.github.horaciocome1.reaque.util.feeds
 import io.github.horaciocome1.reaque.util.onListeningFailed
-import io.github.horaciocome1.reaque.util.posts
 
 class FeedsService : FeedsServiceInterface {
 
@@ -19,21 +19,24 @@ class FeedsService : FeedsServiceInterface {
 
     private val auth = FirebaseAuth.getInstance()
 
-    private val posts = MutableLiveData<List<Post>>().apply { value = mutableListOf() }
+    private var _posts = mutableListOf<Post>()
+
+    private val posts = MutableLiveData<List<Post>>()
 
     override fun get(): LiveData<List<Post>> {
-        posts.value?.let { posts ->
-            if (posts.isEmpty())
-                auth.addSimpleAuthStateListener {
-                    ref.whereEqualTo("subscriber.id", it.uid).addSnapshotListener { snapshot, exception ->
-                        when {
-                            exception != null -> onListeningFailed(tag, exception)
-                            snapshot != null -> this.posts.value = snapshot.posts
-                            else -> requestFeed()
+        if (_posts.isEmpty())
+            auth.addSimpleAuthStateListener {
+                ref.whereEqualTo("subscriber.id", it.uid).addSnapshotListener { snapshot, exception ->
+                    when {
+                        exception != null -> onListeningFailed(tag, exception)
+                        snapshot != null -> {
+                            _posts = snapshot.feeds
+                            posts.value = _posts
                         }
+                        else -> requestFeed()
                     }
                 }
-        }
+            }
         return posts
     }
 

@@ -31,11 +31,11 @@ object Constants {
     const val CIRCLE = 2307
     const val BLUR = 2308
 
-    // Topics Adapter
-    const val LISTING_TOPICS_ON_CREATE_POST = 3500
-
-    // posts
-    const val LISTING_POSTS_ON_SUGGESTIONS = 4600
+    // list type
+    const val LISTING_TOPICS = 4401
+    const val LISTING_POSTS = 4403
+    const val LISTING_POSTS_ON_SUGGESTIONS = 4404
+    const val LISTING_USERS = 4405
 
     // strings
     const val LANDING_PAGE = "https://reaque.firebaseapp.com"

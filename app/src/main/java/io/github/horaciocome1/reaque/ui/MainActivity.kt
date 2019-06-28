@@ -88,12 +88,18 @@ class MainActivity : AppCompatActivity() {
             passedThroughSignIn = false
             finish()
         }
-        if (destination.id == R.id.destination_sign_in) {
-            supportActionBar?.hide()
-            bottomnavigationview?.visibility = View.GONE
-        } else {
-            supportActionBar?.show()
-            bottomnavigationview?.visibility = View.VISIBLE
+        when (destination.id) {
+            R.id.destination_sign_in -> {
+                supportActionBar?.hide()
+                bottomnavigationview?.visibility = View.GONE
+            }
+            R.id.destination_feed -> supportActionBar?.hide()
+            R.id.destination_explore -> supportActionBar?.hide()
+            R.id.destination_more -> supportActionBar?.hide()
+            else -> {
+                supportActionBar?.show()
+                bottomnavigationview?.visibility = View.VISIBLE
+            }
         }
     }
 

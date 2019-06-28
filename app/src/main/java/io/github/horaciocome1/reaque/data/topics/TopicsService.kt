@@ -31,27 +31,37 @@ class TopicsService {
 
     private val auth = FirebaseAuth.getInstance()
 
+    private var _notEmptyTopics = mutableListOf<Topic>()
+        set(value) {
+            field = value
+            notEmptyTopics.value = field
+        }
+
     val notEmptyTopics = MutableLiveData<List<Topic>>()
         get() {
-            notEmptyTopics.value?.let {
-                if (it.isEmpty())
-                    ref.whereGreaterThan("posts", empty).addSimpleAndSafeSnapshotListener(
-                        tag,
-                        auth
-                    ) { snapshot, _ -> field.value = snapshot.topics }
-            }
+            if (_notEmptyTopics.isEmpty())
+                ref.whereGreaterThan("posts_count", empty)
+                    .addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
+                        _notEmptyTopics = snapshot.topics
+                        field.value = _notEmptyTopics
+                    }
             return field
+        }
+
+    private var _topics = mutableListOf<Topic>()
+        set(value) {
+            field = value
+            topics.value = field
         }
 
     val topics = MutableLiveData<List<Topic>>()
         get() {
-            topics.value?.let {
-                if (it.isEmpty())
-                    ref.orderBy("title", Query.Direction.ASCENDING).addSimpleAndSafeSnapshotListener(
-                        tag,
-                        auth
-                    ) { snapshot, _ -> field.value = snapshot.topics }
-            }
+            if (_topics.isEmpty())
+                ref.orderBy("title", Query.Direction.ASCENDING)
+                    .addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
+                        _topics = snapshot.topics
+                        field.value = _topics
+                    }
             return field
         }
 

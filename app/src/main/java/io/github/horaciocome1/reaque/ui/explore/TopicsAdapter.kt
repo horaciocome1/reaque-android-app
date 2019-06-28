@@ -26,7 +26,6 @@ class TopicsAdapter(private val list: List<Topic>) : RecyclerView.Adapter<Topics
 
     private lateinit var binding: ItemTopicBinding
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         binding = ItemTopicBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding.root)

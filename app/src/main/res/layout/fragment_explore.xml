@@ -37,7 +37,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="32dp"
                 android:text="@string/suggestions"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4" />
 
@@ -45,20 +47,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:list="@{posts}"
+                app:columns="@{1}"
                 app:type="@{Constants.LISTING_POSTS_ON_SUGGESTIONS}" />
 
             <ProgressBar
                 android:layout_width="match_parent"
                 android:layout_height="16dp"
                 android:layout_marginTop="32dp"
-                android:visibility="@{posts.isEmpty() ? View.GONE : View.VISIBLE}" />
+                android:visibility="@{posts.isEmpty() ? View.VISIBLE : View.GONE}" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="32dp"
                 android:text="@string/topics"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4" />
 
@@ -66,13 +69,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:list="@{topics}"
-                app:type="@{Constants.LISTING_POSTS_ON_SUGGESTIONS}" />
+                app:columns="@{1}"
+                app:type="@{Constants.LISTING_TOPICS}" />
 
             <ProgressBar
                 android:layout_width="match_parent"
                 android:layout_height="16dp"
                 android:layout_marginTop="32dp"
-                android:visibility="@{topics.isEmpty() ? View.GONE : View.VISIBLE}" />
+                android:visibility="@{topics.isEmpty() ? View.VISIBLE : View.GONE}" />
 
         </LinearLayout>
 

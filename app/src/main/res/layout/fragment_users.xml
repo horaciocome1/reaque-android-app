@@ -10,6 +10,8 @@
 
         <import type="android.view.View" />
 
+        <import type="io.github.horaciocome1.reaque.util.Constants" />
+
         <variable
             name="users"
             type="List&lt;User&gt;" />
@@ -24,7 +26,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:list="@{users}" />
+            app:columns="@{1}"
+            app:list="@{users}"
+            app:type="@{Constants.LISTING_USERS}" />
 
         <ProgressBar
             android:layout_width="match_parent"
