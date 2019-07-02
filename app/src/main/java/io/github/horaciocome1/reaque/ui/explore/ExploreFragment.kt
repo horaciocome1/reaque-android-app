@@ -14,7 +14,7 @@ class ExploreFragment : Fragment() {
 
     lateinit var binding: FragmentExploreBinding
 
-    val viewModel: ExploreViewModel by lazy {
+    private val viewModel: ExploreViewModel by lazy {
         val factory = InjectorUtils.exploreViewModelFactory
         ViewModelProviders.of(this, factory)[ExploreViewModel::class.java]
     }

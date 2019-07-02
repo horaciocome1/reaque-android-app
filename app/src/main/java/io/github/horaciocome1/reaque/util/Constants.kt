@@ -37,6 +37,13 @@ object Constants {
     const val LISTING_POSTS_ON_SUGGESTIONS = 4404
     const val LISTING_USERS = 4405
 
+    // hosts
+    const val FEED_FRAGMENT = 5501
+    const val EXPLORE_FRAGMENT = 5502
+    const val POSTS_FRAGMENT = 5503
+    const val CREATE_POST_FRAGMENT = 5504
+    const val USERS_FRAGMENT = 5505
+
     // strings
     const val LANDING_PAGE = "https://reaque.firebaseapp.com"
     const val BOOKMARKS_REQUEST = "bookmarks"

@@ -43,7 +43,7 @@ val DocumentSnapshot.topic: Topic
         posts = this@topic["posts"].toString()
         users = this@topic["users"].toString()
         readings = this@topic["readings"].toString()
-        popularity = this@topic["popularity"].toString()
+        score = this@topic["score"].toString()
     }
 
 val DocumentSnapshot.post: Post
@@ -65,16 +65,15 @@ val DocumentSnapshot.post: Post
         readings = this@post["readings"].toString()
         rating = this@post["rating"].toString()
         shares = this@post["shares"].toString()
-        val content = this@post["content_id"].toString()
-        if (!content.isBlank())
-            id = content
     }
 
 val DocumentSnapshot.bookmark: Post
     get() = Post(this@bookmark["post.id"].toString()).apply {
         title = this@bookmark["post.title"].toString()
         pic = this@bookmark["post.pic"].toString()
-        date = this@bookmark["post.date"].toString()
+        val stamp = this@bookmark["post.timestamp"]
+        if (stamp is Timestamp)
+            timestamp = stamp
         user.apply {
             id = this@bookmark["post.user.id"].toString()
             name = this@bookmark["post.user.name"].toString()

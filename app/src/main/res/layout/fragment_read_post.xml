@@ -53,13 +53,12 @@
             app:layout_constraintTop_toTopOf="@+id/button" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/rating_button"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="56dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:text="1"
             app:icon="@drawable/outline_star_rate_18"
             app:layout_constraintBottom_toBottomOf="@+id/button4"
             app:layout_constraintStart_toEndOf="@+id/imageView14"
@@ -80,10 +79,11 @@
             android:layout_height="46dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/divider4"
+            app:type="@{Constants.CIRCLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/divider4"
-            app:srcCompat="@color/colorError" />
+            app:url="@{post.user.pic}" />
 
         <TextView
             android:id="@+id/textView18"
@@ -94,12 +94,12 @@
             android:layout_marginEnd="32dp"
             android:layout_marginRight="32dp"
             android:fontFamily="@font/roboto_medium"
-            android:text="4.1"
+            android:text="@{post.rating}"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-            app:layout_constraintBottom_toBottomOf="@+id/button5"
+            app:layout_constraintBottom_toBottomOf="@+id/rating_button"
             app:layout_constraintEnd_toStartOf="@+id/button4"
-            app:layout_constraintStart_toEndOf="@+id/button5"
-            app:layout_constraintTop_toTopOf="@+id/button5" />
+            app:layout_constraintStart_toEndOf="@+id/rating_button"
+            app:layout_constraintTop_toTopOf="@+id/rating_button" />
 
         <ScrollView
             android:layout_width="0dp"
@@ -117,11 +117,12 @@
                 <ImageView
                     android:id="@+id/imageView15"
                     android:layout_width="0dp"
-                    android:layout_height="200dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:type="@{Constants.DEFAULT}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@color/design_default_color_primary" />
+                    app:url="@{post.pic}" />
 
                 <TextView
                     android:id="@+id/textView19"
@@ -133,7 +134,7 @@
                     android:layout_marginEnd="32dp"
                     android:layout_marginRight="32dp"
                     android:lineSpacingExtra="8dp"
-                    android:text="Como surgiu o Mozambique Fashion Week?"
+                    android:text="@{post.title}"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -149,7 +150,7 @@
                     android:layout_marginEnd="32dp"
                     android:layout_marginRight="32dp"
                     android:fontFamily="@font/roboto_medium"
-                    android:text="Horacio Come"
+                    android:text="@{post.user.name}"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -165,7 +166,7 @@
                     android:layout_marginEnd="32dp"
                     android:layout_marginRight="32dp"
                     android:lineSpacingExtra="8sp"
-                    android:text='Copyright 2019 Horácio Flávio Comé Júnior     Licensed under the Apache License, Version 2.0 (the "License");    you may not use this file except in compliance with the License.    You may obtain a copy of the License at         http://www.apache.org/licenses/LICENSE-2.0     Unless required by applicable law or agreed to in writing, software    distributed under the License is distributed on an "AS IS" BASIS,    WITHOUT WARRANTIES OR CONDITIONS OF '
+                    android:text="@{post.message}"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                     android:textIsSelectable="true"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -183,7 +184,8 @@
                     android:layout_marginRight="32dp"
                     android:layout_marginBottom="32dp"
                     android:fontFamily="@font/roboto_light"
-                    android:text="22, MAIO 2017"
+                    android:text="@{post.date}"
+                    android:textAllCaps="true"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -200,6 +202,7 @@
                     app:layout_constraintStart_toStartOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

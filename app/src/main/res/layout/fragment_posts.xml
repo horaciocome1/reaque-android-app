@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             app:columns="@{1}"
             app:list="@{posts}"
+            app:host="@{Constants.POSTS_FRAGMENT}"
             app:type="@{Constants.LISTING_POSTS}" />
 
         <ProgressBar

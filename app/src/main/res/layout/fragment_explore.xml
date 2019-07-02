@@ -37,9 +37,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="32dp"
+                android:layout_margin="32dp"
                 android:text="@string/suggestions"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4" />
 
@@ -48,20 +46,26 @@
                 android:layout_height="wrap_content"
                 app:list="@{posts}"
                 app:columns="@{1}"
+                app:host="@{Constants.EXPLORE_FRAGMENT}"
                 app:type="@{Constants.LISTING_POSTS_ON_SUGGESTIONS}" />
 
             <ProgressBar
                 android:layout_width="match_parent"
                 android:layout_height="16dp"
-                android:layout_marginTop="32dp"
                 android:visibility="@{posts.isEmpty() ? View.VISIBLE : View.GONE}" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="24dp"
+                android:background="@color/secondaryColor" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="32dp"
+                android:layout_margin="32dp"
                 android:text="@string/topics"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4" />
 
@@ -70,12 +74,12 @@
                 android:layout_height="wrap_content"
                 app:list="@{topics}"
                 app:columns="@{1}"
+                app:host="@{Constants.EXPLORE_FRAGMENT}"
                 app:type="@{Constants.LISTING_TOPICS}" />
 
             <ProgressBar
                 android:layout_width="match_parent"
                 android:layout_height="16dp"
-                android:layout_marginTop="32dp"
                 android:visibility="@{topics.isEmpty() ? View.VISIBLE : View.GONE}" />
 
         </LinearLayout>

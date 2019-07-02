@@ -23,17 +23,24 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            android:text="@string/whats_new"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:columns="@{1}"
             app:list="@{posts}"
+            app:host="@{Constants.FEED_FRAGMENT}"
             app:type="@{Constants.LISTING_POSTS}" />
 
         <ProgressBar
             android:layout_width="match_parent"
             android:layout_height="16dp"
-            android:layout_marginTop="32dp"
             android:visibility="@{posts.isEmpty() ? View.GONE : View.VISIBLE}" />
 
     </LinearLayout>

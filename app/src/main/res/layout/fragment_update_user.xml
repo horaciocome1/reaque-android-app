@@ -32,7 +32,7 @@
                     android:layout_height="wrap_content"
                     android:minHeight="?android:attr/actionBarSize"
                     app:navigationIcon="@drawable/outline_close_24"
-                    app:title="@string/edit" />
+                    app:title="@string/done" />
 
             </com.google.android.material.appbar.AppBarLayout>
 

@@ -10,7 +10,7 @@ import io.github.horaciocome1.reaque.util.addSimpleSnapshotListener
 import io.github.horaciocome1.reaque.util.map
 import io.github.horaciocome1.reaque.util.user
 
-class RatingsService : RatingsServiceIntarface {
+class RatingsService : RatingsServiceInterface {
 
     private val tag = "RatingsService"
 
@@ -18,7 +18,7 @@ class RatingsService : RatingsServiceIntarface {
 
     private val auth = FirebaseAuth.getInstance()
 
-    private val rate = MutableLiveData<Float>().apply { value = 1f }
+    private val rate = MutableLiveData<String>().apply { value = "1" }
 
     override fun rate(post: Post, value: Int, onSuccessListener: (Void) -> Unit) {
         auth.addSimpleAuthStateListener {
@@ -31,10 +31,15 @@ class RatingsService : RatingsServiceIntarface {
         }
     }
 
-    override fun get(post: Post): LiveData<Float> {
+    override fun get(post: Post): LiveData<String> {
         auth.addSimpleAuthStateListener { user ->
             ref.document("${user.uid}_${post.id}").addSimpleSnapshotListener(tag) {
-                rate.value = it["value"].toString().toFloat()
+                val value = it["value"]
+                if (value != null)
+                    rate.value = value.toString()
+                else
+                    rate.value = "1"
+
             }
         }
         return rate

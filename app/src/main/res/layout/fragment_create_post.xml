@@ -60,7 +60,6 @@
 
             </com.google.android.material.appbar.AppBarLayout>
 
-
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -199,6 +198,7 @@
                 android:layout_height="wrap_content"
                 app:list="@{topics}"
                 app:columns="@{2}"
+                app:host="@{Constants.CREATE_POST_FRAGMENT}"
                 app:type="@{Constants.LISTING_TOPICS}" />
 
         </LinearLayout>
@@ -254,7 +254,7 @@
 
             <ProgressBar
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

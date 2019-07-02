@@ -22,6 +22,6 @@ data class Topic(var id: String) {
     var posts = ""
     var users = ""
     var readings = ""
-    var popularity = ""
+    var score = ""
 
 }

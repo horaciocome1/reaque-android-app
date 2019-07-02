@@ -101,6 +101,10 @@ class MainActivity : AppCompatActivity() {
                 bottomnavigationview?.visibility = View.VISIBLE
             }
         }
+        if (destination.id == R.id.destination_feed && destination.id != R.id.destination_explore && destination.id != R.id.destination_more)
+            bottomnavigationview?.visibility = View.GONE
+        else
+            bottomnavigationview?.visibility = View.VISIBLE
     }
 
 }
