@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.util.*
@@ -66,8 +67,8 @@ class PostsService : PostsServiceInterface {
     }
 
     override fun getTop20(): LiveData<List<Post>> {
-        ref/*.orderBy("score", Query.Direction.DESCENDING).limit(20)
-            */.addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
+        ref.orderBy("score", Query.Direction.DESCENDING).limit(20)
+            .addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
                 this.top20Posts.value = snapshot.posts
             }
         return top20Posts

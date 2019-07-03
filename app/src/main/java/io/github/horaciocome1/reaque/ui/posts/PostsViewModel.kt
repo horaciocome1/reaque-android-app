@@ -79,7 +79,8 @@ class PostsViewModel(
     fun navigateUp(view: View) = view.findNavController().navigateUp()
 
     fun openUserProfile(view: View, user: User) {
-
+        val directions = ReadPostFragmentDirections.actionOpenUserProfileFromReadPost(user.id)
+        view.findNavController().navigate(directions)
     }
 
 }

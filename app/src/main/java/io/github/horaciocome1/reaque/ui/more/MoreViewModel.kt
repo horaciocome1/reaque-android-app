@@ -16,8 +16,10 @@
 package io.github.horaciocome1.reaque.ui.more
 
 import android.view.View
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.util.addSimpleAuthStateListener
@@ -25,13 +27,16 @@ import io.github.horaciocome1.reaque.util.user
 
 class MoreViewModel : ViewModel() {
 
-    private val auth = FirebaseAuth.getInstance()
+    private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
 
-    val user = MutableLiveData<User>()
-        get() {
-            auth.addSimpleAuthStateListener { field.value = it.user }
-            return field
-        }
+    private val _user = MutableLiveData<User>()
+
+    val user: LiveData<User>
+        get() = _user
+
+    init {
+        auth.addSimpleAuthStateListener { _user.value = it.user }
+    }
 
     fun openUpdateUser(view: View) {
         if (auth.currentUser != null) {
@@ -44,7 +49,9 @@ class MoreViewModel : ViewModel() {
     }
 
     fun openUserProfile(view: View) {
-        if (auth.currentUser != null) {
+        auth.currentUser?.let {
+            val directions = MoreFragmentDirections.actionOpenUserProfileFromMore(it.uid)
+            view.findNavController().navigate(directions)
         }
     }
 

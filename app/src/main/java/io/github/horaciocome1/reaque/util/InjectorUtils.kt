@@ -22,11 +22,14 @@ import io.github.horaciocome1.reaque.data.posts.PostsRepository
 import io.github.horaciocome1.reaque.data.ratings.RatingsRepository
 import io.github.horaciocome1.reaque.data.readings.ReadingsRepository
 import io.github.horaciocome1.reaque.data.shares.SharesRepository
+import io.github.horaciocome1.reaque.data.subscriptions.SubscriptionsRepository
 import io.github.horaciocome1.reaque.data.topics.TopicsRepository
+import io.github.horaciocome1.reaque.data.users.UsersRepository
 import io.github.horaciocome1.reaque.ui.explore.ExploreViewModelFactory
 import io.github.horaciocome1.reaque.ui.feed.FeedViewModelFactory
 import io.github.horaciocome1.reaque.ui.more.MoreViewModelFactory
 import io.github.horaciocome1.reaque.ui.posts.PostsViewModelFactory
+import io.github.horaciocome1.reaque.ui.users.UsersViewModelFactory
 
 object InjectorUtils {
 
@@ -58,6 +61,12 @@ object InjectorUtils {
             ratingsRepository,
             bookmarksRepository
         )
+    }
+
+    val usersViewModelFactory: UsersViewModelFactory by lazy {
+        val usersRepository = UsersRepository.getInstance(db.usersService)
+        val subscriptionsRepository = SubscriptionsRepository.getInstance(db.subscriptionsService)
+        UsersViewModelFactory(usersRepository, subscriptionsRepository)
     }
 
 }

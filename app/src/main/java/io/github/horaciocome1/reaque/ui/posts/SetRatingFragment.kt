@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.databinding.FragmentSetRatingBinding
 import io.github.horaciocome1.reaque.util.InjectorUtils
 import kotlinx.android.synthetic.main.fragment_set_rating.*
@@ -28,6 +29,16 @@ class SetRatingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
         toolbar?.setNavigationOnClickListener { viewModel.navigateUp(it) }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        arguments?.let { bundle ->
+            val post = Post(
+                SetRatingFragmentArgs.fromBundle(bundle).postId
+            )
+            binding.post = post
+        }
     }
 
 }

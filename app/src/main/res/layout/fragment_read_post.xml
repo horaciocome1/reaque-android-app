@@ -47,6 +47,7 @@
             android:onClick="@{(view) -> viewmodel.bookmark(view, post)}"
             app:icon="@drawable/outline_bookmark_border_18"
             app:iconTint="@color/orange"
+            android:enabled="false"
             app:layout_constraintBottom_toBottomOf="@+id/share_button"
             app:layout_constraintEnd_toStartOf="@+id/share_button"
             app:layout_constraintTop_toTopOf="@+id/share_button" />
