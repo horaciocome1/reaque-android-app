@@ -21,7 +21,7 @@
     <fragment
         android:id="@+id/destination_feed"
         android:name="io.github.horaciocome1.reaque.ui.feed.FeedFragment"
-        android:label="Feed">
+        android:label="@string/feed">
         <action
             android:id="@+id/action_open_read_post_from_feed"
             app:destination="@id/destination_read_post"
@@ -33,7 +33,7 @@
     <fragment
         android:id="@+id/destination_explore"
         android:name="io.github.horaciocome1.reaque.ui.explore.ExploreFragment"
-        android:label="Explore">
+        android:label="@string/explore">
         <action
             android:id="@+id/action_open_read_post_from_explore"
             app:destination="@id/destination_read_post"
@@ -45,15 +45,30 @@
     <fragment
         android:id="@+id/destination_more"
         android:name="io.github.horaciocome1.reaque.ui.more.MoreFragment"
-        android:label="More" />
+        android:label="@string/more" />
     <fragment
         android:id="@+id/destination_sign_in"
         android:name="io.github.horaciocome1.reaque.ui.sign_in.SignInFragment"
-        android:label="SignIn" />
+        android:label="@string/sign_in" />
     <fragment
         android:id="@+id/destination_read_post"
         android:name="io.github.horaciocome1.reaque.ui.posts.ReadPostFragment"
-        android:label="Read">
+        android:label="@string/read_post">
+        <argument
+            android:name="post_id"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_open_set_rating"
+            app:destination="@id/destination_set_rating"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/destination_set_rating"
+        android:name="io.github.horaciocome1.reaque.ui.posts.SetRatingFragment"
+        android:label="@string/set_rating">
         <argument
             android:name="post_id"
             app:argType="string" />

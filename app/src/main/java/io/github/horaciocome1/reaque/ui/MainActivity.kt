@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
             val bundle = Bundle().apply {
                 putString("post_id", it.id)
             }
-//            navController.navigate(R.id.destination_read, bundle)
+            navController.navigate(R.id.destination_read_post, bundle)
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
@@ -88,19 +88,20 @@ class MainActivity : AppCompatActivity() {
             passedThroughSignIn = false
             finish()
         }
-        when (destination.id) {
-            R.id.destination_sign_in -> {
-                supportActionBar?.hide()
-                bottomnavigationview?.visibility = View.GONE
+        if (isOrientationPortrait)
+            when (destination.id) {
+                R.id.destination_sign_in -> {
+                    supportActionBar?.hide()
+                    bottomnavigationview?.visibility = View.GONE
+                }
+                R.id.destination_feed -> supportActionBar?.hide()
+                R.id.destination_explore -> supportActionBar?.hide()
+                R.id.destination_more -> supportActionBar?.hide()
+                else -> {
+                    supportActionBar?.show()
+                    bottomnavigationview?.visibility = View.VISIBLE
+                }
             }
-            R.id.destination_feed -> supportActionBar?.hide()
-            R.id.destination_explore -> supportActionBar?.hide()
-            R.id.destination_more -> supportActionBar?.hide()
-            else -> {
-                supportActionBar?.show()
-                bottomnavigationview?.visibility = View.VISIBLE
-            }
-        }
         if (destination.id != R.id.destination_feed && destination.id != R.id.destination_explore && destination.id != R.id.destination_more)
             bottomnavigationview?.visibility = View.GONE
         else

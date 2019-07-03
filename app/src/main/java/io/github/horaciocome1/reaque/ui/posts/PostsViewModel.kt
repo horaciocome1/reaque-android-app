@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
 import io.github.horaciocome1.reaque.data.bookmarks.BookmarksRepository
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.posts.PostsRepository
@@ -15,6 +16,7 @@ import io.github.horaciocome1.reaque.data.shares.SharesRepository
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.util.Constants
+import io.github.horaciocome1.reaque.util.buildShortDynamicLink
 
 class PostsViewModel(
     private val postsRepository: PostsRepository,
@@ -23,6 +25,10 @@ class PostsViewModel(
     private val ratingsRepository: RatingsRepository,
     private val bookmarksRepository: BookmarksRepository
 ) : ViewModel() {
+
+    private val dynamicLinks: FirebaseDynamicLinks by lazy {
+        FirebaseDynamicLinks.getInstance()
+    }
 
     fun get(id: String): LiveData<List<Post>> {
         return if (id == Constants.BOOKMARKS_REQUEST)
@@ -41,32 +47,39 @@ class PostsViewModel(
 
     fun get(post: Post) = postsRepository.get(post)
 
-    fun setRate(view: View, post: Post, value: Int) {
-        view.isEnabled = false
-        ratingsRepository.rate(post, value) { view.isEnabled = true }
-    }
+    fun getRating(post: Post) = ratingsRepository.get(post)
 
-    fun getRate(post: Post) = ratingsRepository.get(post)
+    fun setRate(view: View, post: Post, value: Int) {
+        navigateUp(view)
+        ratingsRepository.rate(post, value) { }
+    }
 
     fun read(post: Post) = readingsRepository.read(post)
 
-    fun share(view: View, post: Post) {
+    fun share(fragment: ReadPostFragment, view: View, post: Post) {
         view.isEnabled = false
-        sharesRepository.share(post) { view.isEnabled = true }
+        dynamicLinks.buildShortDynamicLink(post) {
+            fragment.startActivity(it)
+            sharesRepository.share(post) { view.isEnabled = true }
+        }
     }
 
     fun bookmark(view: View, post: Post) {
         view.isEnabled = false
-        bookmarksRepository.bookmark(post) {}
+        bookmarksRepository.bookmark(post) { view.visibility = View.GONE }
     }
 
     fun unBookmark(view: View, post: Post) {
         view.isEnabled = false
-        bookmarksRepository.unBookmark(post) {}
+        bookmarksRepository.unBookmark(post) { view.visibility = View.GONE }
     }
 
     fun isBookmarked(post: Post) = bookmarksRepository.isBookmarked(post)
 
     fun navigateUp(view: View) = view.findNavController().navigateUp()
+
+    fun openUserProfile(view: View, user: User) {
+
+    }
 
 }

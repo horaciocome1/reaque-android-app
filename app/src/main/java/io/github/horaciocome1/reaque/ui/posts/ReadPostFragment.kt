@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.button.MaterialButton
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.databinding.FragmentReadPostBinding
 import io.github.horaciocome1.reaque.util.InjectorUtils
@@ -29,6 +30,9 @@ class ReadPostFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewmodel = viewModel
+        share_button?.setOnClickListener {
+            binding.post?.let { viewModel.share(this, view, it) }
+        }
     }
 
     override fun onStart() {
@@ -38,8 +42,19 @@ class ReadPostFragment : Fragment() {
                 ReadPostFragmentArgs.fromBundle(bundle).postId
             )
             viewModel.get(post).observe(this, Observer { binding.post = it })
-            viewModel.getRate(post).observe(this, Observer { rating_button?.text = it })
+            viewModel.getRating(post).observe(this, Observer { rating_button?.text = it })
+            viewModel.isBookmarked(post).observe(this, Observer {
+                if (it)
+                    unbookmark_button?.turnVisible()
+                else
+                    bookmark_button?.turnVisible()
+            })
         }
+    }
+
+    private fun MaterialButton.turnVisible() {
+        visibility = View.VISIBLE
+        isEnabled = true
     }
 
 }

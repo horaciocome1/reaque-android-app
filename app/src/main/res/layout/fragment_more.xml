@@ -274,7 +274,7 @@
                     <TextView
                         android:id="@+id/feedback_textview"
                         style="@style/AppTheme.CompleteClickableEffect"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:paddingStart="32dp"
                         android:paddingLeft="32dp"
@@ -282,8 +282,8 @@
                         android:paddingEnd="32dp"
                         android:paddingRight="32dp"
                         android:paddingBottom="16dp"
-                        android:text="@string/feedback"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                        android:text="@string/feedback"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/licenses_textview" />
@@ -303,7 +303,7 @@
                     <TextView
                         android:id="@+id/about_textview"
                         style="@style/AppTheme.CompleteClickableEffect"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
                         android:paddingStart="32dp"

@@ -297,6 +297,27 @@
                             <option name="y" value="430" />
                           </Point>
                         </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_open_set_rating">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="destination_set_rating">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="1057" />
+                            <option name="y" value="-24" />
+                          </Point>
+                        </option>
                       </LayoutPositions>
                     </value>
                   </entry>

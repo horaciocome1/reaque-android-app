@@ -67,5 +67,14 @@
     <string name="subscribe">Subscribe</string>
     <string name="bullet">•</string>
     <string name="done">Done</string>
+    <string name="rating_5">5 stars</string>
+    <string name="rating_4">4 stars</string>
+    <string name="rating_3">3 stars</string>
+    <string name="rating_2">2 stars</string>
+    <string name="rating_1">1 star</string>
+    <string name="set_rating">Set rating</string>
+    <string name="read_post">Read post</string>
+    <string name="feed">Feed</string>
+    <string name="sign_in">Sign In</string>
 
 </resources>
