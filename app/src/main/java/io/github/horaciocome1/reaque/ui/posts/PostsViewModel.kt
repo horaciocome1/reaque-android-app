@@ -58,10 +58,12 @@ class PostsViewModel(
     fun get(post: Post) = postsRepository.get(post)
 
     fun read(post: Post) {
-        if (P.id == post.id && P.read) {
-            P.id = post.id
-            P.read = true
-            readingsRepository.read(post) { }
+        P.run {
+            if (id != post.id) {
+                id = post.id
+                readingsRepository.read(post) { read = true }
+            } else if (!read)
+                readingsRepository.read(post) { read = true }
         }
     }
 

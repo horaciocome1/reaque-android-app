@@ -61,23 +61,23 @@ val Bookmark.map: Map<String, Any>
     )
 
 val Subscription.map: Map<String, Any>
-    get() = mapOf(
-        "user" to mapOf(
-            "id" to user.id,
-            "name" to user.name,
-            "pic" to user.pic,
-            "top_topic" to user.topTopic,
-            "subscribers" to user.subscribers
-        ),
-        "subscriber" to mapOf(
-            "id" to subscriber.id,
-            "name" to subscriber.name,
-            "pic" to subscriber.pic,
-            "top_topic" to subscriber.topTopic,
-            "subscribers" to subscriber.subscribers
-        ),
-        "timestamp" to FieldValue.serverTimestamp()
-    )
+    get() {
+        return mapOf(
+            "user" to mapOf(
+                "id" to user.id,
+                "name" to user.name,
+                "pic" to user.pic,
+                "top_topic" to user.topTopic,
+                "subscribers" to user.subscribers
+            ),
+            "subscriber" to mapOf(
+                "id" to subscriber.id,
+                "name" to subscriber.name,
+                "pic" to subscriber.pic
+            ),
+            "timestamp" to FieldValue.serverTimestamp()
+        )
+    }
 
 val Rating.map: Map<String, Any>
     get() = mapOf(
