@@ -7,7 +7,7 @@ import io.github.horaciocome1.reaque.data.users.User
 
 interface PostsServiceInterface {
 
-    fun create(post: Post, onSuccessListener: (DocumentReference) -> Unit)
+    fun create(post: Post, onSuccessListener: (DocumentReference?) -> Unit)
 
     fun get(post: Post): LiveData<Post>
 

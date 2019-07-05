@@ -3,6 +3,7 @@ package io.github.horaciocome1.reaque.data.feeds
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import io.github.horaciocome1.reaque.data.posts.Post
@@ -12,16 +13,19 @@ import io.github.horaciocome1.reaque.util.onListeningFailed
 
 class FeedsService : FeedsServiceInterface {
 
-    private val tag = "FeedsService"
+    private val tag by lazy { "FeedsService" }
 
-    private val ref = FirebaseFirestore.getInstance().collection("feeds")
-    private val requestRef = FirebaseFirestore.getInstance().collection("feed_requests")
+    private val ref: CollectionReference by lazy { FirebaseFirestore.getInstance().collection("feeds") }
 
-    private val auth = FirebaseAuth.getInstance()
+    private val requestRef: CollectionReference by lazy { FirebaseFirestore.getInstance().collection("feed_requests") }
+
+    private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
 
     private var _posts = mutableListOf<Post>()
 
-    private val posts = MutableLiveData<List<Post>>()
+    private val posts: MutableLiveData<List<Post>> by lazy {
+        MutableLiveData<List<Post>>().apply { value = mutableListOf() }
+    }
 
     override fun get(): LiveData<List<Post>> {
         if (_posts.isEmpty())

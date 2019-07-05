@@ -33,11 +33,11 @@
         app:cardCornerRadius="@dimen/default_corner_radius"
         app:cardElevation="@dimen/default_card_elevation"
         app:strokeColor="@color/default_stroke_color"
-        app:strokeWidth="@dimen/default_stroke_width"
-        style="@style/AppTheme.CompleteClickableEffect">
+        app:strokeWidth="@dimen/default_stroke_width">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
+            style="@style/AppTheme.CompleteClickableEffect"
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatImageView

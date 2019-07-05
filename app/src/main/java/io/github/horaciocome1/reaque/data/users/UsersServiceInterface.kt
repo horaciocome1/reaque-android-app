@@ -5,7 +5,7 @@ import io.github.horaciocome1.reaque.data.topics.Topic
 
 interface UsersServiceInterface {
 
-    fun update(user: User, onSuccessListener: (Void) -> Unit)
+    fun update(user: User, onSuccessListener: (Void?) -> Unit)
 
     fun get(user: User): LiveData<User>
 

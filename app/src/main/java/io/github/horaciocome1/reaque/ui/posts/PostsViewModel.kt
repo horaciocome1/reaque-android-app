@@ -26,6 +26,15 @@ class PostsViewModel(
     private val bookmarksRepository: BookmarksRepository
 ) : ViewModel() {
 
+    private object P {
+
+        // to avoid reading a post more than once in a session
+
+        var id = ""
+        var read = false
+
+    }
+
     private val dynamicLinks: FirebaseDynamicLinks by lazy {
         FirebaseDynamicLinks.getInstance()
     }
@@ -45,7 +54,16 @@ class PostsViewModel(
         }
     }
 
+
     fun get(post: Post) = postsRepository.get(post)
+
+    fun read(post: Post) {
+        if (P.id == post.id && P.read) {
+            P.id = post.id
+            P.read = true
+            readingsRepository.read(post) { }
+        }
+    }
 
     fun getRating(post: Post) = ratingsRepository.get(post)
 
@@ -53,8 +71,6 @@ class PostsViewModel(
         navigateUp(view)
         ratingsRepository.rate(post, value) { }
     }
-
-    fun read(post: Post) = readingsRepository.read(post)
 
     fun share(fragment: ReadPostFragment, view: View, post: Post) {
         view.isEnabled = false
@@ -76,11 +92,16 @@ class PostsViewModel(
 
     fun isBookmarked(post: Post) = bookmarksRepository.isBookmarked(post)
 
-    fun navigateUp(view: View) = view.findNavController().navigateUp()
-
     fun openUserProfile(view: View, user: User) {
         val directions = ReadPostFragmentDirections.actionOpenUserProfileFromReadPost(user.id)
         view.findNavController().navigate(directions)
     }
+
+    fun openSetRating(view: View, post: Post) {
+        val directions = ReadPostFragmentDirections.actionOpenSetRating(post.id)
+        view.findNavController().navigate(directions)
+    }
+
+    fun navigateUp(view: View) = view.findNavController().navigateUp()
 
 }

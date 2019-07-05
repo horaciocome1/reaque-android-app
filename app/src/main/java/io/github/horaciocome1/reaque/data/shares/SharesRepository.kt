@@ -4,7 +4,7 @@ import io.github.horaciocome1.reaque.data.posts.Post
 
 class SharesRepository private constructor(private val service: SharesService) : SharesServiceInterface {
 
-    override fun share(post: Post, onSuccessListener: (Void) -> Unit) =
+    override fun share(post: Post, onSuccessListener: (Void?) -> Unit) =
         service.share(post, onSuccessListener)
 
     companion object {

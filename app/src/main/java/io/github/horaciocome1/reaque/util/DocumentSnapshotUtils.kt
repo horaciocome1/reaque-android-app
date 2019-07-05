@@ -34,6 +34,7 @@ val DocumentSnapshot.user: User
         posts = this@user["posts"].toString()
         subscribers = this@user["subscribers"].toString()
         subscriptions = this@user["subscriptions"].toString()
+        topTopic = this@user["top_topic"].toString()
     }
 
 val DocumentSnapshot.topic: Topic
@@ -110,6 +111,6 @@ val DocumentSnapshot.subscriber: User
         id = this@subscriber["subscriber.id"].toString()
         name = this@subscriber["subscriber.name"].toString()
         pic = this@subscriber["subscriber.pic"].toString()
-        subscribers = this@subscriber["user.subscribers"].toString()
-        topTopic = this@subscriber["user.top_topic"].toString()
+        subscribers = this@subscriber["subscriber.subscribers"].toString()
+        topTopic = this@subscriber["subscriber.top_topic"].toString()
     }

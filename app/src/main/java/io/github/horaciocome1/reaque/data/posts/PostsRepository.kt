@@ -6,7 +6,7 @@ import io.github.horaciocome1.reaque.data.users.User
 
 class PostsRepository private constructor(private val service: PostsService) : PostsServiceInterface {
 
-    override fun create(post: Post, onSuccessListener: (DocumentReference) -> Unit) =
+    override fun create(post: Post, onSuccessListener: (DocumentReference?) -> Unit) =
         service.create(post, onSuccessListener)
 
     override fun get(post: Post) = service.get(post)

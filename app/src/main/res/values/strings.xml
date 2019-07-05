@@ -76,5 +76,6 @@
     <string name="read_post">Read post</string>
     <string name="feed">Feed</string>
     <string name="sign_in">Sign In</string>
+    <string name="unsubscribe">Unsubscribe</string>
 
 </resources>

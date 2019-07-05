@@ -41,20 +41,29 @@ class ReadPostFragment : Fragment() {
             val post = Post(
                 ReadPostFragmentArgs.fromBundle(bundle).postId
             )
-            viewModel.get(post).observe(this, Observer { binding.post = it })
+            viewModel.get(post).observe(this, Observer {
+                viewModel.read(it)
+                binding.post = it
+            })
             viewModel.getRating(post).observe(this, Observer { rating_button?.text = it })
             viewModel.isBookmarked(post).observe(this, Observer {
                 if (it)
-                    unbookmark_button?.turnVisible()
+                    turnVisible(unbookmark_button, bookmark_button)
                 else
-                    bookmark_button?.turnVisible()
+                    turnVisible(bookmark_button, unbookmark_button)
             })
         }
     }
 
-    private fun MaterialButton.turnVisible() {
-        visibility = View.VISIBLE
-        isEnabled = true
+    private fun turnVisible(b1: MaterialButton, b2: MaterialButton) {
+        b1.run {
+            visibility = View.VISIBLE
+            isEnabled = true
+        }
+        b2.run {
+            visibility = View.GONE
+            isEnabled = false
+        }
     }
 
 }

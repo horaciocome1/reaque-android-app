@@ -41,16 +41,22 @@ class UserProfileFragment : Fragment() {
             viewModel.get(user).observe(this, Observer { binding.user = it })
             viewModel.amSubscribedTo(user).observe(this, Observer {
                 if (it)
-                    unsubscribe_button?.turnVisible()
+                    turnVisible(unsubscribe_button, subscribe_button)
                 else
-                    subscribe_button?.turnVisible()
+                    turnVisible(subscribe_button, unsubscribe_button)
             })
         }
     }
 
-    private fun MaterialButton.turnVisible() {
-        visibility = View.VISIBLE
-        isEnabled = true
+    private fun turnVisible(b1: MaterialButton, b2: MaterialButton) {
+        b1.run {
+            visibility = View.VISIBLE
+            isEnabled = true
+        }
+        b2.run {
+            visibility = View.GONE
+            isEnabled = false
+        }
     }
 
 }

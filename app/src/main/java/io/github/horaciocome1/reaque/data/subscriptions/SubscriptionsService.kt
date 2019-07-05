@@ -3,25 +3,32 @@ package io.github.horaciocome1.reaque.data.subscriptions
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.util.*
 
 class SubscriptionsService : SubscriptionsServiceInterface {
 
-    private val tag = "SubscriptionsService"
+    private val tag: String by lazy { "SubscriptionsService" }
 
-    private val ref = FirebaseFirestore.getInstance().collection("subscriptions")
+    private val ref: CollectionReference by lazy { FirebaseFirestore.getInstance().collection("subscriptions") }
 
-    private val auth = FirebaseAuth.getInstance()
+    private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
 
-    private val subscriptions = MutableLiveData<List<User>>().apply { value = mutableListOf() }
+    private val subscriptions: MutableLiveData<List<User>> by lazy {
+        MutableLiveData<List<User>>().apply { value = mutableListOf() }
+    }
 
-    private val subscribers = MutableLiveData<List<User>>().apply { value = mutableListOf() }
+    private val subscribers: MutableLiveData<List<User>> by lazy {
+        MutableLiveData<List<User>>().apply { value = mutableListOf() }
+    }
 
-    private val amSubscribedTo = MutableLiveData<Boolean>().apply { value = false }
+    private val amSubscribedTo: MutableLiveData<Boolean> by lazy {
+        MutableLiveData<Boolean>().apply { value = false }
+    }
 
-    override fun subscribe(user: User, onSuccessListener: (Void) -> Unit) {
+    override fun subscribe(user: User, onSuccessListener: (Void?) -> Unit) {
         auth.addSimpleAuthStateListener {
             val subscription = Subscription("").apply {
                 this.user = user
@@ -31,7 +38,7 @@ class SubscriptionsService : SubscriptionsServiceInterface {
         }
     }
 
-    override fun unSubscribe(user: User, onSuccessListener: (Void) -> Unit) {
+    override fun unSubscribe(user: User, onSuccessListener: (Void?) -> Unit) {
         auth.addSimpleAuthStateListener {
             ref.document("${it.uid}_${user.id}").delete().addOnSuccessListener(onSuccessListener)
         }
@@ -57,10 +64,10 @@ class SubscriptionsService : SubscriptionsServiceInterface {
 
     override fun amSubscribedTo(user: User): LiveData<Boolean> {
         amSubscribedTo.value = false
-        auth.addSimpleAuthStateListener {
-            ref.document("${it.uid}_${user.id}").addSimpleSnapshotListener(tag) {
-                // if this is called, document exists
-                amSubscribedTo.value = true
+        auth.addSimpleAuthStateListener { firebaseUser ->
+            ref.document("${firebaseUser.uid}_${user.id}").addSimpleSnapshotListener(tag) {
+                val userId = it["user.id"]
+                amSubscribedTo.value = userId != null
             }
         }
         return amSubscribedTo

@@ -17,6 +17,7 @@ package io.github.horaciocome1.reaque.data.topics
 
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import io.github.horaciocome1.reaque.util.addSimpleAndSafeSnapshotListener
@@ -24,18 +25,15 @@ import io.github.horaciocome1.reaque.util.topics
 
 class TopicsService {
 
-    private val tag = "TopicsService"
-    private val empty = 0
+    private val tag: String by lazy { "TopicsService" }
 
-    private val ref = FirebaseFirestore.getInstance().collection("topics")
+    private val empty: Int by lazy { 0 }
 
-    private val auth = FirebaseAuth.getInstance()
+    private val ref: CollectionReference by lazy { FirebaseFirestore.getInstance().collection("topics") }
+
+    private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
 
     private var _notEmptyTopics = mutableListOf<Topic>()
-        set(value) {
-            field = value
-            notEmptyTopics.value = field
-        }
 
     val notEmptyTopics = MutableLiveData<List<Topic>>()
         get() {
@@ -49,10 +47,6 @@ class TopicsService {
         }
 
     private var _topics = mutableListOf<Topic>()
-        set(value) {
-            field = value
-            topics.value = field
-        }
 
     val topics = MutableLiveData<List<Topic>>()
         get() {

@@ -5,9 +5,9 @@ import io.github.horaciocome1.reaque.data.users.User
 
 interface SubscriptionsServiceInterface {
 
-    fun subscribe(user: User, onSuccessListener: (Void) -> Unit)
+    fun subscribe(user: User, onSuccessListener: (Void?) -> Unit)
 
-    fun unSubscribe(user: User, onSuccessListener: (Void) -> Unit)
+    fun unSubscribe(user: User, onSuccessListener: (Void?) -> Unit)
 
     fun getSubscriptions(): LiveData<List<User>>
 

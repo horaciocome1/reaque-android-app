@@ -3,6 +3,7 @@ package io.github.horaciocome1.reaque.data.posts
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -12,24 +13,35 @@ import io.github.horaciocome1.reaque.util.*
 
 class PostsService : PostsServiceInterface {
 
-    private val tag = "PostsService:"
+    private val tag: String by lazy { "PostsService:" }
 
-    private val ref = FirebaseFirestore.getInstance().collection("posts")
+    private val ref: CollectionReference by lazy { FirebaseFirestore.getInstance().collection("posts") }
 
-    private val auth = FirebaseAuth.getInstance()
+    private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
 
-    private val post = MutableLiveData<Post>().apply {
-        value =
-            Post("")
+    private var _post = Post("")
+
+    private val post: MutableLiveData<Post> by lazy {
+        MutableLiveData<Post>().apply { value = _post }
     }
-    private val topicPosts = MutableLiveData<List<Post>>().apply { value = mutableListOf() }
-    private val userPosts = MutableLiveData<List<Post>>().apply { value = mutableListOf() }
-    private val top20Posts = MutableLiveData<List<Post>>().apply { value = mutableListOf() }
+
+    private val topicPosts: MutableLiveData<List<Post>> by lazy {
+        MutableLiveData<List<Post>>().apply { value = mutableListOf() }
+    }
+
+    private val userPosts: MutableLiveData<List<Post>> by lazy {
+        MutableLiveData<List<Post>>().apply { value = mutableListOf() }
+    }
+
+    private val top20Posts: MutableLiveData<List<Post>> by lazy {
+        MutableLiveData<List<Post>>().apply { value = mutableListOf() }
+    }
 
     private var userId = ""
+
     private var topicId = ""
 
-    override fun create(post: Post, onSuccessListener: (DocumentReference) -> Unit) {
+    override fun create(post: Post, onSuccessListener: (DocumentReference?) -> Unit) {
         auth.addSimpleAuthStateListener {
             post.user = it.user
             ref.add(post.map).addOnSuccessListener(onSuccessListener)
@@ -37,12 +49,11 @@ class PostsService : PostsServiceInterface {
     }
 
     override fun get(post: Post): LiveData<Post> {
-        this.post.value?.id?.let {
-            if (post.id != it)
+        if (post.id != _post.id)
                 ref.document(post.id).addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
-                    this.post.value = snapshot.post
+                    _post = snapshot.post
+                    this.post.value = _post
                 }
-        }
         return this.post
     }
 

@@ -4,9 +4,10 @@ import io.github.horaciocome1.reaque.data.posts.Post
 
 class BookmarksRepository private constructor(private val service: BookmarksService) : BookmarksServiceInterface {
 
-    override fun bookmark(post: Post, onSuccessListener: (Void) -> Unit) = service.bookmark(post, onSuccessListener)
+    override fun bookmark(post: Post, onSuccessListener: (Void?) -> Unit) = service.bookmark(post, onSuccessListener)
 
-    override fun unBookmark(post: Post, onSuccessListener: (Void) -> Unit) = service.unBookmark(post, onSuccessListener)
+    override fun unBookmark(post: Post, onSuccessListener: (Void?) -> Unit) =
+        service.unBookmark(post, onSuccessListener)
 
     override fun get() = service.get()
 

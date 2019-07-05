@@ -25,9 +25,9 @@ import io.github.horaciocome1.reaque.util.onUploadingFailed
 
 class StorageService {
 
-    private val tag = "StorageService"
+    private val tag: String by lazy { "StorageService" }
 
-    private val storage = FirebaseStorage.getInstance()
+    private val storage: FirebaseStorage by lazy { FirebaseStorage.getInstance() }
 
     fun upload(imageUri: Uri, topic: Topic, onSuccessListener: (String) -> Unit) {
         val ref = storage.reference.child("images/${topic.id}/${imageUri.lastPathSegment}")

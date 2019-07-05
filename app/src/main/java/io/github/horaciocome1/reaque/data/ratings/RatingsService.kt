@@ -3,6 +3,7 @@ package io.github.horaciocome1.reaque.data.ratings
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.util.addSimpleAuthStateListener
@@ -12,15 +13,17 @@ import io.github.horaciocome1.reaque.util.user
 
 class RatingsService : RatingsServiceInterface {
 
-    private val tag = "RatingsService"
+    private val tag: String by lazy { "RatingsService" }
 
-    private val ref = FirebaseFirestore.getInstance().collection("ratings")
+    private val ref: CollectionReference by lazy { FirebaseFirestore.getInstance().collection("ratings") }
 
-    private val auth = FirebaseAuth.getInstance()
+    private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
 
-    private val rate = MutableLiveData<String>().apply { value = "1" }
+    private val rating: MutableLiveData<String> by lazy {
+        MutableLiveData<String>().apply { value = "1" }
+    }
 
-    override fun rate(post: Post, value: Int, onSuccessListener: (Void) -> Unit) {
+    override fun rate(post: Post, value: Int, onSuccessListener: (Void?) -> Unit) {
         auth.addSimpleAuthStateListener {
             val rating = Rating("").apply {
                 this.post = post
@@ -32,17 +35,17 @@ class RatingsService : RatingsServiceInterface {
     }
 
     override fun get(post: Post): LiveData<String> {
+        rating.value = "1"
         auth.addSimpleAuthStateListener { user ->
             ref.document("${user.uid}_${post.id}").addSimpleSnapshotListener(tag) {
                 val value = it["value"]
                 if (value != null)
-                    rate.value = value.toString()
+                    rating.value = value.toString()
                 else
-                    rate.value = "1"
-
+                    rating.value = "1"
             }
         }
-        return rate
+        return rating
     }
 
 }

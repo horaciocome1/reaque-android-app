@@ -52,9 +52,9 @@ val Bookmark.map: Map<String, Any>
                 "name" to post.user.name,
                 "pic" to post.user.pic
             ),
-            "timestamp" to post.date
+            "timestamp" to post.timestamp
         ),
-        "subscriber" to mapOf(
+        "user" to mapOf(
             "id" to user.id
         ),
         "timestamp" to FieldValue.serverTimestamp()

@@ -89,17 +89,14 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
         if (isOrientationPortrait)
-            when (destination.id) {
-                R.id.destination_sign_in -> {
-                    supportActionBar?.hide()
-                    bottomnavigationview?.visibility = View.GONE
-                }
-                R.id.destination_feed -> supportActionBar?.hide()
-                R.id.destination_explore -> supportActionBar?.hide()
-                R.id.destination_more -> supportActionBar?.hide()
-                else -> {
-                    supportActionBar?.show()
-                    bottomnavigationview?.visibility = View.VISIBLE
+            supportActionBar?.run {
+                when (destination.id) {
+                    R.id.destination_sign_in -> hide()
+                    R.id.destination_feed -> hide()
+                    R.id.destination_explore -> hide()
+                    R.id.destination_more -> hide()
+                    R.id.destination_set_rating -> hide()
+                    else -> show()
                 }
             }
         if (destination.id != R.id.destination_feed && destination.id != R.id.destination_explore && destination.id != R.id.destination_more)
