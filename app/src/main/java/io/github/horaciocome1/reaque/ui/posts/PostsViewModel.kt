@@ -26,18 +26,16 @@ class PostsViewModel(
     private val bookmarksRepository: BookmarksRepository
 ) : ViewModel() {
 
-    private object P {
-
-        // to avoid reading a post more than once in a session
-
-        var id = ""
-        var read = false
-
-    }
-
     private val dynamicLinks: FirebaseDynamicLinks by lazy {
         FirebaseDynamicLinks.getInstance()
     }
+
+    var readingPost = Post("")
+        set(value) {
+            if (value.id.isNotBlank() && value.id != field.id)
+                readingsRepository.read(value) { }
+            field = value
+        }
 
     fun get(id: String): LiveData<List<Post>> {
         return if (id == Constants.BOOKMARKS_REQUEST)
@@ -56,16 +54,6 @@ class PostsViewModel(
 
 
     fun get(post: Post) = postsRepository.get(post)
-
-    fun read(post: Post) {
-        P.run {
-            if (id != post.id) {
-                id = post.id
-                readingsRepository.read(post) { read = true }
-            } else if (!read)
-                readingsRepository.read(post) { read = true }
-        }
-    }
 
     fun getRating(post: Post) = ratingsRepository.get(post)
 

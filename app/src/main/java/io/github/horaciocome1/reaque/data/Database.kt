@@ -16,7 +16,7 @@
 package io.github.horaciocome1.reaque.data
 
 import io.github.horaciocome1.reaque.data.bookmarks.BookmarksService
-import io.github.horaciocome1.reaque.data.feeds.FeedsService
+import io.github.horaciocome1.reaque.data.feed.FeedService
 import io.github.horaciocome1.reaque.data.posts.PostsService
 import io.github.horaciocome1.reaque.data.ratings.RatingsService
 import io.github.horaciocome1.reaque.data.readings.ReadingsService
@@ -29,7 +29,7 @@ import io.github.horaciocome1.reaque.data.users.UsersService
 class Database private constructor() {
 
     var bookmarksService = BookmarksService()
-    var feedsService = FeedsService()
+    var feedsService = FeedService()
     var postsService = PostsService()
     var ratingsService = RatingsService()
     var readingsService = ReadingsService()

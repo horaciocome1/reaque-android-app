@@ -2,7 +2,7 @@ package io.github.horaciocome1.reaque.data.bookmarks
 
 import io.github.horaciocome1.reaque.data.posts.Post
 
-class BookmarksRepository private constructor(private val service: BookmarksService) : BookmarksServiceInterface {
+class BookmarksRepository private constructor(private val service: BookmarksService) : BookmarksInterface {
 
     override fun bookmark(post: Post, onSuccessListener: (Void?) -> Unit) = service.bookmark(post, onSuccessListener)
 

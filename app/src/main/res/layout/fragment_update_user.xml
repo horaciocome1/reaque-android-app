@@ -102,6 +102,7 @@
                 android:layout_margin="8dp"
                 android:padding="@dimen/default_padding"
                 android:text="@string/submit"
+                android:onClick="@{(view) -> viewmodel.update(view)}"
                 app:backgroundTint="@android:color/white"
                 app:cornerRadius="@dimen/default_corner_radius"
                 android:textColor="@color/secondaryColor" />

@@ -3,17 +3,16 @@ package io.github.horaciocome1.reaque.data.users
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.util.*
 
-class UsersService : UsersServiceInterface {
+class UsersService : UsersInterface {
 
     private val tag: String by lazy { "UsersService" }
 
-    private val ref: CollectionReference by lazy { FirebaseFirestore.getInstance().collection("users") }
+    private val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
 
     private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
 
@@ -29,26 +28,31 @@ class UsersService : UsersServiceInterface {
 
     private var topicId = ""
 
-    override fun update(user: User, onSuccessListener: (Void?) -> Unit) {
+    override fun update(user: User, onSuccessListener: (DocumentReference?) -> Unit) {
         auth.addSimpleAuthStateListener {
-            ref.document(it.uid).set(user.map, SetOptions.merge()).addOnSuccessListener(onSuccessListener)
+            val ref = db.collection("users/${it.uid}/update_requests")
+            ref.add(user.mapSimple).addOnSuccessListener(onSuccessListener)
         }
     }
 
     override fun get(user: User): LiveData<User> {
-        if (user.id != _user.id)
-            ref.document(user.id).addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
+        if (user.id != _user.id) {
+            val ref = db.document("users/${user.id}")
+            ref.addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
                 _user = snapshot.user
                 this.user.value = _user
             }
+        }
         return this.user
     }
 
     override fun get(topic: Topic): LiveData<List<User>> {
-        if (topic.id != topicId)
-            ref.whereEqualTo("topic.id", topic.id).addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
+        if (topic.id != topicId) {
+            val ref = db.collection("topics/${topic.id}/users")
+            ref.addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
                 users.value = snapshot.users
             }
+        }
         return users
     }
 

@@ -3,7 +3,7 @@ package io.github.horaciocome1.reaque.data.bookmarks
 import androidx.lifecycle.LiveData
 import io.github.horaciocome1.reaque.data.posts.Post
 
-interface BookmarksServiceInterface {
+interface BookmarksInterface {
 
     fun bookmark(post: Post, onSuccessListener: (Void?) -> Unit)
 

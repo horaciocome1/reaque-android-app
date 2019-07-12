@@ -5,7 +5,7 @@ import com.google.firebase.firestore.DocumentReference
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
 
-interface PostsServiceInterface {
+interface PostsInterface {
 
     fun create(post: Post, onSuccessListener: (DocumentReference?) -> Unit)
 

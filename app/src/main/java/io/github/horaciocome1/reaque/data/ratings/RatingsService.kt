@@ -3,46 +3,47 @@ package io.github.horaciocome1.reaque.data.ratings
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.util.addSimpleAuthStateListener
 import io.github.horaciocome1.reaque.util.addSimpleSnapshotListener
-import io.github.horaciocome1.reaque.util.map
-import io.github.horaciocome1.reaque.util.user
+import io.github.horaciocome1.reaque.util.mapSimple
 
-class RatingsService : RatingsServiceInterface {
+class RatingsService : RatingsInterface {
 
     private val tag: String by lazy { "RatingsService" }
 
-    private val ref: CollectionReference by lazy { FirebaseFirestore.getInstance().collection("ratings") }
+    private val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
 
     private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
 
-    private val rating: MutableLiveData<String> by lazy {
-        MutableLiveData<String>().apply { value = "1" }
+    private val rating: MutableLiveData<Int> by lazy {
+        MutableLiveData<Int>().apply { value = 1 }
     }
 
     override fun rate(post: Post, value: Int, onSuccessListener: (Void?) -> Unit) {
-        auth.addSimpleAuthStateListener {
-            val rating = Rating("").apply {
-                this.post = post
-                user = it.user
-                this.value = value
+        auth.addSimpleAuthStateListener { user ->
+            rating.value?.let {
+                if (value != it) {
+                    val map = post.mapSimple.plus("value" to value)
+                    val ref = db.document("users/${user.uid}/ratings/${post.id}")
+                    ref.set(map, SetOptions.merge())
+                }
             }
-            ref.document("${it.uid}_${post.id}").set(rating.map).addOnSuccessListener(onSuccessListener)
         }
     }
 
-    override fun get(post: Post): LiveData<String> {
-        rating.value = "1"
+    override fun get(post: Post): LiveData<Int> {
+        rating.value = 1
         auth.addSimpleAuthStateListener { user ->
-            ref.document("${user.uid}_${post.id}").addSimpleSnapshotListener(tag) {
+            val ref = db.document("users/${user.uid}/ratings/${post.id}")
+            ref.addSimpleSnapshotListener(tag) {
                 val value = it["value"]
                 if (value != null)
-                    rating.value = value.toString()
+                    rating.value = value.toString().toInt()
                 else
-                    rating.value = "1"
+                    rating.value = 1
             }
         }
         return rating

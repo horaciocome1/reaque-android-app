@@ -20,7 +20,7 @@ class UpdateUserViewModel(private val repository: UsersRepository) : ObservableV
 
     var isUpdatingUser = false
 
-    fun update(view: View, user: User) {
+    fun update(view: View) {
         isUpdatingUser = true
         repository.update(user) { navigateUp(view) }
     }

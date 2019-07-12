@@ -3,7 +3,7 @@ package io.github.horaciocome1.reaque.data.subscriptions
 import androidx.lifecycle.LiveData
 import io.github.horaciocome1.reaque.data.users.User
 
-interface SubscriptionsServiceInterface {
+interface SubscriptionsInterface {
 
     fun subscribe(user: User, onSuccessListener: (Void?) -> Unit)
 

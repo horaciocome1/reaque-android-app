@@ -36,10 +36,19 @@ class UsersViewModel(
 
     fun amSubscribedTo(user: User) = subscriptionsRepository.amSubscribedTo(user)
 
-    fun openSubscribers(view: View, user: User) {}
+    fun openSubscribers(view: View, user: User) {
+        if (user.id != "")
+            view.visibility = View.VISIBLE
+    }
 
-    fun openSubscriptions(view: View, user: User) {}
+    fun openSubscriptions(view: View, user: User) {
+        if (user.id != "")
+            view.visibility = View.VISIBLE
+    }
 
-    fun openPosts(view: View, user: User) {}
+    fun openPosts(view: View, user: User) {
+        if (user.id != "")
+            view.visibility = View.VISIBLE
+    }
 
 }

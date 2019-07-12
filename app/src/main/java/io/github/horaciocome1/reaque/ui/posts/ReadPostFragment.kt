@@ -42,10 +42,10 @@ class ReadPostFragment : Fragment() {
                 ReadPostFragmentArgs.fromBundle(bundle).postId
             )
             viewModel.get(post).observe(this, Observer {
-                viewModel.read(it)
                 binding.post = it
+                viewModel.readingPost = it
             })
-            viewModel.getRating(post).observe(this, Observer { rating_button?.text = it })
+            viewModel.getRating(post).observe(this, Observer { rating_button?.text = it.toString() })
             viewModel.isBookmarked(post).observe(this, Observer {
                 if (it)
                     turnVisible(unbookmark_button, bookmark_button)

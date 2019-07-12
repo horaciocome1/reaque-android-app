@@ -2,7 +2,7 @@ package io.github.horaciocome1.reaque.data.readings
 
 import io.github.horaciocome1.reaque.data.posts.Post
 
-class ReadingsRepository private constructor(private val service: ReadingsService) : ReadingsServiceInterface {
+class ReadingsRepository private constructor(private val service: ReadingsService) : ReadingsInterface {
 
     override fun read(post: Post, onSuccessListener: (Void?) -> Unit) = service.read(post, onSuccessListener)
 

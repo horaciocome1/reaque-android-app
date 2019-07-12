@@ -3,16 +3,19 @@ package io.github.horaciocome1.reaque.data.bookmarks
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import io.github.horaciocome1.reaque.data.posts.Post
-import io.github.horaciocome1.reaque.util.*
+import io.github.horaciocome1.reaque.util.addSimpleAuthStateListener
+import io.github.horaciocome1.reaque.util.addSimpleSnapshotListener
+import io.github.horaciocome1.reaque.util.mapSimple
+import io.github.horaciocome1.reaque.util.posts
 
-class BookmarksService : BookmarksServiceInterface {
+class BookmarksService : BookmarksInterface {
 
     private val tag: String by lazy { "BookmarksService" }
 
-    private val ref: CollectionReference by lazy { FirebaseFirestore.getInstance().collection("bookmarks") }
+    private val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
 
     private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
 
@@ -26,17 +29,15 @@ class BookmarksService : BookmarksServiceInterface {
 
     override fun bookmark(post: Post, onSuccessListener: (Void?) -> Unit) {
         auth.addSimpleAuthStateListener {
-            val bookmark = Bookmark("").apply {
-                this.post = post
-                this.user = it.user
-            }
-            ref.document("${it.uid}_${post.id}").set(bookmark.map).addOnSuccessListener(onSuccessListener)
+            val ref = db.document("users/${it.uid}/bookmarks/${post.id}")
+            ref.set(post.mapSimple).addOnSuccessListener(onSuccessListener)
         }
     }
 
     override fun unBookmark(post: Post, onSuccessListener: (Void?) -> Unit) {
         auth.addSimpleAuthStateListener {
-            ref.document("${it.uid}_${post.id}").delete().addOnSuccessListener(onSuccessListener)
+            val ref = db.document("users/${it.uid}/bookmarks/${post.id}")
+            ref.delete().addOnSuccessListener(onSuccessListener)
         }
     }
 
@@ -44,8 +45,9 @@ class BookmarksService : BookmarksServiceInterface {
         posts.value?.let {
             if (it.isEmpty())
                 auth.addSimpleAuthStateListener { user ->
-                    ref.whereEqualTo("user.id", user.uid).addSimpleSnapshotListener(tag) { snapshot ->
-                        posts.value = snapshot.bookmarks
+                    val ref = db.collection("users/${user.uid}/bookmarks")
+                    ref.orderBy("score", Query.Direction.DESCENDING).addSimpleSnapshotListener(tag) { snapshot ->
+                        posts.value = snapshot.posts
                     }
                 }
         }
@@ -55,8 +57,9 @@ class BookmarksService : BookmarksServiceInterface {
     override fun isBookmarked(post: Post): LiveData<Boolean> {
         isBookmarked.value = false
         auth.addSimpleAuthStateListener { user ->
-            ref.document("${user.uid}_${post.id}").addSimpleSnapshotListener(tag) {
-                val postId = it["post.id"]
+            val ref = db.document("users/${user.uid}/bookmarks/${post.id}")
+            ref.addSimpleSnapshotListener(tag) {
+                val postId = it["title"]
                 isBookmarked.value = postId != null
             }
         }

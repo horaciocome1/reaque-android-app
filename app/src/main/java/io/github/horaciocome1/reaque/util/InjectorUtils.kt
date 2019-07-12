@@ -17,7 +17,7 @@ package io.github.horaciocome1.reaque.util
 
 import io.github.horaciocome1.reaque.data.Database
 import io.github.horaciocome1.reaque.data.bookmarks.BookmarksRepository
-import io.github.horaciocome1.reaque.data.feeds.FeedsRepository
+import io.github.horaciocome1.reaque.data.feed.FeedRepository
 import io.github.horaciocome1.reaque.data.posts.PostsRepository
 import io.github.horaciocome1.reaque.data.ratings.RatingsRepository
 import io.github.horaciocome1.reaque.data.readings.ReadingsRepository
@@ -36,7 +36,7 @@ object InjectorUtils {
     private val db = Database.getInstance()
 
     val feedViewModelFactory: FeedViewModelFactory by lazy {
-        val repository = FeedsRepository.getInstance(db.feedsService)
+        val repository = FeedRepository.getInstance(db.feedsService)
         FeedViewModelFactory(repository)
     }
 

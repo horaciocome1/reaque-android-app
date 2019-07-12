@@ -84,6 +84,8 @@ class MainActivity : AppCompatActivity() {
         }
 
     private val onDestinationChangedListener = NavController.OnDestinationChangedListener { _, destination, _ ->
+        if (destination.id == R.id.destination_sign_in)
+            passedThroughSignIn = true
         if (destination.id != R.id.destination_sign_in && auth.currentUser == null && passedThroughSignIn) {
             passedThroughSignIn = false
             finish()
@@ -95,10 +97,11 @@ class MainActivity : AppCompatActivity() {
                     R.id.destination_feed -> hide()
                     R.id.destination_explore -> hide()
                     R.id.destination_more -> hide()
-                    R.id.destination_set_rating -> hide()
                     else -> show()
                 }
             }
+        if (destination.id == R.id.destination_set_rating)
+            supportActionBar?.hide()
         if (destination.id != R.id.destination_feed && destination.id != R.id.destination_explore && destination.id != R.id.destination_more)
             bottomnavigationview?.visibility = View.GONE
         else

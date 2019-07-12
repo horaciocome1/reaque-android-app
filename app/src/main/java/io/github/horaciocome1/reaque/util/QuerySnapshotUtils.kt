@@ -11,61 +11,21 @@ import io.github.horaciocome1.reaque.data.users.User
 val QuerySnapshot.topics: MutableList<Topic>
     get() {
         val list = mutableListOf<Topic>()
-        forEach { doc ->
-            list.add(doc.topic)
-            list.sortBy { it.title }
-        }
+        forEach { list.add(it.topic) }
         return list
     }
 
 val QuerySnapshot.users: MutableList<User>
     get() {
         val list = mutableListOf<User>()
-        forEach { doc ->
-            list.add(doc.user)
-            list.sortBy { it.name }
-        }
+        forEach { list.add(it.user) }
         return list
     }
 
 val QuerySnapshot.posts: MutableList<Post>
     get() {
         val list = mutableListOf<Post>()
-        forEach { doc ->
-            list.add(doc.post)
-            list.sortByDescending { it.timestamp }
-        }
-        return list
-    }
-
-val QuerySnapshot.bookmarks: MutableList<Post>
-    get() {
-        val list = mutableListOf<Post>()
-        forEach { list.add(it.bookmark) }
-        return list
-    }
-
-val QuerySnapshot.feeds: MutableList<Post>
-    get() {
-        val list = mutableListOf<Post>()
-        forEach { snapshot ->
-            list.add(snapshot.feed)
-            list.sortBy { it.score }
-        }
-        return list
-    }
-
-val QuerySnapshot.subscriptions: MutableList<User>
-    get() {
-        val list = mutableListOf<User>()
-        forEach { list.add(it.subscribed) }
-        return list
-    }
-
-val QuerySnapshot.subscribers: MutableList<User>
-    get() {
-        val list = mutableListOf<User>()
-        forEach { list.add(it.subscriber) }
+        forEach { list.add(it.post) }
         return list
     }
 

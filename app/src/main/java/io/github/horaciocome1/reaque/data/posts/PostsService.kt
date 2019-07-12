@@ -3,7 +3,6 @@ package io.github.horaciocome1.reaque.data.posts
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -11,11 +10,11 @@ import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.util.*
 
-class PostsService : PostsServiceInterface {
+class PostsService : PostsInterface {
 
     private val tag: String by lazy { "PostsService:" }
 
-    private val ref: CollectionReference by lazy { FirebaseFirestore.getInstance().collection("posts") }
+    private val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
 
     private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
 
@@ -44,22 +43,27 @@ class PostsService : PostsServiceInterface {
     override fun create(post: Post, onSuccessListener: (DocumentReference?) -> Unit) {
         auth.addSimpleAuthStateListener {
             post.user = it.user
+            val ref = db.collection("posts")
             ref.add(post.map).addOnSuccessListener(onSuccessListener)
         }
     }
 
     override fun get(post: Post): LiveData<Post> {
-        if (post.id != _post.id)
-                ref.document(post.id).addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
-                    _post = snapshot.post
-                    this.post.value = _post
-                }
+        if (post.id != _post.id) {
+            val ref = db.document("posts/${post.id}")
+            ref.addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
+                _post = snapshot.post
+                this.post.value = _post
+            }
+        }
         return this.post
     }
 
     override fun get(user: User): LiveData<List<Post>> {
         if (user.id != userId) {
-            ref.whereEqualTo("user.id", user.id).addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
+            val ref = db.collection("users/${user.id}/posts")
+            ref.orderBy("score", Query.Direction.DESCENDING)
+                .addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
                 this.userPosts.value = snapshot.posts
             }
             userId = user.id
@@ -69,7 +73,9 @@ class PostsService : PostsServiceInterface {
 
     override fun get(topic: Topic): LiveData<List<Post>> {
         if (topic.id != topicId) {
-            ref.whereEqualTo("topic.id", topic.id).addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
+            val ref = db.collection("topics/${topic.id}/posts")
+            ref.orderBy("score", Query.Direction.DESCENDING)
+                .addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
                 this.topicPosts.value = snapshot.posts
             }
             topicId = topic.id
@@ -78,10 +84,15 @@ class PostsService : PostsServiceInterface {
     }
 
     override fun getTop20(): LiveData<List<Post>> {
-        ref.orderBy("score", Query.Direction.DESCENDING).limit(20)
-            .addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
-                this.top20Posts.value = snapshot.posts
+        top20Posts.value?.let {
+            if (it.isEmpty()) {
+                val ref = db.collection("posts")
+                ref.orderBy("score", Query.Direction.DESCENDING).limit(20)
+                    .addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
+                        this.top20Posts.value = snapshot.posts
+                    }
             }
+        }
         return top20Posts
     }
 

@@ -3,7 +3,7 @@ package io.github.horaciocome1.reaque.data.subscriptions
 import io.github.horaciocome1.reaque.data.users.User
 
 class SubscriptionsRepository private constructor(private val service: SubscriptionsService) :
-    SubscriptionsServiceInterface {
+    SubscriptionsInterface {
 
     override fun subscribe(user: User, onSuccessListener: (Void?) -> Unit) = service.subscribe(user, onSuccessListener)
 
