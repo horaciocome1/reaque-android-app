@@ -26,7 +26,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:columns="@{1}"
+            app:columns="@{2}"
             app:list="@{users}"
             app:host="@{Constants.USERS_FRAGMENT}"
             app:type="@{Constants.LISTING_USERS}" />

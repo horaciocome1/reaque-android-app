@@ -50,6 +50,7 @@ class PostsService : PostsInterface {
 
     override fun get(post: Post): LiveData<Post> {
         if (post.id != _post.id) {
+            this.post.value = Post("")
             val ref = db.document("posts/${post.id}")
             ref.addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
                 _post = snapshot.post
@@ -61,6 +62,7 @@ class PostsService : PostsInterface {
 
     override fun get(user: User): LiveData<List<Post>> {
         if (user.id != userId) {
+            userPosts.value = mutableListOf()
             val ref = db.collection("users/${user.id}/posts")
             ref.orderBy("score", Query.Direction.DESCENDING)
                 .addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
@@ -73,6 +75,7 @@ class PostsService : PostsInterface {
 
     override fun get(topic: Topic): LiveData<List<Post>> {
         if (topic.id != topicId) {
+            topicPosts.value = mutableListOf()
             val ref = db.collection("topics/${topic.id}/posts")
             ref.orderBy("score", Query.Direction.DESCENDING)
                 .addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->

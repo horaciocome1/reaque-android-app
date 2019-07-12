@@ -18,14 +18,13 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/primaryColor</item>
-        <item name="colorPrimaryDark">@color/primaryColor</item>
+        <item name="colorPrimary">@color/primaryLightColor</item>
+        <item name="colorPrimaryDark">@color/primaryLightColor</item>
         <item name="colorAccent">@color/secondaryColor</item>
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@color/primaryTextColor</item>
         <item name="materialCardViewStyle">@style/AppTheme.CardView</item>
-        <item name="floatingActionButtonStyle">@style/AppTheme.Fab</item>
     </style>
 
     <style name="AppTheme.CompleteClickableEffect">
@@ -38,11 +37,6 @@
         <item name="cardElevation">@dimen/default_card_elevation</item>
         <item name="cardCornerRadius">@dimen/default_corner_radius</item>
         <item name="cardBackgroundColor">@color/primaryLightColor</item>
-    </style>
-
-    <style name="AppTheme.Fab" parent="Widget.MaterialComponents.FloatingActionButton">
-        <item name="tint">@color/secondaryColor</item>
-        <item name="backgroundTint">@color/primaryLightColor</item>
     </style>
 
     <style name="AppTheme.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">

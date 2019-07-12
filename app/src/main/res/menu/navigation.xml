@@ -18,7 +18,7 @@
     <item
         android:id="@+id/destination_feed"
         android:icon="@drawable/outline_whatshot_24"
-        android:title="@string/notifications" />
+        android:title="@string/feed" />
 
     <item
         android:id="@+id/destination_explore"

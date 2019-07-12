@@ -21,25 +21,22 @@
     <string name="terms_and_conditions_url" translatable="false">https://github.com/horaciocome1/reaque/tree/master/docs/TERMS_AND_CONDITIONS.md</string>
     <string name="privacy_policy_url" translatable="false">https://github.com/horaciocome1/reaque/tree/master/docs/PRIVACY_POLICY.md</string>
     <string name="licence_url" translatable="false">https://github.com/horaciocome1/reaque/tree/master/docs/LICENSE</string>
-    <string name="contributing_url" translatable="false">https://github.com/horaciocome1/reaque/tree/master/docs/DONATE.md</string>
-    <string name="read_me_url" translatable="false">https://reaque.firebaseapp.com</string>
-    <string name="project_url" translatable="false">https://github.com/horaciocome1/reaque</string>
+    <string name="about_url" translatable="false">https://reaque.firebaseapp.com</string>
     <string name="url_background_sign_in" translatable="false">https://firebasestorage.googleapis.com/v0/b/reaque.appspot.com/o/resources%2Fimages%2F19228.jpg?alt=media&amp;token=2f9d40b5-f2bf-47cb-8534-782c40487923</string>
 
     <string name="developer_email" translatable="false">hcome@pm.me</string>
 
-    <string name="topics">Topics</string>
-    <string name="posts">Posts</string>
+    <string name="email_app_not_found">Email app not found</string>
+
     <string name="more">More</string>
-    <string name="notifications">Feed</string>
-    <string name="favorite">Favorite</string>
+    <string name="posts">Posts</string>
 
     <string name="sign_out">Log out</string>
     <string name="feedback">Feedback</string>
     <string name="about">About</string>
     <string name="terms_and_conditions">Terms and conditions</string>
     <string name="privacy_policy">Privacy policy</string>
-    <string name="open_source_licenses">Open source licenses</string>
+    <string name="licenses">Licenses</string>
     <string name="share">Share</string>
     <string name="cancel">Cancel</string>
     <string name="gallery">Gallery</string>
@@ -51,16 +48,13 @@
     <string name="bio">Bio</string>
     <string name="submit">Submit</string>
 
-    <string name="email_app_not_found">Email app not found.</string>
     <string name="welcome">Welcome</string>
     <string name="content_description_post_cover_image">Post cover image</string>
     <string name="content_description_user_profile_image">User profile image</string>
-    <string name="my_profile">My profile</string>
     <string name="subscriptions">Subscriptions</string>
     <string name="explore">Explore</string>
     <string name="suggestions">Suggestions</string>
     <string name="create_post">Create post</string>
-    <string name="browse_users">Browse users</string>
     <string name="subscribers">Subscribers</string>
     <string name="bookmarks">Bookmarks</string>
     <string name="post">Post</string>
@@ -75,7 +69,9 @@
     <string name="set_rating">Set rating</string>
     <string name="read_post">Read post</string>
     <string name="feed">Feed</string>
-    <string name="sign_in">Sign In</string>
+    <string name="sign_in">Sign in</string>
     <string name="unsubscribe">Unsubscribe</string>
+    <string name="users">Users</string>
+    <string name="topic_of_interest">Topic of interest</string>
 
 </resources>

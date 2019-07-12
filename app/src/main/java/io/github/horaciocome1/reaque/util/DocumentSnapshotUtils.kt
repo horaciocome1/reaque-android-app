@@ -50,7 +50,7 @@ val DocumentSnapshot.topic: Topic
 val DocumentSnapshot.post: Post
     get() = Post(id).apply {
         pic = this@post["pic"].toString()
-        val stamp = this@post["date"]
+        val stamp = this@post["timestamp"]
         if (stamp is Timestamp)
             timestamp = stamp
         message = this@post["message"].toString()

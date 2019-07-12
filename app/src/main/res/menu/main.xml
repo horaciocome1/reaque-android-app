@@ -18,12 +18,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/my_profile"
-        android:icon="@drawable/outline_account_circle_24"
-        android:title="@string/my_profile"
-        app:showAsAction="ifRoom" />
-
-    <item
         android:id="@+id/about"
         android:icon="@drawable/outline_info_24"
         android:title="@string/about"

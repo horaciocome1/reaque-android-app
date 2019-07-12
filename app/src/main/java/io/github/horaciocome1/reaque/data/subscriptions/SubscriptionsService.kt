@@ -31,6 +31,10 @@ class SubscriptionsService : SubscriptionsInterface {
         MutableLiveData<Boolean>().apply { value = false }
     }
 
+    private val subscriptionsOf = ""
+
+    private val subscribersOf = ""
+
     override fun subscribe(user: User, onSuccessListener: (Void?) -> Unit) {
         auth.addSimpleAuthStateListener {
             val ref = db.document("users/${it.uid}/subscriptions/${user.id}")
@@ -45,29 +49,21 @@ class SubscriptionsService : SubscriptionsInterface {
         }
     }
 
-    override fun getSubscriptions(): LiveData<List<User>> {
-        auth.addSimpleAuthStateListener { user ->
-            subscriptions.value?.let { list ->
-                if (list.isEmpty()) {
-                    val ref = db.collection("users/${user.uid}/subscriptions")
-                    ref.orderBy("timestamp", Query.Direction.DESCENDING).addSimpleSnapshotListener(tag) {
-                        subscriptions.value = it.users
-                    }
-                }
+    override fun getSubscriptions(user: User): LiveData<List<User>> {
+        if (user.id != subscriptionsOf) {
+            val ref = db.collection("users/${user.id}/subscriptions")
+            ref.orderBy("timestamp", Query.Direction.DESCENDING).addSimpleSnapshotListener(tag) {
+                subscriptions.value = it.users
             }
         }
         return subscriptions
     }
 
-    override fun getSubscribers(): LiveData<List<User>> {
-        auth.addSimpleAuthStateListener { user ->
-            subscribers.value?.let { list ->
-                if (list.isEmpty()) {
-                    val ref = db.collection("users/${user.uid}/subscribers")
-                    ref.orderBy("timestamp", Query.Direction.DESCENDING).addSimpleSnapshotListener(tag) {
-                        subscribers.value = it.users
-                    }
-                }
+    override fun getSubscribers(user: User): LiveData<List<User>> {
+        if (user.id != subscribersOf) {
+            val ref = db.collection("users/${user.id}/subscribers")
+            ref.orderBy("timestamp", Query.Direction.DESCENDING).addSimpleSnapshotListener(tag) {
+                subscribers.value = it.users
             }
         }
         return subscribers

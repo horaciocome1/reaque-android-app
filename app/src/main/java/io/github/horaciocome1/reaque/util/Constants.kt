@@ -49,5 +49,8 @@ object Constants {
     const val BOOKMARKS_REQUEST = "bookmarks"
     const val SUBSCRIPTIONS_REQUEST = "subscriptions"
     const val SUBSCRIBERS_REQUEST = "subscribers"
+    const val TOPIC_POSTS_REQUEST = "topic_posts"
+    const val TOPIC_USERS_REQUEST = "topic_users"
+    const val USER_POSTS_REQUEST = "user_posts"
 
 }

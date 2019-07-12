@@ -15,15 +15,21 @@
 
 package io.github.horaciocome1.reaque.ui.more
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.google.firebase.auth.FirebaseAuth
+import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.databinding.FragmentMoreBinding
 import io.github.horaciocome1.reaque.util.InjectorUtils
+import kotlinx.android.synthetic.main.fragment_more.*
 
 class MoreFragment : Fragment() {
 
@@ -34,9 +40,50 @@ class MoreFragment : Fragment() {
         ViewModelProviders.of(this, factory)[MoreViewModel::class.java]
     }
 
+    private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentMoreBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        licenses_textview.setOnClickListener {
+            val url = resources.getString(R.string.licence_url)
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
+        }
+        about_textview.setOnClickListener {
+            val url = resources.getString(R.string.about_url)
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
+        }
+        privacy_policy_textview.setOnClickListener {
+            val url = resources.getString(R.string.privacy_policy_url)
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
+        }
+        terms_and_conditions_textview.setOnClickListener {
+            val url = resources.getString(R.string.terms_and_conditions_url)
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
+        }
+        feedback_textview.setOnClickListener {
+            val email = resources.getString(R.string.developer_email)
+            try {
+                val mailto = "mailto:$email"
+                val emailIntent = Intent(Intent.ACTION_SENDTO)
+                emailIntent.data = Uri.parse(mailto)
+                startActivity(emailIntent)
+            } catch (exception: Exception) {
+                Toast.makeText(it.context, R.string.email_app_not_found, Toast.LENGTH_LONG).show()
+            }
+        }
+        sign_out_textview.setOnClickListener {
+            auth.signOut()
+            activity?.finish()
+        }
     }
 
     override fun onStart() {

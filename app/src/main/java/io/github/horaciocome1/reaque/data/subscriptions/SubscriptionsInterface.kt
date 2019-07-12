@@ -9,9 +9,9 @@ interface SubscriptionsInterface {
 
     fun unSubscribe(user: User, onSuccessListener: (Void?) -> Unit)
 
-    fun getSubscriptions(): LiveData<List<User>>
+    fun getSubscriptions(user: User): LiveData<List<User>>
 
-    fun getSubscribers(): LiveData<List<User>>
+    fun getSubscribers(user: User): LiveData<List<User>>
 
     fun amSubscribedTo(user: User): LiveData<Boolean>
 

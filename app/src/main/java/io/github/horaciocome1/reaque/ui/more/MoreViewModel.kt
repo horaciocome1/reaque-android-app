@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import io.github.horaciocome1.reaque.data.users.User
+import io.github.horaciocome1.reaque.util.Constants
 import io.github.horaciocome1.reaque.util.addSimpleAuthStateListener
 import io.github.horaciocome1.reaque.util.user
 
@@ -51,6 +52,15 @@ class MoreViewModel : ViewModel() {
     fun openUserProfile(view: View) {
         auth.currentUser?.let {
             val directions = MoreFragmentDirections.actionOpenUserProfileFromMore(it.uid)
+            view.findNavController().navigate(directions)
+        }
+    }
+
+    fun openBookmarks(view: View) {
+        auth.currentUser?.let {
+            val directions = MoreFragmentDirections.actionOpenPostsFromMore(
+                it.uid, Constants.BOOKMARKS_REQUEST
+            )
             view.findNavController().navigate(directions)
         }
     }

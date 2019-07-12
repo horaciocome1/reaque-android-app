@@ -19,7 +19,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/primaryColor"
+    android:background="@color/primaryLightColor"
     tools:context=".ui.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -52,6 +52,7 @@
         app:itemTextColor="@drawable/color_bottom_navigation"
         app:labelVisibilityMode="labeled"
         android:theme="@style/AppTheme.BottomNavigationView"
+        android:background="@color/primaryLightColor"
         app:menu="@menu/navigation" />
 
 </LinearLayout>

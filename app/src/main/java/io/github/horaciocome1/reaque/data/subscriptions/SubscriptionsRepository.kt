@@ -10,9 +10,9 @@ class SubscriptionsRepository private constructor(private val service: Subscript
     override fun unSubscribe(user: User, onSuccessListener: (Void?) -> Unit) =
         service.unSubscribe(user, onSuccessListener)
 
-    override fun getSubscriptions() = service.getSubscriptions()
+    override fun getSubscriptions(user: User) = service.getSubscriptions(user)
 
-    override fun getSubscribers() = service.getSubscribers()
+    override fun getSubscribers(user: User) = service.getSubscribers(user)
 
     override fun amSubscribedTo(user: User) = service.amSubscribedTo(user)
 
