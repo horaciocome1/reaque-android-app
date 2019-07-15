@@ -8,7 +8,7 @@ import com.google.firebase.firestore.SetOptions
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.util.addSimpleAuthStateListener
 import io.github.horaciocome1.reaque.util.addSimpleSnapshotListener
-import io.github.horaciocome1.reaque.util.mapSimple
+import io.github.horaciocome1.reaque.util.mapRating
 
 class RatingsService : RatingsInterface {
 
@@ -24,13 +24,8 @@ class RatingsService : RatingsInterface {
 
     override fun rate(post: Post, value: Int, onSuccessListener: (Void?) -> Unit) {
         auth.addSimpleAuthStateListener { user ->
-            rating.value?.let {
-                if (value != it) {
-                    val map = post.mapSimple.plus("value" to value)
-                    val ref = db.document("users/${user.uid}/ratings/${post.id}")
-                    ref.set(map, SetOptions.merge())
-                }
-            }
+            val ref = db.document("users/${user.uid}/ratings/${post.id}/requests/${post.id}")
+            ref.set(post.mapRating((value)), SetOptions.merge())
         }
     }
 

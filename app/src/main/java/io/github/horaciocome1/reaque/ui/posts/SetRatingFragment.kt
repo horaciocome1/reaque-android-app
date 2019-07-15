@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.databinding.FragmentSetRatingBinding
@@ -37,7 +38,7 @@ class SetRatingFragment : Fragment() {
             val post = Post(
                 SetRatingFragmentArgs.fromBundle(bundle).postId
             )
-            binding.post = post
+            viewModel.get(post).observe(this, Observer { binding.post = post })
         }
     }
 

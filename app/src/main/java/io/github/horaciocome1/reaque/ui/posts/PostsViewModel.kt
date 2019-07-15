@@ -49,8 +49,10 @@ class PostsViewModel(
     fun getRating(post: Post) = ratingsRepository.get(post)
 
     fun setRate(view: View, post: Post, value: Int) {
-        navigateUp(view)
-        ratingsRepository.rate(post, value) { }
+        if (post.id.isNotBlank()) {
+            navigateUp(view)
+            ratingsRepository.rate(post, value) { }
+        }
     }
 
     fun share(fragment: ReadPostFragment, view: View, post: Post) {

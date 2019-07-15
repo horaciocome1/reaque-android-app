@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.util.*
@@ -49,7 +50,8 @@ class UsersService : UsersInterface {
     override fun get(topic: Topic): LiveData<List<User>> {
         if (topic.id != topicId) {
             val ref = db.collection("topics/${topic.id}/users")
-            ref.addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
+            ref.orderBy("score", Query.Direction.DESCENDING)
+                .addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
                 users.value = snapshot.users
             }
         }

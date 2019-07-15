@@ -15,7 +15,9 @@
 
 package io.github.horaciocome1.reaque.ui
 
+import android.content.Intent
 import android.content.res.Configuration
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.Menu
@@ -65,6 +67,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        item?.let {
+            if (it.itemId == R.id.menu_about) {
+                val url = resources.getString(R.string.about_url)
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                startActivity(intent)
+                return super.onOptionsItemSelected(it)
+            }
+        }
         val navigated = NavigationUI.onNavDestinationSelected(item!!, navController)
         return navigated || super.onOptionsItemSelected(item)
     }
