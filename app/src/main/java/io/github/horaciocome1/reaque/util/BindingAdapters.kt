@@ -97,7 +97,7 @@ class BindingAdapters {
                 else
                     StaggeredGridLayoutManager(columns, RecyclerView.VERTICAL)
                 adapter = TopicsAdapter(list)
-                if (host == Constants.POSTS_FRAGMENT) {
+                if (host == Constants.EXPLORE_FRAGMENT) {
                     addOnItemClickListener { view, position ->
                         val directions = ExploreFragmentDirections.actionOpenPostsFromExplore(
                             list[position].id, Constants.TOPIC_POSTS_REQUEST
