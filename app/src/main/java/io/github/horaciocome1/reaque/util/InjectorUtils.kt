@@ -22,6 +22,7 @@ import io.github.horaciocome1.reaque.data.posts.PostsRepository
 import io.github.horaciocome1.reaque.data.ratings.RatingsRepository
 import io.github.horaciocome1.reaque.data.readings.ReadingsRepository
 import io.github.horaciocome1.reaque.data.shares.SharesRepository
+import io.github.horaciocome1.reaque.data.storage.StorageRepository
 import io.github.horaciocome1.reaque.data.subscriptions.SubscriptionsRepository
 import io.github.horaciocome1.reaque.data.topics.TopicsRepository
 import io.github.horaciocome1.reaque.data.users.UsersRepository
@@ -29,7 +30,9 @@ import io.github.horaciocome1.reaque.ui.explore.ExploreViewModelFactory
 import io.github.horaciocome1.reaque.ui.feed.FeedViewModelFactory
 import io.github.horaciocome1.reaque.ui.more.MoreViewModelFactory
 import io.github.horaciocome1.reaque.ui.posts.PostsViewModelFactory
+import io.github.horaciocome1.reaque.ui.posts.create.CreatePostViewModelFactory
 import io.github.horaciocome1.reaque.ui.users.UsersViewModelFactory
+import io.github.horaciocome1.reaque.ui.users.update.UpdateUserViewModelFactory
 
 object InjectorUtils {
 
@@ -63,10 +66,26 @@ object InjectorUtils {
         )
     }
 
+    val createPostViewModelFactory: CreatePostViewModelFactory by lazy {
+        val topicsRepository = TopicsRepository.getInstance(db.topicsService)
+        val postsRepository = PostsRepository.getInstance(db.postsService)
+        val storageRepository = StorageRepository.getInstance(db.storageService)
+        CreatePostViewModelFactory(
+            postsRepository,
+            topicsRepository,
+            storageRepository
+        )
+    }
+
     val usersViewModelFactory: UsersViewModelFactory by lazy {
         val usersRepository = UsersRepository.getInstance(db.usersService)
         val subscriptionsRepository = SubscriptionsRepository.getInstance(db.subscriptionsService)
         UsersViewModelFactory(usersRepository, subscriptionsRepository)
+    }
+
+    val updateUserViewModelFactory: UpdateUserViewModelFactory by lazy {
+        val repository = UsersRepository.getInstance(db.usersService)
+        UpdateUserViewModelFactory(repository)
     }
 
 }

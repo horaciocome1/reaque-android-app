@@ -97,6 +97,8 @@ class MainActivity : AppCompatActivity() {
                     R.id.destination_feed -> hide()
                     R.id.destination_explore -> hide()
                     R.id.destination_more -> hide()
+                    R.id.destination_create_post -> hide()
+                    R.id.destination_update_user -> hide()
                     else -> show()
                 }
             }

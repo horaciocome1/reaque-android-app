@@ -40,12 +40,16 @@ class MoreViewModel : ViewModel() {
     }
 
     fun openUpdateUser(view: View) {
-        if (auth.currentUser != null) {
+        auth.currentUser?.let {
+            val directions = MoreFragmentDirections.actionOpenUpdateUserFromMore(it.uid)
+            view.findNavController().navigate(directions)
         }
     }
 
     fun openCreatePost(view: View) {
         if (auth.currentUser != null) {
+            val directions = MoreFragmentDirections.actionOpenCreatePostFromMore()
+            view.findNavController().navigate(directions)
         }
     }
 

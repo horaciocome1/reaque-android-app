@@ -3,8 +3,8 @@ package io.github.horaciocome1.reaque.data.users
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.util.*
 
@@ -28,10 +28,10 @@ class UsersService : UsersInterface {
 
     private var topicId = ""
 
-    override fun update(user: User, onSuccessListener: (DocumentReference?) -> Unit) {
+    override fun update(user: User, onSuccessListener: (Void?) -> Unit) {
         auth.addSimpleAuthStateListener {
-            val ref = db.collection("users/${it.uid}/update_requests")
-            ref.add(user.mapSimple).addOnSuccessListener(onSuccessListener)
+            val ref = db.document("users/${it.uid}")
+            ref.set(user.mapSimple, SetOptions.merge()).addOnSuccessListener(onSuccessListener)
         }
     }
 

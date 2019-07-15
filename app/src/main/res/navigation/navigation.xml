@@ -15,7 +15,7 @@
 
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/mobile_navigation"
+    android:id="@+id/navigation"
     android:label="@string/app_name"
     app:startDestination="@id/destination_feed">
     <fragment
@@ -74,6 +74,20 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_open_update_user_from_more"
+            app:destination="@id/destination_update_user"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_open_create_post_from_more"
+            app:destination="@id/destination_create_post"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/destination_sign_in"
@@ -112,7 +126,7 @@
     <fragment
         android:id="@+id/destination_user_profile"
         android:name="io.github.horaciocome1.reaque.ui.users.UserProfileFragment"
-        android:label="User profile">
+        android:label="@string/user_profile">
         <argument
             android:name="user_id"
             app:argType="string" />
@@ -167,4 +181,16 @@
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
+    <fragment
+        android:id="@+id/destination_update_user"
+        android:name="io.github.horaciocome1.reaque.ui.users.update.UpdateUserFragment"
+        android:label="@string/update">
+        <argument
+            android:name="user_id"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/destination_create_post"
+        android:name="io.github.horaciocome1.reaque.ui.posts.create.CreatePostFragment"
+        android:label="@string/create_post" />
 </navigation>

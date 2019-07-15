@@ -70,7 +70,7 @@ class BindingAdapters {
                                 when (type) {
                                     Constants.LISTING_TOPICS -> {
                                         val topics = list as List<Topic>
-                                        loadTopics(topics, columns)
+                                        loadTopics(topics, columns, host)
                                     }
                                     Constants.LISTING_POSTS -> {
                                         val posts = list as List<Post>
@@ -91,23 +91,25 @@ class BindingAdapters {
                 }
             }
 
-            private fun RecyclerView.loadTopics(list: List<Topic>, columns: Int) {
+            private fun RecyclerView.loadTopics(list: List<Topic>, columns: Int, host: Int) {
                 layoutManager = if (columns == 1)
                     LinearLayoutManager(context)
                 else
                     StaggeredGridLayoutManager(columns, RecyclerView.VERTICAL)
                 adapter = TopicsAdapter(list)
-                addOnItemClickListener { view, position ->
-                    val directions = ExploreFragmentDirections.actionOpenPostsFromExplore(
-                        list[position].id, Constants.TOPIC_POSTS_REQUEST
-                    )
-                    view.findNavController().navigate(directions)
-                }
-                addOnItemLongPressListener { view, position ->
-                    val directions = ExploreFragmentDirections.actionOpenUsersFromExplore(
-                        list[position].id, Constants.TOPIC_USERS_REQUEST
-                    )
-                    view.findNavController().navigate(directions)
+                if (host == Constants.POSTS_FRAGMENT) {
+                    addOnItemClickListener { view, position ->
+                        val directions = ExploreFragmentDirections.actionOpenPostsFromExplore(
+                            list[position].id, Constants.TOPIC_POSTS_REQUEST
+                        )
+                        view.findNavController().navigate(directions)
+                    }
+                    addOnItemLongPressListener { view, position ->
+                        val directions = ExploreFragmentDirections.actionOpenUsersFromExplore(
+                            list[position].id, Constants.TOPIC_USERS_REQUEST
+                        )
+                        view.findNavController().navigate(directions)
+                    }
                 }
             }
 

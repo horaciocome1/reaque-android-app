@@ -234,6 +234,18 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
+                  <entry key="destination_create_post">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-339" />
+                            <option name="y" value="1638" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="destination_explore">
                     <value>
                       <LayoutPositions>
@@ -291,13 +303,23 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-548" />
-                            <option name="y" value="1202" />
+                            <option name="x" value="-535" />
+                            <option name="y" value="1108" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_open_create_post_from_more">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_open_posts_from_more">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_open_update_user_from_more">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -383,6 +405,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="destination_update_user">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="99" />
+                            <option name="y" value="1450" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="destination_user_profile">
                     <value>
                       <LayoutPositions>
@@ -394,7 +428,7 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_open_posts_from_more">
+                            <entry key="action_open_posts_from_user_profile">
                               <value>
                                 <LayoutPositions />
                               </value>

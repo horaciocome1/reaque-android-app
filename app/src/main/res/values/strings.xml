@@ -73,5 +73,7 @@
     <string name="unsubscribe">Unsubscribe</string>
     <string name="users">Users</string>
     <string name="topic_of_interest">Topic of interest</string>
+    <string name="user_profile">User\'s profile</string>
+    <string name="update">Update</string>
 
 </resources>

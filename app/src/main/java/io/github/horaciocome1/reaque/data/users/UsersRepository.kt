@@ -1,11 +1,10 @@
 package io.github.horaciocome1.reaque.data.users
 
-import com.google.firebase.firestore.DocumentReference
 import io.github.horaciocome1.reaque.data.topics.Topic
 
 class UsersRepository private constructor(private val service: UsersService) : UsersInterface {
 
-    override fun update(user: User, onSuccessListener: (DocumentReference?) -> Unit) =
+    override fun update(user: User, onSuccessListener: (Void?) -> Unit) =
         service.update(user, onSuccessListener)
 
     override fun get(user: User) = service.get(user)

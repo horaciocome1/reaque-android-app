@@ -1,4 +1,4 @@
-package io.github.horaciocome1.reaque.ui.posts
+package io.github.horaciocome1.reaque.ui.posts.create
 
 import android.net.Uri
 import android.view.View
@@ -32,12 +32,20 @@ class CreatePostViewModel(
 
     var isCreatingPost = false
 
-    fun create(view: View) {
+    val isPostReady: Boolean
+        get() {
+            post.run {
+                return title.isNotBlank() && message.isNotBlank() && topic.id.isNotBlank() && imageUri != Uri.EMPTY
+            }
+        }
+
+    fun create(view: View): CreatePostViewModel {
         isCreatingPost = true
         storageRepository.uploadImage(imageUri, post.topic) {
             post.pic = it
             postsRepository.create(post) { navigateUp(view) }
         }
+        return this
     }
 
     fun navigateUp(view: View) = view.findNavController().navigateUp()

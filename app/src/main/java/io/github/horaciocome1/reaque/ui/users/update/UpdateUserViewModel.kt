@@ -1,4 +1,4 @@
-package io.github.horaciocome1.reaque.ui.users
+package io.github.horaciocome1.reaque.ui.users.update
 
 import android.view.View
 import androidx.databinding.Bindable
@@ -20,11 +20,21 @@ class UpdateUserViewModel(private val repository: UsersRepository) : ObservableV
 
     var isUpdatingUser = false
 
-    fun update(view: View) {
+    val isUserReady: Boolean
+        get() {
+            user.run {
+                return bio.isNotBlank() && address.isNotBlank() && bio != "null" && address != "null"
+            }
+        }
+
+    fun get(user: User) = repository.get(user)
+
+    fun update(view: View): UpdateUserViewModel {
         isUpdatingUser = true
         repository.update(user) { navigateUp(view) }
+        return this
     }
 
-    private fun navigateUp(view: View) = view.findNavController().navigateUp()
+    fun navigateUp(view: View) = view.findNavController().navigateUp()
 
 }

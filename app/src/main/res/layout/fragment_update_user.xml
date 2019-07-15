@@ -8,7 +8,7 @@
 
         <variable
             name="viewmodel"
-            type="io.github.horaciocome1.reaque.ui.users.UpdateUserViewModel" />
+            type="io.github.horaciocome1.reaque.ui.users.update.UpdateUserViewModel" />
 
     </data>
 
@@ -32,7 +32,8 @@
                     android:layout_height="wrap_content"
                     android:minHeight="?android:attr/actionBarSize"
                     app:navigationIcon="@drawable/outline_close_24"
-                    app:title="@string/done" />
+                    app:title="@string/update"
+                    app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
 
             </com.google.android.material.appbar.AppBarLayout>
 
@@ -95,29 +96,27 @@
             </ScrollView>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/submit_button"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:id="@+id/update_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:padding="@dimen/default_padding"
-                android:text="@string/submit"
-                android:onClick="@{(view) -> viewmodel.update(view)}"
-                app:backgroundTint="@android:color/white"
+                android:text="@string/done"
+                android:textColor="@color/secondaryColor"
                 app:cornerRadius="@dimen/default_corner_radius"
-                android:textColor="@color/secondaryColor" />
+                app:backgroundTint="@color/primaryLightColor" />
 
         </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/primaryColor"
+            android:background="@color/primaryLightColor"
             android:visibility="@{viewmodel.isUpdatingUser == false ? View.GONE : View.VISIBLE}">
 
             <ProgressBar
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
