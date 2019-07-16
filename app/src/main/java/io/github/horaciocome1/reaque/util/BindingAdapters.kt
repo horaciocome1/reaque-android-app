@@ -78,7 +78,7 @@ class BindingAdapters {
                                     }
                                     Constants.LISTING_POSTS_ON_SUGGESTIONS -> {
                                         val posts = list as List<Post>
-                                        loadPostsOnSuggestions(posts)
+                                        loadPostsOnSuggestions(posts, host)
                                     }
                                     Constants.LISTING_USERS -> {
                                         val users = list as List<User>
@@ -122,21 +122,20 @@ class BindingAdapters {
                 addOnItemClickListener { view, position ->
                     val directions = when (host) {
                         Constants.FEED_FRAGMENT -> FeedFragmentDirections.actionOpenReadPostFromFeed(list[position].id)
-                        else -> PostsFragmentDirections.actionOpenReadFromPosts(list[position].id)
+                        else -> PostsFragmentDirections.actionOpenReadPostFromPosts(list[position].id)
                     }
                     view.findNavController().navigate(directions)
                 }
             }
 
-            private fun RecyclerView.loadPostsOnSuggestions(list: List<Post>) {
+            private fun RecyclerView.loadPostsOnSuggestions(list: List<Post>, host: Int) {
                 layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-                adapter = PostsAdapter.SuggestionsAdapter(list).apply {
-                    setItemViewCacheSize(list.size)
-                }
-                addOnItemClickListener { view, position ->
-                    val directions = ExploreFragmentDirections.actionOpenReadPostFromExplore(list[position].id)
-                    view.findNavController().navigate(directions)
-                }
+                adapter = PostsAdapter.SuggestionsAdapter(list)
+                if (host == Constants.EXPLORE_FRAGMENT)
+                    addOnItemClickListener { view, position ->
+                        val directions = ExploreFragmentDirections.actionOpenReadPostFromExplore(list[position].id)
+                        view.findNavController().navigate(directions)
+                    }
             }
 
             private fun RecyclerView.loadUsers(list: List<User>, columns: Int) {

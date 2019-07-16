@@ -76,4 +76,10 @@
     <string name="user_profile">User\'s profile</string>
     <string name="update">Update</string>
 
+    <string name="permission_needed">Permission needed</string>
+    <string name="permission_needed_explanation">We must access your storage so you can select a picture for the post. As of that you may need to accept the permission dialog.</string>
+    <string name="permission_denied">Permission DENIED</string>
+    <string name="confirm">I understand!</string>
+    <string name="reject">Don\'t want to</string>
+
 </resources>

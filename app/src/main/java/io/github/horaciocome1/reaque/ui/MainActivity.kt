@@ -103,16 +103,15 @@ class MainActivity : AppCompatActivity() {
         if (isOrientationPortrait)
             supportActionBar?.run {
                 when (destination.id) {
-                    R.id.destination_sign_in -> hide()
                     R.id.destination_feed -> hide()
                     R.id.destination_explore -> hide()
                     R.id.destination_more -> hide()
-                    R.id.destination_create_post -> hide()
-                    R.id.destination_update_user -> hide()
                     else -> show()
                 }
             }
-        if (destination.id == R.id.destination_set_rating)
+        if (destination.id == R.id.destination_set_rating || destination.id == R.id.destination_create_post
+            || destination.id == R.id.destination_update_user || destination.id == R.id.destination_sign_in
+        )
             supportActionBar?.hide()
         if (destination.id != R.id.destination_feed && destination.id != R.id.destination_explore && destination.id != R.id.destination_more)
             bottomnavigationview?.visibility = View.GONE

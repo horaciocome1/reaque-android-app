@@ -47,6 +47,7 @@ class UpdateUserFragment : Fragment() {
             viewModel.get(user).observe(this, Observer {
                 viewModel.bio.value = it.bio
                 viewModel.address.value = it.address
+                binding.viewmodel = viewModel
             })
         }
         viewModel.bio.observe(this, Observer {

@@ -21,11 +21,8 @@ object Constants {
 
     // StartActivityForResult
     const val PICK_IMAGE_FROM_GALLERY_REQUEST_CODE = 1207
-    const val GOOGLE_SIGN_IN_REQUEST_CODE = 1209
-
-    // StaggeredRecyclerView
-    const val SINGLE_COLUMN = 1
-    const val TWO_COLUMNS = 2
+    const val GOOGLE_SIGN_IN_REQUEST_CODE = 1208
+    const val STORAGE_PERMISSION_CODE = 1209
 
     // Glide
     const val CIRCLE = 2307

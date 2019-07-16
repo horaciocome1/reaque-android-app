@@ -49,9 +49,9 @@ class PostsViewModel(
     fun getRating(post: Post) = ratingsRepository.get(post)
 
     fun setRate(view: View, post: Post, value: Int) {
-        if (post.id.isNotBlank()) {
-            navigateUp(view)
+        if (post.title.isNotBlank()) {
             ratingsRepository.rate(post, value) { }
+            navigateUp(view)
         }
     }
 
