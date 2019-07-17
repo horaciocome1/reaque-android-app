@@ -80,10 +80,10 @@ dependencies {
     implementation "android.arch.navigation:navigation-ui-ktx:$nav_version"
 
     // firebase
-    implementation 'com.google.firebase:firebase-core:17.0.0'
+    implementation 'com.google.firebase:firebase-core:17.0.1'
     implementation 'com.google.firebase:firebase-firestore:20.1.0'
-    implementation 'com.google.firebase:firebase-storage:18.0.0'
-    implementation 'com.google.firebase:firebase-auth:18.0.0'
+    implementation 'com.google.firebase:firebase-storage:18.1.0'
+    implementation 'com.google.firebase:firebase-auth:18.1.0'
     implementation 'com.google.firebase:firebase-perf:18.0.1'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
     implementation 'com.google.firebase:firebase-dynamic-links:18.0.0'
