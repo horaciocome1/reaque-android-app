@@ -43,9 +43,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:strokeColor="@color/default_stroke_color"
-                app:strokeWidth="@dimen/default_stroke_width">
+                android:layout_margin="8dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -123,9 +121,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:paddingTop="16dp"
-                android:paddingBottom="16dp"
-                app:strokeColor="@color/default_stroke_color"
-                app:strokeWidth="@dimen/default_stroke_width">
+                android:paddingBottom="16dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -203,9 +199,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:strokeColor="@color/default_stroke_color"
-                app:strokeWidth="@dimen/default_stroke_width">
+                android:layout_margin="8dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -313,9 +307,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:paddingTop="16dp"
-                android:paddingBottom="16dp"
-                app:strokeColor="@color/default_stroke_color"
-                app:strokeWidth="@dimen/default_stroke_width">
+                android:paddingBottom="16dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"

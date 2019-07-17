@@ -51,16 +51,16 @@
 
             <ProgressBar
                 android:layout_width="match_parent"
-                android:layout_height="16dp"
+                android:layout_height="@dimen/default_progressbar_size"
                 android:visibility="@{posts.isEmpty() ? View.VISIBLE : View.GONE}" />
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="@dimen/default_stroke_width"
                 android:layout_marginStart="24dp"
                 android:layout_marginLeft="24dp"
                 android:layout_marginTop="24dp"
-                android:background="@color/secondaryColor" />
+                android:background="@color/secondaryLightColor" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -79,7 +79,7 @@
 
             <ProgressBar
                 android:layout_width="match_parent"
-                android:layout_height="16dp"
+                android:layout_height="@dimen/default_progressbar_size"
                 android:visibility="@{topics.isEmpty() ? View.VISIBLE : View.GONE}" />
 
         </LinearLayout>

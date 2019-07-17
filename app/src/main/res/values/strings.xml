@@ -51,6 +51,7 @@
     <string name="welcome">Welcome</string>
     <string name="content_description_post_cover_image">Post cover image</string>
     <string name="content_description_user_profile_image">User profile image</string>
+    <string name="content_description_topic_cover_image">Topic cover image</string>
     <string name="subscriptions">Subscriptions</string>
     <string name="explore">Explore</string>
     <string name="suggestions">Suggestions</string>

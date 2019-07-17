@@ -90,7 +90,7 @@ class PostsService : PostsInterface {
         top20Posts.value?.let {
             if (it.isEmpty()) {
                 val ref = db.collection("posts")
-                ref.orderBy("score", Query.Direction.DESCENDING).limit(20)
+                ref.orderBy("score", Query.Direction.DESCENDING).limit(10)
                     .addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
                         this.top20Posts.value = snapshot.posts
                     }

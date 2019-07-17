@@ -31,9 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         app:cardCornerRadius="@dimen/default_corner_radius"
-        app:cardElevation="@dimen/default_card_elevation"
-        app:strokeColor="@color/default_stroke_color"
-        app:strokeWidth="@dimen/default_stroke_width">
+        app:cardElevation="@dimen/default_card_elevation">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -97,6 +95,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/subscribers_textview"
                 app:layout_constraintEnd_toStartOf="@+id/subscribers_textview"
                 app:layout_constraintTop_toTopOf="@+id/subscribers_textview"
+                android:contentDescription="@string/content_description_user_profile_image"
                 app:srcCompat="@drawable/outline_people_outline_18" />
 
             <TextView

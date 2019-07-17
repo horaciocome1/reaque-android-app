@@ -142,7 +142,7 @@ class CreatePostFragment : Fragment() {
             AlertDialog.Builder(activity as MainActivity)
                 .setTitle(resources.getString(R.string.permission_needed))
                 .setMessage(resources.getString(R.string.permission_needed_explanation))
-                .setPositiveButton(resources.getString(R.string.confirm)) { dialog, which ->
+                .setPositiveButton(resources.getString(R.string.confirm)) { _, _ ->
                     ActivityCompat.requestPermissions(
                         activity as MainActivity,
                         arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),

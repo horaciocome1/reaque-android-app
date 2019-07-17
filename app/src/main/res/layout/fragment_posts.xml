@@ -33,7 +33,7 @@
 
         <ProgressBar
             android:layout_width="match_parent"
-            android:layout_height="16dp"
+            android:layout_height="@dimen/default_progressbar_size"
             android:layout_marginTop="32dp"
             android:visibility="@{posts.isEmpty() ? View.VISIBLE : View.GONE}" />
 

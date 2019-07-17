@@ -4,11 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.util.addSimpleAuthStateListener
 import io.github.horaciocome1.reaque.util.addSimpleSnapshotListener
-import io.github.horaciocome1.reaque.util.mapRating
+import io.github.horaciocome1.reaque.util.map
 
 class RatingsService : RatingsInterface {
 
@@ -22,17 +21,18 @@ class RatingsService : RatingsInterface {
         MutableLiveData<Int>().apply { value = 1 }
     }
 
-    override fun rate(post: Post, value: Int, onSuccessListener: (Void?) -> Unit) {
+    override fun set(post: Post, value: Int, onSuccessListener: (Void?) -> Unit) {
         auth.addSimpleAuthStateListener { user ->
-            val ref = db.document("users/${user.uid}/ratings/${post.id}/requests/${post.id}")
-            ref.set(post.mapRating((value)), SetOptions.merge())
+            val ref = db.document("posts/${post.id}/ratings/${user.uid}")
+            val map = user.map.plus("value" to value).plus("post" to mapOf("id" to post.id))
+            ref.set(map).addOnSuccessListener(onSuccessListener)
         }
     }
 
     override fun get(post: Post): LiveData<Int> {
         rating.value = 1
         auth.addSimpleAuthStateListener { user ->
-            val ref = db.document("users/${user.uid}/ratings/${post.id}")
+            val ref = db.document("posts/${post.id}/ratings/${user.uid}")
             ref.addSimpleSnapshotListener(tag) {
                 val value = it["value"]
                 if (value != null)

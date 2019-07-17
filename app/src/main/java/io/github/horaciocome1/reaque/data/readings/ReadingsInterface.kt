@@ -4,6 +4,6 @@ import io.github.horaciocome1.reaque.data.posts.Post
 
 interface ReadingsInterface {
 
-    fun read(post: Post, onSuccessListener: (Void?) -> Unit)
+    fun read(post: Post, onSuccessListener: (Unit?) -> Unit)
 
 }

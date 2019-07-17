@@ -6,10 +6,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import io.github.horaciocome1.reaque.data.posts.Post
-import io.github.horaciocome1.reaque.util.addSimpleAuthStateListener
-import io.github.horaciocome1.reaque.util.addSimpleSnapshotListener
-import io.github.horaciocome1.reaque.util.mapSimple
-import io.github.horaciocome1.reaque.util.posts
+import io.github.horaciocome1.reaque.util.*
 
 class BookmarksService : BookmarksInterface {
 
@@ -28,16 +25,22 @@ class BookmarksService : BookmarksInterface {
     }
 
     override fun bookmark(post: Post, onSuccessListener: (Void?) -> Unit) {
-        auth.addSimpleAuthStateListener {
-            val ref = db.document("users/${it.uid}/bookmarks/${post.id}")
-            ref.set(post.mapSimple).addOnSuccessListener(onSuccessListener)
+        auth.addSimpleAuthStateListener { user ->
+            db.runBatch {
+                it.set(db.document("users/${user.uid}/bookmarks/${post.id}"), post.mapSimple)
+                it.set(db.document("posts/${post.id}/bookmarks/${user.uid}"), user.map)
+                it.commit()
+            }.addOnSuccessListener(onSuccessListener)
         }
     }
 
     override fun unBookmark(post: Post, onSuccessListener: (Void?) -> Unit) {
-        auth.addSimpleAuthStateListener {
-            val ref = db.document("users/${it.uid}/bookmarks/${post.id}")
-            ref.delete().addOnSuccessListener(onSuccessListener)
+        auth.addSimpleAuthStateListener { user ->
+            db.runBatch {
+                it.delete(db.document("users/${user.uid}/bookmarks/${post.id}"))
+                it.delete(db.document("posts/${post.id}/bookmarks/${user.uid}"))
+                it.commit()
+            }.addOnSuccessListener(onSuccessListener)
         }
     }
 
@@ -59,8 +62,7 @@ class BookmarksService : BookmarksInterface {
         auth.addSimpleAuthStateListener { user ->
             val ref = db.document("users/${user.uid}/bookmarks/${post.id}")
             ref.addSimpleSnapshotListener(tag) {
-                val postId = it["title"]
-                isBookmarked.value = postId != null
+                isBookmarked.value = it["title"] != null
             }
         }
         return isBookmarked

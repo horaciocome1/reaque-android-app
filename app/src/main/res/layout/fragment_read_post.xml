@@ -87,7 +87,7 @@
         <View
             android:id="@+id/divider4"
             android:layout_width="0dp"
-            android:layout_height="2dp"
+            android:layout_height="4dp"
             android:background="@drawable/background_shadow_bottom_to_top"
             app:layout_constraintBottom_toTopOf="@+id/share_button"
             app:layout_constraintEnd_toEndOf="parent"
@@ -104,6 +104,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:onClick="@{(view) -> viewmodel.openUserProfile(view, post.user)}"
+            android:contentDescription="@string/content_description_user_profile_image"
             app:url="@{post.user.pic}" />
 
         <TextView
@@ -141,6 +142,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:type="@{Constants.DEFAULT}"
+                    android:contentDescription="@string/content_description_post_cover_image"
                     app:url="@{post.pic}" />
 
                 <TextView

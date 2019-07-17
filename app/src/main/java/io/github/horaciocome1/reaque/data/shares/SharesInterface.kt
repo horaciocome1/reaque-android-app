@@ -4,6 +4,6 @@ import io.github.horaciocome1.reaque.data.posts.Post
 
 interface SharesInterface {
 
-    fun share(post: Post, onSuccessListener: (Void?) -> Unit)
+    fun share(post: Post, onSuccessListener: (Unit?) -> Unit)
 
 }

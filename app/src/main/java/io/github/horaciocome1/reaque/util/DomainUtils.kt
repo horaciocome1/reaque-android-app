@@ -85,3 +85,10 @@ val FirebaseUser.user: User
         name = displayName.toString()
         pic = photoUrl.toString()
     }
+
+val FirebaseUser.map: Map<String, Any>
+    get() = mapOf(
+        "name" to displayName.toString(),
+        "pic" to photoUrl.toString(),
+        "timestamp" to FieldValue.serverTimestamp()
+    )

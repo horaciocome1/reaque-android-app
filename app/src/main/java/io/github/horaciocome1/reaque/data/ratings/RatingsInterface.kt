@@ -5,7 +5,7 @@ import io.github.horaciocome1.reaque.data.posts.Post
 
 interface RatingsInterface {
 
-    fun rate(post: Post, value: Int, onSuccessListener: (Void?) -> Unit)
+    fun set(post: Post, value: Int, onSuccessListener: (Void?) -> Unit)
 
     fun get(post: Post): LiveData<Int>
 
