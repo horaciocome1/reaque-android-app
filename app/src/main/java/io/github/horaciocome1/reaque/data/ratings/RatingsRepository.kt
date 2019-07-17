@@ -4,7 +4,7 @@ import io.github.horaciocome1.reaque.data.posts.Post
 
 class RatingsRepository private constructor(private val service: RatingsService) : RatingsInterface {
 
-    override fun set(post: Post, value: Int, onSuccessListener: (Void?) -> Unit) =
+    override fun set(post: Post, value: Int, onSuccessListener: (Unit?) -> Unit) =
         service.set(post, value, onSuccessListener)
 
     override fun get(post: Post) = service.get(post)

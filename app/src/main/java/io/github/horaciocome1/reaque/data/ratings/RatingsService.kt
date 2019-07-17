@@ -21,11 +21,16 @@ class RatingsService : RatingsInterface {
         MutableLiveData<Int>().apply { value = 1 }
     }
 
-    override fun set(post: Post, value: Int, onSuccessListener: (Void?) -> Unit) {
+    override fun set(post: Post, value: Int, onSuccessListener: (Unit?) -> Unit) {
         auth.addSimpleAuthStateListener { user ->
-            val ref = db.document("posts/${post.id}/ratings/${user.uid}")
-            val map = user.map.plus("value" to value).plus("post" to mapOf("id" to post.id))
-            ref.set(map).addOnSuccessListener(onSuccessListener)
+            db.runTransaction {
+                val ref = db.document("posts/${post.id}/ratings/${user.uid}")
+                val snapshot = it[ref]
+                if (value != snapshot["value"]) {
+                    val map = user.map.plus("value" to value).plus("post" to mapOf("id" to post.id))
+                    it.set(ref, map)
+                }
+            }.addOnSuccessListener(onSuccessListener)
         }
     }
 

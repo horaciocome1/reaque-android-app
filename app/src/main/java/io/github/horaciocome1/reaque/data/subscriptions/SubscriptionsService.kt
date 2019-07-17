@@ -50,7 +50,6 @@ class SubscriptionsService : SubscriptionsInterface {
             db.runBatch {
                 it.delete(db.document("users/${firebaseUser.uid}/subscriptions/${user.id}"))
                 it.delete(db.document("users/${user.id}/subscribers/${firebaseUser.uid}"))
-                it.commit()
             }.addOnSuccessListener(onSuccessListener)
         }
     }

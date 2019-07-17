@@ -29,7 +29,6 @@ class BookmarksService : BookmarksInterface {
             db.runBatch {
                 it.set(db.document("users/${user.uid}/bookmarks/${post.id}"), post.mapSimple)
                 it.set(db.document("posts/${post.id}/bookmarks/${user.uid}"), user.map)
-                it.commit()
             }.addOnSuccessListener(onSuccessListener)
         }
     }
@@ -39,7 +38,6 @@ class BookmarksService : BookmarksInterface {
             db.runBatch {
                 it.delete(db.document("users/${user.uid}/bookmarks/${post.id}"))
                 it.delete(db.document("posts/${post.id}/bookmarks/${user.uid}"))
-                it.commit()
             }.addOnSuccessListener(onSuccessListener)
         }
     }

@@ -62,33 +62,26 @@ class BindingAdapters {
 
             @BindingAdapter("list", "type", "columns", "host")
             @JvmStatic
-            fun RecyclerView.loadList(l: List<Any>?, t: Int?, c: Int?, h: Int?) {
-                t?.let { type ->
-                    l?.let { list ->
-                        c?.let { columns ->
-                            h?.let { host ->
-                                when (type) {
-                                    Constants.LISTING_TOPICS -> {
-                                        val topics = list as List<Topic>
-                                        loadTopics(topics, columns, host)
-                                    }
-                                    Constants.LISTING_POSTS -> {
-                                        val posts = list as List<Post>
-                                        loadPosts(posts, columns, host)
-                                    }
-                                    Constants.LISTING_POSTS_ON_SUGGESTIONS -> {
-                                        val posts = list as List<Post>
-                                        loadPostsOnSuggestions(posts, host)
-                                    }
-                                    Constants.LISTING_USERS -> {
-                                        val users = list as List<User>
-                                        loadUsers(users, columns)
-                                    }
-                                }
-                            }
+            fun RecyclerView.loadList(list: List<Any>?, type: Int?, columns: Int?, host: Int?) {
+                if (list != null && type != null && columns != null && host != null)
+                    when (type) {
+                        Constants.LISTING_TOPICS -> {
+                            val topics = list as List<Topic>
+                            loadTopics(topics, columns, host)
+                        }
+                        Constants.LISTING_POSTS -> {
+                            val posts = list as List<Post>
+                            loadPosts(posts, columns, host)
+                        }
+                        Constants.LISTING_POSTS_ON_SUGGESTIONS -> {
+                            val posts = list as List<Post>
+                            loadPostsOnSuggestions(posts, host)
+                        }
+                        Constants.LISTING_USERS -> {
+                            val users = list as List<User>
+                            loadUsers(users, columns)
                         }
                     }
-                }
             }
 
             private fun RecyclerView.loadTopics(list: List<Topic>, columns: Int, host: Int) {
