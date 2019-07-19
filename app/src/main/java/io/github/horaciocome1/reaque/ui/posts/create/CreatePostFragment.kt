@@ -134,30 +134,31 @@ class CreatePostFragment : Fragment() {
     }
 
     private fun requestStoragePermission() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(
-                activity as MainActivity,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            )
-        ) {
-            AlertDialog.Builder(activity as MainActivity)
-                .setTitle(resources.getString(R.string.permission_needed))
-                .setMessage(resources.getString(R.string.permission_needed_explanation))
-                .setPositiveButton(resources.getString(R.string.confirm)) { _, _ ->
-                    ActivityCompat.requestPermissions(
-                        activity as MainActivity,
-                        arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-                        Constants.STORAGE_PERMISSION_CODE
-                    )
-                }
-                .setNegativeButton(resources.getString(R.string.reject)) { dialog, _ -> dialog.dismiss() }
-                .create()
-                .show()
-        } else
-            ActivityCompat.requestPermissions(
-                activity as MainActivity,
-                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-                Constants.STORAGE_PERMISSION_CODE
-            )
+        if (activity is MainActivity)
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    activity as MainActivity,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                )
+            ) {
+                AlertDialog.Builder(activity as MainActivity)
+                    .setTitle(resources.getString(R.string.permission_needed))
+                    .setMessage(resources.getString(R.string.permission_needed_explanation))
+                    .setPositiveButton(resources.getString(R.string.confirm)) { _, _ ->
+                        ActivityCompat.requestPermissions(
+                            activity as MainActivity,
+                            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                            Constants.STORAGE_PERMISSION_CODE
+                        )
+                    }
+                    .setNegativeButton(resources.getString(R.string.reject)) { dialog, _ -> dialog.dismiss() }
+                    .create()
+                    .show()
+            } else
+                ActivityCompat.requestPermissions(
+                    activity as MainActivity,
+                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                    Constants.STORAGE_PERMISSION_CODE
+                )
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {

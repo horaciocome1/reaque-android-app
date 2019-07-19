@@ -35,11 +35,13 @@ class SubscriptionsService : SubscriptionsInterface {
 
     override fun subscribe(user: User, onSuccessListener: (Transaction?) -> Unit) {
         auth.addSimpleAuthStateListener { firebaseUser ->
-            val ref = db.document("users/${firebaseUser.uid}/subscriptions/${user.id}")
+            var ref = db.document("users/${firebaseUser.uid}/subscriptions/${user.id}")
             ref.set(user.map).addOnSuccessListener { _ ->
                 db.runTransaction {
-                    val snapshot = it.get(db.document("users/${firebaseUser.uid}"))
-                    it.set(db.document("users/${user.id}/subscribers/${firebaseUser.uid}"), snapshot.user.map)
+                    ref = db.document("users/${firebaseUser.uid}")
+                    val snapshot = it.get(ref)
+                    ref = db.document("users/${user.id}/subscribers/${firebaseUser.uid}")
+                    it.set(ref, snapshot.user.map)
                 }.addOnSuccessListener(onSuccessListener)
             }
         }
