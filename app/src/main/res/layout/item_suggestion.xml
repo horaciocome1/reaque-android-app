@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="io.github.horaciocome1.reaque.util.Constants" />
+
+        <variable
+            name="post"
+            type="io.github.horaciocome1.reaque.data.posts.Post" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="@dimen/default_corner_radius"
+        app:cardElevation="@dimen/default_card_elevation">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/AppTheme.CompleteClickableEffect"
+            android:scaleType="centerCrop"
+            app:type="@{Constants.DEFAULT}"
+            android:contentDescription="@string/content_description_post_cover_image"
+            app:url="@{post.pic}" />
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

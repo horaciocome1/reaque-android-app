@@ -16,19 +16,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/destination_notifications"
+        android:id="@+id/destination_feed"
         android:icon="@drawable/outline_whatshot_24"
-        android:title="@string/notifications" />
+        android:title="@string/feed" />
 
     <item
-        android:id="@+id/destination_users"
-        android:icon="@drawable/outline_people_outline_24"
-        android:title="@string/users" />
-
-    <item
-        android:id="@+id/destination_posts"
-        android:icon="@drawable/outline_library_books_24"
-        android:title="@string/posts" />
+        android:id="@+id/destination_explore"
+        android:icon="@drawable/outline_explore_24"
+        android:title="@string/explore" />
 
     <item
         android:id="@+id/destination_more"

@@ -15,32 +15,39 @@
 
 package io.github.horaciocome1.reaque.data
 
-import io.github.horaciocome1.reaque.data.favorites.FavoritesWebService
-import io.github.horaciocome1.reaque.data.media.ImageUploaderWebService
-import io.github.horaciocome1.reaque.data.notifications.NotificationsWebService
-import io.github.horaciocome1.reaque.data.posts.PostsWebService
-import io.github.horaciocome1.reaque.data.topics.TopicsWebService
-import io.github.horaciocome1.reaque.data.users.UsersWebService
+import io.github.horaciocome1.reaque.data.bookmarks.BookmarksService
+import io.github.horaciocome1.reaque.data.feed.FeedService
+import io.github.horaciocome1.reaque.data.posts.PostsService
+import io.github.horaciocome1.reaque.data.ratings.RatingsService
+import io.github.horaciocome1.reaque.data.readings.ReadingsService
+import io.github.horaciocome1.reaque.data.shares.SharesService
+import io.github.horaciocome1.reaque.data.storage.StorageService
+import io.github.horaciocome1.reaque.data.subscriptions.SubscriptionsService
+import io.github.horaciocome1.reaque.data.topics.TopicsService
+import io.github.horaciocome1.reaque.data.users.UsersService
 
 class Database private constructor() {
 
-    var topicsWebService = TopicsWebService()
-    var usersWebService = UsersWebService()
-    var postsWebService = PostsWebService()
-    var notificationsWebService = NotificationsWebService()
-    var imageUploaderWebService = ImageUploaderWebService()
-    var favoritesWebService = FavoritesWebService()
+    var bookmarksService = BookmarksService()
+    var feedsService = FeedService()
+    var postsService = PostsService()
+    var ratingsService = RatingsService()
+    var readingsService = ReadingsService()
+    var sharesService = SharesService()
+    var storageService = StorageService()
+    var subscriptionsService = SubscriptionsService()
+    var topicsService = TopicsService()
+    var usersService = UsersService()
 
     companion object {
 
         @Volatile
         private var instance: Database? = null
 
-        fun getInstance() = instance ?: synchronized(this) {
-            instance ?: Database().also {
-                instance = it
+        fun getInstance() = instance
+            ?: synchronized(this) {
+                instance ?: Database().also { instance = it }
             }
-        }
 
     }
 

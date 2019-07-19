@@ -19,12 +19,13 @@
     android:id="@+id/drawerlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primaryLightColor"
     tools:context=".ui.MainActivity">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/primaryColor">
+        android:background="@color/primaryLightColor">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
@@ -34,6 +35,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline5"
                 android:minHeight="?attr/actionBarSize" />
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -45,7 +47,7 @@
             android:layout_height="match_parent"
             app:defaultNavHost="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:navGraph="@navigation/mobile_navigation" />
+            app:navGraph="@navigation/navigation" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

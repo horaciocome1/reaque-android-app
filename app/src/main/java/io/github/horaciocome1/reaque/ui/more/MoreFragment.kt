@@ -21,65 +21,75 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.google.android.material.snackbar.Snackbar
+import androidx.lifecycle.ViewModelProviders
 import com.google.firebase.auth.FirebaseAuth
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.databinding.FragmentMoreBinding
-import io.github.horaciocome1.reaque.util.getEmailIntent
+import io.github.horaciocome1.reaque.util.InjectorUtils
 import kotlinx.android.synthetic.main.fragment_more.*
 
 class MoreFragment : Fragment() {
 
     private lateinit var binding: FragmentMoreBinding
-    private lateinit var auth: FirebaseAuth
+
+    private val viewModel: MoreViewModel by lazy {
+        val factory = InjectorUtils.moreViewModelFactory
+        ViewModelProviders.of(this, factory)[MoreViewModel::class.java]
+    }
+
+    private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        auth = FirebaseAuth.getInstance()
         binding = FragmentMoreBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.let {
-            it.lifecycleOwner = this
-            it.viewmodel = viewModel
+        licenses_textview.setOnClickListener {
+            val url = resources.getString(R.string.licence_url)
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
+        }
+        about_textview.setOnClickListener {
+            val url = resources.getString(R.string.about_url)
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
+        }
+        privacy_policy_textview.setOnClickListener {
+            val url = resources.getString(R.string.privacy_policy_url)
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
+        }
+        terms_and_conditions_textview.setOnClickListener {
+            val url = resources.getString(R.string.terms_and_conditions_url)
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
         }
         feedback_textview.setOnClickListener {
-            emailDeveloper()
+            val email = resources.getString(R.string.developer_email)
+            try {
+                val mailto = "mailto:$email"
+                val emailIntent = Intent(Intent.ACTION_SENDTO)
+                emailIntent.data = Uri.parse(mailto)
+                startActivity(emailIntent)
+            } catch (exception: Exception) {
+                Toast.makeText(it.context, R.string.email_app_not_found, Toast.LENGTH_LONG).show()
+            }
         }
-        frequently_asked_questions_textview.setOnClickListener(this::openLinks)
-        about_textview.setOnClickListener(this::openLinks)
+        sign_out_textview.setOnClickListener {
+            auth.signOut()
+            activity?.finish()
+        }
     }
 
     override fun onStart() {
         super.onStart()
-        viewModel.me.observe(this, Observer { user ->
-            binding.user = user
-        })
-    }
-
-    private fun openLinks(view: View) {
-        val link = when (view) {
-            frequently_asked_questions_textview -> resources.getString(R.string.project_url)
-            about_textview -> resources.getString(R.string.read_me_url)
-            else -> null
-        }
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
-        startActivity(intent)
-    }
-
-    private fun emailDeveloper() {
-        val email = resources.getString(R.string.developer_email)
-        try {
-            startActivity(getEmailIntent(email))
-        } catch (e: Exception) {
-            root_view?.let {
-                Snackbar.make(root_view, R.string.email_app_not_found, Snackbar.LENGTH_LONG).show()
-            }
-        }
+        binding.viewmodel = viewModel
+        viewModel.user.observe(this, Observer { binding.user = it })
     }
 
 }

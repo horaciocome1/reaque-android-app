@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="post"
+            type="io.github.horaciocome1.reaque.data.posts.Post" />
+
+        <variable
+            name="viewModel"
+            type="io.github.horaciocome1.reaque.ui.posts.PostsViewModel" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?attr/actionBarSize"
+                app:navigationIcon="@drawable/outline_close_24"
+                app:title="@string/set_rating"
+                app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    style="@style/AppTheme.CompleteClickableEffect"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:onClick="@{(view) -> viewModel.setRating(view, post, 5)}"
+                    android:paddingStart="32dp"
+                    android:paddingLeft="32dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="32dp"
+                    android:paddingRight="32dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/rating_5"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    style="@style/AppTheme.CompleteClickableEffect"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{(view) -> viewModel.setRating(view, post, 4)}"
+                    android:paddingStart="32dp"
+                    android:paddingLeft="32dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="32dp"
+                    android:paddingRight="32dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/rating_4"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                <TextView
+                    android:id="@+id/textView13"
+                    style="@style/AppTheme.CompleteClickableEffect"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{(view) -> viewModel.setRating(view, post, 3)}"
+                    android:paddingStart="32dp"
+                    android:paddingLeft="32dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="32dp"
+                    android:paddingRight="32dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/rating_3"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                <TextView
+                    android:id="@+id/textView23"
+                    style="@style/AppTheme.CompleteClickableEffect"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{(view) -> viewModel.setRating(view, post, 2)}"
+                    android:paddingStart="32dp"
+                    android:paddingLeft="32dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="32dp"
+                    android:paddingRight="32dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/rating_2"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                <TextView
+                    android:id="@+id/textView24"
+                    style="@style/AppTheme.CompleteClickableEffect"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:onClick="@{(view) -> viewModel.setRating(view, post, 1)}"
+                    android:paddingStart="32dp"
+                    android:paddingLeft="32dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="32dp"
+                    android:paddingRight="32dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/rating_1"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</layout>

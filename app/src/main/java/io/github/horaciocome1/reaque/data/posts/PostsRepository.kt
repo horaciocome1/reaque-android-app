@@ -1,49 +1,31 @@
-/*
- *    Copyright 2019 Horácio Flávio Comé Júnior
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and limitations under the License.
- */
-
 package io.github.horaciocome1.reaque.data.posts
 
-import androidx.lifecycle.LiveData
+import com.google.firebase.firestore.DocumentReference
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
 
-class PostsRepository private constructor(private val service: PostsWebService) {
+class PostsRepository private constructor(private val service: PostsService) : PostsInterface {
 
-    val favorites: LiveData<List<Post>> = service.favorites
+    override fun create(post: Post, onSuccessListener: (DocumentReference?) -> Unit) =
+        service.create(post, onSuccessListener)
 
-    fun isThisFavoriteForMe(post: Post) = service.isThisMyFavorite(post)
+    override fun get(post: Post) = service.get(post)
 
-    fun submitPost(post: Post, onSuccessful: () -> Unit) = service.submitPost(post, onSuccessful)
+    override fun get(user: User) = service.get(user)
 
-    fun getPosts(topic: Topic) = service.getPosts(topic)
+    override fun get(topic: Topic) = service.get(topic)
 
-    fun getPosts(post: Post) = service.getPosts(post)
-
-    fun getPosts(user: User) = service.getPosts(user)
-
+    override fun getTop20() = service.getTop20()
 
     companion object {
 
         @Volatile
         private var instance: PostsRepository? = null
 
-        fun getInstance(service: PostsWebService) = instance ?: synchronized(this) {
-            instance ?: PostsRepository(service).also {
-                instance = it
+        fun getInstance(service: PostsService) = instance
+            ?: synchronized(this) {
+                instance ?: PostsRepository(service).also { instance = it }
             }
-        }
 
     }
 

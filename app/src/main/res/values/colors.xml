@@ -23,7 +23,7 @@
     <color name="secondaryDarkColor">#3f1dcb</color>
     <color name="primaryTextColor">#000000</color>
     <color name="secondaryTextColor">#ffffff</color>
-    <color name="colorError">#f44336</color>
+    <color name="colorError">#F44336</color>
 
     <!-- CUSTOM COLORS -->
     <color name="orange">#ff6d00</color>

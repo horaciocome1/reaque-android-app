@@ -17,10 +17,10 @@ package io.github.horaciocome1.reaque.ui.more
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import io.github.horaciocome1.reaque.data.users.UsersRepository
 
-class MoreViewModelFactory(private val repository: UsersRepository) : ViewModelProvider.NewInstanceFactory() {
+class MoreViewModelFactory : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>) = MoreViewModel(repository) as T
+    override fun <T : ViewModel?> create(modelClass: Class<T>) = MoreViewModel() as T
+
 }

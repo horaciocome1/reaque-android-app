@@ -21,9 +21,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.databinding.ItemPostBinding
+import io.github.horaciocome1.reaque.databinding.ItemSuggestionBinding
 
-class PostsAdapter(private val list: List<Post>)
-    : RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
+class PostsAdapter(private val list: List<Post>) : RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
 
     private lateinit var binding: ItemPostBinding
 
@@ -39,5 +39,22 @@ class PostsAdapter(private val list: List<Post>)
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
+
+    class SuggestionsAdapter(private val list: List<Post>) : RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
+
+        private lateinit var binding: ItemSuggestionBinding
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+            binding = ItemSuggestionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            return ViewHolder(binding.root)
+        }
+
+        override fun getItemCount() = list.size
+
+        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+            binding.post = list[position]
+        }
+
+    }
 
 }

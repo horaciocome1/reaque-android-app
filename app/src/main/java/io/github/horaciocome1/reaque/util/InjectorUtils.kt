@@ -16,54 +16,76 @@
 package io.github.horaciocome1.reaque.util
 
 import io.github.horaciocome1.reaque.data.Database
-import io.github.horaciocome1.reaque.data.favorites.FavoritesRepository
-import io.github.horaciocome1.reaque.data.media.MediaRepository
-import io.github.horaciocome1.reaque.data.notifications.NotificationsRepository
+import io.github.horaciocome1.reaque.data.bookmarks.BookmarksRepository
+import io.github.horaciocome1.reaque.data.feed.FeedRepository
 import io.github.horaciocome1.reaque.data.posts.PostsRepository
+import io.github.horaciocome1.reaque.data.ratings.RatingsRepository
+import io.github.horaciocome1.reaque.data.readings.ReadingsRepository
+import io.github.horaciocome1.reaque.data.shares.SharesRepository
+import io.github.horaciocome1.reaque.data.storage.StorageRepository
+import io.github.horaciocome1.reaque.data.subscriptions.SubscriptionsRepository
 import io.github.horaciocome1.reaque.data.topics.TopicsRepository
 import io.github.horaciocome1.reaque.data.users.UsersRepository
+import io.github.horaciocome1.reaque.ui.explore.ExploreViewModelFactory
+import io.github.horaciocome1.reaque.ui.feed.FeedViewModelFactory
 import io.github.horaciocome1.reaque.ui.more.MoreViewModelFactory
-import io.github.horaciocome1.reaque.ui.notifications.NotificationsViewModelFactory
 import io.github.horaciocome1.reaque.ui.posts.PostsViewModelFactory
+import io.github.horaciocome1.reaque.ui.posts.create.CreatePostViewModelFactory
 import io.github.horaciocome1.reaque.ui.users.UsersViewModelFactory
+import io.github.horaciocome1.reaque.ui.users.update.UpdateUserViewModelFactory
 
 object InjectorUtils {
 
-    val usersViewModelFactory: UsersViewModelFactory
-        get() {
-            val usersRepository = UsersRepository.getInstance(Database.getInstance().usersWebService)
-            val topicsRepository = TopicsRepository.getInstance(Database.getInstance().topicsWebService)
-            val postsRepository = PostsRepository.getInstance(Database.getInstance().postsWebService)
-            val favoritesRepository = FavoritesRepository.getInstance(Database.getInstance().favoritesWebService)
-            return UsersViewModelFactory(usersRepository, topicsRepository, postsRepository, favoritesRepository)
-        }
+    private val db = Database.getInstance()
 
-    val moreViewModelFactory: MoreViewModelFactory
-        get() {
-            val repository = UsersRepository.getInstance(Database.getInstance().usersWebService)
-            return MoreViewModelFactory(repository)
-        }
+    val feedViewModelFactory: FeedViewModelFactory by lazy {
+        val repository = FeedRepository.getInstance(db.feedsService)
+        FeedViewModelFactory(repository)
+    }
 
-    val postsViewModelFactory: PostsViewModelFactory
-        get() {
-            val topicsRepository = TopicsRepository.getInstance(Database.getInstance().topicsWebService)
-            val postsRepository = PostsRepository.getInstance(Database.getInstance().postsWebService)
-            val imageRepository = MediaRepository.getInstance(Database.getInstance().imageUploaderWebService)
-            val usersRepository = UsersRepository.getInstance(Database.getInstance().usersWebService)
-            val favoritesRepository = FavoritesRepository.getInstance(Database.getInstance().favoritesWebService)
-            return PostsViewModelFactory(
-                postsRepository,
-                topicsRepository,
-                imageRepository,
-                usersRepository,
-                favoritesRepository
-            )
-        }
+    val exploreViewModelFactory: ExploreViewModelFactory by lazy {
+        val topicsRepository = TopicsRepository.getInstance(db.topicsService)
+        val postsRepository = PostsRepository.getInstance(db.postsService)
+        ExploreViewModelFactory(topicsRepository, postsRepository)
+    }
 
-    val notificationsViewModelFactory: NotificationsViewModelFactory
-        get() {
-            val repository = NotificationsRepository.getInstance(Database.getInstance().notificationsWebService)
-            return NotificationsViewModelFactory(repository)
-        }
+    val moreViewModelFactory: MoreViewModelFactory by lazy { MoreViewModelFactory() }
+
+    val postsViewModelFactory: PostsViewModelFactory by lazy {
+        val postsRepository = PostsRepository.getInstance(db.postsService)
+        val readingsRepository = ReadingsRepository.getInstance(db.readingsService)
+        val sharesRepository = SharesRepository.getInstance(db.sharesService)
+        val ratingsRepository = RatingsRepository.getInstance(db.ratingsService)
+        val bookmarksRepository = BookmarksRepository.getInstance(db.bookmarksService)
+        PostsViewModelFactory(
+            postsRepository,
+            readingsRepository,
+            sharesRepository,
+            ratingsRepository,
+            bookmarksRepository
+        )
+    }
+
+    val createPostViewModelFactory: CreatePostViewModelFactory by lazy {
+        val topicsRepository = TopicsRepository.getInstance(db.topicsService)
+        val postsRepository = PostsRepository.getInstance(db.postsService)
+        val storageRepository = StorageRepository.getInstance(db.storageService)
+        CreatePostViewModelFactory(
+            postsRepository,
+            topicsRepository,
+            storageRepository
+        )
+    }
+
+    val usersViewModelFactory: UsersViewModelFactory by lazy {
+        val usersRepository = UsersRepository.getInstance(db.usersService)
+        val subscriptionsRepository = SubscriptionsRepository.getInstance(db.subscriptionsService)
+        UsersViewModelFactory(usersRepository, subscriptionsRepository)
+    }
+
+    val updateUserViewModelFactory: UpdateUserViewModelFactory by lazy {
+        val repository = UsersRepository.getInstance(db.usersService)
+        UpdateUserViewModelFactory(repository)
+    }
 
 }

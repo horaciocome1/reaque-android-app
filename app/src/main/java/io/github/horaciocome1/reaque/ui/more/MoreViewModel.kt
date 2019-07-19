@@ -16,47 +16,55 @@
 package io.github.horaciocome1.reaque.ui.more
 
 import android.view.View
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import io.github.horaciocome1.reaque.data.users.User
-import io.github.horaciocome1.reaque.data.users.UsersRepository
-import io.github.horaciocome1.reaque.util.InjectorUtils
+import io.github.horaciocome1.reaque.util.Constants
+import io.github.horaciocome1.reaque.util.addSimpleAuthStateListener
+import io.github.horaciocome1.reaque.util.user
 
-val MoreFragment.viewModel: MoreViewModel
-    get() {
-        val factory = InjectorUtils.moreViewModelFactory
-        return ViewModelProviders.of(this, factory).get(MoreViewModel::class.java)
+class MoreViewModel : ViewModel() {
+
+    private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
+
+    private val _user = MutableLiveData<User>()
+
+    val user: LiveData<User>
+        get() = _user
+
+    init {
+        auth.addSimpleAuthStateListener { _user.value = it.user }
     }
 
-class MoreViewModel(repository: UsersRepository) : ViewModel() {
-
-    val me = repository.me
-    private val auth = FirebaseAuth.getInstance()
-
-    fun openEditProfile(view: View) {
-        if (auth.currentUser != null) {
-            val directions = MoreFragmentDirections.actionOpenEditProfile()
+    fun openUpdateUser(view: View) {
+        auth.currentUser?.let {
+            val directions = MoreFragmentDirections.actionOpenUpdateUserFromMore(it.uid)
             view.findNavController().navigate(directions)
         }
     }
 
-    fun openPosting(view: View) {
+    fun openCreatePost(view: View) {
         if (auth.currentUser != null) {
-            val directions = MoreFragmentDirections.actionOpenPosting()
+            val directions = MoreFragmentDirections.actionOpenCreatePostFromMore()
             view.findNavController().navigate(directions)
         }
     }
 
-    fun openSettings(view: View) {
-        val directions = MoreFragmentDirections.actionOpenSettings()
-        view.findNavController().navigate(directions)
+    fun openUserProfile(view: View) {
+        auth.currentUser?.let {
+            val directions = MoreFragmentDirections.actionOpenUserProfileFromMore(it.uid)
+            view.findNavController().navigate(directions)
+        }
     }
 
-    fun openProfile(view: View, user: User) {
-        if (auth.currentUser != null) {
-            val directions = MoreFragmentDirections.actionOpenProfileFromMore(user.id)
+    fun openBookmarks(view: View) {
+        auth.currentUser?.let {
+            val directions = MoreFragmentDirections.actionOpenPostsFromMore(
+                it.uid, Constants.BOOKMARKS_REQUEST
+            )
             view.findNavController().navigate(directions)
         }
     }

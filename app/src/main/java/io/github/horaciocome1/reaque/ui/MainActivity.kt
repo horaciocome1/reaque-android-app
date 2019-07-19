@@ -15,7 +15,9 @@
 
 package io.github.horaciocome1.reaque.ui
 
+import android.content.Intent
 import android.content.res.Configuration
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.Menu
@@ -47,7 +49,7 @@ class MainActivity : AppCompatActivity() {
             val bundle = Bundle().apply {
                 putString("post_id", it.id)
             }
-            navController.navigate(R.id.destination_read, bundle)
+            navController.navigate(R.id.destination_read_post, bundle)
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
@@ -65,6 +67,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        item?.let {
+            if (it.itemId == R.id.menu_about) {
+                val url = resources.getString(R.string.about_url)
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                startActivity(intent)
+                return super.onOptionsItemSelected(it)
+            }
+        }
         val navigated = NavigationUI.onNavDestinationSelected(item!!, navController)
         return navigated || super.onOptionsItemSelected(item)
     }
@@ -84,40 +94,29 @@ class MainActivity : AppCompatActivity() {
         }
 
     private val onDestinationChangedListener = NavController.OnDestinationChangedListener { _, destination, _ ->
+        if (destination.id == R.id.destination_sign_in)
+            passedThroughSignIn = true
         if (destination.id != R.id.destination_sign_in && auth.currentUser == null && passedThroughSignIn) {
             passedThroughSignIn = false
             finish()
         }
-        if (destination.id == R.id.destination_sign_in)
-            passedThroughSignIn = true
-        bottomnavigationview?.visibility = when (destination.id) {
-            R.id.destination_posting -> View.GONE
-            R.id.destination_edit_profile -> View.GONE
-            R.id.destination_sign_in -> View.GONE
-            R.id.destination_viewer -> View.GONE
-            else -> View.VISIBLE
-        }
-        supportActionBar?.run {
-            when (destination.id) {
-                R.id.destination_posts -> if (isOrientationPortrait) hide() else show()
-                R.id.destination_users -> if (isOrientationPortrait) hide() else show()
-                R.id.destination_notifications -> if (isOrientationPortrait) hide() else show()
-                R.id.destination_more -> if (isOrientationPortrait) hide() else show()
-                R.id.destination_sign_in -> hide()
-                R.id.destination_edit_profile -> hide()
-                R.id.destination_posting -> hide()
-                R.id.destination_viewer -> hide()
-                R.id.destination_read -> {
-                    show()
-                    title = ""
+        if (isOrientationPortrait)
+            supportActionBar?.run {
+                when (destination.id) {
+                    R.id.destination_feed -> hide()
+                    R.id.destination_explore -> hide()
+                    R.id.destination_more -> hide()
+                    else -> show()
                 }
-                R.id.destination_profile -> {
-                    show()
-                    title = ""
-                }
-                else -> show()
             }
-        }
+        if (destination.id == R.id.destination_set_rating || destination.id == R.id.destination_create_post
+            || destination.id == R.id.destination_update_user || destination.id == R.id.destination_sign_in
+        )
+            supportActionBar?.hide()
+        if (destination.id != R.id.destination_feed && destination.id != R.id.destination_explore && destination.id != R.id.destination_more)
+            bottomnavigationview?.visibility = View.GONE
+        else
+            bottomnavigationview?.visibility = View.VISIBLE
     }
 
 }
