@@ -3,10 +3,7 @@ package io.github.horaciocome1.reaque.data.posts
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.FieldValue
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.*
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.util.*
@@ -60,8 +57,8 @@ class PostsService : PostsInterface {
                 it.set(postOnTopicRef, post.mapSimple)
                 it.set(postOnUserRef, post.mapSimple)
                 it.set(userOnTopicRef, user.user.map)
-                it.set(topicRef, increment)
-                it.set(userRef, increment)
+                it.set(topicRef, increment, SetOptions.merge())
+                it.set(userRef, increment, SetOptions.merge())
             }
         }
     }
