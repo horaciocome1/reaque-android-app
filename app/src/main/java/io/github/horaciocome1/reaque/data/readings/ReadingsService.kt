@@ -5,7 +5,7 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.util.addSimpleAuthStateListener
-import io.github.horaciocome1.reaque.util.map
+import io.github.horaciocome1.reaque.util.mapSimple
 
 class ReadingsService : ReadingsInterface {
 
@@ -24,9 +24,8 @@ class ReadingsService : ReadingsInterface {
             val postRef = db.document("posts/${post.id}")
             readingRef.get().addOnSuccessListener { snapshot ->
                 if (snapshot["timestamp"] == null) {
-                    val data = user.map.plus("post" to mapOf("id" to post.id))
                     db.runBatch {
-                        it.set(readingRef, data)
+                        it.set(readingRef, post.mapSimple)
                         it.set(postRef, increment)
                     }
                 }
