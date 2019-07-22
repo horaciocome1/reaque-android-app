@@ -3,10 +3,15 @@ package io.github.horaciocome1.reaque.data.bookmarks
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.SetOptions
 import io.github.horaciocome1.reaque.data.posts.Post
-import io.github.horaciocome1.reaque.util.*
+import io.github.horaciocome1.reaque.util.addSimpleAuthStateListener
+import io.github.horaciocome1.reaque.util.addSimpleSnapshotListener
+import io.github.horaciocome1.reaque.util.mapSimple
+import io.github.horaciocome1.reaque.util.posts
 
 class BookmarksService : BookmarksInterface {
 
@@ -15,6 +20,16 @@ class BookmarksService : BookmarksInterface {
     private val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
 
     private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
+
+    private val increment: Map<String, FieldValue> by lazy {
+        val increment = FieldValue.increment(1)
+        mapOf("bookmarks" to increment)
+    }
+
+    private val decrement: Map<String, FieldValue> by lazy {
+        val increment = FieldValue.increment(-1)
+        mapOf("bookmarks" to increment)
+    }
 
     private val posts: MutableLiveData<List<Post>> by lazy {
         MutableLiveData<List<Post>>().apply { value = mutableListOf() }
@@ -26,18 +41,22 @@ class BookmarksService : BookmarksInterface {
 
     override fun bookmark(post: Post, onSuccessListener: (Void?) -> Unit) {
         auth.addSimpleAuthStateListener { user ->
+            val bookmarkRef = db.document("users/${user.uid}/bookmarks/${post.id}")
+            val postRef = db.document("posts/${post.id}")
             db.runBatch {
-                it.set(db.document("users/${user.uid}/bookmarks/${post.id}"), post.mapSimple)
-                it.set(db.document("posts/${post.id}/bookmarks/${user.uid}"), user.map)
+                it.set(bookmarkRef, post.mapSimple)
+                it.set(postRef, increment, SetOptions.merge())
             }.addOnSuccessListener(onSuccessListener)
         }
     }
 
     override fun unBookmark(post: Post, onSuccessListener: (Void?) -> Unit) {
         auth.addSimpleAuthStateListener { user ->
+            val bookmarkRef = db.document("users/${user.uid}/bookmarks/${post.id}")
+            val postRef = db.document("posts/${post.id}")
             db.runBatch {
-                it.delete(db.document("users/${user.uid}/bookmarks/${post.id}"))
-                it.delete(db.document("posts/${post.id}/bookmarks/${user.uid}"))
+                it.delete(bookmarkRef)
+                it.set(postRef, decrement, SetOptions.merge())
             }.addOnSuccessListener(onSuccessListener)
         }
     }
