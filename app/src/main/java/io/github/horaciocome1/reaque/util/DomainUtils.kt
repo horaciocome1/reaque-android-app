@@ -53,17 +53,6 @@ val Post.mapSimple: Map<String, Any>
         )
     )
 
-fun Post.mapRating(value: Int) = mapOf(
-    "title" to title,
-    "pic" to pic,
-    "timestamp" to timestamp,
-    "value" to value,
-    "user" to mapOf(
-        "id" to user.id,
-        "name" to user.name,
-        "pic" to user.pic
-    )
-)
 
 val User.map: Map<String, Any>
     get() = mapOf(

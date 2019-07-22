@@ -1,16 +1,16 @@
 package io.github.horaciocome1.reaque.data.subscriptions
 
-import com.google.firebase.firestore.Transaction
+import com.google.android.gms.tasks.Task
 import io.github.horaciocome1.reaque.data.users.User
 
 class SubscriptionsRepository private constructor(private val service: SubscriptionsService) :
     SubscriptionsInterface {
 
-    override fun subscribe(user: User, onSuccessListener: (Transaction?) -> Unit) =
-        service.subscribe(user, onSuccessListener)
+    override fun subscribe(user: User, onCompleteListener: (Task<Void?>?) -> Unit) =
+        service.subscribe(user, onCompleteListener)
 
-    override fun unSubscribe(user: User, onSuccessListener: (Void?) -> Unit) =
-        service.unSubscribe(user, onSuccessListener)
+    override fun unSubscribe(user: User, onCompleteListener: (Task<Void?>?) -> Unit) =
+        service.unSubscribe(user, onCompleteListener)
 
     override fun getSubscriptions(user: User) = service.getSubscriptions(user)
 
