@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import io.github.horaciocome1.reaque.data.topics.Topic
@@ -17,6 +18,11 @@ class PostsService : PostsInterface {
     private val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
 
     private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
+
+    private val increment: Map<String, FieldValue> by lazy {
+        val increment = FieldValue.increment(1)
+        mapOf("posts" to increment)
+    }
 
     private var _post = Post("")
 
@@ -41,10 +47,22 @@ class PostsService : PostsInterface {
     private var topicId = ""
 
     override fun create(post: Post, onSuccessListener: (DocumentReference?) -> Unit) {
-        auth.addSimpleAuthStateListener {
-            post.user = it.user
-            val ref = db.collection("posts")
-            ref.add(post.map).addOnSuccessListener(onSuccessListener)
+        auth.addSimpleAuthStateListener { user ->
+            post.user = user.user
+            val postRef = db.collection("posts").document()
+            val postOnTopicRef = db.document("topics/${post.topic.id}/posts/${postRef.id}")
+            val postOnUserRef = db.document("users/${post.user.id}/posts/${postRef.id}")
+            val userOnTopicRef = db.document("topics/${post.topic.id}/users/${post.user.id}")
+            val topicRef = db.document("topics/${post.topic.id}")
+            val userRef = db.document("users/${post.user.id}")
+            db.runBatch {
+                it.set(postRef, post.map)
+                it.set(postOnTopicRef, post.mapSimple)
+                it.set(postOnUserRef, post.mapSimple)
+                it.set(userOnTopicRef, user.user.map)
+                it.set(topicRef, increment)
+                it.set(userRef, increment)
+            }
         }
     }
 
