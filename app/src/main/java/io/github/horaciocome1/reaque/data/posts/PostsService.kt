@@ -86,7 +86,7 @@ class PostsService : PostsInterface {
         return topicPosts
     }
 
-    override fun getTop20(): LiveData<List<Post>> {
+    override fun getTop10(): LiveData<List<Post>> {
         top20Posts.value?.let {
             if (it.isEmpty()) {
                 val ref = db.collection("posts")

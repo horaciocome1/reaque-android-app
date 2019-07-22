@@ -15,6 +15,6 @@ interface PostsInterface {
 
     fun get(topic: Topic): LiveData<List<Post>>
 
-    fun getTop20(): LiveData<List<Post>>
+    fun getTop10(): LiveData<List<Post>>
 
 }

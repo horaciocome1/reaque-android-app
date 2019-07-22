@@ -15,7 +15,7 @@ class PostsRepository private constructor(private val service: PostsService) : P
 
     override fun get(topic: Topic) = service.get(topic)
 
-    override fun getTop20() = service.getTop20()
+    override fun getTop10() = service.getTop10()
 
     companion object {
 

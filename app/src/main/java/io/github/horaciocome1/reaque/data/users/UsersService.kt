@@ -38,6 +38,7 @@ class UsersService : UsersInterface {
 
     override fun get(user: User): LiveData<User> {
         if (user.id != _user.id) {
+            this.user.value = User("")
             val ref = db.document("users/${user.id}")
             ref.addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
                 _user = snapshot.user
