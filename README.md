@@ -1,4 +1,4 @@
-# Reaque ![Logo of the reaque android app](screenshots/logo.png)
+# ![Logo of the reaque android app](screenshots/logo.png) Reaque
 Reaque is where you share and read about experiences in Mozambique. Intend to show and find what great things we can do here now. Personal comments about it and a cover photo. Or just sharing a thought with those for who you are the favorite!
 
 ![Exploring posts on reaque android app](screenshots/mock1.png) ![Reading a post on reaque android app](screenshots/mock2.png) ![Feed on reaque android app](screenshots/mock3.png)
@@ -13,7 +13,7 @@ Here are some basic technical stuff. If you are an user, thank you for being her
 This project is built throught [Android Studio 3.4.2](https://developer.android.com/studio/releases), following the [Android Architecture Component](https://developer.android.com/topic/libraries/architecture) ( including _**databinding**_, _**navigation**_ and _**lifecycle**_) and last but not least the [MVVM pattern](https://en.wikipedia.org/wiki/Model–view–viewmodel).
 
 ## Version
-Still on beta now.
+Beta. Releasing soon.
 
 ### For developers only
 I use git for versioning. Please read Contributing section.
@@ -49,4 +49,4 @@ Although you might need further more details, for instance here you got the use 
 ## Screenshots
 This is how it looks on an 5.7 inch phone running [Android Nougat](https://www.android.com/versions/nougat-7-0/)
 
-![exploring posts in reaque android app](screenshots/screen1.png) ![feed on in reaque android app](screenshots/screen2.png) ![reading a post in reaque android app](screenshots/screen3.png) ![viewing an user's profile in reaque android app](screenshots/screen4.png) ![more options in reaque android app](screenshots/screen5.png) ![creating a post in reaque android app](screen6.png) ![setting storage permission in reaque android app](screenshots/screen7.png) ![updating bio and address in reaque android app](screenshots/screen8.png)
+![exploring posts in reaque android app](screenshots/screen1.png) ![feed on in reaque android app](screenshots/screen2.png) ![reading a post in reaque android app](screenshots/screen3.png) ![viewing an user's profile in reaque android app](screenshots/screen4.png) ![more options in reaque android app](screenshots/screen5.png) ![creating a post in reaque android app](screenshots/screen6.png) ![setting storage permission in reaque android app](screenshots/screen7.png) ![updating bio and address in reaque android app](screenshots/screen8.png)
