@@ -2,6 +2,7 @@ package io.github.horaciocome1.reaque.data.users
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -29,10 +30,10 @@ class UsersService : UsersInterface {
 
     private var topicId = ""
 
-    override fun update(user: User, onSuccessListener: (Void?) -> Unit) {
+    override fun update(user: User, onCompleteListener: (Task<Void?>?) -> Unit) {
         auth.addSimpleAuthStateListener {
             val ref = db.document("users/${it.uid}")
-            ref.set(user.mapSimple, SetOptions.merge()).addOnSuccessListener(onSuccessListener)
+            ref.set(user.mapSimple, SetOptions.merge()).addOnCompleteListener(onCompleteListener)
         }
     }
 

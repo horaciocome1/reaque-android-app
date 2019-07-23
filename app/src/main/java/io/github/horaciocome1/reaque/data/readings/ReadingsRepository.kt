@@ -1,10 +1,11 @@
 package io.github.horaciocome1.reaque.data.readings
 
+import com.google.android.gms.tasks.Task
 import io.github.horaciocome1.reaque.data.posts.Post
 
 class ReadingsRepository private constructor(private val service: ReadingsService) : ReadingsInterface {
 
-    override fun read(post: Post, onSuccessListener: (Unit?) -> Unit) = service.read(post, onSuccessListener)
+    override fun read(post: Post, onCompleteListener: (Task<Void?>?) -> Unit) = service.read(post, onCompleteListener)
 
     companion object {
 

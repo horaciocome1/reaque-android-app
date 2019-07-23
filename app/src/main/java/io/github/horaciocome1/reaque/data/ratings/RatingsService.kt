@@ -2,6 +2,7 @@ package io.github.horaciocome1.reaque.data.ratings
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import io.github.horaciocome1.reaque.data.posts.Post
@@ -21,7 +22,7 @@ class RatingsService : RatingsInterface {
         MutableLiveData<Int>().apply { value = 1 }
     }
 
-    override fun set(post: Post, value: Int, onSuccessListener: (Unit?) -> Unit) {
+    override fun set(post: Post, value: Int, onCompleteListener: (Task<Unit?>?) -> Unit) {
         auth.addSimpleAuthStateListener { user ->
             db.runTransaction {
                 val ref = db.document("posts/${post.id}/ratings/${user.uid}")
@@ -30,7 +31,7 @@ class RatingsService : RatingsInterface {
                     val map = user.map.plus("value" to value).plus("post" to mapOf("id" to post.id))
                     it.set(ref, map)
                 }
-            }.addOnSuccessListener(onSuccessListener)
+            }.addOnCompleteListener(onCompleteListener)
         }
     }
 

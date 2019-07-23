@@ -2,8 +2,12 @@ package io.github.horaciocome1.reaque.data.posts
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.*
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.SetOptions
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.util.*
@@ -43,7 +47,7 @@ class PostsService : PostsInterface {
 
     private var topicId = ""
 
-    override fun create(post: Post, onSuccessListener: (DocumentReference?) -> Unit) {
+    override fun create(post: Post, onCompleteListener: (Task<Void?>?) -> Unit) {
         auth.addSimpleAuthStateListener { user ->
             post.user = user.user
             val postRef = db.collection("posts").document()
@@ -59,7 +63,7 @@ class PostsService : PostsInterface {
                 it.set(userOnTopicRef, user.user.map)
                 it.set(topicRef, increment, SetOptions.merge())
                 it.set(userRef, increment, SetOptions.merge())
-            }
+            }.addOnCompleteListener(onCompleteListener)
         }
     }
 
