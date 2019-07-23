@@ -20,7 +20,7 @@ import io.github.horaciocome1.reaque.data.topics.Topic
 
 class StorageRepository private constructor(private val webservice: StorageService) {
 
-    fun uploadImage(imageUri: Uri, topic: Topic, onSuccessListener: (String) -> Unit) =
+    fun uploadImage(imageUri: Uri, topic: Topic, onSuccessListener: (Uri?) -> Unit) =
         webservice.upload(imageUri, topic, onSuccessListener)
 
     companion object {

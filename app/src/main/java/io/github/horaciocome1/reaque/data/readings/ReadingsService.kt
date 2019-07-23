@@ -1,5 +1,6 @@
 package io.github.horaciocome1.reaque.data.readings
 
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
@@ -19,7 +20,7 @@ class ReadingsService : ReadingsInterface {
         mapOf("readings" to increment)
     }
 
-    override fun read(post: Post, onSuccessListener: (Unit?) -> Unit) {
+    override fun read(post: Post, onCompleteListener: (Task<Void?>?) -> Unit) {
         auth.addSimpleAuthStateListener { user ->
             val readingRef = db.document("users/${user.uid}/readings/${post.id}")
             val postRef = db.document("posts/${post.id}")
@@ -28,7 +29,7 @@ class ReadingsService : ReadingsInterface {
                     db.runBatch {
                         it.set(readingRef, post.mapSimple)
                         it.set(postRef, increment, SetOptions.merge())
-                    }
+                    }.addOnCompleteListener(onCompleteListener)
                 }
             }
         }

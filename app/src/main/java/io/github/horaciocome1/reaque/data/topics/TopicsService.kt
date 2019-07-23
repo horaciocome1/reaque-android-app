@@ -27,8 +27,6 @@ class TopicsService {
 
     private val tag: String by lazy { "TopicsService" }
 
-    private val empty: Int by lazy { 0 }
-
     private val ref: CollectionReference by lazy { FirebaseFirestore.getInstance().collection("topics") }
 
     private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
@@ -38,7 +36,7 @@ class TopicsService {
     val notEmptyTopics = MutableLiveData<List<Topic>>()
         get() {
             if (_notEmptyTopics.isEmpty())
-                ref.whereGreaterThan("posts", empty)
+                ref.orderBy("score", Query.Direction.DESCENDING)
                     .addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
                         _notEmptyTopics = snapshot.topics
                         field.value = _notEmptyTopics

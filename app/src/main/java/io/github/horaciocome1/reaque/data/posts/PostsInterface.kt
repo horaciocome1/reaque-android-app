@@ -1,13 +1,13 @@
 package io.github.horaciocome1.reaque.data.posts
 
 import androidx.lifecycle.LiveData
-import com.google.firebase.firestore.DocumentReference
+import com.google.android.gms.tasks.Task
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
 
 interface PostsInterface {
 
-    fun create(post: Post, onSuccessListener: (DocumentReference?) -> Unit)
+    fun create(post: Post, onCompleteListener: (Task<Void?>?) -> Unit)
 
     fun get(post: Post): LiveData<Post>
 

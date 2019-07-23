@@ -21,27 +21,18 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import io.github.horaciocome1.reaque.data.topics.Topic
-import io.github.horaciocome1.reaque.util.onUploadingFailed
 
 class StorageService {
 
-    private val tag: String by lazy { "StorageService" }
-
     private val storage: FirebaseStorage by lazy { FirebaseStorage.getInstance() }
 
-    fun upload(imageUri: Uri, topic: Topic, onSuccessListener: (String) -> Unit) {
+    fun upload(imageUri: Uri, topic: Topic, onSuccessListener: (Uri?) -> Unit) {
         val ref = storage.reference.child("images/${topic.id}/${imageUri.lastPathSegment}")
         ref.putFile(imageUri).continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
             if (!task.isSuccessful)
-                task.exception?.let {
-                    throw it
-                }
+                task.exception?.let { throw it }
             return@Continuation ref.downloadUrl
-        }).addOnSuccessListener {
-            onSuccessListener(it.toString())
-        }.addOnFailureListener {
-            onUploadingFailed(tag)
-        }
+        }).addOnSuccessListener(onSuccessListener)
     }
 
 }

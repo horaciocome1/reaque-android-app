@@ -1,5 +1,6 @@
 package io.github.horaciocome1.reaque.data.shares
 
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
@@ -19,7 +20,7 @@ class SharesService : SharesInterface {
         mapOf("shares" to increment)
     }
 
-    override fun share(post: Post, onSuccessListener: (Unit?) -> Unit) {
+    override fun share(post: Post, onCompleteListener: (Task<Void?>?) -> Unit) {
         auth.addSimpleAuthStateListener { user ->
             val readingRef = db.document("users/${user.uid}/shares/${post.id}")
             val postRef = db.document("posts/${post.id}")
@@ -28,7 +29,7 @@ class SharesService : SharesInterface {
                     db.runBatch {
                         it.set(readingRef, post.mapSimple)
                         it.set(postRef, increment, SetOptions.merge())
-                    }
+                    }.addOnCompleteListener(onCompleteListener)
                 }
             }
         }

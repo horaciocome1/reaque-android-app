@@ -1,13 +1,15 @@
 package io.github.horaciocome1.reaque.data.bookmarks
 
+import com.google.android.gms.tasks.Task
 import io.github.horaciocome1.reaque.data.posts.Post
 
 class BookmarksRepository private constructor(private val service: BookmarksService) : BookmarksInterface {
 
-    override fun bookmark(post: Post, onSuccessListener: (Void?) -> Unit) = service.bookmark(post, onSuccessListener)
+    override fun bookmark(post: Post, onCompleteListener: (Task<Void?>?) -> Unit) =
+        service.bookmark(post, onCompleteListener)
 
-    override fun unBookmark(post: Post, onSuccessListener: (Void?) -> Unit) =
-        service.unBookmark(post, onSuccessListener)
+    override fun unBookmark(post: Post, onCompleteListener: (Task<Void?>?) -> Unit) =
+        service.unBookmark(post, onCompleteListener)
 
     override fun get() = service.get()
 

@@ -2,6 +2,7 @@ package io.github.horaciocome1.reaque.data.bookmarks
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
@@ -39,25 +40,25 @@ class BookmarksService : BookmarksInterface {
         MutableLiveData<Boolean>().apply { value = false }
     }
 
-    override fun bookmark(post: Post, onSuccessListener: (Void?) -> Unit) {
+    override fun bookmark(post: Post, onCompleteListener: (Task<Void?>?) -> Unit) {
         auth.addSimpleAuthStateListener { user ->
             val bookmarkRef = db.document("users/${user.uid}/bookmarks/${post.id}")
             val postRef = db.document("posts/${post.id}")
             db.runBatch {
                 it.set(bookmarkRef, post.mapSimple)
                 it.set(postRef, increment, SetOptions.merge())
-            }.addOnSuccessListener(onSuccessListener)
+            }.addOnCompleteListener(onCompleteListener)
         }
     }
 
-    override fun unBookmark(post: Post, onSuccessListener: (Void?) -> Unit) {
+    override fun unBookmark(post: Post, onCompleteListener: (Task<Void?>?) -> Unit) {
         auth.addSimpleAuthStateListener { user ->
             val bookmarkRef = db.document("users/${user.uid}/bookmarks/${post.id}")
             val postRef = db.document("posts/${post.id}")
             db.runBatch {
                 it.delete(bookmarkRef)
                 it.set(postRef, decrement, SetOptions.merge())
-            }.addOnSuccessListener(onSuccessListener)
+            }.addOnCompleteListener(onCompleteListener)
         }
     }
 

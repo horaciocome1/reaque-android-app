@@ -41,9 +41,11 @@ class CreatePostViewModel(
 
     fun create(view: View): CreatePostViewModel {
         isCreatingPost = true
-        storageRepository.uploadImage(imageUri, post.topic) {
-            post.pic = it
-            postsRepository.create(post) { navigateUp(view) }
+        storageRepository.uploadImage(imageUri, post.topic) { uri: Uri? ->
+            uri?.let {
+                post.pic = it.toString()
+                postsRepository.create(post) { navigateUp(view) }
+            }
         }
         return this
     }
