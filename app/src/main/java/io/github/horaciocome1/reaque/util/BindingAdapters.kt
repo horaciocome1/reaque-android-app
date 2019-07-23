@@ -75,7 +75,7 @@ class BindingAdapters {
                         }
                         Constants.LISTING_POSTS_ON_SUGGESTIONS -> {
                             val posts = list as List<Post>
-                            loadPostsOnSuggestions(posts, host)
+                            loadPostsOnSuggestions(posts)
                         }
                         Constants.LISTING_USERS -> {
                             val users = list as List<User>
@@ -91,17 +91,17 @@ class BindingAdapters {
                     StaggeredGridLayoutManager(columns, RecyclerView.VERTICAL)
                 adapter = TopicsAdapter(list)
                 if (host == Constants.EXPLORE_FRAGMENT) {
-                    addOnItemClickListener { view, position ->
+                    addOnItemClickListener { _, position ->
                         val directions = ExploreFragmentDirections.actionOpenPostsFromExplore(
                             list[position].id, Constants.TOPIC_POSTS_REQUEST
                         )
-                        view.findNavController().navigate(directions)
+                        findNavController().navigate(directions)
                     }
-                    addOnItemLongPressListener { view, position ->
+                    addOnItemLongPressListener { _, position ->
                         val directions = ExploreFragmentDirections.actionOpenUsersFromExplore(
                             list[position].id, Constants.TOPIC_USERS_REQUEST
                         )
-                        view.findNavController().navigate(directions)
+                        findNavController().navigate(directions)
                     }
                 }
             }
@@ -112,23 +112,22 @@ class BindingAdapters {
                 else
                     StaggeredGridLayoutManager(columns, RecyclerView.VERTICAL)
                 adapter = PostsAdapter(list)
-                addOnItemClickListener { view, position ->
+                addOnItemClickListener { _, position ->
                     val directions = when (host) {
                         Constants.FEED_FRAGMENT -> FeedFragmentDirections.actionOpenReadPostFromFeed(list[position].id)
                         else -> PostsFragmentDirections.actionOpenReadPostFromPosts(list[position].id)
                     }
-                    view.findNavController().navigate(directions)
+                    findNavController().navigate(directions)
                 }
             }
 
-            private fun RecyclerView.loadPostsOnSuggestions(list: List<Post>, host: Int) {
+            private fun RecyclerView.loadPostsOnSuggestions(list: List<Post>) {
                 layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
                 adapter = PostsAdapter.SuggestionsAdapter(list)
-                if (host == Constants.EXPLORE_FRAGMENT)
-                    addOnItemClickListener { view, position ->
-                        val directions = ExploreFragmentDirections.actionOpenReadPostFromExplore(list[position].id)
-                        view.findNavController().navigate(directions)
-                    }
+                addOnItemClickListener { _, position ->
+                    val directions = ExploreFragmentDirections.actionOpenReadPostFromExplore(list[position].id)
+                    findNavController().navigate(directions)
+                }
             }
 
             private fun RecyclerView.loadUsers(list: List<User>, columns: Int) {
@@ -137,9 +136,9 @@ class BindingAdapters {
                 else
                     StaggeredGridLayoutManager(columns, RecyclerView.VERTICAL)
                 adapter = UsersAdapter(list)
-                addOnItemClickListener { view, position ->
+                addOnItemClickListener { _, position ->
                     val directions = UsersFragmentDirections.actionOpenUserProfileFromUsers(list[position].id)
-                    view.findNavController().navigate(directions)
+                    findNavController().navigate(directions)
                 }
             }
 
