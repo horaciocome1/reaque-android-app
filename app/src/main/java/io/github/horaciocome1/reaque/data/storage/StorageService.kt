@@ -30,9 +30,7 @@ class StorageService {
         val ref = storage.reference.child("images/${topic.id}/${imageUri.lastPathSegment}")
         ref.putFile(imageUri).continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
             if (!task.isSuccessful)
-                task.exception?.let {
-                    throw it
-                }
+                task.exception?.let { throw it }
             return@Continuation ref.downloadUrl
         }).addOnSuccessListener(onSuccessListener)
     }
