@@ -25,7 +25,7 @@ val Post.map: Map<String, Any>
         "title" to title,
         "message" to message,
         "pic" to pic,
-        "timestamp" to FieldValue.serverTimestamp(),
+        "timestamp" to timestamp,
         "bookmarks" to 0,
         "readings" to 0,
         "rating" to 0,
@@ -50,7 +50,8 @@ val Post.mapSimple: Map<String, Any>
             "id" to user.id,
             "name" to user.name,
             "pic" to user.pic
-        )
+        ),
+        "score" to score.toInt()
     )
 
 
