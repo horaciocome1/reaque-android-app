@@ -28,7 +28,7 @@ data class Post(var id: String) {
     var pic = ""
     var message = ""
     var topic = Topic("")
-    var timestamp = Timestamp(0, 0)
+    var timestamp = Timestamp.now()
         set(value) {
             date = value.string
             field = value
