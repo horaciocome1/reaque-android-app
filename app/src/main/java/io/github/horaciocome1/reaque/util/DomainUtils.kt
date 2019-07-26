@@ -51,7 +51,7 @@ val Post.mapSimple: Map<String, Any>
             "name" to user.name,
             "pic" to user.pic
         ),
-        "score" to score.toInt()
+        "score" to score.toFloat()
     )
 
 
