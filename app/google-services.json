@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "122712633760-kb5oics5qg5135lgqrig7tubkvk2c6h6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.github.horaciocome1.reaque",
+            "certificate_hash": "aa220d6f23b8cdcdd4a9fec2368cf166834b15f3"
+          }
+        },
+        {
           "client_id": "122712633760-pm82l3ctb5pep0njfgmhgjv945c7j6cp.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

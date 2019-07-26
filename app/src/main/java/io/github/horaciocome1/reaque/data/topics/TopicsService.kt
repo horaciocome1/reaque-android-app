@@ -34,7 +34,7 @@ class TopicsService {
     val notEmptyTopics = MutableLiveData<List<Topic>>()
         get() {
             if (_notEmptyTopics.isEmpty())
-                ref.orderBy("score", Query.Direction.DESCENDING)
+                ref.whereGreaterThan("score", 0).orderBy("score", Query.Direction.DESCENDING)
                     .addSimpleAndSafeSnapshotListener(auth) { snapshot, _ ->
                         _notEmptyTopics = snapshot.topics
                         field.value = _notEmptyTopics

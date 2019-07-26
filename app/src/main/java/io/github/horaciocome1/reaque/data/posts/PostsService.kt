@@ -56,11 +56,13 @@ class PostsService : PostsInterface {
             val userRef = db.document("users/${post.user.id}")
             db.runBatch {
                 it.set(postRef, post.map)
-                it.set(postOnTopicRef, post.mapSimple)
-                it.set(postOnUserRef, post.mapSimple)
-                it.set(userOnTopicRef, user.user.map)
+                it.set(postOnTopicRef, post.mapSimpleForCreatingPost)
+                it.set(postOnUserRef, post.mapSimpleForCreatingPost)
+                it.set(userOnTopicRef, user.user.map, SetOptions.merge())
                 it.set(topicRef, increment, SetOptions.merge())
                 it.set(userRef, increment, SetOptions.merge())
+                val data = mapOf("top_topic" to post.topic.title)
+                it.set(userRef, data, SetOptions.merge())
             }.addOnCompleteListener(onCompleteListener)
         }
     }

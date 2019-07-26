@@ -50,7 +50,15 @@ class CreatePostFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.viewmodel = viewModel
         select_pic_from_gallery_button.setOnClickListener {
-            pickImageFromGallery()
+
+            if (ContextCompat.checkSelfPermission(
+                    activity as MainActivity,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ) == PackageManager.PERMISSION_GRANTED
+            )
+                pickImageFromGallery()
+            else
+                requestStoragePermission()
         }
         OnFocusChangeListener(context).let {
             title_edittext?.onFocusChangeListener = it
@@ -115,22 +123,14 @@ class CreatePostFragment : Fragment() {
     }
 
     private fun pickImageFromGallery() {
-        if (ContextCompat.checkSelfPermission(
-                activity as MainActivity,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            val intent = Intent(Intent.ACTION_PICK).apply {
-                type = "image/*"
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    val mimeTypes = arrayOf("image/jpeg", "image/png")
-                    putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
-                }
+        val intent = Intent(Intent.ACTION_PICK).apply {
+            type = "image/*"
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                val mimeTypes = arrayOf("image/jpeg", "image/png")
+                putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
             }
-            startActivityForResult(intent, Constants.PICK_IMAGE_FROM_GALLERY_REQUEST_CODE)
-        } else
-            requestStoragePermission()
-
+        }
+        startActivityForResult(intent, Constants.PICK_IMAGE_FROM_GALLERY_REQUEST_CODE)
     }
 
     private fun requestStoragePermission() {
