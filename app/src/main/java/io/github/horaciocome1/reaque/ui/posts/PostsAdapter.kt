@@ -40,7 +40,7 @@ class PostsAdapter(private val list: List<Post>) : RecyclerView.Adapter<PostsAda
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
-    class SuggestionsAdapter(private val list: List<Post>) : RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
+    class SuggestionsAdapter(private val list: List<Post>) : RecyclerView.Adapter<ViewHolder>() {
 
         private lateinit var binding: ItemSuggestionBinding
 

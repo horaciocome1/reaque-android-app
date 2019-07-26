@@ -29,24 +29,13 @@ val QuerySnapshot.posts: MutableList<Post>
         return list
     }
 
-fun Query.addSimpleSnapshotListener(TAG: String, listener: (QuerySnapshot) -> Unit) {
+fun Query.addSimpleSnapshotListener(listener: (QuerySnapshot) -> Unit) {
     addSnapshotListener { snapshot, exception ->
-        when {
-            exception != null -> onListeningFailed(TAG, exception)
-            snapshot != null -> listener(snapshot)
-            else -> onSnapshotNull(TAG)
-        }
+        if (exception == null && snapshot != null)
+            listener(snapshot)
     }
 }
 
-fun Query.addSimpleAndSafeSnapshotListener(
-    TAG: String,
-    auth: FirebaseAuth,
-    listener: (QuerySnapshot, FirebaseUser) -> Unit
-) {
-    auth.addSimpleAuthStateListener { user ->
-        addSimpleSnapshotListener(TAG) {
-            listener(it, user)
-        }
-    }
+fun Query.addSimpleAndSafeSnapshotListener(auth: FirebaseAuth, listener: (QuerySnapshot, FirebaseUser) -> Unit) {
+    auth.addSimpleAuthStateListener { user -> addSimpleSnapshotListener { listener(it, user) } }
 }

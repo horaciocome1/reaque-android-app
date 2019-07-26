@@ -44,7 +44,7 @@ You can make pull requests at anytime. There are welcome. It would be good if yo
 If you feel the need to touch the model part or the backend it self, please email me describing your intentions. Also could you visit the **issues** list, from time to time? It would be great!
 
 Although you might need further more details, for instance here you got the use case diagram.
-![use case diagram](docs/diagrams/use_case.jpg)
+![use case diagram](docs/diagrams/use_case.png)
 
 ## Screenshots
 This is how it looks on an 5.7 inch phone running [Android Nougat](https://www.android.com/versions/nougat-7-0/)

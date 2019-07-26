@@ -12,8 +12,6 @@ import io.github.horaciocome1.reaque.util.posts
 
 class FeedService : FeedInterface {
 
-    private val tag by lazy { "FeedService" }
-
     private val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
 
     private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
@@ -28,7 +26,7 @@ class FeedService : FeedInterface {
         if (_posts.isEmpty())
             auth.addSimpleAuthStateListener { user ->
                 val ref = db.collection("users/${user.uid}/feed")
-                ref.orderBy("score", Query.Direction.DESCENDING).addSimpleSnapshotListener(tag) {
+                ref.orderBy("score", Query.Direction.DESCENDING).addSimpleSnapshotListener {
                     _posts = it.posts
                     posts.value = _posts
 

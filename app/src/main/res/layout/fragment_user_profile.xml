@@ -35,6 +35,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:type="@{Constants.BLUR}"
                 android:scaleType="centerCrop"
+                android:contentDescription="@string/content_description_user_profile_image"
                 app:url="@{user.pic}" />
 
             <ImageView
@@ -47,6 +48,7 @@
                 app:layout_constraintStart_toStartOf="@+id/imageView7"
                 app:layout_constraintTop_toTopOf="@+id/imageView7"
                 app:type="@{Constants.CIRCLE}"
+                android:contentDescription="@string/content_description_user_profile_image"
                 app:url="@{user.pic}" />
 
             <TextView
@@ -92,6 +94,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/textView9"
                 app:layout_constraintStart_toStartOf="@+id/textView9"
                 app:layout_constraintTop_toBottomOf="@+id/divider2"
+                android:contentDescription="@string/content_description_posts_icon"
                 app:srcCompat="@drawable/outline_library_books_18" />
 
             <TextView
@@ -182,6 +185,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/textView15"
                 app:layout_constraintEnd_toEndOf="@+id/textView15"
                 app:layout_constraintStart_toStartOf="@+id/textView15"
+                android:contentDescription="@string/content_description_users_icon"
                 app:srcCompat="@drawable/outline_people_outline_18" />
 
             <ImageView
@@ -192,6 +196,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/textView14"
                 app:layout_constraintEnd_toEndOf="@+id/textView14"
                 app:layout_constraintStart_toStartOf="@+id/textView14"
+                android:contentDescription="@string/content_description_users_icon"
                 app:srcCompat="@drawable/outline_people_outline_18" />
 
             <TextView
@@ -218,6 +223,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/textView16"
                 app:layout_constraintEnd_toStartOf="@+id/textView16"
                 app:layout_constraintTop_toTopOf="@+id/textView16"
+                android:contentDescription="@string/content_description_since_icon"
                 app:srcCompat="@drawable/outline_access_time_18" />
 
             <TextView
@@ -244,6 +250,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/textView17"
                 app:layout_constraintEnd_toStartOf="@+id/textView17"
                 app:layout_constraintTop_toTopOf="@+id/textView17"
+                android:contentDescription="@string/content_description_address_icon"
                 app:srcCompat="@drawable/outline_location_on_18" />
 
             <View

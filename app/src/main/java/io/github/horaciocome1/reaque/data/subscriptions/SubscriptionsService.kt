@@ -13,8 +13,6 @@ import io.github.horaciocome1.reaque.util.*
 
 class SubscriptionsService : SubscriptionsInterface {
 
-    private val tag: String by lazy { "SubscriptionsService" }
-
     private val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
 
     private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
@@ -88,7 +86,7 @@ class SubscriptionsService : SubscriptionsInterface {
     override fun getSubscriptions(user: User): LiveData<List<User>> {
         if (user.id != subscriptionsOf) {
             val ref = db.collection("users/${user.id}/subscriptions")
-            ref.orderBy("timestamp", Query.Direction.DESCENDING).addSimpleSnapshotListener(tag) {
+            ref.orderBy("timestamp", Query.Direction.DESCENDING).addSimpleSnapshotListener {
                 subscriptions.value = it.users
             }
             subscriptionsOf = user.id
@@ -99,7 +97,7 @@ class SubscriptionsService : SubscriptionsInterface {
     override fun getSubscribers(user: User): LiveData<List<User>> {
         if (user.id != subscribersOf) {
             val ref = db.collection("users/${user.id}/subscribers")
-            ref.orderBy("timestamp", Query.Direction.DESCENDING).addSimpleSnapshotListener(tag) {
+            ref.orderBy("timestamp", Query.Direction.DESCENDING).addSimpleSnapshotListener {
                 subscribers.value = it.users
             }
             subscribersOf = user.id
@@ -111,7 +109,7 @@ class SubscriptionsService : SubscriptionsInterface {
         amSubscribedTo.value = false
         auth.addSimpleAuthStateListener { firebaseUser ->
             val ref = db.document("users/${firebaseUser.uid}/subscriptions/${user.id}")
-            ref.addSimpleSnapshotListener(tag) {
+            ref.addSimpleSnapshotListener {
                 amSubscribedTo.value = it["timestamp"] != null
             }
         }

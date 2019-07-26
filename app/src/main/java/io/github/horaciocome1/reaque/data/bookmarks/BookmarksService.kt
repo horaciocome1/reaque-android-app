@@ -16,8 +16,6 @@ import io.github.horaciocome1.reaque.util.posts
 
 class BookmarksService : BookmarksInterface {
 
-    private val tag: String by lazy { "BookmarksService" }
-
     private val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
 
     private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
@@ -67,7 +65,7 @@ class BookmarksService : BookmarksInterface {
             if (it.isEmpty())
                 auth.addSimpleAuthStateListener { user ->
                     val ref = db.collection("users/${user.uid}/bookmarks")
-                    ref.orderBy("score", Query.Direction.DESCENDING).addSimpleSnapshotListener(tag) { snapshot ->
+                    ref.orderBy("score", Query.Direction.DESCENDING).addSimpleSnapshotListener { snapshot ->
                         posts.value = snapshot.posts
                     }
                 }
@@ -79,7 +77,7 @@ class BookmarksService : BookmarksInterface {
         isBookmarked.value = false
         auth.addSimpleAuthStateListener { user ->
             val ref = db.document("users/${user.uid}/bookmarks/${post.id}")
-            ref.addSimpleSnapshotListener(tag) {
+            ref.addSimpleSnapshotListener {
                 isBookmarked.value = it["title"] != null
             }
         }

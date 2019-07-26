@@ -14,8 +14,6 @@ import io.github.horaciocome1.reaque.util.*
 
 class PostsService : PostsInterface {
 
-    private val tag: String by lazy { "PostsService:" }
-
     private val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
 
     private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
@@ -71,7 +69,7 @@ class PostsService : PostsInterface {
         if (post.id != _post.id) {
             this.post.value = Post("")
             val ref = db.document("posts/${post.id}")
-            ref.addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
+            ref.addSimpleAndSafeSnapshotListener(auth) { snapshot, _ ->
                 _post = snapshot.post
                 this.post.value = _post
             }
@@ -84,7 +82,7 @@ class PostsService : PostsInterface {
             userPosts.value = mutableListOf()
             val ref = db.collection("users/${user.id}/posts")
             ref.orderBy("score", Query.Direction.DESCENDING)
-                .addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
+                .addSimpleAndSafeSnapshotListener(auth) { snapshot, _ ->
                 this.userPosts.value = snapshot.posts
             }
             userId = user.id
@@ -97,7 +95,7 @@ class PostsService : PostsInterface {
             topicPosts.value = mutableListOf()
             val ref = db.collection("topics/${topic.id}/posts")
             ref.orderBy("score", Query.Direction.DESCENDING)
-                .addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
+                .addSimpleAndSafeSnapshotListener(auth) { snapshot, _ ->
                 this.topicPosts.value = snapshot.posts
             }
             topicId = topic.id
@@ -110,7 +108,7 @@ class PostsService : PostsInterface {
             if (it.isEmpty()) {
                 val ref = db.collection("posts")
                 ref.orderBy("score", Query.Direction.DESCENDING).limit(10)
-                    .addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
+                    .addSimpleAndSafeSnapshotListener(auth) { snapshot, _ ->
                         this.top20Posts.value = snapshot.posts
                     }
             }

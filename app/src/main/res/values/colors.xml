@@ -17,12 +17,10 @@
 
     <color name="primaryColor">#fafafa</color>
     <color name="primaryLightColor">#ffffff</color>
-    <color name="primaryDarkColor">#c7c7c7</color>
     <color name="secondaryColor">#7c4dff</color>
     <color name="secondaryLightColor">#b47cff</color>
     <color name="secondaryDarkColor">#3f1dcb</color>
     <color name="primaryTextColor">#000000</color>
-    <color name="secondaryTextColor">#ffffff</color>
     <color name="colorError">#F44336</color>
 
     <!-- CUSTOM COLORS -->
