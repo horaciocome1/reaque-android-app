@@ -12,8 +12,6 @@ import io.github.horaciocome1.reaque.util.*
 
 class UsersService : UsersInterface {
 
-    private val tag: String by lazy { "UsersService" }
-
     private val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
 
     private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
@@ -41,7 +39,7 @@ class UsersService : UsersInterface {
         if (user.id != _user.id) {
             this.user.value = User("")
             val ref = db.document("users/${user.id}")
-            ref.addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
+            ref.addSimpleAndSafeSnapshotListener(auth) { snapshot, _ ->
                 _user = snapshot.user
                 this.user.value = _user
             }
@@ -53,7 +51,7 @@ class UsersService : UsersInterface {
         if (topic.id != topicId) {
             val ref = db.collection("topics/${topic.id}/users")
             ref.orderBy("score", Query.Direction.DESCENDING)
-                .addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
+                .addSimpleAndSafeSnapshotListener(auth) { snapshot, _ ->
                 users.value = snapshot.users
             }
         }

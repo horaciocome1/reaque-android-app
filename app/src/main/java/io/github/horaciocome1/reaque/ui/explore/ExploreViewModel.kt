@@ -8,6 +8,6 @@ class ExploreViewModel(topicsRepository: TopicsRepository, postsRepository: Post
 
     val notEmptyTopics = topicsRepository.notEmptyTopics
 
-    val top20 = postsRepository.getTop10()
+    val top10 = postsRepository.getTop10()
 
 }

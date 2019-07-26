@@ -12,8 +12,6 @@ import io.github.horaciocome1.reaque.util.map
 
 class RatingsService : RatingsInterface {
 
-    private val tag: String by lazy { "RatingsService" }
-
     private val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
 
     private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
@@ -39,7 +37,7 @@ class RatingsService : RatingsInterface {
         rating.value = 1
         auth.addSimpleAuthStateListener { user ->
             val ref = db.document("posts/${post.id}/ratings/${user.uid}")
-            ref.addSimpleSnapshotListener(tag) {
+            ref.addSimpleSnapshotListener {
                 val value = it["value"]
                 if (value != null)
                     rating.value = value.toString().toInt()

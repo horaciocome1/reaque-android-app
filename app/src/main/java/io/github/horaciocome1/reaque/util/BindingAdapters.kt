@@ -112,7 +112,10 @@ class BindingAdapters {
                     columns == 1 -> LinearLayoutManager(context)
                     else -> StaggeredGridLayoutManager(columns, RecyclerView.VERTICAL)
                 }
-                adapter = PostsAdapter(list)
+                adapter = if (host == Constants.EXPLORE_FRAGMENT)
+                    PostsAdapter.SuggestionsAdapter(list)
+                else
+                    PostsAdapter(list)
                 addOnItemClickListener { _, position ->
                     if (list.isNotEmpty()) {
                         val directions = when (host) {

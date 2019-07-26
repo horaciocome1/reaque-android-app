@@ -25,8 +25,6 @@ import io.github.horaciocome1.reaque.util.topics
 
 class TopicsService {
 
-    private val tag: String by lazy { "TopicsService" }
-
     private val ref: CollectionReference by lazy { FirebaseFirestore.getInstance().collection("topics") }
 
     private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
@@ -37,7 +35,7 @@ class TopicsService {
         get() {
             if (_notEmptyTopics.isEmpty())
                 ref.orderBy("score", Query.Direction.DESCENDING)
-                    .addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
+                    .addSimpleAndSafeSnapshotListener(auth) { snapshot, _ ->
                         _notEmptyTopics = snapshot.topics
                         field.value = _notEmptyTopics
                     }
@@ -50,7 +48,7 @@ class TopicsService {
         get() {
             if (_topics.isEmpty())
                 ref.orderBy("title", Query.Direction.ASCENDING)
-                    .addSimpleAndSafeSnapshotListener(tag, auth) { snapshot, _ ->
+                    .addSimpleAndSafeSnapshotListener(auth) { snapshot, _ ->
                         _topics = snapshot.topics
                         field.value = _topics
                     }

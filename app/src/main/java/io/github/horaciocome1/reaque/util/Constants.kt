@@ -31,7 +31,6 @@ object Constants {
     // list type
     const val LISTING_TOPICS = 4401
     const val LISTING_POSTS = 4403
-    const val LISTING_POSTS_ON_SUGGESTIONS = 4404
     const val LISTING_USERS = 4405
 
     // hosts

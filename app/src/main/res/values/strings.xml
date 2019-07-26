@@ -15,7 +15,6 @@
 
 <resources>
     <string name="app_name" translatable="false">ReaQue</string>
-    <string name="app_version" translatable="false">1.0</string>
 
     <!-- 01 URL -->
     <string name="terms_and_conditions_url" translatable="false">https://github.com/horaciocome1/reaque/tree/master/docs/TERMS_AND_CONDITIONS.md</string>
@@ -38,15 +37,12 @@
     <string name="privacy_policy">Privacy policy</string>
     <string name="licenses">Licenses</string>
     <string name="share">Share</string>
-    <string name="cancel">Cancel</string>
     <string name="gallery">Gallery</string>
-    <string name="profile">Profile</string>
     <string name="title">Title</string>
     <string name="message">Message</string>
     <string name="whats_new">Whats new?</string>
     <string name="address">Address [Town, State]</string>
     <string name="bio">Bio</string>
-    <string name="submit">Submit</string>
 
     <string name="welcome">Welcome</string>
     <string name="content_description_post_cover_image">Post cover image</string>
@@ -82,5 +78,9 @@
     <string name="permission_denied">Permission DENIED</string>
     <string name="confirm">I understand!</string>
     <string name="reject">Don\'t want to</string>
+    <string name="content_description_posts_icon">posts icon</string>
+    <string name="content_description_users_icon">users icon</string>
+    <string name="content_description_since_icon">Since icon</string>
+    <string name="content_description_address_icon">Address icon</string>
 
 </resources>

@@ -6,23 +6,15 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
 
 fun DocumentReference.addSimpleAndSafeSnapshotListener(
-    TAG: String,
     auth: FirebaseAuth,
     listener: (DocumentSnapshot, FirebaseUser) -> Unit
 ) {
-    auth.addSimpleAuthStateListener { user ->
-        addSimpleSnapshotListener(TAG) {
-            listener(it, user)
-        }
-    }
+    auth.addSimpleAuthStateListener { user -> addSimpleSnapshotListener { listener(it, user) } }
 }
 
-fun DocumentReference.addSimpleSnapshotListener(TAG: String, listener: (DocumentSnapshot) -> Unit) {
+fun DocumentReference.addSimpleSnapshotListener(listener: (DocumentSnapshot) -> Unit) {
     addSnapshotListener { snapshot, exception ->
-        when {
-            exception != null -> onListeningFailed(TAG, exception)
-            snapshot != null -> listener(snapshot)
-            else -> onSnapshotNull(TAG)
-        }
+        if (exception == null && snapshot != null)
+            listener(snapshot)
     }
 }
