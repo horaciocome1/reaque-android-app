@@ -1,5 +1,5 @@
 # ![Logo of the reaque android app](screenshots/logo.png) Reaque
-Reaque is where you share and read about experiences in Mozambique. Intend to show and find what great things we can do here now. Personal comments about it and a cover photo. Or just sharing a thought with those for who you are the favorite!
+Reaque is a mobile tool created by some mozambican student which tend to be the place where we get an more realistic view about his country and the people and things there. It is cloud based and people can share and find experiences taken in the land. From reflections and culture throught history and gastronomy to tourim and even fashion, if it is something about there, you should share and find it in Reaque.
 
 ![Exploring posts on reaque android app](screenshots/mock1.png) ![Reading a post on reaque android app](screenshots/mock2.png) ![Feed on reaque android app](screenshots/mock3.png)
 
