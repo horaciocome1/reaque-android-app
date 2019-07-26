@@ -27,7 +27,7 @@ class ExploreFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         viewModel.notEmptyTopics.observe(this, Observer { binding.topics = it })
-        viewModel.top20.observe(this, Observer { binding.posts = it })
+        viewModel.top10.observe(this, Observer { binding.posts = it })
     }
 
 }

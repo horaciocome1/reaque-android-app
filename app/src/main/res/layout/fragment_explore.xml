@@ -47,7 +47,7 @@
                 app:list="@{posts}"
                 app:columns="@{1}"
                 app:host="@{Constants.EXPLORE_FRAGMENT}"
-                app:type="@{Constants.LISTING_POSTS_ON_SUGGESTIONS}" />
+                app:type="@{Constants.LISTING_POSTS}" />
 
             <ProgressBar
                 android:layout_width="match_parent"

@@ -37,7 +37,7 @@ class PostsService : PostsInterface {
         MutableLiveData<List<Post>>().apply { value = mutableListOf() }
     }
 
-    private val top20Posts: MutableLiveData<List<Post>> by lazy {
+    private val top10Posts: MutableLiveData<List<Post>> by lazy {
         MutableLiveData<List<Post>>().apply { value = mutableListOf() }
     }
 
@@ -104,16 +104,16 @@ class PostsService : PostsInterface {
     }
 
     override fun getTop10(): LiveData<List<Post>> {
-        top20Posts.value?.let {
+        top10Posts.value?.let {
             if (it.isEmpty()) {
                 val ref = db.collection("posts")
                 ref.orderBy("score", Query.Direction.DESCENDING).limit(10)
                     .addSimpleAndSafeSnapshotListener(auth) { snapshot, _ ->
-                        this.top20Posts.value = snapshot.posts
+                        this.top10Posts.value = snapshot.posts
                     }
             }
         }
-        return top20Posts
+        return top10Posts
     }
 
 }
