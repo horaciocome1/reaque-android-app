@@ -2,7 +2,6 @@ package io.github.horaciocome1.reaque.ui.sign_in
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +22,6 @@ import kotlinx.android.synthetic.main.fragment_sign_in.*
 
 class SignInFragment : Fragment() {
 
-    private val tag1 = "SignInActivity"
     private lateinit var auth: FirebaseAuth
     private lateinit var binding: FragmentSignInBinding
 
@@ -52,7 +50,6 @@ class SignInFragment : Fragment() {
                     val account = task.getResult(ApiException::class.java)
                     account?.let { firebaseAuthWithGoogle(account) }
                 } catch (exception: ApiException) {
-                    Log.w(tag1, "Google sign in failed", exception)
                     retry()
                 }
             }
@@ -71,17 +68,10 @@ class SignInFragment : Fragment() {
     }
 
     private fun firebaseAuthWithGoogle(account: GoogleSignInAccount) {
-        account.id?.let { Log.d(tag, "firebaseAuthWithGoogle ${account.id}") }
         val credential = GoogleAuthProvider.getCredential(account.idToken, null)
         auth.signInWithCredential(credential)
-            .addOnSuccessListener {
-                Log.d(tag, "firebaseAuthWithGoogle:success")
-                root_view?.findNavController()?.navigateUp()
-            }
-            .addOnFailureListener {
-                Log.w(tag, "firebaseAuthWithGoogle:failure", it)
-                retry()
-            }
+            .addOnSuccessListener { root_view?.findNavController()?.navigateUp() }
+            .addOnFailureListener { retry() }
     }
 
     private fun retry() {
@@ -90,7 +80,6 @@ class SignInFragment : Fragment() {
             val snackBar = Snackbar
                 .make(it, "Ocorreu um erro inexperado! Voltar a tentar?", Snackbar.LENGTH_INDEFINITE)
             snackBar.setAction("Tentar") {
-                snackBar.dismiss()
                 signInWithGoogle()
                 progressbar?.visibility = View.VISIBLE
             }.show()

@@ -54,6 +54,19 @@ val Post.mapSimple: Map<String, Any>
         "score" to score.toFloat()
     )
 
+val Post.mapSimpleForCreatingPost: Map<String, Any>
+    get() = mapOf(
+        "title" to title,
+        "pic" to pic,
+        "timestamp" to timestamp,
+        "user" to mapOf(
+            "id" to user.id,
+            "name" to user.name,
+            "pic" to user.pic
+        ),
+        "score" to 0
+    )
+
 
 val User.map: Map<String, Any>
     get() = mapOf(
