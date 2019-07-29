@@ -6,21 +6,13 @@
 
         <import type="java.util.List" />
 
-        <import type="io.github.horaciocome1.reaque.data.posts.Post" />
-
-        <import type="io.github.horaciocome1.reaque.data.topics.Topic" />
-
         <import type="android.view.View" />
 
         <import type="io.github.horaciocome1.reaque.util.Constants" />
 
         <variable
-            name="posts"
-            type="List&lt;Post&gt;" />
-
-        <variable
-            name="topics"
-            type="List&lt;Topic&gt;" />
+            name="viewmodel"
+            type="io.github.horaciocome1.reaque.ui.explore.ExploreViewModel" />
 
     </data>
 
@@ -42,17 +34,18 @@
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/posts_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:columns="@{3}"
                 app:host="@{Constants.EXPLORE_FRAGMENT}"
-                app:list="@{posts}"
+                app:list="@{viewmodel.posts}"
                 app:type="@{Constants.LISTING_POSTS}" />
 
             <ProgressBar
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_progressbar_size"
-                android:visibility="@{posts.isEmpty() ? View.VISIBLE : View.GONE}" />
+                android:visibility="@{viewmodel.posts.isEmpty() ? View.VISIBLE : View.GONE}" />
 
             <View
                 android:layout_width="match_parent"
@@ -70,17 +63,18 @@
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/topics_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:columns="@{1}"
                 app:host="@{Constants.EXPLORE_FRAGMENT}"
-                app:list="@{topics}"
+                app:list="@{viewmodel.topics}"
                 app:type="@{Constants.LISTING_TOPICS}" />
 
             <ProgressBar
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_progressbar_size"
-                android:visibility="@{topics.isEmpty() ? View.VISIBLE : View.GONE}" />
+                android:visibility="@{viewmodel.topics.isEmpty() ? View.VISIBLE : View.GONE}" />
 
         </LinearLayout>
 

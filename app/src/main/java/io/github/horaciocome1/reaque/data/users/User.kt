@@ -27,5 +27,6 @@ data class User(var id: String) {
     var posts = ""
     var subscribers = ""
     var subscriptions = ""
+    var score = 0f
 
 }

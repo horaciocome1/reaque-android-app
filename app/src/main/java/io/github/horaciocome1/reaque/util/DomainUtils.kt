@@ -43,6 +43,7 @@ val Post.map: Map<String, Any>
 
 val Post.mapSimple: Map<String, Any>
     get() = mapOf(
+        "id" to id,
         "title" to title,
         "pic" to pic,
         "timestamp" to timestamp,
@@ -51,29 +52,17 @@ val Post.mapSimple: Map<String, Any>
             "name" to user.name,
             "pic" to user.pic
         ),
-        "score" to score.toFloat()
+        "score" to score
     )
-
-val Post.mapSimpleForCreatingPost: Map<String, Any>
-    get() = mapOf(
-        "title" to title,
-        "pic" to pic,
-        "timestamp" to timestamp,
-        "user" to mapOf(
-            "id" to user.id,
-            "name" to user.name,
-            "pic" to user.pic
-        ),
-        "score" to 0
-    )
-
 
 val User.map: Map<String, Any>
     get() = mapOf(
+        "id" to id,
         "name" to name,
         "pic" to pic,
         "subscribers" to subscribers,
         "top_topic" to topTopic,
+        "score" to score,
         "timestamp" to FieldValue.serverTimestamp()
     )
 
@@ -88,10 +77,3 @@ val FirebaseUser.user: User
         name = displayName.toString()
         pic = photoUrl.toString()
     }
-
-val FirebaseUser.map: Map<String, Any>
-    get() = mapOf(
-        "name" to displayName.toString(),
-        "pic" to photoUrl.toString(),
-        "timestamp" to FieldValue.serverTimestamp()
-    )

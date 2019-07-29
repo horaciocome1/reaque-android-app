@@ -9,6 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import io.github.horaciocome1.reaque.databinding.FragmentPostsBinding
 import io.github.horaciocome1.reaque.util.InjectorUtils
+import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
+import kotlinx.android.synthetic.main.fragment_posts.*
 
 class PostsFragment : Fragment() {
 
@@ -24,11 +26,17 @@ class PostsFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        posts_recyclerview.addOnItemClickListener(viewModel.onItemClickListener)
+    }
+
     override fun onStart() {
         super.onStart()
         arguments?.let { bundle ->
             val args = PostsFragmentArgs.fromBundle(bundle)
-            viewModel.get(args.parentId, args.requestId).observe(this, Observer { binding.posts = it })
+            viewModel.get(args.parentId, args.requestId)
+                .observe(this, Observer { binding.viewmodel = viewModel.setPosts(it) })
         }
     }
 

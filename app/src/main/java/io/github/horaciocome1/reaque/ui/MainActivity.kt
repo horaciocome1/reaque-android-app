@@ -113,10 +113,13 @@ class MainActivity : AppCompatActivity() {
             || destination.id == R.id.destination_update_user || destination.id == R.id.destination_sign_in
         )
             supportActionBar?.hide()
-        if (destination.id != R.id.destination_feed && destination.id != R.id.destination_explore && destination.id != R.id.destination_more)
+        if (destination.id != R.id.destination_feed && destination.id != R.id.destination_explore && destination.id != R.id.destination_more) {
             bottomnavigationview?.visibility = View.GONE
-        else
+            divider6?.visibility = View.GONE
+        } else {
             bottomnavigationview?.visibility = View.VISIBLE
+            divider6?.visibility = View.VISIBLE
+        }
     }
 
 }
