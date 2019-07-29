@@ -5,10 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.util.addSimpleAuthStateListener
 import io.github.horaciocome1.reaque.util.addSimpleSnapshotListener
 import io.github.horaciocome1.reaque.util.map
+import io.github.horaciocome1.reaque.util.user
 
 class RatingsService : RatingsInterface {
 
@@ -17,24 +19,19 @@ class RatingsService : RatingsInterface {
     private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
 
     private val rating: MutableLiveData<Int> by lazy {
-        MutableLiveData<Int>().apply { value = 1 }
+        MutableLiveData<Int>().apply { value = 0 }
     }
 
-    override fun set(post: Post, value: Int, onCompleteListener: (Task<Unit?>?) -> Unit) {
-        auth.addSimpleAuthStateListener { user ->
-            db.runTransaction {
-                val ref = db.document("posts/${post.id}/ratings/${user.uid}")
-                val snapshot = it[ref]
-                if (value != snapshot["value"]) {
-                    val map = user.map.plus("value" to value).plus("post" to mapOf("id" to post.id))
-                    it.set(ref, map)
-                }
-            }.addOnCompleteListener(onCompleteListener)
+    override fun set(post: Post, value: Int, onCompleteListener: (Task<Void?>?) -> Unit) {
+        auth.addSimpleAuthStateListener {
+            val ref = db.document("posts/${post.id}/ratings/${it.uid}")
+            val data = it.user.map.plus("value" to value).plus("post" to mapOf("id" to post.id))
+            ref.set(data, SetOptions.merge()).addOnCompleteListener(onCompleteListener)
         }
     }
 
     override fun get(post: Post): LiveData<Int> {
-        rating.value = 1
+        rating.value = 0
         auth.addSimpleAuthStateListener { user ->
             val ref = db.document("posts/${post.id}/ratings/${user.uid}")
             ref.addSimpleSnapshotListener {
@@ -42,7 +39,7 @@ class RatingsService : RatingsInterface {
                 if (value != null)
                     rating.value = value.toString().toInt()
                 else
-                    rating.value = 1
+                    rating.value = 0
             }
         }
         return rating

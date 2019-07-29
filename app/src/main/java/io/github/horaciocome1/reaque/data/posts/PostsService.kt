@@ -56,8 +56,8 @@ class PostsService : PostsInterface {
             val userRef = db.document("users/${post.user.id}")
             db.runBatch {
                 it.set(postRef, post.map)
-                it.set(postOnTopicRef, post.mapSimpleForCreatingPost)
-                it.set(postOnUserRef, post.mapSimpleForCreatingPost)
+                it.set(postOnTopicRef, post.map)
+                it.set(postOnUserRef, post.map)
                 it.set(userOnTopicRef, user.user.map, SetOptions.merge())
                 it.set(topicRef, increment, SetOptions.merge())
                 it.set(userRef, increment, SetOptions.merge())

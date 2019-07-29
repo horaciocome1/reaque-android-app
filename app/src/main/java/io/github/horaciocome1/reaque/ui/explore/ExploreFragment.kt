@@ -9,6 +9,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import io.github.horaciocome1.reaque.databinding.FragmentExploreBinding
 import io.github.horaciocome1.reaque.util.InjectorUtils
+import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
+import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemLongPressListener
+import kotlinx.android.synthetic.main.fragment_explore.*
 
 class ExploreFragment : Fragment() {
 
@@ -24,10 +27,17 @@ class ExploreFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        posts_recyclerview.addOnItemClickListener(viewModel.onItemPostClickListener)
+        topics_recyclerview.addOnItemClickListener(viewModel.onItemTopicClickListener)
+        topics_recyclerview.addOnItemLongPressListener(viewModel.onItemTopicLongPressListener)
+    }
+
     override fun onStart() {
         super.onStart()
-        viewModel.notEmptyTopics.observe(this, Observer { binding.topics = it })
-        viewModel.top10.observe(this, Observer { binding.posts = it })
+        viewModel.notEmptyTopics.observe(this, Observer { binding.viewmodel = viewModel.setTopics(it) })
+        viewModel.top10.observe(this, Observer { binding.viewmodel = viewModel.setPosts(it) })
     }
 
 }

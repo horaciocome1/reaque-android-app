@@ -6,15 +6,13 @@
 
         <import type="java.util.List" />
 
-        <import type="io.github.horaciocome1.reaque.data.posts.Post" />
-
         <import type="android.view.View" />
 
         <import type="io.github.horaciocome1.reaque.util.Constants" />
 
         <variable
-            name="posts"
-            type="List&lt;Post&gt;" />
+            name="viewmodel"
+            type="io.github.horaciocome1.reaque.ui.posts.PostsViewModel" />
 
     </data>
 
@@ -24,10 +22,11 @@
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/posts_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:columns="@{1}"
-            app:list="@{posts}"
+            app:list="@{viewmodel.posts}"
             app:host="@{Constants.POSTS_FRAGMENT}"
             app:type="@{Constants.LISTING_POSTS}" />
 
@@ -35,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/default_progressbar_size"
             android:layout_marginTop="32dp"
-            android:visibility="@{posts.isEmpty() ? View.VISIBLE : View.GONE}" />
+            android:visibility="@{viewmodel.posts.isEmpty() ? View.VISIBLE : View.GONE}" />
 
     </LinearLayout>
 

@@ -9,6 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import io.github.horaciocome1.reaque.databinding.FragmentUsersBinding
 import io.github.horaciocome1.reaque.util.InjectorUtils
+import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
+import kotlinx.android.synthetic.main.fragment_users.*
 
 class UsersFragment : Fragment() {
 
@@ -24,11 +26,17 @@ class UsersFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        users_recyclerview.addOnItemClickListener(viewModel.onItemClickListener)
+    }
+
     override fun onStart() {
         super.onStart()
         arguments?.let { bundle ->
             val args = UsersFragmentArgs.fromBundle(bundle)
-            viewModel.get(args.parentId, args.requestId).observe(this, Observer { binding.users = it })
+            viewModel.get(args.parentId, args.requestId)
+                .observe(this, Observer { binding.viewmodel = viewModel.setUsers(it) })
         }
     }
 

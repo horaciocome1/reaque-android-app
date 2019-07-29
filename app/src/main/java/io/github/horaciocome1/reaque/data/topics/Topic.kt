@@ -19,9 +19,5 @@ data class Topic(var id: String) {
 
     var title = ""
     var pic = ""
-    var posts = ""
-    var users = ""
-    var readings = ""
-    var score = ""
 
 }

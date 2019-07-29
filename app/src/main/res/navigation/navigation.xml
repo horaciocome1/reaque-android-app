@@ -122,6 +122,9 @@
         <argument
             android:name="post_id"
             app:argType="string" />
+        <argument
+            android:name="rating"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/destination_user_profile"

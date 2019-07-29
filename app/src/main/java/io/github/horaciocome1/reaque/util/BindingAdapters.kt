@@ -3,7 +3,6 @@ package io.github.horaciocome1.reaque.util
 import android.net.Uri
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -13,15 +12,9 @@ import com.bumptech.glide.request.RequestOptions
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
-import io.github.horaciocome1.reaque.ui.explore.ExploreFragmentDirections
 import io.github.horaciocome1.reaque.ui.explore.TopicsAdapter
-import io.github.horaciocome1.reaque.ui.feed.FeedFragmentDirections
 import io.github.horaciocome1.reaque.ui.posts.PostsAdapter
-import io.github.horaciocome1.reaque.ui.posts.PostsFragmentDirections
 import io.github.horaciocome1.reaque.ui.users.UsersAdapter
-import io.github.horaciocome1.reaque.ui.users.UsersFragmentDirections
-import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
-import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemLongPressListener
 import jp.wasabeef.glide.transformations.BlurTransformation
 
 class BindingAdapters {
@@ -67,7 +60,7 @@ class BindingAdapters {
                     when (type) {
                         Constants.LISTING_TOPICS -> {
                             val topics = list as List<Topic>
-                            loadTopics(topics, columns, host)
+                            loadTopics(topics, columns)
                         }
                         Constants.LISTING_POSTS -> {
                             val posts = list as List<Post>
@@ -80,30 +73,12 @@ class BindingAdapters {
                     }
             }
 
-            private fun RecyclerView.loadTopics(list: List<Topic>, columns: Int, host: Int) {
+            private fun RecyclerView.loadTopics(list: List<Topic>, columns: Int) {
                 layoutManager = if (columns == 1)
                     LinearLayoutManager(context)
                 else
                     StaggeredGridLayoutManager(columns, RecyclerView.VERTICAL)
                 adapter = TopicsAdapter(list)
-                if (host == Constants.EXPLORE_FRAGMENT) {
-                    addOnItemClickListener { _, position ->
-                        if (list.isNotEmpty()) {
-                            val directions = ExploreFragmentDirections.actionOpenPostsFromExplore(
-                                list[position].id, Constants.TOPIC_POSTS_REQUEST
-                            )
-                            findNavController().navigate(directions)
-                        }
-                    }
-                    addOnItemLongPressListener { _, position ->
-                        if (list.isNotEmpty()) {
-                            val directions = ExploreFragmentDirections.actionOpenUsersFromExplore(
-                                list[position].id, Constants.TOPIC_USERS_REQUEST
-                            )
-                            findNavController().navigate(directions)
-                        }
-                    }
-                }
             }
 
             private fun RecyclerView.loadPosts(list: List<Post>, columns: Int, host: Int) {
@@ -116,16 +91,6 @@ class BindingAdapters {
                     PostsAdapter.SuggestionsAdapter(list)
                 else
                     PostsAdapter(list)
-                addOnItemClickListener { _, position ->
-                    if (list.isNotEmpty()) {
-                        val directions = when (host) {
-                            Constants.FEED_FRAGMENT -> FeedFragmentDirections.actionOpenReadPostFromFeed(list[position].id)
-                            Constants.EXPLORE_FRAGMENT -> ExploreFragmentDirections.actionOpenReadPostFromExplore(list[position].id)
-                            else -> PostsFragmentDirections.actionOpenReadPostFromPosts(list[position].id)
-                        }
-                        findNavController().navigate(directions)
-                    }
-                }
             }
 
             private fun RecyclerView.loadUsers(list: List<User>, columns: Int) {
@@ -134,12 +99,6 @@ class BindingAdapters {
                 else
                     StaggeredGridLayoutManager(columns, RecyclerView.VERTICAL)
                 adapter = UsersAdapter(list)
-                addOnItemClickListener { _, position ->
-                    if (list.isNotEmpty()) {
-                        val directions = UsersFragmentDirections.actionOpenUserProfileFromUsers(list[position].id)
-                        findNavController().navigate(directions)
-                    }
-                }
             }
 
         }

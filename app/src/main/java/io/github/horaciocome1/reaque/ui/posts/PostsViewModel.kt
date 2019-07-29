@@ -4,6 +4,7 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
+import com.google.android.material.button.MaterialButton
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
 import io.github.horaciocome1.reaque.data.bookmarks.BookmarksRepository
 import io.github.horaciocome1.reaque.data.posts.Post
@@ -34,6 +35,21 @@ class PostsViewModel(
                 readingsRepository.read(value) { }
             field = value
         }
+
+    var posts: List<Post> = mutableListOf()
+
+    val onItemClickListener: (View, Int) -> Unit = { view, position ->
+        if (posts.isNotEmpty()) {
+            val directions = PostsFragmentDirections.actionOpenReadPostFromPosts(posts[position].id)
+            view.findNavController().navigate(directions)
+        }
+    }
+
+    fun setPosts(posts: List<Post>): PostsViewModel {
+        this.posts = posts
+        return this
+    }
+
 
     fun get(parentId: String, requestId: String): LiveData<List<Post>> {
         return when (requestId) {
@@ -79,8 +95,11 @@ class PostsViewModel(
     }
 
     fun openSetRating(view: View, post: Post) {
-        val directions = ReadPostFragmentDirections.actionOpenSetRating(post.id)
-        view.findNavController().navigate(directions)
+        if (view is MaterialButton) {
+            val rating = view.text.toString().toInt()
+            val directions = ReadPostFragmentDirections.actionOpenSetRating(post.id, rating)
+            view.findNavController().navigate(directions)
+        }
     }
 
     fun navigateUp(view: View) = view.findNavController().navigateUp()

@@ -34,10 +34,15 @@ class SetRatingFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         arguments?.let { bundle ->
-            val post = Post(
-                SetRatingFragmentArgs.fromBundle(bundle).postId
-            )
-            binding.post = post
+            val args = SetRatingFragmentArgs.fromBundle(bundle)
+            binding.post = Post(args.postId)
+            when (args.rating) {
+                1 -> textView1.isEnabled = false
+                2 -> textView2.isEnabled = false
+                3 -> textView3.isEnabled = false
+                4 -> textView4.isEnabled = false
+                5 -> textView5.isEnabled = false
+            }
         }
     }
 
