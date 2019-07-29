@@ -28,7 +28,7 @@
             <ImageView
                 android:id="@+id/imageView7"
                 android:layout_width="0dp"
-                android:layout_height="208dp"
+                android:layout_height="304dp"
                 android:tint="@color/dark_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

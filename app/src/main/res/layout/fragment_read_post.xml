@@ -214,6 +214,15 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
                 <View
+                    android:id="@+id/divider6"
+                    android:layout_width="0dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/background_shadow_bottom_to_top"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView15"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <View
                     android:id="@+id/divider5"
                     android:layout_width="0dp"
                     android:layout_height="16dp"

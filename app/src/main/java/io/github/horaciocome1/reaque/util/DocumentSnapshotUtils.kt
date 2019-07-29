@@ -36,6 +36,9 @@ val DocumentSnapshot.user: User
         subscriptions = this@user["subscriptions"].toString()
         topTopic = this@user["top_topic"].toString()
         score = this@user["score"].toString().toFloat()
+        val score = this@user["score"]
+        if (score != null)
+            this.score = score.toString().toFloat()
     }
 
 val DocumentSnapshot.topic: Topic
@@ -58,6 +61,8 @@ val DocumentSnapshot.post: Post
             name = this@post["user.name"].toString()
             pic = this@post["user.pic"].toString()
         }
-        score = this@post["score"].toString().toFloat()
+        val score = this@post["score"]
+        if (score != null)
+            this.score = score.toString().toFloat()
         rating = this@post["rating"].toString()
     }
