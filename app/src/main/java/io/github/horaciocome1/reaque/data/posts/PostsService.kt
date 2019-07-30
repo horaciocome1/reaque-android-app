@@ -49,6 +49,7 @@ class PostsService : PostsInterface {
         auth.addSimpleAuthStateListener { user ->
             post.user = user.user
             val postRef = db.collection("posts").document()
+            post.id = postRef.id
             val postOnTopicRef = db.document("topics/${post.topic.id}/posts/${postRef.id}")
             val postOnUserRef = db.document("users/${post.user.id}/posts/${postRef.id}")
             val userOnTopicRef = db.document("topics/${post.topic.id}/users/${post.user.id}")
@@ -56,8 +57,8 @@ class PostsService : PostsInterface {
             val userRef = db.document("users/${post.user.id}")
             db.runBatch {
                 it.set(postRef, post.map)
-                it.set(postOnTopicRef, post.map)
-                it.set(postOnUserRef, post.map)
+                it.set(postOnTopicRef, post.mapSimple)
+                it.set(postOnUserRef, post.mapSimple)
                 it.set(userOnTopicRef, user.user.map, SetOptions.merge())
                 it.set(topicRef, increment, SetOptions.merge())
                 it.set(userRef, increment, SetOptions.merge())
@@ -71,8 +72,8 @@ class PostsService : PostsInterface {
         if (post.id != _post.id) {
             this.post.value = Post("")
             val ref = db.document("posts/${post.id}")
-            ref.addSimpleAndSafeSnapshotListener(auth) { snapshot, _ ->
-                _post = snapshot.post
+            ref.addSafeSnapshotListener {
+                _post = it.post
                 this.post.value = _post
             }
         }
@@ -83,9 +84,8 @@ class PostsService : PostsInterface {
         if (user.id != userId) {
             userPosts.value = mutableListOf()
             val ref = db.collection("users/${user.id}/posts")
-            ref.orderBy("score", Query.Direction.DESCENDING)
-                .addSimpleAndSafeSnapshotListener(auth) { snapshot, _ ->
-                this.userPosts.value = snapshot.posts
+            ref.orderBy("score", Query.Direction.DESCENDING).safeGet {
+                this.userPosts.value = it.posts
             }
             userId = user.id
         }
@@ -96,9 +96,8 @@ class PostsService : PostsInterface {
         if (topic.id != topicId) {
             topicPosts.value = mutableListOf()
             val ref = db.collection("topics/${topic.id}/posts")
-            ref.orderBy("score", Query.Direction.DESCENDING)
-                .addSimpleAndSafeSnapshotListener(auth) { snapshot, _ ->
-                this.topicPosts.value = snapshot.posts
+            ref.orderBy("score", Query.Direction.DESCENDING).safeGet {
+                this.topicPosts.value = it.posts
             }
             topicId = topic.id
         }
@@ -106,12 +105,12 @@ class PostsService : PostsInterface {
     }
 
     override fun getTop10(): LiveData<List<Post>> {
-        top10Posts.value?.let {
-            if (it.isEmpty()) {
+        top10Posts.value?.let { list ->
+            if (list.isEmpty()) {
                 val ref = db.collection("posts")
-                ref.orderBy("score", Query.Direction.DESCENDING).limit(10)
-                    .addSimpleAndSafeSnapshotListener(auth) { snapshot, _ ->
-                        this.top10Posts.value = snapshot.posts
+                ref.orderBy("score", Query.Direction.DESCENDING)
+                    .limit(10).safeGet {
+                        this.top10Posts.value = it.posts
                     }
             }
         }

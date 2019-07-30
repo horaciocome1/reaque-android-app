@@ -52,24 +52,30 @@ class UsersViewModel(
     fun amSubscribedTo(user: User) = subscriptionsRepository.amSubscribedTo(user)
 
     fun openSubscribers(view: View, user: User) {
-        val directions = UserProfileFragmentDirections.actionOpenUsersFromUserProfile(
-            user.id, Constants.SUBSCRIBERS_REQUEST
-        )
-        view.findNavController().navigate(directions)
+        if (user.subscribers.isNotBlank() && user.subscribers != "0") {
+            val directions = UserProfileFragmentDirections.actionOpenUsersFromUserProfile(
+                user.id, Constants.SUBSCRIBERS_REQUEST
+            )
+            view.findNavController().navigate(directions)
+        }
     }
 
     fun openSubscriptions(view: View, user: User) {
-        val directions = UserProfileFragmentDirections.actionOpenUsersFromUserProfile(
-            user.id, Constants.SUBSCRIPTIONS_REQUEST
-        )
-        view.findNavController().navigate(directions)
+        if (user.subscriptions.isNotBlank() && user.subscriptions != "0") {
+            val directions = UserProfileFragmentDirections.actionOpenUsersFromUserProfile(
+                user.id, Constants.SUBSCRIPTIONS_REQUEST
+            )
+            view.findNavController().navigate(directions)
+        }
     }
 
     fun openPosts(view: View, user: User) {
-        val directions = UserProfileFragmentDirections.actionOpenPostsFromUserProfile(
-            user.id, Constants.USER_POSTS_REQUEST
-        )
-        view.findNavController().navigate(directions)
+        if (user.posts.isNotBlank() && user.posts != "0") {
+            val directions = UserProfileFragmentDirections.actionOpenPostsFromUserProfile(
+                user.id, Constants.USER_POSTS_REQUEST
+            )
+            view.findNavController().navigate(directions)
+        }
     }
 
 }

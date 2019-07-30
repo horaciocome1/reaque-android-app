@@ -1,8 +1,5 @@
 package io.github.horaciocome1.reaque.util
 
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.data.topics.Topic
@@ -28,14 +25,3 @@ val QuerySnapshot.posts: MutableList<Post>
         forEach { list.add(it.post) }
         return list
     }
-
-fun Query.addSimpleSnapshotListener(listener: (QuerySnapshot) -> Unit) {
-    addSnapshotListener { snapshot, exception ->
-        if (exception == null && snapshot != null)
-            listener(snapshot)
-    }
-}
-
-fun Query.addSimpleAndSafeSnapshotListener(auth: FirebaseAuth, listener: (QuerySnapshot, FirebaseUser) -> Unit) {
-    auth.addSimpleAuthStateListener { user -> addSimpleSnapshotListener { listener(it, user) } }
-}

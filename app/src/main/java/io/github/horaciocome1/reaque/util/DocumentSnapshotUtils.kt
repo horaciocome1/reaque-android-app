@@ -28,14 +28,13 @@ val DocumentSnapshot.user: User
         pic = this@user["pic"].toString()
         address = this@user["address"].toString()
         email = this@user["email"].toString()
-        val timestamp = this@user["since"]
-        if (timestamp is Timestamp)
-            since = timestamp.string
+        val stamp = this@user["since"]
+        if (stamp is Timestamp)
+            timestamp = stamp
         posts = this@user["posts"].toString()
         subscribers = this@user["subscribers"].toString()
         subscriptions = this@user["subscriptions"].toString()
         topTopic = this@user["top_topic"].toString()
-        score = this@user["score"].toString().toFloat()
         val score = this@user["score"]
         if (score != null)
             this.score = score.toString().toFloat()

@@ -34,6 +34,6 @@ data class Post(var id: String) {
             field = value
         }
     var score = 0f
-    var rating = ""
+    var rating = "0"
 
 }

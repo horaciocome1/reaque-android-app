@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:opacity="opaque"> <!-- android:opacity="opaque" should be here -->
+    <item>
+        <color android:color="@color/primaryLightColor" />
+    </item>
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/splash_screen" />
+    </item>
+</layer-list>

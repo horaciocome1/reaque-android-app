@@ -15,6 +15,8 @@
 
 package io.github.horaciocome1.reaque.data.users
 
+import io.github.horaciocome1.reaque.util.string
+
 data class User(var id: String) {
 
     var name = ""
@@ -23,10 +25,15 @@ data class User(var id: String) {
     var address = ""
     var email = ""
     var since = ""
+    var timestamp = com.google.firebase.Timestamp.now()
+        set(value) {
+            since = value.string
+            field = value
+        }
     var topTopic = ""
-    var posts = ""
-    var subscribers = ""
-    var subscriptions = ""
+    var posts = "0"
+    var subscribers = "0"
+    var subscriptions = "0"
     var score = 0f
 
 }

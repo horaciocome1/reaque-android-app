@@ -16,18 +16,15 @@
 package io.github.horaciocome1.reaque.data.topics
 
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import io.github.horaciocome1.reaque.util.addSimpleAndSafeSnapshotListener
+import io.github.horaciocome1.reaque.util.safeGet
 import io.github.horaciocome1.reaque.util.topics
 
 class TopicsService {
 
     private val ref: CollectionReference by lazy { FirebaseFirestore.getInstance().collection("topics") }
-
-    private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
 
     private var _notEmptyTopics = mutableListOf<Topic>()
 
@@ -35,8 +32,8 @@ class TopicsService {
         get() {
             if (_notEmptyTopics.isEmpty())
                 ref.whereGreaterThan("score", 0).orderBy("score", Query.Direction.DESCENDING)
-                    .addSimpleAndSafeSnapshotListener(auth) { snapshot, _ ->
-                        _notEmptyTopics = snapshot.topics
+                    .safeGet {
+                        _notEmptyTopics = it.topics
                         field.value = _notEmptyTopics
                     }
             return field
@@ -48,8 +45,8 @@ class TopicsService {
         get() {
             if (_topics.isEmpty())
                 ref.orderBy("title", Query.Direction.ASCENDING)
-                    .addSimpleAndSafeSnapshotListener(auth) { snapshot, _ ->
-                        _topics = snapshot.topics
+                    .safeGet {
+                        _topics = it.topics
                         field.value = _topics
                     }
             return field

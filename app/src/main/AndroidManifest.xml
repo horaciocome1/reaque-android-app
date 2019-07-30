@@ -29,7 +29,9 @@
         android:fullBackupContent="@xml/backup_descriptor"
         android:theme="@style/AppTheme">
 
-        <activity android:name="io.github.horaciocome1.reaque.ui.MainActivity">
+        <activity
+            android:name="io.github.horaciocome1.reaque.ui.MainActivity"
+            android:theme="@style/AppTheme.Splash">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

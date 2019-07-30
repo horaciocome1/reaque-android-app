@@ -27,6 +27,13 @@
         <item name="materialCardViewStyle">@style/AppTheme.CardView</item>
     </style>
 
+    <style name="AppTheme.Splash" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/background_splash</item>
+        <item name="colorPrimary">@color/primaryLightColor</item>
+        <item name="colorPrimaryDark">@color/primaryLightColor</item>
+        <item name="colorAccent">@color/secondaryColor</item>
+    </style>
+
     <style name="AppTheme.CompleteClickableEffect">
         <item name="android:foreground">?attr/selectableItemBackground</item>
         <item name="android:clickable">true</item>

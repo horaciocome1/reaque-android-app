@@ -61,12 +61,12 @@ class BookmarksService : BookmarksInterface {
     }
 
     override fun get(): LiveData<List<Post>> {
-        posts.value?.let {
-            if (it.isEmpty())
+        posts.value?.let { list ->
+            if (list.isEmpty())
                 auth.addSimpleAuthStateListener { user ->
                     val ref = db.collection("users/${user.uid}/bookmarks")
-                    ref.orderBy("score", Query.Direction.DESCENDING).addSimpleSnapshotListener { snapshot ->
-                        posts.value = snapshot.posts
+                    ref.orderBy("score", Query.Direction.DESCENDING).get().addOnSuccessListener {
+                        posts.value = it.posts
                     }
                 }
         }
