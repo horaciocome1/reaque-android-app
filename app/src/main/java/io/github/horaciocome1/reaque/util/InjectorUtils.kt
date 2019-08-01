@@ -49,7 +49,10 @@ object InjectorUtils {
         ExploreViewModelFactory(topicsRepository, postsRepository)
     }
 
-    val moreViewModelFactory: MoreViewModelFactory by lazy { MoreViewModelFactory() }
+    val moreViewModelFactory: MoreViewModelFactory by lazy {
+        val bookmarksRepository = BookmarksRepository.getInstance(db.bookmarksService)
+        MoreViewModelFactory(bookmarksRepository)
+    }
 
     val postsViewModelFactory: PostsViewModelFactory by lazy {
         val postsRepository = PostsRepository.getInstance(db.postsService)

@@ -17,10 +17,12 @@ package io.github.horaciocome1.reaque.ui.more
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import io.github.horaciocome1.reaque.data.bookmarks.BookmarksRepository
 
-class MoreViewModelFactory : ViewModelProvider.NewInstanceFactory() {
+class MoreViewModelFactory(private val bookmarksRepository: BookmarksRepository) :
+    ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>) = MoreViewModel() as T
+    override fun <T : ViewModel?> create(modelClass: Class<T>) = MoreViewModel(bookmarksRepository) as T
 
 }

@@ -49,6 +49,7 @@ class MoreFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.viewmodel = viewModel
         licenses_textview.setOnClickListener {
             val url = resources.getString(R.string.licence_url)
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
@@ -88,8 +89,15 @@ class MoreFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        binding.viewmodel = viewModel
         viewModel.user.observe(this, Observer { binding.user = it })
+        viewModel.hasBookmarks.observe(this, Observer {
+            val visibility = if (it)
+                View.VISIBLE
+            else
+                View.GONE
+            bookmarks_textview.visibility = visibility
+            bookmarks_imageview.visibility = visibility
+        })
     }
 
 }

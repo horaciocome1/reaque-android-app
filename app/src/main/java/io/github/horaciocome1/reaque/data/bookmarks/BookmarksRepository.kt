@@ -15,6 +15,8 @@ class BookmarksRepository private constructor(private val service: BookmarksServ
 
     override fun isBookmarked(post: Post) = service.isBookmarked(post)
 
+    override fun hasBookmarks() = service.hasBookmarks()
+
     companion object {
 
         @Volatile

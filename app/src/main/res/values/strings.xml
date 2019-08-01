@@ -64,13 +64,13 @@
     <string name="rating_2">2 stars</string>
     <string name="rating_1">1 star</string>
     <string name="set_rating">Set rating</string>
-    <string name="read_post">Read post</string>
+    <string name="read_post">Reading</string>
     <string name="feed">Feed</string>
     <string name="sign_in">Sign in</string>
     <string name="unsubscribe">Unsubscribe</string>
     <string name="users">Users</string>
     <string name="topic_of_interest">Topic of interest</string>
-    <string name="user_profile">User\'s profile</string>
+    <string name="user_profile">Profile</string>
     <string name="update">Update</string>
 
     <string name="permission_needed">Permission needed</string>
@@ -82,5 +82,7 @@
     <string name="content_description_users_icon">users icon</string>
     <string name="content_description_since_icon">Since icon</string>
     <string name="content_description_address_icon">Address icon</string>
+    <string name="please_wait_update">Please wait while updates are uploaded . . .</string>
+    <string name="please_wait_create">Please wait while your post is created . . .</string>
 
 </resources>

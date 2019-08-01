@@ -38,13 +38,19 @@ class BookmarksService : BookmarksInterface {
         MutableLiveData<Boolean>().apply { value = false }
     }
 
+    private val hasBookmarks: MutableLiveData<Boolean> by lazy {
+        MutableLiveData<Boolean>().apply { value = false }
+    }
+
     override fun bookmark(post: Post, onCompleteListener: (Task<Void?>?) -> Unit) {
         auth.addSimpleAuthStateListener { user ->
             val bookmarkRef = db.document("users/${user.uid}/bookmarks/${post.id}")
             val postRef = db.document("posts/${post.id}")
+            val userRef = db.document("users/${user.uid}")
             db.runBatch {
                 it.set(bookmarkRef, post.mapSimple)
                 it.set(postRef, increment, SetOptions.merge())
+                it.set(userRef, increment, SetOptions.merge())
             }.addOnCompleteListener(onCompleteListener)
         }
     }
@@ -53,9 +59,11 @@ class BookmarksService : BookmarksInterface {
         auth.addSimpleAuthStateListener { user ->
             val bookmarkRef = db.document("users/${user.uid}/bookmarks/${post.id}")
             val postRef = db.document("posts/${post.id}")
+            val userRef = db.document("users/${user.uid}")
             db.runBatch {
                 it.delete(bookmarkRef)
                 it.set(postRef, decrement, SetOptions.merge())
+                it.set(userRef, decrement, SetOptions.merge())
             }.addOnCompleteListener(onCompleteListener)
         }
     }
@@ -84,4 +92,18 @@ class BookmarksService : BookmarksInterface {
         return isBookmarked
     }
 
+    override fun hasBookmarks(): LiveData<Boolean> {
+        hasBookmarks.value = false
+        auth.addSimpleAuthStateListener { user ->
+            val ref = db.document("users/${user.uid}")
+            ref.addSimpleSnapshotListener {
+                val bookmarks = it["bookmarks"]
+                hasBookmarks.value = if (bookmarks != null)
+                    bookmarks.toString().toInt() > 0
+                else
+                    false
+            }
+        }
+        return hasBookmarks
+    }
 }
