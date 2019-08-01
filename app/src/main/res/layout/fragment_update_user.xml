@@ -31,9 +31,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:minHeight="?android:attr/actionBarSize"
-                    app:navigationIcon="@drawable/outline_close_24"
-                    app:title="@string/update"
-                    app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
+                    app:navigationIcon="@drawable/outline_close_24">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:text="@string/update"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
+
+                </androidx.appcompat.widget.Toolbar>
 
             </com.google.android.material.appbar.AppBarLayout>
 
@@ -115,12 +122,31 @@
             android:visibility="@{viewmodel.isUpdatingUser == false ? View.GONE : View.VISIBLE}">
 
             <ProgressBar
+                android:id="@+id/progressBar"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/default_progressbar_size"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginBottom="32dp"
+                android:text="@string/please_wait_update"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/progressBar" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

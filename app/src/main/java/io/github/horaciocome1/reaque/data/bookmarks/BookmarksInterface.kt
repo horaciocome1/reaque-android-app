@@ -14,4 +14,6 @@ interface BookmarksInterface {
 
     fun isBookmarked(post: Post): LiveData<Boolean>
 
+    fun hasBookmarks(): LiveData<Boolean>
+
 }

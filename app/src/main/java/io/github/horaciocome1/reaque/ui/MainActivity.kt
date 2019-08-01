@@ -42,7 +42,10 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
         auth = FirebaseAuth.getInstance()
         setupNavigation()
@@ -52,8 +55,6 @@ class MainActivity : AppCompatActivity() {
             }
             navController.navigate(R.id.destination_read_post, bundle)
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
     }
 
     override fun onStart() {
@@ -95,6 +96,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     private val onDestinationChangedListener = NavController.OnDestinationChangedListener { _, destination, _ ->
+        title_textview.text = destination.label
         if (destination.id == R.id.destination_sign_in)
             passedThroughSignIn = true
         if (destination.id != R.id.destination_sign_in && auth.currentUser == null && passedThroughSignIn) {
