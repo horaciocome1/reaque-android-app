@@ -33,7 +33,7 @@ data class Post(var id: String) {
             date = value.string
             field = value
         }
-    var score = 1 - (1 / timestamp.seconds)
+    var score: Float = 1f - (1f / timestamp.seconds)
     var rating = "0"
 
 }
