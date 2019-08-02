@@ -7,7 +7,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.util.addSimpleAuthStateListener
-import io.github.horaciocome1.reaque.util.addSimpleSnapshotListener
 import io.github.horaciocome1.reaque.util.posts
 
 class FeedService : FeedInterface {
@@ -26,11 +25,11 @@ class FeedService : FeedInterface {
         if (_posts.isEmpty())
             auth.addSimpleAuthStateListener { user ->
                 val ref = db.collection("users/${user.uid}/feed")
-                ref.orderBy("score", Query.Direction.DESCENDING).addSimpleSnapshotListener {
-                    _posts = it.posts
-                    posts.value = _posts
-
-                }
+                ref.orderBy("score", Query.Direction.DESCENDING).limit(100)
+                    .get().addOnSuccessListener {
+                        _posts = it.posts
+                        posts.value = _posts
+                    }
             }
         return posts
     }

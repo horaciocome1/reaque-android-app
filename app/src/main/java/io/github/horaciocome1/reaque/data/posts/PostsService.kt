@@ -84,7 +84,7 @@ class PostsService : PostsInterface {
         if (user.id != userId) {
             userPosts.value = mutableListOf()
             val ref = db.collection("users/${user.id}/posts")
-            ref.orderBy("score", Query.Direction.DESCENDING).safeGet {
+            ref.orderBy("score", Query.Direction.DESCENDING).limit(100).safeGet {
                 this.userPosts.value = it.posts
             }
             userId = user.id
@@ -96,7 +96,7 @@ class PostsService : PostsInterface {
         if (topic.id != topicId) {
             topicPosts.value = mutableListOf()
             val ref = db.collection("topics/${topic.id}/posts")
-            ref.orderBy("score", Query.Direction.DESCENDING).safeGet {
+            ref.orderBy("score", Query.Direction.DESCENDING).limit(100).safeGet {
                 this.topicPosts.value = it.posts
             }
             topicId = topic.id
@@ -109,7 +109,7 @@ class PostsService : PostsInterface {
             if (list.isEmpty()) {
                 val ref = db.collection("posts")
                 ref.orderBy("score", Query.Direction.DESCENDING)
-                    .limit(10).safeGet {
+                    .limit(10).addSimpleSnapshotListener {
                         this.top10Posts.value = it.posts
                     }
             }
