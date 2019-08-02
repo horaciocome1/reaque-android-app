@@ -86,7 +86,7 @@ class SubscriptionsService : SubscriptionsInterface {
     override fun getSubscriptions(user: User): LiveData<List<User>> {
         if (user.id != subscriptionsOf) {
             val ref = db.collection("users/${user.id}/subscriptions")
-            ref.orderBy("score", Query.Direction.DESCENDING).safeGet {
+            ref.orderBy("score", Query.Direction.DESCENDING).limit(100).safeGet {
                 subscriptions.value = it.users
             }
             subscriptionsOf = user.id
@@ -97,7 +97,7 @@ class SubscriptionsService : SubscriptionsInterface {
     override fun getSubscribers(user: User): LiveData<List<User>> {
         if (user.id != subscribersOf) {
             val ref = db.collection("users/${user.id}/subscribers")
-            ref.orderBy("score", Query.Direction.DESCENDING).safeGet {
+            ref.orderBy("score", Query.Direction.DESCENDING).limit(100).safeGet {
                 subscribers.value = it.users
             }
             subscribersOf = user.id

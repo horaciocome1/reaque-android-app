@@ -73,9 +73,10 @@ class BookmarksService : BookmarksInterface {
             if (list.isEmpty())
                 auth.addSimpleAuthStateListener { user ->
                     val ref = db.collection("users/${user.uid}/bookmarks")
-                    ref.orderBy("score", Query.Direction.DESCENDING).get().addOnSuccessListener {
-                        posts.value = it.posts
-                    }
+                    ref.orderBy("score", Query.Direction.DESCENDING).limit(100)
+                        .get().addOnSuccessListener {
+                            posts.value = it.posts
+                        }
                 }
         }
         return posts

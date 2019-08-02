@@ -50,7 +50,7 @@ class UsersService : UsersInterface {
     override fun get(topic: Topic): LiveData<List<User>> {
         if (topic.id != topicId) {
             val ref = db.collection("topics/${topic.id}/users")
-            ref.orderBy("score", Query.Direction.DESCENDING).safeGet {
+            ref.orderBy("score", Query.Direction.DESCENDING).limit(100).safeGet {
                 users.value = it.users
             }
         }
