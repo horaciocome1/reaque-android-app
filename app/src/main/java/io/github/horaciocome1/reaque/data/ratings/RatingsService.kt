@@ -23,25 +23,27 @@ class RatingsService : RatingsInterface {
     }
 
     override fun set(post: Post, value: Int, onCompleteListener: (Task<Void?>?) -> Unit) {
-        auth.addSimpleAuthStateListener {
-            val ref = db.document("posts/${post.id}/ratings/${it.uid}")
-            val data = it.user.map.plus("value" to value).plus("post" to mapOf("id" to post.id))
-            ref.set(data, SetOptions.merge()).addOnCompleteListener(onCompleteListener)
-        }
+        if (post.id.isNotBlank() && value >= 1 && value <= 5)
+            auth.addSimpleAuthStateListener {
+                val ref = db.document("posts/${post.id}/ratings/${it.uid}")
+                val data = it.user.map.plus("value" to value).plus("post" to mapOf("id" to post.id))
+                ref.set(data, SetOptions.merge()).addOnCompleteListener(onCompleteListener)
+            }
     }
 
     override fun get(post: Post): LiveData<Int> {
         rating.value = 0
-        auth.addSimpleAuthStateListener { user ->
-            val ref = db.document("posts/${post.id}/ratings/${user.uid}")
-            ref.addSimpleSnapshotListener {
-                val value = it["value"]
-                if (value != null)
-                    rating.value = value.toString().toInt()
-                else
-                    rating.value = 0
+        if (post.id.isNotBlank())
+            auth.addSimpleAuthStateListener { user ->
+                val ref = db.document("posts/${post.id}/ratings/${user.uid}")
+                ref.addSimpleSnapshotListener {
+                    val value = it["value"]
+                    if (value != null)
+                        rating.value = value.toString().toInt()
+                    else
+                        rating.value = 0
+                }
             }
-        }
         return rating
     }
 

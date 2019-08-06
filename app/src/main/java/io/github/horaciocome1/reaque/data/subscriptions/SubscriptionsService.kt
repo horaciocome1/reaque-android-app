@@ -54,37 +54,39 @@ class SubscriptionsService : SubscriptionsInterface {
     private var subscribersOf = ""
 
     override fun subscribe(user: User, onCompleteListener: (Task<Void?>?) -> Unit) {
-        auth.addSimpleAuthStateListener { firebaseUser ->
-            val subscriptionRef = db.document("users/${firebaseUser.uid}/subscriptions/${user.id}")
-            val subscriberRef = db.document("users/${user.id}/subscribers/${firebaseUser.uid}")
-            val myRef = db.document("users/${firebaseUser.uid}")
-            val hisRef = db.document("users/${user.id}")
-            db.runBatch {
-                it.set(subscriptionRef, user.map)
-                it.set(subscriberRef, firebaseUser.user.map)
-                it.set(myRef, incrementSubscriptions, SetOptions.merge())
-                it.set(hisRef, incrementSubscribers, SetOptions.merge())
-            }.addOnCompleteListener(onCompleteListener)
-        }
+        if (user.id.isNotBlank())
+            auth.addSimpleAuthStateListener { firebaseUser ->
+                val subscriptionRef = db.document("users/${firebaseUser.uid}/subscriptions/${user.id}")
+                val subscriberRef = db.document("users/${user.id}/subscribers/${firebaseUser.uid}")
+                val myRef = db.document("users/${firebaseUser.uid}")
+                val hisRef = db.document("users/${user.id}")
+                db.runBatch {
+                    it.set(subscriptionRef, user.map)
+                    it.set(subscriberRef, firebaseUser.user.map)
+                    it.set(myRef, incrementSubscriptions, SetOptions.merge())
+                    it.set(hisRef, incrementSubscribers, SetOptions.merge())
+                }.addOnCompleteListener(onCompleteListener)
+            }
     }
 
     override fun unSubscribe(user: User, onCompleteListener: (Task<Void?>?) -> Unit) {
-        auth.addSimpleAuthStateListener { firebaseUser ->
-            val subscriptionRef = db.document("users/${firebaseUser.uid}/subscriptions/${user.id}")
-            val subscriberRef = db.document("users/${user.id}/subscribers/${firebaseUser.uid}")
-            val myRef = db.document("users/${firebaseUser.uid}")
-            val hisRef = db.document("users/${user.id}")
-            db.runBatch {
-                it.delete(subscriptionRef)
-                it.delete(subscriberRef)
-                it.set(myRef, decrementSubscriptions, SetOptions.merge())
-                it.set(hisRef, decrementSubscribers, SetOptions.merge())
-            }.addOnCompleteListener(onCompleteListener)
-        }
+        if (user.id.isNotBlank())
+            auth.addSimpleAuthStateListener { firebaseUser ->
+                val subscriptionRef = db.document("users/${firebaseUser.uid}/subscriptions/${user.id}")
+                val subscriberRef = db.document("users/${user.id}/subscribers/${firebaseUser.uid}")
+                val myRef = db.document("users/${firebaseUser.uid}")
+                val hisRef = db.document("users/${user.id}")
+                db.runBatch {
+                    it.delete(subscriptionRef)
+                    it.delete(subscriberRef)
+                    it.set(myRef, decrementSubscriptions, SetOptions.merge())
+                    it.set(hisRef, decrementSubscribers, SetOptions.merge())
+                }.addOnCompleteListener(onCompleteListener)
+            }
     }
 
     override fun getSubscriptions(user: User): LiveData<List<User>> {
-        if (user.id != subscriptionsOf) {
+        if (user.id != subscriptionsOf && user.id.isNotBlank()) {
             val ref = db.collection("users/${user.id}/subscriptions")
             ref.orderBy("score", Query.Direction.DESCENDING).limit(100).safeGet {
                 subscriptions.value = it.users
@@ -95,7 +97,7 @@ class SubscriptionsService : SubscriptionsInterface {
     }
 
     override fun getSubscribers(user: User): LiveData<List<User>> {
-        if (user.id != subscribersOf) {
+        if (user.id != subscribersOf && user.id.isNotBlank()) {
             val ref = db.collection("users/${user.id}/subscribers")
             ref.orderBy("score", Query.Direction.DESCENDING).limit(100).safeGet {
                 subscribers.value = it.users
@@ -106,11 +108,13 @@ class SubscriptionsService : SubscriptionsInterface {
     }
 
     override fun amSubscribedTo(user: User): LiveData<Boolean> {
-        amSubscribedTo.value = false
-        auth.addSimpleAuthStateListener { firebaseUser ->
-            val ref = db.document("users/${firebaseUser.uid}/subscriptions/${user.id}")
-            ref.addSimpleSnapshotListener {
-                amSubscribedTo.value = it["timestamp"] != null
+        if (user.id.isNotBlank()) {
+            amSubscribedTo.value = false
+            auth.addSimpleAuthStateListener { firebaseUser ->
+                val ref = db.document("users/${firebaseUser.uid}/subscriptions/${user.id}")
+                ref.addSimpleSnapshotListener {
+                    amSubscribedTo.value = it["timestamp"] != null
+                }
             }
         }
         return amSubscribedTo

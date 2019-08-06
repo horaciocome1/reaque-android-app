@@ -14,22 +14,29 @@
   -->
 
 <resources>
-    <string name="app_name" translatable="false">ReaQue</string>
+
+    <string name="app_name" translatable="false">Reaque</string>
 
     <!-- 01 URL -->
-    <string name="terms_and_conditions_url" translatable="false">https://github.com/horaciocome1/reaque/tree/master/docs/TERMS_AND_CONDITIONS.md</string>
-    <string name="privacy_policy_url" translatable="false">https://github.com/horaciocome1/reaque/tree/master/docs/PRIVACY_POLICY.md</string>
-    <string name="licence_url" translatable="false">https://github.com/horaciocome1/reaque/tree/master/docs/LICENSE</string>
-    <string name="about_url" translatable="false">https://reaque.firebaseapp.com</string>
+    <string name="url_terms_and_conditions" translatable="false">https://github.com/horaciocome1/reaque/tree/master/docs/TERMS_AND_CONDITIONS.md</string>
+    <string name="url_privacy_policy" translatable="false">https://github.com/horaciocome1/reaque/tree/master/docs/PRIVACY_POLICY.md</string>
+    <string name="url_licence" translatable="false">https://github.com/horaciocome1/reaque/tree/master/docs/LICENSE</string>
+    <string name="url_about" translatable="false">https://reaque.firebaseapp.com</string>
     <string name="url_background_sign_in" translatable="false">https://firebasestorage.googleapis.com/v0/b/reaque.appspot.com/o/resources%2Fimages%2F19228.jpg?alt=media&amp;token=2f9d40b5-f2bf-47cb-8534-782c40487923</string>
+    <string name="email_developer" translatable="false">hcome@pm.me</string>
 
-    <string name="developer_email" translatable="false">hcome@pm.me</string>
+    <string name="email_app_not_found" translatable="false">Email app not found</string>
 
-    <string name="email_app_not_found">Email app not found</string>
+    <string name="content_description_post_cover_image" translatable="false">Post cover image</string>
+    <string name="content_description_user_profile_image" translatable="false">User profile image</string>
+    <string name="content_description_topic_cover_image" translatable="false">Topic cover image</string>
+    <string name="content_description_posts_icon" translatable="false">posts icon</string>
+    <string name="content_description_users_icon" translatable="false">users icon</string>
+    <string name="content_description_since_icon" translatable="false">Since icon</string>
+    <string name="content_description_address_icon" translatable="false">Address icon</string>
 
     <string name="more">More</string>
     <string name="posts">Posts</string>
-
     <string name="sign_out">Log out</string>
     <string name="feedback">Feedback</string>
     <string name="about">About</string>
@@ -43,11 +50,7 @@
     <string name="whats_new">Whats new?</string>
     <string name="address">Address [Town, State]</string>
     <string name="bio">Bio</string>
-
     <string name="welcome">Welcome</string>
-    <string name="content_description_post_cover_image">Post cover image</string>
-    <string name="content_description_user_profile_image">User profile image</string>
-    <string name="content_description_topic_cover_image">Topic cover image</string>
     <string name="subscriptions">Subscriptions</string>
     <string name="explore">Explore</string>
     <string name="suggestions">Suggestions</string>
@@ -72,16 +75,11 @@
     <string name="topic_of_interest">Topic of interest</string>
     <string name="user_profile">Profile</string>
     <string name="update">Update</string>
-
     <string name="permission_needed">Permission needed</string>
-    <string name="permission_needed_explanation">We must access your storage so you can select a picture for the post. As of that you may need to accept the permission dialog.</string>
+    <string name="permission_needed_explanation">We need to access your storage so you can select a picture. You may have to accept the permission dialog.</string>
     <string name="permission_denied">Permission DENIED</string>
-    <string name="confirm">I understand!</string>
+    <string name="confirm">I do understand!</string>
     <string name="reject">Don\'t want to</string>
-    <string name="content_description_posts_icon">posts icon</string>
-    <string name="content_description_users_icon">users icon</string>
-    <string name="content_description_since_icon">Since icon</string>
-    <string name="content_description_address_icon">Address icon</string>
     <string name="please_wait_update">Please wait while updates are uploaded . . .</string>
     <string name="please_wait_create">Please wait while your post is created . . .</string>
 
