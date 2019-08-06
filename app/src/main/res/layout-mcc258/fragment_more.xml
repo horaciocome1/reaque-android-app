@@ -68,8 +68,8 @@
                         android:paddingLeft="36dp"
                         android:paddingEnd="36dp"
                         android:paddingRight="36dp"
-                        app:icon="@drawable/outline_edit_18"
                         app:cornerRadius="16dp"
+                        app:icon="@drawable/outline_edit_18"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -84,12 +84,12 @@
                         android:layout_marginLeft="32dp"
                         android:layout_marginTop="32dp"
                         android:layout_marginEnd="32dp"
-                        android:onClick="@{(view) -> viewmodel.openUserProfile(view)}"
                         android:layout_marginRight="32dp"
-                        app:layout_constraintStart_toStartOf="parent"
+                        android:onClick="@{(view) -> viewmodel.openUserProfile(view)}"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:type="@{Constants.CIRCLE}"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
+                        app:type="@{Constants.CIRCLE}"
                         app:url="@{user.pic}" />
 
                     <TextView
@@ -158,6 +158,39 @@
                         app:layout_constraintTop_toTopOf="@id/bookmarks_textview"
                         app:srcCompat="@drawable/outline_bookmarks_18" />
 
+                    <TextView
+                        android:id="@+id/create_post_textview"
+                        style="@style/AppTheme.CompleteClickableEffect"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:onClick="@{(view) -> viewmodel.openCreatePost(view)}"
+                        android:paddingStart="32dp"
+                        android:paddingLeft="32dp"
+                        android:paddingTop="16dp"
+                        android:paddingEnd="32dp"
+                        android:paddingRight="32dp"
+                        android:paddingBottom="16dp"
+                        android:text="@string/create_post"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                        android:textColor="@color/secondaryColor"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/bookmarks_textview" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="32dp"
+                        android:layout_marginRight="32dp"
+                        android:layout_marginBottom="8dp"
+                        android:tint="@color/secondaryColor"
+                        app:layout_constraintBottom_toBottomOf="@id/create_post_textview"
+                        app:layout_constraintEnd_toEndOf="@id/create_post_textview"
+                        app:layout_constraintTop_toTopOf="@id/create_post_textview"
+                        app:srcCompat="@drawable/outline_add_18" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.card.MaterialCardView>
@@ -212,8 +245,8 @@
                         android:paddingEnd="32dp"
                         android:paddingRight="32dp"
                         android:paddingBottom="16dp"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                         android:text="@string/feedback"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/licenses_textview" />

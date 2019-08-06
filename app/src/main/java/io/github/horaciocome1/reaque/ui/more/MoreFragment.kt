@@ -51,27 +51,27 @@ class MoreFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.viewmodel = viewModel
         licenses_textview.setOnClickListener {
-            val url = resources.getString(R.string.licence_url)
+            val url = resources.getString(R.string.url_licence)
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(intent)
         }
         about_textview.setOnClickListener {
-            val url = resources.getString(R.string.about_url)
+            val url = resources.getString(R.string.url_about)
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(intent)
         }
         privacy_policy_textview.setOnClickListener {
-            val url = resources.getString(R.string.privacy_policy_url)
+            val url = resources.getString(R.string.url_privacy_policy)
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(intent)
         }
         terms_and_conditions_textview.setOnClickListener {
-            val url = resources.getString(R.string.terms_and_conditions_url)
+            val url = resources.getString(R.string.url_terms_and_conditions)
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(intent)
         }
         feedback_textview.setOnClickListener {
-            val email = resources.getString(R.string.developer_email)
+            val email = resources.getString(R.string.email_developer)
             try {
                 val mailto = "mailto:$email"
                 val emailIntent = Intent(Intent.ACTION_SENDTO)

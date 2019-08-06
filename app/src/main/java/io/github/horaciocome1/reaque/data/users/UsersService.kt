@@ -29,14 +29,15 @@ class UsersService : UsersInterface {
     private var topicId = ""
 
     override fun update(user: User, onCompleteListener: (Task<Void?>?) -> Unit) {
-        auth.addSimpleAuthStateListener {
-            val ref = db.document("users/${it.uid}")
-            ref.set(user.mapSimple, SetOptions.merge()).addOnCompleteListener(onCompleteListener)
-        }
+        if (user.id.isNotBlank())
+            auth.addSimpleAuthStateListener {
+                val ref = db.document("users/${it.uid}")
+                ref.set(user.mapSimple, SetOptions.merge()).addOnCompleteListener(onCompleteListener)
+            }
     }
 
     override fun get(user: User): LiveData<User> {
-        if (user.id != _user.id) {
+        if (user.id != _user.id && user.id.isNotBlank()) {
             this.user.value = User("")
             val ref = db.document("users/${user.id}")
             ref.addSafeSnapshotListener {
@@ -48,7 +49,7 @@ class UsersService : UsersInterface {
     }
 
     override fun get(topic: Topic): LiveData<List<User>> {
-        if (topic.id != topicId) {
+        if (topic.id != topicId && topic.id.isNotBlank()) {
             val ref = db.collection("topics/${topic.id}/users")
             ref.orderBy("score", Query.Direction.DESCENDING).limit(100).safeGet {
                 users.value = it.users

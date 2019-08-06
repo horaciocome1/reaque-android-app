@@ -27,12 +27,14 @@ class StorageService {
     private val storage: FirebaseStorage by lazy { FirebaseStorage.getInstance() }
 
     fun upload(imageUri: Uri, topic: Topic, onSuccessListener: (Uri?) -> Unit) {
-        val ref = storage.reference.child("images/${topic.id}/${imageUri.lastPathSegment}")
-        ref.putFile(imageUri).continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
-            if (!task.isSuccessful)
-                task.exception?.let { throw it }
-            return@Continuation ref.downloadUrl
-        }).addOnSuccessListener(onSuccessListener)
+        if (imageUri != Uri.EMPTY && topic.id.isNotBlank()) {
+            val ref = storage.reference.child("images/${topic.id}/${imageUri.lastPathSegment}")
+            ref.putFile(imageUri).continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+                if (!task.isSuccessful)
+                    task.exception?.let { throw it }
+                return@Continuation ref.downloadUrl
+            }).addOnSuccessListener(onSuccessListener)
+        }
     }
 
 }

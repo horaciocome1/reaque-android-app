@@ -21,18 +21,19 @@ class ReadingsService : ReadingsInterface {
     }
 
     override fun read(post: Post, onCompleteListener: (Task<Void?>?) -> Unit) {
-        auth.addSimpleAuthStateListener { user ->
-            val readingRef = db.document("users/${user.uid}/readings/${post.id}")
-            val postRef = db.document("posts/${post.id}")
-            readingRef.get().addOnSuccessListener { snapshot ->
-                if (snapshot["timestamp"] == null) {
-                    db.runBatch {
-                        it.set(readingRef, post.mapSimple)
-                        it.set(postRef, increment, SetOptions.merge())
-                    }.addOnCompleteListener(onCompleteListener)
+        if (post.id.isNotBlank())
+            auth.addSimpleAuthStateListener { user ->
+                val readingRef = db.document("users/${user.uid}/readings/${post.id}")
+                val postRef = db.document("posts/${post.id}")
+                readingRef.get().addOnSuccessListener { snapshot ->
+                    if (snapshot["timestamp"] == null) {
+                        db.runBatch {
+                            it.set(readingRef, post.mapSimple)
+                            it.set(postRef, increment, SetOptions.merge())
+                        }.addOnCompleteListener(onCompleteListener)
+                    }
                 }
             }
-        }
     }
 
 }

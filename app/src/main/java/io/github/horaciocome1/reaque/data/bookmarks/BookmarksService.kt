@@ -43,29 +43,31 @@ class BookmarksService : BookmarksInterface {
     }
 
     override fun bookmark(post: Post, onCompleteListener: (Task<Void?>?) -> Unit) {
-        auth.addSimpleAuthStateListener { user ->
-            val bookmarkRef = db.document("users/${user.uid}/bookmarks/${post.id}")
-            val postRef = db.document("posts/${post.id}")
-            val userRef = db.document("users/${user.uid}")
-            db.runBatch {
-                it.set(bookmarkRef, post.mapSimple)
-                it.set(postRef, increment, SetOptions.merge())
-                it.set(userRef, increment, SetOptions.merge())
-            }.addOnCompleteListener(onCompleteListener)
-        }
+        if (post.id.isNotBlank())
+            auth.addSimpleAuthStateListener { user ->
+                val bookmarkRef = db.document("users/${user.uid}/bookmarks/${post.id}")
+                val postRef = db.document("posts/${post.id}")
+                val userRef = db.document("users/${user.uid}")
+                db.runBatch {
+                    it.set(bookmarkRef, post.mapSimple)
+                    it.set(postRef, increment, SetOptions.merge())
+                    it.set(userRef, increment, SetOptions.merge())
+                }.addOnCompleteListener(onCompleteListener)
+            }
     }
 
     override fun unBookmark(post: Post, onCompleteListener: (Task<Void?>?) -> Unit) {
-        auth.addSimpleAuthStateListener { user ->
-            val bookmarkRef = db.document("users/${user.uid}/bookmarks/${post.id}")
-            val postRef = db.document("posts/${post.id}")
-            val userRef = db.document("users/${user.uid}")
-            db.runBatch {
-                it.delete(bookmarkRef)
-                it.set(postRef, decrement, SetOptions.merge())
-                it.set(userRef, decrement, SetOptions.merge())
-            }.addOnCompleteListener(onCompleteListener)
-        }
+        if (post.id.isNotBlank())
+            auth.addSimpleAuthStateListener { user ->
+                val bookmarkRef = db.document("users/${user.uid}/bookmarks/${post.id}")
+                val postRef = db.document("posts/${post.id}")
+                val userRef = db.document("users/${user.uid}")
+                db.runBatch {
+                    it.delete(bookmarkRef)
+                    it.set(postRef, decrement, SetOptions.merge())
+                    it.set(userRef, decrement, SetOptions.merge())
+                }.addOnCompleteListener(onCompleteListener)
+            }
     }
 
     override fun get(): LiveData<List<Post>> {
@@ -84,12 +86,13 @@ class BookmarksService : BookmarksInterface {
 
     override fun isBookmarked(post: Post): LiveData<Boolean> {
         isBookmarked.value = false
-        auth.addSimpleAuthStateListener { user ->
-            val ref = db.document("users/${user.uid}/bookmarks/${post.id}")
-            ref.addSimpleSnapshotListener {
-                isBookmarked.value = it["title"] != null
+        if (post.id.isNotBlank())
+            auth.addSimpleAuthStateListener { user ->
+                val ref = db.document("users/${user.uid}/bookmarks/${post.id}")
+                ref.addSimpleSnapshotListener {
+                    isBookmarked.value = it["title"] != null
+                }
             }
-        }
         return isBookmarked
     }
 

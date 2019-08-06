@@ -69,7 +69,7 @@ class PostsService : PostsInterface {
     }
 
     override fun get(post: Post): LiveData<Post> {
-        if (post.id != _post.id) {
+        if (post.id != _post.id && post.id.isNotBlank()) {
             this.post.value = Post("")
             val ref = db.document("posts/${post.id}")
             ref.addSafeSnapshotListener {
@@ -81,7 +81,7 @@ class PostsService : PostsInterface {
     }
 
     override fun get(user: User): LiveData<List<Post>> {
-        if (user.id != userId) {
+        if (user.id != userId && user.id.isNotBlank()) {
             userPosts.value = mutableListOf()
             val ref = db.collection("users/${user.id}/posts")
             ref.orderBy("score", Query.Direction.DESCENDING).limit(100).safeGet {
@@ -93,7 +93,7 @@ class PostsService : PostsInterface {
     }
 
     override fun get(topic: Topic): LiveData<List<Post>> {
-        if (topic.id != topicId) {
+        if (topic.id != topicId && topic.id.isNotBlank()) {
             topicPosts.value = mutableListOf()
             val ref = db.collection("topics/${topic.id}/posts")
             ref.orderBy("score", Query.Direction.DESCENDING).limit(100).safeGet {

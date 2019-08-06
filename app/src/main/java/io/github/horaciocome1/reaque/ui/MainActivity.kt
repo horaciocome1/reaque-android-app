@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         item?.let {
             if (it.itemId == R.id.menu_about) {
-                val url = resources.getString(R.string.about_url)
+                val url = resources.getString(R.string.url_about)
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                 startActivity(intent)
                 return super.onOptionsItemSelected(it)

@@ -72,8 +72,10 @@ class PostsViewModel(
     fun share(fragment: ReadPostFragment, view: View, post: Post) {
         view.isEnabled = false
         dynamicLinks.buildShortDynamicLink(post) {
-            fragment.startActivity(it)
-            sharesRepository.share(post) { view.isEnabled = true }
+            if (!fragment.isDetached) {
+                fragment.startActivity(it)
+                sharesRepository.share(post) { view.isEnabled = true }
+            }
         }
     }
 
