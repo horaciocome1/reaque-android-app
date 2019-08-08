@@ -27,8 +27,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.GoogleApiAvailability
 import com.google.firebase.auth.FirebaseAuth
 import io.github.horaciocome1.reaque.R
+import io.github.horaciocome1.reaque.data.users.User
+import io.github.horaciocome1.reaque.util.Constants.USER_ID
 import io.github.horaciocome1.reaque.util.handleDynamicLinks
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -42,6 +46,7 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        checkGoogleApiAvailability()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         setSupportActionBar(toolbar)
@@ -49,6 +54,12 @@ class MainActivity : AppCompatActivity() {
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
         auth = FirebaseAuth.getInstance()
         setupNavigation()
+        handleNotifications {
+            val bundle = Bundle().apply {
+                putString("user_id", it.id)
+            }
+            navController.navigate(R.id.destination_user_profile, bundle)
+        }
         handleDynamicLinks {
             val bundle = Bundle().apply {
                 putString("post_id", it.id)
@@ -57,8 +68,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun handleNotifications(listener: (User) -> Unit) {
+        val userId = intent.getStringExtra(USER_ID)
+        userId?.let {
+            if (it.isNotBlank()) {
+                val user = User(it)
+                listener(user)
+            }
+        }
+    }
+
     override fun onStart() {
         super.onStart()
+        checkGoogleApiAvailability()
         if (auth.currentUser == null)
             navController.navigate(R.id.destination_sign_in)
     }
@@ -88,6 +110,13 @@ class MainActivity : AppCompatActivity() {
         navigationview?.let { NavigationUI.setupWithNavController(it, navController) }
         NavigationUI.setupActionBarWithNavController(this, navController, drawerlayout)
         navController.addOnDestinationChangedListener(onDestinationChangedListener)
+    }
+
+    private fun checkGoogleApiAvailability() {
+        val instance = GoogleApiAvailability.getInstance()
+        val code = instance.isGooglePlayServicesAvailable(this)
+        if (code != ConnectionResult.SUCCESS)
+            instance.makeGooglePlayServicesAvailable(this)
     }
 
     private val isOrientationPortrait: Boolean

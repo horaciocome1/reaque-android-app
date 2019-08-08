@@ -17,6 +17,8 @@
 
     <string name="app_name" translatable="false">Reaque</string>
 
+    <string name="default_notification_channel_id" translatable="false">reaque-firebase-messaging-channel_id</string>
+
     <!-- 01 URL -->
     <string name="url_terms_and_conditions" translatable="false">https://github.com/horaciocome1/reaque/tree/master/docs/TERMS_AND_CONDITIONS.md</string>
     <string name="url_privacy_policy" translatable="false">https://github.com/horaciocome1/reaque/tree/master/docs/PRIVACY_POLICY.md</string>

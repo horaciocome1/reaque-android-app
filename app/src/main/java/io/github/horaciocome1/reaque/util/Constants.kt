@@ -48,5 +48,7 @@ object Constants {
     const val TOPIC_POSTS_REQUEST = "topic_posts"
     const val TOPIC_USERS_REQUEST = "topic_users"
     const val USER_POSTS_REQUEST = "user_posts"
+    const val USER_ID = "USER_ID"
+    const val MAIN_ACTIVITY = "MainActivity"
 
 }

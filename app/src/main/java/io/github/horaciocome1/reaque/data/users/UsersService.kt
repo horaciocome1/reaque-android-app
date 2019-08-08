@@ -58,4 +58,13 @@ class UsersService : UsersInterface {
         return users
     }
 
+    fun updateRegistrationToken(token: String, onCompleteListener: (Task<Void?>?) -> Unit) {
+        if (token.isNotBlank())
+            auth.addSimpleAuthStateListener {
+                val data = mapOf("registrationToken" to token)
+                val ref = db.document("users/${it.uid}")
+                ref.set(data, SetOptions.merge()).addOnCompleteListener(onCompleteListener)
+            }
+    }
+
 }
