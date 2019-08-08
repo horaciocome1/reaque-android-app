@@ -47,6 +47,9 @@ val Post.mapSimple: Map<String, Any>
         "title" to title,
         "pic" to pic,
         "timestamp" to timestamp,
+        "topic" to mapOf(
+            "id" to topic.id
+        ),
         "user" to mapOf(
             "id" to user.id,
             "name" to user.name,
