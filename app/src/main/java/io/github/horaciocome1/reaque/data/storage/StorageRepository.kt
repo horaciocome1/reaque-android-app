@@ -18,7 +18,9 @@ package io.github.horaciocome1.reaque.data.storage
 import android.net.Uri
 import io.github.horaciocome1.reaque.data.topics.Topic
 
-class StorageRepository private constructor(private val webservice: StorageService) {
+class StorageRepository private constructor(
+    private val webservice: StorageService
+) {
 
     fun uploadImage(imageUri: Uri, topic: Topic, onSuccessListener: (Uri?) -> Unit) =
         webservice.upload(imageUri, topic, onSuccessListener)
@@ -29,9 +31,10 @@ class StorageRepository private constructor(private val webservice: StorageServi
         private var instance: StorageRepository? = null
 
         fun getInstance(webservice: StorageService) = instance ?: synchronized(this) {
-            instance ?: StorageRepository(webservice).also {
-                instance = it
-            }
+            instance ?: StorageRepository(webservice)
+                .also {
+                    instance = it
+                }
         }
 
     }

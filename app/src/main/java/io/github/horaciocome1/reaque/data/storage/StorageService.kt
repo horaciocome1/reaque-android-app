@@ -24,16 +24,21 @@ import io.github.horaciocome1.reaque.data.topics.Topic
 
 class StorageService {
 
-    private val storage: FirebaseStorage by lazy { FirebaseStorage.getInstance() }
+    private val storage: FirebaseStorage by lazy {
+        FirebaseStorage.getInstance()
+    }
 
     fun upload(imageUri: Uri, topic: Topic, onSuccessListener: (Uri?) -> Unit) {
         if (imageUri != Uri.EMPTY && topic.id.isNotBlank()) {
-            val ref = storage.reference.child("images/${topic.id}/${imageUri.lastPathSegment}")
-            ref.putFile(imageUri).continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
-                if (!task.isSuccessful)
-                    task.exception?.let { throw it }
-                return@Continuation ref.downloadUrl
-            }).addOnSuccessListener(onSuccessListener)
+            val path = "images/${topic.id}/${imageUri.lastPathSegment}"
+            val ref = storage.reference.child(path)
+            ref.putFile(imageUri)
+                .continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+                    if (!task.isSuccessful)
+                        task.exception?.let { throw it }
+                    return@Continuation ref.downloadUrl
+                })
+                .addOnSuccessListener(onSuccessListener)
         }
     }
 

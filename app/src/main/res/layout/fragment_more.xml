@@ -17,6 +17,8 @@
 
     <data>
 
+        <import type="io.github.horaciocome1.reaque.BuildConfig" />
+
         <import type="io.github.horaciocome1.reaque.util.Constants" />
 
         <variable
@@ -40,10 +42,20 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="32dp"
+                android:text="@string/more"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4" />
+
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp">
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -58,7 +70,7 @@
                         android:layout_gravity="start"
                         android:layout_marginStart="8dp"
                         android:layout_marginLeft="8dp"
-                        android:layout_marginTop="32dp"
+                        android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
                         android:layout_marginBottom="32dp"
@@ -70,7 +82,7 @@
                         android:paddingRight="36dp"
                         app:icon="@drawable/outline_edit_18"
                         app:cornerRadius="16dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintBottom_toBottomOf="@id/textView23"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/title_textview" />
@@ -98,16 +110,86 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="32dp"
                         android:layout_marginLeft="32dp"
-                        android:layout_marginTop="32dp"
+                        android:layout_marginTop="8dp"
                         android:layout_marginEnd="32dp"
                         android:layout_marginRight="32dp"
-                        android:fontFamily="@font/roboto_medium"
                         android:text="@{user.name}"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imageview" />
+
+                    <TextView
+                        android:id="@+id/textView23"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginEnd="32dp"
+                        android:layout_marginRight="32dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="@{BuildConfig.VERSION_NAME}"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/update_available_cardview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:visibility="gone"
+                app:cardBackgroundColor="@color/colorError">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/update_textview"
+                        style="@style/AppTheme.CompleteClickableEffect"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:paddingStart="32dp"
+                        android:paddingLeft="32dp"
+                        android:paddingTop="16dp"
+                        android:paddingEnd="32dp"
+                        android:paddingRight="32dp"
+                        android:paddingBottom="16dp"
+                        android:text="@string/update_available"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                        android:textColor="@color/secondaryTextColor"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="32dp"
+                        android:layout_marginRight="32dp"
+                        android:layout_marginBottom="8dp"
+                        android:tint="@color/secondaryTextColor"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/outline_cloud_download_18" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -116,6 +198,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginEnd="8dp"

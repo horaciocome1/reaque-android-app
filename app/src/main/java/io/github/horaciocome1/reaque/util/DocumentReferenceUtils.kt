@@ -11,6 +11,15 @@ fun DocumentReference.addSafeSnapshotListener(listener: (DocumentSnapshot) -> Un
     }
 }
 
+fun DocumentReference.safeGet(listener: (DocumentSnapshot) -> Unit) {
+    val auth = FirebaseAuth.getInstance()
+    auth.addSimpleAuthStateListener {
+        get().addOnSuccessListener {
+            listener(it)
+        }
+    }
+}
+
 fun DocumentReference.addSimpleSnapshotListener(listener: (DocumentSnapshot) -> Unit) {
     addSnapshotListener { snapshot, exception ->
         if (exception == null && snapshot != null)

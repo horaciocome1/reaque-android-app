@@ -3,8 +3,9 @@ package io.github.horaciocome1.reaque.data.subscriptions
 import com.google.android.gms.tasks.Task
 import io.github.horaciocome1.reaque.data.users.User
 
-class SubscriptionsRepository private constructor(private val service: SubscriptionsService) :
-    SubscriptionsInterface {
+class SubscriptionsRepository private constructor(
+    private val service: SubscriptionsService
+) : SubscriptionsInterface {
 
     override fun subscribe(user: User, onCompleteListener: (Task<Void?>?) -> Unit) =
         service.subscribe(user, onCompleteListener)
@@ -22,10 +23,12 @@ class SubscriptionsRepository private constructor(private val service: Subscript
 
         private var instance: SubscriptionsRepository? = null
 
-        fun getInstance(service: SubscriptionsService) = instance
-            ?: synchronized(this) {
-                instance ?: SubscriptionsRepository(service).also { instance }
-            }
+        fun getInstance(service: SubscriptionsService) = instance ?: synchronized(this) {
+            instance ?: SubscriptionsRepository(service)
+                .also {
+                    instance = it
+                }
+        }
 
     }
 

@@ -16,6 +16,7 @@
 package io.github.horaciocome1.reaque.data
 
 import io.github.horaciocome1.reaque.data.bookmarks.BookmarksService
+import io.github.horaciocome1.reaque.data.configurations.ConfigurationsService
 import io.github.horaciocome1.reaque.data.feed.FeedService
 import io.github.horaciocome1.reaque.data.posts.PostsService
 import io.github.horaciocome1.reaque.data.ratings.RatingsService
@@ -28,26 +29,61 @@ import io.github.horaciocome1.reaque.data.users.UsersService
 
 class Database private constructor() {
 
-    var bookmarksService = BookmarksService()
-    var feedsService = FeedService()
-    var postsService = PostsService()
-    var ratingsService = RatingsService()
-    var readingsService = ReadingsService()
-    var sharesService = SharesService()
-    var storageService = StorageService()
-    var subscriptionsService = SubscriptionsService()
-    var topicsService = TopicsService()
-    var usersService = UsersService()
+    val bookmarksService: BookmarksService by lazy {
+        BookmarksService()
+    }
+
+    val feedsService: FeedService by lazy {
+        FeedService()
+    }
+
+    val postsService: PostsService by lazy {
+        PostsService()
+    }
+
+    val ratingsService: RatingsService by lazy {
+        RatingsService()
+    }
+
+    val readingsService: ReadingsService by lazy {
+        ReadingsService()
+    }
+
+    val sharesService: SharesService by lazy {
+        SharesService()
+    }
+
+    val storageService: StorageService by lazy {
+        StorageService()
+    }
+
+    val subscriptionsService: SubscriptionsService by lazy {
+        SubscriptionsService()
+    }
+
+    val topicsService: TopicsService by lazy {
+        TopicsService()
+    }
+
+    val usersService: UsersService by lazy {
+        UsersService()
+    }
+
+    val configurationsService: ConfigurationsService by lazy {
+        ConfigurationsService()
+    }
 
     companion object {
 
         @Volatile
         private var instance: Database? = null
 
-        fun getInstance() = instance
-            ?: synchronized(this) {
-                instance ?: Database().also { instance = it }
-            }
+        fun getInstance() = instance ?: synchronized(this) {
+            instance ?: Database()
+                .also {
+                    instance = it
+                }
+        }
 
     }
 

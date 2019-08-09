@@ -47,4 +47,5 @@
     <string name="reject">Não quero</string>
     <string name="please_wait_update">Por-favor, aguarde enquanto as atualizações são carregadas . . .</string>
     <string name="please_wait_create">Por favor, aguarde enquanto sua publicação é criada . . .</string>
+    <string name="update_available">Atualização disponível</string>
 </resources>

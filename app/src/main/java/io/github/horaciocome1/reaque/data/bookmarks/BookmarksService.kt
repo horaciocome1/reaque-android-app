@@ -16,9 +16,13 @@ import io.github.horaciocome1.reaque.util.posts
 
 class BookmarksService : BookmarksInterface {
 
-    private val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
+    private val db: FirebaseFirestore by lazy {
+        FirebaseFirestore.getInstance()
+    }
 
-    private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
+    private val auth: FirebaseAuth by lazy {
+        FirebaseAuth.getInstance()
+    }
 
     private val increment: Map<String, FieldValue> by lazy {
         val increment = FieldValue.increment(1)
@@ -74,9 +78,11 @@ class BookmarksService : BookmarksInterface {
         posts.value?.let { list ->
             if (list.isEmpty())
                 auth.addSimpleAuthStateListener { user ->
-                    val ref = db.collection("users/${user.uid}/bookmarks")
-                    ref.orderBy("score", Query.Direction.DESCENDING).limit(100)
-                        .get().addOnSuccessListener {
+                    db.collection("users/${user.uid}/bookmarks")
+                        .orderBy("score", Query.Direction.DESCENDING)
+                        .limit(100)
+                        .get()
+                        .addOnSuccessListener {
                             posts.value = it.posts
                         }
                 }
@@ -88,10 +94,10 @@ class BookmarksService : BookmarksInterface {
         isBookmarked.value = false
         if (post.id.isNotBlank())
             auth.addSimpleAuthStateListener { user ->
-                val ref = db.document("users/${user.uid}/bookmarks/${post.id}")
-                ref.addSimpleSnapshotListener {
-                    isBookmarked.value = it["title"] != null
-                }
+                db.document("users/${user.uid}/bookmarks/${post.id}")
+                    .addSimpleSnapshotListener {
+                        isBookmarked.value = it["title"] != null
+                    }
             }
         return isBookmarked
     }
@@ -99,13 +105,11 @@ class BookmarksService : BookmarksInterface {
     override fun hasBookmarks(): LiveData<Boolean> {
         hasBookmarks.value = false
         auth.addSimpleAuthStateListener { user ->
-            val ref = db.document("users/${user.uid}")
-            ref.addSimpleSnapshotListener {
-                val bookmarks = it["bookmarks"]
-                hasBookmarks.value = if (bookmarks != null)
-                    bookmarks.toString().toInt() > 0
-                else
-                    false
+            db.document("users/${user.uid}")
+                .addSimpleSnapshotListener { snapshot ->
+                    snapshot["bookmarks"]?.let {
+                        hasBookmarks.value = it.toString().toInt() > 0
+                    }
             }
         }
         return hasBookmarks

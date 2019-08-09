@@ -14,9 +14,13 @@ import io.github.horaciocome1.reaque.util.user
 
 class RatingsService : RatingsInterface {
 
-    private val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
+    private val db: FirebaseFirestore by lazy {
+        FirebaseFirestore.getInstance()
+    }
 
-    private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
+    private val auth: FirebaseAuth by lazy {
+        FirebaseAuth.getInstance()
+    }
 
     private val rating: MutableLiveData<Int> by lazy {
         MutableLiveData<Int>().apply { value = 0 }
@@ -25,9 +29,12 @@ class RatingsService : RatingsInterface {
     override fun set(post: Post, value: Int, onCompleteListener: (Task<Void?>?) -> Unit) {
         if (post.id.isNotBlank() && value >= 1 && value <= 5)
             auth.addSimpleAuthStateListener {
-                val ref = db.document("posts/${post.id}/ratings/${it.uid}")
-                val data = it.user.map.plus("value" to value).plus("post" to mapOf("id" to post.id))
-                ref.set(data, SetOptions.merge()).addOnCompleteListener(onCompleteListener)
+                val data = it.user.map
+                    .plus("value" to value)
+                    .plus("post" to mapOf("id" to post.id))
+                db.document("posts/${post.id}/ratings/${it.uid}")
+                    .set(data, SetOptions.merge())
+                    .addOnCompleteListener(onCompleteListener)
             }
     }
 
@@ -35,14 +42,12 @@ class RatingsService : RatingsInterface {
         rating.value = 0
         if (post.id.isNotBlank())
             auth.addSimpleAuthStateListener { user ->
-                val ref = db.document("posts/${post.id}/ratings/${user.uid}")
-                ref.addSimpleSnapshotListener {
-                    val value = it["value"]
-                    if (value != null)
-                        rating.value = value.toString().toInt()
-                    else
-                        rating.value = 0
-                }
+                db.document("posts/${post.id}/ratings/${user.uid}")
+                    .addSimpleSnapshotListener { snapshot ->
+                        snapshot["value"]?.let {
+                            rating.value = it.toString().toInt()
+                        }
+                    }
             }
         return rating
     }

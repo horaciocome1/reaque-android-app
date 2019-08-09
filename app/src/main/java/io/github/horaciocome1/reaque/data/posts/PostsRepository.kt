@@ -4,7 +4,9 @@ import com.google.android.gms.tasks.Task
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.data.users.User
 
-class PostsRepository private constructor(private val service: PostsService) : PostsInterface {
+class PostsRepository private constructor(
+    private val service: PostsService
+) : PostsInterface {
 
     override fun create(post: Post, onCompleteListener: (Task<Void?>?) -> Unit) =
         service.create(post, onCompleteListener)
@@ -22,10 +24,12 @@ class PostsRepository private constructor(private val service: PostsService) : P
         @Volatile
         private var instance: PostsRepository? = null
 
-        fun getInstance(service: PostsService) = instance
-            ?: synchronized(this) {
-                instance ?: PostsRepository(service).also { instance = it }
-            }
+        fun getInstance(service: PostsService) = instance ?: synchronized(this) {
+            instance ?: PostsRepository(service)
+                .also {
+                    instance = it
+                }
+        }
 
     }
 
