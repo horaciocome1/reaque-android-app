@@ -22,14 +22,20 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import io.github.horaciocome1.reaque.data.bookmarks.BookmarksRepository
+import io.github.horaciocome1.reaque.data.configurations.ConfigurationsRepository
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.util.Constants
 import io.github.horaciocome1.reaque.util.addSimpleAuthStateListener
 import io.github.horaciocome1.reaque.util.user
 
-class MoreViewModel(bookmarksRepository: BookmarksRepository) : ViewModel() {
+class MoreViewModel(
+    bookmarksRepository: BookmarksRepository,
+    configurationsRepository: ConfigurationsRepository
+) : ViewModel() {
 
-    private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
+    private val auth: FirebaseAuth by lazy {
+        FirebaseAuth.getInstance()
+    }
 
     private val _user = MutableLiveData<User>()
 
@@ -37,10 +43,16 @@ class MoreViewModel(bookmarksRepository: BookmarksRepository) : ViewModel() {
         get() = _user
 
     init {
-        auth.addSimpleAuthStateListener { _user.value = it.user }
+        auth.addSimpleAuthStateListener {
+            _user.value = it.user
+        }
     }
 
     val hasBookmarks = bookmarksRepository.hasBookmarks()
+
+    val isUpdateAvailable = configurationsRepository.isUpdateAvailable()
+
+    val getLatestVersionName = configurationsRepository.getLatestVersionName()
 
     fun openUpdateUser(view: View) {
         auth.currentUser?.let {

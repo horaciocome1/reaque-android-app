@@ -15,10 +15,12 @@ class RatingsRepository private constructor(private val service: RatingsService)
         @Volatile
         private var instance: RatingsRepository? = null
 
-        fun getInstance(service: RatingsService) = instance
-            ?: synchronized(this) {
-                instance ?: RatingsRepository(service).also { instance = it }
-            }
+        fun getInstance(service: RatingsService) = instance ?: synchronized(this) {
+            instance ?: RatingsRepository(service)
+                .also {
+                    instance = it
+                }
+        }
 
     }
 

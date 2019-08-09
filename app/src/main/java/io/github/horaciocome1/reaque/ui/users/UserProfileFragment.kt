@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.google.android.material.button.MaterialButton
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.databinding.FragmentUserProfileBinding
 import io.github.horaciocome1.reaque.util.InjectorUtils
@@ -38,25 +37,21 @@ class UserProfileFragment : Fragment() {
             val user = User(
                 UserProfileFragmentArgs.fromBundle(bundle).userId
             )
-            viewModel.get(user).observe(this, Observer { binding.user = it })
+            viewModel.get(user).observe(this, Observer {
+                binding.user = it
+            })
             viewModel.amSubscribedTo(user).observe(this, Observer {
-                if (it)
-                    turnVisible(unsubscribe_button, subscribe_button)
-                else
-                    turnVisible(subscribe_button, unsubscribe_button)
+                subscribe_button.visibility = visibility(!it)
+                unsubscribe_button.visibility = visibility(it)
             })
         }
     }
 
-    private fun turnVisible(b1: MaterialButton, b2: MaterialButton) {
-        b1.run {
-            visibility = View.VISIBLE
-            isEnabled = true
-        }
-        b2.run {
-            visibility = View.GONE
-            isEnabled = false
-        }
+    private fun visibility(state: Boolean): Int {
+        return if (state)
+            View.VISIBLE
+        else
+            View.GONE
     }
 
 }

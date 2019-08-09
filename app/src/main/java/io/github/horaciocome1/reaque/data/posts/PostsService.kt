@@ -14,19 +14,21 @@ import io.github.horaciocome1.reaque.util.*
 
 class PostsService : PostsInterface {
 
-    private val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
+    private val db: FirebaseFirestore by lazy {
+        FirebaseFirestore.getInstance()
+    }
 
-    private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
+    private val auth: FirebaseAuth by lazy {
+        FirebaseAuth.getInstance()
+    }
 
     private val increment: Map<String, FieldValue> by lazy {
         val increment = FieldValue.increment(1)
         mapOf("posts" to increment)
     }
 
-    private var _post = Post("")
-
     private val post: MutableLiveData<Post> by lazy {
-        MutableLiveData<Post>().apply { value = _post }
+        MutableLiveData<Post>().apply { value = Post("") }
     }
 
     private val topicPosts: MutableLiveData<List<Post>> by lazy {
@@ -41,20 +43,22 @@ class PostsService : PostsInterface {
         MutableLiveData<List<Post>>().apply { value = mutableListOf() }
     }
 
+    private var postId = ""
+
     private var userId = ""
 
     private var topicId = ""
 
     override fun create(post: Post, onCompleteListener: (Task<Void?>?) -> Unit) {
         auth.addSimpleAuthStateListener { user ->
-            post.user = user.user
             val postRef = db.collection("posts").document()
-            post.id = postRef.id
             val postOnTopicRef = db.document("topics/${post.topic.id}/posts/${postRef.id}")
             val postOnUserRef = db.document("users/${post.user.id}/posts/${postRef.id}")
             val userOnTopicRef = db.document("topics/${post.topic.id}/users/${post.user.id}")
             val topicRef = db.document("topics/${post.topic.id}")
             val userRef = db.document("users/${post.user.id}")
+            post.user = user.user
+            post.id = postRef.id
             db.runBatch {
                 it.set(postRef, post.map)
                 it.set(postOnTopicRef, post.mapSimple)
@@ -69,13 +73,12 @@ class PostsService : PostsInterface {
     }
 
     override fun get(post: Post): LiveData<Post> {
-        if (post.id != _post.id && post.id.isNotBlank()) {
+        if (post.id != postId && post.id.isNotBlank()) {
             this.post.value = Post("")
-            val ref = db.document("posts/${post.id}")
-            ref.addSafeSnapshotListener {
-                _post = it.post
-                this.post.value = _post
-            }
+            db.document("posts/${post.id}")
+                .addSafeSnapshotListener {
+                    this.post.value = it.post
+                }
         }
         return this.post
     }
@@ -83,10 +86,12 @@ class PostsService : PostsInterface {
     override fun get(user: User): LiveData<List<Post>> {
         if (user.id != userId && user.id.isNotBlank()) {
             userPosts.value = mutableListOf()
-            val ref = db.collection("users/${user.id}/posts")
-            ref.orderBy("score", Query.Direction.DESCENDING).limit(100).safeGet {
-                this.userPosts.value = it.posts
-            }
+            db.collection("users/${user.id}/posts")
+                .orderBy("score", Query.Direction.DESCENDING)
+                .limit(100)
+                .safeGet {
+                    this.userPosts.value = it.posts
+                }
             userId = user.id
         }
         return userPosts
@@ -95,10 +100,12 @@ class PostsService : PostsInterface {
     override fun get(topic: Topic): LiveData<List<Post>> {
         if (topic.id != topicId && topic.id.isNotBlank()) {
             topicPosts.value = mutableListOf()
-            val ref = db.collection("topics/${topic.id}/posts")
-            ref.orderBy("score", Query.Direction.DESCENDING).limit(100).safeGet {
-                this.topicPosts.value = it.posts
-            }
+            db.collection("topics/${topic.id}/posts")
+                .orderBy("score", Query.Direction.DESCENDING)
+                .limit(100)
+                .safeGet {
+                    this.topicPosts.value = it.posts
+                }
             topicId = topic.id
         }
         return topicPosts
@@ -107,9 +114,10 @@ class PostsService : PostsInterface {
     override fun getTop10(): LiveData<List<Post>> {
         top10Posts.value?.let { list ->
             if (list.isEmpty()) {
-                val ref = db.collection("posts")
-                ref.orderBy("score", Query.Direction.DESCENDING)
-                    .limit(10).addSimpleSnapshotListener {
+                db.collection("posts")
+                    .orderBy("score", Query.Direction.DESCENDING)
+                    .limit(10)
+                    .addSimpleSnapshotListener {
                         this.top10Posts.value = it.posts
                     }
             }

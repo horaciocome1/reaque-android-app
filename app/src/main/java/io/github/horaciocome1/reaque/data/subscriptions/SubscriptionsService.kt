@@ -13,9 +13,13 @@ import io.github.horaciocome1.reaque.util.*
 
 class SubscriptionsService : SubscriptionsInterface {
 
-    private val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
+    private val db: FirebaseFirestore by lazy {
+        FirebaseFirestore.getInstance()
+    }
 
-    private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
+    private val auth: FirebaseAuth by lazy {
+        FirebaseAuth.getInstance()
+    }
 
     private val incrementSubscriptions: Map<String, FieldValue> by lazy {
         val increment = FieldValue.increment(1)
@@ -87,10 +91,12 @@ class SubscriptionsService : SubscriptionsInterface {
 
     override fun getSubscriptions(user: User): LiveData<List<User>> {
         if (user.id != subscriptionsOf && user.id.isNotBlank()) {
-            val ref = db.collection("users/${user.id}/subscriptions")
-            ref.orderBy("score", Query.Direction.DESCENDING).limit(100).safeGet {
-                subscriptions.value = it.users
-            }
+            db.collection("users/${user.id}/subscriptions")
+                .orderBy("score", Query.Direction.DESCENDING)
+                .limit(100)
+                .safeGet {
+                    subscriptions.value = it.users
+                }
             subscriptionsOf = user.id
         }
         return subscriptions
@@ -98,10 +104,12 @@ class SubscriptionsService : SubscriptionsInterface {
 
     override fun getSubscribers(user: User): LiveData<List<User>> {
         if (user.id != subscribersOf && user.id.isNotBlank()) {
-            val ref = db.collection("users/${user.id}/subscribers")
-            ref.orderBy("score", Query.Direction.DESCENDING).limit(100).safeGet {
-                subscribers.value = it.users
-            }
+            db.collection("users/${user.id}/subscribers")
+                .orderBy("score", Query.Direction.DESCENDING)
+                .limit(100)
+                .safeGet {
+                    subscribers.value = it.users
+                }
             subscribersOf = user.id
         }
         return subscribers
@@ -111,10 +119,10 @@ class SubscriptionsService : SubscriptionsInterface {
         if (user.id.isNotBlank()) {
             amSubscribedTo.value = false
             auth.addSimpleAuthStateListener { firebaseUser ->
-                val ref = db.document("users/${firebaseUser.uid}/subscriptions/${user.id}")
-                ref.addSimpleSnapshotListener {
-                    amSubscribedTo.value = it["timestamp"] != null
-                }
+                db.document("users/${firebaseUser.uid}/subscriptions/${user.id}")
+                    .addSimpleSnapshotListener {
+                        amSubscribedTo.value = it["timestamp"] != null
+                    }
             }
         }
         return amSubscribedTo

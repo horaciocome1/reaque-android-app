@@ -17,6 +17,7 @@ package io.github.horaciocome1.reaque.util
 
 import io.github.horaciocome1.reaque.data.Database
 import io.github.horaciocome1.reaque.data.bookmarks.BookmarksRepository
+import io.github.horaciocome1.reaque.data.configurations.ConfigurationsRepository
 import io.github.horaciocome1.reaque.data.feed.FeedRepository
 import io.github.horaciocome1.reaque.data.posts.PostsRepository
 import io.github.horaciocome1.reaque.data.ratings.RatingsRepository
@@ -36,30 +37,45 @@ import io.github.horaciocome1.reaque.ui.users.update.UpdateUserViewModelFactory
 
 object InjectorUtils {
 
-    private val db = Database.getInstance()
+    private val db: Database by lazy {
+        Database.getInstance()
+    }
 
     val feedViewModelFactory: FeedViewModelFactory by lazy {
-        val repository = FeedRepository.getInstance(db.feedsService)
+        val repository = FeedRepository
+            .getInstance(db.feedsService)
         FeedViewModelFactory(repository)
     }
 
     val exploreViewModelFactory: ExploreViewModelFactory by lazy {
-        val topicsRepository = TopicsRepository.getInstance(db.topicsService)
-        val postsRepository = PostsRepository.getInstance(db.postsService)
+        val topicsRepository = TopicsRepository
+            .getInstance(db.topicsService)
+        val postsRepository = PostsRepository
+            .getInstance(db.postsService)
         ExploreViewModelFactory(topicsRepository, postsRepository)
     }
 
     val moreViewModelFactory: MoreViewModelFactory by lazy {
-        val bookmarksRepository = BookmarksRepository.getInstance(db.bookmarksService)
-        MoreViewModelFactory(bookmarksRepository)
+        val bookmarksRepository = BookmarksRepository
+            .getInstance(db.bookmarksService)
+        val configurationsRepository = ConfigurationsRepository
+            .getInstance(db.configurationsService)
+        MoreViewModelFactory(
+            bookmarksRepository,
+            configurationsRepository
+        )
     }
 
     val postsViewModelFactory: PostsViewModelFactory by lazy {
-        val postsRepository = PostsRepository.getInstance(db.postsService)
+        val postsRepository = PostsRepository
+            .getInstance(db.postsService)
         val readingsRepository = ReadingsRepository.getInstance(db.readingsService)
-        val sharesRepository = SharesRepository.getInstance(db.sharesService)
-        val ratingsRepository = RatingsRepository.getInstance(db.ratingsService)
-        val bookmarksRepository = BookmarksRepository.getInstance(db.bookmarksService)
+        val sharesRepository = SharesRepository
+            .getInstance(db.sharesService)
+        val ratingsRepository = RatingsRepository
+            .getInstance(db.ratingsService)
+        val bookmarksRepository = BookmarksRepository
+            .getInstance(db.bookmarksService)
         PostsViewModelFactory(
             postsRepository,
             readingsRepository,
@@ -70,9 +86,12 @@ object InjectorUtils {
     }
 
     val createPostViewModelFactory: CreatePostViewModelFactory by lazy {
-        val topicsRepository = TopicsRepository.getInstance(db.topicsService)
-        val postsRepository = PostsRepository.getInstance(db.postsService)
-        val storageRepository = StorageRepository.getInstance(db.storageService)
+        val topicsRepository = TopicsRepository
+            .getInstance(db.topicsService)
+        val postsRepository = PostsRepository
+            .getInstance(db.postsService)
+        val storageRepository = StorageRepository
+            .getInstance(db.storageService)
         CreatePostViewModelFactory(
             postsRepository,
             topicsRepository,
@@ -81,13 +100,19 @@ object InjectorUtils {
     }
 
     val usersViewModelFactory: UsersViewModelFactory by lazy {
-        val usersRepository = UsersRepository.getInstance(db.usersService)
-        val subscriptionsRepository = SubscriptionsRepository.getInstance(db.subscriptionsService)
-        UsersViewModelFactory(usersRepository, subscriptionsRepository)
+        val usersRepository = UsersRepository
+            .getInstance(db.usersService)
+        val subscriptionsRepository = SubscriptionsRepository
+            .getInstance(db.subscriptionsService)
+        UsersViewModelFactory(
+            usersRepository,
+            subscriptionsRepository
+        )
     }
 
     val updateUserViewModelFactory: UpdateUserViewModelFactory by lazy {
-        val repository = UsersRepository.getInstance(db.usersService)
+        val repository = UsersRepository
+            .getInstance(db.usersService)
         UpdateUserViewModelFactory(repository)
     }
 

@@ -40,8 +40,6 @@ class MoreFragment : Fragment() {
         ViewModelProviders.of(this, factory)[MoreViewModel::class.java]
     }
 
-    private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentMoreBinding.inflate(inflater, container, false)
         return binding.root
@@ -51,53 +49,76 @@ class MoreFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.viewmodel = viewModel
         licenses_textview.setOnClickListener {
-            val url = resources.getString(R.string.url_licence)
+            val url = getString(R.string.url_licence)
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(intent)
         }
         about_textview.setOnClickListener {
-            val url = resources.getString(R.string.url_about)
+            val url = getString(R.string.url_about)
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(intent)
         }
         privacy_policy_textview.setOnClickListener {
-            val url = resources.getString(R.string.url_privacy_policy)
+            val url = getString(R.string.url_privacy_policy)
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(intent)
         }
         terms_and_conditions_textview.setOnClickListener {
-            val url = resources.getString(R.string.url_terms_and_conditions)
+            val url = getString(R.string.url_terms_and_conditions)
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(intent)
         }
         feedback_textview.setOnClickListener {
-            val email = resources.getString(R.string.email_developer)
+            val email = getString(R.string.email_developer)
             try {
                 val mailto = "mailto:$email"
                 val emailIntent = Intent(Intent.ACTION_SENDTO)
                 emailIntent.data = Uri.parse(mailto)
                 startActivity(emailIntent)
             } catch (exception: Exception) {
-                Toast.makeText(it.context, R.string.email_app_not_found, Toast.LENGTH_LONG).show()
+                Toast.makeText(it.context, R.string.email_app_not_found, Toast.LENGTH_LONG)
+                    .show()
             }
         }
         sign_out_textview.setOnClickListener {
+            val auth = FirebaseAuth.getInstance()
             auth.signOut()
             activity?.finish()
+        }
+        update_textview.setOnClickListener {
+            val url = getString(R.string.url_update)
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
         }
     }
 
     override fun onStart() {
         super.onStart()
-        viewModel.user.observe(this, Observer { binding.user = it })
-        viewModel.hasBookmarks.observe(this, Observer {
-            val visibility = if (it)
-                View.VISIBLE
-            else
-                View.GONE
-            bookmarks_textview.visibility = visibility
-            bookmarks_imageview.visibility = visibility
-        })
+        viewModel.user
+            .observe(this, Observer {
+                binding.user = it
+            })
+        viewModel.hasBookmarks
+            .observe(this, Observer {
+                bookmarks_textview.visibility = visibility(it)
+                bookmarks_imageview.visibility = visibility(it)
+            })
+        viewModel.isUpdateAvailable
+            .observe(this, Observer { isUpdateAvailable ->
+                update_available_cardview.visibility = visibility(isUpdateAvailable)
+                if (isUpdateAvailable)
+                    viewModel.getLatestVersionName
+                        .observe(this, Observer {
+                            update_textview.text = it
+                        })
+            })
+    }
+
+    private fun visibility(state: Boolean): Int {
+        return if (state)
+            View.VISIBLE
+        else
+            View.GONE
     }
 
 }

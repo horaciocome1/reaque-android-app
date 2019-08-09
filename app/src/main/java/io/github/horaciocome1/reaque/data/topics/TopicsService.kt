@@ -24,14 +24,17 @@ import io.github.horaciocome1.reaque.util.topics
 
 class TopicsService {
 
-    private val ref: CollectionReference by lazy { FirebaseFirestore.getInstance().collection("topics") }
+    private val ref: CollectionReference by lazy {
+        FirebaseFirestore.getInstance().collection("topics")
+    }
 
     private var _notEmptyTopics = mutableListOf<Topic>()
 
     val notEmptyTopics = MutableLiveData<List<Topic>>()
         get() {
             if (_notEmptyTopics.isEmpty())
-                ref.whereGreaterThan("score", 0).orderBy("score", Query.Direction.DESCENDING)
+                ref.whereGreaterThan("score", 0)
+                    .orderBy("score", Query.Direction.DESCENDING)
                     .safeGet {
                         _notEmptyTopics = it.topics
                         field.value = _notEmptyTopics
