@@ -43,7 +43,8 @@ It is great to see you looking to help some way. There are plenty of this you ca
 You can make pull requests at anytime. There are welcome. It would be good if you follow the coding style so others can easily take advantage of it. Thank you for being here.
 If you feel the need to touch the model part or the backend it self, please email me describing your intentions. Also could you visit the **issues** list, from time to time? It would be great!
 
-Although you might need further more details, for instance here you got the use case diagram.
+Although you might need further more details, for instance here you got some diagrams.
+![architecture diagram](docs/diagrams/reaque_architecture.jpg)
 ![use case diagram](docs/diagrams/use_case.png)
 
 ## Screenshots
