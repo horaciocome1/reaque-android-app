@@ -20,9 +20,9 @@
     <string name="default_notification_channel_id" translatable="false">reaque-firebase-messaging-channel_id</string>
 
     <!-- 01 URL -->
-    <string name="url_terms_and_conditions" translatable="false">https://github.com/horaciocome1/reaque/tree/master/docs/TERMS_AND_CONDITIONS.md</string>
-    <string name="url_privacy_policy" translatable="false">https://github.com/horaciocome1/reaque/tree/master/docs/PRIVACY_POLICY.md</string>
-    <string name="url_licence" translatable="false">https://github.com/horaciocome1/reaque/tree/master/docs/LICENSE</string>
+    <string name="url_terms_and_conditions" translatable="false">https://github.com/horaciocome1/reaque-android-app/tree/master/docs/TERMS_AND_CONDITIONS.md</string>
+    <string name="url_privacy_policy" translatable="false">https://github.com/horaciocome1/reaque-android-app/tree/master/docs/PRIVACY_POLICY.md</string>
+    <string name="url_licence" translatable="false">https://github.com/horaciocome1/reaque-android-app/tree/master/docs/LICENSE</string>
     <string name="url_about" translatable="false">https://reaque.firebaseapp.com</string>
     <string name="url_background_sign_in" translatable="false">https://firebasestorage.googleapis.com/v0/b/reaque.appspot.com/o/resources%2Fimages%2F19228.jpg?alt=media&amp;token=2f9d40b5-f2bf-47cb-8534-782c40487923</string>
     <string name="email_developer" translatable="false">hcome@pm.me</string>
@@ -32,8 +32,8 @@
     <string name="content_description_post_cover_image" translatable="false">Post cover image</string>
     <string name="content_description_user_profile_image" translatable="false">User profile image</string>
     <string name="content_description_topic_cover_image" translatable="false">Topic cover image</string>
-    <string name="content_description_posts_icon" translatable="false">posts icon</string>
-    <string name="content_description_users_icon" translatable="false">users icon</string>
+    <string name="content_description_posts_icon" translatable="false">Posts icon</string>
+    <string name="content_description_users_icon" translatable="false">Users icon</string>
     <string name="content_description_since_icon" translatable="false">Since icon</string>
     <string name="content_description_address_icon" translatable="false">Address icon</string>
 
