@@ -44,7 +44,7 @@ You can make pull requests at anytime. There are welcome. It would be good if yo
 If you feel the need to touch the model part or the backend it self, please email me describing your intentions. Also could you visit the **issues** list, from time to time? It would be great!
 
 Although you might need further more details, for instance here you got some diagrams.
-![architecture diagram](docs/diagrams/reaque_architecture.jpg)
+![architecture diagram](docs/diagrams/reaque-architecture.jpg)
 ![use case diagram](docs/diagrams/use_case.png)
 
 ## Screenshots
