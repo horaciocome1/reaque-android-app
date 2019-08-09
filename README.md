@@ -63,9 +63,9 @@ This is how it looks on an 5.7 inch phone running [Android Nougat](https://www.a
 ## Thanks to my family and
  - [Anilza Cynthia Noa Nhanala](https://www.facebook.com/azlina.cynthia)
  - [Ergito Rubildo](https://github.com/realrgt)
- - Ionisio Daniel
- - Robert Macuacua
+ - [Ionisio Daniel](https://www.facebook.com/iyonissio.daniel.5)
+ - [Robert Macuacua](https://www.facebook.com/robert.m.macuacua)
  - [Rosario Perreira Fernandes](https://github.com/rosariopfernandes)
- - Samuel Zandamela
+ - [Samuel Zandamela](https://www.linkedin.com/in/samuel-zandamela-1aa2b2103)
  
  As You may guess, they are not the **only** who helped. There are no _relevance_ order too.
