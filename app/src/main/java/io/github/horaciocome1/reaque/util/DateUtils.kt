@@ -22,24 +22,22 @@ val Timestamp.string: String
     get() {
         val calendar = Calendar.getInstance()
         calendar.time = toDate()
-        return "${calendar[Calendar.DAY_OF_MONTH]}, ${calendar.month} ${calendar[Calendar.YEAR]}"
+        return "${calendar.month} ${calendar[Calendar.DAY_OF_MONTH]}, ${calendar[Calendar.YEAR]}"
     }
 
 val Calendar.month: String
-    get() {
-        return when (this[Calendar.MONTH]) {
-            Calendar.JANUARY -> "Janeiro"
-            Calendar.FEBRUARY -> "Fevereiro"
-            Calendar.MARCH -> "Março"
-            Calendar.APRIL -> "Abril"
-            Calendar.MAY -> "Maio"
-            Calendar.JUNE -> "Junho"
-            Calendar.JULY -> "Julho"
-            Calendar.AUGUST -> "Agosto"
-            Calendar.SEPTEMBER -> "Setembro"
-            Calendar.OCTOBER -> "Outubro"
-            Calendar.NOVEMBER -> "Novembro"
-            Calendar.DECEMBER -> "Dezembro"
-            else -> "month"
-        }
+    get() = when (this[Calendar.MONTH]) {
+        Calendar.JANUARY -> "Janeiro"
+        Calendar.FEBRUARY -> "Fevereiro"
+        Calendar.MARCH -> "Março"
+        Calendar.APRIL -> "Abril"
+        Calendar.MAY -> "Maio"
+        Calendar.JUNE -> "Junho"
+        Calendar.JULY -> "Julho"
+        Calendar.AUGUST -> "Agosto"
+        Calendar.SEPTEMBER -> "Setembro"
+        Calendar.OCTOBER -> "Outubro"
+        Calendar.NOVEMBER -> "Novembro"
+        Calendar.DECEMBER -> "Dezembro"
+        else -> "month"
     }

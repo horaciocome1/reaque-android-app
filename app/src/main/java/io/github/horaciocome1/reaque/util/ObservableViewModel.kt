@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModel
 
 open class ObservableViewModel: ViewModel(), Observable {
 
-    private val callbacks: PropertyChangeRegistry by lazy { PropertyChangeRegistry() }
+    private val callbacks: PropertyChangeRegistry by lazy {
+        PropertyChangeRegistry()
+    }
 
     override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
         callbacks.remove(callback)

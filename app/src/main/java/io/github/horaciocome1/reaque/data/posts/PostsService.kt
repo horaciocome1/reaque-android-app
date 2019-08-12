@@ -50,23 +50,27 @@ class PostsService : PostsInterface {
     private var topicId = ""
 
     override fun create(post: Post, onCompleteListener: (Task<Void?>?) -> Unit) {
-        auth.addSimpleAuthStateListener { user ->
+        if (auth.currentUser != null) {
+            post.user = auth.currentUser!!.user
             val postRef = db.collection("posts").document()
+            post.id = postRef.id
             val postOnTopicRef = db.document("topics/${post.topic.id}/posts/${postRef.id}")
             val postOnUserRef = db.document("users/${post.user.id}/posts/${postRef.id}")
             val userOnTopicRef = db.document("topics/${post.topic.id}/users/${post.user.id}")
             val topicRef = db.document("topics/${post.topic.id}")
             val userRef = db.document("users/${post.user.id}")
-            post.user = user.user
-            post.id = postRef.id
+            val myFeedRef = db.document("users/${post.user.id}/feed/${postRef.id}")
             db.runBatch {
                 it.set(postRef, post.map)
                 it.set(postOnTopicRef, post.mapSimple)
                 it.set(postOnUserRef, post.mapSimple)
-                it.set(userOnTopicRef, user.user.map, SetOptions.merge())
+                it.set(myFeedRef, post.mapSimple)
+                it.set(userOnTopicRef, auth.currentUser!!.user.map, SetOptions.merge())
                 it.set(topicRef, increment, SetOptions.merge())
                 it.set(userRef, increment, SetOptions.merge())
-                val data = mapOf("top_topic" to post.topic.title)
+                val data = mapOf(
+                    "top_topic" to post.topic.title
+                )
                 it.set(userRef, data, SetOptions.merge())
             }.addOnCompleteListener(onCompleteListener)
         }
@@ -76,8 +80,9 @@ class PostsService : PostsInterface {
         if (post.id != postId && post.id.isNotBlank()) {
             this.post.value = Post("")
             db.document("posts/${post.id}")
-                .addSafeSnapshotListener {
-                    this.post.value = it.post
+                .addSnapshotListener { snapshot, exception ->
+                    if (exception == null && snapshot != null)
+                        this.post.value = snapshot.post
                 }
         }
         return this.post
@@ -89,7 +94,8 @@ class PostsService : PostsInterface {
             db.collection("users/${user.id}/posts")
                 .orderBy("score", Query.Direction.DESCENDING)
                 .limit(100)
-                .safeGet {
+                .get()
+                .addOnSuccessListener {
                     this.userPosts.value = it.posts
                 }
             userId = user.id
@@ -103,7 +109,8 @@ class PostsService : PostsInterface {
             db.collection("topics/${topic.id}/posts")
                 .orderBy("score", Query.Direction.DESCENDING)
                 .limit(100)
-                .safeGet {
+                .get()
+                .addOnSuccessListener {
                     this.topicPosts.value = it.posts
                 }
             topicId = topic.id
@@ -117,8 +124,9 @@ class PostsService : PostsInterface {
                 db.collection("posts")
                     .orderBy("score", Query.Direction.DESCENDING)
                     .limit(10)
-                    .addSimpleSnapshotListener {
-                        this.top10Posts.value = it.posts
+                    .addSnapshotListener { snapshot, exception ->
+                        if (exception == null && snapshot != null)
+                            this.top10Posts.value = snapshot.posts
                     }
             }
         }

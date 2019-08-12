@@ -26,20 +26,18 @@ class BindingAdapters {
             @BindingAdapter("url", "uri", "type", requireAll = false)
             @JvmStatic
             fun ImageView.loadImage(url: String?, uri: Uri?, type: Int?) {
+                val image = if (uri != null && uri != Uri.EMPTY)
+                    uri
+                else
+                    url
+                val options = when (type) {
+                    Constants.BLUR -> RequestOptions.bitmapTransform(BlurTransformation(7, 14))
+                    Constants.CIRCLE -> RequestOptions.circleCropTransform()
+                    else -> RequestOptions()
+                }
                 Glide.with(context)
-                    .load(
-                        if (uri != null && uri != Uri.EMPTY)
-                            uri
-                        else
-                            url
-                    )
-                    .apply(
-                        when (type) {
-                            Constants.BLUR -> RequestOptions.bitmapTransform(BlurTransformation(7, 14))
-                            Constants.CIRCLE -> RequestOptions.circleCropTransform()
-                            else -> RequestOptions()
-                        }
-                    )
+                    .load(image)
+                    .apply(options)
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .into(this)
             }
@@ -87,9 +85,10 @@ class BindingAdapters {
                     columns == 1 -> LinearLayoutManager(context)
                     else -> StaggeredGridLayoutManager(columns, RecyclerView.VERTICAL)
                 }
-                adapter = if (host == Constants.EXPLORE_FRAGMENT)
+                adapter = if (host == Constants.EXPLORE_FRAGMENT) {
+                    setItemViewCacheSize(10)
                     PostsAdapter.SuggestionsAdapter(list)
-                else
+                } else
                     PostsAdapter(list)
             }
 

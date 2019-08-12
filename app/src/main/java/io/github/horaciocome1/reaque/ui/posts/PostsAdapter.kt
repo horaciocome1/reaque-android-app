@@ -40,7 +40,7 @@ class PostsAdapter(private val list: List<Post>) : RecyclerView.Adapter<PostsAda
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
-    class SuggestionsAdapter(private val list: List<Post>) : RecyclerView.Adapter<ViewHolder>() {
+    class SuggestionsAdapter(private val list: List<Post>) : RecyclerView.Adapter<SuggestionsAdapter.ViewHolder>() {
 
         private lateinit var binding: ItemSuggestionBinding
 
@@ -54,6 +54,8 @@ class PostsAdapter(private val list: List<Post>) : RecyclerView.Adapter<PostsAda
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             binding.post = list[position]
         }
+
+        class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
     }
 

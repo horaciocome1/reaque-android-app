@@ -2,7 +2,6 @@ package io.github.horaciocome1.reaque.util
 
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.firebase.dynamiclinks.DynamicLink
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
@@ -45,21 +44,18 @@ fun FirebaseDynamicLinks.buildShortDynamicLink(
             val chooser = Intent.createChooser(sendIntent, post.title)
             onSuccessListener(chooser)
         }
-        .addOnFailureListener {
-            Log.e("ReadPostFragment", "Failed to build short link", it)
-        }
 }
 
-fun MainActivity.handleDynamicLinks(onSuccess: (Post) -> Unit) {
-    FirebaseDynamicLinks.getInstance().getDynamicLink(intent)
-        .addOnSuccessListener { pendingDynamicLinkData ->
-            pendingDynamicLinkData?.let {
-                val postId: String = it.link.toString().removePrefix("${Constants.LANDING_PAGE}/")
+fun MainActivity.handleDynamicLinks(onSuccessListener: (Post) -> Unit) {
+    FirebaseDynamicLinks.getInstance()
+        .getDynamicLink(intent)
+        .addOnSuccessListener {
+            it?.let {
+                val postId: String = it.link
+                    .toString()
+                    .removePrefix("${Constants.LANDING_PAGE}/")
                 val post = Post(postId)
-                onSuccess(post)
+                onSuccessListener(post)
             }
-        }
-        .addOnFailureListener {
-            Log.w("MainActivity", "getDynamicLink:Failure", it)
         }
 }

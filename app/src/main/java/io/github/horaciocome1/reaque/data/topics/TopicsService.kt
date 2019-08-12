@@ -19,7 +19,6 @@ import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import io.github.horaciocome1.reaque.util.safeGet
 import io.github.horaciocome1.reaque.util.topics
 
 class TopicsService {
@@ -35,9 +34,11 @@ class TopicsService {
             if (_notEmptyTopics.isEmpty())
                 ref.whereGreaterThan("score", 0)
                     .orderBy("score", Query.Direction.DESCENDING)
-                    .safeGet {
-                        _notEmptyTopics = it.topics
-                        field.value = _notEmptyTopics
+                    .addSnapshotListener { snapshot, exception ->
+                        if (exception == null && snapshot != null) {
+                            _notEmptyTopics = snapshot.topics
+                            field.value = _notEmptyTopics
+                        }
                     }
             return field
         }
@@ -48,7 +49,8 @@ class TopicsService {
         get() {
             if (_topics.isEmpty())
                 ref.orderBy("title", Query.Direction.ASCENDING)
-                    .safeGet {
+                    .get()
+                    .addOnSuccessListener {
                         _topics = it.topics
                         field.value = _topics
                     }
