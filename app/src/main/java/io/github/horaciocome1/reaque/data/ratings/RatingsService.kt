@@ -7,8 +7,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import io.github.horaciocome1.reaque.data.posts.Post
-import io.github.horaciocome1.reaque.util.addSimpleAuthStateListener
-import io.github.horaciocome1.reaque.util.addSimpleSnapshotListener
 import io.github.horaciocome1.reaque.util.map
 import io.github.horaciocome1.reaque.util.user
 
@@ -27,28 +25,24 @@ class RatingsService : RatingsInterface {
     }
 
     override fun set(post: Post, value: Int, onCompleteListener: (Task<Void?>?) -> Unit) {
-        if (post.id.isNotBlank() && value >= 1 && value <= 5)
-            auth.addSimpleAuthStateListener {
-                val data = it.user.map
-                    .plus("value" to value)
-                    .plus("post" to mapOf("id" to post.id))
-                db.document("posts/${post.id}/ratings/${it.uid}")
-                    .set(data, SetOptions.merge())
-                    .addOnCompleteListener(onCompleteListener)
-            }
+        if (post.id.isNotBlank() && value >= 1 && value <= 5 && auth.currentUser != null) {
+            val data = auth.currentUser!!.user.map
+                .plus("value" to value)
+                .plus("post" to mapOf("id" to post.id))
+            db.document("posts/${post.id}/ratings/${auth.currentUser!!.uid}")
+                .set(data, SetOptions.merge())
+                .addOnCompleteListener(onCompleteListener)
+        }
     }
 
     override fun get(post: Post): LiveData<Int> {
         rating.value = 0
-        if (post.id.isNotBlank())
-            auth.addSimpleAuthStateListener { user ->
-                db.document("posts/${post.id}/ratings/${user.uid}")
-                    .addSimpleSnapshotListener { snapshot ->
-                        snapshot["value"]?.let {
-                            rating.value = it.toString().toInt()
-                        }
-                    }
-            }
+        if (post.id.isNotBlank() && auth.currentUser != null)
+            db.document("posts/${post.id}/ratings/${auth.currentUser!!.uid}")
+                .addSnapshotListener { snapshot, exception ->
+                    if (exception == null && snapshot != null && snapshot.contains("value"))
+                        rating.value = snapshot["value"].toString().toInt()
+                }
         return rating
     }
 

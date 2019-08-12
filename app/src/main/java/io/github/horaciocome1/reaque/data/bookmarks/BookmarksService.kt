@@ -9,8 +9,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
 import io.github.horaciocome1.reaque.data.posts.Post
-import io.github.horaciocome1.reaque.util.addSimpleAuthStateListener
-import io.github.horaciocome1.reaque.util.addSimpleSnapshotListener
 import io.github.horaciocome1.reaque.util.mapSimple
 import io.github.horaciocome1.reaque.util.posts
 
@@ -47,71 +45,64 @@ class BookmarksService : BookmarksInterface {
     }
 
     override fun bookmark(post: Post, onCompleteListener: (Task<Void?>?) -> Unit) {
-        if (post.id.isNotBlank())
-            auth.addSimpleAuthStateListener { user ->
-                val bookmarkRef = db.document("users/${user.uid}/bookmarks/${post.id}")
-                val postRef = db.document("posts/${post.id}")
-                val userRef = db.document("users/${user.uid}")
-                db.runBatch {
-                    it.set(bookmarkRef, post.mapSimple)
-                    it.set(postRef, increment, SetOptions.merge())
-                    it.set(userRef, increment, SetOptions.merge())
-                }.addOnCompleteListener(onCompleteListener)
-            }
+        if (post.id.isNotBlank() && auth.currentUser != null) {
+            val bookmarkRef = db.document("users/${auth.currentUser!!.uid}/bookmarks/${post.id}")
+            val postRef = db.document("posts/${post.id}")
+            val userRef = db.document("users/${auth.currentUser!!.uid}")
+            db.runBatch {
+                it.set(bookmarkRef, post.mapSimple)
+                it.set(postRef, increment, SetOptions.merge())
+                it.set(userRef, increment, SetOptions.merge())
+            }.addOnCompleteListener(onCompleteListener)
+        }
     }
 
     override fun unBookmark(post: Post, onCompleteListener: (Task<Void?>?) -> Unit) {
-        if (post.id.isNotBlank())
-            auth.addSimpleAuthStateListener { user ->
-                val bookmarkRef = db.document("users/${user.uid}/bookmarks/${post.id}")
-                val postRef = db.document("posts/${post.id}")
-                val userRef = db.document("users/${user.uid}")
-                db.runBatch {
-                    it.delete(bookmarkRef)
-                    it.set(postRef, decrement, SetOptions.merge())
-                    it.set(userRef, decrement, SetOptions.merge())
-                }.addOnCompleteListener(onCompleteListener)
-            }
+        if (post.id.isNotBlank() && auth.currentUser != null) {
+            val bookmarkRef = db.document("users/${auth.currentUser!!.uid}/bookmarks/${post.id}")
+            val postRef = db.document("posts/${post.id}")
+            val userRef = db.document("users/${auth.currentUser!!.uid}")
+            db.runBatch {
+                it.delete(bookmarkRef)
+                it.set(postRef, decrement, SetOptions.merge())
+                it.set(userRef, decrement, SetOptions.merge())
+            }.addOnCompleteListener(onCompleteListener)
+        }
     }
 
     override fun get(): LiveData<List<Post>> {
         posts.value?.let { list ->
-            if (list.isEmpty())
-                auth.addSimpleAuthStateListener { user ->
-                    db.collection("users/${user.uid}/bookmarks")
-                        .orderBy("score", Query.Direction.DESCENDING)
-                        .limit(100)
-                        .get()
-                        .addOnSuccessListener {
-                            posts.value = it.posts
-                        }
-                }
+            if (list.isEmpty() && auth.currentUser != null)
+                db.collection("users/${auth.currentUser!!.uid}/bookmarks")
+                    .orderBy("score", Query.Direction.DESCENDING)
+                    .limit(100)
+                    .get()
+                    .addOnSuccessListener {
+                        posts.value = it.posts
+                    }
         }
         return posts
     }
 
     override fun isBookmarked(post: Post): LiveData<Boolean> {
         isBookmarked.value = false
-        if (post.id.isNotBlank())
-            auth.addSimpleAuthStateListener { user ->
-                db.document("users/${user.uid}/bookmarks/${post.id}")
-                    .addSimpleSnapshotListener {
-                        isBookmarked.value = it["title"] != null
-                    }
-            }
+        if (post.id.isNotBlank() && auth.currentUser != null)
+            db.document("users/${auth.currentUser!!.uid}/bookmarks/${post.id}")
+                .addSnapshotListener { snapshot, exception ->
+                    if (exception == null && snapshot != null)
+                        isBookmarked.value = snapshot.exists()
+                }
         return isBookmarked
     }
 
     override fun hasBookmarks(): LiveData<Boolean> {
         hasBookmarks.value = false
-        auth.addSimpleAuthStateListener { user ->
-            db.document("users/${user.uid}")
-                .addSimpleSnapshotListener { snapshot ->
-                    snapshot["bookmarks"]?.let {
-                        hasBookmarks.value = it.toString().toInt() > 0
-                    }
-            }
-        }
+        if (auth.currentUser != null)
+            db.document("users/${auth.currentUser!!.uid}")
+                .addSnapshotListener { snapshot, exception ->
+                    if (exception == null && snapshot != null && snapshot.contains("bookmarks"))
+                        hasBookmarks.value = snapshot["bookmarks"].toString().toInt() > 0
+                }
         return hasBookmarks
     }
 }

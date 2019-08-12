@@ -6,7 +6,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import io.github.horaciocome1.reaque.data.posts.Post
-import io.github.horaciocome1.reaque.util.addSimpleAuthStateListener
 import io.github.horaciocome1.reaque.util.posts
 
 class FeedService : FeedInterface {
@@ -26,9 +25,8 @@ class FeedService : FeedInterface {
     }
 
     override fun get(): LiveData<List<Post>> {
-        if (_posts.isEmpty())
-            auth.addSimpleAuthStateListener { user ->
-                db.collection("users/${user.uid}/feed")
+        if (_posts.isEmpty() && auth.currentUser != null)
+            db.collection("users/${auth.currentUser!!.uid}/feed")
                     .orderBy("score", Query.Direction.DESCENDING)
                     .limit(100)
                     .get()
@@ -36,7 +34,6 @@ class FeedService : FeedInterface {
                         _posts = it.posts
                         posts.value = _posts
                     }
-            }
         return posts
     }
 

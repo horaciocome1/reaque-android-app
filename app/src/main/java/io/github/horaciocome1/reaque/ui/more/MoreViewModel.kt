@@ -25,7 +25,6 @@ import io.github.horaciocome1.reaque.data.bookmarks.BookmarksRepository
 import io.github.horaciocome1.reaque.data.configurations.ConfigurationsRepository
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.util.Constants
-import io.github.horaciocome1.reaque.util.addSimpleAuthStateListener
 import io.github.horaciocome1.reaque.util.user
 
 class MoreViewModel(
@@ -37,15 +36,21 @@ class MoreViewModel(
         FirebaseAuth.getInstance()
     }
 
-    private val _user = MutableLiveData<User>()
+    private val _user: MutableLiveData<User> by lazy {
+        MutableLiveData<User>().apply {
+            value = User("")
+        }
+    }
 
     val user: LiveData<User>
-        get() = _user
+        get() {
+            if (auth.currentUser != null)
+                _user.value = auth.currentUser!!.user
+            return _user
+        }
 
     init {
-        auth.addSimpleAuthStateListener {
-            _user.value = it.user
-        }
+        _user.value
     }
 
     val hasBookmarks = bookmarksRepository.hasBookmarks()

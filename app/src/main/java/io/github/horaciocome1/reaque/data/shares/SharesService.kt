@@ -6,7 +6,6 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import io.github.horaciocome1.reaque.data.posts.Post
-import io.github.horaciocome1.reaque.util.addSimpleAuthStateListener
 import io.github.horaciocome1.reaque.util.mapSimple
 
 class SharesService : SharesInterface {
@@ -25,15 +24,14 @@ class SharesService : SharesInterface {
     }
 
     override fun share(post: Post, onCompleteListener: (Task<Void?>?) -> Unit) {
-        if (post.id.isNotBlank())
-            auth.addSimpleAuthStateListener { user ->
-                val readingRef = db.document("users/${user.uid}/shares/${post.id}")
-                val postRef = db.document("posts/${post.id}")
-                db.runBatch {
-                    it.set(readingRef, post.mapSimple)
-                    it.set(postRef, increment, SetOptions.merge())
-                }.addOnCompleteListener(onCompleteListener)
-            }
+        if (post.id.isNotBlank() && auth.currentUser != null) {
+            val readingRef = db.document("users/${auth.currentUser!!.uid}/shares/${post.id}")
+            val postRef = db.document("posts/${post.id}")
+            db.runBatch {
+                it.set(readingRef, post.mapSimple)
+                it.set(postRef, increment, SetOptions.merge())
+            }.addOnCompleteListener(onCompleteListener)
+        }
     }
 
 }

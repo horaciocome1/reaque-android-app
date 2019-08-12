@@ -34,8 +34,12 @@ class UpdateUserFragment : Fragment() {
             bio_inputlayout.editText?.onFocusChangeListener = it
             address_inputlayout.editText?.onFocusChangeListener = it
         }
-        toolbar?.setNavigationOnClickListener { viewModel.navigateUp(it) }
-        update_button.setOnClickListener { binding.viewmodel = viewModel.update(it) }
+        toolbar.setNavigationOnClickListener {
+            viewModel.navigateUp(it)
+        }
+        update_button.setOnClickListener {
+            binding.viewmodel = viewModel.update(it)
+        }
     }
 
     override fun onStart() {
