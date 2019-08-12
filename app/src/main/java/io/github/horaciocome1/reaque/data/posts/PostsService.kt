@@ -50,19 +50,21 @@ class PostsService : PostsInterface {
     private var topicId = ""
 
     override fun create(post: Post, onCompleteListener: (Task<Void?>?) -> Unit) {
-        if (auth.currentUser != null)
+        if (auth.currentUser != null) {
             post.user = auth.currentUser!!.user
             val postRef = db.collection("posts").document()
-        post.id = postRef.id
+            post.id = postRef.id
             val postOnTopicRef = db.document("topics/${post.topic.id}/posts/${postRef.id}")
             val postOnUserRef = db.document("users/${post.user.id}/posts/${postRef.id}")
             val userOnTopicRef = db.document("topics/${post.topic.id}/users/${post.user.id}")
             val topicRef = db.document("topics/${post.topic.id}")
             val userRef = db.document("users/${post.user.id}")
+            val myFeedRef = db.document("users/${post.user.id}/feed/${postRef.id}")
             db.runBatch {
                 it.set(postRef, post.map)
                 it.set(postOnTopicRef, post.mapSimple)
                 it.set(postOnUserRef, post.mapSimple)
+                it.set(myFeedRef, post.mapSimple)
                 it.set(userOnTopicRef, auth.currentUser!!.user.map, SetOptions.merge())
                 it.set(topicRef, increment, SetOptions.merge())
                 it.set(userRef, increment, SetOptions.merge())
@@ -71,6 +73,7 @@ class PostsService : PostsInterface {
                 )
                 it.set(userRef, data, SetOptions.merge())
             }.addOnCompleteListener(onCompleteListener)
+        }
     }
 
     override fun get(post: Post): LiveData<Post> {

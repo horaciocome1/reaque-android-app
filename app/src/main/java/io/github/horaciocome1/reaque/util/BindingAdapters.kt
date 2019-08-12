@@ -85,9 +85,10 @@ class BindingAdapters {
                     columns == 1 -> LinearLayoutManager(context)
                     else -> StaggeredGridLayoutManager(columns, RecyclerView.VERTICAL)
                 }
-                adapter = if (host == Constants.EXPLORE_FRAGMENT)
+                adapter = if (host == Constants.EXPLORE_FRAGMENT) {
+                    setItemViewCacheSize(10)
                     PostsAdapter.SuggestionsAdapter(list)
-                else
+                } else
                     PostsAdapter(list)
             }
 
