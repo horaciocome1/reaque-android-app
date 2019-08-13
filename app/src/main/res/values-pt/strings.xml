@@ -38,7 +38,7 @@
     <string name="unsubscribe">Cancelar subscrição</string>
     <string name="users">Usuários</string>
     <string name="topic_of_interest">Tópico de interesse</string>
-    <string name="user_profile">Perfil de usuário</string>
+    <string name="user_profile">Perfil</string>
     <string name="update">Actualizar</string>
     <string name="permission_needed">Permissão necessária</string>
     <string name="permission_needed_explanation">Precisamos acessar seu armazenamento para que você possa selecionar uma foto. Para isso, você terá que aceitar o diálogo de permissão.</string>

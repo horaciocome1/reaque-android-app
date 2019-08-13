@@ -78,7 +78,8 @@ class BookmarksService : BookmarksInterface {
                     .limit(100)
                     .get()
                     .addOnSuccessListener {
-                        posts.value = it.posts
+                        if (it != null)
+                            posts.value = it.posts
                     }
         }
         return posts

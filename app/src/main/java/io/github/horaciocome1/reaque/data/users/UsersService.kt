@@ -42,7 +42,7 @@ class UsersService : UsersInterface {
     }
 
     override fun get(user: User): LiveData<User> {
-        if (user.id != userId && user.id.isNotBlank() && auth.currentUser != null) {
+        if (user.id != userId && user.id.isNotBlank()) {
             this.user.value = User("")
             db.document("users/${user.id}")
                 .addSnapshotListener { snapshot, exception ->
@@ -61,7 +61,8 @@ class UsersService : UsersInterface {
                 .limit(100)
                 .get()
                 .addOnSuccessListener {
-                    users.value = it.users
+                    if (it != null)
+                        users.value = it.users
                 }
         return users
     }

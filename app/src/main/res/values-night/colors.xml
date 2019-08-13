@@ -15,8 +15,8 @@
 
 <resources>
 
-    <color name="primaryColor">?android:backgroundTint</color>
-    <color name="primaryLightColor">?android:background</color>
+    <color name="primaryColor">#ffffff</color>
+    <color name="primaryLightColor">#ffffff</color>
     <color name="secondaryColor">#7c4dff</color>
     <color name="secondaryLightColor">#b47cff</color>
     <color name="secondaryDarkColor">#3f1dcb</color>

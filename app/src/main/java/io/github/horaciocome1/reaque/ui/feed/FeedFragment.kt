@@ -33,7 +33,9 @@ class FeedFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        viewModel.get().observe(this, Observer { binding.viewmodel = viewModel.setPosts(it) })
+        viewModel.get().observe(this, Observer {
+            binding.viewmodel = viewModel.setPosts(it)
+        })
     }
 
 }

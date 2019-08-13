@@ -31,8 +31,10 @@ class FeedService : FeedInterface {
                     .limit(100)
                     .get()
                     .addOnSuccessListener {
-                        _posts = it.posts
-                        posts.value = _posts
+                        if (it != null) {
+                            _posts = it.posts
+                            posts.value = _posts
+                        }
                     }
         return posts
     }

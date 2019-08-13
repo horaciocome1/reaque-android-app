@@ -96,7 +96,8 @@ class SubscriptionsService : SubscriptionsInterface {
                 .limit(100)
                 .get()
                 .addOnSuccessListener {
-                    subscriptions.value = it.users
+                    if (it != null)
+                        subscriptions.value = it.users
                 }
             subscriptionsOf = user.id
         }
@@ -110,7 +111,8 @@ class SubscriptionsService : SubscriptionsInterface {
                 .limit(100)
                 .get()
                 .addOnSuccessListener {
-                    subscribers.value = it.users
+                    if (it != null)
+                        subscribers.value = it.users
                 }
             subscribersOf = user.id
         }

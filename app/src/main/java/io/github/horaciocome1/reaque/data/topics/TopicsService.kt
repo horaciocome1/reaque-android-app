@@ -34,9 +34,10 @@ class TopicsService {
             if (_notEmptyTopics.isEmpty())
                 ref.whereGreaterThan("score", 0)
                     .orderBy("score", Query.Direction.DESCENDING)
-                    .addSnapshotListener { snapshot, exception ->
-                        if (exception == null && snapshot != null) {
-                            _notEmptyTopics = snapshot.topics
+                    .get()
+                    .addOnSuccessListener {
+                        if (it != null) {
+                            _notEmptyTopics = it.topics
                             field.value = _notEmptyTopics
                         }
                     }
@@ -51,8 +52,10 @@ class TopicsService {
                 ref.orderBy("title", Query.Direction.ASCENDING)
                     .get()
                     .addOnSuccessListener {
-                        _topics = it.topics
-                        field.value = _topics
+                        if (it != null) {
+                            _topics = it.topics
+                            field.value = _topics
+                        }
                     }
             return field
         }
