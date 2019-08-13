@@ -26,13 +26,15 @@
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
-            android:layout_marginRight="32dp"
+            android:layout_marginEnd="8dp"
             android:padding="16dp"
             android:text="@string/share"
+            android:textColor="@color/green"
             app:icon="@drawable/outline_share_18"
+            app:iconTint="@color/green"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:rippleColor="@color/green" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/unbookmark_button"
@@ -40,14 +42,15 @@
             android:layout_width="48dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
             android:onClick="@{(view) -> viewmodel.unBookmark(view, post)}"
             android:padding="16dp"
             android:visibility="gone"
             app:icon="@drawable/baseline_bookmark_18"
+            app:iconTint="@color/orange"
             app:layout_constraintBottom_toBottomOf="@+id/share_button"
             app:layout_constraintEnd_toStartOf="@+id/rating_button"
-            app:layout_constraintTop_toTopOf="@+id/share_button" />
+            app:layout_constraintTop_toTopOf="@+id/share_button"
+            app:rippleColor="@color/orange" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/bookmark_button"
@@ -55,14 +58,15 @@
             android:layout_width="46dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
             android:onClick="@{(view) -> viewmodel.bookmark(view, post)}"
             android:padding="16dp"
             android:visibility="gone"
             app:icon="@drawable/outline_bookmark_border_18"
+            app:iconTint="@color/orange"
             app:layout_constraintBottom_toBottomOf="@+id/share_button"
             app:layout_constraintEnd_toStartOf="@+id/rating_button"
-            app:layout_constraintTop_toTopOf="@+id/share_button" />
+            app:layout_constraintTop_toTopOf="@+id/share_button"
+            app:rippleColor="@color/orange" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/rating_button"
@@ -70,7 +74,6 @@
             android:layout_width="56dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
             android:onClick="@{(view) -> viewmodel.openSetRating(view, post)}"
             android:paddingTop="16dp"
             android:paddingBottom="16dp"
@@ -92,8 +95,7 @@
             android:id="@+id/imageView14"
             android:layout_width="46dp"
             android:layout_height="46dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
+            android:layout_marginStart="16dp"
             android:contentDescription="@string/content_description_user_profile_image"
             android:onClick="@{(view) -> viewmodel.openUserProfile(view, post.user)}"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -119,11 +121,11 @@
                     android:id="@+id/imageView15"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:contentDescription="@string/content_description_post_cover_image"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:type="@{Constants.DEFAULT}"
-                    android:contentDescription="@string/content_description_post_cover_image"
                     app:url="@{post.pic}" />
 
                 <TextView
@@ -226,7 +228,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
-                    android:layout_marginLeft="32dp"
                     android:fontFamily="@font/roboto_medium"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"

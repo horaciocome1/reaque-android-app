@@ -96,7 +96,8 @@ class PostsService : PostsInterface {
                 .limit(100)
                 .get()
                 .addOnSuccessListener {
-                    this.userPosts.value = it.posts
+                    if (it != null)
+                        this.userPosts.value = it.posts
                 }
             userId = user.id
         }
@@ -111,7 +112,8 @@ class PostsService : PostsInterface {
                 .limit(100)
                 .get()
                 .addOnSuccessListener {
-                    this.topicPosts.value = it.posts
+                    if (it != null)
+                        this.topicPosts.value = it.posts
                 }
             topicId = topic.id
         }
@@ -124,9 +126,10 @@ class PostsService : PostsInterface {
                 db.collection("posts")
                     .orderBy("score", Query.Direction.DESCENDING)
                     .limit(10)
-                    .addSnapshotListener { snapshot, exception ->
-                        if (exception == null && snapshot != null)
-                            this.top10Posts.value = snapshot.posts
+                    .get()
+                    .addOnSuccessListener {
+                        if (it != null)
+                            this.top10Posts.value = it.posts
                     }
             }
         }

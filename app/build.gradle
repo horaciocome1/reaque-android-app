@@ -36,9 +36,8 @@ android {
         applicationId "io.github.horaciocome1.reaque"
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 14
-        versionName "1.4.2-rc-15"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        versionCode 15
+        versionName "1.4.2-rc-25"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
     }
@@ -91,9 +90,4 @@ dependencies {
 
     // play services
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
-
-    // test
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
