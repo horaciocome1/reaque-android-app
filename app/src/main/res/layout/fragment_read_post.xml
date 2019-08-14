@@ -156,7 +156,7 @@
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/divider7" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
                 <TextView
                     android:id="@+id/textView21"
@@ -173,7 +173,7 @@
                     android:textIsSelectable="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+                    app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
                 <TextView
                     android:id="@+id/textView22"
@@ -192,7 +192,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView21" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
                 <View
                     android:id="@+id/divider6"
@@ -216,23 +216,25 @@
                     android:id="@+id/divider7"
                     android:layout_width="56dp"
                     android:layout_height="2dp"
-                    android:layout_marginTop="16dp"
                     android:background="@color/secondaryColor"
+                    app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
                     app:layout_constraintStart_toStartOf="@+id/textView19"
-                    app:layout_constraintTop_toBottomOf="@+id/textView19" />
+                    app:layout_constraintTop_toTopOf="@+id/ratingBar" />
 
-                <TextView
-                    android:id="@+id/textView18"
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    style="@style/Widget.AppCompat.RatingBar.Indicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginLeft="32dp"
-                    android:fontFamily="@font/roboto_medium"
-                    android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                    app:layout_constraintBottom_toBottomOf="@+id/divider7"
+                    android:layout_marginTop="32dp"
+                    android:max="5"
+                    android:numStars="5"
+                    android:onClick="@{(view) -> viewmodel.openSetRating(view, post)}"
+                    android:rating="@{post.rating}"
                     app:layout_constraintStart_toEndOf="@+id/divider7"
-                    app:layout_constraintTop_toTopOf="@+id/divider7" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
