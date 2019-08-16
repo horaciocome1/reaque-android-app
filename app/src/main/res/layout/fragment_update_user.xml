@@ -106,16 +106,23 @@
 
             </ScrollView>
 
+            <View
+                android:id="@+id/divider4"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="@drawable/background_shadow_bottom_to_top"
+                app:layout_constraintBottom_toTopOf="@+id/share_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/update_button"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
                 android:padding="@dimen/default_padding"
                 android:text="@string/done"
-                android:textColor="@color/secondaryColor"
-                app:cornerRadius="@dimen/default_corner_radius"
-                app:backgroundTint="@color/primaryLightColor" />
+                app:cornerRadius="@dimen/default_corner_radius" />
 
         </LinearLayout>
 

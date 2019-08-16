@@ -10,6 +10,7 @@ import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.databinding.FragmentSetRatingBinding
 import io.github.horaciocome1.reaque.util.InjectorUtils
 import kotlinx.android.synthetic.main.fragment_set_rating.*
+import kotlin.math.roundToInt
 
 class SetRatingFragment : Fragment() {
 
@@ -20,6 +21,12 @@ class SetRatingFragment : Fragment() {
         ViewModelProviders.of(this, factory)[PostsViewModel::class.java]
     }
 
+    private var rating = 0
+
+    private var defaultRating = 0
+
+    private var post = Post("")
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentSetRatingBinding.inflate(inflater, container, false)
         return binding.root
@@ -27,22 +34,30 @@ class SetRatingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.viewModel = viewModel
-        toolbar?.setNavigationOnClickListener { viewModel.navigateUp(it) }
+        toolbar.setNavigationOnClickListener {
+            viewModel.navigateUp(it)
+        }
+        rating_bar.setOnRatingBarChangeListener { _, rating, fromUser ->
+            done_button.isEnabled = if (rating != 0f && rating.roundToInt() != defaultRating
+                && post.id.isNotBlank() && fromUser
+            ) {
+                this.rating = rating.roundToInt()
+                true
+            } else
+                false
+        }
+        done_button.setOnClickListener {
+            viewModel.setRating(it, post, rating)
+        }
     }
 
     override fun onStart() {
         super.onStart()
         arguments?.let { bundle ->
             val args = SetRatingFragmentArgs.fromBundle(bundle)
-            binding.post = Post(args.postId)
-            when (args.rating) {
-                1 -> textView1.isEnabled = false
-                2 -> textView2.isEnabled = false
-                3 -> textView3.isEnabled = false
-                4 -> textView4.isEnabled = false
-                5 -> textView5.isEnabled = false
-            }
+            this.post = Post(args.postId)
+            defaultRating = args.rating
+            rating_bar.rating = args.rating.toFloat()
         }
     }
 

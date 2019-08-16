@@ -60,8 +60,8 @@ val DocumentSnapshot.post: Post
             name = this@post["user.name"].toString()
             pic = this@post["user.pic"].toString()
         }
-        val score = this@post["score"]
-        if (score != null)
-            this.score = score.toString().toFloat()
-        rating = this@post["rating"].toString()
+        if (contains("score"))
+            this.score = this@post["score"].toString().toFloat()
+        if (contains("rating"))
+            rating = this@post["rating"].toString().toFloat()
     }

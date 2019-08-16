@@ -2,6 +2,7 @@ package io.github.horaciocome1.reaque.ui.posts.create
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -48,14 +49,14 @@ class CreatePostFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        loadDraft()
         binding.viewmodel = viewModel
         select_pic_from_gallery_button.setOnClickListener {
-
-            if (ContextCompat.checkSelfPermission(
-                    activity as MainActivity,
-                    Manifest.permission.READ_EXTERNAL_STORAGE
-                ) == PackageManager.PERMISSION_GRANTED
+            val permission = ContextCompat.checkSelfPermission(
+                activity as MainActivity,
+                Manifest.permission.READ_EXTERNAL_STORAGE
             )
+            if (permission == PackageManager.PERMISSION_GRANTED)
                 pickImageFromGallery()
             else
                 requestStoragePermission()
@@ -79,10 +80,11 @@ class CreatePostFragment : Fragment() {
                     viewModel.post.topic = it[position]
                     binding.viewmodel = viewModel
                     create_button.isEnabled = viewModel.isPostReady
+                    saveDraft()
                 }
             }
         }
-        select_topic_button.setOnClickListener {
+        select_topic_button?.setOnClickListener {
             selectTopicBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
         }
         select_pic_button.setOnClickListener {
@@ -90,17 +92,20 @@ class CreatePostFragment : Fragment() {
         }
         toolbar?.setNavigationOnClickListener {
             viewModel.navigateUp(it)
+            saveDraft()
         }
-        create_button.setOnClickListener { binding.viewmodel = viewModel.create(it) }
+        create_button?.setOnClickListener { binding.viewmodel = viewModel.create(it) }
     }
 
     override fun onStart() {
         super.onStart()
         viewModel.title.observe(this, Observer {
+            saveDraft()
             viewModel.post.title = it
             create_button.isEnabled = viewModel.isPostReady
         })
         viewModel.message.observe(this, Observer {
+            saveDraft()
             viewModel.post.message = it
             create_button.isEnabled = viewModel.isPostReady
         })
@@ -122,6 +127,17 @@ class CreatePostFragment : Fragment() {
         }
     }
 
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == Constants.STORAGE_PERMISSION_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                pickImageFromGallery()
+            else
+                Toast.makeText(context, R.string.permission_denied, Toast.LENGTH_LONG).show()
+        }
+    }
+
+
     private fun pickImageFromGallery() {
         val intent = Intent(Intent.ACTION_PICK).apply {
             type = "image/*"
@@ -134,12 +150,12 @@ class CreatePostFragment : Fragment() {
     }
 
     private fun requestStoragePermission() {
-        if (activity is MainActivity)
-            if (ActivityCompat.shouldShowRequestPermissionRationale(
-                    activity as MainActivity,
-                    Manifest.permission.READ_EXTERNAL_STORAGE
-                )
-            ) {
+        if (activity is MainActivity) {
+            val permission = ActivityCompat.shouldShowRequestPermissionRationale(
+                activity as MainActivity,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            )
+            if (permission) {
                 AlertDialog.Builder(activity as MainActivity)
                     .setTitle(resources.getString(R.string.permission_needed))
                     .setMessage(resources.getString(R.string.permission_needed_explanation))
@@ -150,7 +166,9 @@ class CreatePostFragment : Fragment() {
                             Constants.STORAGE_PERMISSION_CODE
                         )
                     }
-                    .setNegativeButton(resources.getString(R.string.reject)) { dialog, _ -> dialog.dismiss() }
+                    .setNegativeButton(resources.getString(R.string.reject)) { dialog, _ ->
+                        dialog.dismiss()
+                    }
                     .create()
                     .show()
             } else
@@ -159,15 +177,46 @@ class CreatePostFragment : Fragment() {
                     arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
                     Constants.STORAGE_PERMISSION_CODE
                 )
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == Constants.STORAGE_PERMISSION_CODE) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                pickImageFromGallery()
-            else
-                Toast.makeText(context, R.string.permission_denied, Toast.LENGTH_LONG).show()
         }
     }
+
+    private fun saveDraft() {
+        activity?.let {
+            val postTitle = viewModel.post.title
+            val postMessage = viewModel.post.message
+            val topicId = viewModel.post.topic.id
+            val topicTitle = viewModel.post.topic.title
+            val sharedPreferences = it.getSharedPreferences(Constants.SharedPreferences.NAME, MODE_PRIVATE)
+            sharedPreferences.edit().apply {
+                putString(Constants.SharedPreferences.POST_TITLE, postTitle)
+                putString(Constants.SharedPreferences.POST_MESSAGE, postMessage)
+                putString(Constants.SharedPreferences.TOPIC_ID, topicId)
+                putString(Constants.SharedPreferences.TOPIC_TITLE, topicTitle)
+                apply()
+            }
+        }
+    }
+
+    private fun loadDraft() {
+        activity?.let { activity ->
+            val sharedPreferences = activity.getSharedPreferences(Constants.SharedPreferences.NAME, MODE_PRIVATE)
+            sharedPreferences.getString(Constants.SharedPreferences.TOPIC_ID, "")?.let {
+                if (it.isNotBlank())
+                    viewModel.post.topic.id = it
+            }
+            sharedPreferences.getString(Constants.SharedPreferences.TOPIC_TITLE, "")?.let {
+                if (it.isNotBlank())
+                    viewModel.post.topic.title = it
+            }
+            sharedPreferences.getString(Constants.SharedPreferences.POST_TITLE, "")?.let {
+                if (it.isNotBlank())
+                    viewModel.title.value = it
+            }
+            sharedPreferences.getString(Constants.SharedPreferences.POST_MESSAGE, "")?.let {
+                if (it.isNotBlank())
+                    viewModel.message.value = it
+            }
+        }
+    }
+
 }

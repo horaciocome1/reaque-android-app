@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="default_corner_radius">16dp</dimen>
+    <dimen name="default_stroke_width">1dp</dimen>
+    <dimen name="default_card_elevation">2dp</dimen>
+    <dimen name="default_progressbar_size">16dp</dimen>
+    <dimen name="default_padding">16dp</dimen>
+
+</resources>

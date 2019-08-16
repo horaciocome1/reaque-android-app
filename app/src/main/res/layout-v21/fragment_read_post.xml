@@ -24,11 +24,10 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/share_button"
             style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
+            android:layout_width="48dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="32dp"
             android:padding="16dp"
-            android:text="@string/share"
             android:textColor="@color/green"
             app:icon="@drawable/outline_share_18"
             app:iconTint="@color/green"
@@ -41,7 +40,7 @@
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="48dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
             android:onClick="@{(view) -> viewmodel.unBookmark(view, post)}"
             android:padding="16dp"
             android:visibility="gone"
@@ -55,9 +54,9 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/bookmark_button"
             style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="46dp"
+            android:layout_width="48dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
             android:onClick="@{(view) -> viewmodel.bookmark(view, post)}"
             android:padding="16dp"
             android:visibility="gone"
@@ -95,7 +94,7 @@
             android:id="@+id/imageView14"
             android:layout_width="46dp"
             android:layout_height="46dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="32dp"
             android:contentDescription="@string/content_description_user_profile_image"
             android:onClick="@{(view) -> viewmodel.openUserProfile(view, post.user)}"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -158,7 +157,7 @@
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/divider7" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
                 <TextView
                     android:id="@+id/textView21"
@@ -175,7 +174,7 @@
                     android:textIsSelectable="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+                    app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
                 <TextView
                     android:id="@+id/textView22"
@@ -194,7 +193,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView21" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
                 <View
                     android:id="@+id/divider6"
@@ -218,22 +217,23 @@
                     android:id="@+id/divider7"
                     android:layout_width="56dp"
                     android:layout_height="2dp"
-                    android:layout_marginTop="16dp"
                     android:background="@color/secondaryColor"
+                    app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
                     app:layout_constraintStart_toStartOf="@+id/textView19"
-                    app:layout_constraintTop_toBottomOf="@+id/textView19" />
+                    app:layout_constraintTop_toTopOf="@+id/ratingBar" />
 
-                <TextView
-                    android:id="@+id/textView18"
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    style="@android:style/Widget.Material.RatingBar.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
-                    android:fontFamily="@font/roboto_medium"
-                    android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                    app:layout_constraintBottom_toBottomOf="@+id/divider7"
+                    android:layout_marginTop="32dp"
+                    android:max="5"
+                    android:numStars="5"
+                    android:rating="@{post.rating}"
                     app:layout_constraintStart_toEndOf="@+id/divider7"
-                    app:layout_constraintTop_toTopOf="@+id/divider7" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
