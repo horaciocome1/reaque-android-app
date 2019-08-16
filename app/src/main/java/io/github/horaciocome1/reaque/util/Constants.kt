@@ -51,4 +51,14 @@ object Constants {
     const val USER_ID = "USER_ID"
     const val MAIN_ACTIVITY = "MainActivity"
 
+    object SharedPreferences {
+
+        const val NAME = "SharedPreferencesPostDraft"
+        const val POST_TITLE = "SharedPreferencesPostDraftPostTitle"
+        const val POST_MESSAGE = "SharedPreferencesPostDraftPostMessage"
+        const val TOPIC_ID = "SharedPreferencesPostDraftTopicId"
+        const val TOPIC_TITLE = "SharedPreferencesPostDraftTopicTitle"
+
+    }
+
 }
