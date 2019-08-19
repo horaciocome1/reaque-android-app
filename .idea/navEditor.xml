@@ -355,6 +355,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="destination_preview_message">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="326" />
+                            <option name="y" value="1843" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="destination_read_post">
                     <value>
                       <LayoutPositions>

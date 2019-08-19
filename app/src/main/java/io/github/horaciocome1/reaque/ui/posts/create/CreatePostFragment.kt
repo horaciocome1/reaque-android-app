@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.card.MaterialCardView
 import io.github.horaciocome1.reaque.R
@@ -73,7 +74,7 @@ class CreatePostFragment : Fragment() {
             state = BottomSheetBehavior.STATE_HIDDEN
             skipCollapsed = true
         }
-        topics_recyclerview.addOnItemClickListener { _, position ->
+        topics_recyclerview?.addOnItemClickListener { _, position ->
             binding.topics?.let {
                 if (it.isNotEmpty()) {
                     selectTopicBehavior.state = BottomSheetBehavior.STATE_HIDDEN
@@ -87,14 +88,22 @@ class CreatePostFragment : Fragment() {
         select_topic_button?.setOnClickListener {
             selectTopicBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
         }
-        select_pic_button.setOnClickListener {
+        select_pic_button?.setOnClickListener {
             selectPicBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
         }
         toolbar?.setNavigationOnClickListener {
             viewModel.navigateUp(it)
             saveDraft()
         }
-        create_button?.setOnClickListener { binding.viewmodel = viewModel.create(it) }
+        create_button?.setOnClickListener {
+            binding.viewmodel = viewModel.create(it)
+        }
+        preview_button?.setOnClickListener {
+            val directions = CreatePostFragmentDirections.actionOpenPreviewMessage(
+                viewModel.post.message
+            )
+            view.findNavController().navigate(directions)
+        }
     }
 
     override fun onStart() {
@@ -108,6 +117,10 @@ class CreatePostFragment : Fragment() {
             saveDraft()
             viewModel.post.message = it
             create_button.isEnabled = viewModel.isPostReady
+            preview_button.visibility = if (it.isBlank())
+                View.GONE
+            else
+                View.VISIBLE
         })
         viewModel.topics.observe(this, Observer {
             binding.topics = it

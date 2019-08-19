@@ -86,5 +86,6 @@
     <string name="please_wait_update">Please wait while updates are uploaded . . .</string>
     <string name="please_wait_create">Please wait while your post is created . . .</string>
     <string name="update_available">Update available</string>
+    <string name="preview" translatable="false">Preview</string>
 
 </resources>

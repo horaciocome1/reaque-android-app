@@ -195,5 +195,22 @@
     <fragment
         android:id="@+id/destination_create_post"
         android:name="io.github.horaciocome1.reaque.ui.posts.create.CreatePostFragment"
-        android:label="@string/create_post" />
+        android:label="@string/create_post">
+        <action
+            android:id="@+id/action_open_preview_message"
+            app:destination="@id/destination_preview_message"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@+id/destination_create_post" />
+    </fragment>
+    <fragment
+        android:id="@+id/destination_preview_message"
+        android:name="io.github.horaciocome1.reaque.ui.posts.create.PreviewMessageFragment"
+        android:label="@string/preview">
+        <argument
+            android:name="message"
+            app:argType="string" />
+    </fragment>
 </navigation>
