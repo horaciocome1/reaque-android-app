@@ -9,6 +9,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
 import io.github.horaciocome1.reaque.data.users.User
+import io.github.horaciocome1.reaque.util.Constants
 import io.github.horaciocome1.reaque.util.map
 import io.github.horaciocome1.reaque.util.user
 import io.github.horaciocome1.reaque.util.users
@@ -44,15 +45,21 @@ class SubscriptionsService : SubscriptionsInterface {
     }
 
     private val subscriptions: MutableLiveData<List<User>> by lazy {
-        MutableLiveData<List<User>>().apply { value = mutableListOf() }
+        MutableLiveData<List<User>>().apply {
+            value = mutableListOf()
+        }
     }
 
     private val subscribers: MutableLiveData<List<User>> by lazy {
-        MutableLiveData<List<User>>().apply { value = mutableListOf() }
+        MutableLiveData<List<User>>().apply {
+            value = mutableListOf()
+        }
     }
 
-    private val amSubscribedTo: MutableLiveData<Boolean> by lazy {
-        MutableLiveData<Boolean>().apply { value = false }
+    private val amSubscribedTo: MutableLiveData<Int> by lazy {
+        MutableLiveData<Int>().apply {
+            value = Constants.States.UNDEFINED
+        }
     }
 
     private var subscriptionsOf = ""
@@ -119,13 +126,18 @@ class SubscriptionsService : SubscriptionsInterface {
         return subscribers
     }
 
-    override fun amSubscribedTo(user: User): LiveData<Boolean> {
-        amSubscribedTo.value = false
+    override fun amSubscribedTo(user: User): LiveData<Int> {
+        amSubscribedTo.value = Constants.States.UNDEFINED
         if (user.id.isNotBlank() && auth.currentUser != null)
             db.document("users/${auth.currentUser!!.uid}/subscriptions/${user.id}")
                 .addSnapshotListener { snapshot, exception ->
-                    if (exception == null && snapshot != null)
-                        amSubscribedTo.value = snapshot.exists()
+                    amSubscribedTo.value = if (exception == null && snapshot != null)
+                        if (snapshot.exists())
+                            Constants.States.TRUE
+                        else
+                            Constants.States.FALSE
+                    else
+                        Constants.States.UNDEFINED
                 }
         return amSubscribedTo
     }

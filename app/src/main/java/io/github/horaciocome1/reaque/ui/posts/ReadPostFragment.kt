@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.google.android.material.button.MaterialButton
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.databinding.FragmentReadPostBinding
+import io.github.horaciocome1.reaque.util.Constants
 import io.github.horaciocome1.reaque.util.InjectorUtils
 import kotlinx.android.synthetic.main.fragment_read_post.*
 
@@ -47,22 +47,21 @@ class ReadPostFragment : Fragment() {
             })
             viewModel.getRating(post).observe(this, Observer { rating_button?.text = it.toString() })
             viewModel.isBookmarked(post).observe(this, Observer {
-                if (it)
-                    turnVisible(unbookmark_button, bookmark_button)
-                else
-                    turnVisible(bookmark_button, unbookmark_button)
+                when (it) {
+                    Constants.States.TRUE -> {
+                        bookmark_button.visibility = View.GONE
+                        unbookmark_button.visibility = View.VISIBLE
+                    }
+                    Constants.States.FALSE -> {
+                        bookmark_button.visibility = View.VISIBLE
+                        unbookmark_button.visibility = View.GONE
+                    }
+                    else -> {
+                        bookmark_button.visibility = View.GONE
+                        unbookmark_button.visibility = View.GONE
+                    }
+                }
             })
-        }
-    }
-
-    private fun turnVisible(b1: MaterialButton, b2: MaterialButton) {
-        b1.run {
-            visibility = View.VISIBLE
-            isEnabled = true
-        }
-        b2.run {
-            visibility = View.GONE
-            isEnabled = false
         }
     }
 

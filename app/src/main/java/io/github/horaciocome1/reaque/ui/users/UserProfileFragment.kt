@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.databinding.FragmentUserProfileBinding
+import io.github.horaciocome1.reaque.util.Constants
 import io.github.horaciocome1.reaque.util.InjectorUtils
 import kotlinx.android.synthetic.main.fragment_user_profile.*
 
@@ -41,14 +42,26 @@ class UserProfileFragment : Fragment() {
                 binding.user = it
             })
             viewModel.amSubscribedTo(user).observe(this, Observer {
-                subscribe_button.visibility = visibility(!it)
-                unsubscribe_button.visibility = visibility(it)
+                when (it) {
+                    Constants.States.TRUE -> {
+                        subscribe_button.visibility = View.GONE
+                        unsubscribe_button.visibility = View.VISIBLE
+                    }
+                    Constants.States.FALSE -> {
+                        subscribe_button.visibility = View.VISIBLE
+                        unsubscribe_button.visibility = View.GONE
+                    }
+                    else -> {
+                        subscribe_button.visibility = View.GONE
+                        unsubscribe_button.visibility = View.GONE
+                    }
+                }
             })
         }
     }
 
-    private fun visibility(state: Boolean): Int {
-        return if (state)
+    private fun visibility(state: Int): Int {
+        return if (state == Constants.States.TRUE)
             View.VISIBLE
         else
             View.GONE

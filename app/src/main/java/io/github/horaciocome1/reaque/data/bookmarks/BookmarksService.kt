@@ -9,6 +9,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
 import io.github.horaciocome1.reaque.data.posts.Post
+import io.github.horaciocome1.reaque.util.Constants
 import io.github.horaciocome1.reaque.util.mapSimple
 import io.github.horaciocome1.reaque.util.posts
 
@@ -33,15 +34,21 @@ class BookmarksService : BookmarksInterface {
     }
 
     private val posts: MutableLiveData<List<Post>> by lazy {
-        MutableLiveData<List<Post>>().apply { value = mutableListOf() }
+        MutableLiveData<List<Post>>().apply {
+            value = mutableListOf()
+        }
     }
 
-    private val isBookmarked: MutableLiveData<Boolean> by lazy {
-        MutableLiveData<Boolean>().apply { value = false }
+    private val isBookmarked: MutableLiveData<Int> by lazy {
+        MutableLiveData<Int>().apply {
+            value = Constants.States.UNDEFINED
+        }
     }
 
     private val hasBookmarks: MutableLiveData<Boolean> by lazy {
-        MutableLiveData<Boolean>().apply { value = false }
+        MutableLiveData<Boolean>().apply {
+            value = false
+        }
     }
 
     override fun bookmark(post: Post, onCompleteListener: (Task<Void?>?) -> Unit) {
@@ -85,13 +92,18 @@ class BookmarksService : BookmarksInterface {
         return posts
     }
 
-    override fun isBookmarked(post: Post): LiveData<Boolean> {
-        isBookmarked.value = false
+    override fun isBookmarked(post: Post): LiveData<Int> {
+        isBookmarked.value = Constants.States.UNDEFINED
         if (post.id.isNotBlank() && auth.currentUser != null)
             db.document("users/${auth.currentUser!!.uid}/bookmarks/${post.id}")
                 .addSnapshotListener { snapshot, exception ->
-                    if (exception == null && snapshot != null)
-                        isBookmarked.value = snapshot.exists()
+                    isBookmarked.value = if (exception == null && snapshot != null)
+                        if (snapshot.exists())
+                            Constants.States.TRUE
+                        else
+                            Constants.States.FALSE
+                    else
+                        Constants.States.UNDEFINED
                 }
         return isBookmarked
     }

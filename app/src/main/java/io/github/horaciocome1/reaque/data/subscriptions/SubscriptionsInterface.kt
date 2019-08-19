@@ -14,6 +14,6 @@ interface SubscriptionsInterface {
 
     fun getSubscribers(user: User): LiveData<List<User>>
 
-    fun amSubscribedTo(user: User): LiveData<Boolean>
+    fun amSubscribedTo(user: User): LiveData<Int>
 
 }

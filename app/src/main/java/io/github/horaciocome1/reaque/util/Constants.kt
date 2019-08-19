@@ -61,4 +61,11 @@ object Constants {
 
     }
 
+    // 3 states boolean
+    object States {
+        const val TRUE = 1
+        const val FALSE = 0
+        const val UNDEFINED = -1
+    }
+
 }

@@ -41,12 +41,16 @@ class UsersViewModel(
 
     fun subscribe(view: View, user: User) {
         view.isEnabled = false
-        subscriptionsRepository.subscribe(user) { view.visibility = View.GONE }
+        subscriptionsRepository.subscribe(user) {
+            view.visibility = View.GONE
+        }
     }
 
     fun unSubscribe(view: View, user: User) {
         view.isEnabled = false
-        subscriptionsRepository.unSubscribe(user) { view.visibility = View.GONE }
+        subscriptionsRepository.unSubscribe(user) {
+            view.visibility = View.GONE
+        }
     }
 
     fun amSubscribedTo(user: User) = subscriptionsRepository.amSubscribedTo(user)
