@@ -12,7 +12,7 @@ interface BookmarksInterface {
 
     fun get(): LiveData<List<Post>>
 
-    fun isBookmarked(post: Post): LiveData<Boolean>
+    fun isBookmarked(post: Post): LiveData<Int>
 
     fun hasBookmarks(): LiveData<Boolean>
 
