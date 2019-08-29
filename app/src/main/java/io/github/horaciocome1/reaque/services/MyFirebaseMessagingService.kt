@@ -16,22 +16,21 @@ import io.github.horaciocome1.reaque.util.Constants.USER_ID
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
-    override fun onNewToken(token: String?) {
+
+    override fun onNewToken(token: String) {
         val service = UsersService()
-        token?.let { service.updateRegistrationToken(it) {} }
+        service.updateRegistrationToken(token) {}
     }
 
-    override fun onMessageReceived(remoteMessage: RemoteMessage?) {
-        remoteMessage?.let {
-            if (it.data.isNotEmpty() && it.notification != null) {
-                val userId = it.data[USER_ID]
-                val title = it.notification!!.title
-                val body = it.notification!!.body
-                val clickAction = it.notification!!.clickAction
-                if (userId != null && title != null && body != null && clickAction != null)
-                    if (userId.isNotBlank() && title.isNotBlank() && body.isNotBlank() && clickAction.isNotBlank())
-                        sendNotification(title, body, clickAction, userId)
-            }
+    override fun onMessageReceived(remoteMessage: RemoteMessage) {
+        if (remoteMessage.data.isNotEmpty() && remoteMessage.notification != null) {
+            val userId = remoteMessage.data[USER_ID]
+            val title = remoteMessage.notification!!.title
+            val body = remoteMessage.notification!!.body
+            val clickAction = remoteMessage.notification!!.clickAction
+            if (userId != null && title != null && body != null && clickAction != null)
+                if (userId.isNotBlank() && title.isNotBlank() && body.isNotBlank() && clickAction.isNotBlank())
+                    sendNotification(title, body, clickAction, userId)
         }
     }
 
