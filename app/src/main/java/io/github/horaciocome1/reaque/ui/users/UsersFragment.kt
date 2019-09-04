@@ -14,14 +14,18 @@ import kotlinx.android.synthetic.main.fragment_users.*
 
 class UsersFragment : Fragment() {
 
-    lateinit var binding: FragmentUsersBinding
+    private lateinit var binding: FragmentUsersBinding
 
     private val viewModel: UsersViewModel by lazy {
         val factory = InjectorUtils.usersViewModelFactory
         ViewModelProviders.of(this, factory)[UsersViewModel::class.java]
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentUsersBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -36,7 +40,9 @@ class UsersFragment : Fragment() {
         arguments?.let { bundle ->
             val args = UsersFragmentArgs.fromBundle(bundle)
             viewModel.get(args.parentId, args.requestId)
-                .observe(this, Observer { binding.viewmodel = viewModel.setUsers(it) })
+                .observe(this, Observer {
+                    binding.viewmodel = viewModel.setUsers(it)
+                })
         }
     }
 

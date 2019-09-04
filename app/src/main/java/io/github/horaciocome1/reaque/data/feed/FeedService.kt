@@ -21,13 +21,19 @@ class FeedService : FeedInterface {
     private var _posts = mutableListOf<Post>()
 
     private val posts: MutableLiveData<List<Post>> by lazy {
-        MutableLiveData<List<Post>>().apply { value = mutableListOf() }
+        MutableLiveData<List<Post>>().apply {
+            value = mutableListOf()
+        }
     }
 
     override fun get(): LiveData<List<Post>> {
-        if (_posts.isEmpty() && auth.currentUser != null)
-            db.collection("users/${auth.currentUser!!.uid}/feed")
-                    .orderBy("score", Query.Direction.DESCENDING)
+        auth.addAuthStateListener {
+            if (
+                _posts.isEmpty()
+                && it.currentUser != null
+            )
+                db.collection("users/${auth.currentUser!!.uid}/feed")
+                    .orderBy("timestamp", Query.Direction.DESCENDING)
                     .limit(100)
                     .get()
                     .addOnSuccessListener {
@@ -36,6 +42,7 @@ class FeedService : FeedInterface {
                             posts.value = _posts
                         }
                     }
+        }
         return posts
     }
 

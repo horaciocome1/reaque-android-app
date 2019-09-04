@@ -28,7 +28,8 @@ class PostsAdapter(private val list: List<Post>) : RecyclerView.Adapter<PostsAda
     private lateinit var binding: ItemPostBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        binding = ItemPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val inflater = LayoutInflater.from(parent.context)
+        binding = ItemPostBinding.inflate(inflater, parent, false)
         return ViewHolder(binding.root)
     }
 
@@ -40,12 +41,14 @@ class PostsAdapter(private val list: List<Post>) : RecyclerView.Adapter<PostsAda
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
-    class SuggestionsAdapter(private val list: List<Post>) : RecyclerView.Adapter<SuggestionsAdapter.ViewHolder>() {
+    class SuggestionsAdapter(private val list: List<Post>) :
+        RecyclerView.Adapter<SuggestionsAdapter.ViewHolder>() {
 
         private lateinit var binding: ItemSuggestionBinding
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            binding = ItemSuggestionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            val inflater = LayoutInflater.from(parent.context)
+            binding = ItemSuggestionBinding.inflate(inflater, parent, false)
             return ViewHolder(binding.root)
         }
 

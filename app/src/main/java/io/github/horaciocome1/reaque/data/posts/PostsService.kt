@@ -32,15 +32,21 @@ class PostsService : PostsInterface {
     }
 
     private val topicPosts: MutableLiveData<List<Post>> by lazy {
-        MutableLiveData<List<Post>>().apply { value = mutableListOf() }
+        MutableLiveData<List<Post>>().apply {
+            value = mutableListOf()
+        }
     }
 
     private val userPosts: MutableLiveData<List<Post>> by lazy {
-        MutableLiveData<List<Post>>().apply { value = mutableListOf() }
+        MutableLiveData<List<Post>>().apply {
+            value = mutableListOf()
+        }
     }
 
     private val top10Posts: MutableLiveData<List<Post>> by lazy {
-        MutableLiveData<List<Post>>().apply { value = mutableListOf() }
+        MutableLiveData<List<Post>>().apply {
+            value = mutableListOf()
+        }
     }
 
     private var postId = ""
@@ -54,12 +60,24 @@ class PostsService : PostsInterface {
             post.user = auth.currentUser!!.user
             val postRef = db.collection("posts").document()
             post.id = postRef.id
-            val postOnTopicRef = db.document("topics/${post.topic.id}/posts/${postRef.id}")
-            val postOnUserRef = db.document("users/${post.user.id}/posts/${postRef.id}")
-            val userOnTopicRef = db.document("topics/${post.topic.id}/users/${post.user.id}")
+            val postOnTopicRef = db.document(
+                "topics/${post.topic.id}" +
+                        "/posts/${postRef.id}"
+            )
+            val postOnUserRef = db.document(
+                "users/${post.user.id}" +
+                        "/posts/${postRef.id}"
+            )
+            val userOnTopicRef = db.document(
+                "topics/${post.topic.id}" +
+                        "/users/${post.user.id}"
+            )
             val topicRef = db.document("topics/${post.topic.id}")
             val userRef = db.document("users/${post.user.id}")
-            val myFeedRef = db.document("users/${post.user.id}/feed/${postRef.id}")
+            val myFeedRef = db.document(
+                "users/${post.user.id}" +
+                        "/feed/${postRef.id}"
+            )
             db.runBatch {
                 it.set(postRef, post.map)
                 it.set(postOnTopicRef, post.mapSimple)
@@ -77,13 +95,15 @@ class PostsService : PostsInterface {
     }
 
     override fun get(post: Post): LiveData<Post> {
-        if (post.id != postId && post.id.isNotBlank()) {
-            this.post.value = Post("")
-            db.document("posts/${post.id}")
-                .addSnapshotListener { snapshot, exception ->
-                    if (exception == null && snapshot != null)
-                        this.post.value = snapshot.post
-                }
+        auth.addAuthStateListener {
+            if (post.id != postId && post.id.isNotBlank()) {
+                this.post.value = Post("")
+                db.document("posts/${post.id}")
+                    .addSnapshotListener { snapshot, exception ->
+                        if (exception == null && snapshot != null)
+                            this.post.value = snapshot.post
+                    }
+            }
         }
         return this.post
     }
@@ -92,7 +112,7 @@ class PostsService : PostsInterface {
         if (user.id != userId && user.id.isNotBlank()) {
             userPosts.value = mutableListOf()
             db.collection("users/${user.id}/posts")
-                .orderBy("score", Query.Direction.DESCENDING)
+                .orderBy("timestamp", Query.Direction.DESCENDING)
                 .limit(100)
                 .get()
                 .addOnSuccessListener {
@@ -108,7 +128,7 @@ class PostsService : PostsInterface {
         if (topic.id != topicId && topic.id.isNotBlank()) {
             topicPosts.value = mutableListOf()
             db.collection("topics/${topic.id}/posts")
-                .orderBy("score", Query.Direction.DESCENDING)
+                .orderBy("timestamp", Query.Direction.DESCENDING)
                 .limit(100)
                 .get()
                 .addOnSuccessListener {

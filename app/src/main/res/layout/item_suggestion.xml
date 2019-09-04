@@ -13,8 +13,8 @@
     </data>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="96dp"
-        android:layout_height="96dp"
+        android:layout_width="112dp"
+        android:layout_height="112dp"
         android:layout_margin="8dp"
         app:cardCornerRadius="@dimen/default_corner_radius"
         app:cardElevation="@dimen/default_card_elevation">

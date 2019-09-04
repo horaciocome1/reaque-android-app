@@ -15,6 +15,8 @@
 
 package io.github.horaciocome1.reaque.ui.more
 
+import android.content.Intent
+import android.net.Uri
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -49,10 +51,6 @@ class MoreViewModel(
             return _user
         }
 
-    init {
-        _user.value
-    }
-
     val hasBookmarks = bookmarksRepository.hasBookmarks()
 
     val isUpdateAvailable = configurationsRepository.isUpdateAvailable()
@@ -61,31 +59,53 @@ class MoreViewModel(
 
     fun openUpdateUser(view: View) {
         auth.currentUser?.let {
-            val directions = MoreFragmentDirections.actionOpenUpdateUserFromMore(it.uid)
-            view.findNavController().navigate(directions)
+            val directions = MoreFragmentDirections
+                .actionOpenUpdateUserFromMore(it.uid)
+            view.findNavController()
+                .navigate(directions)
         }
     }
 
     fun openCreatePost(view: View) {
         if (auth.currentUser != null) {
-            val directions = MoreFragmentDirections.actionOpenCreatePostFromMore()
-            view.findNavController().navigate(directions)
+            val directions = MoreFragmentDirections
+                .actionOpenCreatePostFromMore()
+            view.findNavController()
+                .navigate(directions)
         }
     }
 
     fun openUserProfile(view: View) {
         auth.currentUser?.let {
-            val directions = MoreFragmentDirections.actionOpenUserProfileFromMore(it.uid)
-            view.findNavController().navigate(directions)
+            val directions = MoreFragmentDirections
+                .actionOpenUserProfileFromMore(it.uid)
+            view.findNavController()
+                .navigate(directions)
         }
     }
 
     fun openBookmarks(view: View) {
         auth.currentUser?.let {
-            val directions = MoreFragmentDirections.actionOpenPostsFromMore(
-                it.uid, Constants.BOOKMARKS_REQUEST
-            )
-            view.findNavController().navigate(directions)
+            val directions = MoreFragmentDirections
+                .actionOpenPostsFromMore(it.uid, Constants.BOOKMARKS_REQUEST)
+            view.findNavController()
+                .navigate(directions)
+        }
+    }
+
+    fun openUrl(fragment: MoreFragment, url: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        fragment.startActivity(intent)
+    }
+
+    fun sendEmail(fragment: MoreFragment, email: String, onFailureListener: (Exception) -> Unit) {
+        try {
+            val mailto = "mailto:$email"
+            val emailIntent = Intent(Intent.ACTION_SENDTO)
+            emailIntent.data = Uri.parse(mailto)
+            fragment.startActivity(emailIntent)
+        } catch (exception: Exception) {
+            onFailureListener(exception)
         }
     }
 

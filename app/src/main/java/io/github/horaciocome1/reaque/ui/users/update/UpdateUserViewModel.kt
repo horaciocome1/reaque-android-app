@@ -23,9 +23,17 @@ class UpdateUserViewModel(private val repository: UsersRepository) : ObservableV
     val isUserReady: Boolean
         get() {
             user.run {
-                return bio.isNotBlank() && address.isNotBlank() && bio != "null" && address != "null"
+                return bio.isNotBlank()
+                        && address.isNotBlank()
+                        && bio != "null"
+                        && address != "null"
             }
         }
+
+    val navigateUp: (View) -> Unit = {
+        it.findNavController()
+            .navigateUp()
+    }
 
     fun get(user: User) = repository.get(user)
 
@@ -36,7 +44,5 @@ class UpdateUserViewModel(private val repository: UsersRepository) : ObservableV
         }
         return this
     }
-
-    fun navigateUp(view: View) = view.findNavController().navigateUp()
 
 }

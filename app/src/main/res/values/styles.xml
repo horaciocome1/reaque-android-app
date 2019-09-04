@@ -25,8 +25,9 @@
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@color/primaryTextColor</item>
         <item name="materialCardViewStyle">@style/AppTheme.CardView</item>
-        <item name="colorControlNormal">@color/primaryTextColor</item>
+        <item name="colorControlNormal">@color/secondaryDarkColor</item>
         <item name="colorError">@color/colorError</item>
+        <item name="android:textColorSecondary">@color/secondaryDarkColor</item>
     </style>
 
     <style name="AppTheme.Splash" parent="Theme.MaterialComponents.Light.NoActionBar">

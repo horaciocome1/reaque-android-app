@@ -2,16 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-        <import type="android.view.View" />
-
-        <variable
-            name="viewmodel"
-            type="io.github.horaciocome1.reaque.ui.users.update.UpdateUserViewModel" />
-
-    </data>
-
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -54,6 +44,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="32dp"
+                        app:resourceId="@{R.drawable.ic_undraw_ideas_s70l}" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/bio_inputlayout"
@@ -162,5 +158,17 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="io.github.horaciocome1.reaque.R" />
+
+        <variable
+            name="viewmodel"
+            type="io.github.horaciocome1.reaque.ui.users.update.UpdateUserViewModel" />
+
+    </data>
 
 </layout>

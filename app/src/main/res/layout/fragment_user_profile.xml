@@ -12,7 +12,7 @@
 
         <variable
             name="viewmodel"
-            type="io.github.horaciocome1.reaque.ui.users.UsersViewModel" />
+            type="io.github.horaciocome1.reaque.ui.users.profile.UserProfileViewModel" />
 
     </data>
 

@@ -22,7 +22,11 @@ class ExploreFragment : Fragment() {
         ViewModelProviders.of(this, factory)[ExploreViewModel::class.java]
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentExploreBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -36,8 +40,14 @@ class ExploreFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        viewModel.notEmptyTopics.observe(this, Observer { binding.viewmodel = viewModel.setTopics(it) })
-        viewModel.top10.observe(this, Observer { binding.viewmodel = viewModel.setPosts(it) })
+        viewModel.notEmptyTopics
+            .observe(this, Observer {
+                binding.viewmodel = viewModel.setTopics(it)
+            })
+        viewModel.top10
+            .observe(this, Observer {
+                binding.viewmodel = viewModel.setPosts(it)
+            })
     }
 
 }

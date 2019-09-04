@@ -21,15 +21,29 @@ class RatingsService : RatingsInterface {
     }
 
     private val rating: MutableLiveData<Int> by lazy {
-        MutableLiveData<Int>().apply { value = 0 }
+        MutableLiveData<Int>().apply {
+            value = 0
+        }
     }
 
     override fun set(post: Post, value: Int, onCompleteListener: (Task<Void?>?) -> Unit) {
-        if (post.id.isNotBlank() && value >= 1 && value <= 5 && auth.currentUser != null) {
+        if (
+            post.id.isNotBlank()
+            && value >= 1
+            && value <= 5
+            && auth.currentUser != null
+        ) {
             val data = auth.currentUser!!.user.map
                 .plus("value" to value)
-                .plus("post" to mapOf("id" to post.id))
-            db.document("posts/${post.id}/ratings/${auth.currentUser!!.uid}")
+                .plus(
+                    "post" to mapOf(
+                        "id" to post.id
+                    )
+                )
+            db.document(
+                "posts/${post.id}" +
+                        "/ratings/${auth.currentUser!!.uid}"
+            )
                 .set(data, SetOptions.merge())
                 .addOnCompleteListener(onCompleteListener)
         }
@@ -38,10 +52,19 @@ class RatingsService : RatingsInterface {
     override fun get(post: Post): LiveData<Int> {
         rating.value = 0
         if (post.id.isNotBlank() && auth.currentUser != null)
-            db.document("posts/${post.id}/ratings/${auth.currentUser!!.uid}")
+            db.document(
+                "posts/${post.id}" +
+                        "/ratings/${auth.currentUser!!.uid}"
+            )
                 .addSnapshotListener { snapshot, exception ->
-                    if (exception == null && snapshot != null && snapshot.contains("value"))
-                        rating.value = snapshot["value"].toString().toInt()
+                    if (
+                        exception == null
+                        && snapshot != null
+                        && snapshot.contains("value")
+                    )
+                        rating.value = snapshot["value"]
+                            .toString()
+                            .toInt()
                 }
         return rating
     }

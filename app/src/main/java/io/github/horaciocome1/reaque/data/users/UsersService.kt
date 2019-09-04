@@ -23,11 +23,15 @@ class UsersService : UsersInterface {
     }
 
     private val user: MutableLiveData<User> by lazy {
-        MutableLiveData<User>().apply { value = User("") }
+        MutableLiveData<User>().apply {
+            value = User("")
+        }
     }
 
     private val users: MutableLiveData<List<User>> by lazy {
-        MutableLiveData<List<User>>().apply { value = mutableListOf() }
+        MutableLiveData<List<User>>().apply {
+            value = mutableListOf()
+        }
     }
 
     private var topicId = ""
@@ -42,20 +46,28 @@ class UsersService : UsersInterface {
     }
 
     override fun get(user: User): LiveData<User> {
-        if (user.id != userId && user.id.isNotBlank()) {
-            this.user.value = User("")
-            db.document("users/${user.id}")
-                .addSnapshotListener { snapshot, exception ->
-                    if (exception == null && snapshot != null)
-                        this.user.value = snapshot.user
-                }
-            userId = user.id
+        auth.addAuthStateListener {
+            if (
+                user.id != userId
+                && user.id.isNotBlank()
+            ) {
+                this.user.value = User("")
+                db.document("users/${user.id}")
+                    .addSnapshotListener { snapshot, exception ->
+                        if (exception == null && snapshot != null)
+                            this.user.value = snapshot.user
+                    }
+                userId = user.id
+            }
         }
         return this.user
     }
 
     override fun get(topic: Topic): LiveData<List<User>> {
-        if (topic.id != topicId && topic.id.isNotBlank())
+        if (
+            topic.id != topicId
+            && topic.id.isNotBlank()
+        )
             db.collection("topics/${topic.id}/users")
                 .orderBy("score", Query.Direction.DESCENDING)
                 .limit(100)
@@ -68,7 +80,10 @@ class UsersService : UsersInterface {
     }
 
     fun updateRegistrationToken(token: String, onCompleteListener: (Task<Void?>?) -> Unit) {
-        if (token.isNotBlank() && auth.currentUser != null) {
+        if (
+            token.isNotBlank()
+            && auth.currentUser != null
+        ) {
             val data = mapOf("registrationToken" to token)
             db.document("users/${auth.currentUser!!.uid}")
                 .set(data, SetOptions.merge())

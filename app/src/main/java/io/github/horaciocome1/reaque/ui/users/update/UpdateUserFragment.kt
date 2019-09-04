@@ -15,14 +15,18 @@ import kotlinx.android.synthetic.main.fragment_update_user.*
 
 class UpdateUserFragment : Fragment() {
 
-    lateinit var binding: FragmentUpdateUserBinding
+    private lateinit var binding: FragmentUpdateUserBinding
 
     private val viewModel: UpdateUserViewModel by lazy {
         val factory = InjectorUtils.updateUserViewModelFactory
         ViewModelProviders.of(this, factory)[UpdateUserViewModel::class.java]
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentUpdateUserBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -34,9 +38,7 @@ class UpdateUserFragment : Fragment() {
             bio_inputlayout.editText?.onFocusChangeListener = it
             address_inputlayout.editText?.onFocusChangeListener = it
         }
-        toolbar.setNavigationOnClickListener {
-            viewModel.navigateUp(it)
-        }
+        toolbar.setNavigationOnClickListener(viewModel.navigateUp)
         update_button.setOnClickListener {
             binding.viewmodel = viewModel.update(it)
         }
@@ -48,20 +50,23 @@ class UpdateUserFragment : Fragment() {
             val user = User(
                 UpdateUserFragmentArgs.fromBundle(bundle).userId
             )
-            viewModel.get(user).observe(this, Observer {
-                viewModel.bio.value = it.bio
-                viewModel.address.value = it.address
-                binding.viewmodel = viewModel
-            })
+            viewModel.get(user)
+                .observe(this, Observer {
+                    viewModel.bio.value = it.bio
+                    viewModel.address.value = it.address
+                    binding.viewmodel = viewModel
+                })
         }
-        viewModel.bio.observe(this, Observer {
-            viewModel.user.bio = it
-            update_button.isEnabled = viewModel.isUserReady
-        })
-        viewModel.address.observe(this, Observer {
-            viewModel.user.address = it
-            update_button.isEnabled = viewModel.isUserReady
-        })
+        viewModel.bio
+            .observe(this, Observer {
+                viewModel.user.bio = it
+                update_button.isEnabled = viewModel.isUserReady
+            })
+        viewModel.address
+            .observe(this, Observer {
+                viewModel.user.address = it
+                update_button.isEnabled = viewModel.isUserReady
+            })
     }
 
 }

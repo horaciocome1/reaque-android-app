@@ -6,14 +6,18 @@ import androidx.navigation.findNavController
 import io.github.horaciocome1.reaque.data.feed.FeedRepository
 import io.github.horaciocome1.reaque.data.posts.Post
 
-class FeedViewModel(private val repository: FeedRepository) : ViewModel() {
+class FeedViewModel(repository: FeedRepository) : ViewModel() {
 
     var posts: List<Post> = mutableListOf()
 
+    val feed = repository.get()
+
     val onItemClickListener: (View, Int) -> Unit = { view, position ->
         if (posts.isNotEmpty()) {
-            val directions = FeedFragmentDirections.actionOpenReadPostFromFeed(posts[position].id)
-            view.findNavController().navigate(directions)
+            val directions = FeedFragmentDirections
+                .actionOpenReadPostFromFeed(posts[position].id)
+            view.findNavController()
+                .navigate(directions)
         }
     }
 
@@ -21,7 +25,5 @@ class FeedViewModel(private val repository: FeedRepository) : ViewModel() {
         this.posts = posts
         return this
     }
-
-    fun get() = repository.get()
 
 }

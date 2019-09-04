@@ -10,7 +10,8 @@
  *    Unless required by applicable law or agreed to in writing, software
  *    distributed under the License is distributed on an "AS IS" BASIS,
  *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and limitations under the License.
+ *    See the License for the specific language governing permissions and limitations
+ *    under the License.
  */
 
 package io.github.horaciocome1.reaque.util
@@ -32,7 +33,8 @@ val Post.map: Map<String, Any>
         "shares" to 0,
         "score" to 0,
         "topic" to mapOf(
-            "id" to topic.id
+            "id" to topic.id,
+            "title" to topic.title
         ),
         "user" to mapOf(
             "id" to user.id,
@@ -48,7 +50,8 @@ val Post.mapSimple: Map<String, Any>
         "pic" to pic,
         "timestamp" to timestamp,
         "topic" to mapOf(
-            "id" to topic.id
+            "id" to topic.id,
+            "title" to topic.title
         ),
         "user" to mapOf(
             "id" to user.id,

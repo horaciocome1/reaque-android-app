@@ -24,8 +24,14 @@ class ReadingsService : ReadingsInterface {
     }
 
     override fun read(post: Post, onCompleteListener: (Task<Void?>?) -> Unit) {
-        if (post.id.isNotBlank() && auth.currentUser != null) {
-            val readingRef = db.document("users/${auth.currentUser!!.uid}/readings/${post.id}")
+        if (
+            post.id.isNotBlank()
+            && auth.currentUser != null
+        ) {
+            val readingRef = db.document(
+                "users/${auth.currentUser!!.uid}" +
+                        "/readings/${post.id}"
+            )
             val postRef = db.document("posts/${post.id}")
             db.runBatch {
                 it.set(readingRef, post.mapSimple)

@@ -16,26 +16,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-        <import type="io.github.horaciocome1.reaque.util.Constants" />
-
-        <import type="java.util.List" />
-
-        <import type="io.github.horaciocome1.reaque.data.topics.Topic" />
-
-        <import type="android.view.View" />
-
-        <variable
-            name="viewmodel"
-            type="io.github.horaciocome1.reaque.ui.posts.create.CreatePostViewModel" />
-
-        <variable
-            name="topics"
-            type="List&lt;Topic&gt;" />
-
-    </data>
-
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -77,13 +57,30 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
                     android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/cover_imageview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        app:uri="@{viewmodel.imageUri}" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/holder_imageview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:resourceId="@{R.drawable.ic_undraw_camera_mg5h}" />
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/title_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginRight="16dp"
                         android:background="@android:color/transparent"
                         android:hint="@string/title"
                         android:lineSpacingExtra="16sp"
@@ -95,6 +92,10 @@
                         android:id="@+id/message_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginRight="16dp"
                         android:background="@android:color/transparent"
                         android:hint="@string/message"
                         android:lineSpacingExtra="16sp"
@@ -127,7 +128,7 @@
                         android:layout_marginRight="16dp"
                         android:enabled="false"
                         android:padding="16dp"
-                        android:text="@string/post"
+                        android:text="@string/create_post"
                         app:cornerRadius="16dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" />
@@ -142,7 +143,6 @@
                         android:padding="16dp"
                         app:cornerRadius="16dp"
                         app:icon="@drawable/outline_subject_18"
-                        app:iconTint="?colorControlNormal"
                         app:layout_constraintBottom_toBottomOf="@+id/create_button"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/create_button" />
@@ -155,27 +155,9 @@
                         android:padding="16dp"
                         app:cornerRadius="16dp"
                         app:icon="@drawable/outline_add_photo_alternate_18"
-                        app:iconTint="?colorControlNormal"
                         app:layout_constraintBottom_toBottomOf="@+id/select_topic_button"
                         app:layout_constraintStart_toEndOf="@+id/select_topic_button"
                         app:layout_constraintTop_toTopOf="@+id/select_topic_button" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/preview_button"
-                        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-                        android:layout_width="48dp"
-                        android:layout_height="0dp"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginLeft="32dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp"
-                        app:icon="@drawable/outline_remove_red_eye_18"
-                        app:iconTint="?colorControlNormal"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/create_button"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toEndOf="@+id/select_pic_button"
-                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -227,48 +209,6 @@
 
         </LinearLayout>
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/select_pic_bottomsheet"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:behavior_hideable="true"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="0dp"
-            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
-
-            <androidx.core.widget.NestedScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="none">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/background_bottomsheet_stroke"
-                    android:orientation="vertical">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/imageview"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:uri="@{viewmodel.imageUri}"
-                        app:type="@{Constants.DEFAULT}"/>
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/select_pic_from_gallery_button"
-                        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="16dp"
-                        android:text="@string/gallery"
-                        app:icon="@drawable/outline_collections_18" />
-
-                </LinearLayout>
-
-            </androidx.core.widget.NestedScrollView>
-
-        </com.google.android.material.card.MaterialCardView>
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -305,5 +245,27 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <data>
+
+        <import type="io.github.horaciocome1.reaque.util.Constants" />
+
+        <import type="java.util.List" />
+
+        <import type="io.github.horaciocome1.reaque.data.topics.Topic" />
+
+        <import type="android.view.View" />
+
+        <import type="io.github.horaciocome1.reaque.R" />
+
+        <variable
+            name="viewmodel"
+            type="io.github.horaciocome1.reaque.ui.posts.create.CreatePostViewModel" />
+
+        <variable
+            name="topics"
+            type="List&lt;Topic&gt;" />
+
+    </data>
 
 </layout>

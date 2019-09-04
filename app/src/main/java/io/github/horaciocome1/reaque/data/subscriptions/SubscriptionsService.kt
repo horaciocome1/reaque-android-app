@@ -67,9 +67,18 @@ class SubscriptionsService : SubscriptionsInterface {
     private var subscribersOf = ""
 
     override fun subscribe(user: User, onCompleteListener: (Task<Void?>?) -> Unit) {
-        if (user.id.isNotBlank() && auth.currentUser != null) {
-            val subscriptionRef = db.document("users/${auth.currentUser!!.uid}/subscriptions/${user.id}")
-            val subscriberRef = db.document("users/${user.id}/subscribers/${auth.currentUser!!.uid}")
+        if (
+            user.id.isNotBlank()
+            && auth.currentUser != null
+        ) {
+            val subscriptionRef = db.document(
+                "users/${auth.currentUser!!.uid}" +
+                        "/subscriptions/${user.id}"
+            )
+            val subscriberRef = db.document(
+                "users/${user.id}" +
+                        "/subscribers/${auth.currentUser!!.uid}"
+            )
             val myRef = db.document("users/${auth.currentUser!!.uid}")
             val hisRef = db.document("users/${user.id}")
             db.runBatch {
@@ -82,9 +91,18 @@ class SubscriptionsService : SubscriptionsInterface {
     }
 
     override fun unSubscribe(user: User, onCompleteListener: (Task<Void?>?) -> Unit) {
-        if (user.id.isNotBlank() && auth.currentUser != null) {
-            val subscriptionRef = db.document("users/${auth.currentUser!!.uid}/subscriptions/${user.id}")
-            val subscriberRef = db.document("users/${user.id}/subscribers/${auth.currentUser!!.uid}")
+        if (
+            user.id.isNotBlank()
+            && auth.currentUser != null
+        ) {
+            val subscriptionRef = db.document(
+                "users/${auth.currentUser!!.uid}" +
+                        "/subscriptions/${user.id}"
+            )
+            val subscriberRef = db.document(
+                "users/${user.id}" +
+                        "/subscribers/${auth.currentUser!!.uid}"
+            )
             val myRef = db.document("users/${auth.currentUser!!.uid}")
             val hisRef = db.document("users/${user.id}")
             db.runBatch {
@@ -97,7 +115,10 @@ class SubscriptionsService : SubscriptionsInterface {
     }
 
     override fun getSubscriptions(user: User): LiveData<List<User>> {
-        if (user.id != subscriptionsOf && user.id.isNotBlank()) {
+        if (
+            user.id != subscriptionsOf
+            && user.id.isNotBlank()
+        ) {
             db.collection("users/${user.id}/subscriptions")
                 .orderBy("score", Query.Direction.DESCENDING)
                 .limit(100)
@@ -112,7 +133,10 @@ class SubscriptionsService : SubscriptionsInterface {
     }
 
     override fun getSubscribers(user: User): LiveData<List<User>> {
-        if (user.id != subscribersOf && user.id.isNotBlank()) {
+        if (
+            user.id != subscribersOf
+            && user.id.isNotBlank()
+        ) {
             db.collection("users/${user.id}/subscribers")
                 .orderBy("score", Query.Direction.DESCENDING)
                 .limit(100)
@@ -128,10 +152,19 @@ class SubscriptionsService : SubscriptionsInterface {
 
     override fun amSubscribedTo(user: User): LiveData<Int> {
         amSubscribedTo.value = Constants.States.UNDEFINED
-        if (user.id.isNotBlank() && auth.currentUser != null)
-            db.document("users/${auth.currentUser!!.uid}/subscriptions/${user.id}")
+        if (
+            user.id.isNotBlank()
+            && auth.currentUser != null
+        )
+            db.document(
+                "users/${auth.currentUser!!.uid}" +
+                        "/subscriptions/${user.id}"
+            )
                 .addSnapshotListener { snapshot, exception ->
-                    amSubscribedTo.value = if (exception == null && snapshot != null)
+                    amSubscribedTo.value = if (
+                        exception == null
+                        && snapshot != null
+                    )
                         if (snapshot.exists())
                             Constants.States.TRUE
                         else

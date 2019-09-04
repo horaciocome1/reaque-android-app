@@ -36,8 +36,8 @@ android {
         applicationId "io.github.horaciocome1.reaque"
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 16
-        versionName "1.4.2-rc-35"
+        versionCode 17
+        versionName "1.5.0-rc-10"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
     }
@@ -51,7 +51,7 @@ android {
     dataBinding {
         enabled = true
     }
-    buildToolsVersion = '29.0.0'
+    buildToolsVersion = '29.0.2'
 }
 
 dependencies {
@@ -73,7 +73,6 @@ dependencies {
     implementation 'com.github.horaciocome1:simple-recyclerview-touch-listener:0.2.2'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     implementation 'jp.wasabeef:glide-transformations:4.0.1'
-    implementation 'io.noties.markwon:core:4.1.0'
 
     // navigation
     implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"

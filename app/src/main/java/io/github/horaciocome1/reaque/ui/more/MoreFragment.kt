@@ -15,8 +15,6 @@
 
 package io.github.horaciocome1.reaque.ui.more
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -40,7 +38,11 @@ class MoreFragment : Fragment() {
         ViewModelProviders.of(this, factory)[MoreViewModel::class.java]
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentMoreBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -50,33 +52,25 @@ class MoreFragment : Fragment() {
         binding.viewmodel = viewModel
         licenses_textview.setOnClickListener {
             val url = getString(R.string.url_licence)
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-            startActivity(intent)
+            viewModel.openUrl(this, url)
         }
         about_textview.setOnClickListener {
             val url = getString(R.string.url_about)
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-            startActivity(intent)
+            viewModel.openUrl(this, url)
         }
         privacy_policy_textview.setOnClickListener {
             val url = getString(R.string.url_privacy_policy)
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-            startActivity(intent)
+            viewModel.openUrl(this, url)
         }
         terms_and_conditions_textview.setOnClickListener {
             val url = getString(R.string.url_terms_and_conditions)
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-            startActivity(intent)
+            viewModel.openUrl(this, url)
         }
-        feedback_textview.setOnClickListener {
+        feedback_textview.setOnClickListener { textView ->
             val email = getString(R.string.email_developer)
-            try {
-                val mailto = "mailto:$email"
-                val emailIntent = Intent(Intent.ACTION_SENDTO)
-                emailIntent.data = Uri.parse(mailto)
-                startActivity(emailIntent)
-            } catch (exception: Exception) {
-                Toast.makeText(it.context, R.string.email_app_not_found, Toast.LENGTH_LONG)
+            viewModel.sendEmail(this, email) {
+                val message = R.string.email_app_not_found
+                Toast.makeText(textView.context, message, Toast.LENGTH_LONG)
                     .show()
             }
         }
@@ -87,8 +81,7 @@ class MoreFragment : Fragment() {
         }
         update_textview.setOnClickListener {
             val url = getString(R.string.url_update)
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-            startActivity(intent)
+            viewModel.openUrl(this, url)
         }
     }
 
