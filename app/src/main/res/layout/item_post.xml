@@ -68,7 +68,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                app:layout_constraintBottom_toTopOf="@id/textView5"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView6"
@@ -83,32 +83,11 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="16dp"
-                app:layout_constraintBottom_toBottomOf="@id/imageView"
-                app:layout_constraintTop_toBottomOf="@id/imageView"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:type="@{Constants.CIRCLE}"
                 android:contentDescription="@string/content_description_user_profile_image"
                 app:url="@{post.user.pic}"/>
-
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:background="@color/secondaryColor"
-                android:paddingStart="84dp"
-                android:paddingLeft="84dp"
-                android:paddingTop="8dp"
-                android:paddingEnd="84dp"
-                android:paddingRight="84dp"
-                android:paddingBottom="8dp"
-                android:text="@{post.topic.title}"
-                android:textAlignment="textEnd"
-                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                android:textColor="@color/secondaryTextColor"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/textView6"

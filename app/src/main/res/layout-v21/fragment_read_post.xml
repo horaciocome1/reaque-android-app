@@ -161,7 +161,7 @@
                     android:layout_marginEnd="32dp"
                     android:layout_marginRight="32dp"
                     android:background="@drawable/background_all_corners_rounded_secondary"
-                    android:elevation="4dp"
+                    android:elevation="@dimen/default_card_elevation"
                     android:paddingStart="16dp"
                     android:paddingLeft="16dp"
                     android:paddingTop="4dp"
@@ -201,7 +201,7 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="56dp"
                     android:background="@color/secondaryColor"
-                    android:elevation="4dp"
+                    android:elevation="@dimen/default_card_elevation"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
@@ -210,7 +210,7 @@
                     android:layout_width="56dp"
                     android:layout_height="2dp"
                     android:background="@color/secondaryColor"
-                    android:elevation="4dp"
+                    android:elevation="@dimen/default_card_elevation"
                     app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
                     app:layout_constraintStart_toStartOf="@+id/textView19"
                     app:layout_constraintTop_toTopOf="@+id/ratingBar" />

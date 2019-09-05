@@ -24,7 +24,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.Navigation
@@ -34,7 +33,6 @@ import com.google.android.gms.common.GoogleApiAvailability
 import com.google.firebase.auth.FirebaseAuth
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.users.User
-import io.github.horaciocome1.reaque.databinding.ActivityMainBinding
 import io.github.horaciocome1.reaque.util.Constants.USER_ID
 import io.github.horaciocome1.reaque.util.handleDynamicLinks
 import kotlinx.android.synthetic.main.activity_main.*
@@ -54,12 +52,9 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
             return resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
         }
 
-    private lateinit var binding: ActivityMainBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setContentView(R.layout.activity_main)
         checkGoogleApiAvailability()
         setLightStatusBar()

@@ -6,15 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.posts.Post
-import io.github.horaciocome1.reaque.databinding.FragmentSetRatingBinding
 import io.github.horaciocome1.reaque.util.InjectorUtils
 import kotlinx.android.synthetic.main.fragment_set_rating.*
 import kotlin.math.roundToInt
 
 class SetRatingFragment : Fragment() {
-
-    private lateinit var binding: FragmentSetRatingBinding
 
     private val viewModel: ReadPostViewModel by lazy {
         val factory = InjectorUtils.readPostViewModelFactory
@@ -32,8 +30,7 @@ class SetRatingFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentSetRatingBinding.inflate(inflater, container, false)
-        return binding.root
+        return inflater.inflate(R.layout.fragment_set_rating, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

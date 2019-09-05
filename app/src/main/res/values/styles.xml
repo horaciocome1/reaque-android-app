@@ -49,8 +49,4 @@
         <item name="cardBackgroundColor">@color/primaryLightColor</item>
     </style>
 
-    <style name="AppTheme.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
-        <item name="fontFamily">@font/roboto_medium</item>
-    </style>
-
 </resources>

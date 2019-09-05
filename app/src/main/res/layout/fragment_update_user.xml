@@ -45,12 +45,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="32dp"
-                        app:resourceId="@{R.drawable.ic_undraw_ideas_s70l}" />
-
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/bio_inputlayout"
                         android:layout_width="match_parent"
