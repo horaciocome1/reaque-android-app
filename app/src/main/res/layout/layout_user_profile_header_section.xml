@@ -19,6 +19,28 @@
             app:type="@{Constants.BLUR}"
             app:url="@{user.pic}" />
 
+        <View
+            android:id="@+id/divider3"
+            android:layout_width="0dp"
+            android:layout_height="16dp"
+            android:background="@drawable/background_bottomsheet"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView7"
+            app:layout_constraintEnd_toEndOf="@+id/imageView7"
+            app:layout_constraintStart_toStartOf="@+id/imageView7" />
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_marginBottom="8dp"
+            android:contentDescription="@string/content_description_user_profile_image"
+            app:layout_constraintBottom_toTopOf="@+id/divider3"
+            app:layout_constraintEnd_toEndOf="@+id/imageView7"
+            app:layout_constraintStart_toStartOf="@+id/imageView7"
+            app:layout_constraintTop_toTopOf="@+id/divider3"
+            app:type="@{Constants.CIRCLE}"
+            app:url="@{user.pic}" />
+
         <TextView
             android:id="@+id/textView8"
             android:layout_width="0dp"
@@ -37,19 +59,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
-        <ImageView
-            android:id="@+id/imageView8"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            android:layout_marginBottom="8dp"
-            android:contentDescription="@string/content_description_user_profile_image"
-            app:layout_constraintBottom_toTopOf="@+id/divider3"
-            app:layout_constraintEnd_toEndOf="@+id/imageView7"
-            app:layout_constraintStart_toStartOf="@+id/imageView7"
-            app:layout_constraintTop_toTopOf="@+id/divider3"
-            app:type="@{Constants.CIRCLE}"
-            app:url="@{user.pic}" />
-
         <TextView
             android:id="@+id/textView7"
             android:layout_width="0dp"
@@ -66,15 +75,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView8" />
-
-        <View
-            android:id="@+id/divider3"
-            android:layout_width="0dp"
-            android:layout_height="16dp"
-            android:background="@drawable/background_bottomsheet"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView7"
-            app:layout_constraintEnd_toEndOf="@+id/imageView7"
-            app:layout_constraintStart_toStartOf="@+id/imageView7" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
