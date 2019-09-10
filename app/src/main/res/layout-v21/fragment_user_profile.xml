@@ -2,18 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:bind="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="user"
-            type="io.github.horaciocome1.reaque.data.users.User" />
-
-        <variable
-            name="viewmodel"
-            type="io.github.horaciocome1.reaque.ui.users.profile.UserProfileViewModel" />
-
-    </data>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,7 +24,8 @@
                 android:layout_height="1dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
-                android:background="@color/secondaryColor" />
+                android:background="@color/secondaryColor"
+                android:elevation="@dimen/default_card_elevation" />
 
             <include
                 android:id="@+id/details_layout"
@@ -48,9 +37,10 @@
                 android:id="@+id/divider2"
                 android:layout_width="32dp"
                 android:layout_height="1dp"
+                android:layout_gravity="center"
                 android:layout_marginTop="16dp"
                 android:background="@color/secondaryColor"
-                android:layout_gravity="center" />
+                android:elevation="@dimen/default_card_elevation" />
 
             <include
                 layout="@layout/layout_user_profile_actions_section"
@@ -60,5 +50,17 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <data>
+
+        <variable
+            name="user"
+            type="io.github.horaciocome1.reaque.data.users.User" />
+
+        <variable
+            name="viewmodel"
+            type="io.github.horaciocome1.reaque.ui.users.profile.UserProfileViewModel" />
+
+    </data>
 
 </layout>
