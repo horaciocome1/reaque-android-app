@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/select_topics_bottomsheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_bottomsheet_stroke"
+        android:orientation="vertical"
+        app:behavior_hideable="true"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <TextView
+            android:id="@+id/selected_topic_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="56dp"
+            android:layout_marginLeft="56dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="56dp"
+            android:layout_marginRight="56dp"
+            android:layout_marginBottom="32dp"
+            android:text="@{viewmodel.post.topic.title}"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:textColor="@color/secondaryColor" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_stroke_width"
+            android:background="@color/default_stroke_color" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="16dp"
+            app:srcCompat="@drawable/outline_drag_handle_24" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/topics_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:columns="@{4}"
+            app:host="@{Constants.CREATE_POST_FRAGMENT}"
+            app:list="@{topics}"
+            app:type="@{Constants.LISTING_TOPICS}" />
+
+    </LinearLayout>
+
+    <data>
+
+        <import type="io.github.horaciocome1.reaque.util.Constants" />
+
+        <import type="java.util.List" />
+
+        <import type="io.github.horaciocome1.reaque.data.topics.Topic" />
+
+        <variable
+            name="viewmodel"
+            type="io.github.horaciocome1.reaque.ui.posts.create.CreatePostViewModel" />
+
+        <variable
+            name="topics"
+            type="List&lt;Topic&gt;" />
+
+    </data>
+
+</layout>

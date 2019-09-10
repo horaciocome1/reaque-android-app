@@ -4,8 +4,6 @@
 
     <data>
 
-        <import type="io.github.horaciocome1.reaque.util.Constants" />
-
         <variable
             name="post"
             type="io.github.horaciocome1.reaque.data.posts.Post" />
@@ -72,7 +70,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView6"
-                app:type="@{Constants.DEFAULT}"
                 android:contentDescription="@string/content_description_post_cover_image"
                 app:url="@{post.pic}" />
 
@@ -104,7 +101,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

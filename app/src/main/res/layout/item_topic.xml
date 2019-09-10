@@ -4,8 +4,6 @@
 
     <data>
 
-        <import type="io.github.horaciocome1.reaque.util.Constants" />
-
         <variable
             name="topic"
             type="io.github.horaciocome1.reaque.data.topics.Topic" />
@@ -29,7 +27,6 @@
                 android:id="@+id/imageView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:type="@{Constants.DEFAULT}"
                 style="@style/AppTheme.CompleteClickableEffect"
                 android:contentDescription="@string/content_description_topic_cover_image"
                 app:url="@{topic.pic}" />

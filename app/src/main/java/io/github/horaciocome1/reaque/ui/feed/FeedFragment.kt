@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import io.github.horaciocome1.reaque.databinding.FragmentFeedBinding
 import io.github.horaciocome1.reaque.util.InjectorUtils
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
-import kotlinx.android.synthetic.main.fragment_feed.*
+import kotlinx.android.synthetic.main.layout_feed_list.*
 
 class FeedFragment : Fragment() {
 

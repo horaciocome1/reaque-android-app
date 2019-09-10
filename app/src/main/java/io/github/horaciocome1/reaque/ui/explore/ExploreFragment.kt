@@ -11,7 +11,8 @@ import io.github.horaciocome1.reaque.databinding.FragmentExploreBinding
 import io.github.horaciocome1.reaque.util.InjectorUtils
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemLongPressListener
-import kotlinx.android.synthetic.main.fragment_explore.*
+import kotlinx.android.synthetic.main.layout_explore_suggestions_section.*
+import kotlinx.android.synthetic.main.layout_explore_topics_section.*
 
 class ExploreFragment : Fragment() {
 

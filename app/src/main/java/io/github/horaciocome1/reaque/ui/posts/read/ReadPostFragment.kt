@@ -11,7 +11,8 @@ import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.databinding.FragmentReadPostBinding
 import io.github.horaciocome1.reaque.util.Constants
 import io.github.horaciocome1.reaque.util.InjectorUtils
-import kotlinx.android.synthetic.main.fragment_read_post.*
+import kotlinx.android.synthetic.main.layout_read_my_rating_section.*
+import kotlinx.android.synthetic.main.layout_read_post_footer_section.*
 
 class ReadPostFragment : Fragment() {
 

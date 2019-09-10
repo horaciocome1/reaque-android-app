@@ -27,7 +27,11 @@ import com.google.firebase.auth.FirebaseAuth
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.databinding.FragmentMoreBinding
 import io.github.horaciocome1.reaque.util.InjectorUtils
-import kotlinx.android.synthetic.main.fragment_more.*
+import kotlinx.android.synthetic.main.layout_more_about_section.*
+import kotlinx.android.synthetic.main.layout_more_actions_section.*
+import kotlinx.android.synthetic.main.layout_more_footer_section.*
+import kotlinx.android.synthetic.main.layout_more_session_section.*
+import kotlinx.android.synthetic.main.layout_more_updates_section.*
 
 class MoreFragment : Fragment() {
 

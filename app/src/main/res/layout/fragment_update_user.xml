@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -12,89 +13,14 @@
             android:orientation="vertical"
             android:visibility="@{viewmodel.isUpdatingUser == true ? View.GONE : View.VISIBLE}">
 
-            <com.google.android.material.appbar.AppBarLayout
+            <include layout="@layout/layout_appbar" />
+
+            <include
+                layout="@layout/layout_update_user_content"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minHeight="?android:attr/actionBarSize"
-                    app:navigationIcon="@drawable/outline_close_24">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:text="@string/update"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
-
-                </androidx.appcompat.widget.Toolbar>
-
-            </com.google.android.material.appbar.AppBarLayout>
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:scrollbars="none">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/bio_inputlayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/bio"
-                        app:hintAnimationEnabled="true"
-                        app:hintEnabled="true"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginLeft="32dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="32dp"
-                        android:layout_marginRight="32dp">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@android:color/transparent"
-                            android:padding="@dimen/default_padding"
-                            android:text="@={viewmodel.bio}"
-                            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/address_inputlayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/address"
-                        app:hintAnimationEnabled="true"
-                        app:hintEnabled="true"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginLeft="32dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="32dp"
-                        android:layout_marginRight="32dp"
-                        android:layout_marginBottom="56dp">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@android:color/transparent"
-                            android:padding="@dimen/default_padding"
-                            android:text="@={viewmodel.address}"
-                            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                </LinearLayout>
-
-            </ScrollView>
+                android:layout_height="0dp"
+                bind:viewmodel="@{viewmodel}" />
 
             <View
                 android:id="@+id/divider4"
@@ -116,48 +42,15 @@
 
         </LinearLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/primaryLightColor"
-            android:visibility="@{viewmodel.isUpdatingUser == false ? View.GONE : View.VISIBLE}">
-
-            <ProgressBar
-                android:id="@+id/progressBar"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/default_progressbar_size"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView13"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginRight="32dp"
-                android:layout_marginBottom="32dp"
-                android:text="@string/please_wait_update"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/progressBar" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <include
+            layout="@layout/layout_update_user_loading_screen"
+            bind:viewmodel="@{viewmodel}" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <data>
 
         <import type="android.view.View" />
-
-        <import type="io.github.horaciocome1.reaque.R" />
 
         <variable
             name="viewmodel"

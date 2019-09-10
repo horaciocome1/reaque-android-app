@@ -7,13 +7,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.databinding.FragmentUpdateUserBinding
 import io.github.horaciocome1.reaque.util.InjectorUtils
 import io.github.horaciocome1.reaque.util.OnFocusChangeListener
+import kotlinx.android.synthetic.main.fragment_set_rating.*
 import kotlinx.android.synthetic.main.fragment_update_user.*
+import kotlinx.android.synthetic.main.layout_appbar.*
+import kotlinx.android.synthetic.main.layout_update_user_content.*
 
-class UpdateUserFragment : Fragment() {
+class UpdateUserFragment
+    : Fragment(),
+    View.OnClickListener {
 
     private lateinit var binding: FragmentUpdateUserBinding
 
@@ -34,14 +40,13 @@ class UpdateUserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewmodel = viewModel
+        appbar_title_textview?.text = getString(R.string.update)
         OnFocusChangeListener(context).let {
             bio_inputlayout.editText?.onFocusChangeListener = it
             address_inputlayout.editText?.onFocusChangeListener = it
         }
         toolbar.setNavigationOnClickListener(viewModel.navigateUp)
-        update_button.setOnClickListener {
-            binding.viewmodel = viewModel.update(it)
-        }
+        update_button.setOnClickListener(this)
     }
 
     override fun onStart() {
@@ -67,6 +72,14 @@ class UpdateUserFragment : Fragment() {
                 viewModel.user.address = it
                 update_button.isEnabled = viewModel.isUserReady
             })
+    }
+
+    override fun onClick(view: View?) {
+        if (
+            view == done_button
+            && view != null
+        )
+            binding.viewmodel = viewModel.update(view)
     }
 
 }

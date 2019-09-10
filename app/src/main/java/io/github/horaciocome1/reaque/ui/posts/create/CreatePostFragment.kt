@@ -27,7 +27,10 @@ import io.github.horaciocome1.reaque.util.Constants
 import io.github.horaciocome1.reaque.util.InjectorUtils
 import io.github.horaciocome1.reaque.util.OnFocusChangeListener
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
-import kotlinx.android.synthetic.main.fragment_create_post.*
+import kotlinx.android.synthetic.main.layout_appbar.*
+import kotlinx.android.synthetic.main.layout_create_post_actions_section.*
+import kotlinx.android.synthetic.main.layout_create_post_content_section.*
+import kotlinx.android.synthetic.main.layout_create_post_select_topic_section.*
 
 class CreatePostFragment : Fragment() {
 
@@ -51,6 +54,7 @@ class CreatePostFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        appbar_title_textview.text = getString(R.string.create_post)
         activity?.run(viewModel::loadDraft)
         binding.viewmodel = viewModel
         select_pic_button.setOnClickListener {

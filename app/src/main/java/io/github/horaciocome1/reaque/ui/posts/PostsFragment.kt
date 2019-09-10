@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import io.github.horaciocome1.reaque.databinding.FragmentPostsBinding
 import io.github.horaciocome1.reaque.util.InjectorUtils
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
-import kotlinx.android.synthetic.main.fragment_posts.*
+import kotlinx.android.synthetic.main.layout_posts_list.*
 
 class PostsFragment : Fragment() {
 

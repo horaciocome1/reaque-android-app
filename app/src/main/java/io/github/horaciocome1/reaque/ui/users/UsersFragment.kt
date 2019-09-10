@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import io.github.horaciocome1.reaque.databinding.FragmentUsersBinding
 import io.github.horaciocome1.reaque.util.InjectorUtils
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
-import kotlinx.android.synthetic.main.fragment_users.*
+import kotlinx.android.synthetic.main.layout_users_list.*
 
 class UsersFragment : Fragment() {
 

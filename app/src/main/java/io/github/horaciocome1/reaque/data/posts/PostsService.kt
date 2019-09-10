@@ -95,15 +95,13 @@ class PostsService : PostsInterface {
     }
 
     override fun get(post: Post): LiveData<Post> {
-        auth.addAuthStateListener {
-            if (post.id != postId && post.id.isNotBlank()) {
-                this.post.value = Post("")
-                db.document("posts/${post.id}")
-                    .addSnapshotListener { snapshot, exception ->
-                        if (exception == null && snapshot != null)
-                            this.post.value = snapshot.post
-                    }
-            }
+        if (post.id != postId && post.id.isNotBlank()) {
+            this.post.value = Post("")
+            db.document("posts/${post.id}")
+                .addSnapshotListener { snapshot, exception ->
+                    if (exception == null && snapshot != null)
+                        this.post.value = snapshot.post
+                }
         }
         return this.post
     }

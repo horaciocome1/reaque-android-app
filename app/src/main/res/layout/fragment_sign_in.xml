@@ -79,8 +79,6 @@
 
         <import type="io.github.horaciocome1.reaque.R" />
 
-        <import type="io.github.horaciocome1.reaque.util.Constants" />
-
     </data>
 
 </layout>

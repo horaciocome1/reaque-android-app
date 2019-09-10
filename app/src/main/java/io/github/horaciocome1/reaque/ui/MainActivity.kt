@@ -36,6 +36,7 @@ import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.util.Constants.USER_ID
 import io.github.horaciocome1.reaque.util.handleDynamicLinks
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.layout_appbar.*
 
 class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener {
 
@@ -117,7 +118,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         destination: NavDestination,
         arguments: Bundle?
     ) {
-        title_textview.text = destination.label
+        appbar_title_textview.text = destination.label
         if (destination.id == R.id.destination_sign_in)
             passedThroughSignIn = true
         if (

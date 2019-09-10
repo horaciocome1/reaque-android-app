@@ -11,7 +11,7 @@ import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.databinding.FragmentUserProfileBinding
 import io.github.horaciocome1.reaque.util.Constants
 import io.github.horaciocome1.reaque.util.InjectorUtils
-import kotlinx.android.synthetic.main.fragment_user_profile.*
+import kotlinx.android.synthetic.main.layout_user_profile_actions_section.*
 
 class UserProfileFragment : Fragment() {
 

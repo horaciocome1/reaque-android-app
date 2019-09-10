@@ -4,15 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RatingBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import io.github.horaciocome1.reaque.R
 import io.github.horaciocome1.reaque.data.posts.Post
 import io.github.horaciocome1.reaque.util.InjectorUtils
 import kotlinx.android.synthetic.main.fragment_set_rating.*
+import kotlinx.android.synthetic.main.layout_appbar.*
 import kotlin.math.roundToInt
 
-class SetRatingFragment : Fragment() {
+class SetRatingFragment
+    : Fragment(),
+    RatingBar.OnRatingBarChangeListener,
+    View.OnClickListener {
 
     private val viewModel: ReadPostViewModel by lazy {
         val factory = InjectorUtils.readPostViewModelFactory
@@ -36,20 +41,8 @@ class SetRatingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         toolbar.setNavigationOnClickListener(viewModel.navigateUp)
-        rating_bar.setOnRatingBarChangeListener { _, rating, fromUser ->
-            done_button.isEnabled = if (rating != 0f
-                && rating.roundToInt() != defaultRating
-                && post.id.isNotBlank()
-                && fromUser
-            ) {
-                this.rating = rating.roundToInt()
-                true
-            } else
-                false
-        }
-        done_button.setOnClickListener {
-            viewModel.setRating(it, post, rating)
-        }
+        rating_bar.onRatingBarChangeListener = this
+        done_button.setOnClickListener(this)
     }
 
     override fun onStart() {
@@ -60,6 +53,31 @@ class SetRatingFragment : Fragment() {
             defaultRating = args.rating
             rating_bar.rating = defaultRating.toFloat()
         }
+    }
+
+    override fun onRatingChanged(
+        ratingBar: RatingBar?,
+        rating: Float,
+        isChangeFromUser: Boolean
+    ) {
+        done_button.isEnabled = if (
+            rating != 0f
+            && rating.roundToInt() != defaultRating
+            && post.id.isNotBlank()
+            && isChangeFromUser
+        ) {
+            this.rating = rating.roundToInt()
+            true
+        } else
+            false
+    }
+
+    override fun onClick(view: View?) {
+        if (
+            view == rating_bar
+            && view != null
+        )
+            viewModel.setRating(view, post, rating)
     }
 
 }

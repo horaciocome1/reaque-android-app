@@ -46,19 +46,17 @@ class UsersService : UsersInterface {
     }
 
     override fun get(user: User): LiveData<User> {
-        auth.addAuthStateListener {
-            if (
-                user.id != userId
-                && user.id.isNotBlank()
-            ) {
-                this.user.value = User("")
-                db.document("users/${user.id}")
-                    .addSnapshotListener { snapshot, exception ->
-                        if (exception == null && snapshot != null)
-                            this.user.value = snapshot.user
-                    }
-                userId = user.id
-            }
+        if (
+            user.id != userId
+            && user.id.isNotBlank()
+        ) {
+            this.user.value = User("")
+            db.document("users/${user.id}")
+                .addSnapshotListener { snapshot, exception ->
+                    if (exception == null && snapshot != null)
+                        this.user.value = snapshot.user
+                }
+            userId = user.id
         }
         return this.user
     }

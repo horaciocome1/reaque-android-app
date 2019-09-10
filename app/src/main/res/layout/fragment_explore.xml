@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:bind="http://schemas.android.com/tools">
 
     <data>
-
-        <import type="java.util.List" />
-
-        <import type="android.view.View" />
-
-        <import type="io.github.horaciocome1.reaque.util.Constants" />
 
         <variable
             name="viewmodel"
@@ -26,26 +20,9 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="32dp"
-                android:text="@string/suggestions"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/posts_recyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:list="@{viewmodel.posts}"
-                app:columns="@{1}"
-                app:host="@{Constants.EXPLORE_FRAGMENT}"
-                app:type="@{Constants.LISTING_POSTS}" />
-
-            <ProgressBar
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/default_progressbar_size"
-                android:visibility="@{viewmodel.posts.isEmpty() ? View.VISIBLE : View.GONE}" />
+            <include
+                layout="@layout/layout_explore_suggestions_section"
+                bind:viewmodel="@{viewmodel}" />
 
             <View
                 android:layout_width="match_parent"
@@ -55,29 +32,11 @@
                 android:layout_marginTop="24dp"
                 android:background="@color/secondaryLightColor" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="32dp"
-                android:text="@string/topic_of_interest"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/topics_recyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:list="@{viewmodel.topics}"
-                app:columns="@{1}"
-                app:host="@{Constants.EXPLORE_FRAGMENT}"
-                app:type="@{Constants.LISTING_TOPICS}" />
-
-            <ProgressBar
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/default_progressbar_size"
-                android:visibility="@{viewmodel.topics.isEmpty() ? View.VISIBLE : View.GONE}" />
+            <include
+                layout="@layout/layout_explore_topics_section"
+                bind:viewmodel="@{viewmodel}" />
 
         </LinearLayout>
-
 
     </androidx.core.widget.NestedScrollView>
 

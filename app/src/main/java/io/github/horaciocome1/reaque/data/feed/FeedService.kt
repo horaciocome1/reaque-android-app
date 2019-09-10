@@ -27,23 +27,30 @@ class FeedService : FeedInterface {
     }
 
     override fun get(): LiveData<List<Post>> {
-        auth.addAuthStateListener {
-            if (
-                _posts.isEmpty()
-                && it.currentUser != null
-            )
-                db.collection("users/${auth.currentUser!!.uid}/feed")
-                    .orderBy("timestamp", Query.Direction.DESCENDING)
-                    .limit(100)
-                    .get()
-                    .addOnSuccessListener {
-                        if (it != null) {
-                            _posts = it.posts
-                            posts.value = _posts
-                        }
-                    }
-        }
+        if (auth.currentUser == null)
+            auth.addAuthStateListener {
+                if (
+                    _posts.isEmpty()
+                    && it.currentUser != null
+                )
+                    getFeed()
+            }
+        else
+            getFeed()
         return posts
+    }
+
+    private fun getFeed() {
+        db.collection("users/${auth.currentUser!!.uid}/feed")
+            .orderBy("timestamp", Query.Direction.DESCENDING)
+            .limit(100)
+            .get()
+            .addOnSuccessListener {
+                if (it != null) {
+                    _posts = it.posts
+                    posts.value = _posts
+                }
+            }
     }
 
 }
