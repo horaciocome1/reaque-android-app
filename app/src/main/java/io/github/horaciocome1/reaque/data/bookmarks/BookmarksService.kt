@@ -52,8 +52,14 @@ class BookmarksService : BookmarksInterface {
     }
 
     override fun bookmark(post: Post, onCompleteListener: (Task<Void?>?) -> Unit) {
-        if (post.id.isNotBlank() && auth.currentUser != null) {
-            val bookmarkRef = db.document("users/${auth.currentUser!!.uid}/bookmarks/${post.id}")
+        if (
+            post.id.isNotBlank()
+            && auth.currentUser != null
+        ) {
+            val bookmarkRef = db.document(
+                "users/${auth.currentUser!!.uid}" +
+                        "/bookmarks/${post.id}"
+            )
             val postRef = db.document("posts/${post.id}")
             val userRef = db.document("users/${auth.currentUser!!.uid}")
             db.runBatch {
@@ -65,8 +71,14 @@ class BookmarksService : BookmarksInterface {
     }
 
     override fun unBookmark(post: Post, onCompleteListener: (Task<Void?>?) -> Unit) {
-        if (post.id.isNotBlank() && auth.currentUser != null) {
-            val bookmarkRef = db.document("users/${auth.currentUser!!.uid}/bookmarks/${post.id}")
+        if (
+            post.id.isNotBlank()
+            && auth.currentUser != null
+        ) {
+            val bookmarkRef = db.document(
+                "users/${auth.currentUser!!.uid}" +
+                        "/bookmarks/${post.id}"
+            )
             val postRef = db.document("posts/${post.id}")
             val userRef = db.document("users/${auth.currentUser!!.uid}")
             db.runBatch {
@@ -79,9 +91,12 @@ class BookmarksService : BookmarksInterface {
 
     override fun get(): LiveData<List<Post>> {
         posts.value?.let { list ->
-            if (list.isEmpty() && auth.currentUser != null)
+            if (
+                list.isEmpty()
+                && auth.currentUser != null
+            )
                 db.collection("users/${auth.currentUser!!.uid}/bookmarks")
-                    .orderBy("score", Query.Direction.DESCENDING)
+                    .orderBy("timestamp", Query.Direction.DESCENDING)
                     .limit(100)
                     .get()
                     .addOnSuccessListener {
@@ -97,7 +112,10 @@ class BookmarksService : BookmarksInterface {
         if (post.id.isNotBlank() && auth.currentUser != null)
             db.document("users/${auth.currentUser!!.uid}/bookmarks/${post.id}")
                 .addSnapshotListener { snapshot, exception ->
-                    isBookmarked.value = if (exception == null && snapshot != null)
+                    isBookmarked.value = if (
+                        exception == null
+                        && snapshot != null
+                    )
                         if (snapshot.exists())
                             Constants.States.TRUE
                         else
@@ -113,7 +131,11 @@ class BookmarksService : BookmarksInterface {
         if (auth.currentUser != null)
             db.document("users/${auth.currentUser!!.uid}")
                 .addSnapshotListener { snapshot, exception ->
-                    if (exception == null && snapshot != null && snapshot.contains("bookmarks"))
+                    if (
+                        exception == null
+                        && snapshot != null
+                        && snapshot.contains("bookmarks")
+                    )
                         hasBookmarks.value = snapshot["bookmarks"].toString().toInt() > 0
                 }
         return hasBookmarks

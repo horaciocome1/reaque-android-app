@@ -29,6 +29,14 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_open_sign_in_from_feed"
+            app:destination="@id/destination_sign_in"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@+id/destination_feed" />
     </fragment>
     <fragment
         android:id="@+id/destination_explore"
@@ -95,7 +103,7 @@
         android:label="@string/sign_in" />
     <fragment
         android:id="@+id/destination_read_post"
-        android:name="io.github.horaciocome1.reaque.ui.posts.ReadPostFragment"
+        android:name="io.github.horaciocome1.reaque.ui.posts.read.ReadPostFragment"
         android:label="@string/read_post">
         <argument
             android:name="post_id"
@@ -117,7 +125,7 @@
     </fragment>
     <fragment
         android:id="@+id/destination_set_rating"
-        android:name="io.github.horaciocome1.reaque.ui.posts.SetRatingFragment"
+        android:name="io.github.horaciocome1.reaque.ui.posts.read.SetRatingFragment"
         android:label="@string/set_rating">
         <argument
             android:name="post_id"
@@ -128,7 +136,7 @@
     </fragment>
     <fragment
         android:id="@+id/destination_user_profile"
-        android:name="io.github.horaciocome1.reaque.ui.users.UserProfileFragment"
+        android:name="io.github.horaciocome1.reaque.ui.users.profile.UserProfileFragment"
         android:label="@string/user_profile">
         <argument
             android:name="user_id"

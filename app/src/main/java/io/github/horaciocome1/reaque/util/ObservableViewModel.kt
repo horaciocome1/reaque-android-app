@@ -23,7 +23,8 @@ open class ObservableViewModel: ViewModel(), Observable {
     fun notifyChange() = callbacks.notifyCallbacks(this, 0, null)
 
     // notifies listeners that a specific property has changed.
-    // the getter for the property that changes should be marked with [@Bindable] to generate a field in `BR` to be used as `fieldId`
+    // the getter for the property that changes should be marked with [@Bindable]
+    // to generate a field in `BR` to be used as `fieldId`
     fun notifyPropertyChanged(fieldId: Int) = callbacks.notifyCallbacks(this, fieldId, null)
 
 }

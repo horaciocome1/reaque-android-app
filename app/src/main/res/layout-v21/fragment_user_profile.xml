@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/header_layout"
+                layout="@layout/layout_user_profile_header_section"
+                bind:user="@{user}"
+                bind:viewmodel="@{viewmodel}" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="32dp"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:background="@color/secondaryColor"
+                android:elevation="@dimen/default_card_elevation" />
+
+            <include
+                android:id="@+id/details_layout"
+                layout="@layout/layout_user_profile_details_section"
+                bind:user="@{user}"
+                bind:viewmodel="@{viewmodel}" />
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="32dp"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:background="@color/secondaryColor"
+                android:elevation="@dimen/default_card_elevation" />
+
+            <include
+                layout="@layout/layout_user_profile_actions_section"
+                bind:user="@{user}"
+                bind:viewmodel="@{viewmodel}" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <data>
+
+        <variable
+            name="user"
+            type="io.github.horaciocome1.reaque.data.users.User" />
+
+        <variable
+            name="viewmodel"
+            type="io.github.horaciocome1.reaque.ui.users.profile.UserProfileViewModel" />
+
+    </data>
+
+</layout>

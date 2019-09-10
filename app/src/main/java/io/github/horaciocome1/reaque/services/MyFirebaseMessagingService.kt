@@ -16,31 +16,44 @@ import io.github.horaciocome1.reaque.util.Constants.USER_ID
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
-    override fun onNewToken(token: String?) {
+
+    override fun onNewToken(token: String) {
         val service = UsersService()
-        token?.let { service.updateRegistrationToken(it) {} }
+        service.updateRegistrationToken(token) {}
     }
 
-    override fun onMessageReceived(remoteMessage: RemoteMessage?) {
-        remoteMessage?.let {
-            if (it.data.isNotEmpty() && it.notification != null) {
-                val userId = it.data[USER_ID]
-                val title = it.notification!!.title
-                val body = it.notification!!.body
-                val clickAction = it.notification!!.clickAction
-                if (userId != null && title != null && body != null && clickAction != null)
-                    if (userId.isNotBlank() && title.isNotBlank() && body.isNotBlank() && clickAction.isNotBlank())
-                        sendNotification(title, body, clickAction, userId)
-            }
+    override fun onMessageReceived(remoteMessage: RemoteMessage) {
+        if (remoteMessage.data.isNotEmpty() && remoteMessage.notification != null) {
+            val userId = remoteMessage.data[USER_ID]
+            val title = remoteMessage.notification!!.title
+            val body = remoteMessage.notification!!.body
+            val clickAction = remoteMessage.notification!!.clickAction
+            if (
+                userId != null
+                && userId.isNotBlank()
+                && title != null
+                && title.isNotBlank()
+                && body != null
+                && body.isNotBlank()
+                && clickAction != null
+                && clickAction.isNotBlank()
+            )
+                sendNotification(title, body, clickAction, userId)
         }
     }
 
-    private fun sendNotification(title: String, body: String, clickAction: String, userId: String) {
+    private fun sendNotification(
+        title: String,
+        body: String,
+        clickAction: String,
+        userId: String
+    ) {
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         if (clickAction == MAIN_ACTIVITY)
             intent.putExtra(USER_ID, userId)
-        val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
+        val pendingIntent = PendingIntent
+            .getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
         val sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notification =
             NotificationCompat.Builder(this, resources.getString(R.string.default_notification_channel_id))

@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:bind="http://schemas.android.com/tools">
 
     <data>
 
-        <import type="java.util.List" />
-
         <import type="android.view.View" />
-
-        <import type="io.github.horaciocome1.reaque.util.Constants" />
 
         <variable
             name="viewmodel"
@@ -21,14 +17,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/posts_recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:columns="@{1}"
-            app:list="@{viewmodel.posts}"
-            app:host="@{Constants.POSTS_FRAGMENT}"
-            app:type="@{Constants.LISTING_POSTS}" />
+        <include
+            layout="@layout/layout_posts_list"
+            android:visibility="@{viewmodel.posts.isEmpty() ? View.GONE : View.VISIBLE}"
+            bind:viewmodel="@{viewmodel}" />
 
         <ProgressBar
             android:layout_width="match_parent"

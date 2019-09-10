@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="32dp"
+            android:contentDescription="@string/content_description_user_profile_image"
+            android:elevation="4dp"
+            android:onClick="@{(view) -> viewmodel.openUserProfile(view, post.user)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:type="@{Constants.CIRCLE}"
+            app:url="@{post.user.pic}" />
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_medium"
+            android:lines="1"
+            android:text="@{post.user.name}"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:textColor="@color/secondaryDarkColor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/share_button"
+            app:layout_constraintStart_toEndOf="@+id/imageView4"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/bookmark_button"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:onClick="@{(view) -> viewmodel.bookmark(view, post)}"
+            android:padding="16dp"
+            android:visibility="gone"
+            app:icon="@drawable/outline_bookmark_border_18"
+            app:iconTint="@color/orange"
+            app:layout_constraintBottom_toBottomOf="@+id/share_button"
+            app:layout_constraintEnd_toStartOf="@+id/share_button"
+            app:layout_constraintTop_toTopOf="@+id/share_button"
+            app:rippleColor="@color/orange" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/unbookmark_button"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:onClick="@{(view) -> viewmodel.unBookmark(view, post)}"
+            android:padding="16dp"
+            android:visibility="gone"
+            app:icon="@drawable/baseline_bookmark_18"
+            app:iconTint="@color/orange"
+            app:layout_constraintBottom_toBottomOf="@+id/share_button"
+            app:layout_constraintEnd_toStartOf="@+id/share_button"
+            app:layout_constraintTop_toTopOf="@+id/share_button"
+            app:rippleColor="@color/orange" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/share_button"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:padding="16dp"
+            android:textColor="@color/green"
+            app:icon="@drawable/outline_share_18"
+            app:iconTint="@color/green"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:rippleColor="@color/green" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <import type="io.github.horaciocome1.reaque.util.Constants" />
+
+        <variable
+            name="post"
+            type="io.github.horaciocome1.reaque.data.posts.Post" />
+
+        <variable
+            name="viewmodel"
+            type="io.github.horaciocome1.reaque.ui.posts.read.ReadPostViewModel" />
+
+    </data>
+
+</layout>

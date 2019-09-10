@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/cover_imageview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:uri="@{viewmodel.imageUri}" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/holder_imageview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:resourceId="@{R.drawable.ic_undraw_camera_mg5h}" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/title_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@android:color/transparent"
+                android:hint="@string/title"
+                android:lineSpacingExtra="16sp"
+                android:padding="16dp"
+                android:text="@={viewmodel.title}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/message_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@android:color/transparent"
+                android:hint="@string/message"
+                android:lineSpacingExtra="16sp"
+                android:padding="16dp"
+                android:text="@={viewmodel.message}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <data>
+
+        <import type="io.github.horaciocome1.reaque.R" />
+
+        <variable
+            name="viewmodel"
+            type="io.github.horaciocome1.reaque.ui.posts.create.CreatePostViewModel" />
+
+    </data>
+
+</layout>

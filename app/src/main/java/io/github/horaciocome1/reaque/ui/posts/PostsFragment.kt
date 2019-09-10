@@ -10,18 +10,22 @@ import androidx.lifecycle.ViewModelProviders
 import io.github.horaciocome1.reaque.databinding.FragmentPostsBinding
 import io.github.horaciocome1.reaque.util.InjectorUtils
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
-import kotlinx.android.synthetic.main.fragment_posts.*
+import kotlinx.android.synthetic.main.layout_posts_list.*
 
 class PostsFragment : Fragment() {
 
-    lateinit var binding: FragmentPostsBinding
+    private lateinit var binding: FragmentPostsBinding
 
     private val viewModel: PostsViewModel by lazy {
         val factory = InjectorUtils.postsViewModelFactory
         ViewModelProviders.of(this, factory)[PostsViewModel::class.java]
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentPostsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -36,7 +40,9 @@ class PostsFragment : Fragment() {
         arguments?.let { bundle ->
             val args = PostsFragmentArgs.fromBundle(bundle)
             viewModel.get(args.parentId, args.requestId)
-                .observe(this, Observer { binding.viewmodel = viewModel.setPosts(it) })
+                .observe(this, Observer {
+                    binding.viewmodel = viewModel.setPosts(it)
+                })
         }
     }
 

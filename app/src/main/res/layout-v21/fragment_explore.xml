@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include
+                layout="@layout/layout_explore_suggestions_section"
+                bind:viewmodel="@{viewmodel}" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_stroke_width"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:background="@color/secondaryColor"
+                android:elevation="@dimen/default_card_elevation" />
+
+            <include
+                layout="@layout/layout_explore_topics_section"
+                bind:viewmodel="@{viewmodel}" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="io.github.horaciocome1.reaque.ui.explore.ExploreViewModel" />
+
+    </data>
+
+</layout>

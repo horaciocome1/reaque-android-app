@@ -27,6 +27,7 @@
         <item name="materialCardViewStyle">@style/AppTheme.CardView</item>
         <item name="colorControlNormal">@color/primaryTextColor</item>
         <item name="colorError">@color/colorError</item>
+        <item name="android:textColorSecondary">@color/secondaryDarkColor</item>
     </style>
 
     <style name="AppTheme.Splash" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -48,8 +49,8 @@
         <item name="cardBackgroundColor">@color/primaryLightColor</item>
     </style>
 
-    <style name="AppTheme.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
-        <item name="fontFamily">@font/roboto_medium</item>
+    <style name="AppTheme.Toolbar" parent="AppTheme">
+        <item name="colorControlNormal">@color/secondaryColor</item>
     </style>
 
 </resources>

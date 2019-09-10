@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import io.github.horaciocome1.reaque.databinding.FragmentFeedBinding
 import io.github.horaciocome1.reaque.util.InjectorUtils
 import io.github.horaciocome1.simplerecyclerviewtouchlistener.addOnItemClickListener
-import kotlinx.android.synthetic.main.fragment_feed.*
+import kotlinx.android.synthetic.main.layout_feed_list.*
 
 class FeedFragment : Fragment() {
 
@@ -21,7 +21,11 @@ class FeedFragment : Fragment() {
         ViewModelProviders.of(this, factory)[FeedViewModel::class.java]
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentFeedBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -33,9 +37,10 @@ class FeedFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        viewModel.get().observe(this, Observer {
-            binding.viewmodel = viewModel.setPosts(it)
-        })
+        viewModel.feed
+            .observe(this, Observer {
+                binding.viewmodel = viewModel.setPosts(it)
+            })
     }
 
 }

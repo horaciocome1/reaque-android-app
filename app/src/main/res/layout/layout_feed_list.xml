@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/posts_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:columns="@{1}"
+        app:host="@{Constants.FEED_FRAGMENT}"
+        app:list="@{viewmodel.posts}"
+        app:type="@{Constants.LISTING_POSTS}" />
+
+    <data>
+
+        <import type="io.github.horaciocome1.reaque.util.Constants" />
+
+        <variable
+            name="viewmodel"
+            type="io.github.horaciocome1.reaque.ui.feed.FeedViewModel" />
+
+    </data>
+
+</layout>

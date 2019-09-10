@@ -29,13 +29,18 @@ class StorageService {
     }
 
     fun upload(imageUri: Uri, topic: Topic, onSuccessListener: (Uri?) -> Unit) {
-        if (imageUri != Uri.EMPTY && topic.id.isNotBlank()) {
+        if (
+            imageUri != Uri.EMPTY
+            && topic.id.isNotBlank()
+        ) {
             val path = "images/${topic.id}/${imageUri.lastPathSegment}"
             val ref = storage.reference.child(path)
             ref.putFile(imageUri)
                 .continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
                     if (!task.isSuccessful)
-                        task.exception?.let { throw it }
+                        task.exception?.let {
+                            throw it
+                        }
                     return@Continuation ref.downloadUrl
                 })
                 .addOnSuccessListener(onSuccessListener)

@@ -47,4 +47,6 @@
     <string name="please_wait_update">Por-favor, aguarde enquanto as atualizações são carregadas . . .</string>
     <string name="please_wait_create">Por favor, aguarde enquanto sua publicação é criada . . .</string>
     <string name="update_available">Atualização disponível</string>
+    <string name="my_rating">Meu rating</string>
+    <string name="some_error_occurred_while_logging_you_in_please_try_again">Occorreu um erro inexperado durante o início de sessão :(. Por-favor, tente novamente!</string>
 </resources>

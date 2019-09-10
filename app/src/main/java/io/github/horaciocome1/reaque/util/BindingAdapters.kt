@@ -23,15 +23,16 @@ class BindingAdapters {
 
         companion object {
 
-            @BindingAdapter("url", "uri", "type", requireAll = false)
+            @BindingAdapter("url", "uri", "resourceId", "type", requireAll = false)
             @JvmStatic
-            fun ImageView.loadImage(url: String?, uri: Uri?, type: Int?) {
+            fun ImageView.loadImage(url: String?, uri: Uri?, resourceId: Int?, type: Int?) {
                 val image = if (uri != null && uri != Uri.EMPTY)
                     uri
                 else
-                    url
+                    resourceId ?: url
                 val options = when (type) {
-                    Constants.BLUR -> RequestOptions.bitmapTransform(BlurTransformation(7, 14))
+                    Constants.BLUR -> RequestOptions
+                        .bitmapTransform(BlurTransformation(7, 14))
                     Constants.CIRCLE -> RequestOptions.circleCropTransform()
                     else -> RequestOptions()
                 }
@@ -81,7 +82,8 @@ class BindingAdapters {
 
             private fun RecyclerView.loadPosts(list: List<Post>, columns: Int, host: Int) {
                 layoutManager = when {
-                    host == Constants.EXPLORE_FRAGMENT -> LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                    host == Constants.EXPLORE_FRAGMENT ->
+                        LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
                     columns == 1 -> LinearLayoutManager(context)
                     else -> StaggeredGridLayoutManager(columns, RecyclerView.VERTICAL)
                 }

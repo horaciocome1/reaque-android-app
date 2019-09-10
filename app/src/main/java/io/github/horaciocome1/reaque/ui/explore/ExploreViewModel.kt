@@ -21,24 +21,28 @@ class ExploreViewModel(topicsRepository: TopicsRepository, postsRepository: Post
 
     val onItemPostClickListener: (View, Int) -> Unit = { view, position ->
         if (posts.isNotEmpty()) {
-            val directions = ExploreFragmentDirections.actionOpenReadPostFromExplore(posts[position].id)
-            view.findNavController().navigate(directions)
+            val directions = ExploreFragmentDirections
+                .actionOpenReadPostFromExplore(posts[position].id)
+            view.findNavController()
+                .navigate(directions)
         }
     }
 
     val onItemTopicClickListener: (View, Int) -> Unit = { view, position ->
         if (posts.isNotEmpty()) {
-            val directions =
-                ExploreFragmentDirections.actionOpenPostsFromExplore(topics[position].id, Constants.TOPIC_POSTS_REQUEST)
-            view.findNavController().navigate(directions)
+            val directions = ExploreFragmentDirections
+                .actionOpenPostsFromExplore(topics[position].id, Constants.TOPIC_POSTS_REQUEST)
+            view.findNavController()
+                .navigate(directions)
         }
     }
 
     val onItemTopicLongPressListener: (View, Int) -> Unit = { view, position ->
         if (posts.isNotEmpty()) {
-            val directions =
-                ExploreFragmentDirections.actionOpenUsersFromExplore(topics[position].id, Constants.TOPIC_USERS_REQUEST)
-            view.findNavController().navigate(directions)
+            val directions = ExploreFragmentDirections
+                .actionOpenUsersFromExplore(topics[position].id, Constants.TOPIC_USERS_REQUEST)
+            view.findNavController()
+                .navigate(directions)
         }
     }
 

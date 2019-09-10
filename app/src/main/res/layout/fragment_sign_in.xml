@@ -15,16 +15,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-        <import type="io.github.horaciocome1.reaque.util.Constants" />
-
-        <variable
-            name="url"
-            type="String" />
-
-    </data>
-
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/root_view"
         android:layout_width="match_parent"
@@ -43,22 +33,52 @@
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
                 android:textColor="@color/secondaryDarkColor" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imageview"
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/default_progressbar_size"
+                android:layout_gravity="center"
+                android:layout_margin="32dp" />
+
+            <TextView
+                android:id="@+id/error_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                app:type="@{Constants.DEFAULT}"
-                app:url="@{url}" />
+                android:layout_margin="32dp"
+                android:text="@string/some_error_occurred_while_logging_you_in_please_try_again"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                android:textColor="@color/colorError"
+                android:visibility="gone" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageview"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                app:resourceId="@{R.drawable.ic_undraw_reading_0re1}" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/sign_in_button"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="32dp"
+                android:padding="16dp"
+                android:text="@string/sign_in"
+                app:cornerRadius="@dimen/default_corner_radius"
+                app:icon="@drawable/googleg_standard_color_18" />
 
         </LinearLayout>
 
-        <ProgressBar
-            android:id="@+id/progressbar"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/default_progressbar_size"
-            android:layout_gravity="center" />
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <data>
+
+        <import type="io.github.horaciocome1.reaque.R" />
+
+    </data>
 
 </layout>

@@ -12,7 +12,8 @@ class UsersAdapter(private val list: List<User>) : RecyclerView.Adapter<UsersAda
     private lateinit var binding: ItemUserBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        binding = ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val inflater = LayoutInflater.from(parent.context)
+        binding = ItemUserBinding.inflate(inflater, parent, false)
         return ViewHolder(binding.root)
     }
 

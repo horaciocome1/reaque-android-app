@@ -10,7 +10,8 @@
  *    Unless required by applicable law or agreed to in writing, software
  *    distributed under the License is distributed on an "AS IS" BASIS,
  *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and limitations under the License.
+ *    See the License for the specific language governing permissions and limitations
+ *    the License.
  */
 
 package io.github.horaciocome1.reaque.util
@@ -35,9 +36,9 @@ val DocumentSnapshot.user: User
         subscribers = this@user["subscribers"].toString()
         subscriptions = this@user["subscriptions"].toString()
         topTopic = this@user["top_topic"].toString()
-        val score = this@user["score"]
-        if (score != null)
-            this.score = score.toString().toFloat()
+        if (contains("score"))
+            this.score = this@user["score"].toString()
+                .toFloat()
     }
 
 val DocumentSnapshot.topic: Topic
@@ -61,7 +62,9 @@ val DocumentSnapshot.post: Post
             pic = this@post["user.pic"].toString()
         }
         if (contains("score"))
-            this.score = this@post["score"].toString().toFloat()
+            this.score = this@post["score"].toString()
+                .toFloat()
         if (contains("rating"))
-            rating = this@post["rating"].toString().toFloat()
+            rating = this@post["rating"].toString()
+                .toFloat()
     }

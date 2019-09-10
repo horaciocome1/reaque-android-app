@@ -22,12 +22,14 @@ import androidx.recyclerview.widget.RecyclerView
 import io.github.horaciocome1.reaque.data.topics.Topic
 import io.github.horaciocome1.reaque.databinding.ItemTopicBinding
 
-class TopicsAdapter(private val list: List<Topic>) : RecyclerView.Adapter<TopicsAdapter.ViewHolder>() {
+class TopicsAdapter(private val list: List<Topic>) :
+    RecyclerView.Adapter<TopicsAdapter.ViewHolder>() {
 
     private lateinit var binding: ItemTopicBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        binding = ItemTopicBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val inflater = LayoutInflater.from(parent.context)
+        binding = ItemTopicBinding.inflate(inflater, parent, false)
         return ViewHolder(binding.root)
     }
 

@@ -25,7 +25,10 @@ class SharesService : SharesInterface {
 
     override fun share(post: Post, onCompleteListener: (Task<Void?>?) -> Unit) {
         if (post.id.isNotBlank() && auth.currentUser != null) {
-            val readingRef = db.document("users/${auth.currentUser!!.uid}/shares/${post.id}")
+            val readingRef = db.document(
+                "users/${auth.currentUser!!.uid}" +
+                        "/shares/${post.id}"
+            )
             val postRef = db.document("posts/${post.id}")
             db.runBatch {
                 it.set(readingRef, post.mapSimple)

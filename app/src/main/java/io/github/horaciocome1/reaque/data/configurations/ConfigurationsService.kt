@@ -38,8 +38,13 @@ class ConfigurationsService : ConfigurationsInterface {
         isUpdateAvailable.value = false
         db.document("configurations/default")
             .addSnapshotListener { snapshot, exception ->
-                if (exception == null && snapshot != null && snapshot.contains("version_code"))
-                    isUpdateAvailable.value = versionCode < snapshot["version_code"].toString().toInt()
+                if (
+                    exception == null
+                    && snapshot != null
+                    && snapshot.contains("version_code")
+                )
+                    isUpdateAvailable.value = versionCode < snapshot["version_code"].toString()
+                        .toInt()
             }
         return isUpdateAvailable
     }
@@ -47,7 +52,11 @@ class ConfigurationsService : ConfigurationsInterface {
     override fun getLatestVersionName(): LiveData<String> {
         db.document("configurations/default")
             .addSnapshotListener { snapshot, exception ->
-                if (exception == null && snapshot != null && snapshot.contains("version_name"))
+                if (
+                    exception == null
+                    && snapshot != null
+                    && snapshot.contains("version_name")
+                )
                     latestVersionName.value = snapshot["version_name"].toString()
             }
         return latestVersionName

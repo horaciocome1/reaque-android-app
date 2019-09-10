@@ -17,6 +17,6 @@
 
     <item android:color="@color/secondaryColor" android:state_checked="true" />
 
-    <item android:color="?attr/colorControlNormal" android:state_checked="false" />
+    <item android:color="@color/secondaryColor" android:state_checked="false" />
 
 </selector>

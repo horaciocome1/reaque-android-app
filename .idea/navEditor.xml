@@ -293,6 +293,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_open_sign_in_from_feed">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                           </map>
                         </option>
                       </LayoutPositions>
@@ -398,8 +403,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-251" />
-                            <option name="y" value="160" />
+                            <option name="x" value="574" />
+                            <option name="y" value="-115" />
                           </Point>
                         </option>
                       </LayoutPositions>

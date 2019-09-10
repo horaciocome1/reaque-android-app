@@ -25,6 +25,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.google.android.gms.common.ConnectionResult
@@ -35,24 +36,31 @@ import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.util.Constants.USER_ID
 import io.github.horaciocome1.reaque.util.handleDynamicLinks
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.layout_appbar.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener {
 
-    private lateinit var navController: NavController
-    private lateinit var auth: FirebaseAuth
+    private val navController: NavController by lazy {
+        Navigation.findNavController(this, R.id.nav_host_fragment)
+    }
+    private val auth: FirebaseAuth by lazy {
+        FirebaseAuth.getInstance()
+    }
     private var passedThroughSignIn = false
+
+    private val isOrientationPortrait: Boolean
+        get() {
+            return resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         checkGoogleApiAvailability()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        setLightStatusBar()
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        navController = Navigation.findNavController(this, R.id.nav_host_fragment)
-        auth = FirebaseAuth.getInstance()
         setupNavigation()
         handleNotifications {
             val bundle = Bundle().apply {
@@ -105,30 +113,19 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp() = NavigationUI.navigateUp(navController, drawerlayout)
 
-    private fun setupNavigation() {
-        bottomnavigationview?.let { NavigationUI.setupWithNavController(it, navController) }
-        navigationview?.let { NavigationUI.setupWithNavController(it, navController) }
-        NavigationUI.setupActionBarWithNavController(this, navController, drawerlayout)
-        navController.addOnDestinationChangedListener(onDestinationChangedListener)
-    }
-
-    private fun checkGoogleApiAvailability() {
-        val instance = GoogleApiAvailability.getInstance()
-        val code = instance.isGooglePlayServicesAvailable(this)
-        if (code != ConnectionResult.SUCCESS)
-            instance.makeGooglePlayServicesAvailable(this)
-    }
-
-    private val isOrientationPortrait: Boolean
-        get() {
-            return resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
-        }
-
-    private val onDestinationChangedListener = NavController.OnDestinationChangedListener { _, destination, _ ->
-        title_textview.text = destination.label
+    override fun onDestinationChanged(
+        controller: NavController,
+        destination: NavDestination,
+        arguments: Bundle?
+    ) {
+        appbar_title_textview.text = destination.label
         if (destination.id == R.id.destination_sign_in)
             passedThroughSignIn = true
-        if (destination.id != R.id.destination_sign_in && auth.currentUser == null && passedThroughSignIn) {
+        if (
+            destination.id != R.id.destination_sign_in
+            && auth.currentUser == null
+            && passedThroughSignIn
+        ) {
             passedThroughSignIn = false
             finish()
         }
@@ -141,17 +138,47 @@ class MainActivity : AppCompatActivity() {
                     else -> show()
                 }
             }
-        if (destination.id == R.id.destination_set_rating || destination.id == R.id.destination_create_post
-            || destination.id == R.id.destination_update_user || destination.id == R.id.destination_sign_in
+        if (
+            destination.id == R.id.destination_set_rating
+            || destination.id == R.id.destination_create_post
+            || destination.id == R.id.destination_update_user
+            || destination.id == R.id.destination_sign_in
         )
             supportActionBar?.hide()
-        if (destination.id != R.id.destination_feed && destination.id != R.id.destination_explore && destination.id != R.id.destination_more) {
+        if (
+            destination.id != R.id.destination_feed
+            && destination.id != R.id.destination_explore
+            && destination.id != R.id.destination_more
+        ) {
             bottomnavigationview?.visibility = View.GONE
             divider6?.visibility = View.GONE
         } else {
             bottomnavigationview?.visibility = View.VISIBLE
             divider6?.visibility = View.VISIBLE
         }
+    }
+
+    private fun setupNavigation() {
+        bottomnavigationview?.let {
+            NavigationUI.setupWithNavController(it, navController)
+        }
+        navigationview?.let {
+            NavigationUI.setupWithNavController(it, navController)
+        }
+        NavigationUI.setupActionBarWithNavController(this, navController, drawerlayout)
+        navController.addOnDestinationChangedListener(this)
+    }
+
+    private fun checkGoogleApiAvailability() {
+        val instance = GoogleApiAvailability.getInstance()
+        val code = instance.isGooglePlayServicesAvailable(this)
+        if (code != ConnectionResult.SUCCESS)
+            instance.makeGooglePlayServicesAvailable(this)
+    }
+
+    private fun setLightStatusBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
     }
 
 }

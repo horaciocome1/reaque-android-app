@@ -86,5 +86,9 @@
     <string name="please_wait_update">Please wait while updates are uploaded . . .</string>
     <string name="please_wait_create">Please wait while your post is created . . .</string>
     <string name="update_available">Update available</string>
+    <string name="my_rating">My rating</string>
+    <string name="some_error_occurred_while_logging_you_in_please_try_again">Some not expected error occurred while logging you in :(. Please try again!</string>
+    <string name="navigation_drawer_header_image" translatable="false">Navigation drawer header image</string>
+    <string name="set_rating_illustration_image" translatable="false">Set rating illustration image</string>
 
 </resources>
