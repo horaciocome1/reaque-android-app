@@ -12,6 +12,10 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <include
+                layout="@layout/layout_explore_suggestions_section"
+                bind:viewmodel="@{viewmodel}" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_stroke_width"
@@ -19,10 +23,6 @@
                 android:layout_marginTop="24dp"
                 android:background="@color/secondaryColor"
                 android:elevation="@dimen/default_card_elevation" />
-
-            <include
-                layout="@layout/layout_explore_suggestions_section"
-                bind:viewmodel="@{viewmodel}" />
 
             <include
                 layout="@layout/layout_explore_topics_section"

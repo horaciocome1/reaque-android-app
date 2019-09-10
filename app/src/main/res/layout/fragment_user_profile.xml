@@ -25,20 +25,18 @@
             android:orientation="vertical">
 
             <View
-                android:id="@+id/divider2"
-                android:layout_width="32dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="16dp"
-                android:background="@color/secondaryColor"
-                android:layout_gravity="center" />
-
-            <View
                 android:id="@+id/divider"
                 android:layout_width="32dp"
                 android:layout_height="1dp"
+                android:layout_gravity="center"
                 android:layout_marginTop="16dp"
-                android:background="@color/secondaryColor"
-                android:layout_gravity="center" />
+                android:background="@color/secondaryColor" />
+
+            <include
+                android:id="@+id/header_layout"
+                layout="@layout/layout_user_profile_header_section"
+                bind:user="@{user}"
+                bind:viewmodel="@{viewmodel}" />
 
             <include
                 android:id="@+id/details_layout"
@@ -46,11 +44,13 @@
                 bind:user="@{user}"
                 bind:viewmodel="@{viewmodel}" />
 
-            <include
-                android:id="@+id/header_layout"
-                layout="@layout/layout_user_profile_header_section"
-                bind:user="@{user}"
-                bind:viewmodel="@{viewmodel}" />
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="32dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/secondaryColor"
+                android:layout_gravity="center" />
 
             <include
                 layout="@layout/layout_user_profile_actions_section"

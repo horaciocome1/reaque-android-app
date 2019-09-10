@@ -12,7 +12,6 @@ import io.github.horaciocome1.reaque.data.users.User
 import io.github.horaciocome1.reaque.databinding.FragmentUpdateUserBinding
 import io.github.horaciocome1.reaque.util.InjectorUtils
 import io.github.horaciocome1.reaque.util.OnFocusChangeListener
-import kotlinx.android.synthetic.main.fragment_set_rating.*
 import kotlinx.android.synthetic.main.fragment_update_user.*
 import kotlinx.android.synthetic.main.layout_appbar.*
 import kotlinx.android.synthetic.main.layout_update_user_content.*
@@ -75,10 +74,7 @@ class UpdateUserFragment
     }
 
     override fun onClick(view: View?) {
-        if (
-            view == done_button
-            && view != null
-        )
+        if (view != null)
             binding.viewmodel = viewModel.update(view)
     }
 

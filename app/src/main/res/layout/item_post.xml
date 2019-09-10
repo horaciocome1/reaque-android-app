@@ -4,6 +4,8 @@
 
     <data>
 
+        <import type="io.github.horaciocome1.reaque.util.Constants" />
+
         <variable
             name="post"
             type="io.github.horaciocome1.reaque.data.posts.Post" />

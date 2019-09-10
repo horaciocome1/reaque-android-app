@@ -40,6 +40,7 @@ class SetRatingFragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        appbar_title_textview.text = getString(R.string.set_rating)
         toolbar.setNavigationOnClickListener(viewModel.navigateUp)
         rating_bar.onRatingBarChangeListener = this
         done_button.setOnClickListener(this)
@@ -73,10 +74,7 @@ class SetRatingFragment
     }
 
     override fun onClick(view: View?) {
-        if (
-            view == rating_bar
-            && view != null
-        )
+        if (view != null)
             viewModel.setRating(view, post, rating)
     }
 

@@ -32,10 +32,11 @@ class FeedService : FeedInterface {
                 if (
                     _posts.isEmpty()
                     && it.currentUser != null
+                    && _posts.isEmpty()
                 )
                     getFeed()
             }
-        else
+        else if (_posts.isEmpty())
             getFeed()
         return posts
     }

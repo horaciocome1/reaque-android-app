@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="4dp"
                 android:background="@drawable/background_shadow_bottom_to_top"
-                app:layout_constraintBottom_toTopOf="@+id/share_button"
+                app:layout_constraintBottom_toTopOf="@+id/update_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
